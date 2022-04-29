@@ -1,16 +1,26 @@
+
+function sliderX() {
+    document.getElementById('side').classList.toggle("panelHidden"),
+    document.getElementById('slider').classList.toggle("slider")
+}
+ 
+function sliderM() {
+    document.getElementById('side').classList.toggle("panelHiddenM"),
+    document.getElementById('sliderM').classList.toggle("sliderMx")
+}
+ 
+
 //设定边界范围
 var   SW = L.latLng(-305,-120),
        NE = L.latLng(135, 487),
        bounds = L.latLngBounds(SW, NE);
 
-
-
 //定义地图
 var map = L.map('lmap', {
     crs: L.CRS.Simple,
     minZoom: 1,
-    maxZoom:3,
-    maxNativeZoom: 5, 
+    maxZoom:4,
+    maxNativeZoom: 4, 
     maxBounds: bounds, //最大边界
     zoom:3,
     tap: false, 
@@ -18,18 +28,23 @@ var map = L.map('lmap', {
     center:new L.latLng(-27,51)});
 
 //读取瓦片
-var opt = {tileSize: L.point(256, 256)};
+var opt = {tileSize: L.point(192, 192)};
 shiokaze=L.tileLayer('shiokaze/tiles/{z}/{x}/{y}.png', opt);
 futago=L.tileLayer('futago/tiles/{z}/{x}/{y}.png', opt);
 gengetsu=L.tileLayer('gengetsu/tiles/{z}/{x}/{y}.png', opt);
  
 shiokaze.addTo(map);
 
-map.setView([-130,187], 2);
+map.setView([-93,135], 2);
 
 //设定缩放按钮属性
 map.zoomControl.setPosition('bottomleft');
 
+
+//获取坐标
+function showCood(i) {
+    document.getElementById("coodL").innerHTML = "当前坐标---" + i.latlng};
+    map.on('click', showCood);
 
 var customPopup =
         {
@@ -191,7 +206,7 @@ for (i = 0; i < itemData.genItems.length; i++) {
             shf=L.layerGroup(shiokazeMKf),
             shn=L.layerGroup(shiokazeMKn),
             sho=L.layerGroup(shiokazeMKco),
-         //   sh=L.layerGroup(shiokazeMKc.concat(shiokazeMKe,shiokazeMKf)),
+            sh=[she,shc,shf,shn,sho],
             
             gee=L.layerGroup(gengetsuMKe),
             gec=L.layerGroup(gengetsuMKc),
@@ -218,6 +233,15 @@ for (i = 0; i < itemData.genItems.length; i++) {
   //          map.addLayer(jr[u])};
         
    //         all.removeFrom(map);
+//搜索完自动关闭侧栏菜单函数
+function sideSwiper(){
+    if (window.screen.width<1300){
+        sliderM()
+    }
+
+}
+
+
 
 //------------------------------------------搜索
 //SHIO搜索控件
@@ -236,6 +260,10 @@ var shioKensakuCtrl = new L.Control.Search({
 map.addControl(shioKensakuCtrl);
 shioKensakuCtrl.on('search:locationfound', function(e) {    
 	e.layer.openPopup();
+    sideSwiper();
+
+
+
 });     //搜索完成后移动到相应位置
 
 //futa搜索控件
@@ -253,6 +281,7 @@ var futaKensakuCtrl = new L.Control.Search({
 //map.addControl(futaKensakuCtrl);
 futaKensakuCtrl.on('search:locationfound', function(e) {    
 	e.layer.openPopup();
+    sideSwiper();
 });     
 
 //gen搜索控件
@@ -270,10 +299,12 @@ var genKensakuCtrl = new L.Control.Search({
 //map.addControl(genKensakuCtrl);
 genKensakuCtrl.on('search:locationfound', function(e) {    
 	e.layer.openPopup();
+    sideSwiper();
 });   
 
 
-map.addLayer(she);   map.addLayer(shc);   map.addLayer(shf); map.addLayer(shn);   map.addLayer(sho);
+
+for (u = 0; u < sh.length; u++){map.addLayer(sh[u])}
 
 
    
@@ -335,7 +366,7 @@ map.addLayer(she);   map.addLayer(shc);   map.addLayer(shf); map.addLayer(shn); 
                          for (u = 0; u < gx.length; u++){gx[u].setAttribute("value", "show") ;gx[u].classList.remove('transprt');gy[u].classList.remove('displayNone')};
                          map.removeControl(shioKensakuCtrl);map.removeControl(futaKensakuCtrl);map.removeControl(genKensakuCtrl);map.addControl(genKensakuCtrl);
                          break;
-             }};
+             }}
             
     //mapShow(1);
 
@@ -414,18 +445,5 @@ if (window.screen.width<330){
 };
 
 
-//获取坐标
-function showCood(i) {
-    document.getElementById("coodL").innerHTML = "当前坐标---" + i.latlng};
-    map.on('click', showCood);
 
-function sliderX() {
-    document.getElementById('side').classList.toggle("panelHidden"),
-    document.getElementById('slider').classList.toggle("slider")
-}
- 
-function sliderM() {
-    document.getElementById('side').classList.toggle("panelHiddenM"),
-    document.getElementById('sliderM').classList.toggle("sliderMx")
-}
- 
+
