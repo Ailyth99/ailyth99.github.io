@@ -7,12 +7,12 @@
 }
 
 :root { /* Neucom公司色彩风格 */
-    --bg: rgb(255, 255, 240);
+    --bg: #fffff0;
     --accent-bg: #EDEAE1;
     --text: #2A2A2A;
     --text-light: #666666;
     --border: #9B958A;
-    --accent: rgb(239, 110, 46);
+    --accent: #ef6e2e;
     --accent-hover: #FF8533;
     --accent-text: #FFFFFF;
     --code: #CC5200;
@@ -220,9 +220,10 @@ section:last-child {
 .bookmark-url {
     color: var(--text-light);
     font-size: 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-all;     
+    word-wrap: break-word;    
+    line-height: 1.4;         
+    max-width: 100%;          
 }
 
 .bookmark-image {
@@ -243,4 +244,15 @@ section:last-child {
 
 .footer p {
     margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .bookmark-card {
+        width: 100%;          /* 移动端占满宽度 */
+    }
+    
+    .bookmark-image {
+        width: 80px;          /* 移动端图片稍微缩小 */
+        height: 80px;
+    }
 }
