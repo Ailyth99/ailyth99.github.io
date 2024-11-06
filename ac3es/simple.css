@@ -54,6 +54,13 @@ body {
     height: auto;
 }
 
+@media (max-width: 768px) {
+    .logo {
+        max-width: 100%;  /* 移动端下占满宽度 */
+        margin-bottom: 1rem;  /* 添加一些底部间距 */
+    }
+}
+
 h1 {
     color: var(--accent);
     margin: 2.5rem 0;
@@ -86,7 +93,7 @@ p {
     background: var(--bg);
     padding: 3rem;
     border-radius: 8px;
-    margin: 2rem 0;
+    margin: 0rem 0;
 }
 
 table {
@@ -254,5 +261,34 @@ section:last-child {
     .bookmark-image {
         width: 80px;          /* 移动端图片稍微缩小 */
         height: 80px;
+    }
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 400px); /* 固定宽度为400px */
+    gap: 0.5rem;                            /* 减小间距 */
+    margin: 2rem auto;                      /* 上下margin为2rem，左右auto实现居中 */
+    justify-content: center;                /* 网格整体居中 */
+    max-width: 820px;                      /* 限制最大宽度，确保两张图片加间距的总宽 */
+}
+
+.preview-grid img {
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
+    display: block;                         /* 移除图片下方的小间隙 */
+}
+
+@media (max-width: 968px) {
+    .preview-grid {
+        grid-template-columns: 1fr;         /* 移动端单列 */
+        max-width: 400px;                   /* 移动端最大宽度 */
+    }
+    
+    .preview-grid img {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
     }
 }
