@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Font Testing Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Font Testing Tool</h1>
+    <div class="controls">
+        <button id="loadFontsBtn">Click to Load System Fonts</button>
+        <select id="fontSelect"></select>
+        
+        <div class="font-controls">
+            <div class="control-group">
+                <label for="fontSize">Font Size:</label>
+                <div class="size-control">
+                    <input type="range" id="fontSize" min="8" max="72" value="25" class="slider">
+                    <span id="fontSizeDisplay">25px</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label for="fontColor">Font Color:</label>
+                <input type="color" id="fontColor" value="#000000">
+            </div>
+        </div>
+    </div>
+
+    <textarea id="testInput" placeholder="Enter test text here...">
+    这是一段测试文本界于魔界与人间界之间，由称为“扉”的空间歪斜所连接着。
+    Sample text The quick brown fox jumps over the lazy dog 1234567890
+    以上のように快楽主義や刹那主義の傾向があり、魔界の諸々な事情には怠惰的かつ関心が薄い
+
+</textarea>
+    <div id="preview"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
