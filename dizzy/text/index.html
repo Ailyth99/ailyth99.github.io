@@ -18,6 +18,19 @@
         <!-- 竖排转换 -->
         <div class="tab-content active" id="vertical-content">
             <h2>Vertical Text Converter</h2>
+            <div class="format-selector">
+                <label>Output Format:</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="verticalFormat" value="vertical" checked>
+                        <span>Vertical Text</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="verticalFormat" value="single_line">
+                        <span>Single Line</span>
+                    </label>
+                </div>
+            </div>
             <div class="container">
                 <div>
                     <p>Input Text:</p>
@@ -41,6 +54,19 @@
         <!-- 字频统计 -->
         <div class="tab-content" id="frequency-content">
             <h2>Character Frequency Counter</h2>
+            <div class="format-selector">
+                <label>Output Format:</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="frequencyFormat" value="with_count" checked>
+                        <span>With Count</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="frequencyFormat" value="only_chars">
+                        <span>Only Characters</span>
+                    </label>
+                </div>
+            </div>
             <div class="container">
                 <div>
                     <p>Input Text:</p>

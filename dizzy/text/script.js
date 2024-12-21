@@ -2,7 +2,17 @@
 const verticalConverter = {
     convert() {
         const input = this.getInput();
-        const output = input.replace(/\s+/g, '').split('').join('\n');
+        const format = document.querySelector('input[name="verticalFormat"]:checked').value;
+        let output;
+
+        if (format === 'single_line') {
+            // 去掉换行符和所有空格
+            output = input.replace(/\n/g, ' ').replace(/\s+/g, '').trim();
+        } else {
+            // 竖排转换
+            output = input.replace(/\s+/g, '').split('').join('\n');
+        }
+
         this.setOutput(output);
         this.updateCharCount();
     },
@@ -39,7 +49,8 @@ const verticalConverter = {
     }
 };
 
-window.frequencyAnalyzer = {
+// 字频统计器
+const frequencyAnalyzer = {
     analyze() {
         const input = this.getInput();
         const charMap = new Map();
@@ -49,13 +60,24 @@ window.frequencyAnalyzer = {
             charMap.set(char, (charMap.get(char) || 0) + 1);
         });
 
-        // 转换成数组并排序
-        const sortedResult = [...charMap.entries()]
-            .sort((a, b) => b[1] - a[1])
-            .map(([char, count]) => `${char},${count}`)
-            .join('\n');
+        // 获取输出格式
+        const format = document.querySelector('input[name="frequencyFormat"]:checked').value;
+        let results;
 
-        this.setOutput(sortedResult);
+        if (format === 'with_count') {
+            // 转换成数组并排序
+            results = [...charMap.entries()]
+                .sort((a, b) => b[1] - a[1])
+                .map(([char, count]) => `${char},${count}`)
+                .join('\n');
+        } else {
+            // 只输出字符
+            results = [...charMap.keys()]
+                .sort((a, b) => charMap.get(b) - charMap.get(a)) // 按出现次数排序
+                .join('\n');
+        }
+
+        this.setOutput(results);
         this.updateCharCount();
     },
 
