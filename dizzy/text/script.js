@@ -242,6 +242,54 @@ const fontTester = {
     }
 };
 
+// 文字排序器
+const textSorter = {
+    sort() {
+        const input = this.getInput();
+        const method = document.querySelector('input[name="sortMethod"]:checked').value;
+        let output;
+
+        switch (method) {
+            case 'alphabetical':
+                output = input.split('').sort((a, b) => a.localeCompare(b)).join('');
+                break;
+            case 'frequency':
+                const charMap = new Map();
+                input.replace(/\s+/g, '').split('').forEach(char => {
+                    charMap.set(char, (charMap.get(char) || 0) + 1);
+                });
+                output = [...charMap.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([char]) => char)
+                    .join('');
+                break;
+            case 'unicode':
+                output = input.split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('');
+                break;
+        }
+
+        this.setOutput(output);
+    },
+
+    shuffle() {
+        const input = this.getInput();
+        const shuffled = input.split('').sort(() => Math.random() - 0.5).join('');
+        this.setOutput(shuffled);
+    },
+
+    getInput() {
+        return document.querySelector('#sort-content .input').value;
+    },
+
+    getOutput() {
+        return document.querySelector('#sort-content .output');
+    },
+
+    setOutput(value) {
+        this.getOutput().value = value;
+    }
+};
+
 // 初始化所有功能
 document.addEventListener('DOMContentLoaded', () => {
     // Tab 切换功能

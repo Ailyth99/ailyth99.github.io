@@ -11,6 +11,7 @@
             <button class="tab-button" data-tab="frequency">Character Frequency</button>
             <button class="tab-button" data-tab="sjis">SHIFT-JIS</button>
             <button class="tab-button" data-tab="font">Font Test</button>
+            <button class="tab-button" data-tab="sort">Text Sorting</button>
         </div>
     </div>
 
@@ -154,6 +155,42 @@
 Sample text The quick brown fox jumps over the lazy dog 1234567890
 以上のように快楽主義や刹那主義の傾向があり、魔界の諸々な事情には怠惰的かつ関心</textarea>
             <div id="preview"></div>
+        </div>
+
+        <!-- 文字排序 -->
+        <div class="tab-content" id="sort-content">
+            <h2>Text Sorting Tool</h2>
+            <div class="container">
+                <div>
+                    <p>Input Text:</p>
+                    <textarea class="input" placeholder="Enter text to sort..."></textarea>
+                </div>
+                <div>
+                    <p>Result:</p>
+                    <textarea class="output"></textarea>
+                </div>
+            </div>
+            <div class="button-group">
+                <button onclick="textSorter.sort()">Sort</button>
+                <button onclick="textSorter.shuffle()">Shuffle</button>
+            </div>
+            <div class="format-selector">
+                <label>Sort By:</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="sortMethod" value="alphabetical" checked>
+                        <span>Alphabetical Order</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="sortMethod" value="frequency">
+                        <span>By Frequency</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="sortMethod" value="unicode">
+                        <span>By Unicode Value</span>
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 
