@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Processing Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="vertical">Vertical Text</button>
+            <button class="tab-button" data-tab="frequency">Character Frequency</button>
+            <button class="tab-button" data-tab="sjis">SHIFT-JIS</button>
+            <button class="tab-button" data-tab="font">Font Test</button>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <!-- 竖排转换 -->
+        <div class="tab-content active" id="vertical-content">
+            <h2>Vertical Text Converter</h2>
+            <div class="container">
+                <div>
+                    <p>Input Text:</p>
+                    <textarea class="input" placeholder="Enter text to convert..."></textarea>
+                    <div class="char-counter">
+                        Total: <span class="total">0</span> | 
+                        Without Spaces: <span class="no-space">0</span>
+                    </div>
+                </div>
+                <div>
+                    <p>Result:</p>
+                    <textarea class="output"></textarea>
+                </div>
+            </div>
+            <div class="button-group">
+                <button onclick="verticalConverter.convert()">Convert</button>
+                <button onclick="verticalConverter.copyOutput()">Copy Result</button>
+            </div>
+        </div>
+
+        <!-- 字频统计 -->
+        <div class="tab-content" id="frequency-content">
+            <h2>Character Frequency Counter</h2>
+            <div class="container">
+                <div>
+                    <p>Input Text:</p>
+                    <textarea class="input" placeholder="Enter text to analyze..."></textarea>
+                    <div class="char-counter">
+                        Total: <span class="total">0</span> | 
+                        Without Spaces: <span class="no-space">0</span>
+                    </div>
+                </div>
+                <div>
+                    <p>Result:</p>
+                    <textarea class="output"></textarea>
+                </div>
+            </div>
+            <div class="button-group">
+                <button onclick="frequencyAnalyzer.analyze()">Analyze</button>
+                <button onclick="frequencyAnalyzer.copyOutput()">Copy Result</button>
+            </div>
+        </div>
+
+        <!-- SHIFT-JIS转换 -->
+        <div class="tab-content" id="sjis-content">
+            <h2>SHIFT-JIS Encoder</h2>
+            <div class="format-selector">
+                <label>Output Format:</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="sjisFormat" value="code" checked>
+                        <span>Code Only</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="sjisFormat" value="char_code">
+                        <span>Character,Code</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="sjisFormat" value="code_char">
+                        <span>Code,Character</span>
+                    </label>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <p>Input Text:</p>
+                    <textarea class="input" placeholder="Enter text to encode..."></textarea>
+                </div>
+                <div>
+                    <p>Result:</p>
+                    <textarea class="output"></textarea>
+                </div>
+            </div>
+            <div class="button-group">
+                <button onclick="sjisConverter.convert()">Convert</button>
+                <button onclick="sjisConverter.copyOutput()">Copy Result</button>
+            </div>
+            <div class="debug-container">
+                <p>Unmatched Characters:</p>
+                <textarea class="debug-output" readonly></textarea>
+            </div>
+        </div>
+
+        <!-- 字体测试 -->
+        <div class="tab-content" id="font-content">
+            <h2>Font Testing Tool</h2>
+            <div class="controls">
+                <button id="loadFontsBtn">Load System Fonts</button>
+                <select id="fontSelect"></select>
+                
+                <div class="font-controls">
+                    <div class="control-group">
+                        <label for="fontSize">Font Size:</label>
+                        <div class="size-control">
+                            <input type="range" id="fontSize" min="8" max="72" value="25" class="slider">
+                            <span id="fontSizeDisplay">25px</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="fontColor">Font Color:</label>
+                        <input type="color" id="fontColor" value="#000000">
+                    </div>
+                </div>
+            </div>
+
+            <textarea id="testInput" placeholder="Enter test text here...">这是一段测试文本界于魔界与人间界之间，由称为"扉"的空间歪斜所连接着。
+Sample text The quick brown fox jumps over the lazy dog 1234567890
+以上のように快楽主義や刹那主義の傾向があり、魔界の諸々な事情には怠惰的かつ関心</textarea>
+            <div id="preview"></div>
+        </div>
+    </div>
+
+    <script src="sjismap.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
