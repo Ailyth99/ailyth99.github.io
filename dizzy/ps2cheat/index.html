@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PCSX2金手指转换工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PCSX2 Pnach转换</h1>
+        <div>
+            <h3>>>> 输入PAR格式金手指代码：</h3>
+            <textarea id="input" placeholder="在此处粘贴PAR代码..."></textarea>
+        </div>
+        
+       
+            <label>
+                <input type="checkbox" id="keepEmptyLines" checked> 保留空行
+            </label>
+            <label>
+                <input type="checkbox" id="keepComments" checked> 保留注释行
+            </label>
+            <label>
+                <input type="checkbox" id="autoDetect" checked> 自动检测代码(区分byte/word/short/extended)
+            </label>
+       
+        
+        <button onclick="convertCode()">开始转换</button>
+        
+        <div>
+            <h3>>>> 转换结果：</h3>
+            <textarea id="output" readonly></textarea>
+        </div>
+        <p>转换完成后，把结果复制到游戏对应的的pnach文件中，测试是否可用。</p>
+        <div class="info-box">
+            <h3>为什么需要转换PAR金手指代码？</h3>
+            <p>主机的金手指是一种商品，很早就有了，前后有很多厂商分别制作了各自规格的产品进行售卖。</p>
+            <p>关于这些五花八门的金手指产品，可以查看<a href="https://www.bilibili.com/video/BV17u4y1H7Qm" target="_blank">B站UP主“普通玩家M
+                ”的金手指实物讲解</a>。</p>
+            <p>常见的产品有AR（Action Replay）、CB（Code Breaker）、Game Shark、Xploder，为了确保商业利益，各厂商的金手指格式不同，都经过了加密。</p>
+            <p>PCSX2需要把金手指转换成原始格式（RAW）才能使用，因此有了个转换器。本工具主要目的是转换PAR代码，即PRO Action Replay，实际就是AR的日版名称，PS2时期的日本流行的金手指格式就是这种。</p>
+            <p>在互联网上还残存的各种日站的PS2金手指代码，可以试试解密转换后再使用。</p>
+        </div>
+
+        <div class="credits">
+            <p>转换算法参考: <a href="http://www5.airnet.ne.jp/kajapon/ps2par.html" target="_blank">PS2PAR解析部屋</a></p>
+            <p>PAR代码格式说明参考: <a href="https://w.atwiki.jp/emups2/pages/103.html" target="_blank">PCSX2金手指说明</a></p>
+            <p>字体来源: <a href="https://poppyworks.itch.io/silver" target="_blank">Silver Pixel Font by PoppyWorks</a></p>
+        </div>
+    </div>
+
+    <script src="converter.js"></script>
+</body>
+</html>

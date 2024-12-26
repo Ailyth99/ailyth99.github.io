@@ -1,3 +1,5 @@
+//转换算法来自：http://www5.airnet.ne.jp/kajapon/ps2par.html
+
 // 竖排转换器
 const verticalConverter = {
     convert() {
