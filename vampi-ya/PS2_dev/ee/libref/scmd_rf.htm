@@ -1,5 +1,5 @@
 <html lang="ja">
-<!-- Œ©o‚µ@‚PC•”Œ©o‚µ -->
+<!-- o@PCo -->
 <head>
 
 <script language="JavaScript">
@@ -103,7 +103,7 @@
 //-->
 </script>
 <title>SIF Command</title>
-<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="Author" Content="Sony Computer Entertainment Inc.">
@@ -129,7 +129,7 @@
    q = p.toString();
    result = q.match(/\/category\.htm/gi);
    if(result == "/category.htm"){
-          document.writeln("<a href=\"JavaScript:lj('overview','../overview/sif.htm')\"><img src=\"./gif/arrow.png\" border=0>ƒ‰ƒCƒuƒ‰ƒŠŠT—v</a>");
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/sif.htm')\"><img src=\"./gif/arrow.png\" border=0>CuTv</a>");
     }
 }
 // -->
@@ -142,72 +142,72 @@
 SIF Command
 </h1></center>
 </a>
-<font size=4><b>\‘¢‘Ì</b></font>
+<font size=4><b>\</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifCmdData"> sceSifCmdData<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhŠÖ”“o˜^ƒf[ƒ^<br></td></tr>
+<td>&nbsp;</td><td>R}hÖo^f[^<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifCmdHandler"> sceSifCmdHandler<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhŠÖ”<br></td></tr>
+<td>&nbsp;</td><td>R}hÖ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifCmdHdr"> sceSifCmdHdr<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhƒpƒPƒbƒgƒwƒbƒ_<br></td></tr>
+<td>&nbsp;</td><td>R}hpPbgwb_<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifCmdSRData"> sceSifCmdSRData<br></a></td>
-<td>&nbsp;</td><td>ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^•ÏXƒpƒPƒbƒg<br></td></tr>
+<td>&nbsp;</td><td>\tgEFAWX^ÏXpPbg<br></td></tr>
 </table><br>
-<font size=4><b>ŠÖ”</b></font>
+<font size=4><b>Ö</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifAddCmdHandler"> sceSifAddCmdHandler<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhŠÖ”‚Ì“o˜^<br></td></tr>
+<td>&nbsp;</td><td>R}hÖÌ“o^<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifExitCmd"> sceSifExitCmd<br></a></td>
-<td>&nbsp;</td><td>SIF Command API ‚ÌI—¹<br></td></tr>
+<td>&nbsp;</td><td>SIF Command API ÌI<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifGetSreg"> sceSifGetSreg<br></a></td>
-<td>&nbsp;</td><td>ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Ì“à—e‚Ìæ“¾<br></td></tr>
+<td>&nbsp;</td><td>\tgEFAWX^Ì“eÌæ“¾<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifInitCmd"> sceSifInitCmd<br></a></td>
-<td>&nbsp;</td><td>SIF Command API ‚Ì‰Šú‰»<br></td></tr>
+<td>&nbsp;</td><td>SIF Command API Ì<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifRemoveCmdHandler"> sceSifRemoveCmdHandler<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhŠÖ”‚Ìíœ<br></td></tr>
+<td>&nbsp;</td><td>R}hÖÌíœ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifSendCmd"> sceSifSendCmd<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚Ì‘—o<br></td></tr>
+<td>&nbsp;</td><td>R}hpPbgÌ‘o<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifSendCmdIntr"> sceSifSendCmdIntr<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚Ì‘—o(IOP‚Ì‚İÀ‘•)<br></td></tr>
+<td>&nbsp;</td><td>R}hpPbgÌ‘o(IOPÌ‚İ)<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifSetCmdBuffer"> sceSifSetCmdBuffer<br></a></td>
-<td>&nbsp;</td><td>ƒRƒ}ƒ“ƒhŠÖ”—pƒoƒbƒtƒ@‚Ì“o˜^<br></td></tr>
+<td>&nbsp;</td><td>R}hÖpobt@Ì“o^<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifSetSreg"> sceSifSetSreg<br></a></td>
-<td>&nbsp;</td><td>ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Ì“à—e‚Ìİ’è<br></td></tr>
+<td>&nbsp;</td><td>\tgEFAWX^Ì“eÌİ’<br></td></tr>
 </table>
 
-<!-- Œ©o‚µ@‚PC•”Œ©o‚µ -->
+<!-- o@PCo -->
 <br></td></tr></table></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>\‘¢‘Ì</h2></center>
+<center><h2>\</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifCmdData"><font size=6>sceSifCmdData<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhŠÖ”“o˜^ƒf[ƒ^<br></div>
+<!-- Ö -->
+<div align=right>R}hÖo^f[^<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>typedef struct {
@@ -217,76 +217,76 @@ SIF Command
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>func</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒhŠÖ”&nbsp;</td>
+<td valign="TOP">&nbsp;R}hÖ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŠÖ”‚ªÀs‚Éˆø”‚Æ‚µ‚Ä“n‚³‚ê‚éƒf[ƒ^‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;ÖsÉˆÆ‚Ä“nf[^ÌƒAhX&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒRƒ}ƒ“ƒhŠÖ”‚ğ“o˜^‚·‚éÛ‚Ìƒf[ƒ^\‘¢‚Å‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">R}hÖo^Û‚Ìƒf[^\Å‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifCmdHandler"><font size=6>sceSifCmdHandler<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhŠÖ”<br></div>
+<!-- Ö -->
+<div align=right>R}hÖ<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>typedef void (* <b>sceSifCmdHandler</b>)(void *<i>pkt</i>,	void *<i>data</i>)
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>pkt</i>&nbsp;</td>
-<td valign="TOP">&nbsp;sceSifSendCmd() ‚Åw’è‚³‚ê‚½&nbsp;<br>&nbsp;ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚ÌƒRƒs[‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifSendCmd() Åwè‚³ê‚½&nbsp;<br>&nbsp;R}hpPbgÌƒRs[ÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
-<td valign="TOP">&nbsp;sceSifAddCmdHandler ‚ÅƒRƒ}ƒ“ƒhŠÖ”‚Æ&nbsp;<br>&nbsp;‚Æ‚à‚É“o˜^‚µ‚½ƒf[ƒ^ƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifAddCmdHandler ÅƒR}hÖ&nbsp;<br>&nbsp;Æ‚É“o^f[^AhX&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚±‚ÌŠÖ”‚ÍAsceSifSendCmd() ‚É‚æ‚Á‚Ä‹N‚³‚ê‚é DMA Š„‚è‚İ“à‚ÅÀs‚³‚ê‚é‚à‚Ì‚Å‚·B‚»‚ÌÛA‘—‚èè‚ÌƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚Æó‚¯è‚Ìw’èƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ªˆø”‚Æ‚µ‚Ä“n‚³‚ê‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">ÌŠÖÍAsceSifSendCmd() É‚Ä‹N DMA èİ“ÅsÌ‚Å‚BÌÛAÌƒR}hpPbgÆó‚¯Ìwf[^ÌƒAhXÆ‚Ä“nÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifCmdHdr"><font size=6>sceSifCmdHdr<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhƒpƒPƒbƒgƒwƒbƒ_<br></div>
+<!-- Ö -->
+<div align=right>R}hpPbgwb_<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>typedef  struct {
@@ -299,50 +299,50 @@ SIF Command
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>psize</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‚±‚Ìƒwƒbƒ_‚ğŠÜ‚ŞƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚ÌƒTƒCƒY(16ˆÈã112ˆÈ‰º)&nbsp;</td>
+<td valign="TOP">&nbsp;Ìƒwb_Ü‚ŞƒR}hpPbgÌƒTCY(16È112È‰)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>dsize</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒPƒbƒg‚Æ‚¢‚Á‚µ‚å‚É‘—‚éA•tƒf[ƒ^‚Ì‘å‚«‚³&nbsp;</td>
+<td valign="TOP">&nbsp;pPbgÆ‚É‘Atf[^Ì‘å‚«&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>daddr</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•tƒf[ƒ^‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;tf[^ÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>fcode</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚³‚ê‚éƒRƒ}ƒ“ƒhŠÖ”‚Ì”Ô†&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚ÑoR}hÖÌ”Ô&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>opt</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒvƒƒOƒ‰ƒ}‚ªg—p‚µ‚Ä‚æ‚¢ƒf[ƒ^—Ìˆæ&nbsp;</td>
+<td valign="TOP">&nbsp;vO}gpÄ‚æ‚¢f[^Ìˆ&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚ÍA‚±‚Ìƒf[ƒ^\‘¢‚ğæ“ª‚É‚ÂÅ‘å112ƒoƒCƒg‚Ìƒf[ƒ^‚Å‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">R}hpPbgÍAÌƒf[^\æ“ªÉÂÅ‘112oCgÌƒf[^Å‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifCmdSRData"><font size=6>sceSifCmdSRData<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^•ÏXƒpƒPƒbƒg<br></div>
+<!-- Ö -->
+<div align=right>\tgEFAWX^ÏXpPbg<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>typedef struct {
@@ -353,55 +353,55 @@ SIF Command
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>chdr</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒhƒpƒPƒbƒgƒwƒbƒ_&nbsp;</td>
+<td valign="TOP">&nbsp;R}hpPbgwb_&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>rno</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^”Ô†(0`31)&nbsp;</td>
+<td valign="TOP">&nbsp;\tgEFAWX^Ô(0`31)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
-<td valign="TOP">&nbsp;İ’è’l&nbsp;</td>
+<td valign="TOP">&nbsp;İ’l&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">SIF Command API ƒVƒXƒeƒ€‚Í32bit~32ŒÂ‚Ì”z—ñiƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^j‚ğ‚Á‚Ä‚¢‚Ü‚·B0`7”Ô‚ÍƒVƒXƒeƒ€—p‚Å‚·‚ªAc‚è‚Íƒ†[ƒUƒvƒƒOƒ‰ƒ€‚Åg—p‚·‚é‚±‚Æ‚ª‚Å‚«A‚»‚Ì‚½‚ß‚ÌŠÖ”‚àƒfƒtƒHƒ‹ƒg‚Å“o˜^‚³‚ê‚Ä‚¢‚Ü‚·B<br>‘Šè‘¤‚Ìƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚ğİ’è‚·‚éÛ‚É‚ÍA‚±‚Ì\‘¢‘Ì‚ğg‚Á‚ÄŸ‚Ì‚æ‚¤‚É‚µ‚Ü‚·i‘Šè‘¤‚Ì31”ÔƒŒƒWƒXƒ^‚ğ0xff‚Éİ’è‚·‚é—ájB<br></div>
+<div style="margin-left:50px;">SIF Command API VXe32bit~32Â‚Ì”zi\tgEFAWX^jÄ‚Ü‚B0`7Ô‚ÍƒVXepÅ‚AcÍƒ[UvOÅgpé‚±Æ‚Å‚AÌ‚ß‚ÌŠÖftHgÅ“o^Ä‚Ü‚B<br>è‘¤Ìƒ\tgEFAWX^İ’è‚·Û‚É‚ÍAÌ\Ì‚gÄÌ‚æ‚¤É‚Ü‚iè‘¤31ÔƒWX^0xffÉİ’è‚·jB<br></div>
 <div style="margin-left:70px;"><br>sceSifCmdSRData d;<br><br>d.rno = 31;<br>d.value = 0xff;<br>sceSifSendData(SIF_CMDC_SET_SREG,&d,sizeof(d),0,0,0);<br><br></div>
-<div style="margin-left:50px;">‚È‚¨A©•ª‘¤‚Ìƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Ì’l‚ğæ“¾Eİ’è‚·‚é‚½‚ß‚É‚ÍAsceSifGetSreg()/sceSifSetSreg() ‚ğg—p‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">È‚AÌƒ\tgEFAWX^Ì’læ“¾Eİ’è‚·é‚½ß‚É‚ÍAsceSifGetSreg()/sceSifSetSreg() gpÜ‚B<br><br></div>
 
-<!-- ŠÖ˜A€–Ú -->
-<div style="margin-left:10px;"><b>ŠÖ˜A€–Ú</b></div>
+<!-- Ö˜A -->
+<div style="margin-left:10px;"><b>Ö˜A</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><a href="#sceSifGetSreg">sceSifGetSreg</a>()<a href="#"></a>,<a href="#sceSifSetSreg">sceSifSetSreg</a>()<br><br><br><br></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>ŠÖ”</h2></center>
+<center><h2>Ö</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifAddCmdHandler"><font size=6>sceSifAddCmdHandler<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhŠÖ”‚Ì“o˜^<br></div>
+<!-- Ö -->
+<div align=right>R}hÖÌ“o^<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -413,60 +413,60 @@ void  <b>sceSifAddCmdHandler</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚È‚¢iŠ„‚è‚İ‹Ö~ó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚ÑoÂ”\<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚È‚ièİ‹Ö~Ô‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒhŠÖ”‚ğ“o˜^‚·‚éƒoƒbƒtƒ@‚ÌˆÊ’u&nbsp;</td>
+<td valign="TOP">&nbsp;R}hÖo^obt@ÌˆÊ’u&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>f</i>&nbsp;</td>
-<td valign="TOP">&nbsp;“o˜^‚·‚éƒRƒ}ƒ“ƒhŠÖ”&nbsp;</td>
+<td valign="TOP">&nbsp;o^R}hÖ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒhŠÖ”f ‚É“n‚³‚ê‚éƒf[ƒ^‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;R}hÖf É“nf[^ÌƒAhX&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">sceSifSetCmdBuffer() ‚Å“o˜^‚µ‚½ƒoƒbƒtƒ@‚ÉAƒRƒ}ƒ“ƒhƒpƒPƒbƒgŒÄo‚ÉŒÄ‚Ño‚³‚ê‚éŠÖ”iƒRƒ}ƒ“ƒhŠÖ”j‚ğ“o˜^‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">sceSifSetCmdBuffer() Å“o^obt@ÉAR}hpPbgÄoÉŒÄ‚ÑoÖiR}hÖjo^Ü‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒRƒ}ƒ“ƒhŠÖ”‚ÍŠ„‚è‚İƒnƒ“ƒhƒ‰‚Æ‚µ‚ÄÀs‚³‚ê‚é‚½‚ßAƒvƒƒOƒ‰ƒ~ƒ“ƒO‚ÉÛ‚µ‚Ä‚¢‚­‚Â‚©“Á•Ê‚È’ˆÓ‚ª•K—v‚Å‚·BŠ„‚è‚İƒnƒ“ƒhƒ‰‚Ì‹Lq‚É‚Â‚¢‚ÄA\overview\eekernel‚É’ˆÓ–€‚ª‹LÚ‚³‚ê‚Ä‚¢‚Ü‚·‚Ì‚ÅQÆ‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">R}hÖÍŠèİƒnhÆ‚Äsé‚½ßAvO~OÉÛ‚Ä‚Â‚Ê‚È’Ó‚KvÅ‚BèİƒnhÌ‹LqÉ‚Â‚ÄA\overview\eekernelÉ’ÓLÚ‚Ä‚Ü‚Ì‚ÅQÆ‚Ä‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifExitCmd"><font size=6>sceSifExitCmd<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>SIF Command API ‚ÌI—¹<br></div>
+<!-- Ö -->
+<div align=right>SIF Command API ÌI<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -474,38 +474,38 @@ void <b>sceSifExitCmd</b>(void)
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚È‚¢iŠ„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚È‚ièİ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">sceSifInitCmd() ‚Å“o˜^‚µ‚½Š„‚è‚İŠÖ”‚ğ‚Í‚¸‚µ‚Ü‚·B<br>EE ‚ÅƒIƒuƒWƒFƒNƒg‚Ì‘JˆÚ‚ğs‚¢A‚»‚Ìæ‚Å SIF Command API ‚ğg—p‚·‚éê‡‚ÍA‚±‚ÌŠÖ”‚ÅŠ„‚è‚İŠÖ”‚ğ‚Í‚¸‚µA‘JˆÚæ‚ÅV‚½‚ÉsceSifInitCmd() ‚ğŒÄ‚Î‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">sceSifInitCmd() Å“o^èİŠÖÍ‚Ü‚B<br>EE ÅƒIuWFNgÌ‘JÚ‚sAÌ SIF Command API gpê‡ÍAÌŠÖÅŠèİŠÖÍ‚AJÚÅVsceSifInitCmd() Ä‚Î‚È‚Î‚È‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifGetSreg"><font size=6>sceSifGetSreg<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Ì“à—e‚Ìæ“¾<br></div>
+<!-- Ö -->
+<div align=right>\tgEFAWX^Ì“eÌæ“¾<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -513,46 +513,46 @@ unsigned int <b>sceSifGetSreg</b>(int <i>no</i>)
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚È‚¢iŠ„‚è‚İ‹Ö~A‹–‰Âó‘Ô‚ÉˆË‘¶‚µ‚È‚¢j<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚È‚ièİ‹Ö~AÂÔ‚ÉˆË‘È‚j<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒŒƒWƒXƒ^”Ô†i0`31j&nbsp;</td>
+<td valign="TOP">&nbsp;WX^Ôi0`31j&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒŒƒWƒXƒ^‚Ì“à—e‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">WX^Ì“eÔ‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">©•ª‘¤‚Ìƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Ì’l‚ğæ“¾‚µ‚Ü‚·B<br>ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Ì‰Šú’l‚Í0‚Å‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">Ìƒ\tgEFAWX^Ì’læ“¾Ü‚B<br>\tgEFAWX^Ìl0Å‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifInitCmd"><font size=6>sceSifInitCmd<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>SIF Command API ‚Ì‰Šú‰»<br></div>
+<!-- Ö -->
+<div align=right>SIF Command API Ì<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -560,38 +560,38 @@ void <b>sceSifInitCmd</b>(void)
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚È‚¢iŠ„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚È‚ièİ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">SIF Command API ‚Ì‰Šú‰»‚ğs‚¢‚Ü‚·B“à•”•Ï”‚Ì‰Šú‰»‚ÆAƒRƒ}ƒ“ƒh‚ğˆ—‚·‚é‚½‚ß‚ÌŠ„‚è‚İŠÖ”‚Ì“o˜^‚ğs‚¢‚Ü‚·B<br>Å‰‚ÉŒÄ‚Î‚ê‚é sceSifInitCmd() ‚ÍAEE/IOP ‘ŠŒİ‚É“¯Šú‚ğ‚Æ‚é‚½‚ßA‘Šè‘¤‚ÅŒÄ‚Î‚ê‚é‚Ü‚Å‚±‚ÌŠÖ”“à‚Å‘Ò‚¿‚É“ü‚è‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">SIF Command API ÌsÜ‚BÏÌÆAR}hé‚½ß‚ÌŠèİŠÖÌ“o^sÜ‚B<br>ÅÉŒÄ‚Î‚ sceSifInitCmd() ÍAEE/IOP İ‚É“Æ‚é‚½ßAè‘¤ÅŒÄ‚Î‚Ü‚Å‚ÌŠÖÅ‘Ò‚É“Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifRemoveCmdHandler"><font size=6>sceSifRemoveCmdHandler<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhŠÖ”‚Ìíœ<br></div>
+<!-- Ö -->
+<div align=right>R}hÖÌíœ<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -599,46 +599,46 @@ void <b>sceSifRemoveCmdHandler</b>(unsigned int  <i>pos</i>)
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚È‚¢iŠ„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚È‚ièİ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
-<td valign="TOP">&nbsp;íœ‚·‚éƒoƒbƒtƒ@‚ÌˆÊ’u&nbsp;</td>
+<td valign="TOP">&nbsp;íœobt@ÌˆÊ’u&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>pos</i> ‚É“o˜^‚³‚ê‚½ŠÖ”‚ğíœ‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><i>pos</i> É“o^ê‚½ÖíœÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifSendCmd"><font size=6>sceSifSendCmd<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚Ì‘—o<br></div>
+<!-- Ö -->
+<div align=right>R}hpPbgÌ‘o<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -653,90 +653,90 @@ unsigned int  <b>sceSifSendCmd</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚ÑoÂ”\<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièİ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚·ŠÖ”‚ÌˆÊ’u(sceSifAddCmdHandler()‚Å“o˜^‚µ‚½ˆÊ’u)&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚ÑoÖÌˆÊ’u(sceSifAddCmdHandler()Å“o^Ê’u)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>cp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒh(ƒRƒ}ƒ“ƒhƒpƒPƒbƒg)‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;R}h(R}hpPbg)ÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>ps</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚ÌƒTƒCƒY(byte)(16ˆÈã112ƒoƒCƒgˆÈ‰º)&nbsp;</td>
+<td valign="TOP">&nbsp;R}hpPbgÌƒTCY(byte)(16È112oCgÈ‰)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>src</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ˆê‚É‘—‚éƒf[ƒ^i•tƒf[ƒ^j‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;êÉ‘f[^itf[^jÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>dest</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•tƒf[ƒ^‚ğ‘—‚é‘Šè‘¤‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;tf[^ğ‘—‚é‘Šè‘¤ÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•tƒf[ƒ^‚ÌƒTƒCƒY(byte)&nbsp;</td>
+<td valign="TOP">&nbsp;tf[^ÌƒTCY(byte)&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">g—p‚µ‚½ sceSifSetDma() ‚ÌƒLƒ…[ƒCƒ“ƒO¯•Êq‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">gp sceSifSetDma() ÌƒL[COÊqÔ‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;0&nbsp;</td>
-<td valign="TOP">&nbsp;ƒLƒ…[ƒCƒ“ƒO¸”s&nbsp;</td>
+<td valign="TOP">&nbsp;L[COs&nbsp;</td>
 </tr>
 <tr>
-<td valign="TOP">&nbsp;0ˆÈŠO&nbsp;</td>
-<td valign="TOP">&nbsp;ƒLƒ…[ƒCƒ“ƒO¯•Êq&nbsp;</td>
+<td valign="TOP">&nbsp;0ÈŠO&nbsp;</td>
+<td valign="TOP">&nbsp;L[COÊq&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">sceSifSetDma()‚ğ—p‚¢‚ÄƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚ğ‘—‚èA‘Šè‘¤‚Ì <i>pos</i> ‚ÌˆÊ’u‚É	“o˜^‚³‚ê‚Ä‚¢‚éƒRƒ}ƒ“ƒhŠÖ”‚ğŒÄ‚Ño‚µ‚Ü‚·B<br>ƒRƒ}ƒ“ƒh‚ª‘Šè‘¤‚É“Í‚¢‚½‚©‚Ç‚¤‚©‚ÍA•Ô’l‚Æ sceSifDmaStat() ‚É‚æ‚Á‚Ä	”»’f‚Å‚«‚Ü‚·B<br><i>cp</i>/<i>src</i>/<i>dest</i> ‚ÍAEE ‘¤‚Í 16ƒoƒCƒgAIOP‘¤‚Í 4ƒoƒCƒg‚ÅƒAƒ‰ƒCƒ“‚³‚ê‚½ƒAƒhƒŒƒX‚É’u‚¢‚Ä‚­‚¾‚³‚¢B<i>size</i> ‚ÍAEE ‚Ìê‡16ƒoƒCƒgAIOP‚Ìê‡4 ƒoƒCƒg‚Ì”{”‚Å‚·B<br>EE ‚Ìê‡A<i>cp</i> ‚Í ƒLƒƒƒbƒVƒ…ã‚É‚ ‚ê‚Î write-back ‚³‚ê‚Ü‚·‚ªA<i>src</i>‚Í‚³‚ê‚Ü‚¹‚ñ‚Ì‚ÅAƒvƒƒOƒ‰ƒ}‚ÌÓ”C‚ÅƒLƒƒƒbƒVƒ…ã‚©‚ç“f‚«o‚µ‚Ä	‚¨‚¢‚Ä‚­‚¾‚³‚¢B<br>Š„‚è‚İŠÖ”“à‚Å‚ÍAisceSifSendCmd() ‚ğŒÄ‚ñ‚Å‚­‚¾‚³‚¢(EE/IOP‚Æ‚à)B<br><br></div>
+<div style="margin-left:50px;">sceSifSetDma()pÄƒR}hpPbgğ‘—‚Aè‘¤ <i>pos</i> ÌˆÊ’u	o^Ä‚R}hÖÄ‚ÑoÜ‚B<br>R}hè‘¤É“Í‚Ç‚ÍAÔ’l sceSifDmaStat() É‚	fÅ‚Ü‚B<br><i>cp</i>/<i>src</i>/<i>dest</i> ÍAEE  16oCgAIOP 4oCgÅƒACê‚½AhXÉ’uÄ‚B<i>size</i> ÍAEE Ìê‡16oCgAIOPÌê‡4 oCgÌ”{Å‚B<br>EE Ìê‡A<i>cp</i>  LbVÉ‚ write-back Ü‚A<i>src</i>Í‚Ü‚Ì‚ÅAvO}ÌÓ”CÅƒLbVã‚©fo	Ä‚B<br>èİŠÖÅ‚ÍAisceSifSendCmd() Ä‚Å‚(EE/IOPÆ‚)B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>size</i> ‚ÌãŒÀ‚ÍA‚P‰ñ‚Å‘—‚ê‚é DMA ‚ÌãŒÀ 1Mbyte - 16byte ‚Å‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><i>size</i> ÌÍAPÅ‘ DMA Ì 1Mbyte - 16byte Å‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifSendCmdIntr"><font size=6>sceSifSendCmdIntr<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚Ì‘—o(IOP‚Ì‚İÀ‘•)<br></div>
+<!-- Ö -->
+<div align=right>R}hpPbgÌ‘o(IOPÌ‚İ)<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -753,92 +753,92 @@ unsigned int  <b>sceSifSendCmdIntr </b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚ÑoÂ”\<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièİ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚·ŠÖ”‚ÌˆÊ’u(sceSifAddCmdHandler()‚Å“o˜^‚µ‚½ˆÊ’u)&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚ÑoÖÌˆÊ’u(sceSifAddCmdHandler()Å“o^Ê’u)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>cp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒh(ƒRƒ}ƒ“ƒhƒpƒPƒbƒg)‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;R}h(R}hpPbg)ÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>ps</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒhƒpƒPƒbƒg‚ÌƒTƒCƒY(byte)(16ˆÈã112ƒoƒCƒgˆÈ‰º)&nbsp;</td>
+<td valign="TOP">&nbsp;R}hpPbgÌƒTCY(byte)(16È112oCgÈ‰)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>src</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ˆê‚É‘—‚éƒf[ƒ^i•tƒf[ƒ^j‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;êÉ‘f[^itf[^jÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>dest</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•tƒf[ƒ^‚ğ‘—‚é‘Šè‘¤‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;tf[^ğ‘—‚é‘Šè‘¤ÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•tƒf[ƒ^‚ÌƒTƒCƒY(byte)&nbsp;</td>
+<td valign="TOP">&nbsp;tf[^ÌƒTCY(byte)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>func </i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒh“]‘—Œã‚ÉŒÄ‚Î‚ê‚éŠÖ”&nbsp;</td>
+<td valign="TOP">&nbsp;R}h]ÉŒÄ‚Î‚Ö&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
-<td valign="TOP">&nbsp;func ‚É“n‚³‚ê‚éˆø”&nbsp;</td>
+<td valign="TOP">&nbsp;func É“n&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">g—p‚µ‚½ sceSifSetDma() ‚ÌƒLƒ…[ƒCƒ“ƒO¯•Êq‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">gp sceSifSetDma() ÌƒL[COÊqÔ‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;0&nbsp;</td>
-<td valign="TOP">&nbsp;ƒLƒ…[ƒCƒ“ƒO¸”s&nbsp;</td>
+<td valign="TOP">&nbsp;L[COs&nbsp;</td>
 </tr>
 <tr>
-<td valign="TOP">&nbsp;0ˆÈŠO&nbsp;</td>
-<td valign="TOP">&nbsp;ƒLƒ…[ƒCƒ“ƒO¯•Êq&nbsp;</td>
+<td valign="TOP">&nbsp;0ÈŠO&nbsp;</td>
+<td valign="TOP">&nbsp;L[COÊq&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒRƒ}ƒ“ƒh“]‘—Œã‚ÉŠ„‚è‚İŠÖ”‚Æ‚µ‚Ä func() ‚ªŒÄ‚Î‚ê‚Ü‚·B‚»‚ÌÛAˆø”‚Æ‚µ‚Ä <i>data</i> ‚ª“n‚³‚ê‚Ü‚·B‚»‚êˆÈŠO‚ÍAsceSifSendCmd() ‚Æ“¯—l‚Å‚·B<br>Š„‚İ‹Ö~—Ìˆæ‚Å‚ÍAisceSifSendCmdIntr() ‚ğ“Ç‚ñ‚Å‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">R}h]ÉŠèİŠÖÆ‚ func() Ä‚Î‚Ü‚BÌÛAÆ‚ <i>data</i> nÜ‚BÈŠOÍAsceSifSendCmd() Æ“lÅ‚B<br>İ‹Ö~ÌˆÅ‚ÍAisceSifSendCmdIntr() Ç‚Å‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifSetCmdBuffer"><font size=6>sceSifSetCmdBuffer<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒRƒ}ƒ“ƒhŠÖ”—pƒoƒbƒtƒ@‚Ì“o˜^<br></div>
+<!-- Ö -->
+<div align=right>R}hÖpobt@Ì“o^<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -849,50 +849,50 @@ sceSifCmdData * <b>sceSifSetCmdBuffer</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚È‚¢iŠ„‚è‚İ‹Ö~ó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚È‚ièİ‹Ö~Ô‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>db</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒoƒbƒtƒ@‚Ìæ“ªƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;obt@Ìæ“ªAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒoƒbƒtƒ@‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;obt@ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ˆÈ‘O‚É“o˜^‚³‚ê‚Ä‚¢‚½Aƒoƒbƒtƒ@‚ÌƒAƒhƒŒƒX‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">È‘OÉ“o^Ä‚Aobt@ÌƒAhXÔ‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">SIF Command API ‚É‚æ‚Á‚Ä‹N“®‚·‚éŠÖ”iƒRƒ}ƒ“ƒhŠÖ”j‚ğ“o˜^‚·‚é‚½‚ß‚Ìƒoƒbƒtƒ@‚ğİ’è‚µ‚Ü‚·B‰Šúó‘Ô‚Å‚ÍAƒoƒbƒtƒ@‚Ìİ’è‚Í‚ ‚è‚Ü‚¹‚ñB<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">SIF Command API É‚Ä‹NÖiR}hÖjo^é‚½ß‚Ìƒobt@İ’è‚µÜ‚BÔ‚Å‚ÍAobt@Ìİ’Í‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifSetSreg"><font size=6>sceSifSetSreg<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Ì“à—e‚Ìİ’è<br></div>
+<!-- Ö -->
+<div align=right>\tgEFAWX^Ì“eÌİ’<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
@@ -903,41 +903,41 @@ unsigned int <b>sceSifSetSreg</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚È‚¢iŠ„‚è‚İ‹Ö~A‹–‰Âó‘Ô‚ÉˆË‘¶‚µ‚È‚¢j<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚È‚ièİ‹Ö~AÂÔ‚ÉˆË‘È‚j<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒŒƒWƒXƒ^”Ô†i0`31j&nbsp;</td>
+<td valign="TOP">&nbsp;WX^Ôi0`31j&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒŒƒWƒXƒ^‚Éİ’è‚·‚é’l&nbsp;</td>
+<td valign="TOP">&nbsp;WX^Éİ’è‚·l&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">İ’è‚µ‚½’l‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">İ’è‚µlÔ‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">©•ª‘¤‚Ìƒ\ƒtƒgƒEƒFƒAƒŒƒWƒXƒ^‚Éw’è’l‚ğİ’è‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">Ìƒ\tgEFAWX^Éwlİ’è‚µÜ‚B<br><br></div>
 <p><p><hr>
 <div ALIGN="right">
     Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
