@@ -1,5 +1,5 @@
 <html lang="ja">
-<!-- Œ©o‚µ@‚PC•”Œ©o‚µ -->
+<!-- o@PCo -->
 <head>
 
 <script language="JavaScript">
@@ -103,7 +103,7 @@
 //-->
 </script>
 <title>PlayStation File System (EE)</title>
-<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="Author" Content="Sony Computer Entertainment Inc.">
@@ -129,7 +129,7 @@
    q = p.toString();
    result = q.match(/\/category\.htm/gi);
    if(result == "/category.htm"){
-          document.writeln("<a href=\"JavaScript:lj('overview','../overview/pfs.htm')\"><img src=\"./gif/arrow.png\" border=0>ƒ‰ƒCƒuƒ‰ƒŠŠT—v</a>");
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/pfs.htm')\"><img src=\"./gif/arrow.png\" border=0>CuTv</a>");
     }
 }
 // -->
@@ -142,155 +142,155 @@
 PlayStation File System (EE)
 </h1></center>
 </a>
-<font size=4><b>\‘¢‘Ì</b></font>
+<font size=4><b>\</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sce_dirent"> sce_dirent<br></a></td>
-<td>&nbsp;</td><td>ƒfƒBƒŒƒNƒgƒŠƒGƒ“ƒgƒŠ<br></td></tr>
+<td>&nbsp;</td><td>fBNgGg<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sce_stat"> sce_stat<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹ƒXƒe[ƒ^ƒX<br></td></tr>
+<td>&nbsp;</td><td>t@CXe[^X<br></td></tr>
 </table><br>
-<font size=4><b>ŠÖ”</b></font>
+<font size=4><b>Ö</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceChdir"> sceChdir<br></a></td>
-<td>&nbsp;</td><td>ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ì•ÏX<br></td></tr>
+<td>&nbsp;</td><td>JgfBNgÌ•ÏX<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceChstat"> sceChstat<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠ‚ÌƒXƒe[ƒ^ƒX‚ğ•ÏX‚·‚é<br></td></tr>
+<td>&nbsp;</td><td>t@C/fBNgÌƒXe[^XÏX<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceClose"> sceClose<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹‚ÌƒNƒ[ƒY<br></td></tr>
+<td>&nbsp;</td><td>t@CÌƒN[Y<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceDclose"> sceDclose<br></a></td>
-<td>&nbsp;</td><td>ƒfƒBƒŒƒNƒgƒŠ‚ÌƒNƒ[ƒY<br></td></tr>
+<td>&nbsp;</td><td>fBNgÌƒN[Y<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceDevctl"> sceDevctl<br></a></td>
-<td>&nbsp;</td><td>ƒfƒoƒCƒX‚Ö‚Ì“Áê‘€ì<br></td></tr>
+<td>&nbsp;</td><td>foCXÖ‚Ì“ê‘€<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceDopen"> sceDopen<br></a></td>
-<td>&nbsp;</td><td>ƒfƒBƒŒƒNƒgƒŠ‚ÌƒI[ƒvƒ“<br></td></tr>
+<td>&nbsp;</td><td>fBNgÌƒI[v<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceDread"> sceDread<br></a></td>
-<td>&nbsp;</td><td>ƒfƒBƒŒƒNƒgƒŠƒGƒ“ƒgƒŠ‚Ì“Ç‚İo‚µ<br></td></tr>
+<td>&nbsp;</td><td>fBNgGgÌ“Ç‚İo<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceFormat"> sceFormat<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌƒtƒH[ƒ}ƒbƒg<br></td></tr>
+<td>&nbsp;</td><td>t@CVXeÌƒtH[}bg<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceGetstat"> sceGetstat<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠ‚ÌƒXƒe[ƒ^ƒX‚ğæ“¾‚·‚é<br></td></tr>
+<td>&nbsp;</td><td>t@C/fBNgÌƒXe[^Xæ“¾<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceIoctl2"> sceIoctl2<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹‚Ö‚Ì“Áê‘€ì<br></td></tr>
+<td>&nbsp;</td><td>t@CÖ‚Ì“ê‘€<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceLseek"> sceLseek<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ÌˆÚ“®<br></td></tr>
+<td>&nbsp;</td><td>t@C|C^ÌˆÚ“<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceLseek64"> sceLseek64<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ÌˆÚ“®(64bit ‘Î‰)<br></td></tr>
+<td>&nbsp;</td><td>t@C|C^ÌˆÚ“(64bit Î‰)<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceMkdir"> sceMkdir<br></a></td>
-<td>&nbsp;</td><td>ƒfƒBƒŒƒNƒgƒŠ‚Ìì¬<br></td></tr>
+<td>&nbsp;</td><td>fBNgÌì¬<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceMount"> sceMount<br></a></td>
-<td>&nbsp;</td><td>ƒfƒoƒCƒX‚Ìƒ}ƒEƒ“ƒg<br></td></tr>
+<td>&nbsp;</td><td>foCXÌƒ}Eg<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceOpen"> sceOpen<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹‚Ìì¬AƒI[ƒvƒ“<br></td></tr>
+<td>&nbsp;</td><td>t@CÌì¬AI[v<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceRead"> sceRead<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ<br></td></tr>
+<td>&nbsp;</td><td>t@CÌ“Ç‚İ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceReadlink"> sceReadlink<br></a></td>
-<td>&nbsp;</td><td>ƒVƒ“ƒ{ƒŠƒbƒNEƒŠƒ“ƒN‚Ì’l‚ğ“Ç‚Ş<br></td></tr>
+<td>&nbsp;</td><td>V{bNENÌ’lÇ‚<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceRemove"> sceRemove<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹‚Ìíœ<br></td></tr>
+<td>&nbsp;</td><td>t@CÌíœ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceRename"> sceRename<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠ–¼Ì‚Ì•ÏX<br></td></tr>
+<td>&nbsp;</td><td>t@C/fBNgÌ‚Ì•ÏX<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceRmdir"> sceRmdir<br></a></td>
-<td>&nbsp;</td><td>ƒfƒBƒŒƒNƒgƒŠ‚Ìíœ<br></td></tr>
+<td>&nbsp;</td><td>fBNgÌíœ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSymlink"> sceSymlink <br></a></td>
-<td>&nbsp;</td><td>ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ğì¬‚·‚é<br></td></tr>
+<td>&nbsp;</td><td>V{bNNì¬<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSync"> sceSync<br></a></td>
-<td>&nbsp;</td><td>ƒoƒbƒtƒ@ƒLƒƒƒbƒVƒ…‚ÆƒfƒBƒXƒN‚Ì“¯Šú<br></td></tr>
+<td>&nbsp;</td><td>obt@LbVÆƒfBXNÌ“<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceUmount"> sceUmount<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌƒAƒ“ƒ}ƒEƒ“ƒg<br></td></tr>
+<td>&nbsp;</td><td>t@CVXeÌƒA}Eg<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceWrite"> sceWrite<br></a></td>
-<td>&nbsp;</td><td>ƒtƒ@ƒCƒ‹‚Ö‚Ì‘‚«‚İ<br></td></tr>
+<td>&nbsp;</td><td>t@CÖ‚Ì<br></td></tr>
 </table><br>
-<font size=4><b>devctl ƒRƒ}ƒ“ƒh</b></font>
+<font size=4><b>devctl R}h</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PDIOC_CLOSEALL"> PDIOC_CLOSEALL<br></a></td>
-<td>&nbsp;</td><td>‚·‚×‚Ä‚Ìƒtƒ@ƒCƒ‹‚ÌƒNƒ[ƒY<br></td></tr>
+<td>&nbsp;</td><td>×‚Ä‚Ìƒt@CÌƒN[Y<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PDIOC_CLRFSCKSTAT"> PDIOC_CLRFSCKSTAT<br></a></td>
-<td>&nbsp;</td><td>FSCKƒXƒe[ƒ^ƒX‚ÌƒNƒŠƒA<br></td></tr>
+<td>&nbsp;</td><td>FSCKXe[^XÌƒNA<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PDIOC_GETFSCKSTAT"> PDIOC_GETFSCKSTAT<br></a></td>
-<td>&nbsp;</td><td>FSCKƒXƒe[ƒ^ƒX‚Ìƒ`ƒFƒbƒN<br></td></tr>
+<td>&nbsp;</td><td>FSCKXe[^XÌƒ`FbN<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PDIOC_ZONEFREE"> PDIOC_ZONEFREE<br></a></td>
-<td>&nbsp;</td><td>‹ó‚«ƒ][ƒ“”‚Ìæ“¾<br></td></tr>
+<td>&nbsp;</td><td>ó‚«ƒ][Ìæ“¾<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PDIOC_ZONESZ"> PDIOC_ZONESZ<br></a></td>
-<td>&nbsp;</td><td>ƒ][ƒ“ƒTƒCƒY‚Ìæ“¾<br></td></tr>
+<td>&nbsp;</td><td>][TCYÌæ“¾<br></td></tr>
 </table><br>
-<font size=4><b>ioctl2ƒRƒ}ƒ“ƒh</b></font>
+<font size=4><b>ioctl2R}h</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PIOCALLOC"> PIOCALLOC<br></a></td>
-<td>&nbsp;</td><td>—Ìˆæ‚ÌŠm•Û<br></td></tr>
+<td>&nbsp;</td><td>ÌˆÌŠm<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PIOCATTRADD"> PIOCATTRADD<br></a></td>
-<td>&nbsp;</td><td>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚Ì’Ç‰Á<br></td></tr>
+<td>&nbsp;</td><td>gt@CAgr[gGgÌ’Ç‰<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PIOCATTRDEL"> PIOCATTRDEL<br></a></td>
-<td>&nbsp;</td><td>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚Ìíœ<br></td></tr>
+<td>&nbsp;</td><td>gt@CAgr[gGgÌíœ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PIOCATTRLOOKUP"> PIOCATTRLOOKUP<br></a></td>
-<td>&nbsp;</td><td>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚ÌŒŸõ<br></td></tr>
+<td>&nbsp;</td><td>gt@CAgr[gGgÌŒ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PIOCATTRREAD"> PIOCATTRREAD<br></a></td>
-<td>&nbsp;</td><td>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚Ì“Ç‚İo‚µ<br></td></tr>
+<td>&nbsp;</td><td>gt@CAgr[gGgÌ“Ç‚İo<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#PIOCFREE"> PIOCFREE<br></a></td>
-<td>&nbsp;</td><td>—Ìˆæ‚Ì‰ğ•ú<br></td></tr>
+<td>&nbsp;</td><td>ÌˆÌ‰<br></td></tr>
 </table>
 
-<!-- Œ©o‚µ@‚PC•”Œ©o‚µ -->
+<!-- o@PCo -->
 <div style="margin-left:50px;"><br></div>
 <br></td></tr></table></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>\‘¢‘Ì</h2></center>
+<center><h2>\</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sce_dirent"><font size=6>sce_dirent<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒBƒŒƒNƒgƒŠƒGƒ“ƒgƒŠ<br></div>
+<!-- Ö -->
+<div align=right>fBNgGg<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>struct <b>sce_dirent</b> {
@@ -301,48 +301,48 @@ PlayStation File System (EE)
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>d_stat</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒXƒe[ƒ^ƒX‚ğ•\‚µ‚Ü‚·&nbsp;</td>
+<td valign="TOP">&nbsp;t@CXe[^X\Ü‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>d_name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹–¼&nbsp;</td>
+<td valign="TOP">&nbsp;t@C&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;d_private&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñ&nbsp;</td>
+<td valign="TOP">&nbsp;\&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒfƒBƒŒƒNƒgƒŠ‚ÌƒGƒ“ƒgƒŠ‚ğŠi”[‚·‚é\‘¢‘Ì‚Å‚·B<br><br></div>
+<div style="margin-left:50px;">fBNgÌƒGgi[\Ì‚Å‚B<br><br></div>
 
-<!-- ŠÖ˜A€–Ú -->
-<div style="margin-left:10px;"><b>ŠÖ˜A€–Ú</b></div>
+<!-- Ö˜A -->
+<div style="margin-left:10px;"><b>Ö˜A</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><a href="#sceDread">sceDread</a>()<br><br><br><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sce_stat"><font size=6>sce_stat<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹ƒXƒe[ƒ^ƒX<br></div>
+<!-- Ö -->
+<div align=right>t@CXe[^X<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>struct <b>sce_stat</b> {
@@ -358,8 +358,8 @@ PlayStation File System (EE)
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><br></div>
@@ -367,92 +367,92 @@ PlayStation File System (EE)
 <table border=0>
 <tr>
 <td valign="top">&nbsp;<i>st_mode</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒtƒ@ƒCƒ‹‚Ìƒ‚[ƒh&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;t@CÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 0&nbsp;</td>
-<td valign="top">&nbsp;other‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 1&nbsp;</td>
-<td valign="top">&nbsp;other‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 2&nbsp;</td>
-<td valign="top">&nbsp;other‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 3&nbsp;</td>
-<td valign="top">&nbsp;group‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 4&nbsp;</td>
-<td valign="top">&nbsp;group‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 5&nbsp;</td>
-<td valign="top">&nbsp;group‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 6&nbsp;</td>
-<td valign="top">&nbsp;user‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 7&nbsp;</td>
-<td valign="top">&nbsp;user‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 8&nbsp;</td>
-<td valign="top">&nbsp;user‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 9&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 10&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 11&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 12-15&nbsp;</td>
-<td valign="top">&nbsp;ƒtƒ@ƒCƒ‹ƒ^ƒCƒv&nbsp;<br>&nbsp;1 ƒfƒBƒŒƒNƒgƒŠ&nbsp;<br>&nbsp;2 ’Êí‚Ìƒtƒ@ƒCƒ‹&nbsp;<br>&nbsp;4 ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN&nbsp;</td>
+<td valign="top">&nbsp;t@C^Cv&nbsp;<br>&nbsp;1 fBNg&nbsp;<br>&nbsp;2 ÊÌƒt@C&nbsp;<br>&nbsp;4 V{bNN&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>st_attr</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒƒ‚ƒŠƒJ[ƒh‚Ìƒ‚[ƒh‚ÆŒİŠ·‚Ìƒtƒ‰ƒO&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;J[hÌƒ[hÆŒİŠÌƒtO&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>st_size &nbsp;<br>&nbsp;st_hisize</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒtƒ@ƒCƒ‹ƒTƒCƒY(64bit)&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;t@CTCY(64bit)&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>st_ctime</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ì¬ŠÔ&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ì¬&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>st_atime</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ÅIƒAƒNƒZƒXŠÔAÅI•ÏXŠÔ‚Æ“¯‚¶ƒ^ƒCƒ~ƒ“ƒO‚Å&nbsp;<br>&nbsp;ƒAƒbƒvƒf[ƒg‚³‚ê‚Ü‚·B&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ÅIANZXÔAÅIÏXÔ‚Æ“^C~O&nbsp;<br>&nbsp;Abvf[gÜ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>st_mtime</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ÅI•ÏXŠÔ&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ÅIÏX&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
@@ -462,66 +462,66 @@ PlayStation File System (EE)
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;byte 1&nbsp;</td>
-<td valign="top">&nbsp;•b&nbsp;</td>
+<td valign="top">&nbsp;b&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;byte 2&nbsp;</td>
-<td valign="top">&nbsp;•ª&nbsp;</td>
+<td valign="top">&nbsp;&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;byte 3&nbsp;</td>
-<td valign="top">&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;byte 4&nbsp;</td>
-<td valign="top">&nbsp;“ú&nbsp;</td>
+<td valign="top">&nbsp;&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;byte 5&nbsp;</td>
-<td valign="top">&nbsp;Œ&nbsp;</td>
+<td valign="top">&nbsp;&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;byte 6-7&nbsp;</td>
-<td valign="top">&nbsp;”N(4Œ…)&nbsp;</td>
+<td valign="top">&nbsp;N(4)&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>st_private</i>&nbsp;</td>
 <td valign="top">&nbsp;word 0&nbsp;<br>&nbsp;word 1&nbsp;<br>&nbsp;word 2&nbsp;</td>
-<td valign="top">&nbsp;uid&nbsp;<br>&nbsp;gid&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚ªg—p‚µ‚Ä‚¢‚éƒ][ƒ“‚Ì”&nbsp;</td>
+<td valign="top">&nbsp;uid&nbsp;<br>&nbsp;gid&nbsp;<br>&nbsp;t@CgpÄ‚][Ì&nbsp;</td>
 </tr></table>
 </div>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹ƒXƒe[ƒ^ƒX‚ğŠi”[‚·‚é\‘¢‘Ì‚Å‚·B<br><br></div>
+<div style="margin-left:50px;">t@CXe[^Xi[\Ì‚Å‚B<br><br></div>
 
-<!-- ŠÖ˜A€–Ú -->
-<div style="margin-left:10px;"><b>ŠÖ˜A€–Ú</b></div>
+<!-- Ö˜A -->
+<div style="margin-left:10px;"><b>Ö˜A</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><a href="#sce_dirent">sce_dirent</a>,<br><a href="#sceGetstat">sceGetstat</a>()<br><br><br><br></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>ŠÖ”</h2></center>
+<center><h2>Ö</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceChdir"><font size=6>sceChdir<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ì•ÏX<br></div>
+<!-- Ö -->
+<div align=right>JgfBNgÌ•ÏX<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -531,102 +531,102 @@ int <b>sceChdir</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-20&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
-<td valign="TOP">&nbsp;name ‚ªƒfƒBƒŒƒNƒgƒŠ‚Å‚Í‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;name fBNgÅ‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğ•ÏX‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">JgfBNgÏXÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceChstat"><font size=6>sceChstat<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠ‚ÌƒXƒe[ƒ^ƒX‚ğ•ÏX‚·‚é<br></div>
+<!-- Ö -->
+<div align=right>t@C/fBNgÌƒXe[^XÏX<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -638,110 +638,110 @@ int <b>sceChstat</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼(ƒfƒoƒCƒX–¼ + ':' ‚ğŠÜ‚Ş)&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX(foCX + ':' Ü‚)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒXƒe[ƒ^ƒX‚ğŠi”[‚·‚éƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;Xe[^Xi[obt@&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>cbit</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•ÏX‚·‚éƒtƒB[ƒ‹ƒh‚Ìw’èƒ}ƒNƒBŸ‚Ì‚¢‚¸‚ê‚©‚Ì’è”‚Å&nbsp;<br>&nbsp;w’è‚µ‚Ü‚·B&nbsp;<br>&nbsp;SCE_CST_MODE&nbsp;<br>&nbsp;SCE_CST_ATTR&nbsp;<br>&nbsp;SCE_CST_SIZE&nbsp;<br>&nbsp;SCE_CST_CT&nbsp;<br>&nbsp;SCE_CST_AT&nbsp;<br>&nbsp;SCE_CST_MT&nbsp;<br>&nbsp;SCE_CST_PRVT&nbsp;</td>
+<td valign="TOP">&nbsp;ÏXtB[hÌw}NBÌ‚ê‚©Ì’è”&nbsp;<br>&nbsp;wè‚µÜ‚B&nbsp;<br>&nbsp;SCE_CST_MODE&nbsp;<br>&nbsp;SCE_CST_ATTR&nbsp;<br>&nbsp;SCE_CST_SIZE&nbsp;<br>&nbsp;SCE_CST_CT&nbsp;<br>&nbsp;SCE_CST_AT&nbsp;<br>&nbsp;SCE_CST_MT&nbsp;<br>&nbsp;SCE_CST_PRVT&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-30&nbsp;</td>
 <td valign="TOP">&nbsp;-EROFS&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İ‚İê—p‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ã‚Ì&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚É‘Î‚µA‘‚«‚İƒAƒNƒZƒX‚ğ&nbsp;<br>&nbsp;—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İİpÌƒt@CVXe&nbsp;<br>&nbsp;t@CÉ‘Î‚AİƒANZX&nbsp;<br>&nbsp;v&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹^ƒfƒBƒŒƒNƒgƒŠ‚ÌƒXƒe[ƒ^ƒX‚ğ•ÏX‚µ‚Ü‚·Bsce_stat \‘¢‘Ì‚Ìƒƒ“ƒo‚Ì‚¤‚¿•ÏX‚Å‚«‚é‚Ì‚ÍAƒtƒ@ƒCƒ‹‚Ìƒ‚[ƒh‚Ìƒtƒ@ƒCƒ‹ƒ^ƒCƒvˆÈŠO‚Ìƒrƒbƒg‚ÆŠeŠÔAƒƒ‚ƒŠƒJ[ƒhŒİŠ·ƒtƒ‰ƒO‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠƒrƒbƒg‚ÆƒNƒ[ƒYŠ®—¹ƒtƒ‰ƒOˆÈŠO‚Ìƒrƒbƒg‚Å‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">wè‚³ê‚½t@C^fBNgÌƒXe[^XÏXÜ‚Bsce_stat \Ì‚ÌƒoÌ‚ÏXÅ‚Ì‚ÍAt@CÌƒ[hÌƒt@C^CvÈŠOÌƒrbgÆŠeÔAJ[hİŠtOÌƒTufBNgrbgÆƒN[YtOÈŠOÌƒrbgÅ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceClose"><font size=6>sceClose<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹‚ÌƒNƒ[ƒY<br></div>
+<!-- Ö -->
+<div align=right>t@CÌƒN[Y<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -751,62 +751,62 @@ int <b>sceClose</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‚·‚Å‚ÉƒI[ƒvƒ“‚µ‚Ä‚ ‚éƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;Å‚ÉƒI[vÄ‚t@CfBXNv^&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0 ‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0 Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½fBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚½ƒtƒ@ƒCƒ‹‚ğƒNƒ[ƒY‚µAƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^‚ğ‰ğ•ú‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">I[vÄ‚t@CN[YAt@CfBXNv^Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceDclose"><font size=6>sceDclose<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒBƒŒƒNƒgƒŠ‚ÌƒNƒ[ƒY<br></div>
+<!-- Ö -->
+<div align=right>fBNgÌƒN[Y<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -816,62 +816,62 @@ int <b>sceDclose</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;t@CfBXNv^&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0 ‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0 Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½fBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚½ƒfƒBƒŒƒNƒgƒŠ‚ğƒNƒ[ƒY‚µAƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^‚ğ‰ğ•ú‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">I[vÄ‚fBNgN[YAt@CfBXNv^Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceDevctl"><font size=6>sceDevctl<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒoƒCƒX‚Ö‚Ì“Áê‘€ì<br></div>
+<!-- Ö -->
+<div align=right>foCXÖ‚Ì“ê‘€<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -886,92 +886,92 @@ int <b>sceDevctl</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ƒfƒoƒCƒX–¼&nbsp;</td>
+<td valign="TOP">&nbsp;t@CVXefoCX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>cmd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘€ìƒRƒ}ƒ“ƒhBŸ‚Ì‚¢‚¸‚ê‚©‚Ì’è”‚Åw’è‚µ‚Ü‚·B&nbsp;<br>&nbsp;PDIOC_ZONESZ&nbsp;<br>&nbsp;PDIOC_ZONEFREE&nbsp;<br>&nbsp;PDIOC_CLOSEALL&nbsp;</td>
+<td valign="TOP">&nbsp;R}hBÌ‚ê‚©Ì’è”Åwè‚µÜ‚B&nbsp;<br>&nbsp;PDIOC_ZONESZ&nbsp;<br>&nbsp;PDIOC_ZONEFREE&nbsp;<br>&nbsp;PDIOC_CLOSEALL&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒh‚É—^‚¦‚éˆø”Bcmd ‚ÉˆË‘¶‚µ‚Ü‚·B&nbsp;</td>
+<td valign="TOP">&nbsp;R}hÉ—^Bcmd ÉˆË‘Ü‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒh‚©‚çó‚¯æ‚éˆø”Bcmd ‚ÉˆË‘¶‚µ‚Ü‚·B&nbsp;</td>
+<td valign="TOP">&nbsp;R}hó‚¯Bcmd ÉˆË‘Ü‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A<i>cmd</i> ‚ÉˆË‘¶‚µ‚½’l‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AŠeƒRƒ}ƒ“ƒh‚ÍˆÈ‰º‚Ì‹¤’ÊƒGƒ‰[‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">Ìê‡A<i>cmd</i> ÉˆË‘lÔ‚Ü‚B<br>G[Ìê‡AeR}hÍˆÈ‰Ì‹ÊƒG[Ô‚Ü‚B<br><br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;‘¶İ‚µ‚È‚¢ cmd ‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;İ‚È‚ cmd wè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒfƒoƒCƒX‚É‘Î‚µ‚Ä“Áê‘€ì‚ğs‚¢‚Ü‚·BŠe <i>cmd</i> ‚ÌÚ×‚É‚Â‚¢‚Ä‚ÍAudevctlƒRƒ}ƒ“ƒhˆê——v‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">foCXÉ‘Î‚Ä“ê‘€sÜ‚Be <i>cmd</i> ÌÚ×‚É‚Â‚Ä‚ÍAudevctlR}hê——vQÆ‚Ä‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceDopen"><font size=6>sceDopen<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒBƒŒƒNƒgƒŠ‚ÌƒI[ƒvƒ“<br></div>
+<!-- Ö -->
+<div align=right>fBNgÌƒI[v<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -981,97 +981,97 @@ int <b>sceDopen</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒfƒBƒŒƒNƒgƒŠƒpƒX–¼(ƒfƒoƒCƒX–¼ + ':' ‚ğŠÜ‚Ş)&nbsp;</td>
+<td valign="TOP">&nbsp;fBNgpX(foCX + ':' Ü‚)&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">³íI—¹‚Ìê‡Aƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^(0ˆÈã‚Ì’l)‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">IÌê‡At@CfBXNv^(0ÈÌ’l)Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒBƒŒƒNƒgƒŠ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½fBNgİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-20&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ªƒfƒBƒŒƒNƒgƒŠ&nbsp;<br>&nbsp;‚Å‚Í‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@CfBNg&nbsp;<br>&nbsp;Å‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒfƒBƒŒƒNƒgƒŠ‚ÌƒI[ƒvƒ“‚ğs‚¢‚Ü‚·BƒI[ƒvƒ“‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚É‘Î‚µ‚Ä‚Íƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^‚ª—^‚¦‚ç‚ê‚Ü‚·BƒfƒBƒŒƒNƒgƒŠƒpƒX–¼‚ÍA"pfs" + ƒ†ƒjƒbƒg”Ô† + ':' + •¶š—ñ‚Æ‚È‚è‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">fBNgÌƒI[vsÜ‚BI[vfBNgÉ‘Î‚Ä‚Íƒt@CfBXNv^^Ü‚BfBNgpXÍA"pfs" + jbgÔ + ':' + Æ‚È‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceDread"><font size=6>sceDread<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒBƒŒƒNƒgƒŠƒGƒ“ƒgƒŠ‚Ì“Ç‚İo‚µ<br></div>
+<!-- Ö -->
+<div align=right>fBNgGgÌ“Ç‚İo<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1082,81 +1082,81 @@ int <b>sceDread</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;t@CfBXNv^&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İo‚µ‚½ƒf[ƒ^‚ğŠi”[‚·‚éƒoƒbƒtƒ@‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İof[^i[obt@ÌƒAhX&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡Aƒtƒ@ƒCƒ‹–¼‚Ì’·‚³‚ğAƒGƒ“ƒgƒŠ‚ÌÅŒã‚É’B‚µ‚½ê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡At@CÌ’AGgÌÅŒÉ’Bê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½fBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-20&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ªƒfƒBƒŒƒNƒgƒŠ‚Ì‚½‚ß‚ÌƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd fBNgÌ‚ß‚ÌƒfBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>fd</i> ‚Å¦‚³‚ê‚éƒfƒBƒŒƒNƒgƒŠƒGƒ“ƒgƒŠƒXƒgƒŠ[ƒ€‚Ì’†‚ÌŸ‚ÌƒGƒ“ƒgƒŠ‚ğsce_dirent \‘¢‘Ì <i>buf</i> ‚ÉƒRƒs[‚µ‚Ü‚·BƒGƒ“ƒgƒŠ‚ÌÅŒã‚É’B‚µ‚½ê‡‚Í0 ‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><i>fd</i> ÅfBNgGgXg[Ì’ÌÌƒGgsce_dirent \ <i>buf</i> ÉƒRs[Ü‚BGgÌÅŒÉ’Bê‡0 Ô‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceFormat"><font size=6>sceFormat<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌƒtƒH[ƒ}ƒbƒg<br></div>
+<!-- Ö -->
+<div align=right>t@CVXeÌƒtH[}bg<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1169,131 +1169,131 @@ int <b>sceFormat</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>devname</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌƒfƒoƒCƒX–¼(pfs:)&nbsp;</td>
+<td valign="TOP">&nbsp;t@CVXeÌƒfoCX(pfs:)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>blockdevname</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‚ ‚ç‚©‚¶‚ßì¬‚³‚ê‚Ä‚¢‚éƒp[ƒeƒBƒVƒ‡ƒ“‚Ì&nbsp;<br>&nbsp;ƒuƒƒbƒNƒfƒoƒCƒX–¼&nbsp;<br>&nbsp;(—á:"hdd0:BISLPS-XXXXXX,fpwd")&nbsp;</td>
+<td valign="TOP">&nbsp;ç‚©ßì¬Ä‚p[eBV&nbsp;<br>&nbsp;ubNfoCX&nbsp;<br>&nbsp;(:"hdd0:BISLPS-XXXXXX,fpwd")&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒ][ƒ“ƒTƒCƒY•Ï”‚Æƒtƒ‰ƒOƒƒ“ƒgƒIƒvƒVƒ‡ƒ“‚Ö‚Ì&nbsp;<br>&nbsp;ƒ|ƒCƒ“ƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;][TCYÏÆƒtOgIvVÖ‚&nbsp;<br>&nbsp;|C^&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒp[ƒeƒBƒVƒ‡ƒ“‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½p[eBVİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-6&nbsp;</td>
 <td valign="TOP">&nbsp;-ENXIO&nbsp;</td>
-<td valign="TOP">&nbsp;ƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚éƒfƒoƒCƒX‚Å‚Í‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;T|[gÄ‚foCXÅ‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-16&nbsp;</td>
 <td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
-<td valign="TOP">&nbsp;‚·‚Å‚Éw’è‚³‚ê‚½ƒp[ƒeƒBƒVƒ‡ƒ“‚ª&nbsp;<br>&nbsp;ƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;Å‚Éwè‚³ê‚½p[eBV&nbsp;<br>&nbsp;I[vÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚ÌÅ‘å”‚É&nbsp;<br>&nbsp;’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^ÌÅ‘å”&nbsp;<br>&nbsp;BÄ‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">V‚½‚Éƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ğ\’z‚µ‚Ü‚·Bƒ][ƒ“ƒTƒCƒY‚Éw’è‚Å‚«‚é’l‚ÍA2K - 128K ‚Ì”ÍˆÍ‚Ì 2 ‚Ì n æ‚Ì”‚Ì‚İ‚Å‚·Bƒ][ƒ“ƒTƒCƒY‚ÍAì¬—\’è‚Ìƒtƒ@ƒCƒ‹‚Ì‘å•”•ª‚ª¬‚³‚¯‚ê‚Î¬‚³‚­A‘å‚«‚¯‚ê‚Î‘å‚«‚­İ’è‚µ‚½•û‚ªŒø—¦‚ª‚æ‚­‚È‚è‚Ü‚·B<br><br>—á:<br></div>
+<div style="margin-left:50px;">VÉƒt@CVXe\zÜ‚B][TCYÉwÅ‚lÍA2K - 128K Ì”ÍˆÍ‚ 2  n ÌÌ‚İ‚Å‚B][TCYÍAì¬\Ìƒt@CÌ‘å•”ÎAå‚«Î‘å‚«İ’è‚µæ‚­È‚Ü‚B<br><br>:<br></div>
         <div style="margin-left:93px;"><pre><font size=3>int zonesz = 8192;
 sceFormat("pfs:", "hdd0:BISLPS-XXXXXX,fpwd", &zonesz, sizeof(int));
 </pre></font></div>
-<div style="margin-left:50px;"><br>‚Ü‚½ŠJ”­‚ÌŒŸØ—p‚ÉŒÌˆÓ‚Éƒtƒ‰ƒOƒƒ“ƒe[ƒVƒ‡ƒ“‚ğ”­¶‚³‚¹‚½ó‘Ô‚ÅƒtƒH[ƒ}ƒbƒg‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;"><br>Ü‚JÌŒØ—pÉŒÌˆÓ‚ÉƒtOe[Vğ”­Ô‚ÅƒtH[}bgé‚±Æ‚Å‚Ü‚B<br><br></div>
         <div style="margin-left:93px;"><pre><font size=3>int arg[3];
 arg[0] = 8192;              // zone size
 arg[1] = 0x00002d66;        // -f
 arg[2] = 0x01030f0f;        // fragment bit pattern
 sceFormat("pfs:", "hdd0:test", &arg, sizeof(arg));
 </pre></font></div>
-<div style="margin-left:50px;"><br>ƒrƒbƒgƒpƒ^[ƒ“‚Ì 1 ƒrƒbƒg‚ªA1 ƒ][ƒ“‚É‘Î‰‚µ‚Ü‚·B—á‚¦‚ÎA0x0f0f0f0f ‚ğw’è‚·‚é‚Æ 4 ƒ][ƒ“‚ªg—p’†A4 ƒ][ƒ“‚ª‹ó‚«‚Æ‚¢‚Á‚½ƒpƒ^[ƒ“‚ÌŒJ‚è•Ô‚µó‘Ô‚ÅƒtƒH[ƒ}ƒbƒg‚³‚ê‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;"><br>rbgp^[ 1 rbgA1 ][É‘Î‰Ü‚Bá‚¦ÎA0x0f0f0f0f wè‚· 4 ][gpA4 ][ó‚«‚Æ‚p^[ÌŒJÔ‚Ô‚ÅƒtH[}bgÜ‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚±‚Ì‘€ì‚ğs‚¤‚ÆŠù‚Éw’è‚³‚ê‚½ƒp[ƒeƒBƒVƒ‡ƒ“ã‚Éì¬‚³‚ê‚Ä‚¢‚½ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Í‰Šú‰»‚³‚ê‚Ä‚µ‚Ü‚¢‚Ü‚·‚Ì‚ÅA‚²’ˆÓ‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">Ì‘sÆŠÉwè‚³ê‚½p[eBVÉì¬Ä‚t@CVXeÍÄ‚Ü‚Ü‚Ì‚ÅAÓ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceGetstat"><font size=6>sceGetstat<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠ‚ÌƒXƒe[ƒ^ƒX‚ğæ“¾‚·‚é<br></div>
+<!-- Ö -->
+<div align=right>t@C/fBNgÌƒXe[^Xæ“¾<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1304,101 +1304,101 @@ int <b>sceGetstat</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼(ƒfƒoƒCƒX–¼ + ':' ‚ğŠÜ‚Ş)&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX(foCX + ':' Ü‚)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒXƒe[ƒ^ƒX‚ğŠi”[‚·‚éƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;Xe[^Xi[obt@&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹î•ñ‚ğ sce_dirent \‘¢‘Ì <i>buf</i> ‚ÉƒRƒs[‚µ‚Ü‚·Bƒtƒ@ƒCƒ‹ƒpƒX–¼‚ÍA"pfs" + ƒ†ƒjƒbƒg”Ô† + ':' + •¶š—ñ‚Æ‚È‚è‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@C sce_dirent \ <i>buf</i> ÉƒRs[Ü‚Bt@CpXÍA"pfs" + jbgÔ + ':' + Æ‚È‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceIoctl2"><font size=6>sceIoctl2<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹‚Ö‚Ì“Áê‘€ì<br></div>
+<!-- Ö -->
+<div align=right>t@CÖ‚Ì“ê‘€<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1413,87 +1413,87 @@ int <b>sceIoctl2</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br> <br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br> <br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘€ì‘ÎÛ‚Ìƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;ÎÛ‚Ìƒt@CfBXNv^&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>cmd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘€ìƒRƒ}ƒ“ƒhBŸ‚Ì‚¢‚¸‚ê‚©‚Ì’è”‚Åw’è‚µ‚Ü‚·B&nbsp;<br>&nbsp;PIOCALLOC&nbsp;<br>&nbsp;PIOCFREE&nbsp;<br>&nbsp;PIOCATTRADD&nbsp;<br>&nbsp;PIOCATTRDEL&nbsp;<br>&nbsp;PIOCATTRLOOKUP&nbsp;<br>&nbsp;PIOCATTRREAD&nbsp;</td>
+<td valign="TOP">&nbsp;R}hBÌ‚ê‚©Ì’è”Åwè‚µÜ‚B&nbsp;<br>&nbsp;PIOCALLOC&nbsp;<br>&nbsp;PIOCFREE&nbsp;<br>&nbsp;PIOCATTRADD&nbsp;<br>&nbsp;PIOCATTRDEL&nbsp;<br>&nbsp;PIOCATTRLOOKUP&nbsp;<br>&nbsp;PIOCATTRREAD&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒh‚É—^‚¦‚éˆø”Bcmd ‚ÉˆË‘¶‚µ‚Ü‚·B&nbsp;</td>
+<td valign="TOP">&nbsp;R}hÉ—^Bcmd ÉˆË‘Ü‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒYB&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCYB&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒRƒ}ƒ“ƒh‚©‚çó‚¯æ‚éˆø”Bcmd ‚ÉˆË‘¶‚µ‚Ü‚·B&nbsp;</td>
+<td valign="TOP">&nbsp;R}hó‚¯Bcmd ÉˆË‘Ü‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒYB&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCYB&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡Acmd ‚ÉˆË‘¶‚µ‚½’l‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AŠeƒRƒ}ƒ“ƒh‚ÍˆÈ‰º‚Ì‹¤’ÊƒGƒ‰[‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡Acmd ÉˆË‘lÔ‚Ü‚B<br>G[Ìê‡AeR}hÍˆÈ‰Ì‹ÊƒG[Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½fBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;‘¶İ‚µ‚È‚¢ cmd ‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;İ‚È‚ cmd wè‚³ê‚½&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹‚É‘Î‚µ‚Ä“Áê‘€ì‚ğs‚¢‚Ü‚·BŠe cmd ‚ÌÚ×‚É‚Â‚¢‚Ä‚ÍAuioctl2ƒRƒ}ƒ“ƒhˆê——v‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@CÉ‘Î‚Ä“ê‘€sÜ‚Be cmd ÌÚ×‚É‚Â‚Ä‚ÍAuioctl2R}hê——vQÆ‚Ä‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceLseek"><font size=6>sceLseek<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ÌˆÚ“®<br></div>
+<!-- Ö -->
+<div align=right>t@C|C^ÌˆÚ“<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1505,104 +1505,104 @@ int <b>sceLseek</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="top">&nbsp;<i>fd</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;t@CfBXNv^&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>offset</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒ|ƒCƒ“ƒ^‚ÌˆÚ“®‹——£&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;|C^ÌˆÚ“&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>whence</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒp[ƒeƒBƒVƒ‡ƒ“‚ÌŠg’£ƒAƒgƒŠƒrƒ…[ƒg—Ìˆæ“à‚Ì&nbsp;<br>&nbsp;offset ‚ÌŠî€ˆÊ’uBˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚Ì’è”‚Å&nbsp;<br>&nbsp;w’è‚·‚éB&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;p[eBVÌŠgAgr[gÌˆ&nbsp;<br>&nbsp;offset ÌŠî€Ê’uBÈ‰Ì‚ê‚©Ì’è”&nbsp;<br>&nbsp;wè‚·B&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_SEEK_SET&nbsp;</td>
-<td valign="top">&nbsp;ŠJnˆÊ’u&nbsp;</td>
+<td valign="top">&nbsp;JnÊ’u&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_SEEK_CUR&nbsp;</td>
-<td valign="top">&nbsp;Œ»İˆÊ’u&nbsp;</td>
+<td valign="top">&nbsp;İˆÊ’u&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_SEEK_END&nbsp;</td>
-<td valign="top">&nbsp;ÅŒã&nbsp;</td>
+<td valign="top">&nbsp;ÅŒ&nbsp;</td>
 </tr></table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡AV‚½‚Éİ’è‚³‚ê‚½ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚Ì’l‚ğ•Ô‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡AVÉİ’è‚³ê‚½t@C|C^Ì’lÔ‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½fBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-21&nbsp;</td>
 <td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
-<td valign="TOP">&nbsp;ƒfƒBƒŒƒNƒgƒŠ‚É‘Î‚µ‚Ä—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;fBNgÉ‘Î‚Ä—v&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;whence ‚ª³‚µ‚¢’l‚Å‚Í‚È‚¢B‚à‚µ‚­‚ÍA&nbsp;<br>&nbsp;EOF ‚ğ‚±‚¦‚éoffset ‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;whence lÅ‚Í‚È‚BÍA&nbsp;<br>&nbsp;EOF offset wè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-27&nbsp;</td>
 <td valign="TOP">&nbsp;EFBIG&nbsp;</td>
-<td valign="TOP">&nbsp;ˆÚ“®—Ê‚ªA•„†‚È‚µ 32bit ‚Ì®”‚Ì”ÍˆÍ‚ğ’´‚¦‚½&nbsp;<br>&nbsp;(‚±‚Ìê‡‚Å‚àAˆÚ“®‘€ì‚Í³‚µ‚­s‚í‚ê‚é)&nbsp;</td>
+<td valign="TOP">&nbsp;Ú“Ê‚AÈ‚ 32bit ÌÌ”ÍˆÍ‚ğ’´‚&nbsp;<br>&nbsp;(Ìê‡Å‚AÚ“Ís)&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒ^ <i>fd</i> ‚ÌƒIƒtƒZƒbƒg‚ğ <i>whence</i> ‚É]‚Á‚Ä <i>offset</i> ‚ÌˆÊ’u‚Ö•ÏX‚µ‚Ü‚·B<br>ƒIƒtƒZƒbƒg‚ğƒtƒ@ƒCƒ‹‚ÌÅŒã‚ğ’´‚¦‚½êŠ‚Éİ’è‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@CfBXN^ <i>fd</i> ÌƒItZbg <i>whence</i> É] <i>offset</i> ÌˆÊ’uÖ•ÏXÜ‚B<br>ItZbgt@CÌÅŒğ’´‚êŠÉİ’è‚·é‚±Æ‚Í‚Å‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceLseek64"><font size=6>sceLseek64<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ÌˆÚ“®(64bit ‘Î‰)<br></div>
+<!-- Ö -->
+<div align=right>t@C|C^ÌˆÚ“(64bit Î‰)<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1614,105 +1614,105 @@ int <b>sceLseek64</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="top">&nbsp;<i>fd</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;t@CfBXNv^&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>offset</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒ|ƒCƒ“ƒ^‚ÌˆÚ“®‹——£&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;|C^ÌˆÚ“&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>whence</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒp[ƒeƒBƒVƒ‡ƒ“‚ÌŠg’£ƒAƒgƒŠƒrƒ…[ƒg—Ìˆæ“à‚Ì offset ‚Ì&nbsp;<br>&nbsp;Šî€ˆÊ’uBˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚Ì’è”‚Åw’è‚·‚éB&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;p[eBVÌŠgAgr[gÌˆ offset &nbsp;<br>&nbsp;î€Ê’uBÈ‰Ì‚ê‚©Ì’è”Åwè‚·B&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_SEEK_SET&nbsp;</td>
-<td valign="top">&nbsp;ŠJnˆÊ’u&nbsp;</td>
+<td valign="top">&nbsp;JnÊ’u&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_SEEK_CUR&nbsp;</td>
-<td valign="top">&nbsp;Œ»İˆÊ’u&nbsp;</td>
+<td valign="top">&nbsp;İˆÊ’u&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_SEEK_END&nbsp;</td>
-<td valign="top">&nbsp;ÅŒã&nbsp;</td>
+<td valign="top">&nbsp;ÅŒ&nbsp;</td>
 </tr></table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡AV‚½‚Éİ’è‚³‚ê‚½ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚Ì’l‚ğ•Ô‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡AVÉİ’è‚³ê‚½t@C|C^Ì’lÔ‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½fBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-21&nbsp;</td>
 <td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
-<td valign="TOP">&nbsp;ƒfƒBƒŒƒNƒgƒŠ‚É‘Î‚µ‚Ä—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;fBNgÉ‘Î‚Ä—v&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;whence ‚ª³‚µ‚¢’l‚Å‚Í‚È‚¢B‚à‚µ‚­‚ÍA&nbsp;<br>&nbsp;EOF ‚ğ‚±‚¦‚éoffset ‚ªw’è‚³‚ê‚½B&nbsp;</td>
+<td valign="TOP">&nbsp;whence lÅ‚Í‚È‚BÍA&nbsp;<br>&nbsp;EOF offset wè‚³ê‚½B&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒ^ <i>fd</i> ‚ÌƒIƒtƒZƒbƒg‚ğ <i>whence</i> ‚É]‚Á‚Ä <i>offset</i> ‚ÌˆÊ’u‚Ö•ÏX‚µ‚Ü‚·BƒIƒtƒZƒbƒg‚ğƒtƒ@ƒCƒ‹‚ÌÅŒã‚ğ’´‚¦‚½êŠ‚Éİ’è‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB–{ŠÖ”‚Í64ƒrƒbƒg’·‚Ìƒtƒ@ƒCƒ‹ƒTƒCƒY‚É‘Î‰‚µ‚Ä‚¢‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">t@CfBXN^ <i>fd</i> ÌƒItZbg <i>whence</i> É] <i>offset</i> ÌˆÊ’uÖ•ÏXÜ‚BItZbgt@CÌÅŒğ’´‚êŠÉİ’è‚·é‚±Æ‚Í‚Å‚Ü‚B{Ö64rbgÌƒt@CTCYÉ‘Î‰Ä‚Ü‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚±‚ÌŠÖ”‚ğg—p‚·‚éê‡‚ÍƒRƒ“ƒpƒCƒ‹‚É -fno-strict-aliasingƒIƒvƒVƒ‡ƒ“‚ğw’è‚·‚é•K—v‚ª<br>‚ ‚è‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">ÌŠÖgpê‡ÍƒRpC -fno-strict-aliasingIvVwè‚·Kv<br>Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceMkdir"><font size=6>sceMkdir<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒBƒŒƒNƒgƒŠ‚Ìì¬<br></div>
+<!-- Ö -->
+<div align=right>fBNgÌì¬<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1723,185 +1723,185 @@ int <b>sceMkdir</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="top">&nbsp;<i>name</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒfƒBƒŒƒNƒgƒŠƒpƒX–¼(ƒfƒoƒCƒX–¼ + ':' ‚ğŠÜ‚Ş)&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;fBNgpX(foCX + ':' Ü‚)&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>mode</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒtƒ@ƒCƒ‹ƒ‚[ƒh&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;t@C[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 0&nbsp;</td>
-<td valign="top">&nbsp;other‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 1&nbsp;</td>
-<td valign="top">&nbsp;other‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 2&nbsp;</td>
-<td valign="top">&nbsp;other‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 3&nbsp;</td>
-<td valign="top">&nbsp;group‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 4&nbsp;</td>
-<td valign="top">&nbsp;group‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 5&nbsp;</td>
-<td valign="top">&nbsp;group‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 6&nbsp;</td>
-<td valign="top">&nbsp;user‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 7&nbsp;</td>
-<td valign="top">&nbsp;user‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 8&nbsp;</td>
-<td valign="top">&nbsp;user‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 9&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 10&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;bit 11&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;sifdev.h ‚É‚ÍŠeƒ‚[ƒh‚Ìƒ}ƒNƒ‚ª—pˆÓ‚³‚ê‚Ä&nbsp;<br>&nbsp;‚¢‚Ü‚·‚ªA8i”‚ÅA0777A0755 ‚È‚Ç‚à&nbsp;<br>&nbsp;‚í‚©‚è‚â‚·‚¢w’è‚Ì•û–@‚Å‚·B&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;sifdev.h É‚ÍŠe[hÌƒ}NpÓ‚&nbsp;<br>&nbsp;Ü‚A8iÅA0777A0755 È‚Ç‚&nbsp;<br>&nbsp;í‚©â‚·wÌ•@Å‚B&nbsp;</td>
 </tr></table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒpƒX’†‚ÌƒfƒBƒŒƒNƒgƒŠ‚ª&nbsp;<br>&nbsp;‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½pXÌƒfBNg&nbsp;<br>&nbsp;İ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-17&nbsp;</td>
 <td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
-<td valign="TOP">&nbsp;Šù‚Éƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚é&nbsp;</td>
+<td valign="TOP">&nbsp;Éƒt@Cİ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-30&nbsp;</td>
 <td valign="TOP">&nbsp;-EROFS&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İ‚İê—p‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€&nbsp;<br>&nbsp;ã‚Ìƒtƒ@ƒCƒ‹‚É‘Î‚µA‘‚«‚İƒAƒNƒZƒX‚ğ&nbsp;<br>&nbsp;—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İİpÌƒt@CVXe&nbsp;<br>&nbsp;Ìƒt@CÉ‘Î‚AİƒANZX&nbsp;<br>&nbsp;v&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒfƒBƒŒƒNƒgƒŠ‚ğì¬‚µ‚Ü‚·BƒpƒX–¼‚ÍA"pfs" + ƒ†ƒjƒbƒg”Ô† + ':' + •¶š—ñ‚Æ‚È‚è‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">fBNgì¬Ü‚BpXÍA"pfs" + jbgÔ + ':' + Æ‚È‚Ü‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒfƒBƒŒƒNƒgƒŠì¬‚É <i>mode</i> ‚ğ“KØ‚Éw’è‚µ‚È‚©‚Á‚½ê‡AƒfƒBƒŒƒNƒgƒŠ‚ğQÆ‚Å‚«‚È‚­‚È‚é‰Â”\«‚ª‚ ‚è‚Ü‚·BŒ»ó‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚Å‚ÍAumaskAuidAgid “™‚ğ•ÏX‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB<br>umask ‚Í 0002AuidAgid ‚Í 0xffff ŒÅ’è‚Å‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">fBNgì¬ <i>mode</i> KØ‚Éwè‚µÈ‚ê‡AfBNgQÆ‚Å‚È‚È‚Â”\Ü‚BÌƒCuÅ‚ÍAumaskAuidAgid ÏXé‚±Æ‚Í‚Å‚Ü‚B<br>umask  0002AuidAgid  0xffff Å’Å‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceMount"><font size=6>sceMount<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒoƒCƒX‚Ìƒ}ƒEƒ“ƒg<br></div>
+<!-- Ö -->
+<div align=right>foCXÌƒ}Eg<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -1915,139 +1915,139 @@ int <b>sceMount</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="top">&nbsp;<i>fsname</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒ}ƒEƒ“ƒgŒã‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ƒfƒoƒCƒX–¼‚Æ&nbsp;<br>&nbsp;ƒ†ƒjƒbƒg”Ô†w’è‚·‚é•¶š—ñ&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;}EgÌƒt@CVXefoCX&nbsp;<br>&nbsp;jbgÔwè‚·é•¶&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>devname </i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒ}ƒEƒ“ƒg‘ÎÛ‚ÌƒuƒƒbƒNƒfƒoƒCƒX‚ğƒI[ƒvƒ“‚·‚é‚½‚ß‚É&nbsp;<br>&nbsp;•K—v‚ÈƒfƒoƒCƒX¯•Ê•¶š—ñ&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;}EgÎÛ‚ÌƒubNfoCXI[vé‚½ß‚&nbsp;<br>&nbsp;KvÈƒfoCXÊ•&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>flag</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒ}ƒEƒ“ƒg‚Ìƒtƒ‰ƒOBŸ‚Ì‚¢‚¸‚ê‚©‚Ì’è”‚Åw’è‚µ‚Ü‚·B&nbsp;<br>&nbsp;•¡”w’è‚·‚éê‡‚Í˜_—˜a‚ğ‚Æ‚éB&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;}EgÌƒtOBÌ‚ê‚©Ì’è”Åwè‚µÜ‚B&nbsp;<br>&nbsp;wè‚·ê‡Í˜_aÆ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_MT_RDWR&nbsp;</td>
-<td valign="top">&nbsp;“Ç‚İ‘‚«‰Â”\‚Åƒ}ƒEƒ“ƒg‚·‚éB&nbsp;</td>
+<td valign="top">&nbsp;Ç‚İÂ”\Åƒ}EgB&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_MT_RDONLY&nbsp;</td>
-<td valign="top">&nbsp;“Ç‚İæ‚èê—p‚Åƒ}ƒEƒ“ƒg‚·‚éB&nbsp;</td>
+<td valign="top">&nbsp;Ç‚İpÅƒ}EgB&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_MT_ROBUST&nbsp;</td>
-<td valign="top">&nbsp;ƒƒoƒXƒgƒ‚[ƒh‚Åƒ}ƒEƒ“ƒg‚·‚éB&nbsp;</td>
+<td valign="top">&nbsp;oXg[hÅƒ}EgB&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_MT_ERRCHECK&nbsp;</td>
-<td valign="top">&nbsp;ƒ}ƒEƒ“ƒg‚Éƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚É&nbsp;<br>&nbsp;ˆÙí‚ª‚ ‚éê‡‚ÍƒGƒ‰[‚Æ‚·‚éB&nbsp;</td>
+<td valign="top">&nbsp;}EgÉƒt@CVXe&nbsp;<br>&nbsp;Ùí‚ªê‡ÍƒG[Æ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>arg</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>arglen</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr></table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒp[ƒeƒBƒVƒ‡ƒ“‚ª‘¶İ‚µ‚È‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½p[eBVİ‚È‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[B&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-6&nbsp;</td>
 <td valign="TOP">&nbsp;-ENXIO&nbsp;</td>
-<td valign="TOP">&nbsp;ƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚éƒfƒoƒCƒX‚Å‚Í‚È‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;T|[gÄ‚foCXÅ‚Í‚È‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒB&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-16&nbsp;</td>
 <td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
-<td valign="TOP">&nbsp;‚·‚Å‚Éw’è‚³‚ê‚½ƒp[ƒeƒBƒVƒ‡ƒ“‚ª&nbsp;<br>&nbsp;ƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚éB&nbsp;</td>
+<td valign="TOP">&nbsp;Å‚Éwè‚³ê‚½p[eBV&nbsp;<br>&nbsp;I[vÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½B&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚éB&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚B&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>devname</i> ‚Åw’è‚·‚éƒuƒƒbƒNƒfƒoƒCƒX‚ğ <i>fsname</i> ‚Åw’è‚·‚éƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€˜_—ƒfƒoƒCƒX‚Éƒ}ƒEƒ“ƒg‚µ‚Ü‚·B<br><i>devname</i> ‚É‚Í’ÊíA‚ ‚ç‚©‚¶‚ßì¬‚³‚ê‚Ä‚¢‚éƒp[ƒeƒBƒVƒ‡ƒ“‚Ìƒp[ƒeƒBƒVƒ‡ƒ“¯•Ê•¶š—ñ‚ğw’è‚µ‚Ü‚·BƒpƒXƒ[ƒh‚ÍA“Ç‚İæ‚èê—p‚Åƒ}ƒEƒ“ƒg‚·‚é‚Ì‚È‚çAƒŠ[ƒhƒIƒ“ƒŠ[ƒpƒXƒ[ƒh‚¾‚¯‚Å‚à–â‘è‚ ‚è‚Ü‚¹‚ñ‚ªA“Ç‚İ‘‚«‰Â”\‚Åƒ}ƒEƒ“ƒg‚·‚éê‡‚Í•K‚¸ƒtƒ‹ƒpƒXƒ[ƒh‚ª•K—v‚É‚È‚è‚Ü‚·B<br>SCE_MT_ROBUST ‚ğw’è‚·‚é‚Æí‚Éƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€î•ñ‚ÌXV‚·‚é‚æ‚¤‚É‚È‚è‚Ü‚·Bƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚É•ÏX‚ª”­¶‚·‚é‚æ‚¤‚È‘€ì(sceMkdir()AsceWrite() ‚È‚Ç)‚ğs‚Á‚½ê‡‚ÍA‘¦À‚ÉƒfƒBƒXƒN‚Æ“¯Šú‚ğæ‚é‚æ‚¤‚É‚µ‚Ü‚·B‚Ü‚½Aƒƒ‚ƒŠƒJ[ƒhŒİŠ·‚ÌƒNƒ[ƒYŠ®—¹ƒtƒ‰ƒO‚ÌXV‚ÍAROBUST ƒ‚[ƒh‚Ì‚Ì‚İs‚í‚ê‚Ü‚·B<br>SCE_MT_ERRCHECK ‚ğw’è‚·‚é‚Æƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÉˆÙí‚ª‚ ‚éê‡‚ÍAEIO ƒGƒ‰[‚ğ•Ô‚µ‚Ü‚·Bƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÉˆÙí‚ªŒ©‚Â‚©‚Á‚½ê‡‚ÍA‘¬‚â‚©‚Éƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Ìƒ`ƒFƒbƒN‚ğs‚¤‚±‚Æ‚ğ„§‚µ‚Ü‚·Bƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÉˆÙí‚ª‚ ‚Á‚Ä‚àƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌXV‚ğs‚í‚È‚¯‚ê‚ÎA–â‘è‚ª‚È‚¢•”•ª‚É‚Â‚¢‚Ä‚Í“Ç‚İ‚Ş‚±‚Æ‚ª‰Â”\‚Å‚·‚ªA‘‚«‚İ‚Í–â‘è‚ğŠg‘å‚³‚¹‚é‹°‚ê‚ª‚ ‚é‚Ì‚Ås‚í‚È‚¢‚Å‚­‚¾‚³‚¢B<br><br>—á:<br></div>
+<div style="margin-left:50px;"><i>devname</i> Åwè‚·ubNfoCX <i>fsname</i> Åwè‚·t@CVXe_foCXÉƒ}EgÜ‚B<br><i>devname</i> É‚Í’ÊAç‚©ßì¬Ä‚p[eBVÌƒp[eBVÊ•wè‚µÜ‚BpX[hÍAÇ‚İpÅƒ}EgÌ‚È‚A[hI[pX[hÅ‚è‚ Ü‚ñ‚ªAÇ‚İÂ”\Åƒ}Egê‡Í•KtpX[hKvÉ‚È‚Ü‚B<br>SCE_MT_ROBUST wè‚·ÆÉƒt@CVXeÌXVæ‚¤É‚È‚Ü‚Bt@CVXeÉ•ÏXæ‚¤È‘(sceMkdir()AsceWrite() È‚)sê‡ÍAÉƒfBXNÆ“æ‚¤É‚Ü‚BÜ‚AJ[hİŠÌƒN[YtOÌXVÍAROBUST [hÌÌ‚İsÜ‚B<br>SCE_MT_ERRCHECK wè‚·Æƒt@CVXeÉˆÙí‚ªê‡ÍAEIO G[Ô‚Ü‚Bt@CVXeÉˆÙí‚ªÂ‚ê‡ÍAâ‚©Éƒt@CVXeÌƒ`FbNsÆ‚ğ„Ü‚Bt@CVXeÉˆÙí‚ªÄ‚t@CVXeÌXVsÈ‚ÎAè‚ªÈ‚É‚Â‚Ä‚Í“Ç‚İŞ‚Æ‚Â”\Å‚Aİ‚Í–gå‚³é‹°ê‚ªÌ‚ÅsÈ‚Å‚B<br><br>:<br></div>
 <div style="margin-left:70px;">sceMount("pfs0:", "hdd0:tst1,fpwd1", SCE_MT_RDWR, NULL, 0);<br>sceMount("pfs1:", "hdd0:tst2,fpwd2", SCE_MT_RDWR|SCE_MT_ROBUST, NULL,0);<br>sceMount("pfs2:", "hdd0:tst3,,rpwd3", SCE_MT_RDONLY, NULL, 0);<br></div>
 <div style="margin-left:50px;"><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceOpen"><font size=6>sceOpen<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹‚Ìì¬AƒI[ƒvƒ“<br></div>
+<!-- Ö -->
+<div align=right>t@CÌì¬AI[v<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -2059,236 +2059,236 @@ int <b>sceOpen</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="top">&nbsp;<i>name</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼(ƒfƒoƒCƒX–¼ + ':' ‚ğŠÜ‚Ş)&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;t@CpX(foCX + ':' Ü‚)&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>flags</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒAƒNƒZƒXƒ‚[ƒhBŸ‚Ì‚¢‚¸‚ê‚©‚Ì’è”‚Åw’è‚µ‚Ü‚·B&nbsp;<br>&nbsp;•¡”w’è‚·‚éê‡‚Í˜_—˜a‚ğ‚Æ‚éB&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ANZX[hBÌ‚ê‚©Ì’è”Åwè‚µÜ‚B&nbsp;<br>&nbsp;wè‚·ê‡Í˜_aÆ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_RDONLY&nbsp;</td>
-<td valign="top">&nbsp;“Ç‚İo‚µê—p‚ÉƒI[ƒvƒ“‚·‚é&nbsp;</td>
+<td valign="top">&nbsp;Ç‚İopÉƒI[v&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_WRONLY&nbsp;</td>
-<td valign="top">&nbsp;‘‚«‚İê—p‚ÉƒI[ƒvƒ“‚·‚é&nbsp;</td>
+<td valign="top">&nbsp;İpÉƒI[v&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_RDWR&nbsp;</td>
-<td valign="top">&nbsp;“Ç‚İ‘‚«‰Â”\‚ÅƒI[ƒvƒ“‚·‚é&nbsp;</td>
+<td valign="top">&nbsp;Ç‚İÂ”\ÅƒI[v&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_APPEND&nbsp;</td>
-<td valign="top">&nbsp;’Ç‰Á‘‚«‚İƒ‚[ƒh‚É‚·‚é&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚Ö‚Ì‘‚«‚İ‚Íí‚É&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚Ì––”ö‚És‚í‚ê‚é&nbsp;</td>
+<td valign="top">&nbsp;Ç‰İƒ[hÉ‚&nbsp;<br>&nbsp;t@CÖ‚Ìİ‚Í&nbsp;<br>&nbsp;t@CÌ–És&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_CREAT&nbsp;</td>
-<td valign="top">&nbsp;ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¯‚ê‚Î&nbsp;<br>&nbsp;V‹Kì¬‚·‚é&nbsp;</td>
+<td valign="top">&nbsp;t@Cİ‚È‚&nbsp;<br>&nbsp;VKì¬&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_TRUNC&nbsp;</td>
-<td valign="top">&nbsp;Šù‘¶‚Ìƒtƒ@ƒCƒ‹“à—e‚ğØ‚èÌ‚Ä‚é&nbsp;</td>
+<td valign="top">&nbsp;Ìƒt@CeØ‚Ì‚Ä‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i></i>&nbsp;</td>
 <td valign="top">&nbsp;SCE_EXCL&nbsp;</td>
-<td valign="top">&nbsp;SCE_CREAT ‚ğw’è‚µ‚Ä‚¨‚è&nbsp;<br>&nbsp;“¯–¼‚Ìƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚éê‡‚Í&nbsp;<br>&nbsp;ƒGƒ‰[‚Æ‚·‚é&nbsp;</td>
+<td valign="top">&nbsp;SCE_CREAT wè‚µÄ‚&nbsp;<br>&nbsp;Ìƒt@Cİ‚ê‡&nbsp;<br>&nbsp;G[Æ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;<i>mode</i>&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;ƒtƒ@ƒCƒ‹ƒ‚[ƒh&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;t@C[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 0&nbsp;</td>
-<td valign="top">&nbsp;other‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 1&nbsp;</td>
-<td valign="top">&nbsp;other‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 2&nbsp;</td>
-<td valign="top">&nbsp;other‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;otherÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 3&nbsp;</td>
-<td valign="top">&nbsp;group‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 4&nbsp;</td>
-<td valign="top">&nbsp;group‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 5&nbsp;</td>
-<td valign="top">&nbsp;group‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;groupÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 6&nbsp;</td>
-<td valign="top">&nbsp;user‚ÌÀsŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌs&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 7&nbsp;</td>
-<td valign="top">&nbsp;user‚Ìƒ‰ƒCƒgŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌƒCg&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 8&nbsp;</td>
-<td valign="top">&nbsp;user‚ÌƒŠ[ƒhŒ &nbsp;</td>
+<td valign="top">&nbsp;userÌƒ[h&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 9&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 10&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">&nbsp;bit 11&nbsp;</td>
-<td valign="top">&nbsp;—\–ñ&nbsp;</td>
+<td valign="top">&nbsp;\&nbsp;</td>
 </tr>
 <tr>
 <td valign="top">&nbsp;&nbsp;&nbsp;</td>
-<td colspan= 2  valign="top">&nbsp;sifdev.h ‚É‚ÍŠeƒ‚[ƒh‚Ìƒ}ƒNƒ‚ª—pˆÓ‚³‚ê‚Ä&nbsp;<br>&nbsp;‚¢‚Ü‚·‚ªA8i”‚ÅA0777A0644 ‚È‚Ç‚à&nbsp;<br>&nbsp;‚í‚©‚è‚â‚·‚¢w’è‚Ì•û–@‚Å‚·B&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;sifdev.h É‚ÍŠe[hÌƒ}NpÓ‚&nbsp;<br>&nbsp;Ü‚A8iÅA0777A0644 È‚Ç‚&nbsp;<br>&nbsp;í‚©â‚·wÌ•@Å‚B&nbsp;</td>
 </tr></table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">³íI—¹‚Ìê‡Aƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^(0ˆÈã‚Ì’l)‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">IÌê‡At@CfBXNv^(0ÈÌ’l)Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-17&nbsp;</td>
 <td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
-<td valign="TOP">&nbsp;SCE_CREAT ‚Æ SCE_EXCL ‚ªw’è‚³‚êA&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚é&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_CREAT  SCE_EXCL wè‚³A&nbsp;<br>&nbsp;t@Cİ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-21&nbsp;</td>
 <td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹‚ÍƒfƒBƒŒƒNƒgƒŠ‚Å‚ ‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CÍƒfBNgÅ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚ÌÅ‘å”‚É&nbsp;<br>&nbsp;’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^ÌÅ‘å”&nbsp;<br>&nbsp;BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-30&nbsp;</td>
 <td valign="TOP">&nbsp;-EROFS&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İ‚İê—p‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ã‚Ìƒtƒ@ƒCƒ‹‚É&nbsp;<br>&nbsp;‘Î‚µA‘‚«‚İƒAƒNƒZƒX‚ğ—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İİpÌƒt@CVXeÌƒt@C&nbsp;<br>&nbsp;Î‚AİƒANZXv&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN&nbsp;<br>&nbsp;‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘V{bNN&nbsp;<br>&nbsp;ß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹‚Ìì¬AƒI[ƒvƒ“‚ğs‚¢‚Ü‚·BƒI[ƒvƒ“‚µ‚½ƒtƒ@ƒCƒ‹‚É‘Î‚µ‚Ä‚Íƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^‚ª—^‚¦‚ç‚ê‚Ü‚·Bƒtƒ@ƒCƒ‹ƒpƒX–¼‚ÍA"pfs" + ƒ†ƒjƒbƒg”Ô† + ':' + •¶š—ñ‚Æ‚È‚è‚Ü‚·B<br><br>—á:<br></div>
+<div style="margin-left:50px;">t@CÌì¬AI[vsÜ‚BI[vt@CÉ‘Î‚Ä‚Íƒt@CfBXNv^^Ü‚Bt@CpXÍA"pfs" + jbgÔ + ':' + Æ‚È‚Ü‚B<br><br>:<br></div>
 <div style="margin-left:70px;">sceOpen("pfs0:/foo", SCE_CREAT|SCE_RDWR, SCE_STM_RWXUGO);<br></div>
 <div style="margin-left:50px;"><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹ì¬‚É <i>mode</i> ‚ğ“KØ‚Éw’è‚µ‚È‚©‚Á‚½ê‡Aƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚È‚­‚È‚é‰Â”\«‚ª‚ ‚è‚Ü‚·BŒ»ó‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚Å‚ÍAumaskAuidAgid “™‚ğ•ÏX‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñBumask ‚Í 0002AuidAgid ‚Í 0xffff ŒÅ’è‚Å‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@Cì¬ <i>mode</i> KØ‚Éwè‚µÈ‚ê‡At@CJÈ‚È‚Â”\Ü‚BÌƒCuÅ‚ÍAumaskAuidAgid ÏXé‚±Æ‚Í‚Å‚Ü‚Bumask  0002AuidAgid  0xffff Å’Å‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceRead"><font size=6>sceRead<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ<br></div>
+<!-- Ö -->
+<div align=right>t@CÌ“Ç‚İ<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -2300,96 +2300,96 @@ int <b>sceRead</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İo‚µ‘ÎÛ‚Ìƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İoÎÛ‚Ìƒt@CfBXNv^&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İo‚µ‚½ƒf[ƒ^‚ğŠi”[‚·‚éƒoƒbƒtƒ@‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İof[^i[obt@ÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>count</i>&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İo‚·ƒf[ƒ^ƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İof[^TCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A“Ç‚İ‚ñ‚¾ƒoƒCƒg”‚ğ•Ô‚µ‚Ü‚·Bƒtƒ@ƒCƒ‹ˆÊ’u‚Í‚±‚Ì”‚¾‚¯i‚ß‚ç‚ê‚Ü‚·B0‚È‚ç‚Îƒtƒ@ƒCƒ‹‚ÌI‚í‚è‚ğˆÓ–¡‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡AÇ‚İñ‚¾ƒoCgÔ‚Ü‚Bt@CÊ’uÍ‚Ìiß‚Ü‚B0È‚Îƒt@CÌIÓ–Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;<br>&nbsp;‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½fBXNv^&nbsp;<br>&nbsp;Å‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-65541&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO|0x10000&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹‚Ì“à—e‚ğ“Ç‚İ‚İ’†‚É•s—ÇƒZƒNƒ^‚ğ&nbsp;<br>&nbsp;”­Œ©‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;t@CÌ“eÇ‚İİ’É•sÇƒZN^&nbsp;<br>&nbsp;&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚·‚Å‚ÉƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚©‚çÅ‘å <i>count</i> ƒoƒCƒg‚ğ <i>buf</i> ‚Ån‚Ü‚éƒoƒbƒtƒ@‚Ö“Ç‚İ‚İ‚Ü‚·Bƒoƒbƒtƒ@‚Í 64 ƒoƒCƒgƒAƒ‰ƒCƒ“‚³‚ê‚Ä‚¢‚È‚¢‚ÆƒpƒtƒH[ƒ}ƒ“ƒX‚ª’á‰º‚µ‚Ü‚·B•K‚¸ 64 ƒoƒCƒgƒAƒ‰ƒCƒ“‚·‚é‚±‚Æ‚ğ‚¨‘E‚ß‚µ‚Ü‚·B<i>count</i> ‚Í 512 ƒoƒCƒg‚Ì”{”‚É‚È‚é‚æ‚¤‚É ‚·‚é‚ÆƒpƒtƒH[ƒ}ƒ“ƒX‚ªŒüã‚µ‚Ü‚·B‚Å‚«‚é‚©‚¬‚èA512 ƒoƒCƒg‚Ì”{”‚É‚·‚é‚±‚Æ‚ğ‚¨‘E‚ß‚µ‚Ü‚·B‚à‚µA512 ƒoƒCƒg’PˆÊ‚ª•s‰Â”\‚Èê‡‚Å‚àÅ’á‚Å 4 ƒoƒCƒg’PˆÊA‚Å‚«‚ê‚Î 64ƒoƒCƒg’PˆÊ‚ğw’è‚·‚é‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B‚Ü‚½A‚ ‚é’ö“x‘å‚«‚È’PˆÊ‚Å“]‘—‚ğˆê“x‚És‚¤‚Æ‚æ‚è‚¢‚Á‚»‚¤ƒpƒtƒH[ƒ}ƒ“ƒX‚ÍŒüã‚µ‚Ü‚·BEIO|0x10000 ƒGƒ‰[‚ª”­¶‚µ‚½ê‡‚ÍAƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Ìƒ`ƒFƒbƒN‚ğs‚¤‚Ì‚Å‚Í‚È‚­Aƒtƒ@ƒCƒ‹‚ğã‘‚«‚·‚é‚©Aƒtƒ@ƒCƒ‹‚ğÁ‹‚·‚é‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
+<div style="margin-left:50px;">Å‚ÉƒI[vÄ‚t@CÅ‘ <i>count</i> oCg <i>buf</i> ÅnÜ‚obt@Ö“Ç‚İİ‚Ü‚Bobt@ 64 oCgACÄ‚È‚ÆƒptH[}Xá‰ºÜ‚BK 64 oCgACé‚±Æ‚Eß‚Ü‚B<i>count</i>  512 oCgÌ”{É‚È‚æ‚¤ ÆƒptH[}Xã‚µÜ‚BÅ‚é‚©A512 oCgÌ”{É‚é‚±Æ‚Eß‚Ü‚BA512 oCgPÊ‚sÂ”\Èê‡Å‚Å’ 4 oCgPÊAÅ‚ 64oCgPÊ‚wè‚·æ‚¤É‚Ä‚BÜ‚Axå‚«È’PÊ‚Å“]xÉsÆ‚è‚¢ptH[}XÍŒã‚µÜ‚BEIO|0x10000 G[ê‡ÍAt@CVXeÌƒ`FbNsÌ‚Å‚Í‚È‚At@Cã‘é‚©At@Cæ‚¤É‚Ä‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>buf</i> ‚É SPR ‚ğw’è‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><i>buf</i>  SPR wè‚·é‚±Æ‚Í‚Å‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceReadlink"><font size=6>sceReadlink<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒVƒ“ƒ{ƒŠƒbƒNEƒŠƒ“ƒN‚Ì’l‚ğ“Ç‚Ş<br></div>
+<!-- Ö -->
+<div align=right>V{bNENÌ’lÇ‚<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -2401,115 +2401,115 @@ int <b>sceReadlink</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>path</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
-<td valign="TOP">&nbsp;“à—e‚ğ‘‚«‚Ş‚½‚ß‚Ìƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;eŞ‚ß‚Ìƒobt@&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufsiz</i>&nbsp;</td>
-<td valign="TOP">&nbsp;buf ‚ÌƒTƒCƒY(1023ƒoƒCƒg‚Ü‚Å)&nbsp;</td>
+<td valign="TOP">&nbsp;buf ÌƒTCY(1023oCgÜ‚)&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡Aƒoƒbƒtƒ@‚ÉŠi”[‚³‚ê‚½•¶š”‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡Aobt@ÉŠi[ê‚½Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-17&nbsp;</td>
 <td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
-<td valign="TOP">&nbsp;Šù‚É newname ‚ª‘¶İ‚·‚é&nbsp;</td>
+<td valign="TOP">&nbsp; newname İ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½B‚à‚µ‚­‚ÍA&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚Å‚Í‚È‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½BÍA&nbsp;<br>&nbsp;V{bNNÅ‚Í‚È‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>path</i> ‚Å—^‚¦‚ç‚ê‚½ƒVƒ“ƒ{ƒŠƒbƒNEƒŠƒ“ƒN‚Ì“à—e‚ğ <i>buf</i> ‚ÖŠi”[‚·‚éAbuf ‚ÌƒTƒCƒY‚Í <i>bufsiz</i> ‚Åw’è‚·‚éBsceReadlink ‚Í ƒkƒ‹iNULLj•¶š‚ğ<i>buf</i> ‚É’Ç‰Á‚µ‚Ü‚¹‚ñB‚»‚Ì“à—e‘S‚Ä‚ğŠi”[‚·‚é‚½‚ß‚Ìƒoƒbƒtƒ@‚ª¬‚³‰ß‚¬‚éê‡‚ÍAi<i>bufsiz</i> ƒoƒCƒg‚Ì’·‚³‚Éj“à—e‚ğØ‚è‹l‚ß‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><i>path</i> Å—^ê‚½V{bNENÌ“e <i>buf</i> ÖŠi[Abuf ÌƒTCY <i>bufsiz</i> Åwè‚·BsceReadlink  kiNULLj<i>buf</i> É’Ç‰Ü‚BÌ“eSÄ‚i[é‚½ß‚Ìƒobt@ß‚ê‡ÍAi<i>bufsiz</i> oCgÌ’ÉjeØ‚lß‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceRemove"><font size=6>sceRemove<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹‚Ìíœ<br></div>
+<!-- Ö -->
+<div align=right>t@CÌíœ<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -2519,112 +2519,112 @@ int <b>sceRemove</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼(ƒfƒoƒCƒX–¼ + ':' ‚ğŠÜ‚Ş)&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX(foCX + ':' Ü‚)&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-16&nbsp;</td>
 <td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹‚ªƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CI[vÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-21&nbsp;</td>
 <td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹‚ÍƒfƒBƒŒƒNƒgƒŠ‚Å‚ ‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CÍƒfBNgÅ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-30&nbsp;</td>
 <td valign="TOP">&nbsp;-EROFS&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İ‚İê—p‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ã‚Ì&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚É‘Î‚µA‘‚«‚İƒAƒNƒZƒX‚ğ&nbsp;<br>&nbsp;—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İİpÌƒt@CVXe&nbsp;<br>&nbsp;t@CÉ‘Î‚AİƒANZX&nbsp;<br>&nbsp;v&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ğíœ‚µ‚Ü‚·Bƒtƒ@ƒCƒ‹ƒpƒX–¼‚ÍA"pfs" + ƒ†ƒjƒbƒg”Ô† + ':' + •¶š—ñ‚Æ‚È‚è‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">wè‚³ê‚½t@CíœÜ‚Bt@CpXÍA"pfs" + jbgÔ + ':' + Æ‚È‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceRename"><font size=6>sceRename<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠ–¼Ì‚Ì•ÏX<br></div>
+<!-- Ö -->
+<div align=right>t@C/fBNgÌ‚Ì•ÏX<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -2635,138 +2635,138 @@ int <b>sceRename</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>oldname</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•ÏX‘Oƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠƒpƒX–¼&nbsp;</td>
+<td valign="TOP">&nbsp;ÏXOt@C/fBNgpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>newname</i>&nbsp;</td>
-<td valign="TOP">&nbsp;•ÏXŒãƒtƒ@ƒCƒ‹/ƒfƒBƒŒƒNƒgƒŠƒpƒX–¼&nbsp;</td>
+<td valign="TOP">&nbsp;ÏXt@C/fBNgpX&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-16&nbsp;</td>
 <td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹‚ªƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚é‚©A&nbsp;<br>&nbsp;ƒ[ƒLƒ“ƒOƒfƒBƒŒƒNƒgƒŠ‚Å‚ ‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CI[vÄ‚é‚©A&nbsp;<br>&nbsp;[LOfBNgÅ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-20&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
-<td valign="TOP">&nbsp;oldname ‚ªƒfƒBƒŒƒNƒgƒŠ‚ÅAnewname ‚ª&nbsp;<br>&nbsp;ƒfƒBƒŒƒNƒgƒŠ‚Å‚Í‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;oldname fBNgÅAnewname &nbsp;<br>&nbsp;fBNgÅ‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-21&nbsp;</td>
 <td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
-<td valign="TOP">&nbsp;oldname ‚ªƒtƒ@ƒCƒ‹‚ÅAnewname ‚ª&nbsp;<br>&nbsp;ƒfƒBƒŒƒNƒgƒŠ‚Å‚ ‚é&nbsp;</td>
+<td valign="TOP">&nbsp;oldname t@CÅAnewname &nbsp;<br>&nbsp;fBNgÅ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp; "." ‚Ü‚½‚ÍA".." ‚ªw’è‚³‚ê‚½B&nbsp;<br>&nbsp;‚Ü‚½‚ÍAnewname ‚ªoldname ‚Ì&nbsp;<br>&nbsp;ƒpƒX•”•ª‚ğŠÜ‚ñ‚Å‚¢‚éB&nbsp;<br>&nbsp;Œ¾‚¢Š·‚¦‚é‚ÆƒfƒBƒŒƒNƒgƒŠ‚ğ©•ª©g‚Ì&nbsp;<br>&nbsp;ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚É•ÏX‚µ‚æ‚¤‚Æ‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp; "." Ü‚ÍA".." wè‚³ê‚½B&nbsp;<br>&nbsp;Ü‚ÍAnewname oldname &nbsp;<br>&nbsp;pXÜ‚Å‚B&nbsp;<br>&nbsp;ÆƒfBNgg&nbsp;<br>&nbsp;TufBNgÉ•ÏXæ‚¤Æ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-30&nbsp;</td>
 <td valign="TOP">&nbsp;-EROFS&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İ‚İê—p‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ã‚Ì&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚É‘Î‚µA‘‚«‚İƒAƒNƒZƒX‚ğ—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İİpÌƒt@CVXe&nbsp;<br>&nbsp;t@CÉ‘Î‚AİƒANZXv&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-90&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOTEMPTY&nbsp;</td>
-<td valign="TOP">&nbsp;newname ‚ªƒfƒBƒŒƒNƒgƒŠ‚ÅƒfƒBƒŒƒNƒgƒŠ‚ª&nbsp;<br>&nbsp;‹ó‚Å‚Í‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;newname fBNgÅƒfBNg&nbsp;<br>&nbsp;Å‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹‚Ì–¼‘O‚ğ•ÏX‚µ‚Ü‚·B•K—v‚È‚ç‚ÎƒfƒBƒŒƒNƒgƒŠŠÔ‚ÌˆÚ“®‚ğs‚È‚¢‚Ü‚·B<br>‚à‚µ <i>newname</i> ‚ªŠù‚É‘¶İ‚µ‚Ä‚¢‚½ê‡‚É‚ÍAˆÈ‰º‚ÌğŒ‚ğ–‚½‚¹‚Î©“®“I‚É’u‚«Š·‚¦‚ç‚ê‚Ü‚·B<br></div>
-<div style="margin-left:70px;">- <i>oldname</i> ‚ªƒtƒ@ƒCƒ‹‚Å <i>newname</i> ‚àƒtƒ@ƒCƒ‹‚Å‚ ‚éB<br>- <i>oldname</i> ‚ªƒfƒBƒŒƒNƒgƒŠ‚Å <i>newname</i> ‚àƒfƒBƒŒƒNƒgƒŠ‚Å‚ ‚éB<br>- <i>newname</i> ‚ªƒfƒBƒŒƒNƒgƒŠ‚Å‹ó‚Å‚ ‚éB<br>- <i>newname</i> ‚ªƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚È‚¢B<br></div>
-<div style="margin-left:50px;">‚à‚µ <i>newname</i> ‚ª‘¶İ‚µA‰½‚ç‚©‚Ì——R‚Å‘€ì‚ª¸”s‚µ‚½ê‡‚Å‚àA<i>newname</i> ‚ÌÀ‘Ì‚ğŒ³‚Ì‚Ü‚Üc‚·‚±‚Æ‚ğ•ÛØ‚µ‚Ä‚¢‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@CÌ–OÏXÜ‚BKvÈ‚ÎƒfBNgÔ‚ÌˆÚ“sÈ‚Ü‚B<br> <i>newname</i> É‘İ‚Ä‚ê‡É‚ÍAÈ‰Ìğ–‚ÎIÉ’uÜ‚B<br></div>
+<div style="margin-left:70px;">- <i>oldname</i> t@C <i>newname</i> t@CÅ‚B<br>- <i>oldname</i> fBNg <i>newname</i> fBNgÅ‚B<br>- <i>newname</i> fBNgÅ‹Å‚B<br>- <i>newname</i> I[vÄ‚È‚B<br></div>
+<div style="margin-left:50px;"> <i>newname</i> İ‚Aç‚©Ì—RÅ‘ì‚ªsê‡Å‚A<i>newname</i> ÌÌ‚Ì‚Ü‚ÜcÆ‚ÛØ‚Ä‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceRmdir"><font size=6>sceRmdir<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒfƒBƒŒƒNƒgƒŠ‚Ìíœ<br></div>
+<!-- Ö -->
+<div align=right>fBNgÌíœ<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -2776,117 +2776,117 @@ int <b>sceRmdir</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒfƒBƒŒƒNƒgƒŠƒpƒX–¼(ƒfƒoƒCƒX–¼ + ':' ‚ğŠÜ‚Ş)&nbsp;</td>
+<td valign="TOP">&nbsp;fBNgpX(foCX + ':' Ü‚)&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒBƒŒƒNƒgƒŠ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½fBNgİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-16&nbsp;</td>
 <td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
-<td valign="TOP">&nbsp;ƒfƒBƒŒƒNƒgƒŠ‚ªƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚é‚©A&nbsp;<br>&nbsp;ƒ[ƒLƒ“ƒOƒfƒBƒŒƒNƒgƒŠ‚Å‚ ‚é&nbsp;</td>
+<td valign="TOP">&nbsp;fBNgI[vÄ‚é‚©A&nbsp;<br>&nbsp;[LOfBNgÅ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-20&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ªƒfƒBƒŒƒNƒgƒŠ&nbsp;<br>&nbsp;‚Å‚Í‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@CfBNg&nbsp;<br>&nbsp;Å‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-30&nbsp;</td>
 <td valign="TOP">&nbsp;-EROFS&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İ‚İê—p‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ã‚Ì&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚É‘Î‚µA‘‚«‚İƒAƒNƒZƒX‚ğ&nbsp;<br>&nbsp;—v‹‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İİpÌƒt@CVXe&nbsp;<br>&nbsp;t@CÉ‘Î‚AİƒANZX&nbsp;<br>&nbsp;v&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-90&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOTEMPTY&nbsp;</td>
-<td valign="TOP">&nbsp;ƒfƒBƒŒƒNƒgƒŠ‚ª‹ó‚Å‚Í‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fBNgÅ‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚éB&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚B&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">w’è‚³‚ê‚½ƒfƒBƒŒƒNƒgƒŠ‚ğíœ‚µ‚Ü‚·Bíœ‚·‚éƒfƒBƒŒƒNƒgƒŠ‚Í‹ó‚Å‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB<br>ƒfƒBƒŒƒNƒgƒŠƒpƒX–¼‚ÍA"pfs" + ƒ†ƒjƒbƒg”Ô† + ':' + •¶š—ñ‚Æ‚È‚è‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">wè‚³ê‚½fBNgíœÜ‚BíœfBNgÍ‹Å‚È‚Î‚È‚Ü‚B<br>fBNgpXÍA"pfs" + jbgÔ + ':' + Æ‚È‚Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSymlink"><font size=6>sceSymlink <br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ğì¬‚·‚é<br></div>
+<!-- Ö -->
+<div align=right>V{bNNì¬<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -2897,121 +2897,121 @@ int <b>sceSymlink</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>oldname</i>&nbsp;</td>
-<td valign="TOP">&nbsp;Œ³‚Ìƒtƒ@ƒCƒ‹–¼&nbsp;</td>
+<td valign="TOP">&nbsp;Ìƒt@C&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>newname</i>&nbsp;</td>
-<td valign="TOP">&nbsp;V‚µ‚¢ƒtƒ@ƒCƒ‹–¼&nbsp;</td>
+<td valign="TOP">&nbsp;Vt@C&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½t@Cİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-17&nbsp;</td>
 <td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
-<td valign="TOP">&nbsp;Šù‚É newname ‚ª‘¶İ‚·‚é&nbsp;</td>
+<td valign="TOP">&nbsp; newname İ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-30&nbsp;</td>
 <td valign="TOP">&nbsp;-EROFS&nbsp;</td>
-<td valign="TOP">&nbsp;“Ç‚İ‚İê—p‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ã‚Ì&nbsp;<br>&nbsp;ƒtƒ@ƒCƒ‹‚É‘Î‚µA‘‚«‚İƒAƒNƒZƒX‚ğ&nbsp;<br>&nbsp;—v‹‚µ‚½B&nbsp;</td>
+<td valign="TOP">&nbsp;Ç‚İİpÌƒt@CVXe&nbsp;<br>&nbsp;t@CÉ‘Î‚AİƒANZX&nbsp;<br>&nbsp;vB&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-91&nbsp;</td>
 <td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹ƒpƒX–¼‚ª’·‚·‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;t@CpX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-92&nbsp;</td>
 <td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒX–¼‚ğ‰ğŒˆ‚·‚éÛ‚É‘˜‹ö‚µ‚½&nbsp;<br>&nbsp;ƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ª‘½‰ß‚¬‚é&nbsp;</td>
+<td valign="TOP">&nbsp;pXÛ‚É‘&nbsp;<br>&nbsp;V{bNNß‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>newname</i> ‚Æ‚¢‚¤–¼‘O‚Ì <i>oldname</i> ‚Ö‚ÌƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ğì¬‚·‚éBƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚ÍÀs‚É‰ğß‚³‚êAƒtƒ@ƒCƒ‹‚âƒfƒBƒŒƒNƒgƒŠ‚ğŒ©‚Â‚¯‚é‚½‚ß‚ÉAƒŠƒ“ƒN‚Ì“à—e‚ğ‚½‚Ç‚è’u‚«Š·‚¦‚ç‚ê‚éBƒVƒ“ƒ{ƒŠƒbƒNƒŠƒ“ƒN‚Í‘¶İ‚·‚éƒtƒ@ƒCƒ‹‚ğw‚µ‚Ä‚¢‚é‚©‚à‚µ‚ê‚È‚¢‚µA‘¶İ‚µ‚È‚¢ƒtƒ@ƒCƒ‹‚ğw‚µ‚Ä‚¢‚é‚©‚à‚µ‚ê‚È‚¢BƒpƒX’†‚É .. ‚ğŠÜ‚ñ‚Å‚à\‚í‚È‚¢B‚à‚µ <i>newname</i> ‚ªŠù‚É‘¶İ‚·‚éê‡‚É‚Íã‘‚«‚Í‚³‚ê‚È‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><i>newname</i> Æ‚O <i>oldname</i> Ö‚ÌƒV{bNNì¬BV{bNNÍsÉ‰ß‚At@CfBNgÂ‚é‚½ß‚ÉANÌ“eÇ‚uBV{bNNÍ‘İ‚t@CwÄ‚é‚©È‚Aİ‚È‚t@CwÄ‚é‚©È‚BpX .. Ü‚Å‚\È‚B <i>newname</i> É‘İ‚ê‡É‚Íã‘Í‚È‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSync"><font size=6>sceSync<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒoƒbƒtƒ@ƒLƒƒƒbƒVƒ…‚ÆƒfƒBƒXƒN‚Ì“¯Šú<br></div>
+<!-- Ö -->
+<div align=right>obt@LbVÆƒfBXNÌ“<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -3022,71 +3022,71 @@ int <b>sceSync</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒfƒoƒCƒX–¼&nbsp;</td>
+<td valign="TOP">&nbsp;foCX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>flag</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ‰ƒO(—\–ñAg—p‚µ‚Ü‚¹‚ñ)&nbsp;</td>
+<td valign="TOP">&nbsp;tO(\AgpÜ‚)&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Í’x‚¢ƒfƒBƒXƒN‚Ì“Ç‚İ‘‚«‚ğ”ğ‚¯‚é‚½‚ßAƒf[ƒ^‚ğƒƒ‚ƒŠã‚É•Û‚µ‚Ä‚¢‚Ü‚·B‚±‚Ìƒƒ‚ƒŠã‚É‚ ‚éƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Ìƒoƒbƒtƒ@ƒLƒƒƒbƒVƒ…‚Ì“à—e‚ğƒfƒBƒXƒN‚Éƒtƒ‰ƒbƒVƒ…‚µ‚Ü‚·BƒfƒBƒXƒNã‚É‚ ‚éƒLƒƒƒbƒVƒ…‚à‚ ‚í‚¹‚Äƒtƒ‰ƒbƒVƒ…‚³‚ê‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@CVXeÍ’xfBXNÌ“Ç‚İé‚½ßAf[^É•ÛÄ‚Ü‚BÌƒÉ‚t@CVXeÌƒobt@LbVÌ“efBXNÉƒtbVÜ‚BfBXNÉ‚LbVí‚¹ÄƒtbVÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceUmount"><font size=6>sceUmount<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌƒAƒ“ƒ}ƒEƒ“ƒg<br></div>
+<!-- Ö -->
+<div align=right>t@CVXeÌƒA}Eg<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -3096,72 +3096,72 @@ int <b>sceUmount</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>fsname</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒ}ƒEƒ“ƒg’†‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ƒfƒoƒCƒX–¼‚Æ&nbsp;<br>&nbsp;ƒ†ƒjƒbƒg”Ô†w’è‚·‚é•¶š—ñB&nbsp;</td>
+<td valign="TOP">&nbsp;}EgÌƒt@CVXefoCX&nbsp;<br>&nbsp;jbgÔwè‚·é•¶B&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-16&nbsp;</td>
 <td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚³‚ê‚Äƒtƒ@ƒCƒ‹‚ª‚ ‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÄƒt@C&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-19&nbsp;</td>
 <td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒfƒoƒCƒX‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½foCXİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-24&nbsp;</td>
 <td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
-<td valign="TOP">&nbsp;ƒI[ƒvƒ“‚Å‚«‚éƒfƒBƒXƒNƒŠƒvƒ^‚Ì&nbsp;<br>&nbsp;Å‘å”‚É’B‚µ‚Ä‚¢‚é&nbsp;</td>
+<td valign="TOP">&nbsp;I[vÅ‚fBXNv^&nbsp;<br>&nbsp;Å‘å”É’BÄ‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ğƒAƒ“ƒ}ƒEƒ“ƒg‚µ‚Ü‚·Bƒƒ‚ƒŠã‚Ìƒoƒbƒtƒ@ƒLƒƒƒbƒVƒ…‚Ì“à—e‚Íƒtƒ‰ƒbƒVƒ…‚³‚ê‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@CVXeA}EgÜ‚BÌƒobt@LbVÌ“eÍƒtbVÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceWrite"><font size=6>sceWrite<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒtƒ@ƒCƒ‹‚Ö‚Ì‘‚«‚İ<br></div>
+<!-- Ö -->
+<div align=right>t@CÖ‚Ì<br></div>
 
-<!-- Œ`® -->
-<div style="margin-left:10px;"><b>Œ`®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
@@ -3173,489 +3173,489 @@ int <b>sceWrite</b>(
 
 </font></pre></div>
 
-<!-- ŒÄoğŒ -->
-<div style="margin-left:10px;"><b>ŒÄoğŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚è‚İƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\ <br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚é(Š„‚è‚İ‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æ)<br><br></div>
+<div style="margin-left:50px;">èİƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\ <br>}`XbhZ[tÅ‚(èİ‹ÂÔ‚ÅŒÄ‚Ô‚)<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘‚«‚İ‘ÎÛ‚Ìƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;İ‘ÎÛ‚Ìƒt@CfBXNv^&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘‚«‚Şƒf[ƒ^‚ªŠi”[‚³‚ê‚Ä‚¢‚éƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;Şƒf[^i[Ä‚AhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>count</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘‚«‚Şƒf[ƒ^‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;Şƒf[^ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A‘‚«‚ñ‚¾ƒoƒCƒg”‚ğ•Ô‚µ‚Ü‚·Bƒtƒ@ƒCƒ‹ˆÊ’u‚Í‚±‚Ì”‚¾‚¯i‚ß‚ç‚ê‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡Añ‚¾ƒoCgÔ‚Ü‚Bt@CÊ’uÍ‚Ìiß‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-9&nbsp;</td>
 <td valign="TOP">&nbsp;-EBADF&nbsp;</td>
-<td valign="TOP">&nbsp;fd ‚ª—LŒø‚ÈƒI[ƒvƒ“‚³‚ê‚½&nbsp;<br>&nbsp;ƒfƒBƒXƒNƒŠƒvƒ^‚Å‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;fd LÈƒI[vê‚½&nbsp;<br>&nbsp;fBXNv^Å‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-65541&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO|0x10000&nbsp;</td>
-<td valign="TOP">&nbsp;ƒtƒ@ƒCƒ‹‚Ì“à—e‚ğ‘‚«‚İ’†‚É&nbsp;<br>&nbsp;•s—ÇƒZƒNƒ^‚ğ”­Œ©‚µ‚½&nbsp;</td>
+<td valign="TOP">&nbsp;t@CÌ“eİ’&nbsp;<br>&nbsp;sÇƒZN^ğ”­Œ&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>buf</i> ‚Å¦‚³‚ê‚éƒoƒbƒtƒ@[‚©‚çÅ‘å <i>count</i> ƒoƒCƒg‚Ü‚Å‚ğƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^ fd ‚É‚æ‚Á‚ÄQÆ‚³‚ê‚éƒtƒ@ƒCƒ‹‚Ö‘‚«‚İ‚Ü‚·Bƒoƒbƒtƒ@‚Í 64 ƒoƒCƒgƒAƒ‰ƒCƒ“‚³‚ê‚Ä‚¢‚È‚¢‚ÆƒpƒtƒH[ƒ}ƒ“ƒX‚ª’á‰º‚µ‚Ü‚·B•K‚¸ 64 ƒoƒCƒgƒAƒ‰ƒCƒ“‚·‚é‚±‚Æ‚ğ‚¨‘E‚ß‚µ‚Ü‚·B<i>count</i> ‚Í 512 ƒoƒCƒg‚Ì”{”‚É‚È‚é‚æ‚¤‚É‚·‚é‚ÆƒpƒtƒH[ƒ}ƒ“ƒX‚ªŒüã‚µ‚Ü‚·B‚Å‚«‚é‚©‚¬‚èA512 ƒoƒCƒg‚Ì”{”‚É‚·‚é‚±‚Æ‚ğ‚¨‘E‚ß‚µ‚Ü‚·B‚à‚µA512 ƒoƒCƒg’PˆÊ‚ª•s‰Â”\‚Èê‡‚Å‚àÅ’á‚Å 4 ƒoƒCƒg’PˆÊA‚Å‚«‚ê‚Î 64ƒoƒCƒg’PˆÊ‚ğw’è‚·‚é‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B‚Ü‚½A‚ ‚é’ö“x‘å‚«‚È’PˆÊ‚Å“]‘—‚ğˆê“x‚És‚¤‚Æ‚æ‚è‚¢‚Á‚»‚¤ƒpƒtƒH[ƒ}ƒ“ƒX‚ÍŒüã‚µ‚Ü‚·B<br>EIO|0x10000 ƒGƒ‰[‚ª”­¶‚µ‚½ê‡‚ÍAƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Ìƒ`ƒFƒbƒN‚ğs‚¤‚Ì‚Å‚Í‚È‚­Aƒtƒ@ƒCƒ‹‚ğÁ‹‚·‚é‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
+<div style="margin-left:50px;"><i>buf</i> Åobt@[Å‘ <i>count</i> oCgÜ‚Å‚t@CfBXNv^ fd É‚ÄQÆ‚t@CÖİ‚Ü‚Bobt@ 64 oCgACÄ‚È‚ÆƒptH[}Xá‰ºÜ‚BK 64 oCgACé‚±Æ‚Eß‚Ü‚B<i>count</i>  512 oCgÌ”{É‚È‚æ‚¤É‚ÆƒptH[}Xã‚µÜ‚BÅ‚é‚©A512 oCgÌ”{É‚é‚±Æ‚Eß‚Ü‚BA512 oCgPÊ‚sÂ”\Èê‡Å‚Å’ 4 oCgPÊAÅ‚ 64oCgPÊ‚wè‚·æ‚¤É‚Ä‚BÜ‚Axå‚«È’PÊ‚Å“]xÉsÆ‚è‚¢ptH[}XÍŒã‚µÜ‚B<br>EIO|0x10000 G[ê‡ÍAt@CVXeÌƒ`FbNsÌ‚Å‚Í‚È‚At@Cæ‚¤É‚Ä‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;"><i>buf</i> ‚É SPR ‚ğw’è‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB<br><br></div>
+<div style="margin-left:50px;"><i>buf</i>  SPR wè‚·é‚±Æ‚Í‚Å‚Ü‚B<br><br></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>devctl ƒRƒ}ƒ“ƒh</h2></center>
+<center><h2>devctl R}h</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PDIOC_CLOSEALL"><font size=6>PDIOC_CLOSEALL<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>‚·‚×‚Ä‚Ìƒtƒ@ƒCƒ‹‚ÌƒNƒ[ƒY<br></div>
+<!-- Ö -->
+<div align=right>×‚Ä‚Ìƒt@CÌƒN[Y<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">0 ‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">0 Ô‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒ}ƒEƒ“ƒg‚³‚ê‚Ä‚¢‚é‚·‚×‚Ä‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€ã‚Ì‚·‚×‚Ä‚Ìƒtƒ@ƒCƒ‹‚ğƒNƒ[ƒY‚µ‚Ü‚·B‚½‚¾‚µAƒtƒ@ƒCƒ‹ƒfƒBƒXƒNƒŠƒvƒ^“™‚Í‰ğ•ú‚µ‚Ü‚¹‚ñ‚Ì‚ÅA“dŒ¹‚ğØ‚éê‡‚È‚Ç‚ÉŒÀ‚Á‚Äg—p‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">}EgÄ‚é‚·×‚Ä‚Ìƒt@CVXeÌ‚×‚Ä‚Ìƒt@CN[YÜ‚BAt@CfBXNv^Í‰Ü‚Ì‚ÅAdØ‚ê‡È‚Ç‚ÉŒÄgpÄ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PDIOC_CLRFSCKSTAT"><font size=6>PDIOC_CLRFSCKSTAT<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>FSCKƒXƒe[ƒ^ƒX‚ÌƒNƒŠƒA<br></div>
+<!-- Ö -->
+<div align=right>FSCKXe[^XÌƒNA<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0 ‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">Ìê‡A0 Ô‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">fsck ‚É‚æ‚èƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ªXV‚³‚ê‚½ó‘Ô‚ğƒNƒŠƒA‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">fsck É‚t@CVXeXVê‚½Ô‚NAÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PDIOC_GETFSCKSTAT"><font size=6>PDIOC_GETFSCKSTAT<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>FSCKƒXƒe[ƒ^ƒX‚Ìƒ`ƒFƒbƒN<br></div>
+<!-- Ö -->
+<div align=right>FSCKXe[^XÌƒ`FbN<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">fsck ‚ÅA–â‘è‚ªC³‚³‚ê‚½(ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Ìó‘Ô‚ªXV‚³‚ê‚½)ê‡A1 ‚ğ•Ô‚µ‚Ü‚·B<br>‚»‚êˆÈŠO‚ÍA0 ‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">fsck ÅAè‚ªCê‚½(t@CVXeÌÔ‚XVê‚½)ê‡A1 Ô‚Ü‚B<br>ÈŠOÍA0 Ô‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚É‰½‚ç‚©‚Ì•s‹ï‡‚ªŒ©‚Â‚©‚èAƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚Ìó‘Ô‚ªXV‚³‚ê‚½ê‡‚Ì‚İ 1 ‚ğ•Ô‚µ‚Ü‚·Bˆê“xA‚±‚Ìó‘Ô‚ª”­¶‚µ‚Ä‚µ‚Ü‚¤‚Æ PDIOC_CLRFSCKSTAT ‚ÅƒNƒŠƒA‚ğs‚¤‚Ü‚Åó‘Ô‚ğ•Û‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">t@CVXeÉ‰ç‚©Ì•sï‡Â‚At@CVXeÌÔ‚XVê‚½ê‡Ì‚ 1 Ô‚Ü‚BxAÌÔ‚Ä‚Ü‚ PDIOC_CLRFSCKSTAT ÅƒNAsÜ‚ÅÔ‚ÛÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PDIOC_ZONEFREE"><font size=6>PDIOC_ZONEFREE<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>‹ó‚«ƒ][ƒ“”‚Ìæ“¾<br></div>
+<!-- Ö -->
+<div align=right>ó‚«ƒ][Ìæ“¾<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">•„†‚È‚µ 32bit ‚Ì®”‚Å‹ó‚¢‚Ä‚¢‚éƒ][ƒ“‚Ì”‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">È‚ 32bit ÌÅ‹ó‚¢‚Ä‚][ÌÔ‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">g—p‰Â”\‚È‹ó‚«ƒ][ƒ“‚Ì”‚ğæ“¾‚µ‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">gpÂ”\È‹ó‚«ƒ][Ìæ“¾Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PDIOC_ZONESZ"><font size=6>PDIOC_ZONESZ<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒ][ƒ“ƒTƒCƒY‚Ìæ“¾<br></div>
+<!-- Ö -->
+<div align=right>][TCYÌæ“¾<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒ][ƒ“ƒTƒCƒY‚ğ•Ô‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">][TCYÔ‚Ü‚B<br><br></div>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒ][ƒ“ƒTƒCƒY‚ğæ“¾‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">][TCYæ“¾Ü‚B<br><br></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>ioctl2ƒRƒ}ƒ“ƒh</h2></center>
+<center><h2>ioctl2R}h</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PIOCALLOC"><font size=6>PIOCALLOC<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>—Ìˆæ‚ÌŠm•Û<br></div>
+<!-- Ö -->
+<div align=right>ÌˆÌŠm<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;Šm•Û‚µ‚½‚¢ƒoƒCƒg‚Ì”&nbsp;</td>
+<td valign="TOP">&nbsp;mÛ‚oCgÌ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒYB&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCYB&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒYB&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCYB&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹‚ªg—p‚Å‚«‚é—Ìˆæ‚ğŠm•Û‚µ‚Ü‚·Bpfs ‚Å‚ÍAV‚½‚Éƒtƒ@ƒCƒ‹‚Ì‚½‚ß‚Ì—Ìˆæ‚ğŠm•Û‚·‚éƒXƒs[ƒh‚Í‚ ‚Ü‚è‘¬‚­‚Í‚ ‚è‚Ü‚¹‚ñB‚¨‚¨‚æ‚»‚Ìƒtƒ@ƒCƒ‹ƒTƒCƒY‚ª‚í‚©‚Á‚Ä‚¢‚ÄA‘å‚«‚Èƒf[ƒ^‚ğ˜A‘±‚µ‚Äƒtƒ@ƒCƒ‹‚É‘‚­ê‡‚ÍA‘‚«‚İ‚ğs‚¤‘O‚ÉA—Ìˆæ‚ğŠm•Û‚µ‚Ä‚©‚ç‘‚­‚ÆƒpƒtƒH[ƒ}ƒ“ƒX‚ªŒüã‚µ‚Ü‚·B<br><br>—á:<br></div>
+<div style="margin-left:50px;">t@CgpÅ‚ÌˆmÛ‚Ü‚Bpfs Å‚ÍAVÉƒt@CÌ‚ß‚Ì—ÌˆmÛ‚Xs[hÍ‚Ü‚è‘¬Í‚Ü‚Bæ‚»Ìƒt@CTCYí‚©Ä‚ÄAå‚«Èƒf[^AÄƒt@CÉê‡ÍAİ‚sOÉAÌˆmÛ‚Ä‚ç‘ÆƒptH[}Xã‚µÜ‚B<br><br>:<br></div>
 <div style="margin-left:70px;">u_int size = 1024*1024;<br>sceIoctl2(fd, PIOCALLOC, &size, sizeof(int), NULL, 0);<br></div>
 <div style="margin-left:50px;"><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PIOCATTRADD"><font size=6>PIOCATTRADD<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚Ì’Ç‰Á<br></div>
+<!-- Ö -->
+<div align=right>gt@CAgr[gGgÌ’Ç‰<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒL[ 256 ƒoƒCƒg‚ÆƒoƒŠƒ…[ 256 ƒoƒCƒg‚ª&nbsp;<br>&nbsp;Ši”[‚³‚ê‚Ä‚¢‚éƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;L[ 256 oCgÆƒo[ 256 oCg&nbsp;<br>&nbsp;i[Ä‚obt@&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒYB&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCYB&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒYB&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCYB&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-17&nbsp;</td>
 <td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
-<td valign="TOP">&nbsp;w’è‚³‚ê‚½ƒL[‚ªŠù‚É‘¶İ‚·‚é&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚³ê‚½L[É‘İ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒg—Ìˆæ‚ÉƒGƒ“ƒgƒŠ‚ğ’Ç‰Á‚µ‚Ü‚·B<br><br>—á:<br></div>
+<div style="margin-left:50px;">gt@CAgr[gÌˆÉƒGgÇ‰Ü‚B<br><br>:<br></div>
         <div style="margin-left:93px;"><pre><font size=3>struct {
 	char key[0x100];
 	char value[0x100];
@@ -3666,225 +3666,225 @@ strcpy(value, "x-compressed");
 sceIoctl2(fd, PIOCATTRADD, &attr, 0x100*2, NULL, 0);
 </pre></font></div>
 <div style="margin-left:50px;"><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PIOCATTRDEL"><font size=6>PIOCATTRDEL<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚Ìíœ<br></div>
+<!-- Ö -->
+<div align=right>gt@CAgr[gGgÌíœ<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒL[•¶š—ñ‚ªŠi”[‚³‚ê‚Ä‚¢‚éƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;L[ñ‚ªŠi[Ä‚obt@&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;ƒGƒ“ƒgƒŠ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;Ggİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒg—Ìˆæ‚©‚çƒGƒ“ƒgƒŠ‚ğíœ‚µ‚Ü‚·B<br><br>—á:<br></div>
+<div style="margin-left:50px;">gt@CAgr[gÌˆæ‚©GgíœÜ‚B<br><br>:<br></div>
         <div style="margin-left:93px;"><pre><font size=3>char key[] = "application";
 sceIoctl2(fd, PIOCATTRDEL, key, strlen(key)+1, NULL, 0);
 </pre></font></div>
 <div style="margin-left:50px;"><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PIOCATTRLOOKUP"><font size=6>PIOCATTRLOOKUP<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚ÌŒŸõ<br></div>
+<!-- Ö -->
+<div align=right>gt@CAgr[gGgÌŒ<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒL[•¶š—ñ‚ªŠi”[‚³‚ê‚Ä‚¢‚éƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;L[ñ‚ªŠi[Ä‚obt@&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒoƒŠƒ…[‚ğŠi”[‚·‚éƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;o[i[obt@&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡AƒoƒŠƒ…[‚ÌƒTƒCƒY‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡Ao[ÌƒTCYÔ‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-2&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
-<td valign="TOP">&nbsp;ƒGƒ“ƒgƒŠ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;Ggİ‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒg—Ìˆæ‚©‚çw’è‚³‚ê‚½ƒL[‚ğŒŸõ‚µA<br>ƒoƒŠƒ…[‚ğ <i>bufp</i> ‚ÉŠi”[‚µ‚Ü‚·B<br><br>—á:<br></div>
+<div style="margin-left:50px;">gt@CAgr[gÌˆæ‚©wè‚³ê‚½L[A<br>o[ <i>bufp</i> ÉŠi[Ü‚B<br><br>:<br></div>
         <div style="margin-left:93px;"><pre><font size=3>char key[] = "application";
         char value[0x100];
 sceIoctl2(fd, PIOCATTRLOOKUP, key, strlen(key)+1, value, 0x100);
 </pre></font></div>
 <div style="margin-left:50px;"><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PIOCATTRREAD"><font size=6>PIOCATTRREAD<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>Šg’£ƒtƒ@ƒCƒ‹ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠ‚Ì“Ç‚İo‚µ<br></div>
+<!-- Ö -->
+<div align=right>gt@CAgr[gGgÌ“Ç‚İo<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒL[‚ÆƒoƒŠƒ…[‚ğŠi”[‚·‚é 512 ƒoƒCƒg‚Ìƒoƒbƒtƒ@&nbsp;</td>
+<td valign="TOP">&nbsp;L[Æƒo[i[ 512 oCgÌƒobt@&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡AƒL[‚Ì’·‚³‚ğAƒGƒ“ƒgƒŠ‚ÌÅŒã‚É’B‚µ‚½‚È‚ç‚Î0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡AL[Ì’AGgÌÅŒÉ’BÈ‚0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒAƒgƒŠƒrƒ…[ƒgƒGƒ“ƒgƒŠƒXƒgƒŠ[ƒ€‚Ì’†‚ÌŸ‚ÌƒGƒ“ƒgƒŠ‚ğ<i>bufp</i> ‚ÉƒRƒs[‚µ‚Ü‚·BƒGƒ“ƒgƒŠ‚ÌÅŒã‚É’B‚µ‚½ê‡‚Í0 ‚ğ•Ô‚µ‚Ü‚·B<br><br>—á:<br></div>
+<div style="margin-left:50px;">Agr[gGgXg[Ì’ÌÌƒGg<i>bufp</i> ÉƒRs[Ü‚BGgÌÅŒÉ’Bê‡0 Ô‚Ü‚B<br><br>:<br></div>
         <div style="margin-left:93px;"><pre><font size=3>struct {
 	char key[0x100];
 	char value[0x100];
@@ -3893,86 +3893,86 @@ while ((r = sceIoctl2(fd, PIOCATTRREAD, NULL, 0, &attr, 0)) &gt; 0)
 	printf("%s/%s\n", attr.key, attr.value);
 </pre></font></div>
 <div style="margin-left:50px;"><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="PIOCFREE"><font size=6>PIOCFREE<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>—Ìˆæ‚Ì‰ğ•ú<br></div>
+<!-- Ö -->
+<div align=right>ÌˆÌ‰<br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;arg ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;arg ÌƒTCY&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
-<td valign="TOP">&nbsp;—\–ñBNULL ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;\BNULL wè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
-<td valign="TOP">&nbsp;bufp ‚ÌƒTƒCƒY&nbsp;</td>
+<td valign="TOP">&nbsp;bufp ÌƒTCY&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">¬Œ÷‚Ìê‡A0‚ğ•Ô‚µ‚Ü‚·B<br>ƒGƒ‰[‚Ìê‡AˆÈ‰º‚Ì‚¢‚¸‚ê‚©‚ğ•Ô‚µ‚Ü‚·B<br></div>
+<div style="margin-left:50px;">Ìê‡A0Ô‚Ü‚B<br>G[Ìê‡AÈ‰Ì‚ê‚©Ô‚Ü‚B<br></div>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-5&nbsp;</td>
 <td valign="TOP">&nbsp;-EIO&nbsp;</td>
-<td valign="TOP">&nbsp;“üo—ÍƒGƒ‰[&nbsp;</td>
+<td valign="TOP">&nbsp;oÍƒG[&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-12&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
-<td valign="TOP">&nbsp;\•ª‚È‹ó‚«ƒƒ‚ƒŠ‚ª–³‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;\È‹ó‚«ƒ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-13&nbsp;</td>
 <td valign="TOP">&nbsp;-EACCES&nbsp;</td>
-<td valign="TOP">&nbsp;ƒAƒNƒZƒXŒ ŒÀ‚ª‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ANZXÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-22&nbsp;</td>
 <td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
-<td valign="TOP">&nbsp;•s³‚Èˆø”‚ªw’è‚³‚ê‚½&nbsp;</td>
+<td valign="TOP">&nbsp;sÈˆwè‚³ê‚½&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;-28&nbsp;</td>
 <td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
-<td valign="TOP">&nbsp;‹ó‚«—Ìˆæ‚ª‘¶İ‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;ó‚«—Ìˆæ‚ªİ‚È‚&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ğà -->
-<div style="margin-left:10px;"><b>‰ğà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒtƒ@ƒCƒ‹‚ªg—p‚µ‚Ä‚¢‚È‚¢—Ìˆæ‚ğ‰ğ•ú‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">t@CgpÄ‚È‚ÌˆÜ‚B<br><br></div>
 <p><p><hr>
 <div ALIGN="right">
     Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>

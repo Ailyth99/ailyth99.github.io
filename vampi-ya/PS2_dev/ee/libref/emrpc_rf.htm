@@ -1,5 +1,5 @@
 <html lang="ja">
-<!-- Œ©o‚µ@‚PC•”Œ©o‚µ -->
+<!-- o@PCo -->
 <head>
 
 <script language="JavaScript">
@@ -102,8 +102,8 @@
   }
 //-->
 </script>
-<title>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‘Î‰žSIF Remote Procedure Call (ee)</title>
-<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<title>}`XbhÎ‰SIF Remote Procedure Call (ee)</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="Author" Content="Sony Computer Entertainment Inc.">
@@ -129,7 +129,7 @@
    q = p.toString();
    result = q.match(/\/category\.htm/gi);
    if(result == "/category.htm"){
-          document.writeln("<a href=\"JavaScript:lj('overview','../overview/sif.htm')\"><img src=\"./gif/arrow.png\" border=0>ƒ‰ƒCƒuƒ‰ƒŠŠT—v</a>");
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/sif.htm')\"><img src=\"./gif/arrow.png\" border=0>CuTv</a>");
     }
 }
 // -->
@@ -139,63 +139,63 @@
 <hr noshade size=6>
 <a name=Heading2>
 <center><h1>
-ƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‘Î‰žSIF Remote Procedure Call (EE)
+}`XbhÎ‰SIF Remote Procedure Call (EE)
 </h1></center>
 </a>
-<font size=4><b>\‘¢‘Ì</b></font>
+<font size=4><b>\</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMClientData"> sceSifMClientData<br></a></td>
-<td>&nbsp;</td><td>RPC ƒNƒ‰ƒCƒAƒ“ƒgî•ñ<br></td></tr>
+<td>&nbsp;</td><td>RPC NCAg<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMEndFunc"> sceSifMEndFunc<br></a></td>
-<td>&nbsp;</td><td>RPCI—¹ŠÖ”<br></td></tr>
+<td>&nbsp;</td><td>RPCIÖ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMRpcData"> sceSifMRpcData<br></a></td>
-<td>&nbsp;</td><td>RPCƒNƒ‰ƒCƒAƒ“ƒgƒf[ƒ^ƒwƒbƒ_<br></td></tr>
+<td>&nbsp;</td><td>RPCNCAgf[^wb_<br></td></tr>
 </table><br>
-<font size=4><b>ŠÖ”</b></font>
+<font size=4><b>Ö</b></font>
 <a name=#"Heading2"></a>
 <hr border=1 width=100%><br>
 <table>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMBindRpc"> sceSifMBindRpc<br></a></td>
-<td>&nbsp;</td><td>RPC ƒT[ƒrƒXŠÖ”ƒf[ƒ^‚ÌŒŸõ<br></td></tr>
+<td>&nbsp;</td><td>RPC T[rXÖf[^ÌŒ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMBindRpcParam"> sceSifMBindRpcParam<br></a></td>
-<td>&nbsp;</td><td>RPC ƒT[ƒrƒXŠÖ”ƒf[ƒ^‚ÌŒŸõ<br></td></tr>
+<td>&nbsp;</td><td>RPC T[rXÖf[^ÌŒ<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMCallRpc"> sceSifMCallRpc<br></a></td>
-<td>&nbsp;</td><td>RPC ƒT[ƒrƒXŠÖ”‚ÌŒÄ‚Ño‚µ<br></td></tr>
+<td>&nbsp;</td><td>RPC T[rXÖÌŒÄ‚Ño<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMExitRpc"> sceSifMExitRpc<br></a></td>
-<td>&nbsp;</td><td>MSIF RPC API ‚ÌI—¹<br></td></tr>
+<td>&nbsp;</td><td>MSIF RPC API ÌI<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMInitRpc"> sceSifMInitRpc<br></a></td>
-<td>&nbsp;</td><td>MSIF RPC API ‚Ì‰Šú‰»<br></td></tr>
+<td>&nbsp;</td><td>MSIF RPC API Ì<br></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 <td><a href="#sceSifMUnBindRpc"> sceSifMUnBindRpc<br></a></td>
-<td>&nbsp;</td><td>ƒT[ƒoƒXƒŒƒbƒh‚Ìíœ<br></td></tr>
+<td>&nbsp;</td><td>T[oXbhÌíœ<br></td></tr>
 </table>
 
-<!-- Œ©o‚µ@‚PC•”Œ©o‚µ -->
+<!-- o@PCo -->
 <br></td></tr></table></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>\‘¢‘Ì</h2></center>
+<center><h2>\</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMClientData"><font size=6>sceSifMClientData<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>RPC ƒNƒ‰ƒCƒAƒ“ƒgî•ñ<br></div>
+<!-- Ö -->
+<div align=right>RPC NCAg<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>typedef struct _sifm_client_data {
@@ -215,32 +215,32 @@
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Ž©“®Ý’è‚³‚ê‚éˆ×AƒvƒƒOƒ‰ƒ€‘¤‚ÅÝ’è‚·‚é•K—v‚Í‚ ‚è‚¹‚ñB<br><br></div>
+<div style="margin-left:50px;">Ý’è‚³×AvOÅÝ’è‚·KvÍ‚è‚¹B<br><br></div>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">sceSifMBindRpc()‚ÅŽæ“¾‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ðŠi”[‚·‚é\‘¢‘Ì‚Å‚·B<br>sceSifMCallRpc()‚ÅƒT[ƒrƒXŠÖ”‚ðŒÄ‚Ño‚·Û‚É‚àŽg—p‚µ‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">sceSifMBindRpc()ÅŽæ“¾NCAgi[\Ì‚Å‚B<br>sceSifMCallRpc()ÅƒT[rXÖÄ‚ÑoÛ‚É‚gpÜ‚B<br><br></div>
 
-<!-- ŠÖ˜A€–Ú -->
-<div style="margin-left:10px;"><b>ŠÖ˜A€–Ú</b></div>
+<!-- Ö˜A -->
+<div style="margin-left:10px;"><b>Ö˜A</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><a href="#sceSifMBindRpc">sceSifMBindRpc</a>()<a href="#"></a>,<a href="#sceSifMCallRpc">sceSifMCallRpc</a>()<br><br><br><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMEndFunc"><font size=6>sceSifMEndFunc<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>RPCI—¹ŠÖ”<br></div>
+<!-- Ö -->
+<div align=right>RPCIÖ<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>typedef void (* <b>sceSifMEndFunc</b>)(
@@ -249,40 +249,40 @@
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŠÖ”ƒR[ƒ‹Žž‚É“n‚³‚ê‚éƒf[ƒ^ƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;ÖR[É“nf[^AhX&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">RPCƒT[ƒrƒXŠÖ”‚ªI—¹‚µ‚½‚Æ‚«‚ÉŠ„‚èž‚Ý—Ìˆæ‚ÅŒÄ‚Î‚ê‚éŠÖ”B<br>‚»‚ÌÛA<i>data</i>‚ÌƒAƒhƒŒƒX‚ª“n‚³‚ê‚Ü‚·B<br>(MSIF RPC–{ƒo[ƒWƒ‡ƒ“‚Å‚ÍAEndFunc‚Í–¢ŽÀ‘•‚Å‚·)<br><br></div>
+<div style="margin-left:50px;">RPCT[rXÖIÆ‚ÉŠèžÝ—ÌˆÅŒÄ‚Î‚ÖB<br>ÌÛA<i>data</i>ÌƒAhXnÜ‚B<br>(MSIF RPC{o[WÅ‚ÍAEndFuncÍ–Å‚)<br><br></div>
 
-<!-- ŠÖ˜A€–Ú -->
-<div style="margin-left:10px;"><b>ŠÖ˜A€–Ú</b></div>
+<!-- Ö˜A -->
+<div style="margin-left:10px;"><b>Ö˜A</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><a href="#sceSifMCallRpc">sceSifMCallRpc</a>()<br><br><br><br></div>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMRpcData"><font size=6>sceSifMRpcData<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>RPCƒNƒ‰ƒCƒAƒ“ƒgƒf[ƒ^ƒwƒbƒ_<br></div>
+<!-- Ö -->
+<div align=right>RPCNCAgf[^wb_<br></div>
 
-<!-- \‘¢ -->
-<div style="margin-left:10px;"><b>\‘¢</b></div>
+<!-- \ -->
+<div style="margin-left:10px;"><b>\</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>typedef struct _sifm_rpc_data {
@@ -294,57 +294,57 @@
 
 </font></pre></div>
 
-<!-- ƒƒ“ƒo -->
-<div style="margin-left:10px;"><b>ƒƒ“ƒo</b></div>
+<!-- o -->
+<div style="margin-left:10px;"><b>o</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>paddr</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒPƒbƒg‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;pPbgÌƒAhX&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>pid</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒpƒPƒbƒgID&nbsp;</td>
+<td valign="TOP">&nbsp;pPbgID&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒXƒŒƒbƒhID&nbsp;</td>
+<td valign="TOP">&nbsp;XbhID&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚µƒ‚[ƒh&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚Ño[h&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">RPCƒNƒ‰ƒCƒAƒ“ƒg‹¤’Ê‚Ìƒf[ƒ^ƒwƒbƒ_‚Å‚·B<br><br></div>
+<div style="margin-left:50px;">RPCNCAgÊ‚Ìƒf[^wb_Å‚B<br><br></div>
 
-<!-- ŠÖ˜A€–Ú -->
-<div style="margin-left:10px;"><b>ŠÖ˜A€–Ú</b></div>
+<!-- Ö˜A -->
+<div style="margin-left:10px;"><b>Ö˜A</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><a href="#sceSifMClientData">sceSifMClientData</a>()<br><br><br><br></div>
 
-<!-- Œ©o‚µ@‚QCÍŒ©o‚µ -->
+<!-- o@QCÍŒo -->
 <hr border=1 width=100%><br>
-<center><h2>ŠÖ”</h2></center>
+<center><h2>Ö</h2></center>
 <a name=#"Heading2"></a>
-<!-- ŠÖ”–¼ -->
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMBindRpc"><font size=6>sceSifMBindRpc<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>RPC ƒT[ƒrƒXŠÖ”ƒf[ƒ^‚ÌŒŸõ<br></div>
+<!-- Ö -->
+<div align=right>RPC T[rXÖf[^ÌŒ<br></div>
 
-<!-- Œ`Ž® -->
-<div style="margin-left:10px;"><b>Œ`Ž®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMBindRpc</b>(
@@ -355,68 +355,68 @@
 
 </font></pre></div>
 
-<!-- ŒÄoðŒ -->
-<div style="margin-left:10px;"><b>ŒÄoðŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚èž‚Ýƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚èž‚Ý‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èžÝƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièžÝ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ðŽó‚¯Žæ‚é\‘¢‘Ì‚Ìƒ|ƒCƒ“ƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;NCAgó‚¯Ž\Ì‚Ìƒ|C^&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>request</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒŠƒNƒGƒXƒgŽ¯•ÊŽq&nbsp;</td>
+<td valign="TOP">&nbsp;NGXgÊŽq&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚µƒ‚[ƒhB’Êí‚Í0A•K—v‚É‰ž‚¶‚ÄŽŸ‚Ì’è”‚ð&nbsp;<br>&nbsp;Žw’è‚·‚é&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT    ”ñ“¯ŠúŽÀsiŒ»ÝA–¢ŽÀ‘•j&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚Ño[hBÊ0AKvÉ‰ÄŽÌ’è”&nbsp;<br>&nbsp;wè‚·&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT    ñ“¯ŠsiÝAj&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;0&nbsp;</td>
-<td valign="TOP">&nbsp;ƒT[ƒo‘¤‚Ö‚Ì’Ê’m¬Œ÷&nbsp;</td>
+<td valign="TOP">&nbsp;T[oÖ‚Ì’Ê’m&nbsp;</td>
 </tr>
 <tr>
-<td valign="TOP">&nbsp;•‰(&lt;0)&nbsp;</td>
-<td valign="TOP">&nbsp;”­sŽ¸”s&nbsp;</td>
+<td valign="TOP">&nbsp;(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;ss&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒŠƒNƒGƒXƒg‚ð‘—‚é‚½‚ß‚É•K—v‚ÈƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ðƒT[ƒo‚©‚çŽæ“¾‚µ‚Ü‚·B<br>ƒNƒ‰ƒCƒAƒ“ƒg‘¤‚Å•K—v‚ÈŠÖ”‚Å‚·B<br>‚±‚ÌŠÖ”‚ðŒÄ‚Ño‚·‚ÆA<i>request</i>‚ÅŽw’è‚µ‚½ƒŠƒNƒGƒXƒgŽ¯•ÊŽq‚ÌƒT[ƒrƒXŠÖ”‚ª“o˜^‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ðƒT[ƒo‘¤‚Å’²‚×A“o˜^‚³‚ê‚Ä‚¢‚ê‚ÎAŒÄ‚Ño‚µ‚ÌƒL[‚Æ‚È‚éƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ðbd‚ÅŽw’è‚µ‚½sceSifMClinetData\‘¢‘Ì‚É•Ô‚µ‚Ä‚«‚Ü‚·B<br>’ÊíA‚±‚ÌŠÖ”‚ðŒÄ‚Ño‚µ‚½ƒXƒŒƒbƒh‚ÍƒT[ƒo‚©‚ç‚Ì•Ô“š‚ª‚ ‚é‚Ü‚ÅƒXƒŠ[ƒvó‘Ô‚É‚È‚è‚Ü‚·BSIF RPC‚Å‚ÍSIF_RPCM_NOWAIT‚ðŽw’è‚·‚é‚±‚Æ‚ÅƒŠ[ƒv‚¹‚¸‚É‚»‚Ì‚Ü‚Ü”²‚¯‚Ü‚·‚ªAMSIF RPC‚Å‚Í–¢ŽÀ‘•‚Å‚·B<br>‚±‚ÌŠÖ”‚ð—p‚¢‚½ê‡AIOP ‘¤‚Å‚Í sceMCallRpc() ‚Ìì‹Æ‚ðŽó‚¯Ž~‚ß‚éƒXƒŒƒbƒh‚ª¶¬‚³‚ê‚Ü‚·B‚»‚ÌƒXƒŒƒbƒh‚ÌŽóMƒoƒbƒtƒ@AƒXƒ^ƒbƒNƒTƒCƒYAƒvƒ‰ƒCƒIƒŠƒeƒB‚ÍA2kbyte,8kbyte,32 ‚Å‚·B‚±‚Ì’l‚ðŽw’è‚µ‚½‚¢ê‡‚ÍAsceSifMBindRpcParam() ‚ðŽg—p‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
+<div style="margin-left:50px;">NGXgð‘—‚é‚½ß‚É•KvÈƒNCAgT[oæ“¾Ü‚B<br>NCAgÅ•KvÈŠÖÅ‚B<br>ÌŠÖÄ‚ÑoÆA<i>request</i>ÅŽwè‚µNGXgÊŽqÌƒT[rXÖo^Ä‚é‚©Ç‚T[oÅ’×Ao^Ä‚ÎAÄ‚ÑoÌƒL[Æ‚È‚NCAgbdÅŽwè‚µsceSifMClinetData\Ì‚É•Ô‚Ä‚Ü‚B<br>ÊAÌŠÖÄ‚ÑoXbhÍƒT[oÌ•Ô“Ü‚ÅƒX[vÔ‚É‚È‚Ü‚BSIF RPCÅ‚SIF_RPCM_NOWAITwè‚·é‚±Æ‚Åƒ[vÉ‚Ì‚Ü‚Ü”Ü‚AMSIF RPCÅ‚Í–Å‚B<br>ÌŠÖpê‡AIOP Å‚ sceMCallRpc() ÌÆ‚ó‚¯Ž~ß‚XbhÜ‚BÌƒXbhÌŽMobt@AX^bNTCYAvCIeBÍA2kbyte,8kbyte,32 Å‚BÌ’lwè‚µê‡ÍAsceSifMBindRpcParam() gpÄ‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">EE‚Å‚ÍƒXƒŠ[ƒv‚Å‚Í‚È‚­“à•”“I‚ÉŠm•Û‚µ‚½ƒZƒ}ƒtƒH‚ð—p‚¢‚ÄI—¹‚ð‘Ò‚¿‚Ü‚·B<br>ƒT[ƒrƒXŠÖ”‚ª“o˜^‚³‚ê‚Ä‚¢‚½‚©iBind‚ª¬Œ÷‚µ‚½‚©j‚Ç‚¤‚©‚ÍA•Ô‚³‚ê‚½sceSifMClinetData‚Ìserveƒƒ“ƒo‚ª0ˆÈŠO‚Ì’l‚©‚Ç‚¤‚©‚Å”»•Ê‚Å‚«‚Ü‚·BˆÈ‰º‚Ì‚æ‚¤‚ÈƒR[ƒh‚É‚È‚è‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">EEÅ‚ÍƒX[vÅ‚Í‚È‚IÉŠmÛ‚Z}tHpÄIÒ‚Ü‚B<br>T[rXÖo^Ä‚iBindjÇ‚ÍAÔ‚ê‚½sceSifMClinetDataserveo0ÈŠOÌ’lÇ‚Å”Ê‚Å‚Ü‚BÈ‰Ì‚æ‚¤ÈƒR[hÉ‚È‚Ü‚B<br><br></div>
         <div style="margin-left:93px;"><pre><font size=3>   #define BIND_ID  0x12345678
    
    while(1){
@@ -427,16 +427,16 @@
    	if (cd0.serve != 0) break;
    }
 </pre></font></div>
-<div style="margin-left:50px;"><br>‚È‚¨Aã‹L‚Ì‚æ‚¤‚ÈƒR[ƒh‚ÅEE‚©‚çIOP‚Ö•p”É‚É’ÊM‚ðs‚¤‚ÆAEE‚ª‚©‚È‚è‘¬‚¢‚½‚ß‚ÉIOP‚ª‚Ù‚Ú’âŽ~ó‘Ô‚É‚È‚è‚Ü‚·B­‚µŠÔ‚ð‚¨‚¢‚ÄƒŠƒNƒGƒXƒg‚ð”­s‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><br>È‚ALÌ‚æ‚¤ÈƒR[hEEIOPÖ•pÉ‚É’ÊMsÆAEEÈ‚è‘¬ß‚IOPÙ‚Ú’~Ô‚É‚È‚Ü‚BÔ‚ÄƒNGXgð”­sÄ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMBindRpcParam"><font size=6>sceSifMBindRpcParam<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>RPC ƒT[ƒrƒXŠÖ”ƒf[ƒ^‚ÌŒŸõ<br></div>
+<!-- Ö -->
+<div align=right>RPC T[rXÖf[^ÌŒ<br></div>
 
-<!-- Œ`Ž® -->
-<div style="margin-left:10px;"><b>Œ`Ž®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMBindRpcParam</b>(
@@ -450,80 +450,80 @@
 
 </font></pre></div>
 
-<!-- ŒÄoðŒ -->
-<div style="margin-left:10px;"><b>ŒÄoðŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚èž‚Ýƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚èž‚Ý‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èžÝƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièžÝ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ðŽó‚¯Žæ‚é\‘¢‘Ì‚Ìƒ|ƒCƒ“ƒ^&nbsp;</td>
+<td valign="TOP">&nbsp;NCAgó‚¯Ž\Ì‚Ìƒ|C^&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>request</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ƒŠƒNƒGƒXƒgŽ¯•ÊŽq&nbsp;</td>
+<td valign="TOP">&nbsp;NGXgÊŽq&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚µƒ‚[ƒhB’Êí‚Í0A•K—v‚É‰ž‚¶‚ÄŽŸ‚Ì’è”‚ð&nbsp;<br>&nbsp;Žw’è‚·‚éB&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT   ”ñ“¯ŠúŽÀs(Œ»ÝA–¢ŽÀ‘•)&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚Ño[hBÊ0AKvÉ‰ÄŽÌ’è”&nbsp;<br>&nbsp;wè‚·B&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT   ñ“¯Šs(ÝA)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>buffersize</i>&nbsp;</td>
-<td valign="TOP">&nbsp;sceSifMCallRpc() ‚Ì send ‚Ìƒf[ƒ^‚ðŽó‚¯Ž~‚ß‚éŽóM&nbsp;<br>&nbsp;ƒoƒbƒtƒ@‚Ì‘å‚«‚³‚ðŽw’è‚µ‚Ü‚·B&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc()  send Ìƒf[^ó‚¯Ž~ß‚M&nbsp;<br>&nbsp;obt@Ì‘å‚«wè‚µÜ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>stacksize</i>&nbsp;</td>
-<td valign="TOP">&nbsp;sceSifMCallRpc() ‚ÌƒŠƒNƒGƒXƒg‚ðs‚¤IOP‘¤‚ÌƒXƒŒƒbƒh&nbsp;<br>&nbsp;‚ÌƒXƒ^ƒbƒNƒTƒCƒY‚Ì‘å‚«‚³‚ðŽw’è‚µ‚Ü‚·B‘å‚«‚³‚ÍA512&nbsp;<br>&nbsp;ƒoƒCƒgˆÈã‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc() ÌƒNGXgsIOPÌƒXbh&nbsp;<br>&nbsp;ÌƒX^bNTCYÌ‘å‚«wè‚µÜ‚Bå‚«ÍA512&nbsp;<br>&nbsp;oCgÈwè‚µÄ‚B&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>priority</i>&nbsp;</td>
-<td valign="TOP">&nbsp;sceSifMCallRpc() ‚ÌƒŠƒNƒGƒXƒg‚ðs‚¤IOP‘¤‚ÌƒXƒŒƒbƒh&nbsp;<br>&nbsp;‚Ìƒvƒ‰ƒCƒIƒŠƒeƒB‚ðŽw’è‚µ‚Ü‚·B10ˆÈ‰º‚Ì’l‚ÍAƒVƒXƒeƒ€&nbsp;<br>&nbsp;‚ªŽg—p‚µ‚Ü‚·‚Ì‚ÅA‚»‚êˆÈã‚Ì’l‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢B&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc() ÌƒNGXgsIOPÌƒXbh&nbsp;<br>&nbsp;ÌƒvCIeBwè‚µÜ‚B10È‰Ì’lÍAVXe&nbsp;<br>&nbsp;gpÜ‚Ì‚ÅAÈÌ’lwè‚µÄ‚B&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;0&nbsp;</td>
-<td valign="TOP">&nbsp;ƒT[ƒo‘¤‚Ö‚Ì’Ê’m¬Œ÷&nbsp;</td>
+<td valign="TOP">&nbsp;T[oÖ‚Ì’Ê’m&nbsp;</td>
 </tr>
 <tr>
-<td valign="TOP">&nbsp;•‰(&lt;0)&nbsp;</td>
-<td valign="TOP">&nbsp;”­sŽ¸”s&nbsp;</td>
+<td valign="TOP">&nbsp;(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;ss&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒŠƒNƒGƒXƒg‚ð‘—‚é‚½‚ß‚É•K—v‚ÈƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ðƒT[ƒo‚©‚çŽæ“¾‚µ‚Ü‚·B<br>ƒNƒ‰ƒCƒAƒ“ƒg‘¤‚Å•K—v‚ÈŠÖ”‚Å‚·B<br>‚±‚ÌŠÖ”‚ðŒÄ‚Ño‚·‚ÆA<i>request</i>‚ÅŽw’è‚µ‚½ƒŠƒNƒGƒXƒgŽ¯•ÊŽq‚ÌƒT[ƒrƒXŠÖ”‚ª“o˜^‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ðƒT[ƒo‘¤‚Å’²‚×A“o˜^‚³‚ê‚Ä‚¢‚ê‚ÎAŒÄ‚Ño‚µ‚ÌƒL[‚Æ‚È‚éƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ð<i>bd</i>‚ÅŽw’è‚µ‚½sceSifMClinetData\‘¢‘Ì‚É•Ô‚µ‚Ä‚«‚Ü‚·B<br>’ÊíA‚±‚ÌŠÖ”‚ðŒÄ‚Ño‚µ‚½ƒXƒŒƒbƒh‚ÍƒT[ƒo‚©‚ç‚Ì•Ô“š‚ª‚ ‚é‚Ü‚ÅƒXƒŠ[ƒvó‘Ô‚É‚È‚è‚Ü‚·BSIF RPC‚Å‚ÍSIF_RPCM_NOWAIT‚ðŽw’è‚·‚é‚±‚Æ‚ÅƒŠ[ƒv‚¹‚¸‚É‚»‚Ì‚Ü‚Ü”²‚¯‚Ü‚·‚ªAMSIF RPC‚Å‚Í–¢ŽÀ‘•‚Å‚·B<br>‚±‚ÌŠÖ”‚ð—p‚¢‚½ê‡AIOP ‘¤‚Å‚Í sceMCallRpc() ‚Ìì‹Æ‚ðŽó‚¯Ž~‚ß‚éƒXƒŒƒbƒh‚ª¶¬‚³‚ê‚Ü‚·B‚»‚ÌƒXƒŒƒbƒh‚ÌŽóMƒoƒbƒtƒ@AƒXƒ^ƒbƒNƒTƒCƒYAƒvƒ‰ƒCƒIƒŠƒeƒB‚ÍAbuffersize/stacksize/priority ‚Ì’l‚ªŽg—p‚³‚ê‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">NGXgð‘—‚é‚½ß‚É•KvÈƒNCAgT[oæ“¾Ü‚B<br>NCAgÅ•KvÈŠÖÅ‚B<br>ÌŠÖÄ‚ÑoÆA<i>request</i>ÅŽwè‚µNGXgÊŽqÌƒT[rXÖo^Ä‚é‚©Ç‚T[oÅ’×Ao^Ä‚ÎAÄ‚ÑoÌƒL[Æ‚È‚NCAg<i>bd</i>ÅŽwè‚µsceSifMClinetData\Ì‚É•Ô‚Ä‚Ü‚B<br>ÊAÌŠÖÄ‚ÑoXbhÍƒT[oÌ•Ô“Ü‚ÅƒX[vÔ‚É‚È‚Ü‚BSIF RPCÅ‚SIF_RPCM_NOWAITwè‚·é‚±Æ‚Åƒ[vÉ‚Ì‚Ü‚Ü”Ü‚AMSIF RPCÅ‚Í–Å‚B<br>ÌŠÖpê‡AIOP Å‚ sceMCallRpc() ÌÆ‚ó‚¯Ž~ß‚XbhÜ‚BÌƒXbhÌŽMobt@AX^bNTCYAvCIeBÍAbuffersize/stacksize/priority Ì’lgpÜ‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">EE‚Å‚ÍƒXƒŠ[ƒv‚Å‚Í‚È‚­“à•”“I‚ÉŠm•Û‚µ‚½ƒZƒ}ƒtƒH‚ð—p‚¢‚ÄI—¹‚ð‘Ò‚¿‚Ü‚·B<br>ƒT[ƒrƒXŠÖ”‚ª“o˜^‚³‚ê‚Ä‚¢‚½‚©iBind‚ª¬Œ÷‚µ‚½‚©j‚Ç‚¤‚©‚ÍA•Ô‚³‚ê‚½sceSifMClinetData‚Ìserveƒƒ“ƒo‚ª0ˆÈŠO‚Ì’l‚©‚Ç‚¤‚©‚Å”»•Ê‚Å‚«‚Ü‚·BˆÈ‰º‚Ì‚æ‚¤‚ÈƒR[ƒh‚É‚È‚è‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">EEÅ‚ÍƒX[vÅ‚Í‚È‚IÉŠmÛ‚Z}tHpÄIÒ‚Ü‚B<br>T[rXÖo^Ä‚iBindjÇ‚ÍAÔ‚ê‚½sceSifMClinetDataserveo0ÈŠOÌ’lÇ‚Å”Ê‚Å‚Ü‚BÈ‰Ì‚æ‚¤ÈƒR[hÉ‚È‚Ü‚B<br><br></div>
         <div style="margin-left:93px;"><pre><font size=3>   #define BIND_ID  0x12345678
 
    while(1){
@@ -534,16 +534,16 @@
 	if (cd0.serve != 0) break;
    }
 </pre></font></div>
-<div style="margin-left:50px;"><br>‚È‚¨Aã‹L‚Ì‚æ‚¤‚ÈƒR[ƒh‚ÅEE‚©‚çIOP‚Ö•p”É‚É’ÊM‚ðs‚¤‚ÆAEE‚ª‚©‚È‚è‘¬‚¢‚½‚ß‚ÉIOP‚ª‚Ù‚Ú’âŽ~ó‘Ô‚É‚È‚è‚Ü‚·B­‚µŠÔ‚ð‚¨‚¢‚ÄƒŠƒNƒGƒXƒg‚ð”­s‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;"><br>È‚ALÌ‚æ‚¤ÈƒR[hEEIOPÖ•pÉ‚É’ÊMsÆAEEÈ‚è‘¬ß‚IOPÙ‚Ú’~Ô‚É‚È‚Ü‚BÔ‚ÄƒNGXgð”­sÄ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMCallRpc"><font size=6>sceSifMCallRpc<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>RPC ƒT[ƒrƒXŠÖ”‚ÌŒÄ‚Ño‚µ<br></div>
+<!-- Ö -->
+<div align=right>RPC T[rXÖÌŒÄ‚Ño<br></div>
 
-<!-- Œ`Ž® -->
-<div style="margin-left:10px;"><b>Œ`Ž®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMCallRpc</b>(
@@ -560,101 +560,101 @@
 
 </font></pre></div>
 
-<!-- ŒÄoðŒ -->
-<div style="margin-left:10px;"><b>ŒÄoðŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚èž‚Ýƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚èž‚Ý‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èžÝƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièžÝ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;BindÏ‚Ý‚ÌƒNƒ‰ƒCƒAƒ“ƒgî•ñ&nbsp;</td>
+<td valign="TOP">&nbsp;BindÏ‚Ý‚ÌƒNCAg&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>fno</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚³‚ê‚éƒT[ƒrƒXŠÖ”‚É“n‚·”Ô†&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚ÑoT[rXÖÉ“nÔ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚µƒ‚[ƒhB’Êí‚Í0A•K—v‚É‰ž‚¶‚ÄŽŸ‚Ì’è”‚ð&nbsp;<br>&nbsp;ƒ}ƒXƒNŽw’è‚·‚éB&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT  ”ñ“¯ŠúŽÀsiŒ»ÝA–¢ŽÀ‘•j&nbsp;<br>&nbsp;SIF_RPCM_NOWBDC  ƒLƒƒƒbƒVƒ…‚Ìƒ‰ƒCƒgƒoƒbƒN‚È‚µ&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚Ño[hBÊ0AKvÉ‰ÄŽÌ’è”&nbsp;<br>&nbsp;}XNwè‚·B&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT  ñ“¯ŠsiÝAj&nbsp;<br>&nbsp;SIF_RPCM_NOWBDC  LbVÌƒCgobNÈ‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>send</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘—M‚·‚éƒf[ƒ^ƒoƒbƒtƒ@ &nbsp;<br>&nbsp;(EE/IOP‚Å16/4ƒoƒCƒgƒAƒ‰ƒCƒƒ“ƒg)&nbsp;</td>
+<td valign="TOP">&nbsp;Mf[^obt@ &nbsp;<br>&nbsp;(EE/IOP16/4oCgACg)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>ssize</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‘—M‚·‚éƒf[ƒ^ƒTƒCƒY (byteBEE/IOP ‚Å16/4byte’PˆÊ)&nbsp;</td>
+<td valign="TOP">&nbsp;Mf[^TCY (byteBEE/IOP 16/4byteP)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>receive</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŽóM‚·‚éƒf[ƒ^ƒoƒbƒtƒ@&nbsp;<br>&nbsp;(EE/IOP‚Å16/4ƒoƒCƒgƒAƒ‰ƒCƒƒ“ƒg)&nbsp;</td>
+<td valign="TOP">&nbsp;Mf[^obt@&nbsp;<br>&nbsp;(EE/IOP16/4oCgACg)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>rsize</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŽóM‚·‚éƒf[ƒ^ƒTƒCƒY (byteBEE/IOP ‚Å16/4byte’PˆÊ)&nbsp;</td>
+<td valign="TOP">&nbsp;Mf[^TCY (byteBEE/IOP 16/4byteP)&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>end_func</i>&nbsp;</td>
-<td valign="TOP">&nbsp;I—¹Žž‚ÉŠ„‚èž‚Ý‹ÖŽ~‹æŠÔ‚ÅŽÀs‚³‚ê‚éŠÖ” &nbsp;</td>
+<td valign="TOP">&nbsp;IÉŠèžÝ‹ÖŽ~Ô‚ÅŽsÖ &nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>end_para</i>&nbsp;</td>
-<td valign="TOP">&nbsp;end_func ‚Ìƒpƒ‰ƒ[ƒ^‚ÌƒAƒhƒŒƒX&nbsp;</td>
+<td valign="TOP">&nbsp;end_func Ìƒp[^ÌƒAhX&nbsp;</td>
 </tr>
 </table>
 </div>
-<div style="margin-left:50px;"><i>ssize</i>/<i>rsize</i> ‚ÌãŒÀ‚ÍA‚P‰ñ‚Å‘—‚ê‚é DMA ‚ÌãŒÀ 1Mbyte - 16byte‚Å‚·B<br>’ˆÓFŒ»Ý‚ÌŽÀ‘•‚Å‚ÍA<i>ssize</i>‚ÌãŒÀ‚Í2048byte‚Å‚·B<br><br></div>
+<div style="margin-left:50px;"><i>ssize</i>/<i>rsize</i> ÌÍAPÅ‘ DMA Ì 1Mbyte - 16byteÅ‚B<br>ÓFÝ‚ÌŽÅ‚ÍA<i>ssize</i>Ì2048byteÅ‚B<br><br></div>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;0&nbsp;</td>
-<td valign="TOP">&nbsp;ƒT[ƒo‘¤‚Ö‚Ì’Ê’m¬Œ÷&nbsp;</td>
+<td valign="TOP">&nbsp;T[oÖ‚Ì’Ê’m&nbsp;</td>
 </tr>
 <tr>
-<td valign="TOP">&nbsp;•‰(&lt;0)&nbsp;</td>
-<td valign="TOP">&nbsp;”­sŽ¸”s&nbsp;</td>
+<td valign="TOP">&nbsp;(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;ss&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">“o˜^‚³‚ê‚Ä‚¢‚éƒT[ƒrƒXŠÖ”‚ðŒÄ‚Ño‚µ‚Ü‚·BƒNƒ‰ƒCƒAƒ“ƒg‘¤‚ÅŽg—p‚·‚éŠÖ”‚Å‚·B<br>ˆø”<i>bd</i>‚É‚ÍA‚ ‚ç‚©‚¶‚ßsceSifMBindRpc()‚ÅBindÏ‚Ý‚ÌƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚Ì\‘¢‘Ì‚ðŽw’è‚µ‚Ü‚·B<br><i>send</i> ‚ÅŽw’è‚µ‚½ƒf[ƒ^ <i>ssize</i>ƒoƒCƒg‚ªƒT[ƒo‘¤‚É‘—‚ç‚êAƒT[ƒrƒXŠÖ”‚É‘æ2 /‘æ3ˆø”‚Æ‚µ‚Ä“n‚³‚ê‚Ü‚·B<i>fno</i> ‚ª‘æ‚Pˆø”‚Æ‚È‚è‚Ü‚·B<br>ƒT[ƒrƒXŠÖ”‚ÌŽÀsŒãA‚»‚Ì•Ô’l‚ÌƒAƒhƒŒƒX‚É‚ ‚éƒf[ƒ^ <i>rsize</i> ƒoƒCƒg‚ªA<i>receive</i> ‚ÅŽw’è‚µ‚½—Ìˆæ‚É‘—‚è•Ô‚³‚ê‚Ü‚·B<br>’ÊíAsceSifMCallRpc() ‚ðŒÄ‚Ño‚µ‚½ƒXƒŒƒbƒh‚ÍƒT[ƒo‚©‚ç‚Ì•Ô“š‚ª‚ ‚é‚Ü‚ÅƒXƒŠ[ƒvó‘Ô‚É‚È‚è‚Ü‚·BSIF RPC‚Å‚ÍSIF_RPCM_NOWAIT‚ðŽw’è‚·‚é‚±‚Æ‚ÅƒXƒŠ[ƒv‚¹‚¸‚É‚»‚Ì‚Ü‚Ü”²‚¯‚Ü‚·‚ªAMSIF RPC‚Å‚Í–¢ŽÀ‘•‚Å‚·B<br>“¯ˆê sceSifMClientData ‚Ö‚Ì sceSifMCallRpc() ‚ÍAƒZƒ}ƒtƒH‚ð—p‚¢‚ÄƒuƒƒbƒN‚³‚ê‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">o^Ä‚T[rXÖÄ‚ÑoÜ‚BNCAgÅŽgpÖÅ‚B<br><i>bd</i>É‚ÍAç‚©sceSifMBindRpc()BindÏ‚Ý‚ÌƒNCAgÌ\Ì‚wè‚µÜ‚B<br><i>send</i> ÅŽwè‚µf[^ <i>ssize</i>oCgT[oÉ‘AT[rXÖÉ‘2 /3Æ‚Ä“nÜ‚B<i>fno</i> PÆ‚È‚Ü‚B<br>T[rXÖÌŽsAÌ•Ô’lÌƒAhXÉ‚f[^ <i>rsize</i> oCgA<i>receive</i> ÅŽwè‚µÌˆÉ‘Ô‚Ü‚B<br>ÊAsceSifMCallRpc() Ä‚ÑoXbhÍƒT[oÌ•Ô“Ü‚ÅƒX[vÔ‚É‚È‚Ü‚BSIF RPCÅ‚SIF_RPCM_NOWAITwè‚·é‚±Æ‚ÅƒX[vÉ‚Ì‚Ü‚Ü”Ü‚AMSIF RPCÅ‚Í–Å‚B<br> sceSifMClientData Ö‚ sceSifMCallRpc() ÍAZ}tHpÄƒubNÜ‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">EE ‚Å‚ÍƒXƒŠ[ƒv‚Å‚Í‚È‚­“à•”“I‚ÉŠm•Û‚µ‚½ƒZƒ}ƒtƒH‚ð—p‚¢‚ÄI—¹‚ð‘Ò‚¿‚Ü‚·BEE ‚Ìê‡AƒLƒƒƒbƒVƒ…ã‚ÉÚ‚Á‚Ä‚¢‚éƒf[ƒ^‚ð send/receive ‚·‚é‚Æ‚«‚É‚Íƒƒ‚ƒŠ‚Ö write-back ‚µ‚Ü‚·‚ªA <i>mode</i>‚É SIF_RPCM_NOWBDC ‚ðƒ}ƒXƒN‚µ‚Ä‚¨‚­‚Æ write-back ‚ðs‚¢‚Ü‚¹‚ñB<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">EE Å‚ÍƒX[vÅ‚Í‚È‚IÉŠmÛ‚Z}tHpÄIÒ‚Ü‚BEE Ìê‡ALbVÉÚ‚Ä‚f[^ send/receive Æ‚É‚Íƒ write-back Ü‚A <i>mode</i> SIF_RPCM_NOWBDC }XNÄ‚ write-back sÜ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMExitRpc"><font size=6>sceSifMExitRpc<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>MSIF RPC API ‚ÌI—¹<br></div>
+<!-- Ö -->
+<div align=right>MSIF RPC API ÌI<br></div>
 
-<!-- Œ`Ž® -->
-<div style="margin-left:10px;"><b>Œ`Ž®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>void  <b>sceSifMExitRpc</b>(
@@ -663,38 +663,38 @@
 
 </font></pre></div>
 
-<!-- ŒÄoðŒ -->
-<div style="margin-left:10px;"><b>ŒÄoðŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚èž‚Ýƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚èž‚Ý‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èžÝƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièžÝ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">MSIF RPC API‚ðI—¹‚µ‚Ü‚·B<br>ƒŠƒu[ƒg‚·‚é‚È‚ÇAÄ‚ÑsceSifMInitRpc()‚ðŒÄ‚Ño‚µ‚ÄMSIF RPC API ‚Ì‰Šú‰»‚ðs‚¢‚½‚¢ê‡‚ÍAˆê“xsceSifMExitRpc()‚ÅMSIF RPC API‚ðI—¹‚³‚¹‚Ä‚­‚¾‚³‚¢B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">MSIF RPC APIIÜ‚B<br>u[gÈ‚ÇAÄ‚sceSifMInitRpc()Ä‚ÑoMSIF RPC API Ìsê‡ÍAxsceSifMExitRpc()MSIF RPC APIIÄ‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMInitRpc"><font size=6>sceSifMInitRpc<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>MSIF RPC API ‚Ì‰Šú‰»<br></div>
+<!-- Ö -->
+<div align=right>MSIF RPC API Ì<br></div>
 
-<!-- Œ`Ž® -->
-<div style="margin-left:10px;"><b>Œ`Ž®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>void  <b>sceSifMInitRpc</b>(
@@ -703,46 +703,46 @@
 
 </font></pre></div>
 
-<!-- ŒÄoðŒ -->
-<div style="margin-left:10px;"><b>ŒÄoðŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚èž‚Ýƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚èž‚Ý‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èžÝƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièžÝ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
-<td valign="TOP">&nbsp;‹N“®ƒ‚[ƒhiŒ»Ý‚ÌŽÀ‘•‚Å‚Í0 ŒÅ’èj&nbsp;</td>
+<td valign="TOP">&nbsp;N[hiÝ‚ÌŽÅ‚0 Å’j&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">‚È‚µ<br><br></div>
+<div style="margin-left:50px;">È‚<br><br></div>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">MSIF RPC API ‚Ì‰Šú‰»‚ðs‚¢‚Ü‚·B<br>“à•”•Ï”‚ð‰Šú‰»‚µAƒŠƒNƒGƒXƒg‚ðˆ—‚·‚é‚½‚ß‚ÌƒRƒ}ƒ“ƒhŠÖ”‚ðMSIF Command API ‚ÌƒVƒXƒeƒ€ƒoƒbƒtƒ@‚É“o˜^‚µ‚Ü‚·B<br>ƒT[ƒo/ƒNƒ‰ƒCƒAƒ“ƒg‚Ì—¼•û‚Ås‚¤•K—v‚ª‚ ‚è‚Ü‚·B<br>“à•”‚Å‚ÍA“¯Šú‚Ì‚½‚ß•Ð•û‚ªŒÄ‚Î‚ê‚é‚Ü‚Å‚à‚¤ˆê•û‚Í‚±‚ÌŠÖ”“à‚Å‘Ò‚¿‚É“ü‚è‚Ü‚·B<br><br></div>
-<!-- ŠÖ”–¼ -->
+<div style="margin-left:50px;">MSIF RPC API ÌsÜ‚B<br>ÏANGXgé‚½ß‚ÌƒR}hÖMSIF Command API ÌƒVXeobt@É“o^Ü‚B<br>T[o/NCAgÌ—ÅsKvÜ‚B<br>Å‚ÍAÌ‚ß•Ð•Ä‚Î‚Ü‚Å‚Í‚ÌŠÖÅ‘Ò‚É“Ü‚B<br><br></div>
+<!-- Ö -->
 <hr noshade Size=6 >
 <a name="sceSifMUnBindRpc"><font size=6>sceSifMUnBindRpc<br></font></a>
 <hr noshade Size=4 >
-<!-- ŠÖ”à–¾ -->
-<div align=right>ƒT[ƒoƒXƒŒƒbƒh‚Ìíœ<br></div>
+<!-- Ö -->
+<div align=right>T[oXbhÌíœ<br></div>
 
-<!-- Œ`Ž® -->
-<div style="margin-left:10px;"><b>Œ`Ž®</b></div>
+<!-- ` -->
+<div style="margin-left:10px;"><b>`</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMUnBindRpc</b>(
@@ -752,77 +752,77 @@
 
 </font></pre></div>
 
-<!-- ŒÄoðŒ -->
-<div style="margin-left:10px;"><b>ŒÄoðŒ</b></div>
+<!-- Äo -->
+<div style="margin-left:10px;"><b>Äo</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">Š„‚èž‚Ýƒnƒ“ƒhƒ‰‚©‚çŒÄ‚Ño‚µ•s‰Â<br>ƒXƒŒƒbƒh‚©‚çŒÄ‚Ño‚µ‰Â”\<br>ƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒZ[ƒt‚Å‚ ‚éiŠ„‚èž‚Ý‹–‰Âó‘Ô‚ÅŒÄ‚Ô‚±‚Æj<br><br></div>
+<div style="margin-left:50px;">èžÝƒnhÄ‚Ños<br>XbhÄ‚ÑoÂ”\<br>}`XbhZ[tÅ‚ièžÝ‹ÂÔ‚ÅŒÄ‚Ô‚Æj<br><br></div>
 
-<!-- ˆø” -->
-<div style="margin-left:10px;"><b>ˆø”</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=0>
 <tr>
 <td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
-<td valign="TOP">&nbsp;BindÏ‚Ý‚ÌƒNƒ‰ƒCƒAƒ“ƒgî•ñ&nbsp;</td>
+<td valign="TOP">&nbsp;BindÏ‚Ý‚ÌƒNCAg&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
-<td valign="TOP">&nbsp;ŒÄ‚Ño‚µƒ‚[ƒhB’Êí‚Í0A•K—v‚É‰ž‚¶‚ÄŽŸ‚Ì’è”‚ð&nbsp;<br>&nbsp;Žw’è‚·‚é&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT   ”ñ“¯ŠúŽÀsiŒ»ÝA–¢ŽÀ‘•j&nbsp;</td>
+<td valign="TOP">&nbsp;Ä‚Ño[hBÊ0AKvÉ‰ÄŽÌ’è”&nbsp;<br>&nbsp;wè‚·&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT   ñ“¯ŠsiÝAj&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 
-<!-- •Ô‚è’l -->
-<div style="margin-left:10px;"><b>•Ô‚è’l</b></div>
+<!-- Ô‚l -->
+<div style="margin-left:10px;"><b>Ô‚l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
 <div style="margin-left:50px;">
 <table border=1>
 <tr>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>’l</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ƒ}ƒNƒ</b>&nbsp;</td>
-<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Œ‹‰Ê</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>l</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>}N</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;1&nbsp;</td>
 <td valign="TOP">&nbsp;SIFM_UB_OK&nbsp;</td>
-<td valign="TOP">&nbsp;ƒT[ƒoƒXƒŒƒbƒhíœ¬Œ÷&nbsp;</td>
+<td valign="TOP">&nbsp;T[oXbhíœ&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;2&nbsp;</td>
 <td valign="TOP">&nbsp;SIFM_UB_NOT_DORMANT&nbsp;</td>
-<td valign="TOP">&nbsp;ƒT[ƒoƒXƒŒƒbƒh‚ªDORMANTó‘Ô&nbsp;<br>&nbsp;‚Å‚Í‚È‚©‚Á‚½&nbsp;</td>
+<td valign="TOP">&nbsp;T[oXbhDORMANT&nbsp;<br>&nbsp;Å‚Í‚È‚&nbsp;</td>
 </tr>
 <tr>
 <td valign="TOP">&nbsp;3&nbsp;</td>
 <td valign="TOP">&nbsp;SIFM_UB_NOT_EXIST&nbsp;</td>
-<td valign="TOP">&nbsp;Žw’è‚µ‚½ƒT[ƒoƒXƒŒƒbƒh‚ª‘¶Ý‚µ‚È‚¢&nbsp;</td>
+<td valign="TOP">&nbsp;wè‚µT[oXbhÝ‚È‚&nbsp;</td>
 </tr>
 <tr>
-<td valign="TOP">&nbsp;•‰(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;(&lt;0)&nbsp;</td>
 <td valign="TOP">&nbsp;&nbsp;</td>
-<td valign="TOP">&nbsp;”­sŽ¸”s&nbsp;</td>
+<td valign="TOP">&nbsp;ss&nbsp;</td>
 </tr>
 </table>
 </div>
 <br>
 <br>
 
-<!-- ‰ðà -->
-<div style="margin-left:10px;"><b>‰ðà</b></div>
+<!--  -->
+<div style="margin-left:10px;"><b></b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">ƒXƒŒƒbƒhI—¹Žž‚ÉAsceSifMBindRpc()‚É‚æ‚Á‚ÄƒT[ƒo‘¤‚Å¶¬‚³‚ê‚½ƒT[ƒoƒXƒŒƒbƒh‚ðíœ‚·‚é‚½‚ß‚É•K—v‚ÈŠÖ”‚Å‚·B<br>‚±‚ÌŠÖ”‚ðŒÄ‚Ño‚·‚ÆAbd‚ÅŽw’è‚µ‚½ƒNƒ‰ƒCƒAƒ“ƒgî•ñ‚ªBindÏ‚©‚Ç‚¤‚©‚ðƒT[ƒo‘¤‚Å’²‚×A“o˜^‚³‚ê‚Ä‚¢‚ê‚ÎABindŽž‚ÉƒT[ƒo‘¤‚Å¶¬‚³‚ê‚½ƒT[ƒoƒXƒŒƒbƒh‚ðíœ‚µ‚Ü‚·B<br>‘Î‰ž‚·‚éƒT[ƒoƒXƒŒƒbƒh‚ÍAUNBIND—v‹‚ªƒT[ƒo‘¤‚É’Ê’m‚³‚ê‚½Û‚ÉDORMANTó‘Ô‚É‚È‚Á‚Ä‚¢‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB<br>’ÊíA‚±‚ÌŠÖ”‚ðŒÄ‚Ño‚µ‚½ƒXƒŒƒbƒh‚ÍƒT[ƒo‚©‚ç‚Ì•Ô“š‚ª‚ ‚é‚Ü‚ÅƒXƒŠ[ƒvó‘Ô‚É‚È‚è‚Ü‚·BSIF RPC‚Å‚ÍSIF_RPCM_NOWAIT‚ðŽw’è‚·‚é‚±‚Æ‚ÅƒŠ[ƒv‚¹‚¸‚É‚»‚Ì‚Ü‚Ü”²‚¯‚Ü‚·‚ªASIF RPC‚Å‚Í–¢ŽÀ‘•‚Å‚·B<br><br></div>
+<div style="margin-left:50px;">XbhIÉAsceSifMBindRpc()É‚ÄƒT[oÅê‚½T[oXbhíœé‚½ß‚É•KvÈŠÖÅ‚B<br>ÌŠÖÄ‚ÑoÆAbdÅŽwè‚µNCAgBindÏ‚Ç‚T[oÅ’×Ao^Ä‚ÎABindÉƒT[oÅê‚½T[oXbhíœÜ‚B<br>Î‰T[oXbhÍAUNBINDvT[oÉ’Ê’mê‚½Û‚DORMANTÔ‚É‚È‚Ä‚È‚Î‚È‚Ü‚B<br>ÊAÌŠÖÄ‚ÑoXbhÍƒT[oÌ•Ô“Ü‚ÅƒX[vÔ‚É‚È‚Ü‚BSIF RPCÅ‚SIF_RPCM_NOWAITwè‚·é‚±Æ‚Åƒ[vÉ‚Ì‚Ü‚Ü”Ü‚ASIF RPCÅ‚Í–Å‚B<br><br></div>
 
-<!-- ”õl -->
-<div style="margin-left:10px;"><b>”õl</b></div>
+<!-- l -->
+<div style="margin-left:10px;"><b>l</b></div>
 <hr noshade align="left" size=2 width=20%>
 <br>
-<div style="margin-left:50px;">EE‚Å‚ÍƒXƒŠ[ƒv‚Å‚Í‚È‚­“à•”“I‚ÉŠm•Û‚µ‚½ƒZƒ}ƒtƒH‚ð—p‚¢‚ÄI—¹‚ð‘Ò‚¿‚Ü‚·B<br>UnBind‚ª¬Œ÷‚µ‚½‚©‚Ç‚¤‚©‚ÍA•Ô‚³‚ê‚½sceSifMClinetData‚Ìcommandƒƒ“ƒo‚ªSIFM_UB_OK‚©‚Ç‚¤‚©‚Å”»•Ê‚Å‚«‚Ü‚·B<br>ˆÈ‰º‚Ì‚æ‚¤‚ÈƒR[ƒh‚É‚È‚è‚Ü‚·B<br><br></div>
+<div style="margin-left:50px;">EEÅ‚ÍƒX[vÅ‚Í‚È‚IÉŠmÛ‚Z}tHpÄIÒ‚Ü‚B<br>UnBindÇ‚ÍAÔ‚ê‚½sceSifMClinetDatacommandoSIFM_UB_OKÇ‚Å”Ê‚Å‚Ü‚B<br>È‰Ì‚æ‚¤ÈƒR[hÉ‚È‚Ü‚B<br><br></div>
         <div style="margin-left:93px;"><pre><font size=3>   #define BIND_ID  0x12345678
    
    while(1){
@@ -833,7 +833,7 @@
    	if (cd0.command == SIFM_UB_OK) break;
    }
 </pre></font></div>
-<div style="margin-left:50px;"><br>‚È‚¨Aã‹L‚Ì‚æ‚¤‚ÈƒR[ƒh‚ÅEE‚©‚çIOP‚Ö•p”É‚É’ÊM‚ðs‚¤‚ÆAEE‚ª‚©‚È‚è‘¬‚¢‚½‚ß‚ÉIOP‚ª‚Ù‚Ú’âŽ~ó‘Ô‚É‚È‚è‚Ü‚·B­‚µŠÔ‚ð‚¨‚¢‚ÄƒŠƒNƒGƒXƒg‚ð”­s‚µ‚Ä‚­‚¾‚³‚¢B<br><br></div>
+<div style="margin-left:50px;"><br>È‚ALÌ‚æ‚¤ÈƒR[hEEIOPÖ•pÉ‚É’ÊMsÆAEEÈ‚è‘¬ß‚IOPÙ‚Ú’~Ô‚É‚È‚Ü‚BÔ‚ÄƒNGXgð”­sÄ‚B<br><br></div>
 <p><p><hr>
 <div ALIGN="right">
     Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
