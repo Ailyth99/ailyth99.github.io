@@ -1,0 +1,164 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=Content-Type CONTENT="text/html; charset=UTF-8">
+<TITLE>"PlayStation 2" Develop Kernel Index Categories</TITLE>
+<style type="text/css"><!--
+	.Heading{line-height:100%;Font-size:11pt}
+	.CATEGORY{line-height:150%;Font-size:11pt;margin-left:10}
+	.MENU{line-height:100%;font-size:12pt;margin-left:15pt;font-weight:bold}
+	.MENUJ{line-height:170%;font-size:10pt;margin-left:15pt;font-weight:bold}
+//--></style>
+<STYLE TYPE="TEXT/CSS">
+<!--
+a {  text-decoration: none}
+a:hover { color: #FFCC00}
+-->
+</STYLE>
+</HEAD>
+<body bgcolor="#666666" text="#FFFFFF" link="#3399FF" alink="#FFCC00" vlink="#3399FF">
+<table width="206" cellspacing="0" cellpadding="0" bgcolor="#373535">
+<tr> 
+<td width="59" height="60" valign="top"><img src="../logo/psf.gif" width="61" height="60"></td>
+<td width="147" valign="top"><img src="../logo/ps2.gif" width="108" height="28"><br>
+<font size="2"><b><font color="#FFFFFF">Programmer Tool Runtime Library Release 
+2.5</font></b></font> </td>
+</tr>
+</table>
+
+
+<FORM NAME="indx">
+<SELECT NAME=list onchange=top.location.href=this.form.list.options[this.form.list.selectedIndex].value>
+<OPTION VALUE="../develop.htm">開発分野別INDEX
+<OPTION VALUE="../category.htm">カテゴリINDEX
+<OPTION VALUE="sakuin_idx.htm">索引
+<OPTION VALUE="kernel_idx.htm" SELECTED>カーネル/SIF関連 
+<OPTION VALUE="cdvd_idx.htm">CD(DVD)-ROMライブラリ
+<OPTION VALUE="memory_idx.htm">メモリーカード関連 
+<OPTION VALUE="pad_idx.htm">コントローラ/マルチタップ関連　　　 　
+<OPTION VALUE="graph_idx.htm">グラフィックス関連  　　　
+<OPTION VALUE="sound_idx.htm">サウンド関連
+<OPTION VALUE="stream_idx.htm">ストリーミング関連
+<OPTION VALUE="net_idx.htm">ネットワーク関連 
+<OPTION VALUE="hdd_idx.htm">ハードディスク関連  
+<OPTION VALUE="usb_idx.htm">USB/i.LINK関連
+<OPTION VALUE="debug_idx.htm">デバッグ支援ライブラリ 
+<OPTION VALUE="deci2_idx.htm">開発ツールプロトコル
+<OPTION VALUE="first_idx.htm">開発支援ツール
+<OPTION VALUE="../web/html/index.htm">技術情報
+</SELECT>
+</FORM>
+<script language="JavaScript">
+<!--//
+  document.indx.list.selectedIndex = 3;
+// -->
+</script>
+<nobr> 
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">EEカーネル</div>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/eekernel.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/ekrnl_rf.htm" TARGET="main">　libref</A>
+			</div>
+		</TD></TR>
+	</TABLE>
+</TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">IOPカーネル</div>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../iop/overview/iopkernl.htm" TARGET="main">overview</A>
+				<A HREF="../iop/libref/ikrnl_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+			<DIV CLASS="MENUJ">
+				<A HREF="../iop/overview/iop_prog.htm" TARGET="main">IOPプログラミング</A>
+			</DIV>
+		</TD></TR>
+	</TABLE>
+</TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">SIF関連</div>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENUJ">
+				<A HREF="../ee/overview/sif.htm" TARGET="main">SIFシステム概要</A><BR>
+				<A HREF="../ee/libref/scmd_rf.htm" TARGET="main">SIF CMD</A><BR>
+				<A HREF="../ee/libref/sdma_rf.htm" TARGET="main">SIF DMA</A><BR>
+				<A HREF="../ee/libref/srpc_rf.htm" TARGET="main">SIF RPC</A><BR>
+				<A HREF="../ee/libref/emrpc_rf.htm" TARGET="main">SIF MRPC(EE)</A><BR>
+				<A HREF="../iop/libref/imrpc_rf.htm" TARGET="main">SIF MRPC(IOP)</A>
+			</DIV>
+			<DIV CLASS="CATEGORY">標準IOPサービス</DIV>
+				<DIV CLASS="MENU">
+					<A HREF="../ee/overview/libiserv.htm" TARGET="main">overview</A>
+					<A HREF="../ee/libref/iserv_rf.htm" TARGET="main">　libref</A>
+				</DIV>
+		</td></tr>
+	</TABLE>
+</td>
+</tr>
+</TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">標準関数</div>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libio.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/io_rf.htm" TARGET="main">　libref</A><BR>
+			</DIV>
+			<DIV CLASS="CATEGORY">C標準関数</div>
+			<DIV CLASS="MENU">
+				<font color="#333333">overview</font>
+				<A HREF="../iop/libref/c_rf.htm" TARGET="main">　libref</A>
+			</div>
+		</td></tr>
+	</TABLE>
+</td>
+</tr>
+</TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD height="47" width="194" valign="top" nowrap bgcolor="#333333"><DIV CLASS="Heading">システムコンフィグレーション</div>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libscf.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/scf_rf.htm" TARGET="main">　libref</A>
+			</div>
+		</TD></TR>
+	</TABLE>
+</TD></TR></TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">DMA</div>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libdma.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/dma_rf.htm" TARGET="main">　libref</A>
+			</div>
+		</TD></TR>
+	</TABLE>
+</TD></TR></TABLE>
+</NOBR> 
+<P>
+</P>
+<p>
+</p>
+</BODY>
+</HTML>

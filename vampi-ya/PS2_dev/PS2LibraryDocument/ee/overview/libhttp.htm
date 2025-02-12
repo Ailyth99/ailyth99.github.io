@@ -1,0 +1,1082 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>HTTPライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/http_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+HTTPライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリ概要</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>概要</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>サンプルプログラム</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>機能とコードフロー</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>基本的な流れ</b><br></a>
+    <a href="#Heading4_2_2"> <b>オプションヘッダの追加</b><br></a>
+    <a href="#Heading4_2_3"> <b>HTTP レスポンスのオプションヘッダ、およびボディ部の取得</b><br></a>
+    <a href="#Heading4_2_4"> <b>HTTPリクエストボディの設定</b><br></a>
+    <a href="#Heading4_2_5"> <b>タイムアウト設定、アボート</b><br></a>
+    <a href="#Heading4_2_6"> <b>プロキシ設定</b><br></a>
+    <a href="#Heading4_2_7"> <b>ノンブロッキングモード</b><br></a>
+    <a href="#Heading4_2_8"> <b>リダイレクション処理</b><br></a>
+    <a href="#Heading4_2_9"> <b>認証処理</b><br></a>
+    <a href="#Heading4_2_10"> <b>クッキー制御</b><br></a>
+    <a href="#Heading4_2_11"> <b>MIME処理</b><br></a>
+    <a href="#Heading4_2_12"> <b>チャンク受信処理</b><br></a>
+    <a href="#Heading4_2_13"> <b>エンコード、デコード処理</b><br></a>
+    <a href="#Heading4_2_14"> <b>ファイルによる受信</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>注意事項</b></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>エラーコードについて</b><br></a>
+    <a href="#Heading4_3_2"> <b>ユーザエージェントについて</b><br></a>
+    <a href="#Heading4_3_3"> <b>libhttpライブラリ内部でのスレッド生成について</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリ概要</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp は、HTTPを使用するアプリケーションのためのライブラリです。<br>基本的な動作として、アプリケーションから指定された URI に対してHTTP リクエスト送信、レスポンス受信を行ないます。libhttpではこの基本処理に対し、プロキシ設定や認証処理などさまざまな機能をライブラリ側で実現します。<br>libhttp では、さまざまなプロトコルスタックに対応するため、下位のネットワーク API として BSD ソケット準拠のラッパー API であるnetglue を利用しています。netglue ライブラリは libhttp の内部から参照されるため、アプリケーションは単に netglue ライブラリをリンクするだけで構いません。<br>SDK では、弊社ネットワークライブラリ(inet)用 BSD ソケットライブラリであるlibinsck を使った netglue ライブラリ、netglue_insck.a が標準添付されていますので、inet を利用する場合には netglue_insck.a をリンクすれば使用可能です。<br>その他のプロトコルスタックで libhttp を利用する場合には、専用の netglue ライブラリを用意する必要があります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp を使用するために必要なファイルは以下のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘッダファイル&nbsp;</td>
+<td valign="TOP">&nbsp;include/libhttp.h&nbsp;<br>&nbsp;(内部的に以下の3ファイルをinclude)&nbsp;<br>&nbsp;include/libhttp/http_method.h&nbsp;<br>&nbsp;include/libhttp/http_options.h&nbsp;<br>&nbsp;include/libhttp/http_status.h&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ライブラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libhttp.a&nbsp;<br>&nbsp;inet ライブラリを使う場合&nbsp;<br>&nbsp;netglue_insck.a&nbsp;<br>&nbsp;libinsck.a&nbsp;<br>&nbsp;libnet.a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;モジュールファイル&nbsp;</td>
+<td valign="TOP">&nbsp;inet ライブラリを使う場合&nbsp;<br>&nbsp;netcnf.irx&nbsp;<br>&nbsp;inet.irx&nbsp;<br>&nbsp;inetctl.irx&nbsp;<br>&nbsp;msifrpc.irx&nbsp;<br>&nbsp;libnet.irx&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">通常ヘッダファイルは、include/libhttp.hをインクルードするだけで構いません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>サンプルプログラム</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp を使用するサンプルプログラムとして、inet ライブラリを利用した次のものがあります。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ee/sample/inet/libhttp/normal　 指定したURIにGET、HEAD、POSTを行なうサンプル
+         <li> ee/sample/inet/libhttp/proxy　　プロキシを介して指定したURIを取得するサンプル
+         <li> ee/sample/inet/libhttp/mime　　指定したURIを取得し、MIME処理を行なうサンプル
+         <li> ee/sample/inet/libhttp/blocking　http_test のブロッキング版
+         <li> ee/sample/inet/libhttp/chunk　　チャンク転送処理サンプル
+         <li> ee/sample/inet/libhttp/cookie　　クッキー処理サンプル
+         <li> ee/sample/inet/libhttp/redirect　 リダイレクト処理サンプル
+         <li> ee/sample/inet/libhttp/auth　　  認証処理サンプル
+</ul></div>
+<div style="margin-left:50px;">また libhttp に用意された BASE64, quoted-printable のエンコード・デコード、および URLエスケープ、アンエスケープ処理のサンプルがあります。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ee/sample/inet/libhttp/base64　BASE64 処理サンプル
+         <li> ee/sample/inet/libhttp/qp　　　quoted-printable 処理サンプル
+         <li> ee/sample/inet/libhttp/urlesc　 URLエスケープ、アンエスケープの処理サンプル
+</ul></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>機能とコードフロー</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>基本的な流れ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp では、アプリケーションはまずクライアント構造体を作成、操作し、それを基に HTTP リクエストを行ないます。HTTP リクエストに対する HTTP レスポンスを受信した後、レスポンス構造体を取得し、レスポンス結果を判定します。<br><br>具体的には、アプリケーションはまず sceHTTPInit() でHTTPライブラリの初期化を行ないます。<br>そして sceHTTPCreate() でクライアント構造体を作成し、ライブラリの提供するさまざまな機能を用いてクライアント構造体に設定を行なった後、sceHTTPOpen()、sceHTTPRequest() で実際にHTTP リクエストを送信します。HTTP レスポンスを受信すると sceHTTPGetResponse() でレスポンス構造体を取得できます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>#define ERR_STOP while(1)
+int main(int argc, char **argv){
+	sceHTTPClient_t *client;
+	sceHTTPResponse_t *response;
+	sceHTTPParsedURI_t *p;
+	int ret;
+	char *target_uri;
+
+	...
+	/* ネットワークライブラリの初期化を行なっておく */
+	...
+
+	/* libhttp を初期化 */
+	if((ret = sceHTTPInit()) &lt; 0){
+		printf("sceHTTPInit() failed.\n");
+		ERR_STOP;
+	}
+	
+	/* HTTP クライアント構造体の作成。
+		libhttp 内部でクライアント構造体が生成される。*/
+	if((client = sceHTTPCreate()) == NULL){
+		printf("sceHTTPCreate() failed.\n");
+		ERR_STOP;
+	}
+
+	/* 目的の URI を libhttp 用 URI 構造体に変換する。
+	   target_uri で目的の URI を参照しているとする */
+	if((p = sceHTTPParseURI(target_uri, (sceHTTPParseURI_FILENAME
+		| sceHTTPParseURI_SEARCHPART))) == 0){
+		printf("sceHTTPParseURI() failed.\n");
+		ERR_STOP;
+	}
+
+	/* 目的のメソッドをクライアント構造体に設定する */
+	if((ret = sceHTTPSetOption(client, sceHTTPO_Method, sceHTTPM_GET)) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* URI を、クライアント構造体に設定する */
+	if((ret = sceHTTPSetOption(client, sceHTTPO_ParsedURI, p)) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* HTTP リクエストを送信する前に、コネクションに対して
+		任意の設定を行なう */
+	sceHTTPSetOption(client, ...);
+	...
+
+	/* HTTP 接続開始。実際にコネクションを確立する */
+	if(sceHTTPOpen(client) &lt; 0){
+		printf("sceHTTPOpen() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* HTTP リクエスト送信。
+		ブロッキングの場合は HTTP レスポンスを受信するまでブロック。 */
+	if((ret = sceHTTPRequest(client)) &lt; 0){
+		printf("sceHTTPRequest() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* HTTP レスポンスを取得 */
+	response = sceHTTPGetResponse(client);
+
+	...
+	/* 取得した HTTP レスポンスに対して、任意の処理を行なう */
+	...
+
+	/* 終了処理。コネクションを切断する */
+	if((ret = sceHTTPClose(client)) &lt; 0){
+		printf("sceHTTPClose() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* ライブラリ内部で生成したクライアント構造体を解放する。
+	   紐づけされている HTTP レスポンス構造体やヘッダリスト等も
+	   すべて解放される。 */
+	if((ret = sceHTTPDestroy(client)) &lt; 0){
+		printf("sceHTTPDestroy() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* ライブラリの使用を終了する */
+	if((ret = sceHTTPTerminate()) &lt; 0){
+		printf("sceHTTPTerminate() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	return 0;
+
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>オプションヘッダの追加</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp では、デフォルトで以下のオプションヘッダが HTTP リクエストに追加されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ヘッダ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;HOST&nbsp;</td>
+<td valign="TOP">&nbsp;接続先ホスト名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Accept&nbsp;</td>
+<td valign="TOP">&nbsp;*/*;q=0.01&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Accept-Encoding&nbsp;</td>
+<td valign="TOP">&nbsp;gzip,compress&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Accept-Charset&nbsp;</td>
+<td valign="TOP">&nbsp;iso-8859-1;q=0.01&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;User-Agent&nbsp;</td>
+<td valign="TOP">&nbsp;sceHTTPSetOption() による設定値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>sceHTTPSetRedirection() によってリダイレクトの設定をしている場合</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ヘッダ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Pragma&nbsp;</td>
+<td valign="TOP">&nbsp;no-cache&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Cache-Controll&nbsp;</td>
+<td valign="TOP">&nbsp;no-cache&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>method が POST の場合でボディが URL エンコードされている場合</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ヘッダ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Content-Type&nbsp;</td>
+<td valign="TOP">&nbsp;application/x-www-form-urlencoded&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>method が POST の場合</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ヘッダ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Content-Length&nbsp;</td>
+<td valign="TOP">&nbsp;ボディのバイト数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>sceHTTPSetBasicAuth() によってベーシック認証を行なう、もしくはsceHTTPSetDigestAuth() によってダイジェスト認証を行なう場合</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ヘッダ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Authorization&nbsp;</td>
+<td valign="TOP">&nbsp;認証値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>sceHTTPSetCookie() によってクッキーを指定した場合</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ヘッダ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Cookie&nbsp;</td>
+<td valign="TOP">&nbsp;クッキー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">アプリケーションが上記のヘッダに任意の値を指定したい場合、もしくは上記以外のヘッダを追加したい場合は、まずsceHTTPAddHeaderList() によってヘッダ、値を指定したあと、sceHTTPSetOption() の sceHTTPO_RequestHeaders コード によって追加します。<br>ただし、上記のように設定用の API が別に用意されているヘッダは、その API で設定します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	sceHTTPHeaderList_t *list;
+
+	/* クライアント構造体を作成 */
+	client = sceHTTPCreate();
+
+	/* ヘッダリストに X-XXX: foobar を追加する */
+	if((list = sceHTTPAddHeaderList(NULL, "X-XXX", "foobar")) == NULL){
+		printf("sceHTTPAddHeaderList() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	/* ヘッダリストをクライアント構造体に登録する */
+	if(sceHTTPSetOption(client, sceHTTPO_RequestHeaders, list, 0) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* User-Agent: ヘッダを "SCEI Browser 1.0" とする */
+	if(sceHTTPSetOption(client, sceHTTPO_ClientName, "SCEI Brower 1.0") &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>HTTP レスポンスのオプションヘッダ、およびボディ部の取得</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">HTTP レスポンスに含まれるオプションヘッダを取得するには、sceHTTPResponse_t 構造体のメンバ headers を参照します。HTTP レスポンスのボディ部を取得するには、HTTP レスポンス構造体のメンバ entity を参照します。ボディの長さは、メンバ length から取得できます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	sceHTTPResponse_t *response;
+	sceHTTPHeaderList_t *list;
+	int i;
+
+	/* HTTP レスポンスを取得 */
+	response = sceHTTPGetResponse(client);
+
+	/* オプションヘッダを参照 */
+	for(list = response-&gt;headers; list != NULL; list = sceHTTPNextHeader(list)){
+		printf("response header:\n");
+		printf("%s: %s\n", list-&gt;name, list-&gt;value);
+	}
+
+	/* ボディ部を取得 */
+	printf("response body:\n");
+	for(i = 0; i &lt; response-&gt;length; i++)
+		printf("%c", response-&gt;entity[i]);
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>HTTPリクエストボディの設定</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">POSTメソッドの際、HTTP リクエストのボディは sceHTTPSetOption() のsceHTTPO_RequestEntity コードを用いて設定します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	char entity[256];
+
+	/* クライアント構造体を作成 */
+	client = sceHTTPCreate();
+
+	/* リクエストボディ内容の設定 */
+	strncpy(entity, "foo bar", 256);
+
+	/* リクエストボディを設定する */
+	if(sceHTTPSetOption(client, sceHTTPO_RequestEntity, entity, strlen(entity), sceHTTPInputF_LINK) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_5">
+<a href="#Heading3_2"> 2. </a>5 <b>タイムアウト設定、アボート</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">サーバから HTTP レスポンスが返って来ない場合に備えて、タイムアウトを設定することができます。デフォルトではタイムアウト値は無限大です。<br><br>タイムアウトには、HTTP レスポンスヘッダ部を取得するまでの"レスポンスヘッダ取得タイムアウト" と、レスポンスボディ部を取得するまでの "レスポンスデータ取得タイムアウト" の2種類があります。<br><br>また、sceHTTPAbortRequest() によってHTTP 処理をアボートすることもできます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+
+	/* クライアント構造体を作成 */
+	client = sceHTTPCreate();
+
+	/* タイムアウトを設定する(ヘッダ60秒、ボディ120秒とする) */
+	if(sceHTTPSetOption(client, sceHTTPO_ResponseTimeout, 60) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	if(sceHTTPSetOption(client, sceHTTPO_TransferTimeout, 120) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_6">
+<a href="#Heading3_2"> 2. </a>6 <b>プロキシ設定</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プロキシ経由での接続も、ライブラリ側で提供しています。プロキシを利用するには、目的の URI に加えてプロキシサーバの URIをクライアント構造体に設定します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	sceHTTPParsedURI_t *p;
+
+	/* クライアント構造体を作成 */
+	client = sceHTTPCreate();
+
+	/* プロキシ URI (http://proxy.foobar.com) を HTTP ライブラリ用
+		URI 構造体に変換する */
+	if((p = sceHTTPParseURI("http://proxy.foobar.com", 0)) == 0){
+		printf("sceHTTPParseURI() failed.\n");
+		ERR_STOP;
+	}
+	/* プロキシ URI をクライアント構造体に設定する */
+	if(sceHTTPSetOption(client, sceHTTPO_ProxyURI, p) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_7">
+<a href="#Heading3_2"> 2. </a>7 <b>ノンブロッキングモード</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp では、デフォルトでは HTTP リクエストを送信してからHTTP レスポンスを受信するまでブロックしますが、ノンブロックで待つことができます。この場合、HTTP レスポンス受信終了時に呼ばれるコールバック関数をあらかじめ登録しておきます。このときコールバック関数のユーザ定義引数を与えておくことができます。この引数の値がコールバック関数が呼ばれるときの第三引数の値になります。<br><br>ノンブロッキングの設定は sceHTTPOption() を sceHTTPO_BlockingModeコードで、終了コールバック関数とユーザ定義引数の登録は sceHTTPOption() をsceHTTPO_EndOfTransactionCB コードで行ないます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	static void end_cb(sceHTTPClient_t *p, int flags, void *uopt){
+		...
+	}
+
+	sceHTTPClient_t *client;
+	void *uopt;
+
+	/* クライアント構造体を作成 */
+	client = sceHTTPCreate();
+
+	/* ノンブロッキングモードに設定する */
+	if(sceHTTPSetOption(client, sceHTTPO_BlockingMode, 0) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	/* 終了コールバック関数とユーザ定義引数を登録する */
+	uopt = ...;
+	if(sceHTTPSetOption(client, sceHTTPO_EndOfTransactionCB, end_cb, uopt) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_8">
+<a href="#Heading3_2"> 2. </a>8 <b>リダイレクション処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">サーバから Location ヘッダによってリダイレクションの指示があった場合、ライブラリ側で URI 構造体に変換し、クライアント構造体に反映する API を用意しています。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	sceHTTPResponse_t *response;
+	sceHTTPParsedURI_t *p;
+	char **locations;
+	int ret;
+
+	/* HTTP レスポンスを取得 */
+	response = sceHTTPGetResponse(client);
+
+	/* 終了処理。コネクションを切断する */
+	sceHTTPClose(client);
+
+	/* リダイレクション処理の判定 */
+	switch(response-&gt;code){
+	case sceHTTPC_MultipleChoices:
+	case sceHTTPC_MovedPermanentry:
+	case sceHTTPC_Found:
+	case sceHTTPC_SeeOther:
+	case sceHTTPC_TemporaryRedirect:
+	case sceHTTPC_UseProxy:
+		/* Location ヘッダの URI を文字列配列で取得する */
+		if((locations = (char **)sceHTTPParseLocations(response)) == NULL){
+			printf("can't redirect.\n");
+			ERR_STOP;
+		}
+
+		/* 例として Location ヘッダの1番目の URI を選択してみる */
+		if((p = sceHTTPParseURI(locations[0], (sceHTTPParseURI_FILENAME
+			| sceHTTPParseURI_SEARCHPART))) == NULL){
+			printf("bad URI.\n");
+			ERR_STOP;
+		}
+
+		/* リダイレクト URI 文字列配列を解放する */
+		if((ret = sceHTTPFreeLocations(locations)) &lt; 0){
+			printf("sceHTTPFreeLocations() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+
+		/* リダイレクト先の URI をクライアント構造体に反映する */
+		if((ret = sceHTTPSetRedirection(client, p,
+		                    (response-&gt;code == sceHTTPC_UseProxy))) &lt; 0){
+			printf("sceHTTPSetRedirection() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+
+		/* クライアント構造体を再初期化する */
+		if((ret = sceHTTPCleanUpResponse(client)) &lt; 0){
+			printf("sceHTTPCleanUpResponse() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+		/* リクエストヘッダーを全て解放する */
+		if(sceHTTPSetOption(client, sceHTTPO_RequestHeaders, NULL, 1) &lt; 0){
+			printf("sceHTTPSetOption() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+
+		/* リダイレクト先に再接続 */
+		if(sceHTTPOpen(client) &lt; 0){
+			printf("sceHTTPOpen() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+
+		...
+
+	default:
+		break;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_9">
+<a href="#Heading3_2"> 2. </a>9 <b>認証処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttpは、ダイジェスト認証、ベーシック認証をサポートしています。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	sceHTTPResponse_t *response;
+	sceHTTPAuthList_t *auth_list;
+	sceHTTPDigest_t dig;
+	int ret;
+
+	/* HTTP レスポンスを取得 */
+	response = sceHTTPGetResponse(client);
+
+	/* 終了処理。コネクションを切断する */
+	sceHTTPClose(client);
+
+	/* 認証処理の判定 */
+	switch(response-&gt;code){
+	case sceHTTPC_Unauthorized:
+		/* HTTP 認証構造体を取得する */
+		if((auth_list = sceHTTPParseAuth(response)) == NULL){
+			printf("can't get auth info.\n");
+			ERR_STOP;
+		}
+
+		/* 例として www-authenticate ヘッダの1番目を選択してみる */
+		if(auth_list-&gt;auth.type == sceHTTPAuth_BASIC){
+			/* ベーシック認証 */
+			sceHTTPSetBasicAuth(client, "foo", "bar", 0);
+		}
+		else{
+			/* ダイジェスト認証 */
+
+			/* ダイジェスト要求構造体を設定 */
+			dig.username = "foo";
+			dig.password = "bar";
+			...
+
+			/* ダイジェスト認証をクライアント構造体に設定する */
+			if((ret = sceHTTPSetDigestAuth(client, &dig, 0)) &lt; 0){
+				printf("sceHTTPSetDigestAuth() failed.(%d)\n",
+					sceHTTPGetClientError(client));
+				ERR_STOP;
+			}
+		}
+
+		/* 認証構造体を解放する */
+		if((ret = sceHTTPFreeAuthList(auth_list)) &lt; 0){
+			printf("sceHTTPFreeAuthList() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+
+		/* クライアント構造体を再初期化する */
+		if((ret = sceHTTPCleanUpResponse(client)) &lt; 0){
+			printf("sceHTTPCleanUpResponse() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+		/* リクエストヘッダーを全て解放する */
+		if(sceHTTPSetOption(client, sceHTTPO_RequestHeaders, NULL, 1) &lt; 0){
+			printf("sceHTTPSetOption() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+
+		/* サーバに再接続 */
+		if(sceHTTPOpen(client) &lt; 0){
+			printf("sceHTTPOpen() failed.(%d)\n",
+				sceHTTPGetClientError(client));
+			ERR_STOP;
+		}
+
+		...
+
+	default:
+		break;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_10">
+<a href="#Heading3_2"> 2. </a>10 <b>クッキー制御</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">サーバ側からクッキーを返して来た場合、sceHTTPParseCookie() によってそれを構造体として取得し、sceHTTPSetCookie() でクライアント構造体に反映できます。再接続時に有効です。<br>ただし sceHTTPParseCookie() や sceHTTPSetCookie() はクッキーについてパス名、ドメイン名、有効期限などの最低限のチェックしか行いません。そのため sceHTTPParseCookie() で取得したクッキーリストをそのままsceHTTPSetCookie() の引数とするとセキュリティやプライバシー上の問題を引き起こす可能性があるため、必要なクッキーの正当性チェックはアプリケーション側で行なって下さい。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	sceHTTPResponse_t *response;
+	sceHTTPCookieList_t *cookie;
+	int ret;
+
+	/* HTTP レスポンスを取得 */
+	response = sceHTTPGetResponse(client);
+
+	/* 終了処理。コネクションを切断する */
+	if((ret = sceHTTPClose(client)) &lt; 0){
+		printf("sceHTTPClose() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* クッキー取得 */
+	if((cookie = sceHTTPParseCookie(client, response)) == NULL){
+		return 0;
+	}
+
+	/* クライアント構造体を再初期化する */
+	if((ret = sceHTTPCleanUpResponse(client)) &lt; 0){
+		printf("sceHTTPCleanUpResponse() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	/* リクエストヘッダーを全て解放する */
+	if(sceHTTPSetOption(client, sceHTTPO_RequestHeaders, NULL, 1) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* クッキーの正当性のチェック */
+	...
+
+	/* クッキーをクライアント構造体に設定 */
+	if((ret = sceHTTPSetCookie(client, cookie)) &lt; 0){
+		printf("sceHTTPSetCookie() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	/* クッキー構造体を解放する */
+	if((ret = sceHTTPFreeCookieList(cookie)) &lt; 0){
+		printf("sceHTTPFreeCookieList() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* サーバに再接続 */
+	if(sceHTTPOpen(client) &lt; 0){
+		printf("sceHTTPOpen() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+</pre></font></div>
+<div style="margin-left:50px;">クッキーの正当性チェック処理等に便利な関数としてsceHTTPFilterCookieList関数が用意されています。この関数を使う場合、アプリケーションではあらかじめ選択したいクッキーの条件を与えるフィルタ関数を用意します。例えば<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>
+int filter(sceHTTPCookie_t *cp, void *arg){
+	char *host = (char *)arg;
+	if(host == NULL || cp-&gt;domain == NULL ||
+			strlen(host) &lt; strlen(cp-&gt;domain))
+		return(0);
+	host += strlen(host) - strlen(cp-&gt;domain)
+	return(strcmp(host, cp-&gt;domain) == 0);
+}
+</pre></font></div>
+<div style="margin-left:50px;"><br>と定義した上で<br><br>cooked_cookie = sceHTTPFilterCookieList(cookie, filter, hostname);<br><br>と呼び出すことで cooked_cookie に元のクッキーリストからドメインがhostname引数にマッチするようなクッキーのみのリストを新しく作成することができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_11">
+<a href="#Heading3_2"> 2. </a>11 <b>MIME処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp では、MIME マルチパート化されたデータ取得のためにMIME 処理機能を提供しています。<br>MIME処理では、MIME マルチパート化されたドキュメントを処理するフィルタという概念を用います。フィルタはマルチパートの各階層毎に1つ存在します。<br><br>アプリケーションはまず、処理対象のMIMEドキュメントに対してルートフィルタを作成します。<br>そのルートフィルタに対して sceHTTPMimeFilterParseHeaders() でヘッダ処理を行ない、sceHTTPMimeFilterApply() で各パートを処理、フィルタ構造体に取得していきます。<br>sceHTTPMimeFilterParseHeaders()、sceHTTPMimeFilterApply() を繰り返す毎に、その階層の各パートを順に処理していきます。<br><br>子階層がある場合は、子階層に対するフィルタがsceHTTPMimeFilterParseHeaders() 内で自動的に生成されます。子階層の最後のパートを sceHTTPMimeFilterApply() し終わった際に子フィルタは自動的に解放されます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	sceHTTPClient_t *client;
+	sceHTTPResponse_t *response;
+	sceHTTPMimeFilter_t *filter;
+	int ret;
+
+	/* HTTP レスポンスを取得 */
+	response = sceHTTPGetResponse(client);
+
+	/* HTTP レスポンスに対して、MIME ルートフィルタを作成 */
+	if((filter = sceHTTPMimeFilterCreate(sceHTTPMimeFilter_STRING,
+		(void *)response-&gt;entity, response-&gt;length,
+		sceHTTPMimeFilter_STRING, (void *)0)) == NULL){
+		printf("sceHTTPMimeFilterCreate() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* MIME ヘッダを解析し、ルートフィルタのリストに
+		サブパートのフィルタが追加される */
+	if((ret = sceHTTPMimeFilterParseHeaders(filter)) &lt; 0){
+		printf("sceHTTPMimeFilterParseHeaders() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	/* サブパート1に対して処理を行なう。本当は、子階層の存在を
+		調べて存在するならその処理をする必要があるが、ここでは
+		フラットにパートが存在するという前提で処理 */
+	if((ret = sceHTTPMimeFilterApply(filter, NULL)) &lt; 0){
+		printf("sceHTTPMimeFilterApply() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	/* サブパート1のヘッダリストを解放 */
+	if((ret = sceHTTPFreeHeaderList(filter-&gt;headers)) &lt; 0){
+		printf("sceHTTPFreeHeaderList() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	filter-&gt;headers = NULL;
+
+	/* サブパート2に対して処理を行なう */
+	if((ret = sceHTTPMimeFilterApply(filter, NULL)) &lt; 0){
+		printf("sceHTTPMimeFilterApply() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	/* サブパート2のヘッダリストを解放 */
+	if((ret = sceHTTPFreeHeaderList(filter-&gt;headers)) &lt; 0){
+		printf("sceHTTPFreeHeaderList() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+	filter-&gt;headers = NULL;
+
+	...
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_12">
+<a href="#Heading3_2"> 2. </a>12 <b>チャンク受信処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp では、HTTP/1.1 のチャンク形式エンコーディングの受信に対応しています。<br>具体的には、sceHTTPSetOption() の sceHTTPO_ReceiveChunkCB コードによってチャンク受信時のコールバック関数を設定できます。このときコールバック関数のユーザ定義引数を与えておくことができます。この引数の値がチャンク受信時のコールバック関数が呼ばれるときの第四引数の値になります。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	static void end_cb(sceHTTPClient_t *client, int flags, void *uopt){
+		...
+	}
+
+	static void chunk_cb(sceHTTPClient_t *client, char *cdata, int clen, void *uopt){
+		...
+	}
+
+	sceHTTPClient_t *client;
+	void *uopt;
+
+	/* クライアント構造体を作成 */
+	client = sceHTTPCreate();
+
+	uopt = ...;
+	/* チャンク受信コールバック関数とユーザ定義引数を設定する */
+	if(sceHTTPSetOption(client, sceHTTPO_ReceiveChunkCB, chunk_cb, uopt) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_13">
+<a href="#Heading3_2"> 2. </a>13 <b>エンコード、デコード処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttpはボディ部のエンコード、デコードのためのルーチンを提供しています。サポートしているエンコード方式とエンコード、デコード関数は以下の通りです。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;・Base64&nbsp;</td>
+<td valign="TOP">&nbsp;sceBASE64Encoder(), sceBASE64LineDecoder()&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・quoted-printable&nbsp;</td>
+<td valign="TOP">&nbsp;sceQPrintableEncoder(), sceQPrintableLineDecoder()&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・url-encode&nbsp;</td>
+<td valign="TOP">&nbsp;sceURLEscape(), sceURLUnescape()&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_14">
+<a href="#Heading3_2"> 2. </a>14 <b>ファイルによる受信</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">大きなファイルのダウンロードなどメモリに応答の結果をおくことができない場合のために、レスポンスのエンティティ(ボディ)部分をファイルに書き出すことができます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	/* 書き込み可能としてファイルをオープン */
+	fd = sceOpen(filename, SCE_WRONLY|SCE_CREAT|SCE_TRUNC);
+    	
+	/* クライアント構造体を作成 */
+	client = sceHTTPCreate();
+
+	uopt = ...;
+	/* ローカルファイルディスクリプタを設定する */
+	if(sceHTTPSetOption(client, sceHTTPO_LocalFile, fd) &lt; 0){
+		printf("sceHTTPSetOption() failed.(%d)\n",
+			sceHTTPGetClientError(client));
+		ERR_STOP;
+	}
+
+	...
+
+	/* ファイルをクローズ */
+	sceClose(fd);
+</pre></font></div>
+<div style="margin-left:50px;"><br>デフォルトでは libhttpはファイルへのライト関数として sceWrite を設定されたローカルファイルディスクリプタを第一引数を呼び出します。ライブラリ内で設定されたローカルファイルディスクリプタが使われるのはこのときだけですので、このローカルファイルディスクリプタとしてソケットディスクリプタを指定し、sceWrite と同じ形式のライト関数を与えて設定することで書き出し先をソケットとすることもできます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>注意事項</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>エラーコードについて</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp 内部でエラーが起きた場合、各関数の返り値はエラーを示す値となり、詳細なエラー理由は sceHTTPGetClientError() によって取得できます。<br>またライブラリのエラーではなく、HTTP で規定されている応答コードの各エラー値は、sceHTTPErrorString() によって取得できます。<br>sceHTTPGetClientError()の返り値がsceHTTPError_SOCKET、またはsceHTTPError_CONNECTだった場合，さらに詳細なnetglueレイヤでのエラーコードを sceHTTPGetSocketError() によって取得できます。<br>ただしsceHTTPOpen() 関数実行後、サーバ側から接続を絶たれた場合には、その後の secHTTPRequest() 関数の呼び出しが返り値 -1 で失敗しsceHTTPGetClientError() 関数で取得できる値が sceHTTPError_CONNECTとなることがあります。 この場合は sceHTTPGetSocketError() はエラーの理由を示しません。<br>sceHTTPGetSocketError() の示すエラーコードの意味については netglueドキュメントを参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>ユーザエージェントについて</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttp では、デフォルトの User-Agent ヘッダ値として"unknown (sceHTTPLib-X.X.X)" (X.X.X はバージョン番号) を用意しています。<br>しかしこれはサンプル用途のみの値ですので、タイトルで使用する際にはsceHTTPSetOption() の sceHTTPO_ClientName コードによってUser-Agent 値を適切に書き換えて下さい。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>libhttpライブラリ内部でのスレッド生成について</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libhttpでは、内部的にスレッドを生成します。このため EE kernel のスレッド最大数をこえないように注意して下さい。内部的に生成されるスレッドの数は sceHTTPCreate() で 2 個、ノンブロッキングモード時のsceHTTPRequest() で 1 個です。 なおこれらのスレッドの優先度は関数sceHTTPGetOption(), sceHTTPSetOption() によって取得・設定可能です。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

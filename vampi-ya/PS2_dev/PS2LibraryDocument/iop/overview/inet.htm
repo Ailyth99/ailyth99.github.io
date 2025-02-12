@@ -1,0 +1,668 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>ネットワークライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/inet_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+ネットワークライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリ概要</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>ソフトウェア構成</b><br></a>
+    <a href="#Heading4_1_2"> <b>対応機種</b><br></a>
+    <a href="#Heading4_1_3"> <b>ネットワーク設定情報の管理</b><br></a>
+    <a href="#Heading4_1_4"> <b>制限および注意事項</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>動作確認</b></a>
+<p><a href="#Heading3_3">  3 <b>inet.irxの起動オプション</b></a>
+<p><a href="#Heading3_4">  4 <b>ppp.irxの起動オプション</b></a>
+<p><a href="#Heading3_5">  5 <b>INET APIの概要</b></a>
+    <ul>
+    <a href="#Heading4_5_1"> <b>Connection</b><br></a>
+    <a href="#Heading4_5_2"> <b>タイムアウト</b><br></a>
+    <a href="#Heading4_5_3"> <b>マルチスレッド対応</b><br></a>
+    </ul>
+<p><a href="#Heading3_6">  6 <b>注意事項</b></a>
+    <ul>
+    <a href="#Heading4_6_1"> <b>電源OFF処理</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリ概要</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">ネットワークサポートライブラリは、"PlayStation 2"をネットワーク（インターネット）に接続するためのIOPライブラリです。<br>プロトコルとしてはTCPおよびUDP、それらの下位プロトコルとしてIP、ARP、PPPをサポートしています。<br>ハードウェア的には、次の3とおりのネットワーク接続機器をサポートしています。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> USBモデムを用いたダイヤルアップ接続</li>
+         <li VALUE=2> ハードディスクドライブ装置を用いたLAN接続</li>
+         <li VALUE=3> USB-Ethernetアダプタを用いたLAN接続（開発専用）<br>※弊社から提供するドライバは開発専用でタイトルアプリケーションには使用できませんが、独自に開発したドライバを使用することには制限はありません。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">ネットワークに接続するためには、LAN接続であればIPアドレスやサブネットマスクなど、ダイヤルアップ接続であれば接続先の電話番号やユーザアカウントなど、ユーザが個々に設定しなければならない情報が必要です。ネットワークにアクセスするアプリケーションがこれらの情報を共通に使用できるよう、設定ファイルの形式／設定ファイルに基づいてソフトウェアのコンフィグレーションを行うためのライブラリ／設定ファイルを管理編集するためのライブラリが用意されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>ソフトウェア構成</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ネットワークサポートライブラリは、次に示すように大きく3つの部分に分かれます。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/inet001.gif"><p>
+<b>図 1 ネットワークサポートライブラリの構成</b>
+
+</div>
+<br>
+<div style="margin-left:50px;"><br>INETプロトコルスタックの階層図を次に示します。斜線で示した部分のドライバはツール＆ミドルウェアライセンシから提供されます。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/inet002.gif"><p>
+<b>図 2 INETプロトコルスタックの階層構造</b>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>対応機種</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ネットワークサポートライブラリは現在のところ、開発専用として以下のUSB-Ethernetアダプタをサポートしています（これ以外でも、ADMtek AN986（Pegasus）チップを用いた10/100Mbps対応USB-Ethernetアダプタであれば使用できる可能性がありますが、保証はいたしません）。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>地域</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>メーカー名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>製品名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;MELCO&nbsp;</td>
+<td valign="TOP">&nbsp;LUA-TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;MELCO&nbsp;</td>
+<td valign="TOP">&nbsp;LUA2-TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;I-O DATA&nbsp;</td>
+<td valign="TOP">&nbsp;USB-ET/TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;PLANEX&nbsp;</td>
+<td valign="TOP">&nbsp;UE-100TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;PLANEX&nbsp;</td>
+<td valign="TOP">&nbsp;UE-200TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;Corega&nbsp;</td>
+<td valign="TOP">&nbsp;FEther USB-TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;Elecom&nbsp;</td>
+<td valign="TOP">&nbsp;LD-USBL/TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アメリカ&nbsp;</td>
+<td valign="TOP">&nbsp;Linksys&nbsp;</td>
+<td valign="TOP">&nbsp;USB100TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アメリカ&nbsp;</td>
+<td valign="TOP">&nbsp;D-Link&nbsp;</td>
+<td valign="TOP">&nbsp;DSB-650TX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アメリカ&nbsp;</td>
+<td valign="TOP">&nbsp;D-Link&nbsp;</td>
+<td valign="TOP">&nbsp;DSB-650TX B1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヨーロッパ&nbsp;</td>
+<td valign="TOP">&nbsp;ADMtek&nbsp;</td>
+<td valign="TOP">&nbsp;Pegasus&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヨーロッパ&nbsp;</td>
+<td valign="TOP">&nbsp;D-Link&nbsp;</td>
+<td valign="TOP">&nbsp;DU-E100&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヨーロッパ&nbsp;</td>
+<td valign="TOP">&nbsp;Linksys&nbsp;</td>
+<td valign="TOP">&nbsp;USB100TX B&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヨーロッパ&nbsp;</td>
+<td valign="TOP">&nbsp;D-Link&nbsp;</td>
+<td valign="TOP">&nbsp;DU-E100 B1&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">USBモデム等については、次の各機種についてそれぞれメーカーからドライバが提供されています（最新情報はSCE-NETでご確認ください）。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>地域</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>メーカー名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>製品種別</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>製品名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;サン電子&nbsp;</td>
+<td valign="TOP">&nbsp;モデム&nbsp;</td>
+<td valign="TOP">&nbsp;OnlineStation（56Kbps）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;サン電子&nbsp;</td>
+<td valign="TOP">&nbsp;ISDNターミナル&nbsp;<br>&nbsp;アダプタ&nbsp;</td>
+<td valign="TOP">&nbsp;TS128JX3&nbsp;<br>&nbsp;TS128NS&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;サン電子&nbsp;</td>
+<td valign="TOP">&nbsp;携帯電話/PHS&nbsp;<br>&nbsp;接続ケーブル&nbsp;</td>
+<td valign="TOP">&nbsp;PS64P1（DDIポケット用）&nbsp;<br>&nbsp;PS64P2（NTTドコモ､ASTEL PHS用）&nbsp;<br>&nbsp;DS96L（PDC用）&nbsp;<br>&nbsp;DS96LS（PDCp）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;オムロン&nbsp;</td>
+<td valign="TOP">&nbsp;モデム&nbsp;</td>
+<td valign="TOP">&nbsp;ME5614USB&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本&nbsp;</td>
+<td valign="TOP">&nbsp;オムロン&nbsp;</td>
+<td valign="TOP">&nbsp;ISDNターミナル&nbsp;<br>&nbsp;アダプタ&nbsp;</td>
+<td valign="TOP">&nbsp;MT128S-D/U2&nbsp;<br>&nbsp;MT128S-D/U2(S)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">なお、同時に複数のデバイスを扱うことは可能ですが、IOPの空きメモリ量によってはデバイス数が制限されることがあります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>ネットワーク設定情報の管理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ダイヤルアップ接続に使用するモデムの機種やプロバイダの電話番号やユーザアカウント、LAN接続に使用するIPアドレスやサブネットマスクなど、ユーザ個々に異なるネットワーク設定情報は、規定された形式の設定管理ファイル／設定ファイルとして、メモリーカード等に保存されます。このとき、"Playstation 2"の内蔵シリアルナンバーを用いて暗号化（個体符号化）を行い、他の"Playstation 2"本体では設定ファイルを読み出せないしくみになっています（開発時には個体符号化を行わないこともできます）。<br>設定管理ファイル／設定ファイルの読み書きはNETCNF APIを用いて行います。また、メモリ上に読み込んだ設定ファイルの内容に基づいてINETプロトコルスタックの動作設定を行う処理はINETCTL APIを用いて行います。<br>タイトルアプリケーションではこれらのAPIを用いて、ユーザに設定管理ファイル／設定ファイルを編集作成してもらう処理、接続開始の確認をしてもらうなどの処理が必要になります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_4">
+<a href="#Heading3_1"> 1. </a>4 <b>制限および注意事項</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">現在のところ、以下の制限および注意事項があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> 複数のI/Fを同時に接続した場合、interface名（ethXやpppX）はI/Fが登録された順にeth0, eth1,...となります。USBの仕様上、複数のデバイスを接続した場合にどのデバイスが先に認識されるかは不定ですので（たいていは同じ結果になりますが）、interface名とデバイスとの対応も不定になります。特定のデバイスに特定のinterface名を割り当てることはできません。</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>動作確認</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">USB-Ethernetアダプタを使用してネットワークサポートライブラリの起動と動作確認手順を説明します。なお、以下の記述で、$MODULESは/usr/local/sce/iop/modules、$CONFは/usr/local/sce/conf/netを表します。それぞれ適切なディレクトリ名に置き換えて指定してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1"><h4>
+(1)&nbsp;<b>デバイスの接続</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ネットワークサポートライブラリでサポートしているUSB-Ethernetアダプタを用意してDTL-T10000のUSBポートに接続し、LANに接続してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_2"><h4>
+(2)&nbsp;<b>DHCPサーバの準備</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">DHCPサーバは必須ではありませんが、設定ファイルの作成が簡単に済みますので、できればネットワーク内にDHCPサーバを用意してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_3"><h4>
+(3)&nbsp;<b>設定ファイルの作成</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">$CONFの下にある設定ファイルのサンプルを参考にして、設定ファイルを作成してください。<br>DHCPを使う場合は、net003.cnf / ifc003.cnf / dev003.cnfをそのまま使用できます。<br>DHCPを使わない場合は、ifc000.cnfのaddress、netmask等に適切な値を設定してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_4"><h4>
+(4)&nbsp;<b>INETモジュールの起動</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ツールのディレクトリへ移動してdsidbを起動し、いったんリセットしてからinet.irxを起動してください。<br></div>
+<div style="margin-left:80px;">$ cd /usr/local/sce/iop/util/inet<br>$ dsidb<br>dsidb R&gt; reset<br>dsidb R&gt; mstart $MODULES/inet.irx debug=18<br></div>
+<div style="margin-left:67px;">この時点ではI/Fは何も存在していません。debug引数により、ログメッセージをより詳細に出力することができます。2桁の16進数を変更することで出力するログの種類を変更できます。詳しくは後述の起動オプションの項を参照してください。<br>次にINETモジュールおよびその下位レイヤが残すログ情報を表示・記録するためのログモジュールを起動してください。<br></div>
+<div style="margin-left:80px;">dsidb R&gt; mstart $MODULES/inetlog.irx host1:inet.log<br></div>
+<div style="margin-left:67px;">このように引数でファイル名を指定するとそのファイルにログ情報が記録されます。ファイル名を指定しないと、ログ情報はprintfを用いてコンソールに出力されます。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_5"><h4>
+(5)&nbsp;<b>ネットワーク関連の動作設定</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">設定ファイル管理モジュールを常駐させ、設定管理ファイル（netXXX.cnf、XXXは000～999）の内容をメモリに読み込みます。ここでは例として、net003.cnfとします。<br></div>
+<div style="margin-left:80px;">dsidb R&gt; mstart $MODULES/netcnf.irx<br>dsidb R&gt; mstart $MODULES/inetctl.irx -no_decode host1:$CONF/net003.cnf<br></div>
+<div style="margin-left:67px;">net003.cnf内で間接的に指定されている設定ファイルの内容もこれによって読み込まれます。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_6"><h4>
+(6)&nbsp;<b>ドライバモジュールの起動</b><br></h4>
+</a></div>
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> モデムを利用してPPP接続を行う場合<br>まずPPPモジュールを起動し、次にモデムドライバモジュールを起動してください。<br><br>dsidb R&gt; mstart $MODULES/ppp.irx<br>dsidb R&gt; mstart &lt;modem_driver&gt;<br><br>この時点でモデムドライバモジュールがPPPモジュールに対して登録を行い、それによってPPPモジュールがINETモジュールに対してPPPのネットワークI/Fを登録します。</li>
+         <li VALUE=2> USBイーサネット接続を行う場合<br>まずUSBDモジュールを起動し、次にAN986モジュールを起動してください。<br><br>dsidb R&gt; mstart $MODULES/usbd.irx<br>dsidb R&gt; mstart $MODULES/an986.irx<br><br>この時点でAN986モジュールがINETモジュールに対してネットワークI/Fを登録します（もしこのときUSB-Ethernetアダプタが接続されていなければ、接続された時点で行われます）。</li>
+         <li VALUE=3> USBイーサネット上で PPPoE(PPP over Ethernet)接続を行う場合<br>まずUSBDモジュールを起動し、次にAN986モジュールを起動してください。<br><br>dsidb R&gt; mstart $MODULES/usbd.irx<br>dsidb R&gt; mstart $MODULES/an986.irx<br><br>この時点でAN986モジュールがINETモジュールに対してイーサネットのネットワークI/Fを登録します（もしこのときUSB-Ethernetアダプタが接続されていなければ、接続された時点で行われます）。<br>その後、PPPoE用のインタフェースを登録するために、PPPモジュールを起動し、次にPPPoEモジュールを起動してください。<br><br>dsidb R&gt; mstart $MODULES/ppp.irx<br>dsidb R&gt; mstart $MODULES/pppoe.irx<br><br>PPPoEモジュールはPPPモジュールに対して通常のモデムのように振舞います。PPPoEモジュールがロードされるとPPPモジュールに対して登録を行い、それによってPPPモジュールがINETモジュールに対してPPPのネットワークI/Fを登録します。</li>
+         <li VALUE=4> HDDイーサネット接続を行う場合<br>まずDEV9モジュールを起動し、次にSMAPモジュールを起動してください。<br><br>dsidb R&gt; mstart $MODULES/dev9.irx<br>dsidb R&gt; mstart $MODULES/smap.irx<br><br>この時点でSMAPモジュールがINETモジュールに対してネットワークI/Fを登録します。</li>
+         <li VALUE=5> HDDイーサネット上で PPPoE(PPP over Ethernet)接続を行う場合<br>まずDEV9モジュールを起動し、次にSMAPモジュールを起動してください。<br><br>dsidb R&gt; mstart $MODULES/dev9.irx<br>dsidb R&gt; mstart $MODULES/smap.irx<br><br>この時点でSMAPモジュールがINETモジュールに対してネットワークI/Fを登録します。その後、PPPoE用のインタフェースを登録するために、PPPモジュールを起動し、次にPPPoEモジュールを起動してください。<br><br>dsidb R&gt; mstart $MODULES/ppp.irx<br>dsidb R&gt; mstart $MODULES/pppoe.irx<br><br>PPPoEモジュールはPPPモジュールに対して通常のモデムのように振舞います。PPPoEモジュールがロードされるとPPPモジュールに対して登録を行い、それによってPPPモジュールがINETモジュールに対してPPPのネットワークI/Fを登録します。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:67px;"><br>上記において、INETモジュールにネットワークI/Fが登録されると、INETモジュールがINETCTLモジュールに対して「I/Fの状態が変化した(この場合はデバイスがattachされた)こと」を通知します。INETCTLは読み込まれている設定情報に従い、INETに対してINET Control APIを用いて動作設定を行います。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_7"><h4>
+(7)&nbsp;<b>ifconfigによる確認</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ifconfigを実行してI/Fの状態を確認してください。<br></div>
+<div style="margin-left:80px;">dsidb R&gt; mstart /usr/local/sce/iop/util/inet/ifconfig.irx<br></div>
+<div style="margin-left:67px;">以下の例のように表示されれば正常です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>eth0    Module:an986  Prot:0  Impl:0  Loc:USB-1
+        Vendor:Melco  Device:LUA-TX  HWaddr:00:40:26:61:31:F9
+        inet addr:192.168.0.16  Mask:255.255.255.0
+        UP RUNNING ARP DHCP  MTU:1500
+        RX packets:3 bytes:746 errros:0 dropped:0
+        TX packets:4 bytes:764 errros:0 dropped:0
+</pre></font></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_8"><h4>
+(8)&nbsp;<b>routeによる確認</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">routeを実行して、ルーティング情報を確認してください。<br></div>
+<div style="margin-left:80px;">dsidb R&gt; mstart /usr/local/sce/iop/util/inet/route.irx<br></div>
+<div style="margin-left:67px;">以下の例のように表示されれば正常です。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>Destination   Gateway   Genmask     Flags   MSS    Window  Iface
+192.168.0.0     *    255.255.255.0    U      0        0     eth0
+default     192.168.0.1     *        UG      0        0     eth0
+
+</pre></font></div>
+<div style="margin-left:67px;">default Gatewayが設定されない場合は、DHCPサーバ側の設定を確認してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_9"><h4>
+(9)&nbsp;<b>nsconfigによる確認</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">nsconfigを実行して、ネームサーバの設定を確認してください。<br></div>
+<div style="margin-left:80px;">dsidb R&gt; mstart /usr/local/sce/iop/util/inet/nsconfig.irx<br></div>
+<div style="margin-left:67px;">以下の例のように表示されれば正常です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>nameserver 192.168.0.2
+</pre></font></div>
+<div style="margin-left:67px;">「nsconfig: No name server」と表示された場合は、DHCPサーバ側の設定を確認してください。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>inet.irxの起動オプション</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">INETモジュールinet.irxには以下の起動オプションがあります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>mem=<i></b>size</i><br></h4></div>
+
+<div style="margin-left:67px;">inet.irxが確保するメモリプールの容量を指定します。<br><i>size</i>には容量を10進数で指定します。「KB」または「MB」を後に付けて、たとえば「mem=256KB」のように指定することもできます。指定がない場合のデフォルト値は128KBです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>thpri=<i></b>thpri</i><br></h4></div>
+
+<div style="margin-left:67px;">inet.irxが各I/Fごとに生成するスレッドの優先順位を指定します。<i>thpri</i>は10進数で指定します。指定がない場合のデフォルト値は48です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>debug=<i></b>flags</i><br></h4></div>
+
+<div style="margin-left:67px;">inet.irxが記録するログ情報の種類を指定します。<i>flags</i>は16進数で、以下のビットフラグのORを取った値を指定します。<br></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>記録内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit0（0x01）&nbsp;</td>
+<td valign="TOP">&nbsp;エラー表示を記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit1（0x02）&nbsp;</td>
+<td valign="TOP">&nbsp;パケット表示の際にアドレス部分も記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit2（0x04）&nbsp;</td>
+<td valign="TOP">&nbsp;DNS関係のログを記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit3（0x08）&nbsp;</td>
+<td valign="TOP">&nbsp;送信パケットを記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit4（0x10）&nbsp;</td>
+<td valign="TOP">&nbsp;受信パケットを記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit5（0x20）&nbsp;</td>
+<td valign="TOP">&nbsp;BOOTP,DHCP関係のログを記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit6（0x40）&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ関係のデバッグ機能を有効にする&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit7（0x80）&nbsp;</td>
+<td valign="TOP">&nbsp;送受信パケットのバイトダンプを行う&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">指定がない場合のデフォルト値はdebug=00で、何も記録しません。<br>記録したログ情報は、inetlog起動時の指定によって、コンソールに表示したりhost1:のファイルに転送することができます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>ppp.irxの起動オプション</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">PPPモジュールppp.irxには以下の起動オプションがあります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>thpri=<i></b>thpri</i><br></h4></div>
+
+<div style="margin-left:67px;">ppp.irxが各I/Fごとに生成するスレッドの優先順位を指定します。<i>thpri</i>は10進数で指定します。指定がない場合のデフォルト値は68です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>debug=<i></b>flags</i><br></h4></div>
+
+<div style="margin-left:67px;">ppp.irxが記録するログ情報の種類を指定します。<i>flags</i>は16進数で、以下のビットフラグのORを取った値を指定します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>記録内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit0（0x01）&nbsp;</td>
+<td valign="TOP">&nbsp;PPPの状態を記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit1（0x02）&nbsp;</td>
+<td valign="TOP">&nbsp;LCP、IPCPの状態を記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit2（0x04）&nbsp;</td>
+<td valign="TOP">&nbsp;PAP、CHAPの状態を記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit3（0x08）&nbsp;</td>
+<td valign="TOP">&nbsp;チャット処理と応答を記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit4（0x10）&nbsp;</td>
+<td valign="TOP">&nbsp;認証中のプライベート情報なども記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit5（0x20）&nbsp;</td>
+<td valign="TOP">&nbsp;DLLレベルでのデータのやり取りを記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit6（0x40）&nbsp;</td>
+<td valign="TOP">&nbsp;DLLデータ表示の際にパケットダンプも行う&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit7（0x10000）&nbsp;</td>
+<td valign="TOP">&nbsp;PPP内部のタイマ情報を記録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit7（0x20000）&nbsp;</td>
+<td valign="TOP">&nbsp;PPPへのイベントを記録する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">指定がない場合のデフォルト値はdebug=0fです。また、これらの設定は起動後に上位の設定制御モジュールによって変更されることがあります。<br>記録したログ情報は、inetlog起動時の指定によって、コンソールに表示したりhost1:のファイルに転送することができます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>INET APIの概要</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">INET APIは、ネットワークサポートライブラリがタイトルアプリケーションに対して提供するデータ送受信サービスで、プロトコルとしてはTCPおよびUDPをサポートし、さらに下位レイヤであるIPパケットを直接取り扱うこともできます。<br>TCPはエラー検出・再送制御・フロー制御などを伴うプロトコルであり、通信の信頼性が保証されます。一方、UDPはオーバーヘッドの小さい簡易なプロトコルで、データの内容や到達性が保証されません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_1">
+<a href="#Heading3_5"> 5. </a>1 <b>Connection</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">TCPとUDPとでは通信相手への「接続」の意味が異なりますが、INET APIでは合わせてConnectionと呼びます。INET APIを用いての通信処理は、まず通信相手やプロトコルなどを指定してConnectionを生成し、Connectionを開き、送受信を行い、最後にConnectionを閉じるという手順になります。Connectionはそれぞれ生成した際に与えられるConnection IDによって区別されます。<br>なおINET APIでIPパケットを直接扱う場合(Raw IPタイプ)も、本来IPレイヤには「接続」という概念はないのですが、便宜上Connectionという表現を使用します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_2">
+<a href="#Heading3_5"> 5. </a>2 <b>タイムアウト</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">INET APIの関数はすべて同期I/O型で、処理が終了するまで、あるいは明示的にアボートされるまで呼び出し元にはリターンしません。送受信処理で待ち状態が生じると関数内でスリープしますので、送受信処理はConnectionごとに少なくともひとつのスレッドを生成して行う必要があります。<br>待ち状態が生じる可能性のある関数は、タイムアウト時間を引数で指定できるようになっています。指定したタイムアウト時間を経過するとタイムアウトエラーとなり、sceINETE_TIMEOUTを返り値としてリターンします。タイムアウト時間として負の値を指定すると無限大とみなされ、処理終了までスリープして待ち続けることになります。また、0を指定すると待ち時間なしの指定となりますが、待ち時間なしで送受信を繰り返すと他のスレッドに制御が渡らなくなりますので、たとえば次のように待ち時間なしで送受信を繰り返すような処理を行ってはいけません。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>while(1){
+    flags = 0;
+    if(0 &gt; (r = sceInetRecv(cid, buf, sizeof(buf), &flags, 0)))
+        エラー処理;
+    else
+        受信処理;
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_3">
+<a href="#Heading3_5"> 5. </a>3 <b>マルチスレッド対応</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">INET APIの関数は複数のスレッドから同時に呼び出すことができます。あるConnectionに対して複数のスレッドが同時に同じ動作（送信または受信）を行った場合は、処理はキューイングされて、スレッドの優先順にしたがって処理されます。<br>INET APIの関数はスレッド独立部から呼び出すことはできません。KE_ILLEGAL_CONTEXTのエラーとなります。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_6">
+<h2>
+ 6 <b>注意事項</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_1">
+<a href="#Heading3_6"> 6. </a>1 <b>電源OFF処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">HDDイーサネットを利用している場合に"PlayStation 2"本体の電源OFFする場合は、ハードディスクドライブ(EXPANTION BAYタイプ)に対応するため、CD(DVD)-ROMライブラリの関数を使用して以下の処理を行うことが必須です。<br><br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> sceCdPOffCallback()で割り込み処理を検出する</li>
+         <li VALUE=2> dev9 ライブラリの DDIOC_OFF devctl コマンドを使用して、電源をOFFする<br>EEの場合： sceDevctl ("dev9x:",DDIOC_OFF,  NULL, 0, NULL, 0);<br>IOPの場合：devctl("dev9x:", DDIOC_OFF, NULL, 0, NULL, 0); </li>
+         <li VALUE=3> sceCdPowerOff()で"PlayStation 2"本体の電源をOFFする</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;"><br>なお、EXPANTION BAYタイプのみsceCdPOffCallback()で割り込みを検出することはできます。詳細は、ネットワークサンプル(ee(iop)/sample/inet)、ハードディスクライブラリのサンプル(ee/samle/hdd/basic)およびCD(DVD)-ROMライブラリリファレンス(cdvd_rf)、dev9ライブラリリファレンスを参照してください。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

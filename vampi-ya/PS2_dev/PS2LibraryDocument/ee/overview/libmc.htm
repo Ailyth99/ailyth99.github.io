@@ -1,0 +1,590 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>メモリーカードライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/mc_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+メモリーカードライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリの概要</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>概要</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>サンプルプログラム等</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>メモリーカード(PS2)使用手順の概略</b><br></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>初期化（マルチタップを使わない場合）</b><br></a>
+    <a href="#Heading4_2_2"> <b>初期化（マルチタップを使う場合）</b><br></a>
+    <a href="#Heading4_2_3"> <b>メモリーカード(PS2)の差し込み確認</b><br></a>
+    <a href="#Heading4_2_4"> <b>空き容量のチェック</b><br></a>
+    <a href="#Heading4_2_5"> <b>セーブ処理</b><br></a>
+    <a href="#Heading4_2_6"> <b>フォーマット処理</b><br></a>
+    <a href="#Heading4_2_7"> <b>オートセーブ処理</b><br></a>
+    <a href="#Heading4_2_8"> <b>ファイル破損の判定と処置</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>注意事項</b><br></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>RPC再入に関する注意</b><br></a>
+    <a href="#Heading4_3_2"> <b>スレッドプライオリティの変更</b><br></a>
+    <a href="#Heading4_3_3"> <b>ファイル作成日時に関する注意</b><br></a>
+    <a href="#Heading4_3_4"> <b>抜き差しへの対処について</b><br></a>
+    <a href="#Heading4_3_5"> <b>エラー時の処置について</b><br></a>
+    <a href="#Heading4_3_6"> <b>メモリーカードに関する表示について</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>TRC規定事項</b><br></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>12.1 プログラミング上の注意点</b><br></a>
+    <a href="#Heading4_4_2"> <b>12.2 セーブについて</b><br></a>
+    <a href="#Heading4_4_3"> <b>12.3 ロードについて</b><br></a>
+    <a href="#Heading4_4_4"> <b>12.4 メモリーカードデバイスに関連するメッセージについて</b><br></a>
+    <a href="#Heading4_4_5"> <b>12.5 その他、ユーザーインタフェースにおける対処について</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリの概要</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EE上でメモリーカード(PS2)を制御するためのライブラリとして、libmcが提供されています。<br>libmcはメモリーカード(PS2)のハードウェアの違いを吸収し、メモリーカード(PS2)を介してのデータアクセスを支援します。<br>メモリーカード(PS2)へのアクセスはシリアル通信によって行われ、処理内容にもよりますが数フレーム～数十フレームの時間を要します。このため、libmcのほとんどの関数は非同期処理を行います。関数が呼び出されたときには処理の登録のみを行って直ちにリターンし、処理の終了確認・ステータスの取得は別途sceMcSync()を呼び出して行うしくみになっています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libmcに必要なファイルは次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ライブラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libmc.a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘッダファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libmc.h&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;モジュールファイル&nbsp;</td>
+<td valign="TOP">&nbsp;sio2man.irx&nbsp;<br>&nbsp;mtapman.irx（マルチタップ使用時のみ）&nbsp;<br>&nbsp;mcserv.irx&nbsp;<br>&nbsp;mcman.irx&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>サンプルプログラム等</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libmcを使用するサンプルプログラムとして、次のものがあります。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ee/sample/mc/basic<br>メモリーカードライブラリの基本機能確認サンプル
+</ul></div>
+<div style="margin-left:50px;"><br>メモリーカードに書き込むファイルの構成やデータ形式については、別ドキュメント「メモリーカード(PS2)ファイルシステム」を参照してください。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>メモリーカード(PS2)使用手順の概略</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">以下、プログラム上でメモリーカード(PS2)を扱うときの処理手順を説明します。マルチタップに対応するかどうかによって初期化の処理が異なります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>初期化（マルチタップを使わない場合）</b><br>
+</a>
+</h3>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> メモリーカード・ドライバ（IOPモジュール）のロード<br>sceSifLoadModule()を用いて、sio2man.irx, mcman.irx ,mcserv.irxをこの順番でロードします。padman.irxはsio2man.irxより後であれば、mcman.irx, mcserv.irxより先にロードしても後にロードしてもかまいません。</li>
+         <li VALUE=2> メモリーカード・ドライバの初期化<br>sceMcInit()を呼び出します。</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>初期化（マルチタップを使う場合）</b><br>
+</a>
+</h3>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> メモリーカード・ドライバ（IOPモジュール）のロード<br>sceSifLoadModule()を用いて、sio2man.irx, mtapman.irx, mcman.irx ,mcserv.irxをこの順番でロードします。padman.irxはmtapman.irxの後であれば、mcman.irx, mcserv.irxより先にロードしても後にロードしてもかまいません。</li>
+         <li VALUE=2> マルチタップ・ドライバの初期化<br>sceMtapInit()を呼び出します。</li>
+         <li VALUE=3> マルチタップスロット使用開始宣言<br>sceMtapPortOpen(2または3) を呼び出して、それぞれ"PlayStation 2"本体のメモリーカード差込口1，2に対してマルチタップ経由でアクセスできるように宣言します。</li>
+         <li VALUE=4> メモリーカード・ドライバの初期化<br>sceMcInit()を呼び出します。</li>
+         <li VALUE=5> マルチタップの接続確認<br>sceMtapGetConnection(2 または 3) を呼び出して、マルチタップが接続されていることを確認します（初期化時だけでなく、随時確認することができます）。</li>
+         <li VALUE=6> 使用可能スロット数の確認<br>マルチタップが接続されていることがわかれば、sceMcGetSlotMax(0または1) を呼び出してマルチタップが装備している最大スロット数を調べます。libmcの各関数で受け付けられるスロット番号は0～(最大数－1) となります。</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>メモリーカード(PS2)の差し込み確認</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">初期化が終わったら、sceMcGetInfo()を呼び出して、メモリーカード(PS2)が差し込まれていることを確認する必要があります。<br>この関数はほとんどのメモリーカード(PS2)操作関数と同じく、関数呼び出しによって処理の登録のみ行い、sceMcSync()でポーリングして処理終了を待つしくみになっています。終了待ちの間、他のメモリーカード(PS2)操作処理を登録することはできません。プログラムとしては以下のいずれかの形になります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>同期待ち</b><br></h4></div>
+
+<div style="margin-left:67px;">sceMcGetInfo(  ,  ,  ,  ,  );<br>sceMcSync(0,  ,  );<br></div>
+
+<div style="margin-left:40px;"><h4><b>非同期待ち</b><br></h4></div>
+
+<div style="margin-left:67px;">sceMcGetInfo(  ,  ,  ,  ,  );<br>while(!sceMcSync(1,  ,  )) {<br>	/* 他の処理 */<br>}<br></div>
+<div style="margin-left:50px;"><br>sceMcGetInfo(port, slot, type, free, format) において、type, free, formatのうち不要なパラメータを0にしておくと、処理完了までの時間が短くなります。<br>メモリーカード(PS2)の差し込み確認が終わると、sceMcGetInfo()以外のメモリーカード(PS2)操作関数が使用可能になります。使いかたはsceMcGetInfo()と同じで、それぞれの処理を登録してsceMcSync()で処理の完了を待つという組み合わせで呼び出します。<br>なお、ゲーム進行のためにメモリーカード(PS2)が必要なアプリケーションでは、起動時にメモリーカード(PS2)が差し込まれていない場合はその旨のメッセージを所要容量とともに表示し、そのまま開始するかどうかユーザの確認を求めてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>空き容量のチェック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカード(PS2)にファイルを作成するタイトルでは、起動時に、差し込まれているメモリーカード(PS2)に十分な空き容量があるかどうかをチェックしなければなりません。<br>ファイル作成に必要な容量を計算し（計算方法については別ドキュメント「メモリーカード(PS2)ファイルシステム」に解説があります）、sceMcGetInfo()で得た空きクラスタ数と比較して判断してください。空き容量が不足している場合はその旨のメッセージを所要容量とともに表示し、そのままゲームを開始するかどうかユーザの確認を求めてください。<br>なお、この空き容量のチェックは、セーブできないおそれがあるなら警告しておくという趣旨で行うものです。したがって、実際に必要な容量を適宜切り上げて判定してもかまいませんし、ファイルサイズが可変長の場合は最大値によって判定してかまいません。またファイルシステムの構造上、上記の方法では、実はセーブできるメモリーカード(PS2)をセーブできないと判定してしまう可能性がありますが、これもユーザにとって安全側の判定ですから差し支えありません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_5">
+<a href="#Heading3_2"> 2. </a>5 <b>セーブ処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">セーブ処理は、次のような流れで行ってください。<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libmc001.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">セーブ画面に入ったらまず、メモリーカード(PS2)の差し込み確認と空き容量のチェックをあらためて行ってください。ここで、ユーザがメモリーカード(PS2)を差し替えたり、キャンセルしてゲームに戻ったりすることができるようにしてください。ユーザの操作によりセーブ実行へと進んだところで、もしメモリーカード(PS2)が未フォーマットであれば、確認応答ののちフォーマット処理を行います。<br>フォーマット処理やデータ書き込みの間はソフトウェアリセット機能を無効にしておかなければなりません。また、メモリーカード(PS2)を抜いたり電源を切ったりしないようにというメッセージを表示するのがよいでしょう。<br>それぞれの処理が終わったら、正常終了を確認し、失敗したと判断されるときはその旨を明示したメッセージを表示してセーブ画面に戻ってください（ゲームに戻ってはいけません）。データ書き込みの正常終了は、書き込んだファイルの書き込み完了属性やファイルサイズで判定できます。また、データ中にチェックサムを設けると、破損ファイルをロード時に判定するためにも利用できます。<br>なお、セーブ中にメモリーカード(PS2)が抜き取られるなどすると、途中まで書き込まれた破損データができることになります。その際に対処しやすくするため、icon.sysファイルを最後に書き込むようにするとよいでしょう。icon.sysが書き込まれていない場合、破損データをユーザがブラウザ画面で削除することができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_6">
+<a href="#Heading3_2"> 2. </a>6 <b>フォーマット処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">新しいメモリーカード(PS2)は使用開始時にsceMcFormat()を用いてフォーマットを行う必要があります。<br>フォーマット処理はセーブ処理の一部として、データを書き込む直前にsceMcGetInfo()でメモリーカード(PS2)のステータスを調べ、未フォーマットとわかった場合に行ってください（通信エラーによる誤判断を避けるため、十分にリトライを行ってください）。メモリーカード(PS2)が未フォーマットであることとこれからフォーマット処理を行うことを明示したメッセージを画面に表示してユーザの確認を求め、ユーザが「はい」で応答したときのみフォーマットを行い、正常終了すればセーブデータの書き込みに移るようにしてください。これ以外の流れでのフォーマット処理、たとえばユーザの確認応答なしにフォーマットしたりフォーマットだけを行ったりという処理は禁止されています。<br>なお、ユーザが「いいえ」で答えたときにはセーブ処理に戻るようにしてください（ゲームに戻ってそのまま進行させないでください）。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_7">
+<a href="#Heading3_2"> 2. </a>7 <b>オートセーブ処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">オートセーブ機能（ゲーム中にユーザにそのつど知らせず自動的にセーブを行う機能）を実装する場合は、最初にセーブデータを作成する処理を上記の流れに沿って作成してください。それ以後のオートセーブ処理は、次のように行えばよいでしょう。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> メモリーカードが差し替えられていないことをチェックする</li>
+         <li VALUE=2> ソフトウェアリセット機能があれば無効にする</li>
+         <li VALUE=3> セーブデータを上書きする</li>
+         <li VALUE=4> 書き込みが正常終了したことをチェックし、もし失敗していればメッセージを表示する</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_8">
+<a href="#Heading3_2"> 2. </a>8 <b>ファイル破損の判定と処置</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">書き込み処理の最中にメモリーカード(PS2)が抜き取られるなど不測の事態によって、ファイルの内容が正しく記録されない場合や既存ファイルの内容が破壊される場合があります。<br>本質的にアプリケーション側では対処できないことですが、できるだけ危険を防止するため、ソフトウェアリセット機能（特別な操作によって他の処理に移行する機能）を実装しているアプリケーションでは書き込み処理の際にその機能を無効にしなければなりません。また、書き込み処理の最中にはメモリーカードデバイスを抜いたり電源を切ったりしないようにというメッセージを表示するようにしてください。また、データファイルを先に書き込み、icon.sysを最後に書き込むことをお勧めします。icon.sysが作られていないとブラウザ上でも破損データと表示され、ユーザが削除できます。<br>ファイルの書き込みが正常終了したかどうかの判定には、ファイルサイズとともにファイル属性の保存完了（sceMcFileAttrClosed）を利用することができます。この属性は、sceMcWrite()でデータを書き出してsceMcClose()またはsceMcFlush()でメモリーカード(PS2)に記録するという一連の書き込み処理がエラー無しに完了したことを表します。ただし、リリース1.4.5以前のライブラリを使用して作成されたファイルや"PlayStation 2"本体のメモリーカードブラウザ画面でコピーされたファイルではこの保存完了属性はセットされませんので、既存ファイルの破損判定には利用できません。読み込んだファイル内容が破損していないかどうか判定するため、データにチェックサムを付加することをお勧めします。<br>ロードの際に、チェックサムなどによってデータが壊れていると判断された場合は、その旨を明示するメッセージを表示してください。<br>また、セーブの際に破損ファイルのために空き容量が不足していると判断できる場合は、その旨を表示して破損ファイルを上書きまたは削除できるようにするとよいでしょう。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>注意事項</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>RPC再入に関する注意</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libmcの関数はSIF RPCを内部で使用します。そのため、複数のスレッドで利用する場合はRPC再入を起さないように注意が必要です。RPC再入については「SIFシステム」ドキュメントに解説がありますので参照してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_3_1_1"><h4>
+(1)&nbsp;<b>RPC WAIT関数</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">以下の関数はsceSifBindRpc() / sceSifCallRpc()をWAIT実行します。RPC再入に注意するほか、割り込み禁止状態や割り込みハンドラ内で呼び出さないようにしてください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> sceMcInit()
+</ul></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_3_1_2"><h4>
+(2)&nbsp;<b>RPC NOWAIT関数</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">sceMcInit()を除いて、libmcのすべての関数はsceSifBindRpc() / sceSifCallRpc()をNOWAIT実行します。RPC再入に注意するほか、割り込みハンドラ内では呼び出さないようにしてください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_3_1_3"><h4>
+(3)&nbsp;<b>RPCチェック関数</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">以下の関数はsceSifCheckStatRpc()を呼び出します。RPC再入に注意して使用してください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> sceMcSync()
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>スレッドプライオリティの変更</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libmcのIOP側モジュールmcserv.irxのスレッドプライオリティは、デフォルトでは104になっています。必要に応じて、モジュールロード時にプライオリティを指定し、また、実行中に変更することができます。<br>モジュールロード時に指定するには、次のように、sceSifLoadModule()の第3引数で指定します。<br></div>
+<div style="margin-left:67px;">unsigned char *param = "thpri=100";<br>sceSifLoadModule( "host0:/usr/local/sce/iop/modules/mcserv.irx", strlen(param)+1, param);<br></div>
+<div style="margin-left:50px;"><br>実行中にプライオリティを変更するには、sceMcChangeThreadPrioriry()を呼び出します。詳しくは関数リファレンスを参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>ファイル作成日時に関する注意</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ファイル作成日時はJST（日本標準時）によって記録されます。海外版"Playstation 2"においてもメモリーカード(PS2)にはJSTで記録されますので、必要に応じて現地時刻に換算してください。現地時刻への換算には、システムコンフィグレーションライブラリ（libscf）を利用することができます。詳しくはlibscfのドキュメントを参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>抜き差しへの対処について</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカードデバイスはアプリケーションの実行中に抜き差しされたり差し替えられたりする可能性があります。起動時の差し込み確認と空き容量の確認だけでなく、ロードやセーブ処理の際にその都度メモリーカードデバイスの状態を確認して処理を行ってください。<br>特に、容量不足などのメッセージを表示してユーザの確認を求める処理では、表示中にメモリーカードデバイスが差し替えられる可能性が多分にありますので注意してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>エラー時の処置について</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカードデバイスの読み書きに関してエラーが起こった場合、起こった状況を的確に表すメッセージを表示しなければなりません。メモリーカードデバイスが差し込まれていない、フォーマットされていない、容量が不足している、セーブに失敗した、ロードしたデータに異常があったなどの状況が区別できるようにしてください。<br>また、エラーが起こった際には、起こる直前の処理に戻るようにしてください。たとえばセーブしようとして空き容量が不足していた場合は、セーブ処理に戻って、ユーザがメモリーカード(PS2)を差し替えたりセーブをキャンセルしたりできるようにしなければなりません。<br>なお、メモリーカードデバイスとの通信に際して、ノイズなどによって誤ったステータスが返される可能性があります。エラーステータスが返された場合には、念のためリトライを行ったうえで判断するようにしてください。特に未フォーマットの判断を下す際には十分にリトライしてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_6">
+<a href="#Heading3_3"> 3. </a>6 <b>メモリーカードに関する表示について</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカードデバイスの操作に関するメッセージを表示する際には、対象がどのメモリーカードスロットであるかを明示しなければなりません。<br>メモリーカードスロットの正式な名称は「MEMORY CARD差込口1」「MEMORY CARD差込口2」、マルチタップ上のメモリーカードスロットは「MEMORY CARD差込口1-A」等となります。画面レイアウトの都合でこの正式名称を表示することが難しい場合は、「スロット1」などと省略してもかまいませんが、画面全体として「MEMORY CARD差込口1」を意味していることが明らかであるように配慮してください。また、解説書には必ず正式名称を記載してください。<br>メモリーカード(PS2)の正式名称「"PlayStation 2"専用メモリーカード(8MB)」の表示・記載に関しても同様です。画面レイアウトの都合でやむをえない場合は誤解の生じないように配慮した上で省略表記してかまいませんが、解説書には必ず正式名称を記載してください。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>TRC規定事項</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">タイトルアプリケーションでlibmcを使用する際には、TRC（Technical Requirement Checklist）で次の事柄が規定されていますので注意してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>12.1 プログラミング上の注意点</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>メモリーカード(PS2)への対応</b><br></h4></div>
+
+<div style="margin-left:67px;">セーブ用のディレクトリ、セーブデータ／icon.sys／アイコンなどのファイルを作成・削除する際に、ディレクトリ名・ファイル名・ファイル構成・icon.sys内の文書名など、それぞれ別ドキュメント「メモリーカード(PS2)ファイルシステム」の解説に従って作成してください。<br>なお、シリーズものなどでセーブデータを共通に使用できるようにしたい場合でも、セーブ用ディレクトリ等はタイトルごとに別々に作成しなければなりません。「前作のセーブデータをロードする」機能を実装するようにしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>PDAへの対応</b><br></h4></div>
+
+<div style="margin-left:67px;">PDAに対応しないアプリケーションでは、接続チェック以外にPDAへのアクセスを行ってはなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>128KBメモリーカードへの対応</b><br></h4></div>
+
+<div style="margin-left:67px;">容量128KBのメモリーカードに対しては、接続チェック以外にアクセスを行ってはなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ライブラリ初期化</b><br></h4></div>
+
+<div style="margin-left:67px;">sceMcInit()を用いて初期化を行ってください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>本体ブラウザ画面の確認</b><br></h4></div>
+
+<div style="margin-left:67px;">アプリケーションで書き込みを行ったメモリーカードデバイスの内容が、"PlayStation 2"本体のブラウザ画面で適切に表示されることを確認してください。確認する必要があるのは、セーブデータの一覧表示用アイコン、コピー中表示用アイコン、削除中表示用アイコン、文書名、使用容量です。また、セーブデータをコピー／削除する操作を行って、正しく処理できることを確認してください。<br>使用容量については、セーブデータ用ディレクトリ内のファイルサイズを元に計算した値と、ブラウザ画面に表示されている値とを比較して確認してください。計算方法は別ドキュメント「メモリーカード(PS2)ファイルシステム」に説明があります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ステータスチェックのリトライ</b><br></h4></div>
+
+<div style="margin-left:67px;">sceMcGetInfo()に対してsceMcSync()がエラーステータスを返した際には、数回リトライしたうえで判断を下してください。回数は規定されていませんので、ユーザに対するレスポンス性を考慮して適宜に設定してかまいません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_2">
+<a href="#Heading3_4"> 4. </a>2 <b>12.2 セーブについて</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>セーブ処理の流れ</b><br></h4></div>
+
+<div style="margin-left:67px;">セーブ処理とそれに伴うフォーマット処理は、このドキュメントで解説されている処理フローに沿って行ってください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>空き容量の判定</b><br></h4></div>
+
+<div style="margin-left:67px;">セーブに必要な空き容量があるかどうかは、sceMcGetInfo()を用いて取得した空きクラスタ数と、ファイルサイズから計算した所要クラスタ数とを比較して判定してください。計算方法は別ドキュメント「メモリーカード(PS2)ファイルシステム」に説明があります。また、所要クラスタ数を適宜切りのよい値に切り上げてもかまいません。実はセーブできる場合にセーブできないと判定してしまっても、ユーザにとっては安全側の判定ですから差し支えありません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_3">
+<a href="#Heading3_4"> 4. </a>3 <b>12.3 ロードについて</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>正常なロード機能</b><br></h4></div>
+
+<div style="margin-left:67px;">自身でセーブしたデータはもちろん、シリーズものなど他のアプリケーションのデータをロードできる場合は、元のアプリケーションでセーブしたデータも正しくロードできなければなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ロード時の書き込み処理の禁止</b><br></h4></div>
+
+<div style="margin-left:67px;">ロード処理の中で暗黙にフォーマットや領域確保などの書き込み処理を行ってはなりません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_4">
+<a href="#Heading3_4"> 4. </a>4 <b>12.4 メモリーカードデバイスに関連するメッセージについて</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">この項ではメッセージの内容を主として規定しています。フォーマットや容量チェックの処理自体はそれぞれ別の項で規定されている流れに従って行ってください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>的確なメッセージ</b><br></h4></div>
+
+<div style="margin-left:67px;">メッセージの内容はメモリーカードデバイスの状態を明確に表すようにしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>接続されていないことのメッセージ</b><br></h4></div>
+
+<div style="margin-left:67px;">メモリーカードデバイスにアクセスする際にメモリーカードデバイスが差し込まれていなければ、その都度メッセージを表示してください。ただし、オートセーブ機能に関しては、差し込まれていないことがわかったときに一度表示すればよいでしょう。<br></div>
+
+<div style="margin-left:40px;"><h4><b>フォーマット時のメッセージ</b><br></h4></div>
+
+<div style="margin-left:67px;">メモリーカードデバイスをフォーマットするときには、明示的なメッセージを表示してユーザの確認応答を求めなければなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>容量不足のメッセージ</b><br></h4></div>
+
+<div style="margin-left:67px;">起動時のチェック / セーブ画面に入ったときのチェックで空き容量が不足しているときは、必要な容量を添えてメッセージを表示してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書き込み中のメッセージ</b><br></h4></div>
+
+<div style="margin-left:67px;">書き込み処理中には、メモリーカードデバイスを抜いたり電源を切ったりしないように、ユーザーに注意を促すメッセージを表示するとよいでしょう。<br></div>
+
+<div style="margin-left:40px;"><h4><b>失敗時のメッセージ</b><br></h4></div>
+
+<div style="margin-left:67px;">データの読み書きに失敗した場合、何に失敗したか明示するメッセージを表示してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>対象差込口の明示</b><br></h4></div>
+
+<div style="margin-left:67px;">どのメモリーカードデバイスに関するメッセージなのかがはっきりするようにしてください。対応しているメモリーカード差し込み口がひとつだけで、そのことが解説書などに明示されていればこの限りではありません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_5">
+<a href="#Heading3_4"> 4. </a>5 <b>12.5 その他、ユーザーインタフェースにおける対処について</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>他のアプリケーションのデータ表示</b><br></h4></div>
+
+<div style="margin-left:67px;">他のアプリケーションのセーブデータを表示する際には、"PlayStation 2"本体のブラウザと同等の表示ができるようにしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>他のアプリケーションのデータの削除・上書き</b><br></h4></div>
+
+<div style="margin-left:67px;">他のアプリケーションのセーブデータを選択して削除・上書きできる機能を実装する場合、まずアイコンと文書名・使用量を表示してユーザが確認できるようにしてください。前項の規定により、"PlayStation 2"本体のブラウザと同等の表示を行うことが必要になります。全データの一括削除機能と、ファイルの属性変更は禁止されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>複数のセーブデータ</b><br></h4></div>
+
+<div style="margin-left:67px;">複数のセーブデータに対して自動生成した文書名を付けるのであれば、同じ文書名にならないよう連番を含めるなどしてください。ユーザが文書名を入力・変更できるのであれば、その必要はありません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>メモリーカードの抜き差し</b><br></h4></div>
+
+<div style="margin-left:67px;">メモリーカードデバイスは随時抜き差しされる可能性があることを念頭において、セーブまたはロード処理の際にはそのつど状態をチェックし、そのときのステータスに応じて処理を行うしくみにしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>メモリーカードの自動決定</b><br></h4></div>
+
+<div style="margin-left:67px;">読み書き対象とするメモリーカードデバイスをアプリケーション側で自動的に決定する場合は、ユーザに知らせなければなりませんので、決定した段階で画面に表示してください。決定ルールが簡単であれば、解説書に記載しておいてもかまいません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>セーブ / ロードの中断処理</b><br></h4></div>
+
+<div style="margin-left:67px;">メモリーカードデバイスの不都合などによりセーブ / ロード処理を進められない状況でも、ユーザができるだけセーブ / ロードを続けられるように処理フローを作成してください。アプリケーション側で中断して他の処理に移る際には、その旨のメッセージを表示して確認を求めなければなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ソフトウェアリセット</b><br></h4></div>
+
+<div style="margin-left:67px;">コントローラの特別な操作によって他の処理に移行するソフトウェアリセット機能を実装する場合、メモリーカードデバイスに対する書き込み中はその機能を無効にしなければなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>起動時のメモリーカードチェック</b><br></h4></div>
+
+<div style="margin-left:67px;">アプリケーションの起動時、ユーザから見てなるべく早い段階でメモリーカードデバイスの状態をチェックしてください。ゲームの進行上メモリーカード(PS2)が必要なアプリケーションではメモリーカード(PS2)が差し込まれていない場合、メモリーカード(PS2)がなくても進行できるアプリケーションでは空き容量が足りない場合に、その状況と必要な空き容量を示すメッセージを表示して、ゲームを開始するかどうかユーザの確認を求めるようにしてください。そのままゲームを開始する旨の応答があるか、メモリーカードデバイスが差し込まれたり差し替えられたりして条件が満たされたら、ゲームを開始してかまいません。<br>未フォーマットのメモリーカードデバイスは空のメモリーカードデバイスとみなしてください。フォーマット処理そのものはセーブする際に行い、ここで行ってはなりません。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

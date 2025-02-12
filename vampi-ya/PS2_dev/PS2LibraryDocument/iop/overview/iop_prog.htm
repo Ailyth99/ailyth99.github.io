@@ -1,0 +1,1412 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>IOPプログラミング</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/ikrnl_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+IOPプログラミング
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>概要</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>モジュール</b><br></a>
+    <a href="#Heading4_1_2"> <b>モジュールの存在期間（常駐 / 非常駐）</b><br></a>
+    <a href="#Heading4_1_3"> <b>プログラムローダ</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>モジュールの構造</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>セグメントの配置</b><br></a>
+    <a href="#Heading4_2_2"> <b>モジュールID</b><br></a>
+    <a href="#Heading4_2_3"> <b>モジュール名とモジュールバージョン</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>モジュールのロードと起動</b></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>ロードと起動の処理手順</b><br></a>
+    <a href="#Heading4_3_2"> <b>エントリルーチン</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>モジュールの停止とアンロード</b></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>停止とアンロードの処理手順</b><br></a>
+    <a href="#Heading4_4_2"> <b>自己停止と自己アンロード</b><br></a>
+    </ul>
+<p><a href="#Heading3_5">  5 <b>常駐ライブラリ</b></a>
+    <ul>
+    <a href="#Heading4_5_1"> <b>常駐ライブラリのしくみ</b><br></a>
+    <a href="#Heading4_5_2"> <b>エントリテーブル構造体とライブラリエントリ定義ファイル</b><br></a>
+    <a href="#Heading4_5_3"> <b>呼び出しテーブル構造体</b><br></a>
+    <a href="#Heading4_5_4"> <b>スケルトン</b><br></a>
+    </ul>
+<p><a href="#Heading3_6">  6 <b>コンパイルの手順</b></a>
+    <ul>
+    <a href="#Heading4_6_1"> <b>リロケータブルプログラムのコンパイル</b><br></a>
+    <a href="#Heading4_6_2"> <b>常駐ライブラリのコンパイル</b><br></a>
+    </ul>
+<p><a href="#Heading3_7">  7 <b>参考：モジュール間リンクの仕組み</b></a>
+    <ul>
+    <a href="#Heading4_7_1"> <b>エントリテーブル構造体</b><br></a>
+    <a href="#Heading4_7_2"> <b>呼び出しテーブル構造体</b><br></a>
+    <a href="#Heading4_7_3"> <b>ilbファイルフォーマット</b><br></a>
+    <a href="#Heading4_7_4"> <b>リンク時の互換性チェック</b><br></a>
+    </ul>
+<p><a href="#Heading3_8">  8 <b>参考：IOPオブジェクトフォーマット</b></a>
+    <ul>
+    <a href="#Heading4_8_1"> <b>IOPモジュール情報セクション</b><br></a>
+    <a href="#Heading4_8_2"> <b>ファイル中のデータレイアウト</b><br></a>
+    <a href="#Heading4_8_3"> <b>メモリ中のデータレイアウト</b><br></a>
+    <a href="#Heading4_8_4"> <b>ELFヘッダの詳細</b><br></a>
+    <a href="#Heading4_8_5"> <b>プログラムヘッダテーブルの詳細</b><br></a>
+    <a href="#Heading4_8_6"> <b>予約シンボル</b><br></a>
+    <a href="#Heading4_8_7"> <b>シンボルテーブルエントリ</b><br></a>
+    <a href="#Heading4_8_8"> <b>リロケーションテーブルエントリ</b><br></a>
+    <a href="#Heading4_8_9"> <b>デバッグ情報</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>概要</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>モジュール</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOP上のメモリには複数のプログラムをロードすることが可能です。<br>プログラムはROMやCD/DVD-ROM上にリロケータブルオブジェクトファイルとして格納されていますが、必要に応じてメモリの空いている領域にロードされ、ロードされたアドレスに合わせてリロケートされて実行されます。IOP用オブジェクトファイルは通常 '.irx' の拡張子を持ち、IRXファイルと呼ばれることもあります。IRXファイルからメモリにロードされリロケートされた状態のプログラムを、プログラムモジュールまたは単にモジュールと呼びます。<br>モジュールはそれぞれひとつのエントリルーチン（通常はstart関数）を持ちます。モジュールがロードされるとエントリルーチンが呼び出され、その返す値によって、モジュールがメモリに常駐するかどうかが決められます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>モジュールの存在期間（常駐 / 非常駐）</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">モジュールは、それがメモリ上に存在する期間によって分類することができます。<br>まず、エントリルーチンが一度実行されると役目を終えてメモリから消去されるモジュールがあります。このようなモジュールを非常駐モジュールと呼びます。<br>逆に、エントリルーチンの実行終了後もメモリ上に留まり、割り込みや他のモジュールからのリクエストがあったときにそのつど処理を行うモジュールがあります。このようなモジュールを常駐モジュールと呼びます。特に、他のモジュールからサブルーチンとして呼び出されるエントリを持つモジュールを常駐ライブラリと呼びます。<br>常駐モジュールの中にはさらに、必要がなくなったときにはメモリから消去できるものがあります。このようなモジュールをアンロード可能な常駐モジュールと呼びます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>プログラムローダ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プログラムローダは、CD/DVD-ROMやROM等からプログラムモジュールをロード/リロケートし、メモリ上でのモジュールの管理を行います。<br>プログラムローダは、下層のモジュールマネージャと上層のファイルローダにわかれます。<br>モジュールマネージャは以下のことを行います。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ファイルローダから与えられたirx形式のオブジェクトデータの検査とオブジェクトの再配置
+         <li> ロードしたモジュール間のリンク処理
+         <li> 常駐ライブラリの関数のエントリテーブルの登録 / 削除等の管理
+</ul></div>
+<div style="margin-left:50px;">ファイルローダは以下のことを行います。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ディスク上にあるオブジェクトファイルのロードと起動
+         <li> モジュールの登録 / 削除の管理
+</ul></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>モジュールの構造</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>セグメントの配置</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOPのメモリ上ではひとつのモジュールは以下の３つのセグメントからなり、各セグメントは下図の順で連続して配置され、それぞれのサイズは16byteの倍数になっています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>セグメント</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;TEXT segment&nbsp;</td>
+<td valign="TOP">&nbsp;プログラムコード（必須）&nbsp;<br>&nbsp;インストラクションコードとモジュール間リンクのための&nbsp;<br>&nbsp;データ構造が含まれます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DATA segment&nbsp;</td>
+<td valign="TOP">&nbsp;初期値つきデータ（無い場合もある）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;BSS segment&nbsp;</td>
+<td valign="TOP">&nbsp;初期値無しデータエリア（無い場合もある）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/iop_prog001.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>モジュールID</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリ上にロードされたモジュールには識別用のID番号が割り当てられます。このID番号をモジュールIDと呼びます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>モジュール名とモジュールバージョン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">モジュールには、モジュール名とモジュールバージョンをつけることができます。モジュールのソースプログラム中で、以下のように宣言してください。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>ModuleInfo Module = {"Module_name", バージョン番号 };
+</pre></font></div>
+<div style="margin-left:50px;">グローバル変数名Moduleはモジュール名とモジュールバージョンを指定する用途のために予約されています。<br>ModuleInfo構造体は、kernel.hで次のように定義されています。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>typedef struct _moduleinfo {
+	const char		*name;
+	const unsigned short	version;
+} ModuleInfo;
+</pre></font></div>
+<div style="margin-left:50px;">nameフィールドには、モジュールの名称を指定します。名称に使用する文字は、英数字、'_'、'/' だけに限定することを推奨します。<br>versionフィールドの上位8bitにはモジュールのメジャーバージョンを設定し、下位8bitにはマイナーバージョンを設定します。メジャーバージョン、マイナーバージョンとも、1以上の値を用います。0は使用しないでください。<br>モジュール名とモジュールバージョンは、主に以下の用途で使用されます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> システムブート時にブートローダがリプレースモジュールを検知するため
+         <li> プログラム（モジュール）が、既知のモジュール名を持つモジュールのモジュールIDを取得するため
+         <li> プログラマがデバッグ中のモジュールのロードアドレスを把握するため
+         <li> デバッガがブート済のモジュールとディスク上のオブジェクトファイルの同一性を確認するため
+</ul></div>
+<div style="margin-left:50px;">なお、IOPのプログラムローダは、モジュール名とモジュールバージョンがついていないプログラムでも問題なくロードし実行することができます。また、モジュール名とモジュールバージョンの一致する複数のモジュールがメモリ上に存在することも許しています。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>モジュールのロードと起動</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">プログラムローダは、IOPのシステムブート時およびLoadStartModule()などのAPIによって指示があったときに、IOPオブジェクトファイルをロードし、モジュールのエントリルーチンを呼び出します。エントリールーチンの戻り値によって、そのモジュールがメモリに常駐するか消去されるかが決定されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>ロードと起動の処理手順</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">モジュールのロードとエントリルーチンの呼び出しは以下の手順で行われます。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPオブジェクトファイル形式のオブジェクトデータを調べ、必要ならばメモリを確保し、オブジェクトを読み込んだ後、オブジェクトを再配置する</li>
+         <li VALUE=2> モジュールのBSS segmentをゼロクリアする</li>
+         <li VALUE=3> モジュールのTEXT segmentを調査し、常駐ライブラリの関数を呼び出していればリンクする</li>
+         <li VALUE=4> モジュールにモジュールIDを割り当てる</li>
+         <li VALUE=5> モジュールのエントリルーチンを呼び出す</li>
+         <li VALUE=6> エントリルーチンからの戻り値によって、そのモジュールが常駐するか否かを決定し処理する</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">上記の手順において、モジュールは下図のように状態遷移します。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/iop_prog002.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>エントリルーチン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">モジュールのエントリルーチンは、次のようなプロトタイプをもたなければなりません。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>int start(intc argc, char *argv[]);
+</pre></font></div>
+<div style="margin-left:50px;">プログラムローダは、エントリルーチン実行用に確保されているスレッドを起動し、そのスレッドの中で以下の手順でエントリルーチンを呼び出します。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> スタック上に、argv[]配列と引数文字列を積む</li>
+         <li VALUE=2> モジュールのGP(global pointer)valueをGP register($28)にセットする</li>
+         <li VALUE=3> エントリルーチンをサブルーチンコールする</li>
+         <li VALUE=4> （モジュールのエントリールーチンが実行される）</li>
+         <li VALUE=5> エントリルーチンの戻り値の下位2ビットによってモジュールの常駐／非常駐を決定する</li>
+         <li VALUE=6> スレッドを終了する</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">モジュールのプログラマはエントリルーチンを以下の環境下で動作するように組まなければなりません。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 実行スレッドのスタックサイズは2KB
+         <li> 実行スレッドの優先順位はMODULE_INIT_PRIORITY(=8)
+         <li> argcは一般的なC言語のmain関数の引数と同じ（1以上）
+         <li> argvは一般的なC言語のmain関数の引数と同じ
+</ul></div>
+<div style="margin-left:50px;">エントリルーチン実行用に確保されているスレッドはひとつしかないので、異なるモジュールのエントリルーチンが並行して実行されることは原則としてありません。したがって、通常のモジュールのエントリルーチンでは、他のモジュールのエントリルーチンと処理が競合することを考慮する必要はありません。例外として、エントリルーチンのなかでLoadStartModule()などのAPIを用いてさらに他のモジュールを起動する場合は、エントリルーチンの実行がネストします。その結果、使用可能スタックサイズがさらに減ります。<br>エントリルーチンの戻り値の下位2ビットは、以下のいずれかにしなければなりません。その他のビットは自由に使ってかまいません。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;NO_RESIDENT_END&nbsp;</td>
+<td valign="TOP">&nbsp;モジュールはメモリから退去する（非常駐モジュール）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RESIDENT_END&nbsp;</td>
+<td valign="TOP">&nbsp;モジュールはメモリに常駐する（常駐モジュール）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;REMOVABLE_RESIDENT_END&nbsp;</td>
+<td valign="TOP">&nbsp;モジュールはメモリに常駐する&nbsp;<br>&nbsp;（アンロード可能常駐モジュール）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>非常駐モジュールのプログラムのスケルトン</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>#include &lt;kernel.h&gt;
+
+int start(int argc, char *argv[])
+{
+	/* プログラムのするべき作業を行う。*/
+	return NO_RESIDENT_END;
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>常駐モジュールのプログラムのスケルトン</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>#include &lt;kernel.h&gt;
+
+int start(int argc, char *argv[])
+{
+    /* モジュールの常駐後に必要な初期化処理などを行う。*/
+    if( 初期化に成功 )
+        return RESIDENT_END;
+    else
+        return NO_RESIDENT_END;
+}
+</pre></font></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>モジュールの停止とアンロード</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">エントリルーチンがREMOVABLE_RESIDENT_ENDを返した常駐モジュールは、プログラムローダにアンロード可能な常駐モジュールであると認識され、常駐後にStopMdoule()およびUnloadModule()の2つのAPIによって削除することが可能になります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>停止とアンロードの処理手順</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プログラムローダは、常駐モジュールのロード時にモジュール自身が格納されるメモリ領域を確保し、アンロード時にそのメモリ領域を解放します。それ以外に常駐モジュール自身の実行の過程で確保された資源（メモリ / スレッド / イベントフラグ / セマフォ等）があれば、これらはプログラムローダの管理外ですので、常駐モジュール自身で解放する必要があります。<br>そのため常駐モジュールのアンロードは、まずモジュール側で資源の解放などを行う停止処理と、モジュールマネージャ側で常駐モジュールをメモリから削除する削除処理の2段階で行われます。<br>常駐モジュールの停止処理を行うAPIはStopModule()です。StopModule()が実行されると、プログラムローダはエントリルーチン実行用に確保されているスレッドを起動し、そのスレッドの中で以下の手順でエントリルーチンが呼び出されます。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> スタック上にargv[]配列と引数文字列を積む。argv[0]には常に"other"という文字列を設定する。また、停止処理の呼び出しであることを表すために、引数argcには負の値（絶対値はargv[]で渡される引数文字列の数）を設定する</li>
+         <li VALUE=2> モジュールのGP(global pointer) valueをGP register($28)にセットする</li>
+         <li VALUE=3> エントリルーチンをサブルーチンコールする</li>
+         <li VALUE=4> （モジュールのエントリールーチンが実行される。引数argcが負であることを判別して資源の解放などを行う）</li>
+         <li VALUE=5> エントリルーチンの戻り値の下位2ビットがNO_RESIDENT_ENDであれば停止処理が成功したものとし、モジュールを停止状態とみなす。戻り値がREMOVABLE_RESIDENT_ENDであれば、停止処理が不成功でモジュールは引き続き稼働状態であるとみなす</li>
+         <li VALUE=6> スレッドを終了する</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">常駐モジュールの削除処理を行うAPIはUnloadModule()です。UnloadModule()は、対象モジュールが停止状態であることを確認し、モジュールの登録を削除します。また対象モジュールの占めるメモリ領域がロード時に自動的に確保されたものであれば解放します。<br>上記の手順において、モジュールは下図のように状態遷移します。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/iop_prog003.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>アンロード可能常駐モジュールのプログラムのスケルトン</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>#include &lt;kernel.h&gt;
+
+int module_start(int argc, char *argv[]) {
+	/* モジュールの常駐後に必要な初期化処理などを行う。*/
+	if( 初期化に成功 )
+		eturn REMOVABLE_RESIDENT_END;
+	else {
+		/* 必要ならば、初期化処理のキャンセルを行う */
+		return NO_RESIDENT_END;
+	}
+}
+
+int module_stop(int argc, char *argv[]) {
+	/* モジュールの削除前に必要な終了処理などを行う。*/
+	if( 終了処理に成功 )
+		return NO_RESIDENT_END;
+	else {
+		/* 可能ならば、終了処理のキャンセルを行い、
+		* 引き続き常駐を続行できるような状態に戻す。*/
+		return REMOVABLE_RESIDENT_END;
+	}
+}
+
+int start(int argc, char *argv[]) {
+	if( argc &gt;= 0 )    return module_start(argc, argv);
+	else               return module_stop(-argc, argv);
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_2">
+<a href="#Heading3_4"> 4. </a>2 <b>自己停止と自己アンロード</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">StopModule() / UnloadModule()では、自己モジュールを対象にすることはできません。自己モジュールをアンロードするためには、SelfStopModule() / SelfUnloadModule()を使用し、以下の点に注意しなければなりません。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 自己アンロードするモジュールはSelfStopModule() / SelfUnloadModule()を実行するためのスレッドを作成しなければいけない
+         <li> エントリールーチンで停止処理をするときに上記のスレッドを削除しないようにしなければならない
+         <li> 他のモジュールから削除される可能性も考慮したほうがよい
+</ul></div>
+<div style="margin-left:50px;">SelfStopModule()を実行すると、StopModule()のときと同様にモジュールのエントリールーチンが呼び出されます。StopModule()と違う点はargv[0]に与えられる文字列が"self"になることです。したがってエントリルーチンは、argv[0]の内容に応じて、停止処理中で削除すべきスレッドの数を判断しなければなりません。<br>自己アンロードするケースも含めたモジュールの状態遷移は下図のようになります。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/iop_prog004.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>自己アンロード可能常駐モジュールのプログラムのスケルトン</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>#include &lt;kernel.h&gt;
+
+/* 自己削除可能常駐モジュールは、以下のような
+ * 自己を削除するためのスレッドを持たなければならない */
+int special_thread() {
+	:
+	:
+	SelfStopModule(args, argp, &result);
+	SelfUnloadModule(); /* Unload & ExitDeleteThread */
+	/* Never returns here */
+}
+
+int module_start(int argc, char *argv[]) {
+	/* モジュールの常駐後に必要な初期化処理などを行う。
+	* SelfStopModule()/SelfUnloadModule() を実行するための
+	* スレッドもここで作成する。
+	*/
+	if( 初期化に成功 )
+		return REMOVABLE_RESIDENT_END;
+	else {
+		/* 必要ならば、初期化処理のキャンセルを行う */
+		return NO_RESIDENT_END;
+	}
+}
+
+int module_stop(int argc, char *argv[]) {
+	if( strcmp(argv[0],"other") == 0 ) {
+		/* 他のモジュールにより StopModule() されたケース。
+		* モジュールの削除前に必要な終了処理などを行う。
+		*/
+	} else if( strcmp(argv[0],"self") == 0 ) {
+		/* 自モジュールにより SelfStopModule() されたケース。
+		* モジュールの削除前に必要な終了処理などを行う。
+		* ただし、SelfStopModule()/SelfUnloadModule() を実行する
+	* スレッドだけは削除しない。
+	*/
+	}
+	if( 終了処理に成功 )
+		return NO_RESIDENT_END;
+	else {
+		/* 可能ならば、終了処理のキャンセルを行い、
+		* 引き続き常駐を続行できるような状態に戻す。*/
+		return REMOVABLE_RESIDENT_END;
+	}
+}
+
+int start(int argc, char *argv[]) {
+	if( argc &gt;= 0 )    return module_start(argc, argv);
+	else               return module_stop(-argc, argv);
+}
+</pre></font></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>常駐ライブラリ</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">常駐モジュールは、自らのもつ関数群の一部を他のモジュールに提供する常駐ライブラリになることができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_1">
+<a href="#Heading3_5"> 5. </a>1 <b>常駐ライブラリのしくみ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">常駐ライブラリは、他のモジュールに提供するサブルーチンエントリをまとめたエントリテーブル構造体とよばれる構造体を持ちます。通常はモジュールの常駐時に、RegisterLibraryEntries()を使用して自らの持つエントリテーブル構造体をシステムに登録します。また停止時には、エントリテーブル構造体の登録解除をReleaseLibraryEntries()を使用して行います。<br>一方、常駐ライブラリを利用するモジュールは、利用したいサブルーチンのインデックスをまとめた呼び出しテーブル構造体を持ちます。そのモジュールがロードされるときに、呼び出しテーブルが登録済みの常駐ライブラリのエントリテーブル構造体と照合され、該当するサブルーチンのエントリアドレスに書き換えられます。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/iop_prog005.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">アンロード可能な常駐モジュールを常駐ライブラリとすることも可能です。この場合は上記のエントリテーブル構造体に関する処理とともに、アンロード可能な常駐モジュールに必要な停止処理を行う必要があります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_2">
+<a href="#Heading3_5"> 5. </a>2 <b>エントリテーブル構造体とライブラリエントリ定義ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">エントリテーブル構造体は、ライブラリエントリ定義ファイルをもとにioplibgenユーティリティを用いて作成することができます。<br>ライブラリエントリ定義ファイルは、以下の4種類の記述が含まれたテキストファイルです。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_5_2_1"><h4>
+(1)&nbsp;<b>コメント</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">'#'で始まる行はコメント行になります。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_5_2_2"><h4>
+(2)&nbsp;<b>ライブラリ名宣言</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ライブラリ名（8文字以内）を以下のように宣言します。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>Libname libname
+</pre></font></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_5_2_3"><h4>
+(3)&nbsp;<b>ライブラリバージョン宣言</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ライブラリのメジャーバージョン（8bit）とマイナーバージョン（8bit）を、 '.' で区切って10進数で以下のように指定します<br></div>
+<div style="margin-left:80px;">Version <i>MM</i>.<i>mm</i><br></div>
+<div style="margin-left:67px;">メジャーバージョンとマイナーバージョンは、1以上255以下の数値を指定してください。0はリザーブされています。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_5_2_4"><h4>
+(4)&nbsp;<b>エントリ宣言</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">以下の書式で、ライブラリのエントリ関数名を複数宣言できます。<br></div>
+<div style="margin-left:80px;">Entry/<i>level</i> <i>entry_symbol</i> [<i>entry_internal_symbol</i>]<br>Entry <i>entry_symbol</i> [<i>entry_internal_symbol</i>]<br>Entry -<br></div>
+<div style="margin-left:67px;"><i>level</i>は、<i>entry_symbol</i>の公開レベルを1桁の数値で指定します。ioplibgenの-lオプションで公開レベルを指定すると、その数値より以下の公開レベルを持つ<i>entry_symbol</i>のみがエントリテーブルファイルに出力されます。<i>level</i>を省略すると公開レベルは0とみなされます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>予約エントリ</b><br></h4></div>
+
+<div style="margin-left:67px;">エントリテーブル構造体に登録されている関数は実行時にはテーブル内の順番（インデックス）によって識別されます。関数名とテーブル内のインデックスの対応は、原則としてはプログラマが自由に決めてかまいません。<br>しかし、システムサービスの管理上の都合で、最初の４つのエントリは関数名に関わらず、以下のように役割が固定されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>インデックス</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数の機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;ライブラリの初期処理用に予約（詳細未定）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;ライブラリの再初期化処理用に予約（詳細未定）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;ライブラリの終了処理&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;予約（詳細未定）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">この４つのエントリは、該当する関数がある場合にはその関数を登録し、無い場合には、何もせずに単にリターンする関数を登録しなければなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>終了処理</b><br></h4></div>
+
+<div style="margin-left:67px;">ライブラリの終了処理関数は、以下のprototypeを持ちます。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	void  lib_terminate(int mode);
+</pre></font></div>
+<div style="margin-left:67px;">引数modeにより、終了処理関数を呼び出した原因が指定されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>mode</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>原因</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;システム終了（reboot準備）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;モジュール削除（現在未実装、予約）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">reboot準備のための終了処理関数の呼び出しは、通常、システムを割り込み禁止にした後で行われます。ただし、割り込み禁止状態では終了処理を実行できない常駐ライブラリもありうるため、あらかじめSetRebootTimeLibraryHandlingMode() 関数を用いて、終了処理関数の呼び出しタイミングを常駐ライブラリごとに設定しておくことができます。設定できるタイミングは以下の3とおりです。<br></div>
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> 割り込み禁止にした後に呼び出す（デフォルト）</li>
+         <li VALUE=2> 割り込み禁止にする前に呼び出す</li>
+         <li VALUE=3> 割り込み禁止にする前と禁止にした後にそれぞれ１回呼び出す</li>
+</ol></div>
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>ライブラリエントリ定義ファイルの例</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3># まず最初にライブラリ名を宣言。この例では 'mylib' と宣言する。
+Libname mylib
+# versionの宣言。
+Version 1.1
+# ========= 常駐ライブラリの各エントリの宣言 =============
+# 規約により最初の四つのエントリはシステム用にリザーブされている
+# １番目は、ライブラリの初期処理用に予約（詳細未定）
+# ２番目は、ライブラリの再初期化処理用に予約（詳細未定）
+# ３番目は、もしあれば、終了処理エントリ
+# ４番目は、予約
+Entry -
+Entry -
+Entry -
+Entry -
+Entry AllocMemory
+Entry ReAllocMemory
+# 外部から呼ぶときの関数名と、実際の関数名は以下のように異っていてもよい
+# 	外部名		内部名
+Entry FreeMemory		mylib_free_memory
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_3">
+<a href="#Heading3_5"> 5. </a>3 <b>呼び出しテーブル構造体</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">常駐ライブラリを使用するプログラム側で必要な呼び出しテーブル構造体は、通常ioplibldユーティリティを用いて自動作成します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_4">
+<a href="#Heading3_5"> 5. </a>4 <b>スケルトン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">常駐ライブラリを作成するための参考として、ライブラリエントリ定義ファイル（＝エントリテーブル構造体）とプログラムのスケルトンを示します。プログラムのスケルトンは、通常の常駐ライブラリとアンロード可能な常駐ライブラリとについてそれぞれ示してあります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ライブラリエントリ定義ファイルのスケルトン</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>Libname mylib
+Version 1.1
+Entry	-
+Entry	-
+Entry	-
+Entry	-
+Entry	libentry1
+Entry	libentry2
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>常駐ライブラリのプログラムのスケルトン</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>#include &lt;kernel.h&gt;
+
+int start(int argc, char *argv[])
+{
+	extern libhead mylib_entry;
+
+	/* モジュールの常駐後に必要な初期化処理などを行う。*/
+	if( 初期化に失敗 ) {
+		/* 必要ならば、初期化処理のキャンセルを行う */
+		return NO_RESIDENT_END;
+	}
+
+	/* 自身のエントリテーブルをシステムに登録する。 */
+	if( RegisterLibraryEntries(&mylib_entry) == KE_OK )
+		return RESIDENT_END;
+	else {
+		/* 必要ならば、初期化処理のキャンセルを行う */
+		return NO_RESIDENT_END;
+	}
+}
+
+int libentry1()
+{
+  /* .... */
+}
+
+int libentry2()
+{
+  /* .... */
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>アンロード可能常駐ライブラリのプログラムのスケルトン</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>#include &lt;kernel.h&gt;
+
+int module_start(int argc, char *argv[]) {
+	extern libhead mylib_entry;
+
+	/* モジュールの常駐後に必要な初期化処理などを行う。*/
+	if( 初期化に失敗 ) {
+		/* 必要ならば、初期化処理のキャンセルを行う */
+		return NO_RESIDENT_END;
+	}
+
+	/* 自身のエントリテーブルをシステムに登録する。 */
+	if( RegisterLibraryEntries(&mylib_entry) == KE_OK )
+		return REMOVAL_RESIDENT_END;
+	else {
+		 /* 必要ならば、初期化処理のキャンセルを行う */
+		return NO_RESIDENT_END;
+    }
+}
+
+int module_stop(int argc, char *argv[]) {
+	/* 自身のエントリテーブルをシステムから抹消する。 */
+	ReleaseLibraryEntries(&mylib_entry);
+
+	/* モジュールの削除前に必要な終了処理などを行う。*/
+	if( 終了処理に成功 )
+		return NO_RESIDENT_END;
+	else {
+		/* 可能ならば、終了処理のキャンセルを行い、
+		* 引き続き常駐を続行できるような状態に戻す。
+		* 必要ならば自身のエントリテーブルの再登録も行う
+		*/
+		return REMOVABLE_RESIDENT_END;
+	}
+}
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>int start(int argc, char *argv[]) {
+	if( argc &gt;= 0 )    return module_start(argc, argv);
+	else               return module_stop(-argc, argv);
+}
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>int libentry1()
+{
+  /* .... */
+}
+
+int libentry2()
+{
+  /* .... */
+}
+
+</pre></font></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_6">
+<h2>
+ 6 <b>コンパイルの手順</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_1">
+<a href="#Heading3_6"> 6. </a>1 <b>リロケータブルプログラムのコンパイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">リロケータブルプログラムを作成するためには、伝統的なコンパイル・リンク手順の最後の段階でプログラムのアドレスを決定する代わりに、リンカのパーシャルリンク機能でオブジェクトをひとつにまとめ、iopfixupユーティリティを用いてIOPリロケータブル実行形式へ変換するという手順を踏みます。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/iop_prog006.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>リロケータブルプログラムのコンパイル手順の例</b><br></h4></div>
+
+<div style="margin-left:67px;">リロケータブルプログラムをコンパイルする手順は、たとえば次のようになります。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -c xxx1.c
+$ iop-gcc -c xxx2.c
+$ iop-ld -r -dc -o xxxx.o xxx1.o xxx2.o -lyyy
+$ iopfixup -o xxxx.irx xxxx.o
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:67px;">上記をもっと簡単に済ますには次のようにします。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -c xxx1.c
+$ iop-gcc -c xxx2.c
+$ iop-gcc -o xyz.irx xxx1.o xxx2.o -lyyy
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:67px;">さらに簡単にすると、次の１コマンドで済ませることができます。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -o xyz.irx xxx1.c xxx2.c -lyyy
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_2">
+<a href="#Heading3_6"> 6. </a>2 <b>常駐ライブラリのコンパイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">常駐ライブラリとは、プログラムコードの一部を他のモジュールからサブルーチンとして呼び出せるように提供しているモジュールです。<br>常駐ライブラリにはそのモジュールがどのようなサブルーチンを提供するかを示すエントリテーブル構造体が必要です。また、常駐ライブラリが提供するサブルーチンを利用するモジュールには、どのモジュールのどのサブルーチンを利用するかを示す呼び出しテーブル構造体が必要です。これらの構造体を生成しリンクするために、ioplibgenユーティリティとioplibldユーティリティが用意されています。<br>常駐ライブラリと、常駐ライブラリを利用するモジュールのコンパイル・リンクの手順は下図のようになります。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/iop_prog007.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>常駐ライブラリモジュールのコンパイル手順例</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>$ ioplibgen -d stubs.ilb -e entry.s entry.tbl
+$ iop-as -o entry.o entry.s 
+$ iop-gcc -c lll1.c
+$ iop-gcc -c lll2.c
+$ iop-ld -r -dc -o lmn.o lll1.o lll2.o entry.o
+$ iopfixup -o lnm.irx lnm.o
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>常駐ライブラリを利用するモジュールのコンパイル手順例</b><br></h4></div>
+
+<div style="margin-left:67px;">(a)スタティックライブラリをリンクしない場合<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -c xxx1.c
+$ iop-gcc -c xxx2.c
+$ ioplibld -s stub.s xxx1.o xxx2.o : stubs.ilb
+$ io-as -o stubs.o stubs.s
+$ iop-ld -r -dc -o xyz.o xxx1.o xxx2.o stubs.o
+$ iopfixup -o xyz.irx xyz.o
+</pre></font></div>
+<div style="margin-left:67px;">もっと簡単に済ますには……<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -c xxx1.c
+$ iop-gcc -c xxx2.c
+$ iop-gcc -o xyz.irx xxx1.o xxx2.o -ilb=stubs.ilb
+</pre></font></div>
+<div style="margin-left:67px;">(b)スタティックライブラリをリンクする場合<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -c xxx1.c
+$ iop-gcc -c xxx2.c
+$ ioplibld -s stub.s xxxall.o xxx1.o xxx2.o -lsss : stubs.ilb
+$ io-as -o stubs.o stubs.s
+$ iop-ld -r -dc -o xyz.o xxx1.o xxx2.o stubs.o -lsss
+$ iopfixup -o xyz.irx xyz.o
+</pre></font></div>
+<div style="margin-left:67px;">もっと簡単に済ますには……<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -c xxx1.c
+$ iop-gcc -c xxx2.c
+$ iop-gcc -o xyz.irx xxx1.o xxx2.o -lsss -ilb=stubs.ilb
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:67px;">なお、IOP kernelそのものも複数の常駐ライブラリモジュールから構成されています。そのためすべてのアプリケーションプログラムは、かならず「常駐ライブラリを利用するモジュール」として生成することになります。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_7">
+<h2>
+ 7 <b>参考：モジュール間リンクの仕組み</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">IOPプログラムローダはモジュールのロード時に該当モジュールが他のロード済モジュール（常駐ライブラリ）を呼び出しているかどうかを検査し、必要な場合他のモジュールとのリンクを行います。このリンク機能は、呼び出される常駐ライブラリ側のエントリテーブル構造体と呼び出しモジュール側の呼び出しテーブル構造体を操作することで行われます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_1">
+<a href="#Heading3_7"> 7. </a>1 <b>エントリテーブル構造体</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">常駐ライブラリが他のモジュールに提供する関数群は、以下に示すエントリテーブル構造体で記述され、モジュールの起動時にモジュール自身によってプログラムローダのAPI RegisterLibraryEntries()を使用してシステムに登録します。<br>ひとつのモジュールが登録できるエントリテーブル構造体の数に制限はありません。つまり、ひとつのモジュールが複数のライブラリを登録することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>エントリテーブル構造体の形式</b><br></h4></div>
+
+<div style="margin-left:67px;">エントリテーブル構造体は次の形式を持ちます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	.text
+	.set noreorder
+	.globl  mylib_entry
+mylib_entry:
+	.word  0x41c00000	/* magic number of entry table */
+	.word  0		/* reserved */
+	.short  0x0101		/* version */
+	.short  0x0000		/* flags */
+	.ascii  "mylib\0\0\0"	/* library name (max 8 characters) */
+	.align  2
+
+	.word		MylibEntry1	/* address of function 1 */
+	.word		MylibEntry2	/* address of function 2 */
+	.word		MylibEntry3	/* address of function 3 */
+	.word		MylibEntry4	/* address of function 4 */
+	:
+	:
+	.word  0		/* table end mark */
+</pre></font></div>
+<div style="margin-left:67px;"><br>後述の予約エントリの規定により、エントリ関数は４つ以上登録されていなければなりません。<br>'flags'のフィールドは、現在は、IOPシステムがエントリテーブルの管理に使用するフィールドです。かならず0を入れてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_2">
+<a href="#Heading3_7"> 7. </a>2 <b>呼び出しテーブル構造体</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">呼び出しテーブル構造体は、あるモジュールが他の常駐ライブラリモジュールが提供している関数を使用することを表す構造体です。形式はエントリテーブル構造体と似ていますが、そのモジュールが必要とする関数だけをテーブルに含みます。<br>IOPプログラムローダは、モジュールのロード直後に呼び出しテーブル構造体中のjump命令を書き換えてモジュール間のリンクを行います。<br></div>
+
+<div style="margin-left:40px;"><h4><b>呼び出しテーブル構造体の形式</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>	.text
+	.set noreorder
+	.globl  mylib_stub
+mylib_stub:
+	.word  0x41e00000	/* magic number of call table */
+	.word  0			/* reserved */
+	.short  0x0101		/* version */
+	.short  0x0000		/* flags */
+	.ascii  "mylib\0\0\0"	/* library name (max 8 characters) */
+	.align  2
+
+	.globl          MylibEntry1
+MylibEntry1:
+	j      $31
+	.half   0		/* entry table index */
+	.half   0x2400	/* index magic : 0x2400XXXX == addiu $0,$0,XXXX */
+
+	.globl		MylibEntry2
+MylibEntry2:
+	j      $31
+	.half   2		/* entry table index */
+	.half   0x2400	/* index magic */
+	:
+	:
+	:
+	.word   0, 0	/* table end mark */
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:67px;">呼び出し関数エントリをひとつも含まない呼び出しテーブル構造体は許されません。<br>'flags' のフィールドは、現在は、IOPシステムが呼び出しテーブルの管理のために使用するフィールドです。かならず0を入れてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_3">
+<a href="#Heading3_7"> 7. </a>3 <b>ilbファイルフォーマット</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">常駐ライブラリを作成した場合、ライブラリ名とライブラリバージョン、およびライブラリ中の各関数の名前とテーブルインデックスの対応を記述したデータファイル（ilbファイル）を作成する必要があります。<br>このファイルはライブラリを利用する側のモジュールのリンク時に、呼び出しテーブル構造体を作成するための情報として利用されます。<br>以下のように桁固定形式のテキストファイルとし、データファイルの拡張子は '.ilb' とします。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>#IOP-ILB# 任意の文字列 
+L ライブラリ名 
+V 0xHHHH 
+F 0xHHHH
+E ddd entryname 
+E ddd entryname 
+E ddd entryname 
+</pre></font></div>
+<div style="margin-left:50px;"><br>最初の '#IOP-ILB#'で始まる行は続くテキスト行がilb-data形式であることを宣言します。<br>'L' で始まる行は必ず2行目に位置し,3桁目から行末まで8文字以内のライブラリ名<br>'V' で始まる行は必ず3行目に位置し,5桁目から4桁の16進数<br>'F' で始まる行は必ず4行目に位置し,5桁目から4桁の16進数で0を指定します。<br>5行目以降は'E'で始まり3桁目から3桁の10進数と、7桁目から行末までのエントリ名<br><br>複数のilb-data形式を結合してひとつのファイルに格納してよいものとします。その場合は'#IOP-ILB#'を区切り記号とみなします。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_4">
+<a href="#Heading3_7"> 7. </a>4 <b>リンク時の互換性チェック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">前述のようにエントリテーブル構造体と呼び出しテーブル構造体にはlibrary nameフィールドとversionフィールドがあります。<br>library nameフィールドは8byteのサイズを持ち、8byteに満たない名前の場合はnull文字でパディングしてください。<br>versionフィールドの上位8bitは、ライブラリのメジャーバージョンを設定し、下位8bitは、マイナーバージョンを設定します。<br>versionフィールドの設定は、基本的にはプログラマに任されていますが、次の規定があります。<br>メジャーバージョンは、関数テーブルの並び順、及び関数の仕様に互換性のある場合、同じ値を取るように設定しなければいけません。<br>マイナーバージョンは、バグフィックスや後方互換を保った機能追加が行われたときに更新します。<br>メジャーバージョン、マイナーバージョンとも、1以上の値を用います。0は使用しないでください。<br><br>モジュールがIOPメモリ上にロードされて、そこに含まれる呼び出しテーブル構造体がリンクされるときには、library nameフィールドと、メジャーバージョンが一致する登録済のエントリテーブル構造体が検索され、見つかるとリンクされます。<br>（注意：2000年4月現在、プログラムローダは上記のように動作しますが、呼び出しテーブル構造体の指定するマイナーバージョンよりも小さいマイナーバージョンのエントリテーブル構造体とはリンクが出来ない方が望ましいので、いずれそのように変更する予定です。）<br><br>エントリテーブル構造体のシステムへの登録時は、既に登録されているライブラリにlibrary nameとメジャーバージョンが一致して、マイナーバージョンが大きいものが存在した場合は、登録に失敗します。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_8">
+<h2>
+ 8 <b>参考：IOPオブジェクトフォーマット</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">IOPオブジェクトフォーマットは、MIPS R3000のELF形式リロケータブルファイルフォーマットに若干の追加・変更・制限を加えたものです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_1">
+<a href="#Heading3_8"> 8. </a>1 <b>IOPモジュール情報セクション</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOPオブジェクトフォーマットには、IOPモジュール情報セクションが新規に追加されました。<br>IOPモジュール情報セクションは以下の構造の可変長のデータを持ち、IOPプログラムローダがモジュールをロードした後に実行に必要な情報を設定します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>/* A section of type SHT_SCE_IOPMOD contains the following structure.  */
+typedef struct _Elf32_IopMod {
+	Elf32_Word	moduleinfo;
+	Elf32_Word	entry;
+	Elf32_Word	gp_value;
+	Elf32_Word	text_size;
+	Elf32_Word	data_size;
+	Elf32_Word	bss_size;
+	Elf32_Half	moduleversion;
+	char		modulename[1];	/* null terminate */
+} Elf32_IopMod;
+</pre></font></div>
+<div style="margin-left:50px;"><br>entryは、プログラムの起動エントリアドレスのTEXT segment先頭からのオフセットが入ります。<br>gp_valueは、プログラムのGP registerの値のTEXT segment先頭からのオフセットが入ります。<br>text_size, data_size, bss_sizeはそれぞれTEXT, DATA, BSS segmentのサイズを示します。<br>プログラムのDATA segment中にModuleInfo構造体のModule変数が存在するときは、moduleinfoにModule変数のTEXT segment先頭からのオフセットが入り、さらに、moduleversionにModule.versionのコピーが、modulename[]には、Module.nameのコピーが格納されます。<br>Module変数が存在しないときは、moduleinfoには0xffffffff、moduleversionとmodulename[0]には、0が入ります。<br><br>IOPモジュール情報セクションのセクション名は ".iopmod"となり、セクションヘッダの各フィールドには以下の値が格納されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sh_type&nbsp;</td>
+<td valign="TOP">&nbsp;=  SHT_SCE_IOPMOD(=0x70000080)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sh_offset&nbsp;</td>
+<td valign="TOP">&nbsp;=  セクションデータのファイル先頭からのオフセット&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sh_size&nbsp;</td>
+<td valign="TOP">&nbsp;=  sizeof(Elf32_IopMod)+strlen(Elf32_IopMod.modulename)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sh_addralign&nbsp;</td>
+<td valign="TOP">&nbsp;=  4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;その他&nbsp;</td>
+<td valign="TOP">&nbsp;=  0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">なお、IOPオブジェクトファイルには .reginfoセクションは不要です。<br>.reginfoセクションは入れないでください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_2">
+<a href="#Heading3_8"> 8. </a>2 <b>ファイル中のデータレイアウト</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">標準のELF形式リロケータブルファイルではファイル中のデータの配置はとくに規定されていませんが、IOPオブジェクトフォーマットでは以下の順にデータが並んでいなければいけません。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> ELFヘッダ</li>
+         <li VALUE=2> プログラムヘッダテーブル</li>
+         <li VALUE=3> IOPモジュール情報セクションデータ</li>
+         <li VALUE=4> TEXT, DATA segmentデータ</li>
+         <li VALUE=5> その他のセクションデータ</li>
+         <li VALUE=6> セクションヘッダテーブル</li>
+         <li VALUE=7> TEXT, DATA segmentのリロケーションテーブルデータ</li>
+         <li VALUE=8> その他のセクションデータ</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_3">
+<a href="#Heading3_8"> 8. </a>3 <b>メモリ中のデータレイアウト</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOPモジュールは「2.モジュール構造」の「セグメントの配置」で述べたようにレイアウトされている必要があります。<br>すなわち、TEXT, DATA, BSS各セグメントはこの順で連続して配置されalignは0x10、つまり16byte境界でなければなりません。<br><br>UNIXなどでは、.rodataセクションのような書き換え不可のデータをTEXT segmentに含ませることがありますが、IOPのオブジェクトファイルではこれは許されません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_4">
+<a href="#Heading3_8"> 8. </a>4 <b>ELFヘッダの詳細</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ELFヘッダの内容は、以下のように設定されなければなりません。<br><br></div>
+<div style="margin-left:67px;">e_ident	== 'ELF', ELFCLASS32, ELFDATA2LSB,  EV_CURRENT<br>e_type	== ET_SCE_IOPRELEXEC (==0xFF80)またはET_SCE_IOPRELEXEC2 (==0xFF81)<br>e_machine  == EM_MIPS<br>e_version  == EV_CURRENT<br>e_flags	== 任意（無視される）<br>e_entry	== プログラムの起動エントリアドレスのTEXT segment先頭からのオフセット<br>	(Elf32_IopMod.entryと同じ値)<br>e_ehsize	== sizeof(Elf32_Ehdr)<br>e_phoff	== プログラムヘッダテーブルのファイル内の位置<br>	( sizeof(Elf32_Ehdr)と同じになる)<br>e_phentsize  == sizeof(Elf32_Phdr)<br>e_phnum  == 2<br>e_shoff	== セクションヘッダテーブルのファイル内の位置<br>e_shentsize  == sizeof(Elf32_Shdr)<br>e_shnum  == ファイル中のセクションの数<br>e_shstrndx  == .shstrtabセクションのセクションインデックス<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_5">
+<a href="#Heading3_8"> 8. </a>5 <b>プログラムヘッダテーブルの詳細</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プログラムヘッダテーブルは必ず２つの要素を持ち、以下の順になっています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>IOP Module Header</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;p_type&nbsp;</td>
+<td valign="top">&nbsp;== PT_SCE_IOPMOD( == 0x70000080)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;p_flags&nbsp;</td>
+<td valign="top">&nbsp;== PF_R&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;p_offset&nbsp;</td>
+<td valign="top">&nbsp;== IOPモジュール情報セクションのデータのファイル内の位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;p_filesz&nbsp;</td>
+<td valign="top">&nbsp;== IOPモジュール情報セクションのデータのサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;sizeof(Elf32_IopMod)+strlen(Elf32_IopMod.modulename)&nbsp;</td>
+</tr>
+<tr>
+<td colspan= 2  valign="top">&nbsp;p_vaddr,p_memsz  == 0&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;p_align&nbsp;</td>
+<td valign="top">&nbsp;== 4&nbsp;</td>
+</tr></table>
+</div>
+
+<div style="margin-left:40px;"><h4><b>Segment Header</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;p_type&nbsp;</td>
+<td valign="TOP">&nbsp;== PT_LOAD&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;p_flags&nbsp;</td>
+<td valign="TOP">&nbsp;== PF_R+PF_W+PF_X&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;p_offset&nbsp;</td>
+<td valign="TOP">&nbsp;== TEXT segment データのファイル内の位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;p_vaddr&nbsp;</td>
+<td valign="TOP">&nbsp;== 0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;p_filesz&nbsp;</td>
+<td valign="TOP">&nbsp;== ファイル中のロードデータのサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;(TEXT segment size + DATA segment size)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;p_memsz&nbsp;</td>
+<td valign="TOP">&nbsp;== メモリにロード後のデータサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;(TEXT segment size + DATA segment size + BSS segment size)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;p_align&nbsp;</td>
+<td valign="TOP">&nbsp;== 0x10&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_6">
+<a href="#Heading3_8"> 8. </a>6 <b>予約シンボル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">SCE製のIOPオブジェクトファイルジェネレータiopfixupでは、以下の予約シンボルを自動生成します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;_ftext&nbsp;</td>
+<td valign="TOP">&nbsp;TEXTセグメントの先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_etext, etext&nbsp;</td>
+<td valign="TOP">&nbsp;TEXTセグメントの最後のbyteの次のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_fdata&nbsp;</td>
+<td valign="TOP">&nbsp;DATAセグメントの先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_edata, edata&nbsp;</td>
+<td valign="TOP">&nbsp;DATAセグメントの最後のbyteの次のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_fbss&nbsp;</td>
+<td valign="TOP">&nbsp;BSSセグメントの先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_end, end&nbsp;</td>
+<td valign="TOP">&nbsp;BSSセグメントの最後のbyteの次のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_gp&nbsp;</td>
+<td valign="TOP">&nbsp;gpレジスタの初期値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">上記のシンボル間では以下の関係が成り立ちます。<br></div>
+<div style="margin-left:67px;">0 &lt;= ( _fdata - _etext ) &lt; 0x10<br>0 &lt;= ( _fbss - _edata ) &lt; 0x10<br></div>
+<div style="margin-left:50px;"><br>プログラムのソース互換性を確保するために、リンカまたはIOPオブジェクトファイルジェネレータは、上記のシンボルを生成することを推奨します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_7">
+<a href="#Heading3_8"> 8. </a>7 <b>シンボルテーブルエントリ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">シンボルテーブルのテーブルエントリのst_valueフィールドの保持する値がアドレスである場合、それはセクションオフセットではなく、プログラムオフセット（TEXT segmentの先頭からのオフセット）となります。<br><br>また、上記の予約シンボルのうち、etext, _etext, edata, _edata, _fbss,end, _end, _gpのエントリは、st_shndxフィールドにSHN_RADDR(==0xff1f)が入ります。<br><br>それ以外は、標準のR3000用ELFリロケータブルファイルと同じです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_8">
+<a href="#Heading3_8"> 8. </a>8 <b>リロケーションテーブルエントリ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">リロケーションテーブルエントリに関して、以下に記述していない事柄は標準の R3000 用 ELF リロケータブルファイルと同じになります。<br>リロケーションテーブルのテーブルエントリのr_offsetフィールドは、リロケーション処理での書き換えを適用するセクションデータワードの位置を示すプログラムオフセット（TEXT segmentの先頭からのオフセット）が格納され、r_symフィールド(==ELF_32_R_SYM(r_info))は常にSTN_UNDEFが格納されます。<br><br>ELFリロケータブルファイルから IOP オブジェクトファイルに変換する際に、 r_sym フィールドが示しているシンボルの値をプログラムオフセットに変換したのち、該当セクションデータのリロケーションフィールドに適切に足し込まれなければなりません。<br><br>ライブラリリリース 2.5.2 以前の IOPのプログラムローダでは、ELF ヘッダの e_type が ET_SCE_IOPRELEXEC の IOP オブジェクトファイルのみがロード可能です。<br>このオブジェクトファイルで許されるリロケーションタイプは以下の 6 タイプです。<br><br></div>
+<div style="margin-left:67px;">R_MIPS_NONE<br>R_MIPS_16<br>R_MIPS_32<br>R_MIPS_26<br>R_MIPS_HI16<br>R_MIPS_LO16<br><br></div>
+<div style="margin-left:50px;">テーブル上の R_MIPS_HI16 の次には必ず対応する R_MIPS_LO16が無ければなりません。さらに R_MIPS_LO16 は単独で存在することは許されません。<br>ライブラリリリース 2.5.3 以降の IOPのプログラムローダは、機能が拡張されて、上記の IOP オブジェクトファイルに加えて ELF ヘッダの e_type がET_SCE_IOPRELEXEC2 の IOP オブジェクトファイルもロードすることができます。<br>このオブジェクトファイルで許されるリロケーションタイプは以下の 8 タイプです。<br><br></div>
+<div style="margin-left:67px;">R_MIPS_NONE<br>R_MIPS_16<br>R_MIPS_32<br>R_MIPS_26<br>R_MIPS_HI16<br>R_MIPS_LO16<br>R_MIPSSCE_MHI16(=0xfa)<br>R_MIPSSCE_ADDEND(=0xfb)<br></div>
+<div style="margin-left:50px;"><br>テーブル上の R_MIPS_HI16 の次には必ず対応する R_MIPS_LO16が無ければなりません。ただし、R_MIPS_LO16 は単独で存在することが許されます。<br>GNU の binutil などでは、同一のメモリを参照する複数の R_MIPS_HI16 が連続し、その直後にそれらに対応する R_MIPS_LO16が一つ置かれるオブジェクトファイルを生成することがあります。<br>このような連続する R_MIPS_HI16 レコードは、e_type が  ET_SCE_IOPRELEXEC2 のIOP オブジェクトファイルでは、以下に述べる R_MIPSSCE_MHI16 とR_MIPSSCE_ADDEND のペアに変換されなくてはなりません。<br>R_MIPSSCE_MHI16 と R_MIPSSCE_ADDEND は必ずこの順でペアでテーブル上に連続して格納されなければいけません。<br><br>R_MIPSSCE_ADDEND レコードの r_offset フィールドは、リロケーション処理で加算されるべき加数(addend)を保持しています。<br>(本節の最初で述べたように他のタイプのレコードの r_offset フィールドは、リロケーション処理での書き換えを適用するセクションデータワードの位置を示すプログラムオフセットを保持しています。<br>すなわち、R_MIPSSCE_ADDENDレコードの r_offset フィールドは変則的な使われ方をしています。)<br><br>標準の ELF のリロケーションレコードと書き換えが行われるセクションデータのワードとは一対一で対応しています。<br>しかし、R_MIPSSCE_MHI16 レコードは、他のタイプのレコードとは異なり、書き換えが行われる複数のワードに対応しています。<br>該当のワード群のそれぞれのリロケーションフィールド(ワードの下位16ビット)は、ワード群を関連付けするための線形リストのリンクフィールドとして利用され次のワードへのワード単位の符合付相対オフセットが格納されています。<br>線形リストの末端では、相対オフセット値は 0 になります。<br>R_MIPSSCE_MHI16 レコードの r_offset フィールドにはこの線形リストの最初のワードを指し示すプログラムオフセット(TEXT segment の先頭からのオフセット)が格納されます。<br>(下記のリロケーション処理の参考コードを参照してください。)<br><br>ライブラリリリース 2.5.2 以前の IOPのプログラムローダのリロケーション処理を参考のため以下に示します。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>void OLD_apply_elf_rel_section(unsigned int textstart,Elf32_Rel *rp, int entrise)
+	{
+	　　int i, type, mhioff;
+	　　unsigned int data, datalow, daddr, daddr1;
+
+	　　for( i = 0; i &lt; entrise; i++, rp++ ) {
+		　type = ELF32_R_TYPE(rp-&gt;r_info);
+		　daddr = (unsigned int)(rp-&gt;r_offset + textstart);
+		　switch( type ) {
+		　case R_MIPS_NONE:
+		　　break;
+		　case R_MIPS_16:
+		　　data = (unsigned int)( ((*(int *)daddr)&lt;&lt;16)&gt;&gt;16) + textstart;
+		　　// if( (data&gt;&gt;16) != 0 && (data&gt;&gt;16) != 0xffff )
+		　　//     panic("R_MIPS_16 data overflow\n");
+		　　*(unsigned int *)daddr &= 0xffff0000;
+		　　*(unsigned int *)daddr |= data&0xffff;
+		　　break;
+		　case R_MIPS_32:
+		　　*(unsigned int *)(daddr) += textstart;
+		　　break;
+		　case R_MIPS_26:
+		　　data = *(unsigned int *)daddr;
+		　　data = (data & 0x03ffffff)&lt;&lt;2;
+		　　data |= (daddr & 0xf0000000);
+		　　data += textstart;
+		　　*(unsigned int *)daddr &= 0xfc000000;
+		　　*(unsigned int *)daddr |= (data&lt;&lt;4)&gt;&gt;6;
+		　　break;
+		　case R_MIPS_HI16:
+		　　// if( i == entrise+1
+		　　//     || ELF32_R_TYPE(rp[1].r_info) != R_MIPS_LO16
+		　　//     || ELF32_R_SYM(rp[1].r_info) != SHN_UNDEF  ) {
+		　　//     panic("R_MIPS_HI16 without R_MIPS_LO16\n");
+		　　// }
+		　　daddr1 = (unsigned int)( rp[1].r_offset + textstart );
+		　　data  = (unsigned int)( (*(int *)daddr)&lt;&lt;16 );
+		　　datalow = (unsigned int)( ((*(int *)daddr1)&lt;&lt;16)&gt;&gt;16 );
+		　　data = data + datalow + textstart;
+		　　*(unsigned int *)daddr  &= 0xffff0000;
+		　　*(unsigned int *)daddr  |= (((data&gt;&gt;15)+1)&gt;&gt;1)&0xffff;
+		　　*(unsigned int *)daddr1 &= 0xffff0000;
+		　　*(unsigned int *)daddr1 |= data&0xffff;
+		　　rp++; i++; /* skip R_MIPS_LO16 */
+		　　break;
+		　case R_MIPS_LO16:
+		　　// panic("R_MIPS_LO16 without R_MIPS_HI16\n");
+		　　break;
+		　default:
+		　　// panic("unacceptable relocation type: 0x%x\n", type);
+		　　break;
+		　}
+	　　}
+	}
+</pre></font></div>
+<div style="margin-left:50px;"><br>ライブラリリリース 2.5.3 以後の IOPのプログラムローダのリロケーション処理の概要を参考のため以下に示します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>void NEW_apply_elf_rel_section(unsigned int textstart, Elf32_Rel *rp, int entrise)
+	{
+	　　int i, type;
+	　　unsigned int data, datalow, daddr, daddr1;
+
+	　　for( i = 0; i &lt; entrise; i++, rp++ ) {
+		　type = ELF32_R_TYPE(rp-&gt;r_info);
+		　daddr = (unsigned int)(rp-&gt;r_offset+textstart);
+		　switch( type ) {
+		　// R_MIPS_NONE, R_MIPS_16, R_MIPS_32, R_MIPS_26 は以前のバージョン
+		　//　と同一の処理
+		　case R_MIPS_HI16:
+		　　// if( i == entrise+1
+		　　//     || ELF32_R_TYPE(rp[1].r_info) != R_MIPS_LO16
+		　　//     || ELF32_R_SYM(rp[1].r_info) != SHN_UNDEF  ) {
+		　　//     panic("R_MIPS_HI16 without R_MIPS_LO16\n");
+		　　// }
+		　　data  = (unsigned int)( (*(int *)daddr)&lt;&lt;16 );
+		　　daddr1 = (unsigned int)( rp[1].r_offset + textstart );
+		　　datalow = (unsigned int)( ((*(int *)daddr1)&lt;&lt;16)&gt;&gt;16 );
+		　　data = data + datalow + textstart;
+		　　*(unsigned int *)daddr  &= 0xffff0000;
+		　　*(unsigned int *)daddr  |= (((data&gt;&gt;15)+1)&gt;&gt;1)&0xffff;
+		　　break;
+		　case R_MIPS_LO16:
+		　　data = (unsigned int)( ((*(int *)daddr)&lt;&lt;16)&gt;&gt;16) + textstart;
+		　　*(unsigned int *)daddr &= 0xffff0000;
+		　　*(unsigned int *)daddr |= data&0xffff;
+		　　break;
+		　case R_MIPSSCE_MHI16:
+		　　// if( i == entrise+1
+		　　//     || ELF32_R_TYPE(rp[1].r_info) != R_MIPSSCE_ADDEND
+		　　//     || ELF32_R_SYM(rp[1].r_info) != SHN_UNDEF  ) {
+		　　//     panic("R_MIPSSCE_MHI16 without R_MIPSSCE_ADDEND\n");
+		　　// }
+		　　data = rp[1].r_offset + textstart;
+		　　data = (((data&gt;&gt;15)+1)&gt;&gt;1)&0xffff;
+		　　do {
+			mhioff = (((*(int *)daddr)&0xffff)&lt;&lt;16)&gt;&gt;14;
+			*(unsigned int *)daddr  &= 0xffff0000;
+			*(unsigned int *)daddr  |= data;
+			daddr += mhioff;
+		　　} while( mhioff != 0 );
+		　　rp++; i++; /* skip R_MIPSSCE_ADDEND */
+		　　break;
+		　default:
+		　　// panic("unacceptable relocation type: 0x%x\n", type);
+		　　break;
+		　}
+	　　}
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_9">
+<a href="#Heading3_8"> 8. </a>9 <b>デバッグ情報</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOPオブジェクトフォーマットでは、デバッグ情報に関しての規定は行いません。<br>また、IOPプログラムローダは、本文書で規定した以外のセクションを無視します。<br>従って、コンパイラベンダは独自のデバッグ情報を含むセクションをIOPオブジェクトファイルに含めてかまいません。<br>ただし、SCE製のユーティリティは、SCE供給のiop-gcc（標準のR3000用gccとほぼ同じ）の生成するデバッグ情報がセクション名 ".mdebug"セクションタイプSHT_MIPS_DEBUGであることを前提にしているので、MIPS用gccと非互換のデバッグ情報を生成する場合は、これらのセクション名またはセクションタイプを使用してはいけません。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

@@ -1,0 +1,3855 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>EE カーネル</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/eekernel.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+EE カーネル
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SemaParam"> SemaParam<br></a></td>
+<td>&nbsp;</td><td>セマフォ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ThreadParam"> ThreadParam<br></a></td>
+<td>&nbsp;</td><td>スレッドの属性<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#AddDmacHandler"> AddDmacHandler<br></a></td>
+<td>&nbsp;</td><td>DMA割り込みハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#AddDmacHandler2"> AddDmacHandler2<br></a></td>
+<td>&nbsp;</td><td>DMA割り込みハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#AddIntcHandler"> AddIntcHandler<br></a></td>
+<td>&nbsp;</td><td>INTC割り込みハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#AddIntcHandler2"> AddIntcHandler2<br></a></td>
+<td>&nbsp;</td><td>INTC割り込みハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#AddSbusIntcHandler"> AddSbusIntcHandler<br></a></td>
+<td>&nbsp;</td><td>SBUS割り込みハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#CancelWakeupThread / iCancelWakeupThread"> CancelWakeupThread / iCancelWakeupThread<br></a></td>
+<td>&nbsp;</td><td>起床要求回数の取得とCancel<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ChangeThreadPriority / iChangeThreadPriority"> ChangeThreadPriority / iChangeThreadPriority<br></a></td>
+<td>&nbsp;</td><td>スレッドの優先度変更<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#CreateSema"> CreateSema<br></a></td>
+<td>&nbsp;</td><td>セマフォの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#CreateThread"> CreateThread<br></a></td>
+<td>&nbsp;</td><td>新しいスレッドの生成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#DeleteSema"> DeleteSema<br></a></td>
+<td>&nbsp;</td><td>セマフォの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#DeleteThread"> DeleteThread<br></a></td>
+<td>&nbsp;</td><td>スレッドの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#DI"> DI<br></a></td>
+<td>&nbsp;</td><td>割り込み禁止<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#DisableDmac / iDisableDmac"> DisableDmac / iDisableDmac<br></a></td>
+<td>&nbsp;</td><td>DMA割り込み停止<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#DisableIntc / iDisableIntc"> DisableIntc / iDisableIntc<br></a></td>
+<td>&nbsp;</td><td>INTC割り込み停止<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#EI"> EI<br></a></td>
+<td>&nbsp;</td><td>割り込み許可<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#EnableDmac / iEnableDmac"> EnableDmac / iEnableDmac<br></a></td>
+<td>&nbsp;</td><td>DMA割り込み開始<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#EnableIntc / iEnableIntc"> EnableIntc / iEnableIntc<br></a></td>
+<td>&nbsp;</td><td>INTC割り込み開始<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ExitDeleteThread"> ExitDeleteThread<br></a></td>
+<td>&nbsp;</td><td>自スレッドの終了と削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ExitThread"> ExitThread<br></a></td>
+<td>&nbsp;</td><td>自スレッドの終了<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ExpandScratchPad"> ExpandScratchPad<br></a></td>
+<td>&nbsp;</td><td>スクラッチパットの擬似的拡張<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#FlushCache / iFlushCache"> FlushCache / iFlushCache<br></a></td>
+<td>&nbsp;</td><td>キャッシュ掃き出し<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#GetCop0 / iGetCop0"> GetCop0 / iGetCop0<br></a></td>
+<td>&nbsp;</td><td>COP0レジスタの取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#GetThreadId"> GetThreadId<br></a></td>
+<td>&nbsp;</td><td>自スレッドIDの取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#InitThread"> InitThread<br></a></td>
+<td>&nbsp;</td><td>スレッドの初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#InitTLBFunctions"> InitTLBFunctions<br></a></td>
+<td>&nbsp;</td><td>ExpandScrachPad()の初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#Interrupt2Iop"> Interrupt2Iop<br></a></td>
+<td>&nbsp;</td><td>IOPへの割り込み<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#InvalidDCache / iInvalidDCache"> InvalidDCache / iInvalidDCache<br></a></td>
+<td>&nbsp;</td><td>キャッシュ無効化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ReferSemaStatus / iReferSemaStatus"> ReferSemaStatus / iReferSemaStatus<br></a></td>
+<td>&nbsp;</td><td>セマフォ状態の取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ReferThreadStatus / iReferThreadStatus"> ReferThreadStatus / iReferThreadStatus<br></a></td>
+<td>&nbsp;</td><td>スレッド状態の取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ReleaseAlarm / iReleaseAlarm"> ReleaseAlarm / iReleaseAlarm<br></a></td>
+<td>&nbsp;</td><td>アラームの解除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ReleaseWaitThread / iReleaseWaitThread"> ReleaseWaitThread / iReleaseWaitThread<br></a></td>
+<td>&nbsp;</td><td>WAIT状態にあるスレッドの強制解除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#RemoveDmacHandler"> RemoveDmacHandler<br></a></td>
+<td>&nbsp;</td><td>DMA割り込みハンドラの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#RemoveIntcHandler"> RemoveIntcHandler<br></a></td>
+<td>&nbsp;</td><td>割り込みハンドラの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#RemoveSbusIntcHandler"> RemoveSbusIntcHandler<br></a></td>
+<td>&nbsp;</td><td>SBUS割り込みハンドラの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#ResumeThread / iResumeThread"> ResumeThread / iResumeThread<br></a></td>
+<td>&nbsp;</td><td>SUSPEND状態からREADY状態への移行<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#RotateThreadReadyQueue / iRotateThreadReadyQueue"> RotateThreadReadyQueue / iRotateThreadReadyQueue<br></a></td>
+<td>&nbsp;</td><td>レディーキューの回転<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SetAlarm / iSetAlarm"> SetAlarm / iSetAlarm<br></a></td>
+<td>&nbsp;</td><td>アラームの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SetDebugHandler"> SetDebugHandler<br></a></td>
+<td>&nbsp;</td><td>例外ハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SignalSema / iSignalSema"> SignalSema / iSignalSema<br></a></td>
+<td>&nbsp;</td><td>セマフォ資源返却<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SleepThread"> SleepThread<br></a></td>
+<td>&nbsp;</td><td>WAIT状態への移行<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#StartThread"> StartThread<br></a></td>
+<td>&nbsp;</td><td>スレッドの起動<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SuspendThread / iSuspendThread"> SuspendThread / iSuspendThread<br></a></td>
+<td>&nbsp;</td><td>SUSPEND状態への移行<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SyncDCache / iSyncDCache"> SyncDCache / iSyncDCache<br></a></td>
+<td>&nbsp;</td><td>キャッシュ掃き出し<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#TerminateThread / iTerminateThread"> TerminateThread / iTerminateThread<br></a></td>
+<td>&nbsp;</td><td>他スレッドの強制終了<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#WaitSema / PollSema / iPollSema"> WaitSema / PollSema / iPollSema<br></a></td>
+<td>&nbsp;</td><td>セマフォ資源獲得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#WakeupThread / iWakeupThread"> WakeupThread / iWakeupThread<br></a></td>
+<td>&nbsp;</td><td>WAIT状態にあるスレッドのWAKEUP<br></td></tr>
+</table><br>
+<font size=4><b>プログラムの起動/終了関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#Exit"> Exit<br></a></td>
+<td>&nbsp;</td><td>プログラムの終了<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#LoadExecPS2"> LoadExecPS2<br></a></td>
+<td>&nbsp;</td><td>プログラムの起動<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SemaParam"><font size=6>SemaParam<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>セマフォ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+struct <b>SemaParam</b> {
+	int <i>currentCount</i>;
+	int <i>maxCount</i>;
+	int <i>initCount</i>;
+	int <i>numWaitThreads</i>;
+	u_int <i>attr</i>;
+	u_int <i>option</i>;
+}
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>currentCount</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ現在値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>maxCount</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ資源数の最大値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>initCount</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ資源数の初期値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>numWaitThreads</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ待ちスレッド数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>attr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ属性&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>option</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザ定義の付加情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">セマフォの構造体です。<br><i>option</i>はEE Kernelが関知しないメンバで、ユーザプログラムで任意に意味付けして使用することができます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在のバージョンでは、maxCountが正しく処理されません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="ThreadParam"><font size=6>ThreadParam<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スレッドの属性<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+struct <b>ThreadParam</b> {
+	int <i>status</i>;
+	void (*<i>entry</i>)(void *);
+	void *<i>stack</i>;
+	int <i>stackSize</i>;
+	void *<i>gpReg</i>;
+	int <i>initPriority</i>;
+	int <i>currentPriority</i>;
+	u_int <i>attr</i>;
+	u_int <i>option</i>;
+	int <i>waitType</i>;
+	int <i>waitId</i>;
+	int <i>wakeupCount</i>;
+};
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>status</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッド状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>entry</i>&nbsp;</td>
+<td valign="TOP">&nbsp;実行開始アドレス (*)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>stack</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドの使用するスタック領域のアドレス(*)&nbsp;<br>&nbsp;（16byteアライメント）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>stackSize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スタックサイズ（バイト単位：16の倍数） (*)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>gpReg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;GP（Global Pointer）レジスタの値 (*)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>initPriority</i>&nbsp;</td>
+<td valign="TOP">&nbsp;優先度 初期値 (1～127) (*)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>currentPriority</i>&nbsp;</td>
+<td valign="TOP">&nbsp;優先度 現在値 (1～127)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>attr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;System Reserved&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>option</i>&nbsp;</td>
+<td valign="TOP">&nbsp;使用不可&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>waitType</i>&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>waitId</i>&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT要因がセマフォの時セマフォID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>wakeupCount</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Wakup要求数&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;"> (*) スレッド生成時に必要な情報<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">スレッドの属性を保持する構造体です。<br><i>status</i>はスレッドの状態を次の定数で示します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>定数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>状態</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_RUN&nbsp;</td>
+<td valign="TOP">&nbsp;0x01&nbsp;</td>
+<td valign="TOP">&nbsp;RUN状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_READY&nbsp;</td>
+<td valign="TOP">&nbsp;0x02&nbsp;</td>
+<td valign="TOP">&nbsp;READY状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;0x04&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_SUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0x08&nbsp;</td>
+<td valign="TOP">&nbsp;SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_WAITSUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0x0c&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT-SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_DORMANT&nbsp;</td>
+<td valign="TOP">&nbsp;0x10&nbsp;</td>
+<td valign="TOP">&nbsp;DORMANT状態&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;"><i>option</i>は、機能しないため使用不可になっています。<br><i>waitType</i>はWAIT要因を次の値で表します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>要因</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態でない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;WAKUP要求待ち&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ待ち&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="AddDmacHandler"><font size=6>AddDmacHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>DMA割り込みハンドラの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>AddDmacHandler</b>(
+	int <i>channel</i>,
+	int (*<i>handler</i>)(int <i>ch</i>),
+	int <i>next</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>channel</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;チャネル番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;DMAC_VIF0&nbsp;<br>&nbsp;DMAC_VIF1&nbsp;<br>&nbsp;DMAC_GIF&nbsp;<br>&nbsp;DMAC_FROM_IPU&nbsp;<br>&nbsp;DMAC_TO_IPU&nbsp;<br>&nbsp;DMAC_FROM_SPR&nbsp;<br>&nbsp;DMAC_TO_SPR&nbsp;</td>
+<td valign="top">&nbsp;DMAチャネル&nbsp;<br>&nbsp;VIF0  DIR:to  GP:A&nbsp;<br>&nbsp;VIF1  DIR:both  GP:C&nbsp;<br>&nbsp;GIF  DIR:to  GP:C&nbsp;<br>&nbsp;from IPU  DIR:from  GP:C&nbsp;<br>&nbsp;to IPU  DIR:to  GP:C&nbsp;<br>&nbsp;from SPR  DIR:from  GP:C&nbsp;<br>&nbsp;to SPR  DIR:to  GP:C&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>handler</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラ関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>next</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;すでに登録されているハンドラのハンドラID&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;0:先頭に登録する&nbsp;<br>&nbsp;-1:最後に登録する&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ハンドラIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">DMAチャネルごとにDMA割り込みハンドラを設定します。<br><i>channel</i>はDMAチャネルの番号、<i>handler</i>はDMA割り込み時に呼び出されるハンドラのアドレスで、<i>handler</i>の引数<i>ch</i>はDMAチャネルの番号です。<i>next</i>はすでに登録されているDMA割り込みハンドラのアドレスで、<i>handler</i>は<i>next</i>の前に呼び出されることになります。ただし<i>next</i>に0を指定すると<i>handler</i>が先頭の割り込みハンドラとして、-1を指定すると最後の割り込みハンドラとして登録されます。呼び出される割り込みハンドラのgpレジスタの値は、AddDmacHandler関数を呼び出した際のgpレジスタの値が使われます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">DMA割り込みが発生すると、割り込みハンドラを呼び出す前に、GPRをセーブし、割り込みが発生したチャネルに対応するD_STAT.CISがクリアされます。ハンドラの実行を終えるとGPRはリストアされます。一方、FPUレジスタはセーブ／リストアが行われませんので注意してください。<br>割り込みハンドラの作成にあたっては、割り込み禁止状態であること、使用できるAPIが異なることなど、いくつか特別な注意が必要です。\overview\eekernelに注意事項が記載されていますので参照してください。<br>割り込みハンドラが-1を返した場合、それ以降に登録されている割り込みハンドラは呼び出されません。0以上を返した場合、それ以降に登録されている割り込みハンドラは呼び出されます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="AddDmacHandler2"><font size=6>AddDmacHandler2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>DMA割り込みハンドラの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>AddDmacHandler2</b>(
+	int <i>channel</i>,
+	int (*<i>handler</i>)(int <i>ch</i>, void *<i>arg</i>, void *<i>addr</i>),
+	int <i>next,</i>
+<i>	void *arg</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td rowspan= 2  valign="top">&nbsp;<i>channel</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;チャネル番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;DMAC_VIF0&nbsp;<br>&nbsp;DMAC_VIF1&nbsp;<br>&nbsp;DMAC_GIF&nbsp;<br>&nbsp;DMAC_FROM_IPU&nbsp;<br>&nbsp;DMAC_TO_IPU&nbsp;<br>&nbsp;DMAC_FROM_SPR&nbsp;<br>&nbsp;DMAC_TO_SPR&nbsp;</td>
+<td valign="top">&nbsp;DMAチャネル&nbsp;<br>&nbsp;VIF0  DIR:to  GP:A&nbsp;<br>&nbsp;VIF1  DIR:both  GP:C&nbsp;<br>&nbsp;GIF  DIR:to  GP:C&nbsp;<br>&nbsp;from IPU  DIR:from  GP:C&nbsp;<br>&nbsp;to IPU  DIR:to  GP:C&nbsp;<br>&nbsp;from SPR  DIR:from  GP:C&nbsp;<br>&nbsp;to SPR  DIR:to  GP:C&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>handler</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラ関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>next</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;すでに登録されているハンドラのハンドラID&nbsp;<br>&nbsp;0:先頭に登録する&nbsp;<br>&nbsp;-1:最後に登録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>arg</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラへ渡す引数&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ハンドラIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">DMAチャネルごとにDMA割り込みハンドラを設定します。割り込みハンドラに渡される引数がAddDmacHandler()と異なります。<br><i>channel</i>はDMAチャネルの番号、<i>handler</i>はDMA割り込み時に呼び出されるハンドラのアドレスです。<i>handler</i>の引数<i>ch</i>はDMAチャネルの番号、<i>arg</i>はハンドラへ渡す引数、<i>addr</i>は割り込みが発生した時のプログラムカウンタの値です。<i>next</i>はすでに登録されているDMA割り込みハンドラのアドレスで、<i>handler</i>は<i>next</i>の前に呼び出されることになります。ただし<i>next</i>に0を指定すると<i>handler</i>が先頭の割り込みハンドラとして、-1を指定すると最後の割り込みハンドラとして登録されます。呼び出される割り込みハンドラのgpレジスタの値は、AddDmacHandler2関数を呼び出した際のgpレジスタの値が使われます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">DMA割り込みが発生すると、割り込みハンドラを呼び出す前に、GPRをセーブし、割り込みが発生したチャネルに対応するD_STAT.CISがクリアされます。ハンドラの実行を終えるとGPRはリストアされます。一方、FPUレジスタはセーブ／リストアが行われませんので注意してください。<br>割り込みハンドラの作成にあたっては、割り込み禁止状態であること、使用できるAPIが異なることなど、いくつか特別な注意が必要です。\overview\eekernelに注意事項が記載されていますので参照してください。<br>割り込みハンドラが-1を返した場合、それ以降に登録されている割り込みハンドラは呼び出されません。0以上を返した場合、それ以降に登録されている割り込みハンドラは呼び出されます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="AddIntcHandler"><font size=6>AddIntcHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>INTC割り込みハンドラの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>AddIntcHandler</b>(
+	int <i>cause</i>,
+	int (*<i>handler</i>)(int <i>ca</i>),
+	int <i>next</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cause</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;INTC_GS&nbsp;<br>&nbsp;INTC_SBUS&nbsp;<br>&nbsp;INTC_VBLANK_S&nbsp;<br>&nbsp;INTC_VBLANK_E&nbsp;<br>&nbsp;INTC_VIF0&nbsp;<br>&nbsp;INTC_VIF1&nbsp;<br>&nbsp;INTC_VU0&nbsp;<br>&nbsp;INTC_VU1&nbsp;<br>&nbsp;INTC_IPU&nbsp;<br>&nbsp;INTC_TIM0&nbsp;<br>&nbsp;INTC_TIM1&nbsp;</td>
+<td valign="top">&nbsp;割り込み要因&nbsp;<br>&nbsp;GS&nbsp;<br>&nbsp;SBUS&nbsp;<br>&nbsp;V-blank start&nbsp;<br>&nbsp;V-blank end&nbsp;<br>&nbsp;VIF0&nbsp;<br>&nbsp;VIF1&nbsp;<br>&nbsp;VU0&nbsp;<br>&nbsp;VU1&nbsp;<br>&nbsp;IPU&nbsp;<br>&nbsp;Timer0&nbsp;<br>&nbsp;Timer1&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>handler</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラ関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>next</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;すでに登録されているハンドラのハンドラID&nbsp;<br>&nbsp;0:先頭に登録する&nbsp;<br>&nbsp;-1:最後に登録する&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ハンドラIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">INTCの割り込み要因ごとにハンドラを登録します。<br><i>cause</i>は割り込み要因、<i>handler</i>は割り込み発生時に呼び出されるハンドラのアドレス、<i>handler</i>の引数<i>ca</i>は割り込み要因を示す定数です。<i>next</i>はすでに登録されている割り込みハンドラのハンドラIDで、<i>handler</i>は<i>next</i>の前に呼び出されることになります。ただし<i>next</i>に0を指定すると<i>handler</i>が先頭の割り込みハンドラとして、-1を指定すると最後の割り込みハンドラとして登録されます。呼び出される割り込みハンドラのgpレジスタの値は、AddIntcHandler関数を呼び出した際のgpレジスタの値が使われます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">外部割り込みが発生すると、割り込みハンドラを呼び出す前にGPRはセーブされ、ハンドラの実行を終えるとGPRはリストアされます。FPUレジスタのセーブ／リストアは行われませんので注意してください。<br>割り込みハンドラの作成にあたっては、割り込み禁止状態であること、使用できるAPIが異なることなど、いくつか特別な注意が必要です。\overview\eekernelに注意事項が記載されていますので参照してください。<br>割り込みハンドラが-1を返した場合、それ以降に登録されている割り込みハンドラは呼び出されません。0以上を返した場合、それ以降に登録されている割り込みハンドラは呼び出されます。<br><br>GS基本ライブラリのsceGsSyncVとAddIntcHandler(INTC_VBLANK_S,  ,)を併用することはできません。sceGsSyncVと併用する場合は、AddIntcHandler(INTC_VBLANK_S,  ,)の代わりにsceGsSyncVCallbackをお使いください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="AddIntcHandler2"><font size=6>AddIntcHandler2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>INTC割り込みハンドラの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>AddIntcHandler2</b>(
+	int <i>cause</i>,
+	int (*<i>handler</i>)(int <i>ca</i>, void *<i>arg</i>, void *<i>addr</i>),
+	int <i>next</i>
+<i>	</i>void <i>*arg</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cause</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;</td>
+<td valign="top">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;INTC_GS&nbsp;<br>&nbsp;INTC_SBUS&nbsp;<br>&nbsp;INTC_VBLANK_S&nbsp;<br>&nbsp;INTC_VBLANK_E&nbsp;<br>&nbsp;INTC_VIF0&nbsp;<br>&nbsp;INTC_VIF1&nbsp;<br>&nbsp;INTC_VU0&nbsp;<br>&nbsp;INTC_VU1&nbsp;<br>&nbsp;INTC_IPU&nbsp;<br>&nbsp;INTC_TIM0&nbsp;<br>&nbsp;INTC_TIM1&nbsp;</td>
+<td valign="top">&nbsp;GS&nbsp;<br>&nbsp;SBUS&nbsp;<br>&nbsp;V-blank start&nbsp;<br>&nbsp;V-blank end&nbsp;<br>&nbsp;VIF0&nbsp;<br>&nbsp;VIF1&nbsp;<br>&nbsp;VU0&nbsp;<br>&nbsp;VU1&nbsp;<br>&nbsp;IPU&nbsp;<br>&nbsp;Timer0&nbsp;<br>&nbsp;Timer1&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>handler</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラ関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>next</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;すでに登録されているハンドラのハンドラID&nbsp;<br>&nbsp;0: 先頭に登録する&nbsp;<br>&nbsp;-1: 最後に登録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>arg</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラへ渡す引数&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ハンドラIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">INTCの割り込み要因ごとにハンドラを登録します。AddIntcHandler()とはハンドラへ渡す引数が異なります。<br><i>cause</i>は割り込み要因、<i>handler</i>は割り込み発生時に呼び出されるハンドラのアドレス、<i>handler</i>の引数<i>ca</i>は割り込み要因を示す定数、<i>arg</i>はハンドラへ渡す引数、<i>addr</i>は割り込みが発生した時のプログラムカウンタの値です。<i>next</i>はすでに登録されている割り込みハンドラのハンドラIDで、<i>handler</i>は<i>next</i>の前に呼び出されることになります。ただし<i>next</i>に0を指定すると<i>handler</i>が先頭の割り込みハンドラとして、-1を指定すると最後の割り込みハンドラとして登録されます。呼び出される割り込みハンドラのgpレジスタの値は、AddIntcHandler2関数を呼び出した際のgpレジスタの値が使われます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">外部割り込みが発生すると、割り込みハンドラを呼び出す前にGPRはセーブされ、ハンドラの実行を終えるとリストアされます。一方、FPUレジスタはセーブ／リストアが行われませんので注意してください。<br>割り込みハンドラの作成にあたっては、割り込み禁止状態であること、使用できるAPIが異なることなど、いくつか特別な注意が必要です。\overview\eekernelに注意事項が記載されていますので参照してください。<br>割り込みハンドラが-1を返した場合、それ以降に登録されている割り込みハンドラは呼び出されません。0以上を返した場合、それ以降に登録されている割り込みハンドラは呼び出されます。<br><br>GS基本ライブラリのsceGsSyncVとAddIntcHandler2(INTC_VBLANK_S,  ,)を併用することはできません。sceGsSyncVと併用する場合は、AddIntcHandler2(INTC_VBLANK_S,  ,)の代わりにsceGsSyncVCallbackをお使いください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="AddSbusIntcHandler"><font size=6>AddSbusIntcHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SBUS割り込みハンドラの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>AddSbusIntcHandler</b>(
+	int <i>cause</i>,
+	void (*<i>handler</i>)(int <i>ca</i>)
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cause</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>handler</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ハンドラ関数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、<i>cause</i>を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">IOPからの割り込みであるSBUS割り込みのハンドラを登録します。<br><i>cause</i>は割り込み要因で、ユーザー定義の0から15までの値を指定します。最大16個までのハンドラを登録することができ、その中で、IOP側で割り込みをかける際に指定された要因の値を持つものが呼び出されます。たとえばIOPから0を指定して割り込みをかけると、<i>cause</i>に0を指定して登録されたハンドラが呼び出され、それ以外のハンドラは呼び出されません。<br><i>handler</i>は割り込み発生時に呼び出されるハンドラのアドレス、<i>handler</i>の引数<i>ca</i>は割り込み要因です。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">外部割り込みが発生すると、割り込みハンドラを呼び出す前にGPRはセーブされ、ハンドラの実行を終えるとGPRはリストアされます。FPUレジスタのセーブ／リストアは行われませんので注意してください。<br>割り込みハンドラの作成にあたっては、割り込み禁止状態であること、使用できるAPIが異なることなど、いくつか特別な注意が必要です。\overview\eekernelに注意事項が記載されていますので参照してください。<br>SBUS割り込みは常に許可されており、禁止することはできません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="CancelWakeupThread / iCancelWakeupThread"><font size=6>CancelWakeupThread / iCancelWakeupThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>起床要求回数の取得とCancel<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>CancelWakeupThread</b>(
+	int <i>tid</i>
+);
+int <b>iCancelWakeupThread</b>(
+	int <i>tid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;CancelWakeupThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iCancelWakeupThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、起床要求回数を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>tid</i>スレッドの起床要求回数を読み出し、クリアして、起床要求をすべて無効にします。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="ChangeThreadPriority / iChangeThreadPriority"><font size=6>ChangeThreadPriority / iChangeThreadPriority<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スレッドの優先度変更<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>ChangeThreadPriority</b>(
+	int <i>tid</i>,
+	int <i>prio</i>
+);
+int <b>iChangeThreadPriority</b>(
+	int <i>tid</i>,
+	int <i>prio</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ChangeThreadPriority&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iChangeThreadPriority&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>prio</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドの優先度(1～127)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、変更前の優先度を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>tid</i>スレッドの優先度を<i>prio</i>に変更します。該当する優先度のレディーキューの最後に登録されます。変更した優先度はExitによって終了するまで有効です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="CreateSema"><font size=6>CreateSema<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>セマフォの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>CreateSema</b>(
+	struct SemaParam *<i>sema</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sema-&gt;initCount &nbsp;</td>
+<td valign="TOP">&nbsp;セマフォの初期値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sema-&gt;maxCount&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォの最大値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sema-&gt;option&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォに関する付加情報。&nbsp;<br>&nbsp;この値は、ReferSemaStatus()で参照できる。&nbsp;<br>&nbsp;マルチスレッドマネージャはこの値を関知し&nbsp;<br>&nbsp;ないので、適宜意味付けして利用してよい。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、セマフォIDを返します。<br>エラーの場合、以下を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;- セマフォの数が制限値（255）を超えて&nbsp;<br>&nbsp;  作成しようとしている&nbsp;<br>&nbsp;- initCountとして負の値（&lt;0）を登録しようとしている&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">計数セマフォを作成します。作成できるセマフォの数は256-3個です。差し引かれる3個のセマフォの内訳はcrt0.sの_InitSys関数が2個とInitThread関数が1個です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="CreateThread"><font size=6>CreateThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>新しいスレッドの生成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>CreateThread</b>(
+	struct ThreadParam *<i>param</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;param-&gt;entry&nbsp;</td>
+<td valign="TOP">&nbsp;実行を開始する関数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param-&gt;stack&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドが使用するスタック領域&nbsp;<br>&nbsp;(16byteアラインメント)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param-&gt;stackSize&nbsp;</td>
+<td valign="TOP">&nbsp;スタックサイズ(バイト単位:16の倍数)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param-&gt;gpReg&nbsp;</td>
+<td valign="TOP">&nbsp;GP(Global Pointer)レジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param-&gt;initPriority&nbsp;</td>
+<td valign="TOP">&nbsp;優先度(1～127)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param-&gt;option&nbsp;</td>
+<td valign="TOP">&nbsp;設定不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">新しいスレッドの生成(TCBの割り付けとその初期設定)を行い、スレッドIDを返します。<br>この関数が呼び出された時点では生成されたスレッドは実行されず、DORMANT状態になります。生成できるスレッドの数は、256-3個です。差し引かれる3個のスレッドは、main関数のスレッド、InitThread関数で生成されるスレッド、カーネルにより生成されるアイドル時に動作するスレッドです。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">スタック領域を16byteアライメントに揃えるには、次の例のように変数宣言します。<br></div>
+<div style="margin-left:70px;">char stack[STACK_SIZE] __attribute__ ((aligned(16)));<br></div>
+<div style="margin-left:50px;"><br><i>param</i>-&gt;gpRegには、グローバル変数_gpのアドレスを代入してください。<br></div>
+<div style="margin-left:70px;"><i>param-</i>&gt;gpReg = &_gp;<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="DeleteSema"><font size=6>DeleteSema<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>セマフォの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>DeleteSema</b>(
+	int <i>sid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、セマフォIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>sid</i>セマフォを削除します。セマフォの待ちキューに登録されていたスレッドにはエラーが返ります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="DeleteThread"><font size=6>DeleteThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スレッドの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>DeleteThread</b>(
+	int <i>tid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;削除するスレッドのID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>tid</i>スレッドを削除し、TCBを解放します。対象とするスレッドはDORMANT状態でなければなりません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドを削除する場合は、ExitDeleteThread()を使用します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="DI"><font size=6>DI<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>割り込み禁止<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>DI</b> (void);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;本関数を呼び出すまで割り込み許可状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;本関数を呼び出す以前から割り込み禁止状態&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">CPUの割り込み許可ビットを0にします。<br>割り込み許可ビットはスレッドのコンテキストに含まれません。<br>この機能は、細かい単位で割り込みを制御するため、たとえばVU0をマクロ命令で制御する場合などのために用意されたものです。実行権の制御にはスレッドの優先順位、排他制御にはセマフォを使用してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">DI()を呼び出した後の割り込み禁止状態では、printf()は使用できません。scePrintf()を使用してください。<br>リリース2.2以降、本APIはマクロから関数に変更されました。マクロではコンパイラの最適化によりプログラマの意図しないタイミングで割り込み禁止になるためです。<br><br></div>
+
+<div style="margin-left:40px;"><h4><b>DI,EI関数を使用して割り込み禁止の処理を記述する場合の例</b><br></h4></div>
+
+        <div style="margin-left:93px;"><pre><font size=3>int ret;
+ret = DI();
+
+/*　割り込み禁止状態で行う処理 */
+
+if(ret)
+   EI();
+
+</pre></font></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="DisableDmac / iDisableDmac"><font size=6>DisableDmac / iDisableDmac<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>DMA割り込み停止<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>DisableDmac</b>(
+	int <i>channel</i>
+);
+int <b>iDisableDmac</b>(
+	int <i>channel</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DisableDmac&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iDisableDmac&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>channel</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;チャネル番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;</td>
+<td valign="top">&nbsp;DMAチャネル&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;DMAC_VIF0&nbsp;<br>&nbsp;DMAC_VIF1&nbsp;<br>&nbsp;DMAC_GIF&nbsp;<br>&nbsp;DMAC_FROM_IPU&nbsp;<br>&nbsp;DMAC_TO_IPU&nbsp;<br>&nbsp;DMAC_FROM_SPR&nbsp;<br>&nbsp;DMAC_TO_SPR&nbsp;</td>
+<td valign="top">&nbsp;VIF0 DIR:to GP:A&nbsp;<br>&nbsp;VIF1 DIR:both GP:C&nbsp;<br>&nbsp;GIF DIR:to GP:C&nbsp;<br>&nbsp;from IPU DIR:from GP:C&nbsp;<br>&nbsp;to IPU DIR:to GP:C&nbsp;<br>&nbsp;from SPR DIR:from GP:C&nbsp;<br>&nbsp;to SPR DIR:to GP:C&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;すでに停止状態にある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;停止状態に移行&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>channel</i>のDMA終了割り込みを停止します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="DisableIntc / iDisableIntc"><font size=6>DisableIntc / iDisableIntc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>INTC割り込み停止<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>DisableIntc</b>(
+	int <i>cause</i>
+);
+int <b>iDisableIntc</b>(
+	int <i>cause</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DisableIntc&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iDisableIntc&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cause</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;INTC_GS&nbsp;<br>&nbsp;INTC_SBUS&nbsp;<br>&nbsp;INTC_VBLANK_S&nbsp;<br>&nbsp;INTC_VBLANK_E&nbsp;<br>&nbsp;INTC_VIF0&nbsp;<br>&nbsp;INTC_VIF1&nbsp;<br>&nbsp;INTC_VU0&nbsp;<br>&nbsp;INTC_VU1&nbsp;<br>&nbsp;INTC_IPU&nbsp;<br>&nbsp;INTC_TIM0&nbsp;<br>&nbsp;INTC_TIM1&nbsp;</td>
+<td valign="top">&nbsp;割り込み要因&nbsp;<br>&nbsp;GS&nbsp;<br>&nbsp;SBUS&nbsp;<br>&nbsp;V-blank start&nbsp;<br>&nbsp;V-blank end&nbsp;<br>&nbsp;VIF0&nbsp;<br>&nbsp;VIF1&nbsp;<br>&nbsp;VU0&nbsp;<br>&nbsp;VU1&nbsp;<br>&nbsp;IPU&nbsp;<br>&nbsp;Timer0&nbsp;<br>&nbsp;Timer1&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;すでに停止状態にある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;停止状態に移行&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cause</i>を要因とする割り込みを停止します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="EI"><font size=6>EI<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>割り込み許可<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>EI</b>(void);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;本関数を呼び出す以前から割り込み許可状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;本関数を呼び出すまで割り込み禁止状態&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">CPUの割り込み許可ビットを1にします。<br>割り込み許可ビットはスレッドのコンテクストに含まれません。<br>この機能は、細かい単位で割り込みを制御するため、たとえばVU0をマクロ命令で制御する場合などのために用意されたものです。実行権の制御にはスレッドの優先順位、排他制御にはセマフォを使用してください。<br>リリース2.2以降、本APIはマクロから関数に変更されました。マクロではコンパイラの最適化によりプログラマの意図しないタイミングで割り込み許可になるためです。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="EnableDmac / iEnableDmac"><font size=6>EnableDmac / iEnableDmac<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>DMA割り込み開始<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>EnableDmac</b>(
+	int <i>channel</i>
+);
+int <b>iEnableDmac</b>(
+	int <i>channel</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;EnableDmac&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iEnableDmac&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>channel</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;チャネル番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;DMAC_VIF0&nbsp;<br>&nbsp;DMAC_VIF1&nbsp;<br>&nbsp;DMAC_GIF&nbsp;<br>&nbsp;DMAC_FROM_IPU&nbsp;<br>&nbsp;DMAC_TO_IPU&nbsp;<br>&nbsp;DMAC_FROM_SPR&nbsp;<br>&nbsp;DMAC_TO_SPR&nbsp;</td>
+<td valign="top">&nbsp;DMAチャネル&nbsp;<br>&nbsp;VIF0 DIR:to GP:A&nbsp;<br>&nbsp;VIF1 DIR:both GP:C&nbsp;<br>&nbsp;GIF DIR:to GP:C&nbsp;<br>&nbsp;from IPU DIR:from GP:C&nbsp;<br>&nbsp;to IPU DIR:to GP:C&nbsp;<br>&nbsp;from SPR DIR:from GP:C&nbsp;<br>&nbsp;to SPR DIR:to GP:C&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;すでに開始状態にある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;開始状態に移行&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>channel</i>のDMA終了割り込みを開始します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="EnableIntc / iEnableIntc"><font size=6>EnableIntc / iEnableIntc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>INTC割り込み開始<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>EnableIntc</b>(
+	int <i>cause</i>
+);
+int <b>iEnableIntc</b>(
+	int <i>cause</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;EnableIntc&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iEnableIntc&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cause</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;INTC_GS&nbsp;<br>&nbsp;INTC_SBUS&nbsp;<br>&nbsp;INTC_VBLANK_S&nbsp;<br>&nbsp;INTC_VBLANK_E&nbsp;<br>&nbsp;INTC_VIF0&nbsp;<br>&nbsp;INTC_VIF1&nbsp;<br>&nbsp;INTC_VU0&nbsp;<br>&nbsp;INTC_VU1&nbsp;<br>&nbsp;INTC_IPU&nbsp;<br>&nbsp;INTC_TIM0&nbsp;<br>&nbsp;INTC_TIM1&nbsp;</td>
+<td valign="top">&nbsp;割り込み要因&nbsp;<br>&nbsp;GS&nbsp;<br>&nbsp;SBUS&nbsp;<br>&nbsp;V-blank start&nbsp;<br>&nbsp;V-blank end&nbsp;<br>&nbsp;VIF0&nbsp;<br>&nbsp;VIF1&nbsp;<br>&nbsp;VU0&nbsp;<br>&nbsp;VU1&nbsp;<br>&nbsp;IPU&nbsp;<br>&nbsp;Timer0&nbsp;<br>&nbsp;Timer1&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;すでに許可状態にある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;許可状態に移行&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cause</i>を要因とする割り込みを開始します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="ExitDeleteThread"><font size=6>ExitDeleteThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>自スレッドの終了と削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>ExitDeleteThread</b>( void );
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドを終了し、さらに削除します。本システムコールは、呼び出し元に戻ることはないので返り値はありません。<br><br>スレッドが終了する際に、セマフォ等の資源を自動的に解放することはありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="ExitThread"><font size=6>ExitThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>自スレッドの終了<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>ExitThread</b>( void );
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドを終了し、DORMANT状態に移行します。本システムコールは、呼び出し元に戻ることはないので返り値はありません。<br><br>スレッドが終了する際に、セマフォ等の資源を自動的に解放することはありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="ExpandScratchPad"><font size=6>ExpandScratchPad<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スクラッチパットの擬似的拡張<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>ExpandScratchPad</b>(
+	u_int <i>page</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>page</i>&nbsp;</td>
+<td valign="TOP">&nbsp;4Kbyteにアラインメントされた8Kbyteの&nbsp;<br>&nbsp;連続したメモリ領域の開始物理アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、TLB indexを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">スクラッチパッド(0x70000000 - 0x70003fff)の直後の論理アドレスに、引数<i>page</i>で指定されるメモリ領域を cached 領域としてマップします。引数 <i>page</i> が 0 のとき、マップされている領域を解除します。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#InitTLBFunctions">InitTLBFunctions</a>()<br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="FlushCache / iFlushCache"><font size=6>FlushCache / iFlushCache<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キャッシュ掃き出し<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>FlushCache</b>(
+	int <i>operation</i>
+);
+void <b>iFlushCache</b>(
+	int <i>operation</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;FlushCache&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iFlushCache&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>operation</i>&nbsp;</td>
+<td valign="top">&nbsp;キャッシュに対する命令&nbsp;</td>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x0 WRITEBACK_DCACHE&nbsp;</td>
+<td valign="top">&nbsp;データキャッシュの内容を&nbsp;<br>&nbsp;すべて書き戻し、すべて無効にする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x1 INVALIDATE_DCACHE&nbsp;</td>
+<td valign="top">&nbsp;データキャッシュの内容を&nbsp;<br>&nbsp;すべて無効にする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x2 INVALIDATE_ICACHE&nbsp;</td>
+<td valign="top">&nbsp;命令キャッシュの内容を&nbsp;<br>&nbsp;すべて無効にする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x3 INVALIDATE_CACHE&nbsp;</td>
+<td valign="top">&nbsp;命令/データキャッシュの内容を&nbsp;<br>&nbsp;すべて無効にする&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">キャッシュの掃き出し処理を行います。キャッシュの内容をメモリに書き戻すか、破棄するかを選ぶことができます。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#SyncDCache / iSyncDCache">SyncDCache / iSyncDCache</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="GetCop0 / iGetCop0"><font size=6>GetCop0 / iGetCop0<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>COP0レジスタの取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+u_int <b>GetCop0</b>(
+	int <i>id</i>
+);
+u_int <b>iGetCop0</b>(
+	int <i>id</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;GetCop0&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iGetCop0&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;レジスタ番号(0～31)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">レジスタ値を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">COP0の<i>id</i>番レジスタの値を参照します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="GetThreadId"><font size=6>GetThreadId<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>自スレッドIDの取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>GetThreadId</b>( void );
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">スレッドIDを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドのスレッドIDを取得します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="InitThread"><font size=6>InitThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スレッドの初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>InitThread </b>(void);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>初期化失敗の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">スケジューリング用スレッドを生成し、そのスレッドIDを返します。<br>本システムコールを呼び出したスレッドの優先度 を1 にします。スケジューリング用スレッドの優先度は 0 です。<br><br>本関数は、iWakeupThread()、iRotateThreadReadyQueue()、iSuspendThread()が、正しくスケジューリングされない不具合に対応するために用意されたものです。また、セマフォを1つ使用します。<br><br>なおこの関数は、C++のコンストラクタに対応するためcrt0.sで呼ばれるように変更されました。ユーザーが直接呼ぶ必要は、ありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="InitTLBFunctions"><font size=6>InitTLBFunctions<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ExpandScrachPad()の初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>InitTLBFunctions </b>(void);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ExpandScratchPad()の初期化を行います。この関数は、crt0.sで呼ばれるようになりましたので、ユーザーが直接呼ぶ必要はありません。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#ExpandScratchPad">ExpandScratchPad</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="Interrupt2Iop"><font size=6>Interrupt2Iop<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>IOPへの割り込み<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>Interrupt2Iop</b>(
+	int <i>cause</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cause</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、<i>cause</i>を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">IOPに対して<i>cause</i>を要因とする割り込みをかけます。<i>cause</i>には、ユーザー定義の0から15までの値を指定することができます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="InvalidDCache / iInvalidDCache"><font size=6>InvalidDCache / iInvalidDCache<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キャッシュ無効化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>InvalidDCache</b>(
+	void *<i>begin</i>,
+	void *<i>end</i>
+);
+void <b>iInvalidDCache</b>(
+	void *<i>begin</i>,
+	void *<i>end</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;InvalidDCache&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iInvalidDCache&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>begin</i>&nbsp;</td>
+<td valign="TOP">&nbsp;先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>end</i>&nbsp;</td>
+<td valign="TOP">&nbsp;後尾アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">論理アドレス<i>begin</i>から<i>end</i>（も含まれます）までのメモリの内容がD-cache上に存在すれば、そのcacheラインを無効化します。スレッド上でD-cache上にある論理アドレス1MBから2MBまでのデータを無効化するには以下のように行います。<br>InvalidDCache( (void*) 0x10000, (void*) 0x1fffff);<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="ReferSemaStatus / iReferSemaStatus"><font size=6>ReferSemaStatus / iReferSemaStatus<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>セマフォ状態の取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>ReferSemaStatus</b>(
+	int <i>sid</i>,
+	SemaParam *<i>sema</i>
+);
+int <b>iReferSemaStatus</b>(
+	int <i>sid</i>,
+	SemaParam *<i>sema</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ReferSemaStatus&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iReferSemaStatus&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;参照するセマフォIDを指定する。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sema</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォの状態を受け取る構造体変数へのポインタを&nbsp;<br>&nbsp;指定する。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、セマフォIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sema-&gt;currentCount&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ現在値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sema-&gt;maxCount&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォの最大値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sema-&gt;numWaitThreads&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォ待ちスレッド数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sema-&gt;option&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォに関する付加情報。この値は、&nbsp;<br>&nbsp;CreateSema()で設定されたもの。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>sid</i>セマフォの状態を参照します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="ReferThreadStatus / iReferThreadStatus"><font size=6>ReferThreadStatus / iReferThreadStatus<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スレッド状態の取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>ReferThreadStatus</b>(
+	int <i>tid</i>,
+	ThreadParam *<i>info</i>
+);
+int <b>iReferThreadStatus</b>(
+	int <i>tid</i>,
+	ThreadParam *<i>info</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ReferThreadStatus&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iReferThreadStatus&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;参照するスレッドIDを指定する。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>info</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドの状態を受け取る構造体変数へのポインタを指定する。&nbsp;<br>&nbsp;返り値のみ必要な場合はNULLを指定する。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッド状態を表す定数を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;info-&gt;currentPriority&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;スレッドの現在の優先度&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;info-&gt;status&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;スレッドの状態を以下の定数で表す&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x01 THS_RUN&nbsp;</td>
+<td valign="top">&nbsp;RUN状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x02 THS_READY&nbsp;</td>
+<td valign="top">&nbsp;READY状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x04 THS_WAIT&nbsp;</td>
+<td valign="top">&nbsp;WAIT状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x08 THS_SUSPEND&nbsp;</td>
+<td valign="top">&nbsp;SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x0c THS_WAITSUSPEND&nbsp;</td>
+<td valign="top">&nbsp;WAIT-SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x10 THS_DORMANT&nbsp;</td>
+<td valign="top">&nbsp;DORMANT状態&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>tid</i>スレッドの状態を参照します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">このシステムコールはデバッグのために用意されています。デバッグ以外の目的で使用するのは推奨しません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="ReleaseAlarm / iReleaseAlarm"><font size=6>ReleaseAlarm / iReleaseAlarm<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>アラームの解除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>ReleaseAlarm</b>(
+	int <i>id</i>
+);
+int <b>iReleaseAlarm</b>(
+	int <i>id</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ReleaseAlarm&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iReleaseAlarm&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;解除するアラームのID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、アラーム設定後の経過時間 (Hsync count)を返します。<br>エラーの場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アラームを解除します。割込みハンドラの内部ですでに呼び出されることが確定しているアラームをiReleaseAlarmで解除しようとすると失敗します。<br>ReleaseAlarmの引数で指定したアラームがすでに呼び出されていた場合アラームのidの再利用が起こるため無条件にReleaseAlarmを呼び出すことはできません。アラームの開放後かどうかを確認してアラームを開放するには、以下の例を参照ください。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>/*　アラームハンドラ */
+void AlarmHandler(int id , u_short time , void *arg){
+	volatile u_int * IsCalled = (volatile u_int*) arg;
+	*IsCalled = TURE;
+	/*　アラームハンドラの処理 */
+	ExitHandler();
+}
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>/* アラームハンドラを登録し、解除する関数*/
+void func(void){
+	volatile int IsCalled = FALSE;
+	int Alarmid ;
+
+	Alarmid = SetAlarm(10, AlarmHandler, &IsCalled);
+
+	/* 何かしらの処理 */
+
+	IsEI = DI();
+	/* 割り込み禁止状態のなかでアラームを開放できるか確認する。
+	DI関数からReleaseAlarm関数を呼び出すまでの割り込み禁止状態の中で
+	アラームが呼び出されることが確定した場合ReleaseAlarm関数は
+	失敗するが引数Alarmidの再利用の問題は発生しない。*/
+	If(IsCalled==FALSE)
+		ReleaseAlarm(Alarmid);
+	If(IsEI)
+	  EI();
+}
+
+</pre></font></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="ReleaseWaitThread / iReleaseWaitThread"><font size=6>ReleaseWaitThread / iReleaseWaitThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>WAIT状態にあるスレッドの強制解除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>ReleaseWaitThread</b>(
+	int <i>tid</i>
+);
+int <b>iReleaseWaitThread</b>(
+	int <i>tid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ReleaseWaitThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iReleaseWaitThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">WAIT状態にある<i>tid</i>スレッドを強制解除します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="RemoveDmacHandler"><font size=6>RemoveDmacHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>DMA割り込みハンドラの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>RemoveDmacHandler</b>(
+	int <i>channel</i>,
+	int <i>hid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="top">&nbsp;チャネル番号&nbsp;</td>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;DMAC_VIF0&nbsp;<br>&nbsp;DMAC_VIF1&nbsp;<br>&nbsp;DMAC_GIF&nbsp;<br>&nbsp;DMAC_FROM_IPU&nbsp;<br>&nbsp;DMAC_TO_IPU&nbsp;<br>&nbsp;DMAC_FROM_SPR&nbsp;<br>&nbsp;DMAC_TO_SPR&nbsp;</td>
+<td valign="top">&nbsp;DMAチャネル&nbsp;<br>&nbsp;VIF0 DIR:to GP:A&nbsp;<br>&nbsp;VIF1 DIR:both GP:C&nbsp;<br>&nbsp;GIF DIR:to GP:C&nbsp;<br>&nbsp;from IPU DIR:from GP:C&nbsp;<br>&nbsp;to IPU DIR:to GP:C&nbsp;<br>&nbsp;from SPR DIR:from GP:C&nbsp;<br>&nbsp;to SPR DIR:to GP:C&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>hid</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラID&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ハンドラ登録数を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>channel</i>のDMA割り込みハンドラから、<i>hid</i>ハンドラを削除します。<i>hid</i>ハンドラが登録されていない場合はエラーを返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="RemoveIntcHandler"><font size=6>RemoveIntcHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>割り込みハンドラの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>RemoveIntcHandler</b>(
+	int <i>cause</i>,
+	int <i>hid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cause</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;定数&nbsp;<br>&nbsp;INTC_GS&nbsp;<br>&nbsp;INTC_SBUS&nbsp;<br>&nbsp;INTC_VBLANK_S&nbsp;<br>&nbsp;INTC_VBLANK_E&nbsp;<br>&nbsp;INTC_VIF0&nbsp;<br>&nbsp;INTC_VIF1&nbsp;<br>&nbsp;INTC_VU0&nbsp;<br>&nbsp;INTC_VU1&nbsp;<br>&nbsp;INTC_IPU&nbsp;<br>&nbsp;INTC_TIM0&nbsp;<br>&nbsp;INTC_TIM1&nbsp;</td>
+<td valign="top">&nbsp;割り込み要因&nbsp;<br>&nbsp;GS&nbsp;<br>&nbsp;SBUS&nbsp;<br>&nbsp;V-blank start&nbsp;<br>&nbsp;V-blank end&nbsp;<br>&nbsp;VIF0&nbsp;<br>&nbsp;VIF1&nbsp;<br>&nbsp;VU0&nbsp;<br>&nbsp;VU1&nbsp;<br>&nbsp;IPU&nbsp;<br>&nbsp;Timer0&nbsp;<br>&nbsp;Timer1&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>hid</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラID&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ハンドラ登録数を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cause</i>を要因とする割り込みハンドラから、<i>hid</i>ハンドラを削除します。<i>hid</i>ハンドラが登録されていない場合はエラーを返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="RemoveSbusIntcHandler"><font size=6>RemoveSbusIntcHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SBUS割り込みハンドラの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>RemoveSbusIntcHandler</b>(
+	int <i>cause</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cause</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込み要因&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、<i>cause</i>を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cause</i>を要因とするSBUS割り込みハンドラを削除します。ハンドラが登録されていない場合はエラーを返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="ResumeThread / iResumeThread"><font size=6>ResumeThread / iResumeThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SUSPEND状態からREADY状態への移行<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>ResumeThread</b>(
+	int <i>tid</i>
+);
+int <b>iResumeThread</b>(
+	int <i>tid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ResumeThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iResumeThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SUSPEND状態にある<i>tid</i>スレッドをREADY状態にします。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドを指定することはできません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="RotateThreadReadyQueue / iRotateThreadReadyQueue"><font size=6>RotateThreadReadyQueue / iRotateThreadReadyQueue<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>レディーキューの回転<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>RotateThreadReadyQueue</b>(
+	int <i>prio</i>
+);
+int <b>iRotateThreadReadyQueue</b>(
+	int <i>prio</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;RotateThreadReadyQueue&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iRotateThreadReadyQueue&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>prio</i>&nbsp;</td>
+<td valign="TOP">&nbsp;操作したいキューの優先度(1～127)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、優先度を返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">優先度<i>prio</i>のレディーキューを回転します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SetAlarm / iSetAlarm"><font size=6>SetAlarm / iSetAlarm<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>アラームの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>SetAlarm</b>(
+	u_short <i>time</i>,
+	void *<i>cbfunc</i>(int, u_short, void *),
+	void *<i>arg</i>
+);
+int <b>iSetAlarm</b>(
+	u_short <i>time</i>,
+	void *<i>cbfunc</i>(int, u_short, void *),
+	void *<i>arg</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;SetAlarm&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iSetAlarm&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>time</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;時間(Hsync単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cbfunc</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;コールバック関数のアドレス&nbsp;<br>&nbsp;void cbfunc(int id, u_short time, void *arg)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;id&nbsp;</td>
+<td valign="top">&nbsp;: アラームID&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;time&nbsp;</td>
+<td valign="top">&nbsp;: タイムアウト時のHsync count&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;arg&nbsp;</td>
+<td valign="top">&nbsp;: SetAlarmの第3引数&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>arg</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;cbfuncに渡す引数&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、セットしたアラームのIDを返します。<br>アラームをセットできない場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SetAlarm()を呼び出してから<i>time</i>時間内にReleaseAlarm()が呼ばれない場合、<i>cbfunc</i>が呼び出されます（この時点でそのアラームは解除されます）。同時に設定できるアラームは64個以内です。<br>なお、HSync Timerはカーネルで1本リザーブしています(TIMER 3)。<br>アラームで呼び出される割り込みハンドラのgpレジスタの値は、SetAlarm,iSetAlarmを呼び出した際のgpレジスタの値が使われます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アラーム割り込みは、最小1Hsync単位で発生します。このためSetAlarm/iSetAlarmで設定するハンドラの処理は、1Hsync以内であることが求められます。<br><br>同じ時刻に設定された複数のアラームは一回の割込みですべて呼び出されます。<br>ある時刻に処理時間の長いアラームがあった場合、次に呼び出されるアラームの時刻のアラームまでは呼び出されることが保証されています。<br><br>デバッグ用途以外でアラームの内部でscePrintfを使わないで下さい。<br>scePrintfだけで数Hsyncかかってしまうためです。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SetDebugHandler"><font size=6>SetDebugHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>例外ハンドラの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void *<b>SetDebugHandler</b>(
+	int <i>code</i>,
+	void(*<i>handler</i>)
+	(u_int <i>stat</i>, u_int <i>cause</i>, u_int <i>epc</i>, u_int <i>bva</i>, u_int <i>bpa</i>, u_long128 *<i>gpr</i>)
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>code</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;例外番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;TLB変更例外&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;TLB不一致例外（ロードまたは命令フェッチ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;TLB不一致例外（ストア）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;4&nbsp;</td>
+<td valign="top">&nbsp;アドレスエラー例外（ロードまたは命令フェッチ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;5&nbsp;</td>
+<td valign="top">&nbsp;アドレスエラー例外（ストア）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;6&nbsp;</td>
+<td valign="top">&nbsp;バスエラー例外（命令フェッチ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;7&nbsp;</td>
+<td valign="top">&nbsp;バスエラー例外（データロードまたはストア）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;8&nbsp;</td>
+<td valign="top">&nbsp;システムコール例外&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;9&nbsp;</td>
+<td valign="top">&nbsp;ブレークポイント例外&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;予約命令例外&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;11&nbsp;</td>
+<td valign="top">&nbsp;コプロセッサ不使用例外&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;12&nbsp;</td>
+<td valign="top">&nbsp;算術オーバーフロー例外&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;13&nbsp;</td>
+<td valign="top">&nbsp;Trap例外&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>handler</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ハンドラ関数&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、以前に登録されていたハンドラのアドレスを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">CPUの例外が発生した場合に呼び出される例外ハンドラを設定します。呼び出されたハンドラから復帰することはできません。<br><i>code</i>は例外番号、<i>handler</i>は例外発生時に呼び出されるハンドラのアドレスで、<i>handler</i>の引数は例外発生時の状態を表します。引数<i>stat</i>はCOP0のstatusレジスタ、引数<i>cause</i>はCOP0のcauseレジスタ、引数<i>epc</i>は例外が発生したプログラムカウンタ値、引数<i>bva</i>はメモリアクセスや分岐アドレス不正時の論理アドレス値、引数<i>bpa</i>はバスエラー終了の物理アドレス値、引数<i>gpr</i>はサイズが32個の配列でGPRの値です。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数はデバッグ用の機能です。例外が起きたときに例外の内容を画面に表示する場合などに使用してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SignalSema / iSignalSema"><font size=6>SignalSema / iSignalSema<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>セマフォ資源返却<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>SignalSema</b>(
+	int <i>sid</i>
+);
+int <b>iSignalSema</b>(
+	int <i>sid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;SignalSema&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iSignalSema&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、セマフォIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">セマフォ資源を返却します。<br><br><i>sid</i>セマフォの値が0でセマフォ待ちキューが空でない場合は、セマフォ待ちキューの先頭のスレッドを解除しREADY状態にします。それ以外の場合、セマフォの値をインクリメントします。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SleepThread"><font size=6>SleepThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>WAIT状態への移行<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>SleepThread</b>( void );
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドIDを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドをWAIT状態にします。ただし起床要求回数が1以上の場合は、それをデクリメントするのみで、スレッドの状態は変化しません。<br>WAIT状態のスレッドはWakeupThread()またはReleaseWaitThread()によって、WAIT解除されます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="StartThread"><font size=6>StartThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スレッドの起動<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>StartThread</b>(
+	int <i>tid</i>,
+	void *<i>arg</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;起動するスレッドのID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;引数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>tid</i>スレッドを起動し、スタックの初期化を行います。対象とするスレッドはDORMANT状態でなければなりません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SuspendThread / iSuspendThread"><font size=6>SuspendThread / iSuspendThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SUSPEND状態への移行<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>SuspendThread</b>(
+	int <i>tid</i>
+);
+int <b>iSuspendThread</b>(
+	int <i>tid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;SuspendThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iSuspendThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>tid</i>スレッドをSUSPEND状態に移し、スレッドの実行を中断します。<br>SUSPEND状態は、ResumeThread()システムコールによって解除されます。<br>SuspendThread(), ResumeThread()による状態遷移は以下のとおりです。<br><br></div>
+<div style="margin-left:35px;"><ul>
+         <li> 対象スレッドが既にWAIT状態にあった場合は、WAIT状態とSUSPEND状態が複合したWAIT-SUSPEND状態になる。
+         <li> WAIT-SUSPEND状態のときWAIT解除の条件が満たされた場合は、SUSPEND状態に移行する。
+         <li> WAIT-SUSPEND状態のスレッドに対してResumeThread()が発行された場合はWAIT状態に戻る。
+</ul></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SUSPEND状態は、他スレッドの発行したシステムコールによる中断状態を意味するものであり、本システムコールで自スレッドを指定することはできません。<br><br>本システムコールは、主にデバッグ用途に使用されることを想定しています。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SyncDCache / iSyncDCache"><font size=6>SyncDCache / iSyncDCache<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キャッシュ掃き出し<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>SyncDCache</b>(
+	void *<i>begin</i>,
+	void *<i>end</i>
+);
+void <b>iSyncDCache</b>(
+	void *<i>begin</i>,
+	void *<i>end</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;SyncDCache&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iSyncDCache&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>begin</i>&nbsp;</td>
+<td valign="TOP">&nbsp;先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>end</i>&nbsp;</td>
+<td valign="TOP">&nbsp;後尾アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">論理アドレス<i>begin</i>から<i>end</i>（も含まれる）までのメモリの内容がD-cache上に存在すれば、cache上の値をメモリに書き戻し、そのcacheラインを無効にします。スレッド上で論理アドレス1MBから２MBまでのデータをメモリに書き戻すためには以下のように行います。<br>SyncDCache( (void*) 0x10000, (void*) 0x1fffff);<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#FlushCache / iFlushCache">FlushCache / iFlushCache</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="TerminateThread / iTerminateThread"><font size=6>TerminateThread / iTerminateThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>他スレッドの強制終了<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>TerminateThread</b>(
+	int <i>tid</i>
+);
+int <b>iTerminateThread</b>(
+	int <i>tid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;TerminateThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iTerminateThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;強制終了させるスレッドのID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>tid</i>スレッドを強制終了し、DORMANT状態に移行させます。終了が成功すれば<i>tid</i>を返します。<br><br>対象スレッドがREADY状態ではなくWAIT状態やSUSPEND状態であっても、待ちを解除し終了します。すでにDORMANT状態の場合はエラーになります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自スレッドは終了できません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="WaitSema / PollSema / iPollSema"><font size=6>WaitSema / PollSema / iPollSema<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>セマフォ資源獲得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>WaitSema</b>(
+	int <i>sid</i>
+);
+int <b>PollSema</b>(
+	int <i>sid</i>
+);
+int <b>iPollSema</b>(
+	int <i>sid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;WaitSema / PollSema&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iPollSema&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;セマフォID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、セマフォIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>sid</i>セマフォの値が1より大きい場合、セマフォの値をデクリメントし、ただちに正常終了します。セマフォの値が0の場合、別のスレッドがSignalSema()を発行してセマフォの値がインクリメントされるまでWAIT状態になり、そのセマフォの待ちキューにつながれます。<br>PollSema()システムコールは、WaitSema()からWAIT状態に入る機能を取り除いたシステムコールで、WaitSema()と異なり対象セマフォの値が0の場合エラーを返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="WakeupThread / iWakeupThread"><font size=6>WakeupThread / iWakeupThread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>WAIT状態にあるスレッドのWAKEUP<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+int <b>WakeupThread</b>(
+	int <i>tid</i>
+);
+int <b>iWakeupThread</b>(
+	int <i>tid</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;WakeupThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（許可状態で呼び出すこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iWakeupThread&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、スレッドIDを返します。<br>エラー終了の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">WAIT状態にある<i>tid</i>スレッドをREADY状態にします。対象スレッドがWAIT状態でない場合は起床要求回数がカウントアップされ、次にそのスレッドがSleepThread()を呼び出してもWAIT状態には移らないようになります。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>プログラムの起動/終了関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="Exit"><font size=6>Exit<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>プログラムの終了<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>Exit</b>(
+	int <i>n</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>n</i>&nbsp;</td>
+<td valign="TOP">&nbsp;プログラムの実行環境(現時点ではデバッガ）&nbsp;<br>&nbsp;に渡す終了コード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">プログラムを終了します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数はあくまでデバッグ用です。マスターディスクに含まれるプログラムでは、一切使用を禁止します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="LoadExecPS2"><font size=6>LoadExecPS2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>プログラムの起動<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;eekernel.h&gt;
+void <b>LoadExecPS2</b>(
+	const char *<i>file</i>,
+	int <i>n</i>,
+	char **<i>args</i>);
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（許可状態で呼び出すこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>file</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイル名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>n</i>&nbsp;</td>
+<td valign="TOP">&nbsp;引数の個数 (n &lt;= 15)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>args</i>&nbsp;</td>
+<td valign="TOP">&nbsp;引数の配列&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">メモリ（スクラッチパットメモリを含む）をクリアして<br><i>file</i>で指定されたプログラムを起動します。<br>起動されたプログラムのmain関数の引数にはファイル名も含まれます。<br>プログラム例)<br></div>
+<div style="margin-left:70px;">char *args[] = { "arg1", "arg2" };<br>LoadExecPS2("cdrom0:\\program.elf", 2, args);<br></div>
+<div style="margin-left:50px;"><br>上記のコードの場合、起動されるプログラムのmain関数に渡される引数は<br></div>
+<div style="margin-left:70px;">argc = 3<br>argv = { "cdrom0:\\program.elf", "arg1", "arg2" }<br></div>
+<div style="margin-left:50px;">となります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイル名とすべての引数の文字列を合わせて256バイト以下でなければなりません。<br>LoadExecPS2()を呼ぶ前には、基本的に以下の点に注意してください。<br><br></div>
+<div style="margin-left:35px;"><ul>
+         <li> LoadExecPS2() を実行するスレッド以外の全てのスレッドを終了もしくは削除する
+         <li> 全てのコールバック、割り込みハンドラを解除する
+         <li> DMAが動いていない
+         <li> scePadEnd() を行う
+         <li> sceSifExitCmd() を行う
+</ul></div>
+<div style="margin-left:50px;"><br>終了関数が必要なものについては、適宜終了関数を呼ぶようにしてください。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

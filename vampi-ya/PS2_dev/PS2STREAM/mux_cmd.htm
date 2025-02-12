@@ -1,0 +1,237 @@
+<html>
+
+<head>
+<title>mux コマンド</title>
+<meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+</head>
+
+<body>
+
+<h1>mux コマンド</h1>     
+<hr>     
+<h2>目的</h2>     
+<p>　各種データファイルを多重化し、pss      
+ファイルを作成します。</p>     
+<p>　</p>     
+<h2>書式</h2>     
+<h3>command 部</h3>      
+<p>　mux (省略形：m)</p>     
+<p>　</p>
+<h3>options 部</h3>      
+<table border="1">      
+  <tr>      
+    <td>オプション</td>      
+    <td>意味</td>      
+  </tr>      
+  <tr>      
+    <td>-o</td>      
+    <td>出力ファイルが既に存在した場合、上書き出力します。</td>      
+  </tr>      
+  <tr>      
+    <td>-d [ディレクトリ]</td>    
+    <td>出力ディレクトリを指定します。</td>    
+  </tr>    
+  <tr>    
+    <td>-v</td>    
+    <td>作業の進行状況を詳しくレポートします。</td>    
+  </tr>    
+</table>    
+<p>　</p>    
+<h3>target file 部</h3>      
+<table border="1">      
+  <tr>      
+    <td>パラメータ１</td>      
+    <td>多重化指示ファイル</td>     
+  </tr>     
+  <tr>     
+    <td>パラメータ２ (省略可能)</td>     
+    <td>作成される pss ファイル (省略されたときは、多重化指示ファイルの拡張子を、pss      
+      に変更したファイルが作成されます。)</td>     
+  </tr>     
+</table>     
+<p>　</p>
+<h2>多重化指示ファイル</h2>
+<p>　ファイルの多重化に関する情報を記述します。</p>
+<p>　</p>
+<h3>基本形式</h3>
+<pre># comment
+pss
+	min_pack_size [最小パックサイズ]
+	max_pack_size [最大パックサイズ]
+	rate [転送レート]
+
+	stream [ストリーム種別]:[ストリーム 番号]
+		input [入力ファイル]
+
+		min_packet_size [最小パケットサイズ]
+		max_packet_size [最大パケットサイズ]
+		rate [転送レート]
+
+	end
+
+	# stream の繰り返し...
+
+end
+</pre>
+<p>　'#' (シャープ記号)      
+以降の文字は、コメントとして行末まで無視されます。</p>     
+<p>　キーワードの大文字小文字は、区別されます。</p>     
+<p>　各キーワードは、行単位で処理されます。ひとつの行に、複数のキーワードを記述したり、複数の行に分割はできません。</p>     
+<p>　ブロック内での各行の順番は任意です。(input  
+キーワードは、ブロックの最初に記述してください。)</p>    
+<p>　</p>   
+<h3>キーワード説明</h3>   
+<table border="1">   
+  <tr>   
+    <td>キーワード</td>   
+    <td>説明</td>   
+    <td>パラメータ</td>   
+    <td>デフォルト値</td>  
+  </tr>  
+  <tr>  
+    <td>pss</td>  
+    <td>プログラムストリームブロックの開始</td>  
+    <td>なし</td>  
+    <td>N/A</td>  
+  </tr>  
+  <tr>  
+    <td>end</td>  
+    <td>ブロックの終了</td>  
+    <td>なし</td>  
+    <td>N/A</td>  
+  </tr>  
+  <tr>  
+    <td>min_pack_size</td>  
+    <td>最小パックサイズ (省略可能)</td>     
+    <td>最小パックサイズ (byte)</td>     
+    <td>16384 (16KB)</td>    
+  </tr>    
+  <tr>    
+    <td>max_pack_size</td>    
+    <td>最大パックサイズ (省略可能)</td>     
+    <td>最大パックサイズ (byte)</td>     
+    <td>16384 (16KB)</td>    
+  </tr>    
+  <tr>    
+    <td>rate</td>    
+    <td>転送レート (プログラムストリーム、MPEG    
+      ビデオエレメンタリストリーム、オーディオエレメンタリストリームの転送レートは省略可能)</td>    
+    <td>転送レート (byte/sec)</td>     
+    <td>(自動計算)</td>    
+  </tr>    
+  <tr>    
+    <td>stream</td>    
+    <td>エレメンタリストリームブロックの開始</td>    
+    <td><a href="#stream_id">ストリーム種別：ストリーム </a><a href="#stream_id">番号</a></td>    
+    <td>ストリーム種別-&gt;必須<br>  
+      ストリーム ID -&gt; 0</td>    
+  </tr>    
+  <tr>    
+    <td>input</td>    
+    <td>エレメンタリストリーム入力ファイル</td>    
+    <td> 入力ファイル</td>    
+    <td>必須</td>    
+  </tr>    
+  <tr>    
+    <td>min_packet_size</td>    
+    <td>最小パケットサイズ (省略可能)</td>     
+    <td>最小パケットサイズ (byte)</td>     
+    <td>2048 (2KB)</td>    
+  </tr>    
+  <tr>    
+    <td>max_packet_size</td>    
+    <td>最大パケットサイズ (省略可能)</td>     
+    <td>最大パケットサイズ (byte)</td>     
+    <td>4096 (4KB)</td>    
+  </tr>    
+  <tr>    
+    <td>stream_start_delay</td>    
+    <td>ストリーム開始遅延時間 (省略可能)</td>     
+    <td>遅延時間 (ms)</td>    
+    <td>0 ms</td>   
+  </tr>   
+</table>   
+<p>　</p>
+<h3><a name="stream_id"></a>ストリーム種別</h3>
+<table border="1">
+  <tr>
+    <td>キーワード</td>
+    <td>説明</td>
+  </tr>
+  <tr>
+    <td>video</td>
+    <td>MPEG ビデオ エレメンタリストリーム (*.m2v)</td>    
+  </tr>    
+  <tr>    
+    <td>ipu</td>    
+    <td>ipu 動画 エレメンタリストリーム (*.ipu)</td>    
+  </tr>    
+  <tr>    
+    <td>adpcm</td>    
+    <td>adpcm オーディオ エレメンタリストリーム (SPU    
+      ストリームファイル *.ads)</td>    
+  </tr>    
+  <tr>    
+    <td>pcm</td>    
+    <td>pcm オーディオ エレメンタリストリーム (SPU    
+      ストリームファイル *.ads)</td>    
+  </tr>    
+  <tr>    
+    <td>data</td>    
+    <td>任意データ エレメンタリストリーム (*.dat)</td>   
+  </tr>   
+</table>   
+<p>　ストリーム 番号は、MPEG ビデオは、0 - 15      
+まで、その他のストリームは、0 - 65536      
+までの整数値で指定します。</p>     
+<p>　</p>     
+<h3>例：</h3>     
+<h4>ipu 動画と、adpcm オーディオを多重化する</h4>     
+<pre>pss
+	stream ipu
+		input video.ipu
+		rate 256000 # 2000 kbit/s
+	end
+
+	stream adpcm
+		input audio.ads
+	end
+
+end
+</pre>     
+<p>　</p>
+<h4>MPEG ビデオと、PCM オーディオ x 2 を多重化する</h4>     
+<pre>pss
+	stream video:0
+		input video.m2v
+	end
+
+	stream pcm:0
+		input audio1.ads
+	end
+
+	stream pcm:1
+		input audio2.ads
+	end
+
+end
+</pre>     
+<p></p>    
+<p>　</p> 
+<p><strong>[EOF]</strong></p> 
+<p>最終更新日：<!--webbot bot="Timestamp" startspan S-Type="EDITED" 
+S-Format="%Y/%m/%d" -->2000/01/31<!--webbot bot="Timestamp" i-CheckSum="12311" 
+endspan --> 
+</p> 
+<HR>
+<DIV ALIGN="right">
+<ADDRESS>
+    SCE CONFIDENTIAL
+    <BR>Copyright (c) 2000 Sony Computer Entertainment Inc.  All Rights Reserved.</BR>
+</ADDRESS>
+</DIV>  
+</body> 
+ 
+</html> 

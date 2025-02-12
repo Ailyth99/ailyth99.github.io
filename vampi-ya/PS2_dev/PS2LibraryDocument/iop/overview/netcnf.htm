@@ -1,0 +1,2267 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+
+<title>共通ネットワーク設定ライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/ntcnf_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+共通ネットワーク設定ライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>概要</b></a>
+<p><a href="#Heading3_2">  2 <b>NET設定ファイルの概要</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>NET設定ファイルの種別</b><br></a>
+    <a href="#Heading4_2_2"> <b>未定義のキーワード</b><br></a>
+    <a href="#Heading4_2_3"> <b>設定処理</b><br></a>
+    <a href="#Heading4_2_4"> <b>netcnf.irxの起動方法</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>NET設定ファイルの文法</b></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>一般的な形式</b><br></a>
+    <a href="#Heading4_3_2"> <b>コメント</b><br></a>
+    <a href="#Heading4_3_3"> <b>CRコード</b><br></a>
+    <a href="#Heading4_3_4"> <b>文字列および文字列中のエスケープ処理</b><br></a>
+    <a href="#Heading4_3_5"> <b>漢字コード</b><br></a>
+    <a href="#Heading4_3_6"> <b>ヘッダコメント</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>NET_CNFのキーワード</b></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>interface</b><br></a>
+    <a href="#Heading4_4_2"> <b>chat_additional</b><br></a>
+    <a href="#Heading4_4_3"> <b>redial_count</b><br></a>
+    <a href="#Heading4_4_4"> <b>redial_interval</b><br></a>
+    <a href="#Heading4_4_5"> <b>outside_number</b><br></a>
+    <a href="#Heading4_4_6"> <b>outside_delay</b><br></a>
+    <a href="#Heading4_4_7"> <b>dialing_type</b><br></a>
+    </ul>
+<p><a href="#Heading3_5">  5 <b>ATTACH_CNFのキーワード</b></a>
+    <ul>
+    <a href="#Heading4_5_1"> <b>type</b><br></a>
+    <a href="#Heading4_5_2"> <b>vendor</b><br></a>
+    <a href="#Heading4_5_3"> <b>product</b><br></a>
+    <a href="#Heading4_5_4"> <b>location</b><br></a>
+    <a href="#Heading4_5_5"> <b>dhcp</b><br></a>
+    <a href="#Heading4_5_6"> <b>dhcp_host_name</b><br></a>
+    <a href="#Heading4_5_7"> <b>dhcp_host_name_null_terminated</b><br></a>
+    <a href="#Heading4_5_8"> <b>dhcp_release_on_stop</b><br></a>
+    <a href="#Heading4_5_9"> <b>address</b><br></a>
+    <a href="#Heading4_5_10"> <b>netmask</b><br></a>
+    <a href="#Heading4_5_11"> <b>nameserver</b><br></a>
+    <a href="#Heading4_5_12"> <b>route</b><br></a>
+    <a href="#Heading4_5_13"> <b>phy_config</b><br></a>
+    <a href="#Heading4_5_14"> <b>mtu</b><br></a>
+    <a href="#Heading4_5_15"> <b>pppoe</b><br></a>
+    <a href="#Heading4_5_16"> <b>pppoe_service_name</b><br></a>
+    <a href="#Heading4_5_17"> <b>pppoe_ac_name</b><br></a>
+    <a href="#Heading4_5_18"> <b>pppoe_host_uniq_auto</b><br></a>
+    <a href="#Heading4_5_19"> <b>chat_additional</b><br></a>
+    <a href="#Heading4_5_20"> <b>redial_count</b><br></a>
+    <a href="#Heading4_5_21"> <b>redial_interval</b><br></a>
+    <a href="#Heading4_5_22"> <b>outside_delay</b><br></a>
+    <a href="#Heading4_5_23"> <b>dialing_type</b><br></a>
+    <a href="#Heading4_5_24"> <b>phone_number</b><br></a>
+    <a href="#Heading4_5_25"> <b>answer_mode</b><br></a>
+    <a href="#Heading4_5_26"> <b>answer_timeout</b><br></a>
+    <a href="#Heading4_5_27"> <b>chat_login</b><br></a>
+    <a href="#Heading4_5_28"> <b>auth_name / auth_key / peer_name / peer_key</b><br></a>
+    <a href="#Heading4_5_29"> <b>want.auth</b><br></a>
+    <a href="#Heading4_5_30"> <b>allow.auth</b><br></a>
+    <a href="#Heading4_5_31"> <b>lcp_timeout</b><br></a>
+    <a href="#Heading4_5_32"> <b>lcp_max_configure</b><br></a>
+    <a href="#Heading4_5_33"> <b>lcp_max_terminate</b><br></a>
+    <a href="#Heading4_5_34"> <b>ipcp_timeout</b><br></a>
+    <a href="#Heading4_5_35"> <b>ipcp_max_configure</b><br></a>
+    <a href="#Heading4_5_36"> <b>ipcp_max_terminate</b><br></a>
+    <a href="#Heading4_5_37"> <b>auth_timeout</b><br></a>
+    <a href="#Heading4_5_38"> <b>auth_max_failure</b><br></a>
+    <a href="#Heading4_5_39"> <b>idle_timeout</b><br></a>
+    <a href="#Heading4_5_40"> <b>connect_timeout</b><br></a>
+    <a href="#Heading4_5_41"> <b>mru_nego / mru</b><br></a>
+    <a href="#Heading4_5_42"> <b>accm_nego / accm</b><br></a>
+    <a href="#Heading4_5_43"> <b>magic_nego</b><br></a>
+    <a href="#Heading4_5_44"> <b>prc_nego</b><br></a>
+    <a href="#Heading4_5_45"> <b>acc_nego</b><br></a>
+    <a href="#Heading4_5_46"> <b>address_nego / ip_address / ip_mask</b><br></a>
+    <a href="#Heading4_5_47"> <b>vjcomp_nego</b><br></a>
+    <a href="#Heading4_5_48"> <b>dns1_nego / dns1 / dns2_nego / dns2</b><br></a>
+    <a href="#Heading4_5_49"> <b>force_chap_type</b><br></a>
+    <a href="#Heading4_5_50"> <b>omit_empty_frame</b><br></a>
+    <a href="#Heading4_5_51"> <b>log_flags</b><br></a>
+    </ul>
+<p><a href="#Heading3_6">  6 <b>DIAL_CNFのキーワード</b></a>
+    <ul>
+    <a href="#Heading4_6_1"> <b>dialing_type_string</b><br></a>
+    <a href="#Heading4_6_2"> <b>redial_string</b><br></a>
+    <a href="#Heading4_6_3"> <b>chat_init</b><br></a>
+    <a href="#Heading4_6_4"> <b>chat_dial</b><br></a>
+    <a href="#Heading4_6_5"> <b>chat_answer</b><br></a>
+    </ul>
+<p><a href="#Heading3_7">  7 <b>チャットスクリプトの仕様</b></a>
+    <ul>
+    <a href="#Heading4_7_1"> <b>スクリプトの仕様</b><br></a>
+    <a href="#Heading4_7_2"> <b>チャットスクリプトの設定例</b><br></a>
+    <a href="#Heading4_7_3"> <b>注意事項</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>概要</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">netcnf.irxは、「あなたのネットワーク設定ファイル」(共通ネットワーク設定ファイル)を操作するための機能を提供する常駐ライブラリです。<br>共有リソースである「あなたのネットワーク設定ファイル」を扱うネットワーク設定アプリケーションを作成するためには共通ネットワーク設定ライブラリ(netcnf.irx) を使用し、また作成基準を守らなければなりません。作成基準は、EE/IOP共通文書ディレクトリ(genera/)の以下の資料を参照してください。<br><br></div>
+<div style="margin-left:40px;"><ul>
+         <li> あなたのネットワーク設定ファイル使用規定(yncf)
+</ul></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>NET設定ファイルの概要</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">ネットワーク内でのIPアドレスやダイヤルアップ接続のためのアクセスポイントの電話番号など、ネットワーク接続に必要な個別情報は、このドキュメントで定める仕様にしたがった設定ファイルとして、個々の"Playstation 2"ごとに保存します。設定ファイルを生成 / 編集 / 解釈するすべてのプログラムはこの仕様に従わなければなりません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>NET設定ファイルの種別</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">NET設定ファイルには以下の3種があります。設定ファイル中に記述できるキーワードは、設定ファイルの種別ごとに定義されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル種別</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;NET_CNF&nbsp;</td>
+<td valign="TOP">&nbsp;回線に関する情報、他の設定ファイルのファイル名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ATTACH_CNF&nbsp;</td>
+<td valign="TOP">&nbsp;あるひとつのネットワークインタフェースに関する設定情報、&nbsp;<br>&nbsp;つまり、ネットワークデバイスが接続されたときに行う&nbsp;<br>&nbsp;処理の指定。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DIAL_CNF&nbsp;</td>
+<td valign="TOP">&nbsp;あるひとつのモデムの発信手続き情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>未定義のキーワード</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">将来新しいキーワードが追加される場合に備えて、NET設定ファイルを編集するプログラムは、元のファイル中に未定義または未対応のキーワードが現れた場合は、変更を加えずそのまま保存するようにしなければなりません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>設定処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">NET設定ファイルの内容を解釈して設定を行う処理は、netcnf.irxを起動することによって行います。詳細はnetcnf.irxのドキュメントを参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>netcnf.irxの起動方法</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">netcnf.irx は以下の方法でロードして下さい。<br></div>
+<div style="margin-left:67px;">netcnf.irx [&lt;<i>option</i>&gt;] icon=&lt;<i>icon-path</i>&gt; iconsys=&lt;<i>iconsys-path</i>&gt;<br><br></div>
+<div style="margin-left:50px;">注意：以下の引数を必ずつけるようにしてください。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;icon&nbsp;</td>
+<td valign="TOP">&nbsp;アイコンファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;iconsys&nbsp;</td>
+<td valign="TOP">&nbsp;アイコン管理用ファイル(icon.sys)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">オプションには以下のものが用意されています。<br><br></div>
+<div style="margin-left:40px;"><ul>
+         <li> <i>-no_check_capacity</i><br>sceNetCnfAddEntry(), sceNetCnfEditEntry()関数にて容量チェックを行いません。
+         <li> <i>-no_check_provider</i><br>sceNetCnfAddEntry(),sceNetCnfEditEntry()関数にて特殊プロバイダのチェックを行いません。
+</ul></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>NET設定ファイルの文法</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">NET設定ファイルを記述する際の基本的な規則について説明します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>一般的な形式</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">NET設定ファイルは「\n」（LF:0x0a）またはファイルの終わりを終端とする「行」を単位として解釈されます。ただし「\n」の直前に「\\」（0x5c）を置くと、その「\\」と「\n」の2bytesは無視され、次の行は論理的に継続しているものとみなされます。<br><br>一般にNET設定ファイル中の行は次の形式を持ちます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3><i>keyword  arg1  arg2 ...</i>
+</pre></font></div>
+<div style="margin-left:50px;"><br>キーワードとその引数は、ひとつの論理行にただ一組だけ記述することができます。キーワードと引数それぞれは、1個以上の連続するスペース（SP:0x20）またはタブ（TAB:0x08）によって区切ります。スペースとタブ以外にも、IOPの開発環境中のctype.hで定義されているisspace()マクロによって空白とみなされる文字は区切り文字となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>コメント</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">行の先頭に「#」を置くと、その行はコメント行とみなされます。<br>また、文字列中以外の箇所に「#」を置くと、その行の終わりまでの部分はコメントとみなされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>CRコード</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">NET設定ファイル中では、CRコード（0x0d）はエスケープ指定されている場合を除いて、すべて無視されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>文字列および文字列中のエスケープ処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">引数が文字列の場合、その文字列全体を「"」で囲んで記述してください。設定管理ファイル内の<br>usr_name にあたる設定名については「"」で囲む必要はありません。その他、例外的に「"」で<br>囲まなくても済むケースもありますが、一般的ではありませんのでその条件等に関しては記述を<br>省略します。<br>「"」で囲まれた文字列中には、制御コード等を以下のエスケープ指定を用いて記述することができます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>エスケープ指定</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>対応する文字</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\a&nbsp;</td>
+<td valign="TOP">&nbsp;BEL（0x07）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\b&nbsp;</td>
+<td valign="TOP">&nbsp;BS（0x08）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\t&nbsp;</td>
+<td valign="TOP">&nbsp;TAB（0x09）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\n&nbsp;</td>
+<td valign="TOP">&nbsp;LF（0x0a）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\v&nbsp;</td>
+<td valign="TOP">&nbsp;VT（0x0b）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\f&nbsp;</td>
+<td valign="TOP">&nbsp;FF（0x0c）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\r&nbsp;</td>
+<td valign="TOP">&nbsp;CR（0x0d）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\ooo&nbsp;</td>
+<td valign="TOP">&nbsp;8進数によるコード指定。oooは1桁から3桁の8進数。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\xxx&nbsp;</td>
+<td valign="TOP">&nbsp;16進数によるコード指定。xxは1桁または2桁の16進数。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\X&nbsp;</td>
+<td valign="TOP">&nbsp;文字Xの指定。Xは上記以外の文字（[^abtnvfr0-9xa-fA-F]）&nbsp;<br>&nbsp;で、主に「\」や「"」を記述するために使用する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">エスケープ文字は、実際に設定ファイルに記述する際には「\」をエスケープするため、「\\a」のように記述することになります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>漢字コード</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">漢字コードは UTF8 を御使用下さい。また、設定名以外の設定項目(設定内容そのもの)について<br>漢字・仮名文字を使用することを禁止します。設定名においては平仮名・カタカナのみ使用可能と<br>します。また、「,」は区切りとして設定管理ファイル内で既定されていますので使用不可です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_6">
+<a href="#Heading3_3"> 3. </a>6 <b>ヘッダコメント</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">NET設定ファイルの先頭には次のコメントを記載しなければなりません。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3># &lt;Sony Computer Entertainment Inc.&gt; <i>comment</i>
+</font></pre></div>
+<div style="margin-left:50px;"><br>「&gt;」から行末までの内容は任意です。<br>このヘッダコメントは、netcnf.irxによる個体符号化および復号の際にエラー判定に利用します（個体符号化および復号の対象となるのはATTACH_CNFのみですが、ヘッダコメントはすべてのNET設定ファイルに必要です）。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>NET_CNFのキーワード</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">NET_CNF形式のファイルはNET設定ファイル群のルートになるファイルで、ユーザごとの個別情報と、他の設定ファイルのファイル名を含んでいます。NET_CNF中に記述できるキーワードは以下のとおりです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>interface</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ネットワークインタフェースを定義するキーワード、より具体的に言えばATTACH_CNFを指定するキーワードです。NET_CNF中に複数記述することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">interface "<i>display_name</i>" "<i>ifc_cnf</i>" ["<i>dev_cnf</i>"]<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;"><i>display_name</i>は設定ファイル作成・編集プログラム上でユーザが各インタフェース定義を区別するための表示用名称です。特に制限はなく任意の文字列を指定できます。<br><i>ifc_cnf</i>と<i>dev_cnf</i>は、そのネットワークインタフェースに関する設定情報が記述されているATTACH_CNFファイルのファイル名を指定します。ファイル名はNET_CNFの存在するディレクトリを基準とする相対パス名で指定することができます。<br>PPP接続の場合、<i>ifc_cnf</i>にはISP依存の設定情報、<i>dev_cnf</i>にはモデム依存の設定情報を記載します。この使い分けについて詳細は別途運用規定が設けられます。<br>ただし、<i>dev_cnf</i> ファイル中の type のみは常に接続処理でのマージ対象とはならず、<i>ifc_cnf</i> 中の type のみが使用されます。<br>あるキーワードがNET_CNF / <i>ifc_cnf</i> / <i>dev_cnf</i>の3つのファイルに重複して指定されている場合、後の指定が有効になります。つまり、NET_CNF ＜ <i>ifc_cnf</i> ＜ <i>dev_cnf</i>という優先順位で解釈されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_2">
+<a href="#Heading3_4"> 4. </a>2 <b>chat_additional</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">モデムに対する追加スクリプトを定義するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">chat_additional "<i>additional_script</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">PPPのインタフェースにおいて、chat_initキーワードで定義される初期化スクリプトに続いてモデムに送られる追加スクリプトを定義するキーワードです。モデムの送信レベル調整のような、ユーザ固有の対応のために使用します。NET_CNFでの定義はインタフェースに依存しないデフォルトの追加スクリプトとなり、個々のインタフェースに依存する定義が必要な場合は、該当するATTACH_CNFに記述しておくとNET_CNFでの設定が上書きされます。<br>スクリプトの仕様については「チャットスクリプト仕様」を参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_3">
+<a href="#Heading3_4"> 4. </a>3 <b>redial_count</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">リダイヤル回数の上限を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">redial_count <i>redial_count</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">PPPのインタフェースにおいて、モデムドライバが「通話中」を返した際に何回までリダイヤルするかを指定するキーワードです。指定しない場合のデフォルトは0回となり、リダイヤルは行われません。<br>NET_CNFでの指定はインタフェースに依存しないデフォルトのリダイヤル回数となり、インタフェースごとに変更したい場合は、該当するATTACH_CNFに記述しておくとNET_CNFでの設定が上書きされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_4">
+<a href="#Heading3_4"> 4. </a>4 <b>redial_interval</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">リダイヤル間隔を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">redial_interval <i>redial_interval</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">リダイヤルの際の遅延時間を秒単位で指定するキーワードです。指定しない場合のデフォルトは10秒です。<br>NET_CNFでの指定はインタフェースに依存しないデフォルトのリダイヤル間隔となり、インタフェースごとに変更したい場合は、該当するATTACH_CNFに記述しておくとNET_CNFでの設定が上書きされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_5">
+<a href="#Heading3_4"> 4. </a>5 <b>outside_number</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">外線発信文字列を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">outside_number "<i>outside_number</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">外線発信の際に電話番号の先頭にダイヤルする外線発信文字列を指定するキーワードです。指定がない場合のデフォルトは""（空文字列）です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_6">
+<a href="#Heading3_4"> 4. </a>6 <b>outside_delay</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">外線発信遅延文字列を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">outside_delay "<i>outside_delay</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">外線発信の際に、外線発信文字列と電話番号の間にはさむ外線発信遅延文字列を指定するキーワードです。モデムの機種と設定に依存しますが、多くのATコマンドモデムでは「,」で2秒遅延の意味になります。指定がない場合のデフォルトは""（空文字列）です。<br>NET_CNFでの指定はインタフェースに依存しないデフォルトの凱旋発信遅延文字列となり、インタフェースごとに変更したい場合は、該当するATTACH_CNFに記述しておくとNET_CNFでの設定が上書きされます。<br>なお、外線発信文字列（outside_number）が空文字列のときは外線発信遅延文字列は使用されません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_7">
+<a href="#Heading3_4"> 4. </a>7 <b>dialing_type</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">回線タイプを指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">dialing_type [tone|pulse|any]<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">回線のタイプを次のいずれかで指定します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;tone&nbsp;</td>
+<td valign="TOP">&nbsp;トーン回線（アナログ）　[default]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pulse&nbsp;</td>
+<td valign="TOP">&nbsp;パルス回線（アナログ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;any&nbsp;</td>
+<td valign="TOP">&nbsp;上記以外の回線（デジタル等）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">NET_CNFでの指定はインタフェースに依存しないデフォルトの回線種別となり、インタフェースごとに変更したい場合は、該当するATTACH_CNFに記述しておくとNET_CNFでの設定が上書きされます。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>ATTACH_CNFのキーワード</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">ATTACH_CNF形式はNETDEVレイヤに対応する設定ファイルの形式です。<br>ATTACH_CNFに記述するキーワードは2つのグループに分けられます。ひとつは、そのATTACH_CNFをどのNETDEVレイヤモジュール・どのネットワークデバイスに対して適用するかを指定するキーワードです。このグループに属するキーワードは次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>キーワード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>指定内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;type&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEVレイヤの種別指定（USB-Ether / PPP）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vendor&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークデバイスのベンダー指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;product&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークデバイスの製品名指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;location&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークデバイスの接続先ポート指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">もうひとつのグループは、ネットワークI/Fやネットワークデバイスに関する設定を記述するためのキーワードです。このグループには、PPP接続専用のキーワード（下表で※のもの）が多数あります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>キーワード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>指定内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dhcp&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用するかどうかを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dhcp_host_name&nbsp;</td>
+<td valign="TOP">&nbsp;DHCP サーバへ通知するホスト名を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dhcp_host_name_null_terminated&nbsp;</td>
+<td valign="TOP">&nbsp;DHCP サーバへ通知するホスト名に&nbsp;<br>&nbsp;末端の NULL 文字を含めるかどうかを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dhcp_release_on_stop&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースがダウンした時に &nbsp;<br>&nbsp;DHCP サーバへIP アドレスの解放を&nbsp;<br>&nbsp;通知するかどうかを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;address&nbsp;</td>
+<td valign="TOP">&nbsp;IPアドレスを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;netmask&nbsp;</td>
+<td valign="TOP">&nbsp;サブネットマスクを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;nameserver&nbsp;</td>
+<td valign="TOP">&nbsp;ネームサーバを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;route&nbsp;</td>
+<td valign="TOP">&nbsp;ルーティング情報を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;phy_config&nbsp;</td>
+<td valign="TOP">&nbsp;物理層チップの設定方法を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mtu&nbsp;</td>
+<td valign="TOP">&nbsp;want.mru, allow.mru のデフォルト値、&nbsp;<br>&nbsp;MTU 値を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pppoe&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoE(PPP over Ethernet) を&nbsp;<br>&nbsp;有効にするかどうかを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pppoe_service_name&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoE(PPP over Ethernet) の&nbsp;<br>&nbsp;サービス名を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pppoe_ac_name&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoE(PPP over Ethernet) の&nbsp;<br>&nbsp;アクセスコンセントレータ名を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pppoe_host_uniq_auto&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoE(PPP over Ethernet) の&nbsp;<br>&nbsp;クライアントの判別に用いられる&nbsp;<br>&nbsp;ホストユニークデータを&nbsp;<br>&nbsp;自動生成するかどうかを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;chat_additional&nbsp;</td>
+<td valign="TOP">&nbsp;モデムに対する追加スクリプトを定義&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;redial_count&nbsp;</td>
+<td valign="TOP">&nbsp;リダイヤル回数の上限を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;redial_interval&nbsp;</td>
+<td valign="TOP">&nbsp;リダイヤル間隔を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;outside_delay&nbsp;</td>
+<td valign="TOP">&nbsp;外線発信遅延文字列を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dialing_type&nbsp;</td>
+<td valign="TOP">&nbsp;回線タイプを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;phone_number&nbsp;</td>
+<td valign="TOP">&nbsp;発信先電話番号を指定　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;answer_mode&nbsp;</td>
+<td valign="TOP">&nbsp;着信によってネットワーク接続を&nbsp;<br>&nbsp;行うかどうかを指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;answer_timeout&nbsp;</td>
+<td valign="TOP">&nbsp;着信によってネットワーク接続を&nbsp;<br>&nbsp;行う場合のタイムアウト時間を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;chat_login&nbsp;</td>
+<td valign="TOP">&nbsp;ログイン手順を指定　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;auth_name / auth_key / &nbsp;<br>&nbsp;peer_name / peer_key&nbsp;</td>
+<td valign="TOP">&nbsp;認証名および認証キー　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;want.auth / allow.auth&nbsp;</td>
+<td valign="TOP">&nbsp;認証方式　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;lcp_timeout&nbsp;</td>
+<td valign="TOP">&nbsp;LCPタイムアウト時間　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ipcp_timeout&nbsp;</td>
+<td valign="TOP">&nbsp;IPCPタイムアウト時間　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;idle_timeout&nbsp;</td>
+<td valign="TOP">&nbsp;アイドルタイムアウト時間　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;connect_timeout&nbsp;</td>
+<td valign="TOP">&nbsp;回線接続のタイムアウト時間　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mru_nego / mru&nbsp;</td>
+<td valign="TOP">&nbsp;最大受信データ長　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;accm_nego / accm&nbsp;</td>
+<td valign="TOP">&nbsp;非同期制御文字マップ&nbsp;<br>&nbsp;（ACCM:Async-Control-Character-Map）の&nbsp;<br>&nbsp;ネゴシエーション　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;magic_nego&nbsp;</td>
+<td valign="TOP">&nbsp;マジックナンバーのネゴシエーション　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;prc_nego&nbsp;</td>
+<td valign="TOP">&nbsp;プロトコルフィールド圧縮&nbsp;<br>&nbsp;（PRC:Protocol-Field-Compression）の&nbsp;<br>&nbsp;ネゴシエーション　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;acc_nego&nbsp;</td>
+<td valign="TOP">&nbsp;アドレス/制御フィールド圧縮&nbsp;<br>&nbsp;（Address-and-Control-field-Compression）&nbsp;<br>&nbsp;のネゴシエーション　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;address_nego / ip_address &nbsp;<br>&nbsp;/ ip_mask&nbsp;</td>
+<td valign="TOP">&nbsp;IPアドレスとサブネットマスクの&nbsp;<br>&nbsp;ネゴシエーション&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vjcomp_nego&nbsp;</td>
+<td valign="TOP">&nbsp;VJ圧縮のネゴシエーション　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dnsn_nego / dnsn&nbsp;</td>
+<td valign="TOP">&nbsp;ネームサーバのネゴシエーション　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;force_chap_type&nbsp;</td>
+<td valign="TOP">&nbsp;許可する CHAP 認証アルゴリズムを制限&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;omit_empty_frame&nbsp;</td>
+<td valign="TOP">&nbsp;空フレームの除去　※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;log_flags&nbsp;</td>
+<td valign="TOP">&nbsp;ログ表示内容　※&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">PPP接続用のキーワードはさらに、ISPに関する設定を行うもの（<i>ifc.cnf</i>に記述すべきもの）と、モデムに関する設定を行うもの（<i>dev.cnf</i>に記述すべきもの）に分けられます。この使い分けについては運用規定が別に設けられます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_1">
+<a href="#Heading3_5"> 5. </a>1 <b>type</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">INETレイヤの下位レイヤのうち、そのATTACH_CNFが対応するものの種別を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]type [eth|ppp|nic]<br><br>次のいずれかを指定できます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -type　　　下位レイヤの種別指定なし[default]
+         <li> type eth　　USB-Ethernetに対応
+         <li> type ppp　　PPP接続に対応
+         <li> type nic　　Ethernet (Network Adaptor)に対応
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_2">
+<a href="#Heading3_5"> 5. </a>2 <b>vendor</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">そのATACCH_CNFが対応するインタフェースデバイスのベンダ名を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]vendor [<i>vendor</i>]<br><br>次のいずれかを指定できます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -vendor　　　　ベンダ指定なし[default]
+         <li> vendor <i>vendor</i>　ベンダ名が<i>vendor</i>のデバイスにのみ対応
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">ベンダ名はUSBのString Descriptorによる名称として定義されるものではなく、そのデバイスのドライバが指定する文字列です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_3">
+<a href="#Heading3_5"> 5. </a>3 <b>product</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">そのATTACH_CNFが対応するデバイスの製品名を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]product [<i>product</i>]<br><br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -product　　　　　製品名指定なし[default]
+         <li> product <i>product 　</i>製品名が<i>product</i>のデバイスにのみ対応
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">製品名はUSBのString Descriptorによる名称として定義されるものではなく、そのデバイスのドライバが指定する文字列です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_4">
+<a href="#Heading3_5"> 5. </a>4 <b>location</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">そのATTACH_CNFが対応するデバイスの位置情報、つまりデバイスが接続されているポートを指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]location [<i>location</i>]<br><br>次のいずれかを指定できます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -location　　　　　　位置指定なし[default]
+         <li> location <i>location</i><br><i>location</i>で指定する位置のデバイスのみに対応する
+</ul></div>
+<div style="margin-left:67px;"><br><i>location</i>は現時点では以下のような文字列で表されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<i><b>location</b></i>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;"USB-1"&nbsp;</td>
+<td valign="TOP">&nbsp;"PlayStation 2"本体のUSBポート1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;"USB-2"&nbsp;</td>
+<td valign="TOP">&nbsp;"PlayStation 2"本体のUSBポート2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;"USB-1,3"&nbsp;</td>
+<td valign="TOP">&nbsp;"PlayStation 2"本体のUSBポート1に接続されたHubのポート3&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">locationの指定は、同じメーカーの同じ製品を同時に複数接続して使用したい場合に対応するためのもので、実用上これが必要になることはあまりないでしょう。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_5">
+<a href="#Heading3_5"> 5. </a>5 <b>dhcp</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IPアドレスなどの設定をDHCPによって行うかどうかを指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]dhcp<br><br>次のいずれかの指定ができます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -dhcp　DHCPを使用しない[default]
+         <li> dhcp　DHCPを使用する
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_6">
+<a href="#Heading3_5"> 5. </a>6 <b>dhcp_host_name</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">DHCPサーバへ通知するホスト名を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">次のいずれかの指定ができます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -dhcp_host_name　　　　　　ホスト名を通知しない[default]
+         <li> dhcp_host_name <i>host_name　host_name</i>をホスト名として通知する
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">DHCPサーバによっては、サーバ側から指定するホスト名をDHCPメッセージに含める必要があります。そのようなDHCPサーバのためのホスト名を指定するキーワードです。設定したホスト名はDHCP処理の際にのみ使用されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_7">
+<a href="#Heading3_5"> 5. </a>7 <b>dhcp_host_name_null_terminated</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">DHCPサーバへ通知するホスト名に末端のNUL文字を含めるかどうかを指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">次のいずれかの指定ができます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -dhcp_host_namenull_terminated　ホスト名にNUL文字を含めない
+         <li> dhcp_host_namenull_terminated　ホスト名にNUL文字を含める[default]
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">本来、DHCPサーバへ通知するホスト名に末端のNUL文字を含める必要はありませんが、現在一般に使われているDHCPクライアントの多くがNUL文字を含めているため、それに合わせた設定をデフォルトとしてあります。特に問題が生じない限り、デフォルトのままにしてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_8">
+<a href="#Heading3_5"> 5. </a>8 <b>dhcp_release_on_stop</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">I/Fダウン時にDHCPサーバへIPアドレスの解放を通知するかどうかを指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">次のいずれかの指定ができます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -dhcp_release_on_stop　IPアドレスの解放を通知しない[default]
+         <li> dhcp_release_on_stop　IPアドレスの解放を通知する
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_9">
+<a href="#Heading3_5"> 5. </a>9 <b>address</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IPアドレスを指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]address [&lt;address&gt;]<br><br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -address　　　　IPアドレスを直接には指定しない[default]
+         <li> address <i>address</i>　IPアドレスを<i>address</i>とする
+</ul></div>
+<div style="margin-left:67px;"><i>address</i>の書式についてはsceInetName2Address()の解説を参照してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">DHCPを使用せず、かつPPP接続ではない場合はIPアドレスを直接指定する必要があります。<br>DHCPを使用する場合は、address <i>address</i>が指定してあっても、DHCPによって割り当てられたIPアドレスが上書き設定されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_10">
+<a href="#Heading3_5"> 5. </a>10 <b>netmask</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">サブネットマスクを指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]netmask [&lt;netmask&gt;]<br><br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -netmask　　　　　サブネットマスクを直接には指定しない[default]
+         <li> netmask <i>netmask</i>　サブネットマスクを<i>netmask</i>とする
+</ul></div>
+<div style="margin-left:67px;"><i>netmask</i>の書式についてはsceInetName2Address()の解説を参照してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">DHCPを使用せず、かつPPP接続ではない場合はサブネットマスクを直接指定する必要があります。ただし、Class A,B,Cの場合はINETが自動的にサブネットマスクを設定します。<br>DHCPを使用する場合は、netmask <i>netmask</i>が指定してあっても、DHCPによって割り当てられたサブネットマスクが上書き設定されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_11">
+<a href="#Heading3_5"> 5. </a>11 <b>nameserver</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ネームサーバの指定を追加または削除するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">nameserver [add|del] <i>address</i><br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_12">
+<a href="#Heading3_5"> 5. </a>12 <b>route</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ルーティング情報を追加または削除するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">以下のいずれかの指定が可能です。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> route add <i>address</i> [gw <i>address</i>] [netmask <i>netmask</i>]<br>指定したルーティング情報を追加する
+         <li> route add default gw <i>address</i><br>デフォルトゲートウェイを追加する
+         <li> route del <i>address</i><br>指定したルーティング情報を削除する
+         <li> route add default<br>デフォルトのルーティング情報を追加する
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_13">
+<a href="#Heading3_5"> 5. </a>13 <b>phy_config</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">物理層チップの設定方法を指定するキーワードです。Ethernet接続用のATTACH_CNF（type ethが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">以下のいずれかの指定が可能です。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;・-phy_config&nbsp;</td>
+<td valign="TOP">&nbsp;　物理層チップの設定方法を指定しない[default]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・phy_config auto&nbsp;</td>
+<td valign="TOP">&nbsp;　Auto Negotiation Mode&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・phy_config 10&nbsp;</td>
+<td valign="TOP">&nbsp;　10BaseT,Half-Duplex&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・phy_config 10_fd&nbsp;</td>
+<td valign="TOP">&nbsp;　10BaseT,Full-Duplex,No-Flow-Control&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・phy_config 10_fd_pause&nbsp;</td>
+<td valign="TOP">&nbsp;　10BaseT,Full-Duplex,Flow-Control&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・phy_config tx&nbsp;</td>
+<td valign="TOP">&nbsp;　100BaseTX,Half-Duplex&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・phy_config tx_fd&nbsp;</td>
+<td valign="TOP">&nbsp;　100BaseTX,Full-Duplex,No-Flow-Control&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・phy_config tx_fd_pause&nbsp;</td>
+<td valign="TOP">&nbsp;　100BaseTX,Full-Duplex,Flow-Control&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_14">
+<a href="#Heading3_5"> 5. </a>14 <b>mtu</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PPP, PPPoE(PPP over Ethernet) インタフェースの場合は want.mru, allow.mru のデフォルト値、Ethernet インタフェースの場合は MTU 値を設定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">mtu <i>mtu</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:50px;">PPP もしくは PPPoE(PPP over Ethernet) の場合には want.mru および allow.mru のデフォルト値を <i>mtu</i> に設定します。want.mru, allow.mru の指定があった場合には want.mru, allow.mru の指定が優先されます。Ethernet  インタフェースの場合にはそのインタフェースの MTU 値を <i>mtu</i> に設定します。指定がない場合の <i>mtu</i> は PPP 及び、Ethernet インタフェースの場合は 1500 で、PPPoE(PPP over Ethernet) の場合は 1492 となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_15">
+<a href="#Heading3_5"> 5. </a>15 <b>pppoe</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PPPoE(PPP over Ethernet) を有効にするかどうかを設定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]pppoe<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">pppoe を指定した場合 PPPoE(PPP over Ethernet) を使用します。-pppoe を指定した場合 PPPoE(PPP over Ethernet) を使用しません。以下の pppoe で始まるキーワードは PPPoE(PPP over Ethernet) を使用する場合のみ有効となります。それ以外の場合は指定されていてもすべて無視されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_16">
+<a href="#Heading3_5"> 5. </a>16 <b>pppoe_service_name</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PPPoE(PPP over Ethernet) のサービス名を設定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">pppoe_service_name <i>service_name</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合の <i>service_name</i> は空になります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_17">
+<a href="#Heading3_5"> 5. </a>17 <b>pppoe_ac_name</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PPPoE(PPP over Ethernet) のアクセスコンセントレータ名を指定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">pppoe_ac_name <i>ac_name</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合の <i>ac_name</i> は空になります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_18">
+<a href="#Heading3_5"> 5. </a>18 <b>pppoe_host_uniq_auto</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PPPoE(PPP over Ethernet) クライアントの判別に用いられるホストユニークデータを自動生成するかどうかを指定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]pppoe_host_uniq_auto<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">pppoe_host_uniq_auto を指定した場合、ホストユニークデータを自動生成しサーバに通知します。デフォルトでは pppoe_host_uniq_auto が指定されます。-pppoe_host_uniq_auto を指定した場合、ホストユニークデータをサーバに通知しません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_19">
+<a href="#Heading3_5"> 5. </a>19 <b>chat_additional</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">モデムに対する追加スクリプトを定義するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">chat_additional "<i>chat</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">PPPのインタフェースにおいて、モデムに対する追加スクリプトを定義するキーワードです。モデムの送信レベル調整のような、ユーザ固有の対応のために使用します。<br>デフォルトの追加スクリプトはNET_CNF中で定義されますが、ATTACH_CNFでは個々のインタフェースに依存する追加スクリプトを定義します。ATTACH_CNFで追加スクリプトを定義すると、NET_CNF中に定義があっても無視されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_20">
+<a href="#Heading3_5"> 5. </a>20 <b>redial_count</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">リダイヤル回数の上限を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">redial_count <i>redial_count</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">PPPのインタフェースにおいて、モデムドライバが「通話中」を返した際に何回までリダイヤルするかを指定するキーワードです。指定しない場合のデフォルトは0回となり、リダイヤルは行われません。<br>デフォルトのリダイヤル回数はNET_CNF中で設定されますが、ATTACH_CNFでは個々のインタフェースに依存する設定を行います。ATTACH_CNFでリダイヤル回数を設定した場合、NET_CNF中に設定があっても無視されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_21">
+<a href="#Heading3_5"> 5. </a>21 <b>redial_interval</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">リダイヤル間隔を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">redial_interval <i>redial_interval</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">モデムドライバが「通話中」を返した際にどれだけの時間を空けてからリダイヤルするかを秒単位で指定するキーワードです。指定しない場合のデフォルトは10秒です。<br>デフォルトのリダイヤル間隔はNET_CNF中で設定されますが、ATTACH_CNFでは個々のインタフェースに依存する設定を行います。ATTACH_CNFでリダイヤル間隔を設定した場合、NET_CNF中に設定があっても無視されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_22">
+<a href="#Heading3_5"> 5. </a>22 <b>outside_delay</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">外線発信遅延文字列を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">outside_delay "<i>outside_delay</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">外線発信の際に、外線発信文字列と電話番号の間にはさむ外線発信遅延文字列を指定するキーワードです。モデムの機種と設定に依存しますが、多くのATコマンドモデムでは「,」で2秒遅延の意味になります。指定がない場合のデフォルトは""（空文字列）です。<br>デフォルトの外線発信遅延文字列はNET_CNF中で設定されますが、ATTACH_CNFでは個々のインタフェースに依存する設定を行います。ATTACH_CNFで外線発信遅延文字列を設定した場合、NET_CNF中に設定があっても無視されます。<br>なお、外線発信文字列が空文字列のときは外線発信遅延文字列は使用されません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_23">
+<a href="#Heading3_5"> 5. </a>23 <b>dialing_type</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">回線タイプを指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">dialing_type [tone|pulse|any]<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">回線のタイプを次のいずれかで指定します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;tone&nbsp;</td>
+<td valign="TOP">&nbsp;トーン回線（アナログ）[default]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pulse&nbsp;</td>
+<td valign="TOP">&nbsp;パルス回線（アナログ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;any&nbsp;</td>
+<td valign="TOP">&nbsp;上記以外の回線（デジタル等）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">デフォルトの回線タイプはNET_CNF中で設定されますが、ATTACH_CNFでは個々のインタフェースに依存する設定を行います。ATTACH_CNFで回線タイプを設定した場合、NET_CNF中に設定があっても無視されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_24">
+<a href="#Heading3_5"> 5. </a>24 <b>phone_number</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">発信先電話番号を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">phone_number "<i>phone_number</i>"<br>phone_number0 "<i>phone_number</i>"<br>phone_number1 "<i>phone_number</i>"<br>（省略）<br>phone_number9 "<i>phone_number</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">発信先の電話番号を指定するキーワードです。<br>phone_number0からphone_number9は発信先の優先順位、つまりリダイヤルの順序を示します。まずphone_number0で指定された電話番号へ発信を試み、phone_number0が指定されていないか通話中であればphone_number1で指定された電話番号へ発信を試み、……というように順にリダイヤル処理が行われます（電話番号の指定がひとつしか存在しなければ、その同じ番号へ繰り返しリダイヤルが行われます）。<br>phone_numberとphone_number0は等価です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_25">
+<a href="#Heading3_5"> 5. </a>25 <b>answer_mode</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">着信によってネットワーク接続を行うかどうかを指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">次のいずれかの指定が可能です。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> -answer_mode　発信で接続を行う [default]
+         <li> answer_mode　着信で接続を行う
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_26">
+<a href="#Heading3_5"> 5. </a>26 <b>answer_timeout</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">着信で接続を行う場合のタイムアウト時間を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">answer_timeout <i>answer_timeout</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">着信で接続を行う場合のタイムアウト時間を秒数で指定するキーワードです。指定がない場合は、connect_timeoutキーワードで指定される発信タイムアウト時間と同じになります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_27">
+<a href="#Heading3_5"> 5. </a>27 <b>chat_login</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ログイン手順を記述したスクリプト文字列を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">chat_login "<i>chatscript</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合のデフォルトは""であり、ログイン手順は実行されないことになります。<br>チャットスクリプトの仕様に関しては「チャットスクリプトの仕様」を参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_28">
+<a href="#Heading3_5"> 5. </a>28 <b>auth_name / auth_key / peer_name / peer_key</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">認証名および認証キーを指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">auth_name "<i>auth_name</i>"<br>auth_key "<i>auth_key</i>"<br>peer_name "<i>peer_name</i>"<br>peer_key "<i>peer_key</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">一般のISPから与えられるユーザ名とパスワードはauth_name / auth_keyに該当します。peer_name, peer_keyは接続先の認証名と認証キーです。いずれも、デフォルトの設定は存在しません。<br>各パラメータは、認証の方式に応じて次のように使用されます。<br><br>・PAP認証を相手側がこちらに要求する場合（相手側がサーバ）<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>　auth_name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;認証名として送信する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>　auth_key</i>&nbsp;</td>
+<td valign="TOP">&nbsp;認証キーとして送信する&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;">・PAP認証をこちらが相手に要求する場合（相手側がサーバ）<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>　peer_name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信した認証名と照合する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>　peer_key</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信した認証キーと照合する&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;"><b>・</b>CHAP認証を相手側がこちらに要求する場合（こちら側がサーバ）<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>　auth_name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Responseで送信する認証名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>　auth_key</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Responseのダイジェスト化に使用する認証キー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>　peer_name&nbsp;<br>&nbsp;</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Challengeで送られてくる相手側名と照合する&nbsp;<br>&nbsp;（peer_nameが"*"の場合は照合を行わない）&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;">・CHAP認証をこちらが相手に要求する場合（こちら側がサーバ）<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>　peer_name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Responseの照合に使用する認証名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>　peer_key</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Responseの照合に使用する認証キー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>　auth_name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Challengeで送信するこちらの認証名&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_29">
+<a href="#Heading3_5"> 5. </a>29 <b>want.auth</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">相手側に要求する認証方式を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">want.auth [any|pap|chap|pap/chap|chap/pap]<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">相手に要求する認証方式を指定します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>認証方式</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;any&nbsp;</td>
+<td valign="TOP">&nbsp;PAP,CHAPによる認証を要求しない [default]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pap&nbsp;</td>
+<td valign="TOP">&nbsp;PAPによる認証のみを要求する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;chap&nbsp;</td>
+<td valign="TOP">&nbsp;CHAPによる認証のみを要求する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pap/chap&nbsp;</td>
+<td valign="TOP">&nbsp;まずPAPによって認証を要求し、その結果接続を&nbsp;<br>&nbsp;拒否されたら、次にCHAPによって認証を要求する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;chap/pap&nbsp;</td>
+<td valign="TOP">&nbsp;まずCHAPによって認証を要求し、その結果接続を&nbsp;<br>&nbsp;拒否されたら、次にPAPによって認証を要求する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">CHAP認証で要求するアルゴリズムはMD5です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_30">
+<a href="#Heading3_5"> 5. </a>30 <b>allow.auth</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">こちら側で許可する認証方式を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">allow.auth [any|pap|chap|pap/chap|chap/pap]<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">相手から要求されたときに許可する認証方式を指定します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>認証方式</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;any&nbsp;</td>
+<td valign="TOP">&nbsp;PAP,CHAPによる認証を許可しない [default]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pap&nbsp;</td>
+<td valign="TOP">&nbsp;PAPによる認証のみを許可する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;chap&nbsp;</td>
+<td valign="TOP">&nbsp;CHAPによる認証のみを許可する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pap/chap&nbsp;</td>
+<td valign="TOP">&nbsp;PAPまたはCHAPによる認証を許可する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;chap/pap&nbsp;</td>
+<td valign="TOP">&nbsp;PAPまたはCHAPによる認証を許可する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">pap/chapとchap/papは同じ意味になります。CHAP認証で許可するアルゴリズムは、MD5 / MS(Version 1) / MS(Version 2)の３つです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_31">
+<a href="#Heading3_5"> 5. </a>31 <b>lcp_timeout</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">LCPでのタイムアウト時間を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">lcp_timeout <i>sec</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">LCPでのタイムアウト時間を秒単位で指定します。指定がない場合のデフォルトは1秒です。<br>このタイムアウト時間は、要求に対して応答がないときの再送間隔となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_32">
+<a href="#Heading3_5"> 5. </a>32 <b>lcp_max_configure</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">LCPフェーズにおいて設定要求(Configuration-Request)の最大送信回数を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">lcp_max_configure <i>n</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合の最大送信回数は10回となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_33">
+<a href="#Heading3_5"> 5. </a>33 <b>lcp_max_terminate</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">LCPフェーズにおいて終了要求(Terminate-Request)の最大送信回数を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">lcp_max_terminate <i>n</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合の最大送信回数は3回となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_34">
+<a href="#Heading3_5"> 5. </a>34 <b>ipcp_timeout</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IPCPでのタイムアウト時間を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">ipcp_timeout <i>sec</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">IPCPでのタイムアウト時間を秒単位で指定します。指定がない場合のデフォルトは1秒です。<br>このタイムアウト時間は、要求に対して応答がないときの再送間隔となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_35">
+<a href="#Heading3_5"> 5. </a>35 <b>ipcp_max_configure</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IPCPフェーズにおいて設定要求(Configuration-Request)の最大送信回数を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">ipcp_max_configure <i>n</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合の最大送信回数は10回となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_36">
+<a href="#Heading3_5"> 5. </a>36 <b>ipcp_max_terminate</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IPCPフェーズにおいて終了要求(Terminate-Request)の最大送信回数を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">ipcp_max_terminate <i>n</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合の最大送信回数は3回となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_37">
+<a href="#Heading3_5"> 5. </a>37 <b>auth_timeout</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PAP,CHAPによる認証時のタイムアウト時間を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">auth_timeout <i>sec</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">PAP,CHAPによる認証時のタイムアウト時間を秒単位で指定します。このタイムアウト時間は要求に対する応答がない場合の再送間隔、および要求が来るのを待つ間隔として使用されます。指定がない場合には3秒間隔になります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_38">
+<a href="#Heading3_5"> 5. </a>38 <b>auth_max_failure</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PAP,CHAPによる認証時の要求に対する応答がない場合の最大送信回数、および要求が来るのを待つ最大回数を指定するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">auth_max_failure <i>n</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">指定がない場合の最大回数は5回となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_39">
+<a href="#Heading3_5"> 5. </a>39 <b>idle_timeout</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PPPのアイドルタイムアウト時間を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">idle_timeout <i>sec</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">引数にはタイムアウト時間を秒単位で指定します。PPPはここで指定した秒数にわたって送受信が何もない場合には、相手先との通信を自動的に切断します。設定がない場合のデフォルト値は90秒です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_40">
+<a href="#Heading3_5"> 5. </a>40 <b>connect_timeout</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">回線接続のタイムアウト時間を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">connect_timeout <i>sec</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">chat_dialおよびchat_loginの処理が完了してからここで指定した秒数内にモデムからの接続完了の通知がなければタイムアウトとなります。設定しない場合のデフォルト値は10秒です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_41">
+<a href="#Heading3_5"> 5. </a>41 <b>mru_nego / mru</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">MRU（Maximum-Receive-Unit：最大受信データ長）のネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]want.mru_nego<br>[-]allow.mru_nego<br>want.mru <i>mru</i><br>allow.mru <i>mru</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">MRUのネゴシエーションを要求するかどうかをwant.mru_negoで、許可するかどうかをallow.mru_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合は、要求する / 許可するとみなされます。<br>want.mru, allow.mru はその最大受信データ長を指定します。指定がない場合のデフォルト値はともに1500バイトです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_42">
+<a href="#Heading3_5"> 5. </a>42 <b>accm_nego / accm</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ACCM（Async-Control-Character-Map：非同期制御文字マップ）のネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]want.accm_nego<br>[-]allow.accm_nego<br>want.accm_value <i>accm</i><br>allow.accm_value <i>accm</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">ACCMのネゴシエーションを要求するかどうかをwant.accm_negoで、許可するかどうかをallow.accm_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合は、要求する / 許可するとみなされます。<br>want.accm,allow.accm はそのaccm値を指定します。指定がない場合のデフォルト値は、want.accm は0、allow.accm は0xffffffffです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_43">
+<a href="#Heading3_5"> 5. </a>43 <b>magic_nego</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">マジックナンバーのネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]want.magic_nego<br>[-]allow.magic_nego<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">マジックナンバーのネゴシエーションを要求するかどうかをwant.magic_negoで、許可するかどうかをallow.magic_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合は、要求する / 許可するとみなされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_44">
+<a href="#Heading3_5"> 5. </a>44 <b>prc_nego</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PRC（Protocol-Field-Compression：プロトコルフィールド圧縮）のネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]want.prc_nego<br>[-]allow.prc_nego<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">PRCのネゴシエーションを要求するかどうかをwant.prc_negoで、許可するかどうかをallow.prc_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合は、要求する / 許可するとみなされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_45">
+<a href="#Heading3_5"> 5. </a>45 <b>acc_nego</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ACC（Address-and-Control-Field-Compression：アドレス/制御フィールド圧縮）のネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]want.acc_nego<br>[-]allow.acc_nego<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">ACCのネゴシエーションを要求するかどうかをwant.prc_negoで、許可するかどうかをallow.prc_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合は、要求する / 許可するとみなされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_46">
+<a href="#Heading3_5"> 5. </a>46 <b>address_nego / ip_address / ip_mask</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IPアドレスとサブネットマスクのネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]want.address_nego<br>[-]allow.address_nego<br>want.ip_address <i>address</i><br>want.ip_mask <i>netmask</i><br>allow.ip_address <i>address</i><br>allow.ip_mask <i>netmask</i><br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">PPP接続時のIPアドレスのネゴシエーションを要求するかどうかをwant.address_negoで、許可するかどうかをallow.address_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合は、要求する / 許可するとみなされます。<br>address_nego, ip_address, ip_maskの指定とネゴシエーションの結果に応じて、IPアドレスは以下のように決まります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ネゴシエーション&nbsp;<br>&nbsp;要求</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ネゴシエーション&nbsp;<br>&nbsp;結果</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>自分のIPアドレス</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;要求する&nbsp;<br>&nbsp;want.address_nego&nbsp;</td>
+<td valign="TOP">&nbsp;Ack&nbsp;</td>
+<td valign="TOP">&nbsp;want.ip_addressを使う&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;要求する&nbsp;<br>&nbsp;want.address_nego&nbsp;</td>
+<td valign="TOP">&nbsp;Nak&nbsp;</td>
+<td valign="TOP">&nbsp;与えられたIPアドレスとwant.ip&nbsp;<br>&nbsp;_maskとのANDを取り、それが&nbsp;<br>&nbsp;want.ip_addressとwant.ip_mask&nbsp;<br>&nbsp;とのANDと一致したらそのIPアド&nbsp;<br>&nbsp;レスを使う&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;要求しない&nbsp;<br>&nbsp;-want.address_nego&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;want.ip_addressを使う&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ネゴシエーション&nbsp;<br>&nbsp;許可</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ネゴシエーション&nbsp;<br>&nbsp;結果</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>相手のIPアドレス</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;許可する&nbsp;<br>&nbsp;allow.address_nego&nbsp;</td>
+<td valign="TOP">&nbsp;Ack&nbsp;</td>
+<td valign="TOP">&nbsp;allow.ip_addressを使う&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;許可する&nbsp;<br>&nbsp;allow.address_nego&nbsp;</td>
+<td valign="TOP">&nbsp;Nak&nbsp;</td>
+<td valign="TOP">&nbsp;送られてきたIPアドレスとallow.ip&nbsp;<br>&nbsp;_maskとのANDを取り、それが&nbsp;<br>&nbsp;allow.ip_addressとallow.ip_mask&nbsp;<br>&nbsp;とのANDと一致したらそのIPアド&nbsp;<br>&nbsp;レスを使う&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;許可しない&nbsp;<br>&nbsp;-allow.address_nego&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;allow.ip_addressを使う&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">want.ip_address, allow.ip_addressのデフォルト値は"0.0.0.0"、want.ip_mask, allow.ip_maskのデフォルト値は"0.0.0.0"です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_47">
+<a href="#Heading3_5"> 5. </a>47 <b>vjcomp_nego</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">VJ圧縮に関するネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]want.vjcomp_nego<br>[-]allow.vjcomp_nego<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">VJ圧縮のネゴシエーションを要求するかどうかをwant.vjcomp_negoで、許可するかどうかをallow.vjcomp_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合は、要求する / 許可するとみなされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_48">
+<a href="#Heading3_5"> 5. </a>48 <b>dns1_nego / dns1 / dns2_nego / dns2</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ネームサーバに関するネゴシエーションを設定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;[-]want.dns1_nego &nbsp;</td>
+<td valign="TOP">&nbsp;　[-]want.dns2_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;[-]allow.dns1_nego &nbsp;</td>
+<td valign="TOP">&nbsp;　[-]allow.dns2_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;want.dns1 address &nbsp;</td>
+<td valign="TOP">&nbsp;　want.dns2 address&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;allow.dns1 address&nbsp;</td>
+<td valign="TOP">&nbsp;　allow.dns2 address&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">ネームサーバのネゴシエーションを要求するかどうかをwant.dns1_nego / want.dns2_negoで、許可するかどうかをallow.dns1_nego / allow.dns2_negoで指定します。それぞれ、先頭に「-」を付けて記述すると要求しない / 許可しないという意味になります。指定がない場合はすべて、要求しない / 許可しないとみなされます。<br>want.dns1 / want.dns2 / allow.dns1 / allow.dns2はネームサーバのIPアドレスを指定します。<br><br>INETではDNSアドレスの設定数に制限はありませんが、PPPレイヤからINETレイヤに知らせるDNSアドレスはひとつのネットワークインタフェースについて２つまでです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_49">
+<a href="#Heading3_5"> 5. </a>49 <b>force_chap_type</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">許可するCHAP認証アルゴリズムを制限するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">force_chap_type [no|md5|ms|ms-v1|ms-v2]<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">CHAP認証を許可する場合にアルゴリズムを制限するキーワードです。引数の意味はそれぞれ次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;no&nbsp;</td>
+<td valign="TOP">&nbsp;認証アルゴリズムを制限しない [default]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;md5&nbsp;</td>
+<td valign="TOP">&nbsp;MD5のみに制限する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ms&nbsp;</td>
+<td valign="TOP">&nbsp;MS(Version1)のみに制限する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ms-v1&nbsp;</td>
+<td valign="TOP">&nbsp;MS(Version1)のみに制限する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ms-v2&nbsp;</td>
+<td valign="TOP">&nbsp;MS(Version2)のみに制限する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">指定しない場合は認証アルゴリズムを制限しません。<br>相手が要求した認証アルゴリズムで接続できない場合の回避策として特定のアルゴリズムを強制するために用意してあります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_50">
+<a href="#Heading3_5"> 5. </a>50 <b>omit_empty_frame</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">空フレームの送信を制御するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">[-]omit_empty_frame<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">omit_empty_frameを指定すると、PPPフレームの直後の空フレーム（Flagのみのフレーム）を付加しないようになります。先頭に「-」を付けて-omit_empty_frameと指定すると、空フレームを付加するようになります。指定がない場合は付加するようになります。<br>受信時には空フレームの有無に関係なく受信可能です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_51">
+<a href="#Heading3_5"> 5. </a>51 <b>log_flags</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PPPのログ表示内容を指定するキーワードです。PPP接続用のATTACH_CNF（type pppが指定されているATTACH_CNF）でのみ有効です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">log_flags <i>flag</i>...<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">デバッグ用のキーワードで、inetlog.cによるPPPのログ表示内容を指定します。<i>flag</i>には以下のいずれかが指定できます。設定がない場合のデフォルト値は「phase cp auth chat」です。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<i><b>flag</b></i>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ログ表示内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;phase&nbsp;</td>
+<td valign="TOP">&nbsp;PPPの状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;cp&nbsp;</td>
+<td valign="TOP">&nbsp;LCP, IPCPの状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;auth&nbsp;</td>
+<td valign="TOP">&nbsp;PAP, CHAPの状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;chat&nbsp;</td>
+<td valign="TOP">&nbsp;チャット処理とその応答&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;private&nbsp;</td>
+<td valign="TOP">&nbsp;チャットスクリプト中のプライベート情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dll&nbsp;</td>
+<td valign="TOP">&nbsp;DLLレベルでのデータのやり取り&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dump&nbsp;</td>
+<td valign="TOP">&nbsp;DLLデータのパケットダンプ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;timer&nbsp;</td>
+<td valign="TOP">&nbsp;タイマ関係の情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;event&nbsp;</td>
+<td valign="TOP">&nbsp;PPPへのイベント&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">　※それぞれ数値で指定することも可能です。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_6">
+<h2>
+ 6 <b>DIAL_CNFのキーワード</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">DIAL_CNFは、PPP接続の一般的なパラメータでモデムに依存するものを記述する設定ファイルです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_1">
+<a href="#Heading3_6"> 6. </a>1 <b>dialing_type_string</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ダイヤル文字列を定義するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">dialing_type_string "<i>tone</i>" "<i>pulse</i>" "<i>any</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">チャットスクリプト内で使用する特殊文字列\Dの内容を定義します。ユーザが使用する回線タイプに応じて、ここで指定した<i>tone</i> / <i>pulse</i> / <i>any</i>のいずれかが特殊文字列\Dに割り当てられます。<br>たとえば「dialing_type_string "ATDT" "ATDP" "ATD"」と指定しておくと、NET_CNF内でdialing_typeがtoneであれば、チャットスクリプト内の「\D」が「ATDT」に置き換えて実行されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_2">
+<a href="#Heading3_6"> 6. </a>2 <b>redial_string</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">通話中のときにモデムから返されるリザルト文字列を記述するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">redial_string "<i>redial_string</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">通話中だった場合にモデムが返してくるリザルト文字列を記述するキーワードです。多くのATコマンドモデムでは「BUSY」です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_3">
+<a href="#Heading3_6"> 6. </a>3 <b>chat_init</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">発信・着信手順の初期化部分を定義するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">chat_init "<i>init_script</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">発信・着信双方で必要な初期化手順を指定したスクリプト文字列を指定します。この中には、redial_stringで指定した文字列を受信したらアボートする、という記述が含まれていなければなりません。<br>スクリプト文字列の仕様に関しては「チャットスクリプト仕様」を参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_4">
+<a href="#Heading3_6"> 6. </a>4 <b>chat_dial</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">発信手順を定義するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">chat_dial "<i>dial_script</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">発信手順を指定したスクリプト文字列を指定します。スクリプト文字列の仕様に関しては「チャットスクリプト仕様」を参照してください。<br>NET_CNFまたはATTACH_CNFで-answer_modeが指定されていると、次のように発信用スクリプトが生成されます。<br><i>init_script</i> + <i>additional_script</i> + <i>dial_script</i><br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_5">
+<a href="#Heading3_6"> 6. </a>5 <b>chat_answer</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">着信手順を定義するキーワードです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>書式</b><br></h4></div>
+
+<div style="margin-left:67px;">chat_answer "<i>answer_script</i>"<br></div>
+
+<div style="margin-left:40px;"><h4><b>解説</b><br></h4></div>
+
+<div style="margin-left:67px;">着信手順を指定したスクリプト文字列を指定します。スクリプト文字列の仕様に関しては「チャットスクリプト仕様」を参照してください。<br>NET_CNFまたはATTACH_CNFでanswer_modeが指定されていると、次のように着信用スクリプトが生成されます。<br><i>init_script</i> + <i>additional_script</i> + "TIMEOUT <i>answer_timeout</i>" + <i>dial_script</i><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_7">
+<h2>
+ 7 <b>チャットスクリプトの仕様</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">チャットスクリプトは、PPP接続の際の、以下の5つの手順を指定するために使用するスクリプトです。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> モデム初期化（chat_init）<br>モデム接続の際のタイムアウト時間、アボート文字列、モデム初期化のスクリプト
+         <li> モデム追加スクリプト（chat_additional）<br>モデムに対してユーザ固有の設定を行うためのスクリプト
+         <li> モデム発信スクリプト（chat_dial）<br>発信処理のスクリプト。モデムドライバとともにモデムメーカーから供給される
+         <li> モデム着信スクリプト（chat_answer）<br>着信処理のスクリプト。モデムドライバとともにモデムメーカーから供給される
+         <li> ログイン手続き（chat_login）<br>PPPによる認証ではなく文字列のやり取りでのログイン手続きが必要な場合のスクリプト
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_1">
+<a href="#Heading3_7"> 7. </a>1 <b>スクリプトの仕様</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">スクリプトはそれぞれひとつの文字列として記述されます。スクリプトをファイル内などで記述する際には一般的に「\」文字をエスケープして「\\」と記述する必要がありますので注意してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>一般形式</b><br></h4></div>
+
+<div style="margin-left:67px;">一般的にスクリプトには、受信文字列と送信文字列を交互に、空白で区切って指定します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>recv1 send1 recv2 send2
+</pre></font></div>
+<div style="margin-left:67px;"><br>この例では"recv1"を受信するまで待って"send1"を送り、次に"recv2"を受信するまで待って"send2"を送ります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>特殊文字列</b><br></h4></div>
+
+<div style="margin-left:67px;">スクリプト中で、以下に示す特殊文字はそれぞれ次のように置き換えて解釈されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>特殊文字</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\s&nbsp;</td>
+<td valign="TOP">&nbsp;空白（SP:0x20）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\t&nbsp;</td>
+<td valign="TOP">&nbsp;タブ（HT:0x09）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\r&nbsp;</td>
+<td valign="TOP">&nbsp;復改（CR:0x0d）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\n&nbsp;</td>
+<td valign="TOP">&nbsp;改行（LF:0x0a）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\U&nbsp;</td>
+<td valign="TOP">&nbsp;認証名（auth_name）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\P&nbsp;</td>
+<td valign="TOP">&nbsp;認証キー（auth_key）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\T&nbsp;</td>
+<td valign="TOP">&nbsp;電話番号（phone_number）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\D&nbsp;</td>
+<td valign="TOP">&nbsp;回線タイプ別ダイヤル文字列&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;^X&nbsp;</td>
+<td valign="TOP">&nbsp;CTRL-X（0x00-0x1f）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\c&nbsp;</td>
+<td valign="TOP">&nbsp;文字列の最後に\rを付加しない（送信文字列専用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\d&nbsp;</td>
+<td valign="TOP">&nbsp;2秒待つ（delay）（送信文字列専用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\p&nbsp;</td>
+<td valign="TOP">&nbsp;0.25秒待つ（pause）（送信文字列専用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;\X&nbsp;</td>
+<td valign="TOP">&nbsp;文字Xそのもの（特殊文字のエスケープ：送信文字列専用）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>空の文字列</b><br></h4></div>
+
+<div style="margin-left:67px;">何も待たずに送信する場合には、受信文字列として空の文字列を指定します。空の文字列は連続する2個のダブルクォートで記述します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>タイムアウト時間の指定</b><br></h4></div>
+
+<div style="margin-left:67px;">受信文字列を待つ上限の時間は次のように指定します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>TIMEOUT <i>n	</i>（<i>n</i>は10進数、単位は秒）
+</pre></font></div>
+<div style="margin-left:67px;"><br>指定しない場合のデフォルト値は30秒です。受信文字列をタイムアウト時間内に受信できない場合は、PPPによる接続処理全体がエラーで終了します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>リトライの指定</b><br></h4></div>
+
+<div style="margin-left:67px;">受信文字列をタイムアウト時間内に受信できない場合のリトライ処理は次のように指定します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>recv1-send1-recv2 send2
+</pre></font></div>
+<div style="margin-left:67px;"><br>"recv1"をタイムアウト時間内に受信すれば、そのまま"send2"を送信します。<br>"recv1"をタイムアウト時間内に受信しなかった場合には、"send1"を送信して"recv2"の受信を待ちます。"recv2"をタイムアウト時間内に受信すれば"send2"を送信し、そうでなければエラー終了します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>アボート文字列の指定</b><br></h4></div>
+
+<div style="margin-left:67px;">次の指定により、ある特定の文字列を受信した場合にエラー終了させることができます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>ABORT <i>string</i>
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_2">
+<a href="#Heading3_7"> 7. </a>2 <b>チャットスクリプトの設定例</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">以下の設定例では、受信文字列と送信文字列とのペアを１行に１ペアずつ記述してあります。このようにすると確認が簡単になり、指定ミスも起こりにくくなります。<br>なお、NET設定ファイルはテキストで直書きできますが、説明のためC言語プログラム上での記述形式で示してあります。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>chat_init =    		// &lt; 初期化手続き &gt;
+     TIMEOUT 60		// タイムアウト時間を 60 秒に設定
+     " ABORT NO\\sCARRIER"	// "NO CARRIER" 受信でエラー終了
+     " ABORT ERROR"    	// "ERROR" 受信でエラー終了
+     " ABORT BUSY"		// "BUSY" 受信でエラー終了
+     " ABORT DELAYED"  	// "DELAYED" 受信でエラー終了
+     " \"\" \\dA\\pT"  	// 遅延付きで "AT\r" を送信
+     " OK \"\"";		// "OK" を待つ
+
+chat_additional = 		// &lt; 追加手続き &gt;
+     "";			//何もしないときは空文字列とする
+
+chat_dial =    		// &lt; 発信手続き &gt;
+     "\"\" \\D\\T"		// 発信する
+     " CONNECT \\d\\c";	// "CONNECT"を待ち、さらに2秒待つ
+
+chat_answer =  		// &lt; 着信手続き &gt;
+     "RING ATA"		// "RING"を待って"ATA"を送る
+     " CONNECT \\d\\c";	// "CONNECT"を待ち、さらに2秒待つ
+
+chat_login =   		// &lt; ログイン手続き&gt;
+     "TIMEOUT 10"		// タイムアウト時間を 10 秒に設定
+     " ogin:--ogin: \\U"	// "ogin:" を再送付きで待って認証名を送信
+     " ssword: \\P"    	// "ssword:" を待って認証キーを送信
+     " PPP\\sstart";		// 最後に "PPP start" を待つ
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_3">
+<a href="#Heading3_7"> 7. </a>3 <b>注意事項</b><br>
+</a>
+</h3>
+<div style="margin-left:40px;"><ul>
+         <li> 送信文字列中に「\c」を指定しない限り、送信文字列の最後には「\r」が自動的に付加して送信されます。受信文字列ではこのような自動的な付加処理は行われません。
+         <li> 送信文字列と受信文字列の最大長は255バイトです。<br>スクリプト全体の長さには（NET設定ファイルの仕様上では）特に制限はありません。
+         <li> 受信文字列のバッファは送信文字列を送信する時点でクリアされます。
+</ol></div>
+<br>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

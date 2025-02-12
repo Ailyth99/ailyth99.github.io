@@ -1,0 +1,260 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=Content-Type CONTENT="text/html; charset=UTF-8">
+<TITLE>"PlayStation 2" Develop Graphics Index Categories</TITLE>
+<style type="text/css"><!--
+	.Heading{line-height:100%;Font-size:11pt}
+	.CATEGORY{line-height:150%;Font-size:11pt;margin-left:10}
+	.MENU{line-height:100%;font-size:12pt;margin-left:15pt;font-weight:bold}
+	.MENUJ1{line-height:150%;font-size:10pt;margin-left:15pt;font-weight:bold}
+	.MENUJ2{line-height:100%;font-size:10pt;margin-left:15pt;font-weight:bold}
+	div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+//--></style>
+<STYLE TYPE="TEXT/CSS">
+<!--
+a {  text-decoration: none}
+a:hover { color: #FFCC00}
+-->
+</STYLE>
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+</HEAD>
+<body onload= "iniFunc()" bgcolor="#666666" text="#FFFFFF" link="#3399FF" alink="#FFCC00" vlink="#3399FF">
+<div id="fixedLay0" class="fixedLay">
+<a href="graph_category.htm"><img src="../logo/link.gif" border="0" alt="TOP"></a>
+</div>
+<table width="206" cellspacing="0" cellpadding="0" bgcolor="#373535">
+<tr> 
+<td width="59" height="60" valign="top"><img src="../logo/psf.gif" width="61" height="60"></td>
+<td width="147" valign="top"><img src="../logo/ps2.gif" width="108" height="28"><br>
+<font size="2"><b><font color="#FFFFFF">Programmer Tool Runtime Library Release 
+2.5</font></b></font> </td>
+</tr>
+</table>
+
+
+<FORM NAME="indx">
+<SELECT NAME=list onchange=top.location.href=this.form.list.options[this.form.list.selectedIndex].value>
+<OPTION VALUE="../develop.htm">開発分野別INDEX
+<OPTION VALUE="../category.htm">カテゴリINDEX
+<OPTION VALUE="sakuin_idx.htm">索引
+<OPTION VALUE="kernel_idx.htm">カーネル/SIF関連 
+<OPTION VALUE="cdvd_idx.htm">CD(DVD)-ROMライブラリ
+<OPTION VALUE="memory_idx.htm">メモリーカード関連 
+<OPTION VALUE="pad_idx.htm">コントローラ/マルチタップ関連　　　　
+<OPTION VALUE="graph_idx.htm" SELECTED>グラフィックス関連 
+<OPTION VALUE="sound_idx.htm">サウンド関連
+<OPTION VALUE="stream_idx.htm">ストリーミング関連
+<OPTION VALUE="net_idx.htm">ネットワーク関連 
+<OPTION VALUE="hdd_idx.htm">ハードディスク関連  
+<OPTION VALUE="usb_idx.htm">USB/i.LINK関連
+<OPTION VALUE="debug_idx.htm">デバッグ支援ライブラリ 
+<OPTION VALUE="other_idx.htm">その他
+<OPTION VALUE="deci2_idx.htm">開発ツールプロトコル
+<OPTION VALUE="first_idx.htm">開発支援ツール
+<OPTION VALUE="../web/html/index.htm">技術情報
+</SELECT>
+</FORM>
+<script language="JavaScript">
+<!--//
+  document.indx.list.selectedIndex = 7;
+// -->
+</script>
+<nobr> 
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">GS基本</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libgraph.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/graph_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</td></tr></TABLE>
+</td></tr></TABLE>
+<BR>
+
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">高レベルグラフィックス</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libhig.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/hig_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</TD></TR>
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">サービス関数</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/higserv.htm" TARGET="main">overview</A>
+			</DIV>
+			</TD></TR>
+			<TR><TD>
+			<DIV CLASS="MENUJ1">
+				<A HREF="../ee/libref/himem_rf.htm" TARGET="main">メモリ領域管理</A><BR>
+				<A HREF="../ee/libref/hidma_rf.htm" TARGET="main">DMAパケット管理</A><BR>
+				<A HREF="../ee/libref/higs_rf.htm" TARGET="main">GSレジスタ管理</A>
+			</DIV></DIV>
+		</TD></TR>
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">プラグイン
+			</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libhip.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/hip_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</TD></TR>
+	</TABLE>
+</TD></TR></TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF"><TR>
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">基本グラフィックス</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libgp.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/gp_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR><TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">パケット</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libpkt.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/pkt_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</TD></TR>
+	</TABLE>
+</TD></TR>
+</TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR><TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">VU0行列演算</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libvu0.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/vu0_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</TD></TR>
+	</TABLE>
+</TD></TR></TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR><TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">データフォーマット</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENUJ2">
+				<A HREF="../format/gformat.htm#Heading3_1" TARGET="main">eS中間ファイルフォーマット</A><BR><BR>
+				<A HREF="../format/gformat.htm#Heading3_2" TARGET="main">rawファイルフォーマット</A><BR><BR>
+				<A HREF="../format/gformat.htm#Heading3_3" TARGET="main">HiGデータフォーマット</A><BR><BR>
+				<A HREF="../format/gformat.htm#Heading3_4" TARGET="main">HiPプラグイン<BR>データフォーマット</A><BR><BR>
+				<A HREF="../format/gformat.htm#Heading3_5" TARGET="main">GF-VU1標準メモリ<BR>フォーマット</A><BR><BR>
+				<A HREF="../format/hmd.htm" TARGET="main">HMDフォーマット（更新なし）</A><BR>
+		</TD></TR>
+	</TABLE>
+</TD></TR>
+</TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="206" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">Tips</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENUJ2">
+				<A HREF="../tips/graphtips.htm#Heading3_3" TARGET="main">GSに関するチューニング</A><BR><BR>
+				<A HREF="../tips/graphtips.htm#Heading3_2" TARGET="main">3Dグラフィックスの基礎</A><BR><BR>
+				<A HREF="../tips/gsknhow.pdf" TARGET="main">GSの高速化ノウハウ(PDF)</A><BR><BR>
+				<A HREF="../tips/graphtips.htm#Heading3_4" TARGET="main">画質向上のための<BR>アンチエイリアシング</A>
+</DIV>
+		</TD></TR>
+	</TABLE>
+</TD></TR></TABLE>
+</NOBR> 
+<P>
+</P>
+<p>
+</p>
+</BODY>
+</HTML>
