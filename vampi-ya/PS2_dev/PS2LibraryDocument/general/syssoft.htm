@@ -1,0 +1,1423 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+<title>ライブラリの概略</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+ライブラリの概略
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ソフトウェアアーキテクチャの基礎</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>EE側メモリマップ</b><br></a>
+    <a href="#Heading4_1_2"> <b>IOP側のモジュール構成</b><br></a>
+    <a href="#Heading4_1_3"> <b>デフォルトモジュールの置き換え</b><br></a>
+    <a href="#Heading4_1_4"> <b>デフォルトモジュールのバージョンチェック</b><br></a>
+    <a href="#Heading4_1_5"> <b>モジュールのアンロード</b><br></a>
+    <a href="#Heading4_1_6"> <b>アンロード可能なモジュール一覧</b><br></a>
+    <a href="#Heading4_1_7"> <b>アプリケーション起動時に必要な処理</b><br></a>
+    <a href="#Heading4_1_8"> <b>アプリケーション起動時に渡される引数</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>Kernel</b><br></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>スレッド</b><br></a>
+    <a href="#Heading4_2_2"> <b>マルチスレッド管理</b><br></a>
+    <a href="#Heading4_2_3"> <b>優先度</b><br></a>
+    <a href="#Heading4_2_4"> <b>スレッド間通信</b><br></a>
+    <a href="#Heading4_2_5"> <b>Kernel API</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>各ライブラリの特徴</b><br></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>EEライブラリ－カーネルAPI</b><br></a>
+    <a href="#Heading4_3_2"> <b>EEライブラリ－周辺機器関連</b><br></a>
+    <a href="#Heading4_3_3"> <b>EEライブラリ－グラフィックス関連</b><br></a>
+    <a href="#Heading4_3_4"> <b>EEライブラリ－動画関連</b><br></a>
+    <a href="#Heading4_3_5"> <b>EEライブラリ－サウンド関連</b><br></a>
+    <a href="#Heading4_3_6"> <b>EEライブラリ－ネットワーク関連</b><br></a>
+    <a href="#Heading4_3_7"> <b>EEライブラリ－開発支援</b><br></a>
+    <a href="#Heading4_3_8"> <b>IOPライブラリ－カーネルAPI</b><br></a>
+    <a href="#Heading4_3_9"> <b>IOPライブラリ－周辺機器関連</b><br></a>
+    <a href="#Heading4_3_10"> <b>IOPライブラリ－サウンド関連</b><br></a>
+    <a href="#Heading4_3_11"> <b>IOPライブラリ－i.Link関連</b><br></a>
+    <a href="#Heading4_3_12"> <b>IOPライブラリ－USB関連</b><br></a>
+    <a href="#Heading4_3_13"> <b>IOPライブラリ－ネットワーク関連</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>EE-IOP間通信ライブラリ（SIF RPC）のしくみ</b><br></a>
+<p><a href="#Heading3_5">  5 <b>ネットワーク関連ライブラリのしくみ</b><br></a>
+<p><a href="#Heading3_6">  6 <b>コンポーネントサウンドライブラリ（CSL）のしくみ</b><br></a>
+<p><a href="#Heading3_7">  7 <b>高レベルグラフィックスライブラリ（HiG）のしくみ</b><br></a>
+<p><a href="#Heading3_8">  8 <b>ミドルウェアとは</b><br></a>
+<p><a href="#Heading3_9">  9 <b>コントローラを利用するために</b><br></a>
+    <ul>
+    <a href="#Heading4_9_1"> <b>libpadとlibpad2</b><br></a>
+    <a href="#Heading4_9_2"> <b>処理のタイミングについて</b><br></a>
+    </ul>
+<p><a href="#Heading3_10">  10 <b>マルチタップを利用するために</b><br></a>
+<p><a href="#Heading3_11">  11 <b>CD/DVD-ROMを利用するために</b><br></a>
+<p><a href="#Heading3_12">  12 <b>メモリーカードを利用するために</b><br></a>
+    <ul>
+    <a href="#Heading4_12_1"> <b>メモリーカードの仕様</b><br></a>
+    <a href="#Heading4_12_2"> <b>メモリーカードライブラリ</b><br></a>
+    <a href="#Heading4_12_3"> <b>関連ツール</b><br></a>
+    </ul>
+<p><a href="#Heading3_13">  13 <b>PDAを利用するために</b><br></a>
+<p><a href="#Heading3_14">  14 <b>USBを利用するために</b><br></a>
+    <ul>
+    <a href="#Heading4_14_1"> <b>USBDとLDD</b><br></a>
+    <a href="#Heading4_14_2"> <b>USBモジュール・オートローダー</b><br></a>
+    </ul>
+<p><a href="#Heading3_15">  15 <b>i.Linkを利用するために</b><br></a>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ソフトウェアアーキテクチャの基礎</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>EE側メモリマップ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EE Kernelのメモリマップを次に示します。<br>ユーザメモリは、キャッシュ使用モードの異なる３つの仮想アドレスに重複してマップされています。プログラマはこの3つの仮想アドレスを使い分けることで、キャッシュの使用方法をきめこまかく制御することができます。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft001.gif"><p>
+<b>図 1 EE Kernelメモリマップ</b>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>IOP側のモジュール構成</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOP側のソフトウェアはダイナミックリンクを前提としたモジュールで構成され、アプリケーションの起動時に、各アプリケーションが必要とするモジュールを選択してメモリにロードするしくみになっています。<br>ROMやCD/DVD-ROM上では、モジュールはリロケータブルオブジェクトファイルとして格納されています。ファイルは通常 '.irx' の拡張子を持ち、IRXファイルと呼ばれることもあります。<br>モジュールは、一度実行されると役目を終えてメモリから消去される非常駐モジュールと、メモリ上に留まって割り込みや他のモジュールからのリクエストに応じて処理を行う常駐モジュールとに区分できます。常駐モジュールの中にはさらに、必要がなくなったときにはメモリから消去できるものがあり、アンロード可能な常駐モジュールと呼ばれます。<br>常駐モジュールの一部は、他のモジュールに対してサブルーチンを提供します。このようなモジュールを特に常駐ライブラリと呼びます。<br>以下にSCEから提供されているIOPモジュールの主なものを示します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>モジュール</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>用途・機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sio2man.irx&nbsp;</td>
+<td valign="TOP">&nbsp;シリアル通信基本モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;padman.irx&nbsp;</td>
+<td valign="TOP">&nbsp;コントローラ制御モジュール（libpad用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dbcman.irx&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスコントロールモジュール（libpad2用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sio2d.irx&nbsp;</td>
+<td valign="TOP">&nbsp;シリアル通信モジュール（libpad2用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dgco.irx, ds1u.irx, &nbsp;<br>&nbsp;ds2u.irx, ds1o.irx, &nbsp;<br>&nbsp;ds2o.irx&nbsp;</td>
+<td valign="TOP">&nbsp;コントローラドライバモジュール（libpad2用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mtapman.irx&nbsp;</td>
+<td valign="TOP">&nbsp;マルチタップ制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mcman.irx, &nbsp;<br>&nbsp;mcserv.irx&nbsp;</td>
+<td valign="TOP">&nbsp;メモリーカード制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sksound.irx, &nbsp;<br>&nbsp;skhsynth.irx, &nbsp;<br>&nbsp;skmidi.irx, &nbsp;<br>&nbsp;sksesq.irx, &nbsp;<br>&nbsp;skmsin.irx&nbsp;</td>
+<td valign="TOP">&nbsp;標準キットライブラリ/サウンドシステムのモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mcxman.irx, &nbsp;<br>&nbsp;mcxserv.irx&nbsp;</td>
+<td valign="TOP">&nbsp;PDA制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;libsd.irx, &nbsp;<br>&nbsp;sdrdrv.irx&nbsp;</td>
+<td valign="TOP">&nbsp;低レベルサウンド制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;spucodec.irx&nbsp;</td>
+<td valign="TOP">&nbsp;SPU2に対応した波形データの符号処理モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;modmidi.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：MIDIシーケンサ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;modmsin.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：MIDIストリーム生成&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;modsesq.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：効果音シーケンサ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;modsein.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：効果音ストリーム生成&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;modssyn.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：ソフトウェア・シンセサイザ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;modhsyn.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：ハードウェア・シンセサイザ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;modmono.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：MIDIモノフォニック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;moddelay.irx&nbsp;</td>
+<td valign="TOP">&nbsp;CSL：MIDIレイテンシ調整&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;usbd.irx&nbsp;</td>
+<td valign="TOP">&nbsp;USBドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;usbmload.irx&nbsp;</td>
+<td valign="TOP">&nbsp;USBモジュールローダー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ilink.irx, &nbsp;<br>&nbsp;ilsock.irx&nbsp;</td>
+<td valign="TOP">&nbsp;i.LINKドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;inet.irx&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークライブラリ（INETプロトコルスタック）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;inetctl.irx&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク（INET）設定ライブラリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;netcnf.irx&nbsp;</td>
+<td valign="TOP">&nbsp;共通ネットワーク設定ライブラリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;smap.irx&nbsp;</td>
+<td valign="TOP">&nbsp;HDDイーサネット用ドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pppoe.irx&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoE用ドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;atad.irx&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークアダプターが接続される&nbsp;<br>&nbsp;デバイスのモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;dev9.irx&nbsp;</td>
+<td valign="TOP">&nbsp;ハードディスクのドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;hdd.irx&nbsp;</td>
+<td valign="TOP">&nbsp;パーティション管理モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pfs.irx&nbsp;</td>
+<td valign="TOP">&nbsp;PlayStation File Systemモジュール&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>デフォルトモジュールの置き換え</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">もっとも基本的なモジュールは起動時にROMから（DTL-T10000ではフラッシュROMから）ロードされます。これらをデフォルトモジュールと呼びます。ただし実機のROMに搭載されているデフォルトモジュールはバージョンが古いため、タイトルアプリケーションは起動直後にIOPをリブートし、デフォルトモジュールのうちアップデートすべきもの（リプレースモジュール）をCD/DVD-ROMからロードしなおして置き換えなければなりません。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft002.gif"><p>
+<b>図 2  IOPデフォルトモジュールの置き換え</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">リプレースモジュールを具体的に挙げると次のとおりですが、これらのモジュールをまとめたイメージファイル（実機用のioprp<i>xx</i>.imgおよび開発機用のt10000-rel<i>xx</i>.bin）がライブラリとともに提供されています。<br></div>
+<div style="margin-left:80px;">cdvdman.irx / cdvdfsv.irx / eesync.irx / fileio.irx / ioman.irx / loadcore.irx / loadfile.irx / moduleloader.irx / romdrv.irx / sifcmd.irx / sifman.irx / stdio.irx / sysclib.irx / timermani.irx / threadman.irx<br></div>
+<div style="margin-left:50px;">デフォルトモジュールの置き換え処理の具体的な方法については、別ドキュメント「SIFシステム」に記載があります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_4">
+<a href="#Heading3_1"> 1. </a>4 <b>デフォルトモジュールのバージョンチェック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">一方、EE側ライブラリの以下の関数には、デフォルトモジュールとバージョンが整合しているかどうかをチェックする機能が組み込まれています。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> sceOpen()
+         <li> sceSifLoadModule()
+         <li> sceSifLoadElf()
+         <li> sceSifLoadElfPart()
+</ul></div>
+<div style="margin-left:50px;">これらの関数は自身のバージョンとリプレースモジュールのひとつであるloadfile.irxのバージョンとを比較し、一致していない場合には、-SCE_EVERSIONMISSを返します。このエラーが返された場合は、イメージファイルまたはフラッシュROMのバージョンを確認してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_5">
+<a href="#Heading3_1"> 1. </a>5 <b>モジュールのアンロード</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">一部の常駐モジュールは、必要がなくなった際にメモリからアンロードすることができます。アンロード可能なモジュールをアンロードする際には、まずそのモジュールが起動後に確保したメモリやスレッドなどの資源を解放する停止処理を行い、これが適切に行われたらモジュールをメモリから削除する削除処理を行います。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_6">
+<a href="#Heading3_1"> 1. </a>6 <b>アンロード可能なモジュール一覧</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アンロード可能なモジュールの一覧を次に示します。<br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>モジュール名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>用途・機能等</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;cdvdfsv.irx&nbsp;</td>
+<td valign="TOP">&nbsp;libcdvdをEE側から使用するためのモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ilink.irx&nbsp;</td>
+<td valign="TOP">&nbsp;i.LINKドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ilsock.irx&nbsp;</td>
+<td valign="TOP">&nbsp;i.LINK用ソケット通信モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;inet.irx&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークライブラリ（INETプロトコルスタック）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;inetctl.irx&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク（INET）設定ライブラリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;inetlog.irx&nbsp;</td>
+<td valign="TOP">&nbsp;INETプロトコルスタックのユーティリティモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mcman.irx&nbsp;</td>
+<td valign="TOP">&nbsp;メモリーカード制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mcserv.irx&nbsp;</td>
+<td valign="TOP">&nbsp;メモリーカード制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mcxman.irx&nbsp;</td>
+<td valign="TOP">&nbsp;PDA制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mcxserv.irx&nbsp;</td>
+<td valign="TOP">&nbsp;PDA制御モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;netcnf.irx&nbsp;</td>
+<td valign="TOP">&nbsp;共通ネットワーク設定ライブラリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;netstat.irx&nbsp;</td>
+<td valign="TOP">&nbsp;INETプロトコルスタックのユーティリティモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ping.irx&nbsp;</td>
+<td valign="TOP">&nbsp;INETプロトコルスタックのユーティリティモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ppp.irx&nbsp;</td>
+<td valign="TOP">&nbsp;PPPドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;pppoe.irx&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoE用ドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;smap.irx&nbsp;</td>
+<td valign="TOP">&nbsp;HDDイーサネット用ドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;usbd.irx&nbsp;</td>
+<td valign="TOP">&nbsp;USBドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;usbkb.irx&nbsp;</td>
+<td valign="TOP">&nbsp;USBキーボードドライバモジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;usbmload.irx&nbsp;</td>
+<td valign="TOP">&nbsp;USBモジュールローダー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_7">
+<a href="#Heading3_1"> 1. </a>7 <b>アプリケーション起動時に必要な処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">タイトルアプリケーションの起動直後に、次のような処理を行う必要があります。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_1_7_1"><h4>
+(1)&nbsp;<b>"PlayStation 2"ロゴ画面のクリア</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">"PlayStation 2"の電源投入時に表示される"PlayStation 2"ロゴ画面は、アプリケーションの実行開始直後に、瞬間的にクリアしなければなりません。また、ロゴ画面で演奏されるサウンドも同時に消音しなければなりません。このことはTRC（Technical Requirement Checklist）で規定されています。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_1_7_2"><h4>
+(2)&nbsp;<b>メディアタイプの指定</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">不正ディスクの作成を防止するため、正規のメディアがCD-ROMかDVD-ROMか、プログラム中でメディアタイプを指定するしくみになっています。詳しくはlibcdvdのドキュメントを参照してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_1_7_3"><h4>
+(3)&nbsp;<b>デフォルトモジュールの置き換え</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">先に説明したとおり、デフォルトモジュールをアップデートする処理が必要です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_8">
+<a href="#Heading3_1"> 1. </a>8 <b>アプリケーション起動時に渡される引数</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アプリケーションの起動プログラム（SYSTEM.CNFのBOOT2パラメータで指定されたプログラム）には、次のような引数が渡されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;argv[0]&nbsp;</td>
+<td valign="TOP">&nbsp;ディスク上の起動プログラムファイル名&nbsp;<br>&nbsp;（例）cdrom0:\SLPS_123.45;1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;argv[1]&nbsp;</td>
+<td valign="TOP">&nbsp;ハードディスクにインストールしたアプリケーションをユーザが選択して&nbsp;<br>&nbsp;起動した場合、そのドライブ名とパーティションIDおよびBOOT2パラメータ&nbsp;<br>&nbsp;（例）hdd0:PP.SLPS-12345..APP_MAIN:cdrom0:\SLPS_123.45;1&nbsp;<br>&nbsp;CD(DVD)-ROMから直接起動した場合はNULL&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>Kernel</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">EEおよびIOPのシステムソフトウェア（Kernel）は、細部で相違はありますが、いずれもマルチスレッドをサポートするオペレーティングシステムです。Kernelは、システムのブート、プログラムのロード、マルチスレッドのスケジュール管理、スレッド間通信、例外ハンドラ、メモリ管理、キャッシュ管理、デバイス管理、およびデバッガサポート機能を提供します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>スレッド</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">スレッドとは、並行処理の観点から見た、プログラムの論理的な単位です。アプリケーションプログラムの処理内容を複数のスレッドに分け、それらを同時並行的に動作させることができます。同時並行といっても厳密に同時に実行されているスレッドはひとつだけで、Kernelの管理のスケジューリングに従い順次切り替えられて実行されるしくみになっています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>マルチスレッド管理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Kernelのマルチスレッドスケジューリングは、スレッドの状態と、生成時に与えられた優先度によって行います。タイムシェアリングシステムではなく、優先度の高いスレッドから暗黙のうちに実行権が奪われることはありません。外部割り込みがあっても、割り込みハンドラ内で優先度が変更されたり優先度のより高いスレッドが実行可能状態に移されない限り、割り込みから復帰すればもとのスレッドが実行されます。<br>スレッドは次に示すように６つの状態を取ります。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft003.gif"><p>
+<b>図 3 スレッドの状態遷移</b>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br>生成されたスレッドはまずDORMANT状態になり、起動されることによってREADY状態となって実行待ち行列（レディキュー）に入ります。レディキューの並び順は優先度の高い順で、同一優先度のスレッドどうしは早くREADY状態になった順に並びます。<br>レディキューの先頭にあるスレッドが実行されてRUN状態となります。RUN状態のスレッドは、セマフォなどの条件成立待ちによってWAIT状態に移り、待ち条件が成立するとREADY状態に戻ります。<br>READY状態にあるスレッドが他から強制的に実行保留されている状態がSUSPEND状態です。また、WAIT状態にあるスレッドが強制的に実行保留されている状態がWAIT-SUSPEND状態です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>優先度</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EE Kernelはユーザプログラムの優先度を1（最高）として起動します。ユーザプログラムの各スレッドは1～127の優先度を持つことができます。<br>IOP側では、ユーザプログラムが使用できる優先度の範囲はUSER_HIGHEST_PRIORITY（=9） ～ USER_LOWEST_PRIORITY（=123）に限られています。また、SCEI提供のデバイスドライバが以下に示す優先度を使用しています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>優先度</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>デバイスドライバ</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;loader&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;10&nbsp;</td>
+<td valign="TOP">&nbsp;reboot&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;16&nbsp;</td>
+<td valign="TOP">&nbsp;sio2man&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;18&nbsp;</td>
+<td valign="TOP">&nbsp;(reserved)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;20&nbsp;</td>
+<td valign="TOP">&nbsp;padman, mtapman(high), dbcman&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;24&nbsp;</td>
+<td valign="TOP">&nbsp;rspu2drv, sdrdrv&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;28&nbsp;</td>
+<td valign="TOP">&nbsp;i.link(high)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;30&nbsp;</td>
+<td valign="TOP">&nbsp;usb(high)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+<td valign="TOP">&nbsp;sksound&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;34&nbsp;</td>
+<td valign="TOP">&nbsp;i.link(low)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;36&nbsp;</td>
+<td valign="TOP">&nbsp;usb(low)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;40&nbsp;</td>
+<td valign="TOP">&nbsp;smap, an986&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;42&nbsp;</td>
+<td valign="TOP">&nbsp;mcman, mcxman&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;46&nbsp;</td>
+<td valign="TOP">&nbsp;padman, mtapman(low), sio2d,dgco, ds1u, ds2u,&nbsp;<br>&nbsp;ds1o, ds2o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;48&nbsp;</td>
+<td valign="TOP">&nbsp;inet, inetctl, netcnf&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;68&nbsp;</td>
+<td valign="TOP">&nbsp;ppp, pppoe&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;81&nbsp;</td>
+<td valign="TOP">&nbsp;cdvdfsv&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;88&nbsp;</td>
+<td valign="TOP">&nbsp;loadmodule, usbmload&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;96&nbsp;</td>
+<td valign="TOP">&nbsp;fileio&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;104&nbsp;</td>
+<td valign="TOP">&nbsp;mcserv, mcxserv&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>スレッド間通信</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EE Kernelはスレッド間の通信・同期機能として、セマフォを提供します。IOP Kernelはさらにイベントフラグとメッセージボックスを提供します。<br>セマフォは、あるデバイスやメモリ領域を同時に使用するスレッド数を制限するために使用します。あらかじめ最大数を指定してセマフォを作成しておき、デバイス等を使用したいスレッドはWaitSema()関数を実行してセマフォ資源（すなわちデバイス等の使用権）を取得してから使用します。もしセマフォ資源に空きがなければセマフォ待ち行列に入り、他スレッドがSignalSema()関数を実行してセマフォ資源を返却すると、待ち行列の先頭から順次セマフォ資源が与えられてREADY状態に戻ります。<br>イベントフラグはより多様な同期処理を行うことができます。あらかじめフラグの初期値を設定してイベントフラグを作成しておき、条件の成立を待つスレッドはWaitEventFlag()関数を実行することにより、解除条件を指定して待ち行列に入ります。他のスレッドがSetEventFlag()によってフラグ値を変更すると、それによって解除条件が満たされたスレッドがREADY状態に戻ります。<br>メッセージボックスはスレッド間でのデータ交換をサポートするサービスで、セマフォとリングバッファの組み合わされたものと考えることもできます。<br>まずCreateMbx()を用いてメッセージボックスを作成しておきます（複数可）。メッセージを待つスレッドはメッセージボックスの番号を指定してReceiveMbx()を発行してWAIT状態に入ります。他のスレッドまたはスレッド独立部からSendMbx() / iSendMbx()でメッセージボックスの番号を指定してメッセージを送信すると、そのメッセージボックスで待っているスレッドがREADY状態に移されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_5">
+<a href="#Heading3_2"> 2. </a>5 <b>Kernel API</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">KernelのAPIはC言語の関数として定義されています。<br>注意すべき点は、スレッド中から呼び出す場合と、たとえば割り込みハンドラなどのスレッド独立部から呼び出す場合とで、APIが別々に用意されていることです。ほぼ同じ機能であっても内部処理が異なるため、たとえばTerminateThとiTerminateThというように、割り込みハンドラなどから呼び出すための関数は「i」を付けた名前になっています。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>各ライブラリの特徴</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">"PlayStation 2"用のソフトウェア作成を支援する目的で、各ハードウェア機能ブロックを制御するライブラリと、ソフトウェア開発を支援するためのライブラリが提供されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>EEライブラリ－カーネルAPI</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>カーネルAPI</b><br></h4></div>
+
+<div style="margin-left:67px;">優先度ベースのマルチスレッドスケジューリング機能、セマフォによるスレッド間通信機能、例外ハンドラの管理機能、COP0の制御機能などがカーネルAPIとして提供されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>入出力サービス</b><br></h4></div>
+
+<div style="margin-left:67px;">カーネルAPIの拡張部分として、CD(DVD)-ROMとハードディスク、および開発用コンピュータ上のファイルに対する入出力サービスが提供されています。open/close, read/write, seek, ioctlという一般的なAPIに加えて、簡易printf関数と、SIF RPCのバインド情報をリセットする関数が用意されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>標準IOPサービス</b><br></h4></div>
+
+<div style="margin-left:67px;">カーネルAPIの拡張部分として、IOPモジュールをIOPメモリにロードしたりelfファイルをEEメモリにロードするなどの操作を行う関数群と、IOPメモリ上のヒープ領域を操作する関数群が用意されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>EEライブラリ－周辺機器関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>システムコンフィグレーションライブラリ libscf</b><br></h4></div>
+
+<div style="margin-left:67px;">表示言語やテレビ画面の縦横比など、"PlayStation 2"の詳細設定画面でユーザが設定したシステムコンフィグレーション情報を取得するためのライブラリです。海外版"PlayStation 2"と日本版"PlayStation 2"、DTL-T10000との相違を吸収する働きを持ちます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CD(DVD)-ROMライブラリ libcdvd</b><br></h4></div>
+
+<div style="margin-left:67px;">CD(DVD)-ROMドライブの制御とデータの読み込みを行うライブラリです。ストリーミング処理をサポートするために、IOPメモリにリングバッファを設けてデータを連続的に読み込む機能が用意されています。また、現在日時（内蔵リアルタイムクロック）を読み出す関数もこのライブラリに含まれています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>メモリカードライブラリ libmc</b><br></h4></div>
+
+<div style="margin-left:67px;">メモリーカードの検出やフォーマット処理、メモリーカード上のファイル管理、データの読み書きなどを行うライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>PDAライブラリ libmcx</b><br></h4></div>
+
+<div style="margin-left:67px;">PDAの制御、PDA情報の取得・更新、ユーザインターフェイス情報の取得・更新、メモリへのアクセスなどを行うライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>コントローラライブラリ libpad</b><br></h4></div>
+
+<div style="margin-left:67px;">コントローラのボタンデータの取得、コントローラモードの変更、アクチュエータの操作（振動）などの制御を行うライブラリです。"DUALSHOCK 2"を始め、市販されているコントローラ各機種に対応しています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>コントローラライブラリ2 libpad2</b><br></h4></div>
+
+<div style="margin-left:67px;">メモリ使用量を抑えたい場合のために分割構造としたコントローラライブラリです。振動制御の機能を別ライブラリに切り離したことと、コントローラの機種ごとに別々のドライバモジュールを用意したことにより、コントローラの使用方法や機種を限定すればEEメモリ / IOPメモリを節約することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>振動ライブラリ libvib</b><br></h4></div>
+
+<div style="margin-left:67px;">コントローラライブラリ2と併用して、コントローラの振動機能を制御するライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>マルチタップライブラリ libmtap</b><br></h4></div>
+
+<div style="margin-left:67px;">マルチタップを制御するライブラリです。コントローラライブラリ（libpad）やメモリーカードライブラリとともに使用すると、マルチタップに接続されたコントローラやメモリーカード(PS2)を制御することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>USBキーボードライブラリ libusbkb</b><br></h4></div>
+
+<div style="margin-left:67px;">USBキーボードを制御するライブラリです。文字入力用途を想定して、キーコードの読み替えやリピート処理などを行う機能があります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ハードディスクライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">ハードディスクドライブを利用するためのライブラリです。ドライブの制御とパーティション管理、pfs（"Playstation File System）の操作と、２つのモジュールで実装され、どちらも入出力サービスのAPIを通じて使用します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>EEライブラリ－グラフィックス関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>GS基本ライブラリ libgraph</b><br></h4></div>
+
+<div style="margin-left:67px;">表示や描画に必要な環境情報の生成・整形、ならびにGSの初期設定等を行うライブラリです。GSのバージョンによる相違を吸収するため、初期設定は必ずこのライブラリを使用して行ってください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>高レベルグラフィックスライブラリ libhig</b><br></h4></div>
+
+<div style="margin-left:67px;">機能の組合せや追加が容易なプラグイン形式のグラフィックスライブラリです。処理はデータ主導型で行われます。つまり、プラグインブロックというデータ構造にしたがって各プラグインが呼び出されるため、アプリケーション側では、オーサリング済みのデータを読み込み、プラグインブロックをキックして、生成されたディスプレイリストをDMAでGIFへ転送する、という全体的な管理を行えばよいことになります。<br>各プラグインの下位ルーチンとなるメモリ管理サービス関数 / DMAサービス関数 / GS管理サービス関数が提供され、独自プラグインの開発に利用することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>グラフィックスプラグインライブラリ libhip</b><br></h4></div>
+
+<div style="margin-left:67px;">高レベルグラフィックスライブラリ用のプラグイン群です。VU1へのマイクロプログラム転送、GSへのテクスチャデータの転送、シェイプデータの描画、階層構造と座標変換のマトリクス生成、キーフレーム間の線形補間、共有頂点・共有法線による形状生成、バンプマップ、環境マップ、シャドウイング、そのほかのプラグインが提供されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>EEライブラリ－動画関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>MPEGライブラリ libmpeg</b><br></h4></div>
+
+<div style="margin-left:67px;">MPEG2 / MPEG1画像のデコード処理を行うライブラリです。データ転送の制御やMC補償処理を含んでいます。データ転送の制御は、アプリケーション側で適当なバッファリング方式を選択できるよう、コールバック関数によって行うしくみになっています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>IPUライブラリ libipu</b><br></h4></div>
+
+<div style="margin-left:67px;">IPUを制御する低レベルライブラリです。IPUコマンドの実行、IPU全体の動作制御などのAPIが用意されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>EEライブラリ－サウンド関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>低レベルサウンドライブラリ libsdr</b><br></h4></div>
+
+<div style="margin-left:67px;">SPU2をリモート制御するライブラリです。IOP側にあるドライバモジュールと協調して動作し、IOP用の低レベルサウンドライブラリlibsdと同等の機能をEEアプリケーションに提供します。処理効率を高めるために、SPU2に対するコマンドをまとめて発行するバッチ実行のしくみが用意されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSLラインアウト liblout</b><br></h4></div>
+
+<div style="margin-left:67px;">PCM Streamをlibsdr経由でSPU2に転送・再生するCSLモジュールです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL MIDI Stream生成 libmsin</b><br></h4></div>
+
+<div style="margin-left:67px;">アプリケーションプログラムからのAPI呼び出しによってMIDI Streamをリアルタイムに生成するCSLモジュールです。効果音制御用の拡張MIDIメッセージを生成することもできます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSLソフトウェアシンセサイザ libssyn</b><br></h4></div>
+
+<div style="margin-left:67px;">IOP側のmodssynからMIDI Streamを入力し、EEメモリ上の音素データを用いてPCM Stream dataを出力するソフトウェア音源モジュールです。EEアプリケーションからのAPI呼び出しによって発音することもできます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL 効果音Stream生成 libsein</b><br></h4></div>
+
+<div style="margin-left:67px;">アプリケーションプログラムからのAPI呼び出しによってリアルタイムに効果音Streamを生成するCSLモジュールです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>SPU2ローカルメモリ管理ライブラリ libspu2m</b><br></h4></div>
+
+<div style="margin-left:67px;">SPU2ローカルメモリの使用状況を、EEメモリ上に管理テーブルを持つことによって管理するライブラリです。ローカルメモリを最大いくつのブロックに分けて管理するかに応じて、管理テーブルの大きさをライブラリの初期化時に指定することができます。<br>サウンドデータ入出力領域など、libspu2mで管理すべきでない領域は予約されています。エフェクト処理の作業領域は必要に応じて予約することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>標準キットライブラリ/サウンドシステム SKSS</b><br></h4></div>
+
+<div style="margin-left:67px;">IOP側でのプログラミングなしに、EE側だけでサウンド処理を行えるようにしたライブラリです。MIDIシーケンスの演奏 / 効果音シーケンスの演奏 / 単発発音を行うことができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_6">
+<a href="#Heading3_3"> 3. </a>6 <b>EEライブラリ－ネットワーク関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>ネットワークライブラリ Libnet</b><br></h4></div>
+
+<div style="margin-left:67px;">SIFRPCを用いて、IOP側に実装されているINETおよびINETCTLをEE側から呼び出すライブラリです。Release 2.4.3まではサンプルプログラムとして提供されていたもので、ソースコードが公開されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>共通ネットワーク設定インタフェースライブラリ netcnfif</b><br></h4></div>
+
+<div style="margin-left:67px;">IOP側に実装されている共通ネットワーク設定ライブラリ（netcnf.irx）の機能の一部をEE側から呼び出すライブラリです。これを使用することで「あなたのネットワーク設定ファイル」をEE上のアプリケーションから操作することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ネットワークソケットライブラリ libinsck</b><br></h4></div>
+
+<div style="margin-left:67px;">IOP側のネットワークライブラリ（INET）を呼び出し、EEアプリケーションにソケットAPIを提供するライブラリです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_7">
+<a href="#Heading3_3"> 3. </a>7 <b>EEライブラリ－開発支援</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>開発用デバッグ支援ライブラリ libdev</b><br></h4></div>
+
+<div style="margin-left:67px;">VU0 / VU1 / VIF0 / VIF1 / GIFを制御し、内部レジスタ等を読み出す機能を持つライブラリです。また、"PlayStation 2"のモニタ画面を擬似コンソールとしてメッセージ出力を行う機能が用意されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>DMA基本ライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">DMA転送を制御する機能とともに、転送リストの作成を支援するためにChainモード用のさまざまなタグを生成する機能を持つライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>パケットライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">Source Chainモード用のDMAパケット、VIFのUNPACKパケット、VIFのDIRECTパケット、GIFパケット（GSプリミティブ）の作成を支援するライブラリです。各パケットのヘッダ部を半自動的に生成し、アライメントを適切に処理する機能を持っています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>パフォーマンスカウンタライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">プログラムをチューニングするための資料として、EE Core内蔵のパフォーマンスカウンタを使用して、プログラム実行中のCPU / パイプラインの内部イベントを計数測定するライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>VU0ライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">VU0マクロ命令を用いたベクトル演算・マトリックス演算のライブラリです。ソースコードとともに提供されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_8">
+<a href="#Heading3_3"> 3. </a>8 <b>IOPライブラリ－カーネルAPI</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>IOPカーネル</b><br></h4></div>
+
+<div style="margin-left:67px;">優先度ベースのマルチスレッドスケジューリング機能、セマフォ / イベントフラグ / メッセージボックスによるスレッド間同期・通信、割り込みハンドラの管理、メモリプールの管理、タイマ管理、V-blank同期などの機能がカーネルAPIとして提供されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_9">
+<a href="#Heading3_3"> 3. </a>9 <b>IOPライブラリ－周辺機器関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>CD(DVD)-ROMライブラリ libcdvd</b><br></h4></div>
+
+<div style="margin-left:67px;">CD(DVD)-ROMドライブの制御とデータの読み込みを行うライブラリです。ストリーミング処理をサポートするために、IOPメモリにリングバッファを設けてデータを連続的に読み込む機能が用意されています。また、現在日時（内蔵リアルタイムクロック）を読み出す関数もこのライブラリに含まれています。EE側からもほぼ同じ機能を利用することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ハードディスクライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">ハードディスクドライブを利用するためのライブラリです。ドライブの制御とパーティション管理、pfs（"Playstation File System）と、２つのモジュールに分けて実装され、どちらも入出力サービスのAPIを通じて使用します。EE側からもほぼ同じ機能を利用することができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_10">
+<a href="#Heading3_3"> 3. </a>10 <b>IOPライブラリ－サウンド関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>低レベルサウンドライブラリ libsd</b><br></h4></div>
+
+<div style="margin-left:67px;">SPU2を直接制御するライブラリです。SPU2レジスタへのアクセス、SPU2ローカルメモリとの波形データ・サウンドデータの転送、SPU2からの割り込みに対する処理の設定、エフェクト属性の設定･取得などの機能があります。また、一連のSPU2レジスタへのアクセスをまとめて行うバッチ機能が用意されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>波形符号化ライブラリ spucodec</b><br></h4></div>
+
+<div style="margin-left:67px;">16bitストレートPCMデータをSPU2に対応した波形データにエンコードするライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL MIDI Stream生成 modmsin</b><br></h4></div>
+
+<div style="margin-left:67px;">アプリケーションプログラムからのAPI呼び出しによってMIDI Streamをリアルタイムに生成するCSLモジュールです。効果音制御用の拡張MIDIメッセージを生成することもできます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL MIDIシーケンサ modmidi</b><br></h4></div>
+
+<div style="margin-left:67px;">SQデータを入力してMIDI Streamを生成するCSLモジュールです。複数のSQデータを同時に演奏することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSLハードウェアシンセサイザ modhsyn</b><br></h4></div>
+
+<div style="margin-left:67px;">MIDI Streamデータを入力しSPU2で発音するCSLモジュールです。効果音用の拡張MIDIメッセージ、また効果音メッセージにも対応しています。デバッグ用に、SPU2に対するアクセス履歴を取得する機能があります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSLソフトウェアシンセサイザ modssyn</b><br></h4></div>
+
+<div style="margin-left:67px;">MIDI Streamを入力しEE側のlibssynで発音するCSLモジュールです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL MIDIディレイモジュール moddelay</b><br></h4></div>
+
+<div style="margin-left:67px;">MIDI Streamの遅延処理を行うCSLモジュールです。レーテンシ差の調整などに使用します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL MIDIモノフォニック modmono</b><br></h4></div>
+
+<div style="margin-left:67px;">MIDI StreamをモノフォニックにアサインするCSLモジュールです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL 効果音Stream生成 modsein</b><br></h4></div>
+
+<div style="margin-left:67px;">アプリケーションプログラムからのAPI呼び出しによってリアルタイムに効果音Streamを生成するCSLモジュールです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CSL効果音シーケンサ modsesq</b><br></h4></div>
+
+<div style="margin-left:67px;">SQデータを入力して効果音Streamを生成するCSLモジュールです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_11">
+<a href="#Heading3_3"> 3. </a>11 <b>IOPライブラリ－i.Link関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>i.Link用ドライバライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">1394バスを監視・制御するドライバライブラリです。アシンクロナス転送をサポートしています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>i.Link用ソケットライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">i.Link用ドライバライブラリの上位階層として、ソケット通信をサポートするライブラリです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_12">
+<a href="#Heading3_3"> 3. </a>12 <b>IOPライブラリ－USB関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>USBドライバライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">USBバスを監視・制御するドライバライブラリです。HCD (Host Controller Driver), USBD (USB Driver), Hub Driverの3つの機能を持ち、通信先の機器に依存しない処理を受け持っています。特定のUSB機器を利用するためには、機器に依存する処理を受け持つLDDを作成する必要があります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>USBモジュール・オートローダー</b><br></h4></div>
+
+<div style="margin-left:67px;">USB機器の抜き挿しに応じてそのつど適切なLDDをロード / アンロードするドライバです。オートロード対応のLDDと、USB機器とLDDファイルの対応を記述したドライバデータベースとを作成しておくと、USB機器が接続された時点でそれに適合するLDDを判別して自動的にロード処理を行います。ただしLDDがオートロードに対応している必要があります。ストリーミング処理中など、オートロードが不都合なときには延期することもできます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_13">
+<a href="#Heading3_3"> 3. </a>13 <b>IOPライブラリ－ネットワーク関連</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>ネットワークライブラリ INET</b><br></h4></div>
+
+<div style="margin-left:67px;">TCP / UDPプロトコルによるデータ送受信サービスを提供するライブラリ（INETプロトコルスタック）です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ネットワーク（INET）設定ライブラリ INETCTL</b><br></h4></div>
+
+<div style="margin-left:67px;">INETプロトコルスタックの動作に関する設定や、動作状態の管理を行うライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>共通ネットワーク設定ライブラリ NETCNF</b><br></h4></div>
+
+<div style="margin-left:67px;">共通ネットワーク設定ファイルの読み書きをサポートするライブラリです。共通ネットワーク設定ファイルとは、ネットワークに接続するために必要な電話回線やLANに関する各種設定情報を一定の形式で記録するものです。これを基礎として、各アプリケーションがネットワーク設定情報を共有できるように整備されたものが「あなたのネットワーク設定ファイル」です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ネットワークデバイスライブラリ NETDEV</b><br></h4></div>
+
+<div style="margin-left:67px;">ネットワーク接続用デバイスのデバイスドライバ開発用ライブラリです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>モデム開発ライブラリ</b><br></h4></div>
+
+<div style="margin-left:67px;">モデムドライバ開発用のライブラリです。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>EE-IOP間通信ライブラリ（SIF RPC）のしくみ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">EEとIOPとの間で協調して行う処理をサポートするために、両者間で簡単なクライアント／サーバーシステムを構築するリモートプロシージャコールライブラリ（SIF RPC）が、その下位ライブラリとともに提供されています。また、ハードディスクドライブの制御やファイル入出力やIOP制御などの機能が標準サービス関数として提供されています。さらに、libpad / libmc / libcdvdなど、EE側に実装されているライブラリで周辺機器に関するものはほとんどが内部でSIF RPCを使用しています。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft004.gif"><p>
+<b>図 4 EE-IOP間のクライアント／サーバーシステム階層図</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">SIF RPCを使用する際には、割り込み禁止状態でサービス関数を呼び出さないようにするほか、同じサービス関数群を同時に複数のスレッドから呼び出さないようにセマフォなどを用いて調停する必要があります。内部でSIF RPCを使用するライブラリについても同じ注意が必要です。<br>ネットワークを使用するアプリケーションなどでこの点が大きな負担となる場合は、調停機能を持つマルチスレッド版のMSIF RPCを使用することができます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>ネットワーク関連ライブラリのしくみ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">"PlayStation 2"をネットワーク（インターネット）に接続するために、INET / INETCTL / NETCNFの３つのIOPライブラリが提供されています。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft005.gif"><p>
+<b>図 5 ネットワークサポートライブラリの構成</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">INETプロトコルスタックはTCPおよびUDP、それらの下位プロトコルとしてIP / ARP / PPPをサポートしています。<br>ハードウェア的には次の3とおりのネットワーク接続機器をサポートしています。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> USBモデムを用いたダイヤルアップ接続</li>
+         <li VALUE=2> ネットワークアダプターを用いたLAN接続</li>
+         <li VALUE=3> USB-Ethernetアダプタを用いたLAN接続（開発専用）</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">ネットワークに接続するためにユーザが個々に設定しなければならない情報、たとえばIPアドレスやサブネットマスク、接続先プロバイダの電話番号やユーザアカウントなどの情報は、ネットワークにアクセスするアプリケーションが共有して利用できるよう、NETCNFライブラリを通して「あなたのネットワーク設定ファイル」に記録・管理するしくみになっています。<br>共有リソースであるあなたのネットワーク設定ファイルを利用する際には、ファイルの読み書き処理とともにユーザインタフェースを一定のガイドラインに従って実装していただく必要があります。これを支援するために、共通ネットワーク設定GUIライブラリ（ntgui / ntgui2）が別パッケージとして提供されています。<br>また、EE上のアプリケーションからネットワークを利用するために、ネットワークライブラリ（Libnet）と共通ネットワーク設定インタフェースライブラリ（netcnfif）、ソケット通信ライブラリ（libinsck）が用意されています。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_6">
+<h2>
+ 6 <b>コンポーネントサウンドライブラリ（CSL）のしくみ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">CSLはサウンド生成処理をコンポーネント化するための標準化アーキテクチャです。CSLモジュールを適宜組み合わせ、必要に応じて独自のCSLモジュールを作成することによって、高度なサウンド処理を容易に実装することができます。<br>CSLモジュールどうしの連携は、あるモジュールの出力バッファをもうひとつのモジュールが入力バッファとして共有することによって行われます。各CSLモジュールはtickと呼ばれる一定の時間間隔で呼び出され、入力バッファにデータがあれば1tickに相当する量を処理して出力バッファに書き込み、書き込まれたデータは次のCSLモジュールの入力データとなります。このように、共有したバッファを介してストリームデータの受け渡しが行われます。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft006.gif"><p>
+<b>図 6 バッファ共有によるCSLモジュールの連携</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">CSLモジュールは、IOP上で動作するものとEE上で動作するものがありますが、入出力データ形式の組み合わせによってカテゴリ分けされます。<br>SCEから提供するCSLモジュールは次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>モジュール</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ハードウェア・&nbsp;<br>&nbsp;シンセサイザ&nbsp;<br>&nbsp;（modhsyn）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；MIDI→Original&nbsp;</td>
+<td valign="TOP">&nbsp;SPU2のボイスを使用する音源&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ソフトウェア・&nbsp;<br>&nbsp;シンセサイザ&nbsp;<br>&nbsp;（modssyn）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；MIDI→PCM&nbsp;</td>
+<td valign="TOP">&nbsp;多機能WaveTable音源IOP側&nbsp;<br>&nbsp;モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MIDIシーケンサ&nbsp;<br>&nbsp;（modmidi）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；Original→MIDI&nbsp;</td>
+<td valign="TOP">&nbsp;SQファイルからMIDIストリーム&nbsp;<br>&nbsp;への変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;効果音シーケンサ&nbsp;<br>&nbsp;（modsesq）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；Original→MIDI&nbsp;</td>
+<td valign="TOP">&nbsp;効果音専用シーケンサ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;効果音Stream生成&nbsp;<br>&nbsp;（modsein）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；Original→SE&nbsp;</td>
+<td valign="TOP">&nbsp;効果音ストリーム生成&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MIDI Stream生成&nbsp;<br>&nbsp;（modmsin）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；Original→MIDI&nbsp;</td>
+<td valign="TOP">&nbsp;MIDIストリーム生成&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MIDIモノフォニック&nbsp;<br>&nbsp;（modmono）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；MIDI→MIDI&nbsp;</td>
+<td valign="TOP">&nbsp;モノフォニック化&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MIDIディレイ&nbsp;<br>&nbsp;（moddelay）&nbsp;</td>
+<td valign="TOP">&nbsp;IOP；MIDI→MIDI&nbsp;</td>
+<td valign="TOP">&nbsp;レイテンシの調節&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MIDI Stream生成&nbsp;<br>&nbsp;（libmsin）&nbsp;</td>
+<td valign="TOP">&nbsp;EE；Original→MIDI&nbsp;</td>
+<td valign="TOP">&nbsp;MIDIストリーム生成&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ソフトウェア・&nbsp;<br>&nbsp;シンセサイザ&nbsp;<br>&nbsp;（libssyn）&nbsp;</td>
+<td valign="TOP">&nbsp;EE；MIDI→PCM&nbsp;</td>
+<td valign="TOP">&nbsp;多機能WaveTable音源EE側&nbsp;<br>&nbsp;モジュール&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ラインアウト&nbsp;<br>&nbsp;（liblout）&nbsp;</td>
+<td valign="TOP">&nbsp;EE；PCM→Original&nbsp;</td>
+<td valign="TOP">&nbsp;SPU2を使用するPCMストリーム&nbsp;<br>&nbsp;再生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;効果音Stream生成&nbsp;<br>&nbsp;（libsein）&nbsp;</td>
+<td valign="TOP">&nbsp;EE；Original→SE&nbsp;</td>
+<td valign="TOP">&nbsp;効果音ストリーム生成&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">先にも述べたとおり、独自のCSLモジュールを作成し、SCE提供のCSLモジュールと組み合わせて独自のサウンド処理を行うことができます。CSLの標準規定は主にバッファ構造について定めたゆるやかなもので、モジュール内部の処理はもちろん、APIについても推奨規定だけを設けてあり、実装のほとんどは作成者に任されています。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_7">
+<h2>
+ 7 <b>高レベルグラフィックスライブラリ（HiG）のしくみ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">多様なグラフィックス手法を簡単な手続きで実現できるようにするため、グラフィックス機能をプラグイン形式で管理する高レベルグラフィックスライブラリ（HiG）が、そのためのデータフォーマット、コンバータ、基本的なプラグイン、そして独自のプラグイン作成をサポートする下層ライブラリとともに提供されます。<br>HiG自体はプラグインの登録・データブロックの解釈・プラグインの呼び出しなど管理上の機能を持ち、グラフィックス処理は各プラグインが行います。プラグインに対する各種のパラメータはデータブロック中に持たせ、メモリの確保などハードウェアリソースの操作はユーザプログラムが行います。このような独立性の高い構造により、グラフィック処理ルーチンの再利用やミドルウェアとしての提供が容易になります。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft007.gif"><p>
+<b>図 7 高レベルグラフィックスライブラリのソフトウェア階層</b>
+
+</div>
+<br>
+<div style="margin-left:50px;"><br>基本的なプラグインとしては、Graphics Frameworkの機能と同等のプラグインライブラリHiPが提供されます。また、データコンバータとしては、eSフォーマット（後述）からHiGフォーマットに変換するツールesConvがeSパッケージに同梱されて提供されます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_8">
+<h2>
+ 8 <b>ミドルウェアとは</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">ミドルウェアは、"PlayStation 2"の高性能をよりクオリティの高い表現につなげるためのソフトウェアとして、ライブラリよりも上位に位置付けられる開発支援ソフトウェアで、主としてサードパーティから提供されます。<br>3Dグラフィックス / アニメーション / サウンドなどコンピュータエンタテインメントを構成する表現手法のクオリティを高めるためには、それぞれ高度に専門的な技術とノウハウの蓄積が必要です。優れた技術を持つサードパーティがそれぞれ得意な分野でミドルウェアを提供することにより、次世代のコンピュータエンタテインメントにふさわしい高いクオリティの表現可能性が広がることになります。<br>各ミドルウェアの要として、中間ファイルフォーマット「eS」が規定されます。eSは、従来HMDフォーマットでサポートされていた領域はもちろん、ジオメトリ・テクスチャ・アニメーション・景観を一元的に取り扱うことができ、さらに各アプリケーション / ミドルウェアに独自の情報を取り扱うために容易に拡張することができるフォーマットです。複数のミドルウェアが使用するデータをひとつのファイルに統合することができ、各ミドルウェアはデータのそれぞれ一部分を取り出して処理します。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft008.gif"><p>
+<b>図 8 eSとミドルウェア</b>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_9">
+<h2>
+ 9 <b>コントローラを利用するために</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_9_1">
+<a href="#Heading3_9"> 9. </a>1 <b>libpadとlibpad2</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">コントローラの制御を行うライブラリとして、libpadとlibpad2+libvibが提供されています。<br>libpadは、接続状態やアクチュエータ情報の取得 / ボタンデータの読み取り / アクチュエータの制御と、コントローラに関する処理全般をサポートするライブラリです。<br>libpad2は主にメモリ使用量を抑えたい場合のためにlibpadを機能ごとに分割したライブラリです。アクチュエータの制御機能をlibvibとして分離したほか、IOP側のドライバモジュールもコントローラの機種ごとに分割したうえ、各1台のコントローラを制御するしくみになっています。アプリケーションの機能・対応機種・対応接続数に応じて必要なだけのモジュールをロードすればよいため、たとえば振動処理を行わない場合 / ボタンの感圧機能を利用しない場合 / "DUALSHOCK 2"専用で他のコントローラに対応しない場合 / 1人プレイ専用の場合など、メモリの使用量を抑えることができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_9_2">
+<a href="#Heading3_9"> 9. </a>2 <b>処理のタイミングについて</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">コントローラライブラリはEE側プログラムとIOP側プログラムとで構成されています。コントローラとの通信処理はIOP側プログラムがVSyncに同期して1フレームに１回ずつ行い、読み取ったデータはDMAによってEE側メモリに転送し、EE側プログラムはメモリからデータを読み出すしくみになっています。<br>つまり、EE側で動作するアプリケーションは任意のタイミングでコントローラのデータを読むことができますが、そのデータは最大で1Vsync前の状態を表していることになります。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft009.gif"><p>
+<b>図 9 コントローラのデータ読み出しタイミング</b>
+
+</div>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_10">
+<h2>
+ 10 <b>マルチタップを利用するために</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">マルチタップを使用することにより、最大8台のコントローラとメモリカード(PS2)を"PlayStation 2"に接続することができます。<br>マルチタップを使用する際には、libmtapを介してlibpad / libmcのサービスを利用します（libpad2は現在のところマルチタップに対応していません）。あらかじめlibmtapのモジュールをIOP側にロードし、マルチタップが接続されたポートをオープンしておくことにより、libpad / libmcの各関数でマルチタップに接続されたコントローラやメモリカード(PS2)にアクセスできるようになります。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_11">
+<h2>
+ 11 <b>CD/DVD-ROMを利用するために</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">"PlayStation 2"に搭載されているCD/DVD-ROMドライブは最大24倍速（CD-ROM） / 4倍速（DVD-ROM）、回転速度一定のCAV方式で、データ転送レートは一定ではありません。回転速度については、高速回転で読み出してもしエラーが発生すれば速度を落としてリトライするモードと、エラーが発生しないように最初から速度を抑えておくストリーミング用のモードの２とおりを設定できます。<br>CD/DVD-ROMへのアクセスをサポートするライブラリとして、libcdvdが提供されます。<br>ファイルシステムはISO-9660 level1に準拠し、DVDのUDFはサポートしていません。ファイルやディレクトリの名前や個数に関して、下記の制限があります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>制限</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ディレクトリ数&nbsp;</td>
+<td valign="TOP">&nbsp;40ディレクトリ／システム&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ディレクトリ階層の深さ&nbsp;</td>
+<td valign="TOP">&nbsp;最大８階層&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ファイル数&nbsp;</td>
+<td valign="TOP">&nbsp;30ファイル／ディレクトリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;使用できる文字&nbsp;</td>
+<td valign="TOP">&nbsp;0～9、A～Z、_&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ファイル名の形式&nbsp;</td>
+<td valign="TOP">&nbsp;（ファイル名8文字）．（拡張子3文字）；１&nbsp;<br>&nbsp;※ロングファイル名不可&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ディレクトリ名の形式&nbsp;</td>
+<td valign="TOP">&nbsp;（ディレクトリ名8文字）&nbsp;<br>&nbsp;※拡張子不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">ファイルのアクセスは、まずファイル名からセクタ番号を取得し、そのセクタ番号を指定してデータを読み出します。データ読み出し処理はノンブロッキングで、他の処理を並行して行うことができます。なお、別途提供されるCD/DVD-ROM Generatorを使用すると、ファイルとセクタ番号のマッピングテーブルを作成することができ、実行時にファイル名からセクタ番号を取得する処理を省くことができます。<br>なお、CD-XAおよびCD-DA（音楽CD）の読み出しはサポートしていません。CD-DA相当のデータは44.1KHzから48KHzへのピッチ変換が必要になるため、高い負荷がかかります。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_12">
+<h2>
+ 12 <b>メモリーカードを利用するために</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">"PlayStation 2"は容量を増大したメモリーカード(PS2)をサポートします。128KBのメモリーカードは、ブラウザで"PlayStation"用データファイルをコピーする場合にのみ利用できます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_12_1">
+<a href="#Heading3_12"> 12. </a>1 <b>メモリーカードの仕様</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカードの主な仕様を次に示します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>仕様</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>128KBのメモリーカードの仕様</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;容量&nbsp;</td>
+<td valign="TOP">&nbsp;64Mbit（8MB）&nbsp;</td>
+<td valign="TOP">&nbsp;1Mbit（128KB）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;管理単位&nbsp;</td>
+<td valign="TOP">&nbsp;クラスタ（＝1024bytes）&nbsp;</td>
+<td valign="TOP">&nbsp;スロット（＝8192bytes）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アクセス単位&nbsp;</td>
+<td valign="TOP">&nbsp;ページ（＝512bytes）&nbsp;</td>
+<td valign="TOP">&nbsp;セクタ（＝128bytes）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;消去単位&nbsp;</td>
+<td valign="TOP">&nbsp;ブロック（＝8192bytes）&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;書き込み所要時間&nbsp;</td>
+<td valign="TOP">&nbsp;60ms／ブロック&nbsp;</td>
+<td valign="TOP">&nbsp;2200ms／ブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;読み出し所要時間&nbsp;</td>
+<td valign="TOP">&nbsp;25ms／ブロック&nbsp;</td>
+<td valign="TOP">&nbsp;2200ms／ブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">大容量化に伴って、ファイルシステムについても階層ディレクトリのサポートのほか、アイコンや、ファイル情報の内容などが変更されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_12_2">
+<a href="#Heading3_12"> 12. </a>2 <b>メモリーカードライブラリ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカード(PS2)へのアクセスを支援するライブラリとして、libmcが提供されています。libmcは、メモリーカード(PS2)のフォーマット、カード情報の取得、ファイル一覧の取得、階層ディレクトリの操作、ファイルのリード / ライト、ファイル属性の変更などをサポートします。libmcの処理はノンブロッキングで、処理終了をポーリングしつつ他の処理を並行して行えるようになっています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_12_3">
+<a href="#Heading3_12"> 12. </a>3 <b>関連ツール</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカード用アイコンデータをプレビュー表示するプレビューア（viewer）が提供されています。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_13">
+<h2>
+ 13 <b>PDAを利用するために</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">PDAは、ARM7TDMIをプロセッサコアとし、128KBのフラッシュメモリ、2KBのRAM、32×32ドットモノクロLCDほかの入出力装置を備えた小型コンピュータです。"PlayStation 2"のメモリーカード差込口に接続し、メモリーカードと同様の手順でプログラムファイル（PDAアプリケーション）を保存し、ARM7の仮想アドレス空間に配置して実行する機能を持っています。<br>PDAへのアクセスを支援するライブラリとして、EE上で動作するlibmcxが提供されています。libmcの関数を併用して、標準入出力によるファイルアクセス、パーティション管理、ファイルシステム管理を行うことができるほか、シリアル番号や実行中のPDAアプリケーションに関する情報の読み書き、アラーム設定やスピーカー音量などユーザインタフェース情報の読み書き、内蔵フラッシュメモリの読み書き、ファイル転送中表示の制御などがAPIとして提供されています。<br><br>なお運用上の規定として、PDAへのアクセスはPDAアプリケーションを保有する"PlayStation 2"タイトルアプリケーションに限り、また作成できるファイル形式もPDAアプリケーション形式に限られています。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_14">
+<h2>
+ 14 <b>USBを利用するために</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">USB仕様の低レベルライブラリとして、IOP上で動作するUSBDが提供されています。マウス / キーボード / マイク / モデム / プリンタ、そのほか多数の周辺機器を接続しての応用が考えられます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_14_1">
+<a href="#Heading3_14"> 14. </a>1 <b>USBDとLDD</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBDはホストコントローラ（OpenHCI）の制御とUSBハブの制御機能を含む低レベルドライバで、マウスやモデムといった特定のUSB機器を使用するためには、それぞれの機器（あるいはデバイスクラス）に対応するドライバ（LDD : Logical Device Driver）を各自で作成する必要があります。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft010.gif"><p>
+<b>図 10 USBDとLDDの階層構造</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">LDDには以下の５つの関数を実装する必要があります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能・動作</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;start関数&nbsp;</td>
+<td valign="TOP">&nbsp;LDDを初期化し、USBDに対して登録する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;probe関数&nbsp;</td>
+<td valign="TOP">&nbsp;USB機器が接続されたことを検出すると、USBDは登録&nbsp;<br>&nbsp;されている各LDDのprobe関数を順に呼び出す。&nbsp;<br>&nbsp;probe関数では接続された機器が自分の担当するものか&nbsp;<br>&nbsp;どうかを判定してUSBDに情報を返す&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;attach関数&nbsp;</td>
+<td valign="TOP">&nbsp;各LDDのprobe関数の返した値に応じて、適切な&nbsp;<br>&nbsp;LDDのattach関数をUSBDが呼び出す。attach関数で&nbsp;<br>&nbsp;USB機器との通信処理の準備を行い、USBDに対して&nbsp;<br>&nbsp;データ転送要求を発行する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;コールバック関数&nbsp;</td>
+<td valign="TOP">&nbsp;データ転送が終了したときに呼び出される。コールバック&nbsp;<br>&nbsp;関数では適切なデータ処理を行い、必要ならば再び&nbsp;<br>&nbsp;データ転送要求を発行する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;detach関数&nbsp;</td>
+<td valign="TOP">&nbsp;USB機器が切断されたことをUSBDが検出すると呼び出される&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">LDDの作成にあたっては、USB規格について、該当するデバイスクラスの定義について、および対象とするUSB機器固有の仕様についての知識が必要です。前2者についてはUSB Implementers Forum Inc.,のWebサイト（http://www.usb.org/）で入手することができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_14_2">
+<a href="#Heading3_14"> 14. </a>2 <b>USBモジュール・オートローダー</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USB機器が接続された時点でその機器に対応するLDDをロードする機能として、USBモジュール・オートローダーが提供されています。あらかじめUSB機器とそれに対応するLDDのファイル名を設定ファイルに記述して用意しておき、USB機器が接続されたときにはその設定ファイルにしたがって適切なLDDをロードするというものです。ストリーミング処理中など、オートロードが不都合な場面では一時的に機能を停止することもできます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_15">
+<h2>
+ 15 <b>i.Linkを利用するために</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">i.Link（IEEE1394バス）による通信処理をサポートするために、IOP上で動作するi.Link用ドライバライブラリおよびソケットライブラリが提供されています。i.Link対応機器とのデータ交換のほか、2台の"PlayStation 2"を接続しての対戦処理、PC等とのデータ交換などに利用することができます。<br><br>i.Link用ドライバはIEEE1394.a 2.0に準拠し、トランザクションレベルのノードケイパビリティを実現しています。すなわち、asyncの送受信とConfig ROMのRead/Writeが可能です。ソケットライブラリは、通信相手を指定したパケットの送受信をサポートします。<br>いずれもIOP側に実装されているため、EEアプリケーションから利用するためには独自にRPCサービス関数を用意してください（IOPの負荷が大きくなるため、汎用のライブラリを提供する予定はありません）。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/syssoft011.gif"><p>
+<b>図 11 i.Link関連ライブラリの階層構造
+</div>
+<br>
+</b>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

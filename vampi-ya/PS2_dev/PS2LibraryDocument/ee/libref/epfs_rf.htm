@@ -1,0 +1,3982 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>PlayStation File System (EE)</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/pfs.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+PlayStation File System (EE)
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sce_dirent"> sce_dirent<br></a></td>
+<td>&nbsp;</td><td>ディレクトリエントリ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sce_stat"> sce_stat<br></a></td>
+<td>&nbsp;</td><td>ファイルステータス<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceChdir"> sceChdir<br></a></td>
+<td>&nbsp;</td><td>カレントディレクトリの変更<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceChstat"> sceChstat<br></a></td>
+<td>&nbsp;</td><td>ファイル/ディレクトリのステータスを変更する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceClose"> sceClose<br></a></td>
+<td>&nbsp;</td><td>ファイルのクローズ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceDclose"> sceDclose<br></a></td>
+<td>&nbsp;</td><td>ディレクトリのクローズ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceDevctl"> sceDevctl<br></a></td>
+<td>&nbsp;</td><td>デバイスへの特殊操作<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceDopen"> sceDopen<br></a></td>
+<td>&nbsp;</td><td>ディレクトリのオープン<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceDread"> sceDread<br></a></td>
+<td>&nbsp;</td><td>ディレクトリエントリの読み出し<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceFormat"> sceFormat<br></a></td>
+<td>&nbsp;</td><td>ファイルシステムのフォーマット<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGetstat"> sceGetstat<br></a></td>
+<td>&nbsp;</td><td>ファイル/ディレクトリのステータスを取得する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceIoctl2"> sceIoctl2<br></a></td>
+<td>&nbsp;</td><td>ファイルへの特殊操作<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLseek"> sceLseek<br></a></td>
+<td>&nbsp;</td><td>ファイルポインタの移動<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLseek64"> sceLseek64<br></a></td>
+<td>&nbsp;</td><td>ファイルポインタの移動(64bit 対応)<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceMkdir"> sceMkdir<br></a></td>
+<td>&nbsp;</td><td>ディレクトリの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceMount"> sceMount<br></a></td>
+<td>&nbsp;</td><td>デバイスのマウント<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceOpen"> sceOpen<br></a></td>
+<td>&nbsp;</td><td>ファイルの作成、オープン<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceRead"> sceRead<br></a></td>
+<td>&nbsp;</td><td>ファイルの読み込み<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceReadlink"> sceReadlink<br></a></td>
+<td>&nbsp;</td><td>シンボリック・リンクの値を読む<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceRemove"> sceRemove<br></a></td>
+<td>&nbsp;</td><td>ファイルの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceRename"> sceRename<br></a></td>
+<td>&nbsp;</td><td>ファイル/ディレクトリ名称の変更<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceRmdir"> sceRmdir<br></a></td>
+<td>&nbsp;</td><td>ディレクトリの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSymlink"> sceSymlink <br></a></td>
+<td>&nbsp;</td><td>シンボリックリンクを作成する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSync"> sceSync<br></a></td>
+<td>&nbsp;</td><td>バッファキャッシュとディスクの同期<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUmount"> sceUmount<br></a></td>
+<td>&nbsp;</td><td>ファイルシステムのアンマウント<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceWrite"> sceWrite<br></a></td>
+<td>&nbsp;</td><td>ファイルへの書き込み<br></td></tr>
+</table><br>
+<font size=4><b>devctl コマンド</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PDIOC_CLOSEALL"> PDIOC_CLOSEALL<br></a></td>
+<td>&nbsp;</td><td>すべてのファイルのクローズ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PDIOC_CLRFSCKSTAT"> PDIOC_CLRFSCKSTAT<br></a></td>
+<td>&nbsp;</td><td>FSCKステータスのクリア<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PDIOC_GETFSCKSTAT"> PDIOC_GETFSCKSTAT<br></a></td>
+<td>&nbsp;</td><td>FSCKステータスのチェック<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PDIOC_ZONEFREE"> PDIOC_ZONEFREE<br></a></td>
+<td>&nbsp;</td><td>空きゾーン数の取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PDIOC_ZONESZ"> PDIOC_ZONESZ<br></a></td>
+<td>&nbsp;</td><td>ゾーンサイズの取得<br></td></tr>
+</table><br>
+<font size=4><b>ioctl2コマンド</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PIOCALLOC"> PIOCALLOC<br></a></td>
+<td>&nbsp;</td><td>領域の確保<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PIOCATTRADD"> PIOCATTRADD<br></a></td>
+<td>&nbsp;</td><td>拡張ファイルアトリビュートエントリの追加<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PIOCATTRDEL"> PIOCATTRDEL<br></a></td>
+<td>&nbsp;</td><td>拡張ファイルアトリビュートエントリの削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PIOCATTRLOOKUP"> PIOCATTRLOOKUP<br></a></td>
+<td>&nbsp;</td><td>拡張ファイルアトリビュートエントリの検索<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PIOCATTRREAD"> PIOCATTRREAD<br></a></td>
+<td>&nbsp;</td><td>拡張ファイルアトリビュートエントリの読み出し<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#PIOCFREE"> PIOCFREE<br></a></td>
+<td>&nbsp;</td><td>領域の解放<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<div style="margin-left:50px;"><br></div>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sce_dirent"><font size=6>sce_dirent<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ディレクトリエントリ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>struct <b>sce_dirent</b> {
+	struct sce_stat <i>d_stat</i>;
+	char <i>d_name</i>[256];
+	void *<i>d_private</i>;
+};
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>d_stat</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルステータスを表します&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>d_name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイル名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;d_private&nbsp;</td>
+<td valign="TOP">&nbsp;予約&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ディレクトリのエントリを格納する構造体です。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceDread">sceDread</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sce_stat"><font size=6>sce_stat<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルステータス<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>struct <b>sce_stat</b> {
+	unsigned int <i>st_mode</i>;
+	unsigned int <i>st_attr</i>;
+	unsigned int <i>st_size</i>;
+	unsigned char <i>st_ctime</i>[8];
+	unsigned char <i>st_atime</i>[8];
+	unsigned char <i>st_mtime</i>[8];
+	unsigned int <i>st_hisize</i>;
+	unsigned int <i>st_private</i>[6];
+};
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>st_mode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ファイルのモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 0&nbsp;</td>
+<td valign="top">&nbsp;otherの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 1&nbsp;</td>
+<td valign="top">&nbsp;otherのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 2&nbsp;</td>
+<td valign="top">&nbsp;otherのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 3&nbsp;</td>
+<td valign="top">&nbsp;groupの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 4&nbsp;</td>
+<td valign="top">&nbsp;groupのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 5&nbsp;</td>
+<td valign="top">&nbsp;groupのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 6&nbsp;</td>
+<td valign="top">&nbsp;userの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 7&nbsp;</td>
+<td valign="top">&nbsp;userのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 8&nbsp;</td>
+<td valign="top">&nbsp;userのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 9&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 10&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 11&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 12-15&nbsp;</td>
+<td valign="top">&nbsp;ファイルタイプ&nbsp;<br>&nbsp;1 ディレクトリ&nbsp;<br>&nbsp;2 通常のファイル&nbsp;<br>&nbsp;4 シンボリックリンク&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>st_attr</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;メモリカードのモードと互換のフラグ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>st_size &nbsp;<br>&nbsp;st_hisize</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ファイルサイズ(64bit)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>st_ctime</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;作成時間&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>st_atime</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;最終アクセス時間、最終変更時間と同じタイミングで&nbsp;<br>&nbsp;アップデートされます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>st_mtime</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;最終変更時間&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;byte 0&nbsp;</td>
+<td valign="top">&nbsp;reserved&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;byte 1&nbsp;</td>
+<td valign="top">&nbsp;秒&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;byte 2&nbsp;</td>
+<td valign="top">&nbsp;分&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;byte 3&nbsp;</td>
+<td valign="top">&nbsp;時&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;byte 4&nbsp;</td>
+<td valign="top">&nbsp;日&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;byte 5&nbsp;</td>
+<td valign="top">&nbsp;月&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;byte 6-7&nbsp;</td>
+<td valign="top">&nbsp;年(4桁)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>st_private</i>&nbsp;</td>
+<td valign="top">&nbsp;word 0&nbsp;<br>&nbsp;word 1&nbsp;<br>&nbsp;word 2&nbsp;</td>
+<td valign="top">&nbsp;uid&nbsp;<br>&nbsp;gid&nbsp;<br>&nbsp;ファイルが使用しているゾーンの数&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルステータスを格納する構造体です。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sce_dirent">sce_dirent</a>,<br><a href="#sceGetstat">sceGetstat</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceChdir"><font size=6>sceChdir<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>カレントディレクトリの変更<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceChdir</b>(
+	const char *<i>name</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-20&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
+<td valign="TOP">&nbsp;name がディレクトリではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">カレントディレクトリを変更します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceChstat"><font size=6>sceChstat<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイル/ディレクトリのステータスを変更する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceChstat</b>(
+	const char *<i>name</i>,
+	struct sce_stat *<i>buf</i>,
+	unsigned int <i>cbit</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名(デバイス名 + ':' を含む)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ステータスを格納するバッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cbit</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変更するフィールドの指定マクロ。次のいずれかの定数で&nbsp;<br>&nbsp;指定します。&nbsp;<br>&nbsp;SCE_CST_MODE&nbsp;<br>&nbsp;SCE_CST_ATTR&nbsp;<br>&nbsp;SCE_CST_SIZE&nbsp;<br>&nbsp;SCE_CST_CT&nbsp;<br>&nbsp;SCE_CST_AT&nbsp;<br>&nbsp;SCE_CST_MT&nbsp;<br>&nbsp;SCE_CST_PRVT&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-30&nbsp;</td>
+<td valign="TOP">&nbsp;-EROFS&nbsp;</td>
+<td valign="TOP">&nbsp;読み込み専用のファイルシステム上の&nbsp;<br>&nbsp;ファイルに対し、書き込みアクセスを&nbsp;<br>&nbsp;要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">指定されたファイル／ディレクトリのステータスを変更します。sce_stat 構造体のメンバのうち変更できるのは、ファイルのモードのファイルタイプ以外のビットと各時間、メモリカード互換フラグのサブディレクトリビットとクローズ完了フラグ以外のビットです。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceClose"><font size=6>sceClose<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルのクローズ<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceClose</b>(
+	int <i>fd</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;すでにオープンしてあるファイルディスクリプタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0 を返します。<br>エラーの場合、以下を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされたディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">オープンされていたファイルをクローズし、ファイルディスクリプタを解放します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceDclose"><font size=6>sceDclose<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ディレクトリのクローズ<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceDclose</b>(
+	int <i>fd</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルディスクリプタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0 を返します。<br>エラーの場合、以下を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされたディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">オープンされていたディレクトリをクローズし、ファイルディスクリプタを解放します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceDevctl"><font size=6>sceDevctl<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>デバイスへの特殊操作<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceDevctl</b>(
+	const char *<i>name</i>,
+	int <i>cmd</i>,
+	const void *<i>arg</i>,
+	unsigned int <i>arglen</i>,
+	void *<i>bufp</i>,
+	unsigned int <i>buflen</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルシステムデバイス名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cmd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;操作コマンド。次のいずれかの定数で指定します。&nbsp;<br>&nbsp;PDIOC_ZONESZ&nbsp;<br>&nbsp;PDIOC_ZONEFREE&nbsp;<br>&nbsp;PDIOC_CLOSEALL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドに与える引数。cmd に依存します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドから受け取る引数。cmd に依存します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、<i>cmd</i> に依存した値を返します。<br>エラーの場合、各コマンドは以下の共通エラーを返します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;存在しない cmd が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">デバイスに対して特殊操作を行います。各 <i>cmd</i> の詳細については、「devctlコマンド一覧」を参照してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceDopen"><font size=6>sceDopen<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ディレクトリのオープン<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceDopen</b>(
+	const char *<i>name</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ディレクトリパス名(デバイス名 + ':' を含む)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ファイルディスクリプタ(0以上の値)を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたディレクトリが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-20&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルがディレクトリ&nbsp;<br>&nbsp;ではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ディレクトリのオープンを行います。オープンしたディレクトリに対してはファイルディスクリプタが与えられます。ディレクトリパス名は、"pfs" + ユニット番号 + ':' + 文字列となります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceDread"><font size=6>sceDread<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ディレクトリエントリの読み出し<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceDread</b>(
+	int <i>fd</i>,
+	struct sce_dirent *<i>buf</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;読み出したデータを格納するバッファのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、ファイル名の長さを、エントリの最後に達した場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされたディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-20&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
+<td valign="TOP">&nbsp;fd がディレクトリのためのディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>fd</i> で示されるディレクトリエントリストリームの中の次のエントリをsce_dirent 構造体 <i>buf</i> にコピーします。エントリの最後に達した場合は0 を返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceFormat"><font size=6>sceFormat<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルシステムのフォーマット<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceFormat</b>(
+	const char *<i>devname</i>,
+	const char *<i>blockdevname</i>,
+	void *<i>arg</i>,
+	int <i>arglen</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>devname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルシステムのデバイス名(pfs:)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>blockdevname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;あらかじめ作成されているパーティションの&nbsp;<br>&nbsp;ブロックデバイス名&nbsp;<br>&nbsp;(例:"hdd0:BISLPS-XXXXXX,fpwd")&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ゾーンサイズ変数とフラグメントオプションへの&nbsp;<br>&nbsp;ポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたパーティションが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-6&nbsp;</td>
+<td valign="TOP">&nbsp;-ENXIO&nbsp;</td>
+<td valign="TOP">&nbsp;サポートされているデバイスではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-16&nbsp;</td>
+<td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;すでに指定されたパーティションが&nbsp;<br>&nbsp;オープンされている&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの最大数に&nbsp;<br>&nbsp;達している&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">新たにファイルシステムを構築します。ゾーンサイズに指定できる値は、2K - 128K の範囲の 2 の n 乗の数のみです。ゾーンサイズは、作成予定のファイルの大部分が小さければ小さく、大きければ大きく設定した方が効率がよくなります。<br><br>例:<br></div>
+        <div style="margin-left:93px;"><pre><font size=3>int zonesz = 8192;
+sceFormat("pfs:", "hdd0:BISLPS-XXXXXX,fpwd", &zonesz, sizeof(int));
+</pre></font></div>
+<div style="margin-left:50px;"><br>また開発時の検証用に故意にフラグメンテーションを発生させた状態でフォーマットすることができます。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>int arg[3];
+arg[0] = 8192;              // zone size
+arg[1] = 0x00002d66;        // -f
+arg[2] = 0x01030f0f;        // fragment bit pattern
+sceFormat("pfs:", "hdd0:test", &arg, sizeof(arg));
+</pre></font></div>
+<div style="margin-left:50px;"><br>ビットパターンの 1 ビットが、1 ゾーンに対応します。例えば、0x0f0f0f0f を指定すると 4 ゾーンが使用中、4 ゾーンが空きといったパターンの繰り返し状態でフォーマットされます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この操作を行うと既に指定されたパーティション上に作成されていたファイルシステムは初期化されてしまいますので、ご注意ください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGetstat"><font size=6>sceGetstat<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイル/ディレクトリのステータスを取得する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceGetstat</b>(
+	const char *<i>name</i>,
+	struct sce_stat *<i>buf</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名(デバイス名 + ':' を含む)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ステータスを格納するバッファ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイル情報を sce_dirent 構造体 <i>buf</i> にコピーします。ファイルパス名は、"pfs" + ユニット番号 + ':' + 文字列となります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceIoctl2"><font size=6>sceIoctl2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルへの特殊操作<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceIoctl2</b>(
+	int <i>fd</i>,
+	int <i>cmd</i>,
+	const void *<i>arg</i>,
+	unsigned int <i>arglen</i>,
+	void *<i>bufp</i>,
+	unsigned int <i>buflen</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br> <br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;操作対象のファイルディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cmd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;操作コマンド。次のいずれかの定数で指定します。&nbsp;<br>&nbsp;PIOCALLOC&nbsp;<br>&nbsp;PIOCFREE&nbsp;<br>&nbsp;PIOCATTRADD&nbsp;<br>&nbsp;PIOCATTRDEL&nbsp;<br>&nbsp;PIOCATTRLOOKUP&nbsp;<br>&nbsp;PIOCATTRREAD&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドに与える引数。cmd に依存します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドから受け取る引数。cmd に依存します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、cmd に依存した値を返します。<br>エラーの場合、各コマンドは以下の共通エラーを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされたディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;存在しない cmd が指定された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルに対して特殊操作を行います。各 cmd の詳細については、「ioctl2コマンド一覧」を参照してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLseek"><font size=6>sceLseek<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルポインタの移動<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceLseek</b>(
+	int <i>fd</i>,
+	int <i>offset</i>,
+	int <i>whence</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>fd</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ファイルディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>offset</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ポインタの移動距離&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>whence</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;パーティションの拡張アトリビュート領域内の&nbsp;<br>&nbsp;offset の基準位置。以下のいずれかの定数で&nbsp;<br>&nbsp;指定する。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_SEEK_SET&nbsp;</td>
+<td valign="top">&nbsp;開始位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_SEEK_CUR&nbsp;</td>
+<td valign="top">&nbsp;現在位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_SEEK_END&nbsp;</td>
+<td valign="top">&nbsp;最後&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、新たに設定されたファイルポインタの値を返す。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされたディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-21&nbsp;</td>
+<td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
+<td valign="TOP">&nbsp;ディレクトリに対して要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;whence が正しい値ではない。もしくは、&nbsp;<br>&nbsp;EOF をこえるoffset が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-27&nbsp;</td>
+<td valign="TOP">&nbsp;EFBIG&nbsp;</td>
+<td valign="TOP">&nbsp;移動量が、符号なし 32bit の整数の範囲を超えた&nbsp;<br>&nbsp;(この場合でも、移動操作は正しく行われる)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルディスクリタ <i>fd</i> のオフセットを <i>whence</i> に従って <i>offset</i> の位置へ変更します。<br>オフセットをファイルの最後を超えた場所に設定することはできません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLseek64"><font size=6>sceLseek64<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルポインタの移動(64bit 対応)<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceLseek64</b>(
+	int <i>fd</i>,
+	long <i>offset</i>,
+	int <i>whence</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>fd</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ファイルディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>offset</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ポインタの移動距離&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>whence</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;パーティションの拡張アトリビュート領域内の offset の&nbsp;<br>&nbsp;基準位置。以下のいずれかの定数で指定する。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_SEEK_SET&nbsp;</td>
+<td valign="top">&nbsp;開始位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_SEEK_CUR&nbsp;</td>
+<td valign="top">&nbsp;現在位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_SEEK_END&nbsp;</td>
+<td valign="top">&nbsp;最後&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、新たに設定されたファイルポインタの値を返す。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされたディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-21&nbsp;</td>
+<td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
+<td valign="TOP">&nbsp;ディレクトリに対して要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;whence が正しい値ではない。もしくは、&nbsp;<br>&nbsp;EOF をこえるoffset が指定された。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルディスクリタ <i>fd</i> のオフセットを <i>whence</i> に従って <i>offset</i> の位置へ変更します。オフセットをファイルの最後を超えた場所に設定することはできません。本関数は64ビット長のファイルサイズに対応しています。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数を使用する場合はコンパイル時に -fno-strict-aliasingオプションを指定する必要が<br>あります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceMkdir"><font size=6>sceMkdir<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ディレクトリの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceMkdir</b>(
+	const char *<i>name</i>,
+	int mode
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>name</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ディレクトリパス名(デバイス名 + ':' を含む)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>mode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ファイルモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 0&nbsp;</td>
+<td valign="top">&nbsp;otherの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 1&nbsp;</td>
+<td valign="top">&nbsp;otherのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 2&nbsp;</td>
+<td valign="top">&nbsp;otherのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 3&nbsp;</td>
+<td valign="top">&nbsp;groupの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 4&nbsp;</td>
+<td valign="top">&nbsp;groupのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 5&nbsp;</td>
+<td valign="top">&nbsp;groupのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 6&nbsp;</td>
+<td valign="top">&nbsp;userの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 7&nbsp;</td>
+<td valign="top">&nbsp;userのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 8&nbsp;</td>
+<td valign="top">&nbsp;userのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 9&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 10&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;bit 11&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;sifdev.h には各モードのマクロが用意されて&nbsp;<br>&nbsp;いますが、8進数で、0777、0755 なども&nbsp;<br>&nbsp;わかりやすい指定の方法です。&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたパス中のディレクトリが&nbsp;<br>&nbsp;存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-17&nbsp;</td>
+<td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
+<td valign="TOP">&nbsp;既にファイルが存在する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-30&nbsp;</td>
+<td valign="TOP">&nbsp;-EROFS&nbsp;</td>
+<td valign="TOP">&nbsp;読み込み専用のファイルシステム&nbsp;<br>&nbsp;上のファイルに対し、書き込みアクセスを&nbsp;<br>&nbsp;要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ディレクトリを作成します。パス名は、"pfs" + ユニット番号 + ':' + 文字列となります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ディレクトリ作成時に <i>mode</i> を適切に指定しなかった場合、ディレクトリを参照できなくなる可能性があります。現状のライブラリでは、umask、uid、gid 等を変更することはできません。<br>umask は 0002、uid、gid は 0xffff 固定です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceMount"><font size=6>sceMount<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>デバイスのマウント<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceMount</b>(
+	const char *<i>fsname</i>,
+	const char *<i>devname</i>,
+	int <i>flag</i>,
+	void *<i>arg</i>,
+	int <i>arglen</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>fsname</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;マウント後のファイルシステムデバイス名と&nbsp;<br>&nbsp;ユニット番号指定する文字列&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>devname </i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;マウント対象のブロックデバイスをオープンするために&nbsp;<br>&nbsp;必要なデバイス識別文字列&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flag</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;マウントのフラグ。次のいずれかの定数で指定します。&nbsp;<br>&nbsp;複数指定する場合は論理和をとる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_MT_RDWR&nbsp;</td>
+<td valign="top">&nbsp;読み書き可能でマウントする。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_MT_RDONLY&nbsp;</td>
+<td valign="top">&nbsp;読み取り専用でマウントする。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_MT_ROBUST&nbsp;</td>
+<td valign="top">&nbsp;ロバストモードでマウントする。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_MT_ERRCHECK&nbsp;</td>
+<td valign="top">&nbsp;マウント時にファイルシステムに&nbsp;<br>&nbsp;異常がある場合はエラーとする。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>arg</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>arglen</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;arg のサイズ&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたパーティションが存在しない。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-6&nbsp;</td>
+<td valign="TOP">&nbsp;-ENXIO&nbsp;</td>
+<td valign="TOP">&nbsp;サポートされているデバイスではない。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-16&nbsp;</td>
+<td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;すでに指定されたパーティションが&nbsp;<br>&nbsp;オープンされている。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>devname</i> で指定するブロックデバイスを <i>fsname</i> で指定するファイルシステム論理デバイスにマウントします。<br><i>devname</i> には通常、あらかじめ作成されているパーティションのパーティション識別文字列を指定します。パスワードは、読み取り専用でマウントするのなら、リードオンリーパスワードだけでも問題ありませんが、読み書き可能でマウントする場合は必ずフルパスワードが必要になります。<br>SCE_MT_ROBUST を指定すると常にファイルシステム情報の更新するようになります。ファイルシステムに変更が発生するような操作(sceMkdir()、sceWrite() など)を行った場合は、即座にディスクと同期を取るようにします。また、メモリカード互換のクローズ完了フラグの更新は、ROBUST モードの時のみ行われます。<br>SCE_MT_ERRCHECK を指定するとファイルシステムに異常がある場合は、EIO エラーを返します。ファイルシステムに異常が見つかった場合は、速やかにファイルシステムのチェックを行うことを推奨します。ファイルシステムに異常があってもファイルシステムの更新を行わなければ、問題がない部分については読み込むことが可能ですが、書き込みは問題を拡大させる恐れがあるので行わないでください。<br><br>例:<br></div>
+<div style="margin-left:70px;">sceMount("pfs0:", "hdd0:tst1,fpwd1", SCE_MT_RDWR, NULL, 0);<br>sceMount("pfs1:", "hdd0:tst2,fpwd2", SCE_MT_RDWR|SCE_MT_ROBUST, NULL,0);<br>sceMount("pfs2:", "hdd0:tst3,,rpwd3", SCE_MT_RDONLY, NULL, 0);<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceOpen"><font size=6>sceOpen<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルの作成、オープン<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceOpen</b>(
+	const char *<i>name</i>,
+	int <i>flags</i>,
+	unsigned short <i>mode</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>name</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ファイルパス名(デバイス名 + ':' を含む)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flags</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;アクセスモード。次のいずれかの定数で指定します。&nbsp;<br>&nbsp;複数指定する場合は論理和をとる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_RDONLY&nbsp;</td>
+<td valign="top">&nbsp;読み出し専用にオープンする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_WRONLY&nbsp;</td>
+<td valign="top">&nbsp;書き込み専用にオープンする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_RDWR&nbsp;</td>
+<td valign="top">&nbsp;読み書き可能でオープンする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_APPEND&nbsp;</td>
+<td valign="top">&nbsp;追加書き込みモードにする&nbsp;<br>&nbsp;ファイルへの書き込みは常に&nbsp;<br>&nbsp;ファイルの末尾に行われる&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_CREAT&nbsp;</td>
+<td valign="top">&nbsp;ファイルが存在しなければ&nbsp;<br>&nbsp;新規作成する&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_TRUNC&nbsp;</td>
+<td valign="top">&nbsp;既存のファイル内容を切り捨てる&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SCE_EXCL&nbsp;</td>
+<td valign="top">&nbsp;SCE_CREAT を指定しており&nbsp;<br>&nbsp;同名のファイルが存在する場合は&nbsp;<br>&nbsp;エラーとする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>mode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ファイルモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 0&nbsp;</td>
+<td valign="top">&nbsp;otherの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 1&nbsp;</td>
+<td valign="top">&nbsp;otherのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 2&nbsp;</td>
+<td valign="top">&nbsp;otherのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 3&nbsp;</td>
+<td valign="top">&nbsp;groupの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 4&nbsp;</td>
+<td valign="top">&nbsp;groupのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 5&nbsp;</td>
+<td valign="top">&nbsp;groupのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 6&nbsp;</td>
+<td valign="top">&nbsp;userの実行権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 7&nbsp;</td>
+<td valign="top">&nbsp;userのライト権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 8&nbsp;</td>
+<td valign="top">&nbsp;userのリード権&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 9&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 10&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;bit 11&nbsp;</td>
+<td valign="top">&nbsp;予約&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;sifdev.h には各モードのマクロが用意されて&nbsp;<br>&nbsp;いますが、8進数で、0777、0644 なども&nbsp;<br>&nbsp;わかりやすい指定の方法です。&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、ファイルディスクリプタ(0以上の値)を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-17&nbsp;</td>
+<td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_CREAT と SCE_EXCL が指定され、&nbsp;<br>&nbsp;ファイルが存在する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-21&nbsp;</td>
+<td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルはディレクトリである&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの最大数に&nbsp;<br>&nbsp;達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-30&nbsp;</td>
+<td valign="TOP">&nbsp;-EROFS&nbsp;</td>
+<td valign="TOP">&nbsp;読み込み専用のファイルシステム上のファイルに&nbsp;<br>&nbsp;対し、書き込みアクセスを要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇したシンボリックリンク&nbsp;<br>&nbsp;が多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルの作成、オープンを行います。オープンしたファイルに対してはファイルディスクリプタが与えられます。ファイルパス名は、"pfs" + ユニット番号 + ':' + 文字列となります。<br><br>例:<br></div>
+<div style="margin-left:70px;">sceOpen("pfs0:/foo", SCE_CREAT|SCE_RDWR, SCE_STM_RWXUGO);<br></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイル作成時に <i>mode</i> を適切に指定しなかった場合、ファイルを開けなくなる可能性があります。現状のライブラリでは、umask、uid、gid 等を変更することはできません。umask は 0002、uid、gid は 0xffff 固定です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceRead"><font size=6>sceRead<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルの読み込み<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceRead</b>(
+	int <i>fd</i>,
+	void *<i>buf</i>,
+	int <i>count</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;読み出し対象のファイルディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;読み出したデータを格納するバッファのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>count</i>&nbsp;</td>
+<td valign="TOP">&nbsp;読み出すデータサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、読み込んだバイト数を返します。ファイル位置はこの数だけ進められます。0ならばファイルの終わりを意味します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされたディスクリプタ&nbsp;<br>&nbsp;でない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-65541&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO|0x10000&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルの内容を読み込み中に不良セクタを&nbsp;<br>&nbsp;発見した&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">すでにオープンされているファイルから最大 <i>count</i> バイトを <i>buf</i> で始まるバッファへ読み込みます。バッファは 64 バイトアラインされていないとパフォーマンスが低下します。必ず 64 バイトアラインすることをお薦めします。<i>count</i> は 512 バイトの倍数になるように するとパフォーマンスが向上します。できるかぎり、512 バイトの倍数にすることをお薦めします。もし、512 バイト単位が不可能な場合でも最低で 4 バイト単位、できれば 64バイト単位を指定するようにしてください。また、ある程度大きな単位で転送を一度に行うとよりいっそうパフォーマンスは向上します。EIO|0x10000 エラーが発生した場合は、ファイルシステムのチェックを行うのではなく、ファイルを上書きするか、ファイルを消去するようにしてください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>buf</i> に SPR を指定することはできません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceReadlink"><font size=6>sceReadlink<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>シンボリック・リンクの値を読む<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceReadlink</b>(
+	const char *<i>path</i>,
+	char *<i>buf,</i>
+	unsigned int <i>bufsiz</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>path</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;内容を書き込むためのバッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufsiz</i>&nbsp;</td>
+<td valign="TOP">&nbsp;buf のサイズ(1023バイトまで)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、バッファに格納された文字数を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-17&nbsp;</td>
+<td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
+<td valign="TOP">&nbsp;既に newname が存在する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された。もしくは、&nbsp;<br>&nbsp;シンボリックリンクではない。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>path</i> で与えられたシンボリック・リンクの内容を <i>buf</i> へ格納する、buf のサイズは <i>bufsiz</i> で指定する。sceReadlink は ヌル（NULL）文字を<i>buf</i> に追加しません。その内容全てを格納するためのバッファが小さ過ぎる場合は、（<i>bufsiz</i> バイトの長さに）内容を切り詰めます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceRemove"><font size=6>sceRemove<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceRemove</b>(
+	const char *<i>name</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名(デバイス名 + ':' を含む)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-16&nbsp;</td>
+<td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルがオープンされている&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-21&nbsp;</td>
+<td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルはディレクトリである&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-30&nbsp;</td>
+<td valign="TOP">&nbsp;-EROFS&nbsp;</td>
+<td valign="TOP">&nbsp;読み込み専用のファイルシステム上の&nbsp;<br>&nbsp;ファイルに対し、書き込みアクセスを&nbsp;<br>&nbsp;要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">指定されたファイルを削除します。ファイルパス名は、"pfs" + ユニット番号 + ':' + 文字列となります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceRename"><font size=6>sceRename<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイル/ディレクトリ名称の変更<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceRename</b>(
+	const char *<i>oldname</i>,
+	const char *<i>newname</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>oldname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変更前ファイル/ディレクトリパス名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>newname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変更後ファイル/ディレクトリパス名&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-16&nbsp;</td>
+<td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルがオープンされているか、&nbsp;<br>&nbsp;ワーキングディレクトリである&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-20&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
+<td valign="TOP">&nbsp;oldname がディレクトリで、newname が&nbsp;<br>&nbsp;ディレクトリではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-21&nbsp;</td>
+<td valign="TOP">&nbsp;-EISDIR&nbsp;</td>
+<td valign="TOP">&nbsp;oldname がファイルで、newname が&nbsp;<br>&nbsp;ディレクトリである&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp; "." または、".." が指定された。&nbsp;<br>&nbsp;または、newname がoldname の&nbsp;<br>&nbsp;パス部分を含んでいる。&nbsp;<br>&nbsp;言い換えるとディレクトリを自分自身の&nbsp;<br>&nbsp;サブディレクトリに変更しようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-30&nbsp;</td>
+<td valign="TOP">&nbsp;-EROFS&nbsp;</td>
+<td valign="TOP">&nbsp;読み込み専用のファイルシステム上の&nbsp;<br>&nbsp;ファイルに対し、書き込みアクセスを要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-90&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOTEMPTY&nbsp;</td>
+<td valign="TOP">&nbsp;newname がディレクトリでディレクトリが&nbsp;<br>&nbsp;空ではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルの名前を変更します。必要ならばディレクトリ間の移動を行ないます。<br>もし <i>newname</i> が既に存在していた場合には、以下の条件を満たせば自動的に置き換えられます。<br></div>
+<div style="margin-left:70px;">- <i>oldname</i> がファイルで <i>newname</i> もファイルである。<br>- <i>oldname</i> がディレクトリで <i>newname</i> もディレクトリである。<br>- <i>newname</i> がディレクトリで空である。<br>- <i>newname</i> がオープンされていない。<br></div>
+<div style="margin-left:50px;">もし <i>newname</i> が存在し、何らかの理由で操作が失敗した場合でも、<i>newname</i> の実体を元のまま残すことを保証しています。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceRmdir"><font size=6>sceRmdir<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ディレクトリの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceRmdir</b>(
+	const char *<i>name</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ディレクトリパス名(デバイス名 + ':' を含む)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたディレクトリが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-16&nbsp;</td>
+<td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;ディレクトリがオープンされているか、&nbsp;<br>&nbsp;ワーキングディレクトリである&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-20&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOTDIR&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルがディレクトリ&nbsp;<br>&nbsp;ではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-30&nbsp;</td>
+<td valign="TOP">&nbsp;-EROFS&nbsp;</td>
+<td valign="TOP">&nbsp;読み込み専用のファイルシステム上の&nbsp;<br>&nbsp;ファイルに対し、書き込みアクセスを&nbsp;<br>&nbsp;要求した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-90&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOTEMPTY&nbsp;</td>
+<td valign="TOP">&nbsp;ディレクトリが空ではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">指定されたディレクトリを削除します。削除するディレクトリは空でなければなりません。<br>ディレクトリパス名は、"pfs" + ユニット番号 + ':' + 文字列となります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSymlink"><font size=6>sceSymlink <br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>シンボリックリンクを作成する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceSymlink</b>(
+	const char *<i>oldname</i>,
+	const char *<i>newname</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>oldname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;元のファイル名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>newname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;新しいファイル名&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたファイルが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-17&nbsp;</td>
+<td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
+<td valign="TOP">&nbsp;既に newname が存在する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-30&nbsp;</td>
+<td valign="TOP">&nbsp;-EROFS&nbsp;</td>
+<td valign="TOP">&nbsp;読み込み専用のファイルシステム上の&nbsp;<br>&nbsp;ファイルに対し、書き込みアクセスを&nbsp;<br>&nbsp;要求した。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-91&nbsp;</td>
+<td valign="TOP">&nbsp;-ENAMETOOLONG&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルパス名が長すぎる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-92&nbsp;</td>
+<td valign="TOP">&nbsp;-ELOOP&nbsp;</td>
+<td valign="TOP">&nbsp;パス名を解決する際に遭遇した&nbsp;<br>&nbsp;シンボリックリンクが多過ぎる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>newname</i> という名前の <i>oldname</i> へのシンボリックリンクを作成する。シンボリックリンクは実行時に解釈され、ファイルやディレクトリを見つけるために、リンクの内容をたどり置き換えられる。シンボリックリンクは存在するファイルを指しているかもしれないし、存在しないファイルを指しているかもしれない。パス中に .. を含んでも構わない。もし <i>newname</i> が既に存在する場合には上書きはされない。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSync"><font size=6>sceSync<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッファキャッシュとディスクの同期<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceSync</b>(
+	const char *<i>name</i>,
+	int <i>flag</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;デバイス名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flag</i>&nbsp;</td>
+<td valign="TOP">&nbsp;フラグ(予約、使用しません)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルシステムは遅いディスクの読み書きを避けるため、データをメモリ上に保持しています。このメモリ上にあるファイルシステムのバッファキャッシュの内容をディスクにフラッシュします。ディスク上にあるキャッシュもあわせてフラッシュされます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUmount"><font size=6>sceUmount<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルシステムのアンマウント<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceUmount</b>(
+	const char *<i>fsname</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fsname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;マウント中のファイルシステムデバイス名と&nbsp;<br>&nbsp;ユニット番号指定する文字列。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-16&nbsp;</td>
+<td valign="TOP">&nbsp;-EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;オープンされてファイルがある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの&nbsp;<br>&nbsp;最大数に達している&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルシステムをアンマウントします。メモリ上のバッファキャッシュの内容はフラッシュされます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceWrite"><font size=6>sceWrite<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ファイルへの書き込み<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceWrite</b>(
+	int <i>fd</i>,
+	const void *<i>buf</i>,
+	int <i>count</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能 <br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;書き込み対象のファイルディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;書き込むデータが格納されているアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>count</i>&nbsp;</td>
+<td valign="TOP">&nbsp;書き込むデータのサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、書き込んだバイト数を返します。ファイル位置はこの数だけ進められます。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-9&nbsp;</td>
+<td valign="TOP">&nbsp;-EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;fd が有効なオープンされた&nbsp;<br>&nbsp;ディスクリプタでない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-65541&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO|0x10000&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルの内容を書き込み中に&nbsp;<br>&nbsp;不良セクタを発見した&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>buf</i> で示されるバッファーから最大 <i>count</i> バイトまでをファイルディスクリプタ fd によって参照されるファイルへ書き込みます。バッファは 64 バイトアラインされていないとパフォーマンスが低下します。必ず 64 バイトアラインすることをお薦めします。<i>count</i> は 512 バイトの倍数になるようにするとパフォーマンスが向上します。できるかぎり、512 バイトの倍数にすることをお薦めします。もし、512 バイト単位が不可能な場合でも最低で 4 バイト単位、できれば 64バイト単位を指定するようにしてください。また、ある程度大きな単位で転送を一度に行うとよりいっそうパフォーマンスは向上します。<br>EIO|0x10000 エラーが発生した場合は、ファイルシステムのチェックを行うのではなく、ファイルを消去するようにしてください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>buf</i> に SPR を指定することはできません。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>devctl コマンド</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PDIOC_CLOSEALL"><font size=6>PDIOC_CLOSEALL<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>すべてのファイルのクローズ<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">0 を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">マウントされているすべてのファイルシステム上のすべてのファイルをクローズします。ただし、ファイルディスクリプタ等は解放しませんので、電源を切る場合などに限って使用してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PDIOC_CLRFSCKSTAT"><font size=6>PDIOC_CLRFSCKSTAT<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>FSCKステータスのクリア<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0 を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">fsck によりファイルシステムが更新された状態をクリアします。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PDIOC_GETFSCKSTAT"><font size=6>PDIOC_GETFSCKSTAT<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>FSCKステータスのチェック<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">fsck で、問題が修正された(ファイルシステムの状態が更新された)場合、1 を返します。<br>それ以外は、0 を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルシステムに何らかの不具合が見つかり、ファイルシステムの状態が更新された場合のみ 1 を返します。一度、この状態が発生してしまうと PDIOC_CLRFSCKSTAT でクリアを行うまで状態を保持します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PDIOC_ZONEFREE"><font size=6>PDIOC_ZONEFREE<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>空きゾーン数の取得<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">符号なし 32bit の整数で空いているゾーンの数を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">使用可能な空きゾーンの数を取得します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PDIOC_ZONESZ"><font size=6>PDIOC_ZONESZ<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ゾーンサイズの取得<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ゾーンサイズを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ゾーンサイズを取得します。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>ioctl2コマンド</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PIOCALLOC"><font size=6>PIOCALLOC<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>領域の確保<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;確保したいバイトの数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルが使用できる領域を確保します。pfs では、新たにファイルのための領域を確保するスピードはあまり速くはありません。おおよそのファイルサイズがわかっていて、大きなデータを連続してファイルに書く場合は、書き込みを行う前に、領域を確保してから書くとパフォーマンスが向上します。<br><br>例:<br></div>
+<div style="margin-left:70px;">u_int size = 1024*1024;<br>sceIoctl2(fd, PIOCALLOC, &size, sizeof(int), NULL, 0);<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PIOCATTRADD"><font size=6>PIOCATTRADD<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>拡張ファイルアトリビュートエントリの追加<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キー 256 バイトとバリュー 256 バイトが&nbsp;<br>&nbsp;格納されているバッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-17&nbsp;</td>
+<td valign="TOP">&nbsp;-EEXIST&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたキーが既に存在する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">拡張ファイルアトリビュート領域にエントリを追加します。<br><br>例:<br></div>
+        <div style="margin-left:93px;"><pre><font size=3>struct {
+	char key[0x100];
+	char value[0x100];
+} attr;
+
+strcpy(key, "application");
+strcpy(value, "x-compressed");
+sceIoctl2(fd, PIOCATTRADD, &attr, 0x100*2, NULL, 0);
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PIOCATTRDEL"><font size=6>PIOCATTRDEL<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>拡張ファイルアトリビュートエントリの削除<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キー文字列が格納されているバッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;エントリが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">拡張ファイルアトリビュート領域からエントリを削除します。<br><br>例:<br></div>
+        <div style="margin-left:93px;"><pre><font size=3>char key[] = "application";
+sceIoctl2(fd, PIOCATTRDEL, key, strlen(key)+1, NULL, 0);
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PIOCATTRLOOKUP"><font size=6>PIOCATTRLOOKUP<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>拡張ファイルアトリビュートエントリの検索<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キー文字列が格納されているバッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バリューを格納するバッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、バリューのサイズを返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOENT&nbsp;</td>
+<td valign="TOP">&nbsp;エントリが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">拡張ファイルアトリビュート領域から指定されたキーを検索し、<br>バリューを <i>bufp</i> に格納します。<br><br>例:<br></div>
+        <div style="margin-left:93px;"><pre><font size=3>char key[] = "application";
+        char value[0x100];
+sceIoctl2(fd, PIOCATTRLOOKUP, key, strlen(key)+1, value, 0x100);
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PIOCATTRREAD"><font size=6>PIOCATTRREAD<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>拡張ファイルアトリビュートエントリの読み出し<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーとバリューを格納する 512 バイトのバッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、キーの長さを、エントリの最後に達したならば0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アトリビュートエントリストリームの中の次のエントリを<i>bufp</i> にコピーします。エントリの最後に達した場合は0 を返します。<br><br>例:<br></div>
+        <div style="margin-left:93px;"><pre><font size=3>struct {
+	char key[0x100];
+	char value[0x100];
+} attr;
+while ((r = sceIoctl2(fd, PIOCATTRREAD, NULL, 0, &attr, 0)) &gt; 0)
+	printf("%s/%s\n", attr.key, attr.value);
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="PIOCFREE"><font size=6>PIOCFREE<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>領域の解放<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、以下のいずれかを返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-5&nbsp;</td>
+<td valign="TOP">&nbsp;-EIO&nbsp;</td>
+<td valign="TOP">&nbsp;入出力エラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;十分な空きメモリが無い&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-13&nbsp;</td>
+<td valign="TOP">&nbsp;-EACCES&nbsp;</td>
+<td valign="TOP">&nbsp;アクセス権限がない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-22&nbsp;</td>
+<td valign="TOP">&nbsp;-EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な引数が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-28&nbsp;</td>
+<td valign="TOP">&nbsp;-ENOSPC&nbsp;</td>
+<td valign="TOP">&nbsp;空き領域が存在しない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ファイルが使用していない領域を解放します。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

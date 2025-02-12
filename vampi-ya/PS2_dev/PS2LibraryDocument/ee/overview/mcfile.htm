@@ -1,0 +1,1652 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>メモリーカード(PS2)ファイルシステム</title>
+<meta http-equiv="Content-Type"content= text/html; charset=UTF-8 >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/libmc.htm')\"><img src=\"./gif/arrow.png\" border=0>メモリーカードライブラリ概要</a><br><a href=\"JavaScript:lj('overview','../overview/libmcx.htm')\"><img src=\"./gif/arrow.png\" border=0>PDAライブラリ概要</a><br>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+メモリーカード(PS2)ファイルシステム
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>メモリーカード(PS2)ファイルシステムの概要</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>主な特徴</b><br></a>
+    <a href="#Heading4_1_2"> <b>従来型メモリーカードデバイスとの互換性</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>"PlayStation 2"ファイル形式：ファイル構成</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>エントリ名に使用できる文字</b><br></a>
+    <a href="#Heading4_2_2"> <b>サブディレクトリ名</b><br></a>
+    <a href="#Heading4_2_3"> <b>アイコン関連ファイル</b><br></a>
+    <a href="#Heading4_2_4"> <b>ユーザデータファイル</b><br></a>
+    <a href="#Heading4_2_5"> <b>サブディレクトリ内の最大ファイル数</b><br></a>
+    <a href="#Heading4_2_6"> <b>標準的なファイル構成例</b><br></a>
+    <a href="#Heading4_2_7"> <b>ファイルの削除</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>"PlayStation 2"ファイル形式：icon.sys</b></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>icon.sysの構造</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>"PlayStation 2"ファイル形式：</b><b>アイコンデータファイル</b></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>ジオメトリ定義</b><br></a>
+    <a href="#Heading4_4_2"> <b>MIMEアニメーション</b><br></a>
+    <a href="#Heading4_4_3"> <b>シェーディング</b><br></a>
+    <a href="#Heading4_4_4"> <b>テクスチャ</b><br></a>
+    <a href="#Heading4_4_5"> <b>アンチエイリアシングに関する注意事項</b><br></a>
+    <a href="#Heading4_4_6"> <b>データ構造</b><br></a>
+    <a href="#Heading4_4_7"> <b>アイコンデータ作成支援ツール</b><br></a>
+    </ul>
+<p><a href="#Heading3_5">  5 <b>"PlayStation"ファイル形式</b></a>
+    <ul>
+    <a href="#Heading4_5_1"> <b>エントリ名に使用できる文字</b><br></a>
+    <a href="#Heading4_5_2"> <b>サブディレクトリ名</b><br></a>
+    <a href="#Heading4_5_3"> <b>ユーザデータファイル</b><br></a>
+    <a href="#Heading4_5_4"> <b>標準的なファイル構成例</b><br></a>
+    <a href="#Heading4_5_5"> <b>ファイルの削除</b><br></a>
+    </ul>
+<p><a href="#Heading3_6">  6 <b>メモリーカード(PS2)ファイルシステムの内部構造</b></a>
+    <ul>
+    <a href="#Heading4_6_1"> <b>クラスタ</b><br></a>
+    <a href="#Heading4_6_2"> <b>サブディレクトリの構造</b><br></a>
+    <a href="#Heading4_6_3"> <b>ファイルの構造</b><br></a>
+    <a href="#Heading4_6_4"> <b>サブディレクトリ / ファイルの属性</b><br></a>
+    <a href="#Heading4_6_5"> <b>データサイズと所要容量の計算方法</b><br></a>
+    </ul>
+<p><a href="#Heading3_7">  7 <b>PDAへのファイル書き込み</b></a>
+    <ul>
+    <a href="#Heading4_7_1"> <b>ファイル名</b><br></a>
+    <a href="#Heading4_7_2"> <b>メモリーカード拡張ファイルヘッダ</b><br></a>
+    <a href="#Heading4_7_3"> <b>アイコン</b><br></a>
+    </ul>
+<p><a href="#Heading3_8">  8 <b>チェックポイント</b></a>
+    <ul>
+    <a href="#Heading4_8_1"> <b>icon.sysのチェックポイント</b><br></a>
+    <a href="#Heading4_8_2"> <b>アイコンデータファイルのチェックポイント</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>メモリーカード(PS2)ファイルシステムの概要</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>主な特徴</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"専用メモリーカード(8MB)（以下、メモリーカード(PS2)と略記します）で採用しているファイルシステムの主な特徴は次のとおりです。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 1KB（1024bytes）のクラスタを単位として管理する
+         <li> ルートディレクトリにはサブディレクトリのみ / サブディレクトリ中にはファイルのみ作成可能という限定された階層ディレクトリ構造をとり、ユーザから見たときにはサブディレクトリがデータの単位となる
+         <li> ルートディレクトリに作成できるサブディレクトリ数は無制限
+         <li> 各サブディレクトリに作成できるファイル数は18個まで
+         <li> サブディレクトリ名 / ファイル名は32文字まで、使用できる文字は英数字と一部の記号で、大文字と小文字は区別される
+         <li> サブディレクトリ管理情報としてサブディレクトリひとつにつき1536bytes、ファイル管理情報としてファイルひとつにつき512bytesが消費される
+         <li> "PlayStation 2"ファイル形式 / "PlayStation"ファイル形式のふたつのファイル形式があり、それぞれサブディレクトリ名 / ファイル名 / ファイル内容について規定されている
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>従来型メモリーカードデバイスとの互換性</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"では、メモリーカード(PS2)に加えて、従来型メモリーカードデバイス、つまり128KBのメモリーカードおよびポケットステーション（PDA）を扱うことができます。<br>ただし、"PlayStation 2"タイトルから従来型メモリーカードデバイスへのアクセスは原則的に禁止されています。PDAアプリケーションを保有しているタイトル（PDA対応タイトル）がPDA用プログラムファイル（MCX0）を読み書きする場合とPDA用データファイル（CRD0）を読み出す場合に限って、PDAにアクセスすることが認められています。<br>次の表は、"PlayStation ２"タイトルがメモリーカードデバイスのそれぞれに対してどの形式のファイルを読み書きできるかをまとめたものです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>メモリーカードデバイス</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>PS2形式</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>PS形式&nbsp;<br>&nbsp;（PDA非対応）</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>PS形式&nbsp;<br>&nbsp;（MCX0）</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>PS形式&nbsp;<br>&nbsp;（CRD0）</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;メモリーカード(PS2)&nbsp;</td>
+<td valign="TOP">&nbsp;R/W&nbsp;</td>
+<td valign="TOP">&nbsp;R/W&nbsp;</td>
+<td valign="TOP">&nbsp;←&nbsp;</td>
+<td valign="TOP">&nbsp;←&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;メモリーカード(128KB)&nbsp;</td>
+<td valign="TOP">&nbsp;×&nbsp;</td>
+<td valign="TOP">&nbsp;×&nbsp;</td>
+<td valign="TOP">&nbsp;←&nbsp;</td>
+<td valign="TOP">&nbsp;←&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;PDA&nbsp;</td>
+<td valign="TOP">&nbsp;×&nbsp;</td>
+<td valign="TOP">&nbsp;×&nbsp;</td>
+<td valign="TOP">&nbsp;R/W ※&nbsp;</td>
+<td valign="TOP">&nbsp;Rのみ ※&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">※PDA対応タイトルに限る。<br><br>"PlayStation 2"タイトルが"PlayStation"タイトルと従来型メモリーカードデバイスを介してデータをやり取りしたい場合は、"PlayStation 2"本体の機能であるメモリーカードブラウザ画面で、データのコピーをユーザに行ってもらうことになります。メモリーカードブラウザ画面で従来型メモリーカードデバイスにセーブされているデータをメモリーカード(PS2)にコピーすると、コピーしたデータは"PlayStation"ファイル形式となり、"PlayStation 2"タイトルが読み出すことができます。また、"PlayStation 2"タイトルがメモリーカード(PS2)に"PlayStation"ファイル形式でデータをセーブすれば、メモリーカードブラウザ画面で従来型メモリーカードデバイスにコピーすることができ、"PlayStation"タイトルが使用することができます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>"PlayStation 2"ファイル形式：ファイル構成</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">"PlayStation 2"ファイル形式は、メモリーカード(PS2)専用のファイル形式で、同時に、メモリーカード(PS2)において標準的に使用されるファイル形式です。サブディレクトリ中に複数のデータファイルを作成し、3Dアニメーションのアイコンを3個まで持たせて、一群のデータとして管理することができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>エントリ名に使用できる文字</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">サブディレクトリ名 / ファイル名に使用可能な文字は、ASCIIコードで0x20～0x7eの範囲のうち、'*'（0x2a）、'/'（0x2f）、'?'（0x3f）を除いた文字です。<br>サブディレクトリ名 / ファイル名ともに、大文字と小文字は区別されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>サブディレクトリ名</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"ファイル形式では、サブディレクトリ名はタイトルの提供地域および商品型番に従って、次のように付けてください。末尾に'\0'が必要です。<i>xxxxxxxx</i>の部分は任意ですので、ひとつのタイトルで複数のデータを作成したい場合は、この部分を適宜変更して複数のサブディレクトリを作ることができます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>タイトル種別</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>商品型番</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>サブディレクトリ名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本・韓国市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLPS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BISLPS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本・韓国市場向けSCEIタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCPS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BISCPS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;米国市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLUS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BASLUS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;米国市場向けSCEAタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCUS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BASCUS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;欧州市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLES－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BESLES－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;欧州市場向けSCEEタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCES－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BESCES－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>アイコン関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"ファイル形式では、メモリーカードブラウザ画面に各データのシンボルとして表示される3Dアイコンのデータファイルを、サブディレクトリ中に用意しておく必要があります。アイコン関連のファイルとしては、通常次の4つを用意します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>データ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>備考</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アイコン定義ファイル&nbsp;</td>
+<td valign="TOP">&nbsp;icon.sys&nbsp;</td>
+<td valign="TOP">&nbsp;内容は後述&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;一覧表示用アイコンデータファイル&nbsp;</td>
+<td valign="TOP">&nbsp;（任意）&nbsp;</td>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;コピー中表示用アイコンデータファイル&nbsp;</td>
+<td valign="TOP">&nbsp;（任意）&nbsp;</td>
+<td valign="TOP">&nbsp;兼用可&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;削除中表示用アイコンデータファイル&nbsp;</td>
+<td valign="TOP">&nbsp;（任意）&nbsp;</td>
+<td valign="TOP">&nbsp;兼用可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">icon.sys以外はファイル名を31文字以内で自由に決めることができ、そのファイル名をicon.sys内に記述します。これらのアイコンデータファイルはそれぞれ別々に用意することもできますし、同じアイコンデータファイルを兼用することもできます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>ユーザデータファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"ファイル形式では、ひとつのディレクトリに複数のユーザデータファイルを保存することができます。そのうちのひとつはディレクトリ名と同じ名前でなければなりませんが、ほかは任意のファイル名を31文字以内で付けることができます。<br>ユーザデータファイル内部の形式・データフォーマットは任意です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_5">
+<a href="#Heading3_2"> 2. </a>5 <b>サブディレクトリ内の最大ファイル数</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"ファイル形式では、ひとつのサブディレクトリに保存するファイルは、icon.sys / アイコンデータファイル / ディレクトリ名と同じ名前のユーザデータファイル / その他の名前のユーザデータファイル、これらを合わせて18個まででなければなりません。アイコンデータファイルを3個用意した場合は以下の構成になります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>個数</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;icon.sys&nbsp;</td>
+<td valign="TOP">&nbsp;1個&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アイコンデータファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3個&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ディレクトリ名と同名のユーザデータファイル&nbsp;</td>
+<td valign="TOP">&nbsp;1個&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;その他の名前のユーザデータファイル&nbsp;</td>
+<td valign="TOP">&nbsp;13個以内&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_6">
+<a href="#Heading3_2"> 2. </a>6 <b>標準的なファイル構成例</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"ファイル形式での標準的なファイル構成は次のようになります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;／&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;├&nbsp;</td>
+<td valign="TOP">&nbsp;BISLPS－00000Save1&nbsp;</td>
+<td valign="TOP">&nbsp;……サブディレクトリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;－icon.sys&nbsp;</td>
+<td valign="TOP">&nbsp;……アイコン定義ファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;├ static.ico&nbsp;</td>
+<td valign="TOP">&nbsp;……アイコンデータファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;├ copy.ico&nbsp;</td>
+<td valign="TOP">&nbsp;……アイコンデータファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;├ delete.ico&nbsp;</td>
+<td valign="TOP">&nbsp;……アイコンデータファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;├ BISLPS－00000Save1&nbsp;</td>
+<td valign="TOP">&nbsp;……データファイル（1個目：ディレクトリと同じ名前）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;├ Save1-p1&nbsp;</td>
+<td valign="TOP">&nbsp;……データファイル（2個目）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;├ Save1-p2&nbsp;</td>
+<td valign="TOP">&nbsp;……データファイル（3個目）&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_7">
+<a href="#Heading3_2"> 2. </a>7 <b>ファイルの削除</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"ファイル形式ではicon.sysおよびアイコンデータファイルが必須となっていますので、ファイルを削除する際にはディレクトリごとすべて削除するか、ユーザデータファイルのみを削除してください。icon.sysが存在しないサブディレクトリは、ブラウザ画面では「破損データ」として表示されます。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>"PlayStation 2"ファイル形式：icon.sys</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">アイコン定義ファイルは、"PlayStation 2"のメモリーカードブラウザ画面でのアイコン表示を定義するファイルで、"PlayStation 2"ファイル形式のサブディレクトリには必ず作成しておかなければなりません。このファイルが存在しない場合、ブラウザ画面では破損データとして表示されます。<br>アイコン定義ファイルのファイル名はicon.sysに固定で、他の名前は使用できません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>icon.sysの構造</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">icon.sysの構造は以下のようになっています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オフセット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>サイズ&nbsp;<br>&nbsp;(バイト)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>名称</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;ヘッダ&nbsp;</td>
+<td valign="TOP">&nbsp;'P','S','2','D'&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;(reserved)&nbsp;</td>
+<td valign="TOP">&nbsp;0x0000&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;6&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;文書名改行位置&nbsp;</td>
+<td valign="TOP">&nbsp;2行目の先頭になる文字の位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;(reserved)&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000000&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;背景透過率&nbsp;</td>
+<td valign="TOP">&nbsp;0（透明）～ 0x80（不透明）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;16&nbsp;</td>
+<td valign="TOP">&nbsp;16&nbsp;<br>&nbsp;16&nbsp;<br>&nbsp;16&nbsp;<br>&nbsp;16&nbsp;</td>
+<td valign="TOP">&nbsp;背景RGB・左上&nbsp;<br>&nbsp;背景RGB・右上&nbsp;<br>&nbsp;背景RGB・左下&nbsp;<br>&nbsp;背景RGB・右下&nbsp;</td>
+<td valign="TOP">&nbsp;sceVu0IVECTOR形式&nbsp;<br>&nbsp;{r,g,b,-}の順でそれぞれ0～0xff&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;80&nbsp;</td>
+<td valign="TOP">&nbsp;16&nbsp;<br>&nbsp;16&nbsp;<br>&nbsp;16&nbsp;</td>
+<td valign="TOP">&nbsp;光源方向・光源１&nbsp;<br>&nbsp;光源方向・光源２&nbsp;<br>&nbsp;光源方向・光源３&nbsp;</td>
+<td valign="TOP">&nbsp;sceVu0FVECTOR形式&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;16&nbsp;<br>&nbsp;16&nbsp;<br>&nbsp;16&nbsp;</td>
+<td valign="TOP">&nbsp;光源RGB・光源１&nbsp;<br>&nbsp;光源RGB・光源２&nbsp;<br>&nbsp;光源RGB・光源３&nbsp;</td>
+<td valign="TOP">&nbsp;sceVu0FVECTOR形式&nbsp;<br>&nbsp;{r,g,b,-} の順&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;176&nbsp;</td>
+<td valign="TOP">&nbsp;16&nbsp;</td>
+<td valign="TOP">&nbsp;アンビエント&nbsp;</td>
+<td valign="TOP">&nbsp;sceVu0FVECTOR形式&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;192&nbsp;</td>
+<td valign="TOP">&nbsp;68&nbsp;</td>
+<td valign="TOP">&nbsp;文書名&nbsp;</td>
+<td valign="TOP">&nbsp;SJIS全角文字の一部のみで&nbsp;<br>&nbsp;32文字まで、末尾に'\0'&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;260&nbsp;</td>
+<td valign="TOP">&nbsp;64&nbsp;</td>
+<td valign="TOP">&nbsp;一覧用アイコン&nbsp;<br>&nbsp;ファイル名&nbsp;</td>
+<td valign="TOP">&nbsp;末尾に'\0'&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;324&nbsp;</td>
+<td valign="TOP">&nbsp;64&nbsp;</td>
+<td valign="TOP">&nbsp;コピー時用アイコン&nbsp;<br>&nbsp;ファイル名&nbsp;</td>
+<td valign="TOP">&nbsp;末尾に'\0'&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;388&nbsp;</td>
+<td valign="TOP">&nbsp;64&nbsp;</td>
+<td valign="TOP">&nbsp;削除時用アイコン&nbsp;<br>&nbsp;ファイル名&nbsp;</td>
+<td valign="TOP">&nbsp;末尾に'\0'&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;452&nbsp;</td>
+<td valign="TOP">&nbsp;512&nbsp;</td>
+<td valign="TOP">&nbsp;(reserved)&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>文書名改行位置（オフセット6）</b><br></h4></div>
+
+<div style="margin-left:67px;">文書名を何バイト目で改行して表示するかを設定します。<br>文書名はシフトJIS全角文字のみですので、たとえば8文字目で改行するのであれば16を設定してください。指定できる値は2から32までの偶数でなければなりません（それ以外の値を設定すると正しく表示されない可能性があります）。また、表示領域は16文字×2行ですので、改行位置によっては2行目の文字数が16文字を超えてしまい、一部が表示されないことになりますから注意してください。<br>改行をしない場合（文書名が1行に収まる場合）は32を設定してください。<br>なお、0が設定された場合はワードラップ処理が行われますが、これは128KBメモリーカードの表示に対応するための機能であり、必ずしも意図どおりには表示されません。メモリーカード(PS2)においては0を設定しないでください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>背景透過率（オフセット12）</b><br></h4></div>
+
+<div style="margin-left:67px;">ブラウザ画面でこのアイコンを選択したときに、背景色を透かして背景のアイコン一覧が見える透過率を指定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>光源RGB / アンビエント（オフセット80～ / 128）</b><br></h4></div>
+
+<div style="margin-left:67px;">各光源色とアンビエントは、ブラウザ内部ではsceVu0LightColorMatrix()に渡されてライトカラー行列の形で取り扱われます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>文書名（オフセット192）</b><br></h4></div>
+
+<div style="margin-left:67px;">ブラウザ画面に表示される文書名を指定します。全角32文字までで、使用できる文字はシフトJISコードの非漢字および第一水準漢字のみ、ただし0x84bfから0x889eは使用できません。末尾に'\0'を必要とし、'\0'は文字数に含まれません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>一覧用アイコンファイル名（オフセット260）</b><br></h4></div>
+
+<div style="margin-left:67px;">メモリーカード中のファイル一覧を表示しているとき、および、このアイコンが選択されてひとつだけ大きく表示するときに使用するアイコンデータのファイル名を指定します。末尾に'\0'が必要です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>コピー時用アイコンファイル名 / 削除時用アイコンファイル名（オフセット324 / 388）</b><br></h4></div>
+
+<div style="margin-left:67px;">それぞれcopy, deleteが選択されたときに使用するアイコンデータのファイル名を指定します。末尾に'\0'が必要です。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>"PlayStation 2"ファイル形式：</b><b>アイコンデータファイル</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">アイコンデータファイルは、アニメーション情報やテクスチャデータを含む、バイナリ形式の簡易な3次元オブジェクト定義ファイルです。"PlayStation 2"ファイル形式のサブディレクトリには、少なくともひとつのアイコンデータファイルが存在しなければなりません。<br>ブラウザ画面では、各サブディレクトリのicon.sys中で指定されているアイコンデータファイルが読み込まれ、適宜配置されて描画されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>ジオメトリ定義</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アイコンデータファイルでは、オブジェクトはすべて独立三角形として定義されます。トライアングルストリップやライン等のプリミティブはサポートされていません。ひとつのアイコンデータファイルで使用できる三角形数はアニメーションの設定によって異なり、以下に示すとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>MIMEキーシェイプ数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>最大三角形数</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;600&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;500&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;6&nbsp;</td>
+<td valign="TOP">&nbsp;450&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;400&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">注意：キーシェイプ数２はサポートされていません。<br><br>アイコンの形状はx = －10.0～10.0, y=0.0～－20.0, z=－10.0～10.0の、一辺が20.0の立方体の中に収まるようにデザインしてください。これを超えると、画面に表示された際に隣のアイコンと干渉しあう恐れがあります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_2">
+<a href="#Heading3_4"> 4. </a>2 <b>MIMEアニメーション</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アイコンの描画においてMIMEによる頂点座標補間アニメーションがサポートされています。キーシェイプの個数は1、4、6、8個のいずれかを選択することができます。アニメーション処理は、フレーム毎に、それぞれのシェイプについてキーフレームから計算された重み付けを行ってモデルの形状を計算することによって行われます。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/mcfile001.gif"><p>
+<b>図 1　MIMEアニメーション</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">アニメーションを行わない静止したアイコンについても、キーフレームは必ず1つ指定しなければなりません。その場合は、シェイプ1個、1フレーム目、重み1.0としてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_3">
+<a href="#Heading3_4"> 4. </a>3 <b>シェーディング</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アイコンのシェーディングは、三角形の各頂点に割り当てられた法線ベクトル、色、テクスチャ座標と、icon.sysによって定義された平行光源1～3、アンビエントによって計算されます。ライティングオフとすることはできません。また、αブレンディング、αテストの効果を用いることもできません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_4">
+<a href="#Heading3_4"> 4. </a>4 <b>テクスチャ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アイコンモデルには16bit（PSMCT16）、128×128テクセルのテクスチャを1枚貼り付けることができます。<br>テクスチャにはバイリニアフィルタが必ず適用されます。また、必ずポリゴンの色とモデュレートされます。テクスチャの色をそのまま出力する指定（DECAL）はできません。<br>テクスチャを貼るように指定すると、すべてのポリゴンに同じテクスチャが貼り付けられます。一部のポリゴンにテクスチャを貼りたくない場合は、各頂点のSTをすべて同じ値に指定して同一のテクセルを参照させるなどの方法を用いてください。<br>アイコンファイルのサイズを削減するため、ハーフワード単位のRun-Length符号化によってテクスチャを圧縮することができます（図柄によってはかえってサイズが大きくなる場合もあります）。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_5">
+<a href="#Heading3_4"> 4. </a>5 <b>アンチエイリアシングに関する注意事項</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ブラウザがアイコンを描画する際には、GSのAA1機能を用いてアンチエイリアシング描画を行います。これに関連して以下の注意事項がありますので、モデリングの際に考慮してください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ポリゴンのソーティングを行わないため、ポリゴン間のアンチエイリアシング効果が現れない場合があります。
+         <li> バックフェイスクリップを行っているため、頂点順序からいって裏側になる面は表示されません。ポリゴンの裏面も表示したい場合は、裏面に相当するポリゴンを別に定義してください。
+         <li> 細長いポリゴンや、非常に小さいポリゴンはAA1による描画ゴミを引き起こしやすいので、なるべく使用しないでください。
+         <li> AA1の特性として、ポリゴンが視線に対して大きく傾いている場合に前後関係が部分的に誤って描画される問題があります。この問題を回避するため、ブラウザはスクリーン上のポリゴンの面積が小さい場合にクリップする処理を行っています。この判定基準となる面積の閾値はアイコンファイル中のパラメータ（BFACE）で指定することができます。0.0で通常のバックフェイスクリップになり、値が大きいほど大きなポリゴンがクリップされることになります。1.0程度の値で試してみて調整してください。モデルの形状によっては、この問題を回避しきれない場合もあります。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_6">
+<a href="#Heading3_4"> 4. </a>6 <b>データ構造</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アイコンファイルのデータ構造を次に示します。実際のファイルには各セクションがこの順番で詰めて格納されています。<br>モデルセクションでは頂点データの始めのほうから順に3頂点ずつで１個の三角形が表現されます。テクスチャセクションは圧縮の有無によって形式が変わります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>バージョンヘッダ</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Name</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Size(byte)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;VERSION&nbsp;</td>
+<td valign="TOP">&nbsp;4 [int]&nbsp;</td>
+<td valign="TOP">&nbsp;VERSION No = 0x0001 0000&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>モデルセクション</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Name</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Size(byte)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;NBSP&nbsp;<br>&nbsp;ATTRIB&nbsp;<br>&nbsp;BFACE&nbsp;<br>&nbsp;NBVTX&nbsp;</td>
+<td valign="TOP">&nbsp;4 [int]&nbsp;<br>&nbsp;4&nbsp;<br>&nbsp;4 [float]&nbsp;<br>&nbsp;4 [int]&nbsp;</td>
+<td valign="TOP">&nbsp;シェイプの個数  1, 4, 6, 8のいずれか&nbsp;<br>&nbsp;モデル属性（別表参照）&nbsp;<br>&nbsp;バックフェイスクリップの基準値（通常1.0）&nbsp;<br>&nbsp;頂点数（3の倍数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;VTX&nbsp;<br>&nbsp;NORMAL&nbsp;<br>&nbsp;ST&nbsp;<br>&nbsp;COLOR&nbsp;</td>
+<td valign="TOP">&nbsp;8×NBSP&nbsp;<br>&nbsp;8&nbsp;<br>&nbsp;4&nbsp;<br>&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;頂点１の頂点座標&nbsp;<br>&nbsp;　　法線ベクトル&nbsp;<br>&nbsp;　　テクスチャ座標&nbsp;<br>&nbsp;　　頂点色&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;VTX&nbsp;<br>&nbsp;NORMAL&nbsp;<br>&nbsp;ST&nbsp;<br>&nbsp;COLOR&nbsp;</td>
+<td valign="TOP">&nbsp;8×NBSP&nbsp;<br>&nbsp;8&nbsp;<br>&nbsp;4&nbsp;<br>&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;頂点2の頂点座標&nbsp;<br>&nbsp;　　法線ベクトル&nbsp;<br>&nbsp;　　テクスチャ座標&nbsp;<br>&nbsp;　　頂点色&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;----&nbsp;</td>
+<td valign="TOP">&nbsp;----&nbsp;</td>
+<td valign="TOP">&nbsp;NBVTX個まで繰り返し&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>アニメーションセクション</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Name</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Size(byte)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;NBSEQ&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;シーケンスの個数（現在は1のみサポート）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;NBFRAME&nbsp;<br>&nbsp;SPEED&nbsp;<br>&nbsp;OFFSET&nbsp;<br>&nbsp;NBKSP&nbsp;</td>
+<td valign="TOP">&nbsp;4 [int]&nbsp;<br>&nbsp;4 [float]&nbsp;<br>&nbsp;4 [int]&nbsp;<br>&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;シーケンス１のフレーム長&nbsp;<br>&nbsp;　　再生スピード倍率&nbsp;<br>&nbsp;　　再生オフセット（フレーム番号）&nbsp;<br>&nbsp;　　シェイプ個数（最大8個）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;KSPID&nbsp;<br>&nbsp;NBKF&nbsp;<br>&nbsp;KEYS&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;<br>&nbsp;4&nbsp;<br>&nbsp;8×NBKF&nbsp;</td>
+<td valign="TOP">&nbsp;シェイプキー１のシェイプ番号&nbsp;<br>&nbsp;　　キーフレーム個数（最大10）&nbsp;<br>&nbsp;　　キーデータ（NBKF個：別表参照）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;KSPID&nbsp;<br>&nbsp;NBKF&nbsp;<br>&nbsp;KEYS&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;<br>&nbsp;4&nbsp;<br>&nbsp;8×NBKF&nbsp;</td>
+<td valign="TOP">&nbsp;シェイプキー2のシェイプ番号&nbsp;<br>&nbsp;　　キーフレーム個数（最大10）&nbsp;<br>&nbsp;　　キーデータ（NBKF個：別表参照）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;----&nbsp;</td>
+<td valign="TOP">&nbsp;----&nbsp;</td>
+<td valign="TOP">&nbsp;NBKSP個まで繰り返し&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>テクスチャセクション（圧縮時）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Name</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Size(byte)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SIZE&nbsp;</td>
+<td valign="TOP">&nbsp;4 [int]&nbsp;</td>
+<td valign="TOP">&nbsp;圧縮されたテクスチャのサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;TEX&nbsp;</td>
+<td valign="TOP">&nbsp;-&nbsp;</td>
+<td valign="TOP">&nbsp;圧縮テクスチャデータ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>テクスチャセクション（非圧縮時）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Name</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Size(byte)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;TEX&nbsp;</td>
+<td valign="TOP">&nbsp;32768&nbsp;</td>
+<td valign="TOP">&nbsp;テクスチャデータ（PSMCT16形式128×128イメージ）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div style="margin-left:40px;"><h4><b>モデル属性：ATTRIB</b><br></h4></div>
+
+<div style="margin-left:67px;">モデル属性は次のように定義されています。ANTIビットは必ず1に設定してください。また、RLEビットの設定によってテクスチャセクションの形式が変わりますので注意が必要です。<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/mcfile002.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Name</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Pos.</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;IIP&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;シェーディング方式&nbsp;<br>&nbsp;0 : flat shading&nbsp;<br>&nbsp;1 : gouraud shading&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ANTI&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;アンチエイリアシング予約ビット。1固定。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;TEX&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;テクスチャ貼り付けのon/off&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RLE&nbsp;</td>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;テクスチャ圧縮の有無&nbsp;<br>&nbsp;0 : 非圧縮（PSMCT16 rawイメージ）&nbsp;<br>&nbsp;1 : short word単位のRun-Length圧縮済み&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div style="margin-left:40px;"><h4><b>VTX：頂点座標</b><br></h4></div>
+
+<div style="margin-left:67px;">頂点座標は、(x, y, z)各要素を6:10の固定小数（2bytes）で表し2bytesのパディングを加えた8bytesを1組とし、NBSP（シェイプ個数）組で1個の頂点を表します。<br>なお、floatから6:10固定小数に変換するマクロが sce/ee/sample/mc/icon/iconconv ソース中にありますので参考にしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>NORMAL：法線ベクトル</b><br></h4></div>
+
+<div style="margin-left:67px;">法線ベクトルは、(x, y, z)各要素を4:12の固定小数（2bytes）で表し2bytesのパディングを加えた8bytesで表します。<br>なお、floatから4:12固定小数に変換するマクロが sce/ee/sample/mc/icon/iconconv ソース中にありますので参考にしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ST：テクスチャ座標</b><br></h4></div>
+
+<div style="margin-left:67px;">テクスチャ座標は、(s, t)各要素を4:12の固定小数（2bytes）で表します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>COLOR：頂点色</b><br></h4></div>
+
+<div style="margin-left:67px;">頂点色はr, g, b, a各1byteの4bytesで表します。ただしaの値は無視されます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>KEYS：キーデータ</b><br></h4></div>
+
+<div style="margin-left:67px;">キーデータは次のように、キーとなるフレーム番号とそのフレームで当該シェイプ（対応するKSPIDで指定されるシェイプ）に与える重みを組にした8byteデータです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Name</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Size(byte)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;FRAME&nbsp;</td>
+<td valign="TOP">&nbsp;4 [float]&nbsp;</td>
+<td valign="TOP">&nbsp;キーフレームのフレーム番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;WEIGHT&nbsp;</td>
+<td valign="TOP">&nbsp;4 [float]&nbsp;</td>
+<td valign="TOP">&nbsp;シェイプの重み&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SIZE：圧縮テクスチャサイズ／TEX：テクスチャデータ</b><br></h4></div>
+
+<div style="margin-left:67px;">テクスチャデータは、PSMCT16形式の128×128イメージをそのまま使用するか、short word単位のRun-Length法で圧縮したデータを使用することができます。圧縮／非圧縮の区別はATTRIBフィールドのRLEビットで示します。<br>圧縮したデータを使用する場合、SIZEフィールドにそのサイズを設定します。非圧縮の場合はSIZEフィールド自体が不要です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_7">
+<a href="#Heading3_4"> 4. </a>7 <b>アイコンデータ作成支援ツール</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">アイコンの作成をサポートするツールとして、必要なデータ列を記述したASCIIファイルからアイコンデータファイルに変換／逆変換するプログラムを用意してあります。Linux上で動作するもので、ソースコードが ee/sample/mc/icon/iconconv に登録されています。<br>また、圧縮テクスチャデータを作成するために、Run-Length符号化によるイメージデータの圧縮／展開を行うプログラムを用意してあります。同じくLinux上で動作するもので、ソースコードが ee/sample/mc/icon/rle に登録されています。<br>さらに、作成したアイコンデータをプレビューするツールとして tools/viewer が用意されています。プレビュー表示はDTL-T10000で行いますが、実機での表示と多少異なる場合がありますので、最終的な確認はアイコンデータファイルをメモリーカードに保存したうえ実機で行ってください。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>"PlayStation"ファイル形式</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">"PlayStation"ファイル形式は、主として従来型のメモリーカードデバイスとの互換性のために用意されているファイル形式です。128KBのメモリーカードで使用されるメモリーカードファイルヘッダ付きの形式と、PDAで使用されるメモリーカード拡張ファイルヘッダ付きの形式があります。<br>"PlayStation 2"ファイル形式との相違は、サブディレクトリ中に作成できるファイルがひとつだけであること、そのひとつのファイルにアイコン関連のデータとユーザデータを収めるようにユーザデータファイルの構造が規定されていることです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_1">
+<a href="#Heading3_5"> 5. </a>1 <b>エントリ名に使用できる文字</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">サブディレクトリ名 / ファイル名に使用可能な文字は、ASCIIコードで0x20～0x7eの範囲のうち、'*'（0x2a）、'/'（0x2f）、'?'（0x3f）を除いた文字です。<br>サブディレクトリ名 / ファイル名ともに、大文字と小文字は区別されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_2">
+<a href="#Heading3_5"> 5. </a>2 <b>サブディレクトリ名</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation"ファイル形式（メモリーカードファイルヘッダ付き）では、"PlayStation 2"ファイル形式と同様に、タイトルの提供地域および商品型番に従って次のようにサブディレクトリ名を付けてください。末尾に'\0'が必要です。<i>xxxxxxxx</i>の部分は任意ですので、ひとつのタイトルで複数のデータを作成したい場合は、この部分を適宜変更して複数のサブディレクトリを作ることができます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>タイトル種別</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>商品型番</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>サブディレクトリ名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本・韓国市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLPS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BISLPS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本・韓国市場向けSCEIタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCPS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BISCPS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;米国市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLUS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BASLUS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;米国市場向けSCEAタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCUS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BASCUS－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;欧州市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLES－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BESLES－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;欧州市場向けSCEEタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCES－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BESCES－nnnnnxxxxxxxx&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">メモリーカード拡張ファイルヘッダ付きの場合は、7byteめの'-'（0x2d）を'P'（0x50）に置き換えた名前を使用してください。そのほかの点は上記と同様です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_3">
+<a href="#Heading3_5"> 5. </a>3 <b>ユーザデータファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation"ファイル形式では、サブディレクトリ名と同じ名前のユーザデータファイルひとつだけを保存することができます。<br>データファイル内部の形式・データフォーマットは、従来の"PlayStation"用ファイル形式に従ってください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_4">
+<a href="#Heading3_5"> 5. </a>4 <b>標準的なファイル構成例</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation"ファイル形式のファイル構成例は次のようになります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;／&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;├&nbsp;</td>
+<td valign="TOP">&nbsp;BISLPS－12345SaveData&nbsp;</td>
+<td valign="TOP">&nbsp;サブディレクトリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;└ BISLPS－12345SaveData&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザデータファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;├&nbsp;</td>
+<td valign="TOP">&nbsp;BISLPSP12345PDAProg&nbsp;</td>
+<td valign="TOP">&nbsp;サブディレクトリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;｜&nbsp;</td>
+<td valign="TOP">&nbsp;└ BISLPSP12345PDAProg&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザデータファイル（PDA用）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_5">
+<a href="#Heading3_5"> 5. </a>5 <b>ファイルの削除</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation"ファイル形式では、ディレクトリ名と同じ名前のユーザデータファイルが必ずひとつ存在しなければなりません。ユーザデータファイルを削除する際には、ディレクトリごと削除してください。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_6">
+<h2>
+ 6 <b>メモリーカード(PS2)ファイルシステムの内部構造</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">この章では、サブディレクトリやファイルがメモリーカード(PS2)上にどのような構造で記録されているかを解説します。また同時に、データが使用する容量の計算方法を説明します。<br>MS-DOS等のFATファイルシステムに似た構造になっていますので、FATをご存知の方にはわかりやすいことでしょう。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_1">
+<a href="#Heading3_6"> 6. </a>1 <b>クラスタ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">メモリーカード(PS2)上のファイルは、「クラスタ」を単位として管理されます。クラスタのサイズは1024byteで、1byteのデータも1024byteのデータも同じく１クラスタを使用することになります。データのバイト数からクラスタ数を求める計算式は次のとおりです。<br><br></div>
+<div style="margin-left:67px;">クラスタ数＝（バイト数＋1023）/ 1024　　（除算の余りは切り捨て）<br></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/mcfile003.gif"><p>
+<b>図 2　データサイズとクラスタ</b>
+
+</div>
+<br>
+<div style="margin-left:50px;"><br>フォーマット直後の（空の）メモリーカード(PS2)は、8000クラスタの容量を持っています。"PlayStation 2"本体のメモリーカードブラウザ画面では「7998キロバイト」と表示されますが、これは、後で述べるディレクトリエントリ等の所要量を見込んで2クラスタ少ない値を表示する仕様となっているためです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_2">
+<a href="#Heading3_6"> 6. </a>2 <b>サブディレクトリの構造</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">サブディレクトリは、管理情報（ディレクトリエントリ）とサブディレクトリ本体の情報に分れて記録されています。<br>ディレクトリエントリは、サブディレクトリ名や属性や作成日などの管理情報です。サイズは512bytesで、つまり1クラスタにサブディレクトリ２つ分のディレクトリエントリが記録されます。ディレクトリエントリのうちユーザがアクセスできる情報は、sceMcGetDir()を用いて読み出すことができます。<br>サブディレクトリ本体には、そのサブディレクトリに含まれている各ファイルの管理情報（ファイルエントリ）が記録されています。また、ふたつのディレクトリ（.および..）の管理情報がサブディレクトリ作成時に自動的に作成されています。これらはサブディレクトリの管理上必要なエントリで、削除することはできません。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/mcfile004.gif"><p>
+<b>図 3　サブディレクトリの構造</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">サブディレクトリを削除すると、サブディレクトリの本体が記録されていたクラスタは空き容量に戻されます。一方、ディレクトリエントリは削除跡となり、次にサブディレクトリを作成するまで消費されたままのゴミ領域となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_3">
+<a href="#Heading3_6"> 6. </a>3 <b>ファイルの構造</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ファイルは、管理情報（ファイルエントリ）と本体データとが分れて記録されています（ファイルとサブディレクトリとは同じ構造であり、相違は属性のサブディレクトリビットがセットされているかどうかと本体部分の内容だけです）。<br>ファイルエントリは、そのファイルが属するサブディレクトリの本体の一部として記録されています。サイズは512byteで、1クラスタにファイル2つ分のファイルエントリが記録されます。ファイルエントリのうちユーザがアクセスできる情報は、sceMcGetDir()を用いて読み出すことができます。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/mcfile005.gif"><p>
+<b>図 4　ファイルの構造</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">ファイルを削除すると、ファイル本体が使用していたクラスタは空き容量に戻されます。一方、ファイルエントリは削除跡となり、次にファイルを作成するまでサブディレクトリ本体の中のゴミ領域となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_4">
+<a href="#Heading3_6"> 6. </a>4 <b>サブディレクトリ / ファイルの属性</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ディレクトリエントリ / ファイルエントリには、ファイルの形式や読み書き許可などを表す16bitsの属性が記録されています。有効なビットは次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>属性</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット位置</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;読み出し許可&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;sceMcFileAttrReadable&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;書き込み許可&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;sceFileAttrWriteable&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;実行許可&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;sceMcFileAttrExecutable&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;コピー禁止&nbsp;</td>
+<td valign="TOP">&nbsp;bit 3&nbsp;</td>
+<td valign="TOP">&nbsp;sceMcFileAttrDupProhibit&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;サブディレクトリ&nbsp;</td>
+<td valign="TOP">&nbsp;bit 5&nbsp;</td>
+<td valign="TOP">&nbsp;sceMcFileAttrSubdir&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;保存完了&nbsp;</td>
+<td valign="TOP">&nbsp;bit 7&nbsp;</td>
+<td valign="TOP">&nbsp;sceMcFileAttrClosed&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;PDAアプリケーション&nbsp;</td>
+<td valign="TOP">&nbsp;bit 11&nbsp;</td>
+<td valign="TOP">&nbsp;sceMcFileAttrPDAExec&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;"PlayStation"形式&nbsp;</td>
+<td valign="TOP">&nbsp;bit 12&nbsp;</td>
+<td valign="TOP">&nbsp;sceMcFileAttrPS1&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">属性は、サブディレクトリ / ファイルを作成する際に自動的に生成されます。sceMcSetFileInfo()を用いると既存のファイルの属性を変更することも可能ですが、以下のような属性変更は不都合を引き起こすおそれがあるため禁止されています。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 他のタイトルで作成されたサブディレクトリ / ファイルの属性を変更すること
+         <li> サブディレクトリの読み出し許可属性・実行許可属性をオフにすること
+         <li> ひとつのサブディレクトリ内に書き込み許可属性がオンのファイルとオフのファイルを混在させること
+
+</ul></div>
+<div style="margin-left:50px;">サブディレクトリのコピー禁止属性をセットすると、メモリーカードブラウザではそのデータをコピーできなくなります。<br>保存完了属性（sceMcFileAttrClosedビット）は、ファイルの書き込み処理が正常に完了したとき1になります。ただし、国内版"Playstation 2"やDTL-H10000のブラウザ画面でファイルをコピーした場合には、この属性はコピーされない仕様になっています。したがって、あるファイルのsceMcFileAttrClosedビットが0であっても、保存に失敗した破損ファイルだと判断することはできません。ファイルの内容が正しいかどうかを判定するために、別途チェックサムなどのしくみをアプリケーション側で実装するようお奨めします。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_5">
+<a href="#Heading3_6"> 6. </a>5 <b>データサイズと所要容量の計算方法</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">データをメモリーカード(PS2)に保存する際に必要な容量は、以下のようにして計算することができます。<br></div>
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> ファイル本体の使用クラスタ数<br>次の式により、作成するファイルのサイズを個々に1024バイト単位に切り上げてクラスタ数を求める。<br>　クラスタ数 ＝ （バイト数＋1023） / 1024   余りは切り捨て</li>
+         <li VALUE=2> ファイルエントリ（サブディレクトリ本体）の使用クラスタ数<br>次の式により、ファイルエントリ分のクラスタ数を求める。<br>　クラスタ数 ＝ （作成するファイル数＋1） / 2   余りは切り捨て</li>
+         <li VALUE=3> ディレクトリ管理情報の使用クラスタ数<br>新しくディレクトリを作成する場合は、ディレクトリエントリ / . / ..のために2クラスタが使用される。既存のディレクトリにファイルを追加する場合は0。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">上記(a)をファイルごとに求めて合計し、さらに(b),(c)を加えた値が必要な容量となります。<br>メモリーカード(PS2)の状態によっては、ファイルエントリやディレクトリエントリの削除跡を再使用できるために上記の計算で求めたクラスタ数を消費せずに済む場合もありますが、どのような場合でも上記の計算より多くのクラスタを消費することはありません。<br>なお、"PlayStation 2"本体のブラウザ画面に表示されるデータサイズは、計算方法が異なるため上記の値よりも小さくなります。所要容量の計算には使用しないでください。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_7">
+<h2>
+ 7 <b>PDAへのファイル書き込み</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">"PlayStation 2"タイトルでPDA用アプリケーションをPDAに書き込む際には、"PlayStation"ファイル形式（メモリーカード拡張ファイルヘッダ付き）のユーザデータファイルをPDAのファイルシステムに従って保存することになります。<br>PDAのファイルシステムはサブディレクトリを持たないフラットなもので、ファイルの先頭部分のデータ構造が規定され、そこにアイコン関連のデータを収めるようになっていることが特徴です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_1">
+<a href="#Heading3_7"> 7. </a>1 <b>ファイル名</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAにファイルを書き込む際には、"PlayStation"ファイル形式（メモリーカード拡張ファイルヘッダ付き）と同様に、タイトルの提供地域および商品型番に従って次のようにファイル名を付けてください。末尾に'\0'が必要です。<i>xxxxxxxx</i>の部分は下記の使用禁止文字を除いて任意ですので、ひとつのタイトルで複数のデータを作成したい場合は、この部分を適宜変更して複数のファイルを作ることができます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>タイトル種別</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>商品型番</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>サブディレクトリ名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本・韓国市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLPS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BISLPSPnnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;日本・韓国市場向けSCEIタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCPS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BISCPSPnnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;米国市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLUS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BASLUSPnnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;米国市場向けSCEAタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCUS－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BASCUSPnnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;欧州市場向けライセンスタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SLES－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BESLESPnnnnnxxxxxxxx&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;欧州市場向けSCEEタイトル&nbsp;</td>
+<td valign="TOP">&nbsp;SCES－nnnnn&nbsp;</td>
+<td valign="TOP">&nbsp;BESCESPnnnnnxxxxxxxx&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">ファイル名に使用できない文字は、'＊'（0x2a）および'?'（0x3f）です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_2">
+<a href="#Heading3_7"> 7. </a>2 <b>メモリーカード拡張ファイルヘッダ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAに書き込むファイルの先頭部分には、以下に示すようなメモリーカード拡張ファイルヘッダが必要です。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オフセット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>サイズ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;Magic　固定値"SC"&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;Type&nbsp;<br>&nbsp;0x11/0x12/0x13&nbsp;<br>&nbsp;のいずれか&nbsp;</td>
+<td valign="TOP">&nbsp;"PlayStation"メモリーカード&nbsp;<br>&nbsp;管理画面用アイコン&nbsp;<br>&nbsp;のイメージデータ数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;ブロック数&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルが占有する&nbsp;<br>&nbsp;ブロック数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;64&nbsp;</td>
+<td valign="TOP">&nbsp;文書名&nbsp;</td>
+<td valign="TOP">&nbsp;シフトJISコード、&nbsp;<br>&nbsp;32文字まで&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;68&nbsp;</td>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;Pad すべて0x00&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;80&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;PDAファイル一覧用&nbsp;<br>&nbsp;アイコンのイメージ&nbsp;<br>&nbsp;データ数&nbsp;</td>
+<td valign="TOP">&nbsp;ファイル一覧時に表示される&nbsp;<br>&nbsp;アニメーションの&nbsp;<br>&nbsp;コマ数（＝n1）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;82&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;ファイル種別 "MCX0"&nbsp;</td>
+<td valign="TOP">&nbsp;PDAアプリケーションを表す&nbsp;<br>&nbsp;ほかに"CRD0"もありうる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;86&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;ゲーム選択用&nbsp;<br>&nbsp;アイコンのページ数&nbsp;</td>
+<td valign="TOP">&nbsp;ゲーム選択画面での&nbsp;<br>&nbsp;アニメーションページ数（＝n2）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;87&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザー定義デバイス&nbsp;<br>&nbsp;ドライバエントリ数&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザー定義デバイス&nbsp;<br>&nbsp;ドライバの総数（＝n3）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;88&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;Reserved　すべて0x00&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;92&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;プログラム開始アドレス&nbsp;</td>
+<td valign="TOP">&nbsp;ファイルヘッダの先頭&nbsp;<br>&nbsp;を0x02000000とする&nbsp;<br>&nbsp;絶対アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;96&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+<td valign="TOP">&nbsp;CLUT&nbsp;</td>
+<td valign="TOP">&nbsp;CLUTエントリ×16&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;"PlayStation"メモリーカード&nbsp;<br>&nbsp;管理画面用アイコンイメージ1&nbsp;</td>
+<td valign="TOP">&nbsp;必須&nbsp;<br>&nbsp;16×16×4bits&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;※&nbsp;</td>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;"PlayStation"メモリーカード&nbsp;<br>&nbsp;管理画面用アイコンイメージ2&nbsp;</td>
+<td valign="TOP">&nbsp;Type=0x12,0x13の場合のみ&nbsp;<br>&nbsp;16×16×4bits&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;※&nbsp;</td>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;"PlayStation"メモリーカード&nbsp;<br>&nbsp;管理画面用アイコンイメージ3&nbsp;</td>
+<td valign="TOP">&nbsp;Type=0x13の場合のみ&nbsp;<br>&nbsp;16×16×4bits&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;※&nbsp;</td>
+<td valign="TOP">&nbsp;128×n4&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスドライバの&nbsp;<br>&nbsp;エントリテーブル&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスドライバごとに&nbsp;<br>&nbsp;4byte×2&nbsp;<br>&nbsp;（n4＝(n3+15)/16）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;※&nbsp;</td>
+<td valign="TOP">&nbsp;128×n1&nbsp;</td>
+<td valign="TOP">&nbsp;PDAファイル一覧用&nbsp;<br>&nbsp;アイコンのイメージデータ&nbsp;</td>
+<td valign="TOP">&nbsp;32×32×1bit×n1枚&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;※&nbsp;</td>
+<td valign="TOP">&nbsp;128×n5&nbsp;</td>
+<td valign="TOP">&nbsp;ゲーム選択用アイコン&nbsp;<br>&nbsp;のエントリテーブル&nbsp;</td>
+<td valign="TOP">&nbsp;アニメーション1ページあたり&nbsp;<br>&nbsp;4byte×2&nbsp;<br>&nbsp;（n5＝(n2+15)/16）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;※&nbsp;</td>
+<td valign="TOP">&nbsp;128×n6&nbsp;</td>
+<td valign="TOP">&nbsp;ゲーム選択用アイコン&nbsp;<br>&nbsp;のイメージデータ&nbsp;</td>
+<td valign="TOP">&nbsp;32×32×1bit×n6枚&nbsp;<br>&nbsp;n6はゲーム選択用アイコンの&nbsp;<br>&nbsp;各ページのコマ数の総和&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">※データ内容によって変わりますが、アイコンのイメージデータは128byteバウンダリに揃うことになります。<br><br>以下、各項目の詳細を説明します（アイコンに関する項目については別にまとめて説明します）。<br></div>
+
+<div style="margin-left:40px;"><h4><b>文書名</b><br></h4></div>
+
+<div style="margin-left:67px;">文書名はメモリーカードブラウザ画面に表示される文書名です。使用できる文字はシフトJISコードの非漢字および第一水準漢字のみ、ただし0x84bf～0x889eは使用できません。文字数は全角32文字までで、32文字に満たない場合は末尾にnull（0x00）を置いてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ファイル種別</b><br></h4></div>
+
+<div style="margin-left:67px;">ファイル種別としては、PDAアプリケーションであることを表す"MCX0"をセットしてください。このほかに既定のファイル種別としてはPDA対応データファイルを表す"CRD0"がありますが、"PlayStation 2"タイトルが"CRD0"のファイルをPDAに書き込むことは禁止されています。また、ファイル種別がこれら以外の値になっているファイルはPDA非対応のデータファイルであり、"PlayStation 2"タイトルが使用してはなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>プログラム開始アドレス</b><br></h4></div>
+
+<div style="margin-left:67px;">PDAアプリケーションは、ヘッダを含めたファイルそのものが仮想アドレス0x02000000以降にマッピングされ、ここに指定したアドレスから実行開始されます。したがってここには、エントリポイントのファイル内でのオフセットに0x02000000を加えた値を指定してください。<br>存在しないアドレスが指定されていてもエラー処理は行われません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>CLUT</b><br></h4></div>
+
+<div style="margin-left:67px;">"PlayStation"メモリーカード管理画面用アイコンイメージに適用されるカラールックアップテーブルです。各CLUTエントリは次のように、RGB各5bitの色情報を持ちます。<br></div>
+<div style="margin-left:80px;">CLUTエントリ = (B[4:0] &lt;&lt; 10) | (G[4:0] &lt;&lt; 5) | R[4:0]<br></div>
+
+<div style="margin-left:40px;"><h4><b>ユーザー定義デバイスドライバ</b><br></h4></div>
+
+<div style="margin-left:67px;">デバイスドライバとは、"PlayStation 2"からPDA上の特殊な機能を呼び出すためのPDA側サブルーチンです。sceMcxDevRead() / sceMcxDevWrite()をデバイスドライバ番号を指定して呼び出すと、PDAカーネルのコールバック機能によって対応するデバイスドライバに制御が移されます。詳細は「PDAカーネル仕様書」の｢カーネルサービス概要：PlayStationとの通信：デバイスエントリコールバック｣の項を参照してください。<br>ユーザー定義デバイスドライバエントリ数（<i>n3</i>）には、ユーザー定義のデバイスドライバの総数を指定してください。最小値は0で、その場合はデバイスエントリテーブルは存在しません。<br>デバイスエントリテーブルは、次の形式で各デバイスドライバの固定データ長とエントリポイントを指定してください。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オフセット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>サイズ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;デバイス128の固定部データ長&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;デバイス128のデータ受け渡しルーチンエントリポイント&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;デバイス129の固定部データ長&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;デバイス129のデータ受け渡しルーチンエントリポイント&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;（途中省略）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;(n3-1)*8&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスn3＋127の固定部データ長&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;(n3-1)*8+4&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスn3＋127のデータ受け渡しルーチン&nbsp;<br>&nbsp;エントリポイント&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:80px;">※ユーザー定義のデバイスドライバには128以降の番号が割り当てられます。<br></div>
+<div style="margin-left:67px;"><br>各エントリポイントの数値は、プログラム開始アドレスと同様、ファイルヘッダの先頭を0x02000000としてメモリ上に展開したアドレスになります。<br>デバイスエントリテーブルのサイズは128バイト単位です。ドライバの数が16を超える場合、追加用のテーブルとして128バイトを続けて確保し、そこへ136,137,...のエントリテーブルを格納してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_7_3">
+<a href="#Heading3_7"> 7. </a>3 <b>アイコン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAで使用するアイコンは、"PlayStation"メモリーカード管理画面用アイコン、PDAファイル一覧用アイコン、ゲーム選択用アイコンの3種があり、それぞれファイルヘッダに決まった形式で収められています。以下、各アイコンの使われかたとデータ形式の詳細について説明します。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_7_3_1"><h4>
+(1)&nbsp;<b>アイコンの種類と特徴</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">3種のアイコンそれぞれの特徴を次に示します。［］内はメモリーカード拡張ファイルヘッダの関連する項目です。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>アイコンの種類</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ピクセル&nbsp;<br>&nbsp;サイズ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カラー</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ページ数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>コマ数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フレーム&nbsp;<br>&nbsp;レート&nbsp;<br>&nbsp;(fps)</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;"PlayStation"&nbsp;<br>&nbsp;メモリーカード管理&nbsp;<br>&nbsp;画面用アイコン&nbsp;</td>
+<td valign="TOP">&nbsp;16×16&nbsp;</td>
+<td valign="TOP">&nbsp;32768色中&nbsp;<br>&nbsp;16色&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;1～3&nbsp;<br>&nbsp;[Type]&nbsp;</td>
+<td valign="TOP">&nbsp;2または3&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;PDAファイル一覧用&nbsp;<br>&nbsp;アイコン&nbsp;</td>
+<td valign="TOP">&nbsp;32×32&nbsp;</td>
+<td valign="TOP">&nbsp;モノクロ&nbsp;</td>
+<td valign="TOP">&nbsp;1(0)&nbsp;</td>
+<td valign="TOP">&nbsp;0～&nbsp;<br>&nbsp;[n1]&nbsp;</td>
+<td valign="TOP">&nbsp;6&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゲーム選択用&nbsp;<br>&nbsp;アイコン&nbsp;</td>
+<td valign="TOP">&nbsp;32×32&nbsp;</td>
+<td valign="TOP">&nbsp;モノクロ&nbsp;</td>
+<td valign="TOP">&nbsp;1～&nbsp;<br>&nbsp;[n2]&nbsp;</td>
+<td valign="TOP">&nbsp;1～&nbsp;<br>&nbsp;[総計n6]&nbsp;</td>
+<td valign="TOP">&nbsp;ページごと&nbsp;<br>&nbsp;に指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_7_3_2"><h4>
+(2)&nbsp;<b>"PlayStation"メモリーカード管理画面用アイコン</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">"PlayStation"メモリーカード管理画面用アイコンは、"PlayStation 2"のブラウザ画面に表示されるアイコンで、PDAアプリケーションファイルだけでなくPDA上のすべてのファイルが持っています。イメージデータは16×16ピクセル、4bitCLUTによる16色カラーで、コマ数が2（Type＝0x12）のときは2fps、コマ数が3（Type＝0x13）のときは3fpsでアニメーション表示されます。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_7_3_3"><h4>
+(3)&nbsp;<b>PDAファイル一覧用アイコン</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">PDAファイル一覧用アイコンは、PDAの液晶ディスプレイに表示されるアイコンです。イメージデータは32×32ピクセルの白黒2値で、コマ数は任意、6fpsでアニメーション表示されます。<br>PDAアプリケーションファイルでコマ数が0（イメージデータなし）の場合、ゲーム選択用アイコンの1ページ目が代りに使用されます。<br>なお、PDA対応のデータファイル（ファイル種別＝"CRD0"）はコマ数が0という設定は禁止されていて、必ずPDAファイル一覧用アイコンを持っています。また参考までに、PDA非対応のデータファイルはPDAファイル一覧用アイコンを持たず"PlayStation"メモリーカード管理画面用アイコンが代りに表示されます。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_7_3_4"><h4>
+(4)&nbsp;<b>ゲーム選択用アイコン</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ゲーム選択用アイコンは、「ゲーム選択機能」PDAの液晶ディスプレイに表示されるアイコンです。イメージデータは32×32ピクセルの白黒2値で、複数のページを持つことができるため、たとえば1ページ目はゲームタイトルのアニメーション、2ページ目はゲーム概要のアニメーション、3ページ目は制作者名のアニメーション、といった使いかたができます。各ページのコマ数とフレームレートはそれぞれ独立に指定することができます。<br></div>
+<div style="margin-left:67px;"></div>
+<div align=center>
+<p>
+<img src="gif/mcfile006.gif"><p>
+<b>図 5 ゲーム選択機能</b>
+
+</div>
+<br>
+<div style="margin-left:67px;">イメージデータは1ページ目の1コマ目から順に詰めて配置し、ページごとのコマ数とフレームレートおよびイメージデータの位置をエントリテーブルで指定します。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/mcfile007.gif"><p>
+<b>図 6 ゲーム選択用アイコンのデータ構造</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">エントリの構造は次のとおりです。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/mcfile008.gif"><p>
+<b>図 7 ゲーム選択用アイコンエントリテーブルのデータ構造</b>
+
+</div>
+<br>
+<div style="margin-left:50px;">フレームレートには、１コマの表示時間を１/30秒を単位として指定します。つまり、30を指定すると毎秒1コマ、10を指定すると毎秒3コマ、5を指定すると毎秒6コマ……というようになります。<br>イメージデータ格納アドレスには、そのページの１コマ目のアイコンイメージデータの先頭アドレスを指定します。ヘッダファイルの先頭を0x02000000としてメモリ上に展開したアドレスで、128バイトバウンダリに揃っていなければなりません。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_8">
+<h2>
+ 8 <b>チェックポイント</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">以下、メモリーカードへのファイル書き込み処理に関連して、要注意のポイント、陥りやすい間違いを挙げておきます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_1">
+<a href="#Heading3_8"> 8. </a>1 <b>icon.sysのチェックポイント</b><br>
+</a>
+</h3>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_1_1"><h4>
+(1)&nbsp;<b>文書名はShift-JISコードで指定されているか</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">オフセット192～259に書き込む文書名は、終端の'\0'を除いてすべてShift-JIS文字でなければなりません。英数字は全角英数字を使用し、アスキー文字（半角英数字：0x20～0x7e）を含めないようにしてください。海外向けのタイトルでも同じですので、特に注意してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_1_2"><h4>
+(2)&nbsp;<b>文書名の改行位置は2～32の偶数になっているか</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">オフセット6に書き込む改行位置はバイト単位であり、文書名はすべて2バイト文字ですからかならず偶数になります。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_1_3"><h4>
+(3)&nbsp;<b>文書名の2行目は16文字以内になっているか</b><br></h4>
+</a></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_8_2">
+<a href="#Heading3_8"> 8. </a>2 <b>アイコンデータファイルのチェックポイント</b><br>
+</a>
+</h3>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_2_1"><h4>
+(1)&nbsp;<b>モデル属性のANTIビットは1になっているか</b></h4>
+</a></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_2_2"><h4>
+(2)&nbsp;<b>非圧縮テクスチャなのにサイズを指定していないか</b></h4>
+</a></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_2_3"><h4>
+(3)&nbsp;<b>ファイルのサイズは正しいか</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">アイコンデータファイルのサイズは、その中に記載されているポリゴン数などのデータから計算して求められる規定値と等しくなっていなければなりません。非圧縮テクスチャなのにSIZEフィールドがついているミス、よけいなデータが末尾に付いて書き込まれているミスがときおり見られますので注意してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_2_4"><h4>
+(4)&nbsp;<b>頂点座標は適正な範囲にあるか</b></h4>
+</a></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_8_2_5"><h4>
+(5)&nbsp;<b>MIMEキーシェイプ数は1,4,6,8のいずれかになっているか<br></h4>
+</a></div>
+</b>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

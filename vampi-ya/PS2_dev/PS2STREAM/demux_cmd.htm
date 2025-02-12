@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<title>demux コマンド</title>
+<meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+</head>
+
+<body>
+
+<h1>demux コマンド</h1>     
+<hr>     
+<h2>目的</h2>     
+<p>　多重化されているストリームの非多重化を行います。</p>     
+<p>　</p>     
+<h2>書式</h2>     
+<h3>command 部</h3>     
+<p>　demux (省略形：d)</p>     
+<p>　</p>
+<h3>options 部</h3>     
+<table border="1">     
+  <tr>     
+    <td>オプション</td>     
+    <td>意味</td>     
+  </tr>     
+  <tr>     
+    <td>-o</td>     
+    <td>出力ファイルが既に存在した場合、上書き出力します。</td>     
+  </tr>     
+  <tr>     
+    <td>-d [ディレクトリ]</td>   
+    <td>出力ディレクトリを指定します。</td>   
+  </tr>   
+  <tr>   
+    <td>-v</td>   
+    <td>作業の進行状況を詳しくレポートします。</td>   
+  </tr>   
+  <tr>   
+    <td>-video(:番号) (番号：0 - 15)</td>     
+    <td>MPEG      
+      ビデオストリームのみを出力します。番号 (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
+  </tr>     
+  <tr>     
+    <td>-audio(:番号) (番号：0 - 31)</td>     
+    <td>MPEG      
+      オーディオストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
+  </tr>     
+  <tr>     
+    <td>-ipu(:番号) (番号：0 - 65535)</td>     
+    <td>ipu 動画ストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
+  </tr>     
+  <tr>     
+    <td>-pcm(:番号) (番号：0 - 65535)</td>     
+    <td>PCM      
+      オーディオストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
+  </tr>     
+  <tr>     
+    <td>-adpcm(:番号) (番号：0 - 65535)</td>     
+    <td>adpcm      
+      オーディオストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
+  </tr>     
+  <tr>     
+    <td>-data(:番号) (番号：0 - 65535)</td>     
+    <td>任意データストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
+  </tr>     
+</table>     
+<p>　出力ストリームを指定しなかった場合、すべてのストリームが出力されます。</p>     
+<p>　</p>     
+<h3>target file 部</h3>     
+<table border="1">     
+  <tr>     
+    <td>パラメータ１</td>     
+    <td>非多重化される pss ファイル (MPEG2      
+      プログラムストリームファイル)</td>     
+  </tr>     
+</table>     
+<p>　出力されるファイル名は、次の規約によって自動的に生成されます。</p>
+<table border="1">
+  <tr>
+    <td>ストリーム</td>
+    <td>ファイル名 (xxx は、入力ファイル名。id      
+      は、ストリーム番号)</td>     
+  </tr>     
+  <tr>     
+    <td>MPEG ビデオ</td>     
+    <td>xxx_video_id.m2v</td>     
+  </tr>     
+  <tr>     
+    <td>MPEG オーディオ</td>     
+    <td>xxx_audio_id.m2a</td>     
+  </tr>     
+  <tr>     
+    <td>ipu 動画</td>     
+    <td>xxx_ipu_id.ipu</td>     
+  </tr>     
+  <tr>     
+    <td>pcm オーディオ</td>     
+    <td>xxx_pcm_id.ads</td>    
+  </tr>    
+  <tr>    
+    <td>adpcm オーディオ</td>     
+    <td>xxx_adpcm_id.ads</td>    
+  </tr>    
+  <tr>    
+    <td>data</td>    
+    <td>xxx_data_id.dat</td>   
+  </tr>   
+</table>   
+<p>　</p>
+<p>　</p>
+<p><strong>[EOF]</strong></p>
+<p>最終更新日：<!--webbot bot="Timestamp" startspan S-Type="EDITED"
+S-Format="%Y/%m/%d" -->1999/09/28<!--webbot bot="Timestamp" i-CheckSum="12961"
+endspan -->
+</p>
+<HR>
+<DIV ALIGN="right">
+<ADDRESS>
+    SCE CONFIDENTIAL
+    <BR>Copyright (c) 1999 Sony Computer Entertainment Inc.  All Rights Reserved.</BR>
+</ADDRESS>
+</DIV>
+</body>
+
+</html>
