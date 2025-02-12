@@ -1,0 +1,689 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>共通ネットワーク設定インタフェースライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/ntcif_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+共通ネットワーク設定インタフェースライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>概要</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_2"> <b>サンプルプログラム</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>ライブラリの構成</b><br></a>
+<p><a href="#Heading3_3">  3 <b>使用手順</b><br></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>IOPモジュールの起動引数</b><br></a>
+    <a href="#Heading4_3_2"> <b>SIF RPCサービスのセットアップ</b><br></a>
+    <a href="#Heading4_3_3"> <b>あなたのネットワーク設定ファイルの追加</b><br></a>
+    <a href="#Heading4_3_4"> <b>あなたのネットワーク設定ファイルの編集</b><br></a>
+    <a href="#Heading4_3_5"> <b>あなたのネットワーク設定ファイルの削除</b><br></a>
+    <a href="#Heading4_3_6"> <b>あなたのネットワーク設定ファイルの全削除</b><br></a>
+    <a href="#Heading4_3_7"> <b>あなたのネットワーク設定ファイルの内容を取得</b><br></a>
+    <a href="#Heading4_3_8"> <b>あなたのネットワーク設定ファイルのリストを取得</b><br></a>
+    <a href="#Heading4_3_9"> <b>あなたのネットワーク設定ファイルのリストを編集</b><br></a>
+    <a href="#Heading4_3_10"> <b>デバイスの残り容量をチェック</b><br></a>
+    <a href="#Heading4_3_11"> <b>追加ATコマンドをチェック</b><br></a>
+    <a href="#Heading4_3_12"> <b>特殊プロバイダの設定かどうかをチェック</b><br></a>
+    <a href="#Heading4_3_13"> <b>IOP側のsceNetCnfEnv領域に設定内容を設定</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>概要</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">共通ネットワーク設定インタフェースライブラリは、IOP上で動作するライブラリとして提供されている共通ネットワーク設定ライブラリ（netcnf.irx）の機能の一部をEE側から操作することを目的としたライブラリです。これを使用することにより「あなたのネットワーク設定ファイル」をEE上のアプリケーションから操作することが可能となります。<br>なお、「あなたのネットワーク設定ファイル」は各アプリケーションの共有リソースですので、その取り扱いについて規定が設けられています。EE / IOP共通文書ディレクトリ（general/）にある以下の資料を参照してください。<br><br></div>
+<div style="margin-left:40px;"><ul>
+         <li> あなたのネットワーク設定ファイル使用規定（yncf）
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">共通ネットワーク設定インタフェースライブラリ(netcnfif)を使用するためには必要なファイルは以下の通りです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイルの種類</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sce/ee/include/netcnfif.h&nbsp;</td>
+<td valign="TOP">&nbsp;EEヘッダファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sce/common/include/netcnfif.h&nbsp;</td>
+<td valign="TOP">&nbsp;EE / IOP共通ヘッダファイル&nbsp;<br>&nbsp;（sce/ee/include/netcnfif.hからincludeされる）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sce/ee/lib/netcnfif.a&nbsp;</td>
+<td valign="TOP">&nbsp;EEライブラリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sce/iop/modules/netcnfif.irx&nbsp;</td>
+<td valign="TOP">&nbsp;IOPモジュール&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">また、以下の場所にEEライブラリ(netcnfif.a)およびIOPモジュール(netcnfif.irx)のソースコードが公開されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ディレクトリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ソースコードの種類</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sce/ee/src/lib/netcnfif&nbsp;</td>
+<td valign="TOP">&nbsp;EEライブラリ(netcnfif.a)ソースコード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sce/iop/src/module/netcnfif&nbsp;</td>
+<td valign="TOP">&nbsp;IOPモジュール(netcnfif.irx)ソースコード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>サンプルプログラム</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">sce/ee/sample/netcnfif以下にサンプルプログラムが存在します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ディレクトリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>サンプルの種類</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;add_entry&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルの追加&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;convauth&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザIDを表示用に変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;delete_all&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルの全削除&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;delete_entry&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルの削除&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;edit_entry&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルの編集&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;load_entry&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルの読み込み&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;set_latest_entry&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルリストの編集&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>ライブラリの構成</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">共通ネットワーク設定インタフェースライブラリ(netcnfif)はSIF RPCおよびSIF DMAを使用しEEとIOPの通信を行っています。以下にその概念図を示します。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/netcnfif001.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">SIF RPC用構造体として、以下の構造体が用意されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifArg&nbsp;</td>
+<td valign="TOP">&nbsp;SIF RPCサービスの引数及び返り値を定義&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">SIF DMA用構造体として、以下の構造体が用意されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifList&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルのリストを定義&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifData&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルの内容を定義&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">SIF RPC用関数として、以下の関数が用意されています（※印の関数においてはEE、IOP間の通信は発生しません）。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifInit ※&nbsp;</td>
+<td valign="TOP">&nbsp;SIF RPC用送受信バッファの状態を&nbsp;<br>&nbsp;初期値に戻す&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifSetup&nbsp;</td>
+<td valign="TOP">&nbsp;SIF RPCサーバとバインド&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifCheck&nbsp;</td>
+<td valign="TOP">&nbsp;SIF RPC処理状況の判定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifGetResult ※&nbsp;</td>
+<td valign="TOP">&nbsp;SIF RPCサービスの結果を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifSetFNoDecode ※&nbsp;</td>
+<td valign="TOP">&nbsp;no_decode フラグを設定する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifGetCount&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定ファイルの数を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifGetList&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定ファイルのリストを取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifLoadEntry&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定ファイルの内容を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifAddEntry&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定ファイルの追加&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifEditEntry&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定ファイルの編集&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifDeleteEntry&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定ファイルの削除&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifSetLatestEntry&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定ファイルのリストを編集&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifDeleteAll&nbsp;</td>
+<td valign="TOP">&nbsp;あなたのネットワーク設定ファイルを削除&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifCheckCapacity&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスの残り容量をチェック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifCheckAdditionalAT&nbsp;</td>
+<td valign="TOP">&nbsp;追加ATコマンドをチェック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifCheckSpecialProvider&nbsp;</td>
+<td valign="TOP">&nbsp;特殊プロバイダの設定かどうかチェック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifGetAddr&nbsp;</td>
+<td valign="TOP">&nbsp;IOP側の受信領域(sceNetcnfifData)の&nbsp;<br>&nbsp;アドレスを取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifAllocWorkarea&nbsp;</td>
+<td valign="TOP">&nbsp;IOP側のワークエリアを確保&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifFreeWorkarea&nbsp;</td>
+<td valign="TOP">&nbsp;IOP側のワークエリアを解放&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifSetEnv&nbsp;</td>
+<td valign="TOP">&nbsp;IOP側のsceNetCnfEnv領域に&nbsp;<br>&nbsp;sceNetcnfifDataの内容を設定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">SIF DMA用の関数として、以下の関数が用意されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifSendIOP&nbsp;</td>
+<td valign="TOP">&nbsp;IOPへデータを送信&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifDmaCheck&nbsp;</td>
+<td valign="TOP">&nbsp;SIF DMA処理状況の判定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルの内容を定義したsceNetcnfifData構造体用の関数として、以下の関数が用意されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifDataInit&nbsp;</td>
+<td valign="TOP">&nbsp;sceNetcnfifData構造体を初期化する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifDataDump&nbsp;</td>
+<td valign="TOP">&nbsp;sceNetcnfifData構造体をダンプする&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">また、「あなたのネットワーク設定ファイル使用規定」で使用を義務付けられたの関数として、以下の関数が用意されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetcnfifConvAuthname &nbsp;</td>
+<td valign="TOP">&nbsp;ユーザIDを表示用に変換&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>使用手順</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>IOPモジュールの起動引数</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOPモジュール(netcnfif.irx)には、以下の起動引数が指定できます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>起動引数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;thpri=&lt;10進数&gt;&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドプライオリティを設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;thstack=&lt;10進数&gt;KB&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドのスタックサイズを設定(1024バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;thstack=&lt;10進数&gt;&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドのスタックサイズを設定(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-help&nbsp;</td>
+<td valign="TOP">&nbsp;使用方法を表示 &nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">スレッドプライオリティやスレッドのスタックサイズで設定できる値についてはIOPカーネルライブラリの仕様に従います。指定しない場合のデフォルト値は、スレッドプライオリティが123、スレッドのスタックサイズが8KB(8192バイト)となります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>SIF RPCサービスのセットアップ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">共通ネットワーク設定インタフェースライブラリ(netcnfif)を使用するには最初にSIF RPCサービスのセットアップを行う必要があります。SIF RPCサービスのセットアップは以下の手順で行います。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> SIF RPC APIの初期化。(sceSifInitRpc())</li>
+         <li VALUE=2> SIF RPCサービスのセットアップ。(sceNetcnfifSetup())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>あなたのネットワーク設定ファイルの追加</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルを追加するには、以下の手順で追加を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPワークエリアの確保。(sceNetcnfifAllocWorkarea())</li>
+         <li VALUE=2> IOPの設定内容転送先データエリアのアドレスを取得。(sceNetcnfifGetAddr())</li>
+         <li VALUE=3> 設定内容設定後、設定内容をIOPへ転送。(sceNetcnfifSendIOP())</li>
+         <li VALUE=4> あなたのネットワーク設定ファイルの追加を実行。(sceNetcnfifAddEntry())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>あなたのネットワーク設定ファイルの編集</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルを編集するには、以下の手順で編集を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPワークエリアの確保。(sceNetcnfifAllocWorkarea())</li>
+         <li VALUE=2> IOPの設定内容転送先データエリアのアドレスを取得。(sceNetcnfifGetAddr())</li>
+         <li VALUE=3> 設定内容編集後、設定内容をIOPへ転送。(sceNetcnfifSendIOP())</li>
+         <li VALUE=4> あなたのネットワーク設定ファイルの編集を実行。(sceNetcnfifEditEntry())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>あなたのネットワーク設定ファイルの削除</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルを削除するには、以下の手順で削除を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> 削除するファイル名を指定して、あなたのネットワーク設定ファイルの削除を実行。(sceNetcnfifDeleteEntry())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_6">
+<a href="#Heading3_3"> 3. </a>6 <b>あなたのネットワーク設定ファイルの全削除</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルを全削除するには、以下の手順で全削除を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> 全削除するデバイス名を指定して、あなたのネットワーク設定ファイルの全削除を実行。(sceNetcnfifDeleteAll())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_7">
+<a href="#Heading3_3"> 3. </a>7 <b>あなたのネットワーク設定ファイルの内容を取得</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルの内容を取得するには、以下の手順で内容の取得を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPワークエリアの確保。(sceNetcnfifAllocWorkarea())</li>
+         <li VALUE=2> あなたのネットワーク設定ファイルの内容の取得を実行。(sceNetcnfifLoadEntry())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_8">
+<a href="#Heading3_3"> 3. </a>8 <b>あなたのネットワーク設定ファイルのリストを取得</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルのリストを取得するには、以下の手順でリストの取得を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> あなたのネットワーク設定ファイルの数を取得。(sceNetcnfifGetCount())</li>
+         <li VALUE=2> 必要な領域を確保後、あなたのネットワーク設定ファイルのリストを取得。(sceNetcnfifGetList())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_9">
+<a href="#Heading3_3"> 3. </a>9 <b>あなたのネットワーク設定ファイルのリストを編集</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルのリストを編集にするには、以下の手順でリストの編集を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> リストの先頭に移動したい設定名を指定して、あなたのネットワーク設定ファイルのリストの編集を実行。(sceNetcnfifSetLatestEntry())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_10">
+<a href="#Heading3_3"> 3. </a>10 <b>デバイスの残り容量をチェック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルを保存するデバイスの残り容量をチェックするには、以下の手順で残り容量のチェックを行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> チェックしたデバイスの設定管理ファイルのパスを指定して、あなたのネットワーク設定ファイルの残り容量のチェックを実行。(sceNetcnfifCheckCapacity())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_11">
+<a href="#Heading3_3"> 3. </a>11 <b>追加ATコマンドをチェック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ユーザが入力した追加ATコマンドをチェックするには、以下の手順で追加ATコマンドのチェックを行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> ユーザが入力した追加ATコマンドを指定して、追加ATコマンドのチェックを実行。(sceNetcnfifCheckAdditionalAT())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_12">
+<a href="#Heading3_3"> 3. </a>12 <b>特殊プロバイダの設定かどうかをチェック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルが特殊プロバイダの設定であるかどうかをチェックするには、以下の手順で特殊プロバイダの設定かどうかのチェックを行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPワークエリアの確保。(sceNetcnfifAllocWorkarea())</li>
+         <li VALUE=2> 特殊プロバイダの設定であるかどうかのチェックを実行。(sceNetcnfifCheckSpecialProvider())</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_13">
+<a href="#Heading3_3"> 3. </a>13 <b>IOP側のsceNetCnfEnv領域に設定内容を設定</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">IOP側のsceNetCnfEnv領域に設定内容を設定するには、以下の手順で設定内容の設定を行う必要があります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPワークエリアの確保。(sceNetcnfifAllocWorkarea())</li>
+         <li VALUE=2> IOPの設定内容転送先データエリアのアドレスを取得。(sceNetcnfifGetAddr())</li>
+         <li VALUE=3> 設定内容をIOPへ転送。(sceNetcnfifSendIOP())</li>
+         <li VALUE=4> IOP側のsceNetCnfEnv領域に設定内容の設定を実行。(sceNetcnfifSetEnv())</li>
+</ol></div>
+<br>
+</ol></div>
+<br>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

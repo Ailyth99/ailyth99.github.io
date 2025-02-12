@@ -1,0 +1,394 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>Libnetライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/libnt_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+Libnetライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリ概要</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>Libnetの概要</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>サンプルプログラム</b><br></a>
+    <a href="#Heading4_1_4"> <b>Libnetの再利用</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>Libnet利用時にロードするIOPモジュール</b><br></a>
+<p><a href="#Heading3_3">  3 <b>Libnet関数の仕様</b><br></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>関数の種別</b><br></a>
+    <a href="#Heading4_3_2"> <b>INET / INETCTL関数との相違</b><br></a>
+    <a href="#Heading4_3_3"> <b>Libnet互換関数</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリ概要</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>Libnetの概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Libnetライブラリ（以下Libnetとします）は、IOP側に実装されているネットワークライブラリINET（以下INETとします）をEE側から透過的に扱うためのライブラリです。同じくIOP側に実装されているネットワーク設定ライブラリINETCTL（以下INETCTLとします）を扱うこともできるようになっています。Libnetを使用することで、EE上で動作するネットワーク対応アプリケーションはIOPプログラミングなしでINETを扱うことができます。<br>Libnetは内部でSIFシステムを使用し、EE側とIOP側に分れて実装されています。EE側でユーザプログラムから呼び出された関数がSIFシステムを用いてIOP側の関数を呼び出し、そのIOP側の関数がINETの関数を呼び出すというしくみです。マルチスレッド対応のMSIFRPCを用いているので、EE側の複数のスレッドから任意のタイミングでLibnetの関数を呼び出すことができます。ただし、MSIFRPCの制限により、対応できるスレッド数は最大32個となっています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Libnetを使用する際に必要なファイルは次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ライブラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libnet.a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘッダファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libnet.h&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;IOPモジュール&nbsp;</td>
+<td valign="TOP">&nbsp;libnet.irx&nbsp;<br>&nbsp;msifrpc.irx&nbsp;<br>&nbsp;ほかINETの動作に必要なモジュール（後述）&nbsp;<br>&nbsp;場合により、netcnfif.irxが必要になる&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>サンプルプログラム</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Libnetを使用するンプルプログラムとして次のものがありますので参照してください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ee/sample/inet/libnet/ball_game<br>libnetライブラリを用いた、UDPパケットを用いてサーバ・クライアントのデータ交換を行うサンプル
+         <li> ee/sample/inet/libnet/echo_server<br>libnetライブラリ上で動作するechoサーバサンプル
+         <li> ee/sample/inet/libnet/http_get<br>libnetライブラリを用いた、HTTPにより（libhttp.aは使っていません）リモートファイルを取得するサンプル
+         <li> ee/sample/inet/libnet/load_test<br>TCPを用いて、クライアント-サーバ間でパケットを送受信するサンプル
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_4">
+<a href="#Heading3_1"> 1. </a>4 <b>Libnetの再利用</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Libnetはソースを公開していますので、アプリケーション開発者が必要に応じて独自に修正しタイトルに組み込むことも可能です。<br>独自のLibnetを作成する場合、独自のエラーコードを次の範囲で定義するようにしてください。<br></div>
+<div style="margin-left:67px;">独自のエラーコード：sceLIBNETE_USEREND( =-548) ～ sceLIBNETE_USER( =-546)<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>Libnet利用時にロードするIOPモジュール</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">Libnet利用時には、以下のIOPモジュールをロードしておく必要があります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>Libnet自身のIOPモジュール</b><br></h4></div>
+
+<div style="margin-left:67px;">libnet.irx<br></div>
+
+<div style="margin-left:40px;"><h4><b>MSIFRPCが必要とするモジュール</b><br></h4></div>
+
+<div style="margin-left:67px;">msifrpc.irx<br></div>
+
+<div style="margin-left:40px;"><h4><b>INETが必要とするモジュール</b><br></h4></div>
+
+<div style="margin-left:40px;"><ul>
+         <li> USBイーサ利用時
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> inet.irx</li>
+         <li VALUE=2> netcnf.irx</li>
+         <li VALUE=3> inetctl.irx</li>
+         <li VALUE=4> usbd.irx</li>
+         <li VALUE=5> an986.irx</li>
+         <li VALUE=6> ppp.irx	（PPPoE利用時のみ）</li>
+         <li VALUE=7> pppoe.irx	（PPPoE利用時のみ）</li>
+</ol></div>
+         <li> HDDイーサ利用時
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> inet.irx</li>
+         <li VALUE=2> netcnf.irx</li>
+         <li VALUE=3> inetctl.irx</li>
+         <li VALUE=4> dev9.irx</li>
+         <li VALUE=5> smap.irx</li>
+         <li VALUE=6> ppp.irx	（PPPoE利用時のみ）</li>
+         <li VALUE=7> pppoe.irx	（PPPoE利用時のみ）</li>
+</ol></div>
+         <li> PPP利用時
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> inet.irx</li>
+         <li VALUE=2> netcnf.irx</li>
+         <li VALUE=3> inetctl.irx</li>
+         <li VALUE=4> ppp.irx</li>
+         <li VALUE=5> usbd.irx</li>
+         <li VALUE=6> usbmload.irx	（複数のモデム機種をサポートする場合）</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:67px;">通常のアプリケーションでは、接続されたモデム機種を自動判別して適切なモデムドライバをロードするためにusbmload.irxを使用することになります。サンプルプログラムでは特定のモデムドライバを使うことを想定しているため、usbmload.irxを使用していません。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>Libnet関数の仕様</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>関数の種別</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Libnetに実装されている関数は、次の3種に分けることができます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> Libnet独自の関数
+         <li> INETで提供されている関数をLibnet用に修正した関数
+         <li> INETCTLで提供されている関数をLibnet用に修正した関数
+</ul></div>
+<div style="margin-left:50px;">すべての関数がブロッキング動作を前提にしています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>INET / INETCTL関数との相違</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">INET / INETCTLで提供されている関数をLibnet用に修正するため、各関数に以下の引数が追加されています。<br><br></div>
+<div style="margin-left:67px;">sceSifMClientData *<i>cd</i>;<br>u_int *<i>net_buf</i>;<br></div>
+<div style="margin-left:50px;"><br><i>cd</i>はMSIFRPCのクライアントデータ、<i>net_buf</i>はSIFの送受信に用いるバッファです。<br>このバッファは、以前16 bytes alignとしていましたが、キャッシュを考慮して64 bytes alignとしてください。併せてバッファサイズも64バイト単位にしてください。<br>バッファは必要なサイズ分を確保しておかなければなりません。必要なサイズとは、送信バッファまたは受信バッファの大きいほうのサイズです。たとえばsceInetSend()を呼び出す際には、送信バッファとして<br><br></div>
+<div style="margin-left:67px;">sizeof(u_int) * 4 ＋ 最大送信データサイズ<br><br></div>
+<div style="margin-left:50px;">が必要ですので、これを64バイト単位に切り上げたサイズが必要になります。アプリケーションの送信データだけではなく他のデータ（制御データ）も収めるサイズが必要ですので注意してください。なお、現在の制御データの最大サイズはsceLIBNET_CTRL_DATA_SIZEです。この制御データのサイズは将来増減することがあります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>Libnet互換関数</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Release 2.5では各ライブラリの機能を明確にするため、通信処理を行うLibnetとコンフィグレーション処理を行うNetcnfifとを分割しましたが、libnet_init()などRelease2.4.3以前のLibnetで使われていた関数名を以下のとおり互換用として準備してあります。これにより、以前のプログラムもMakefileやLibnet IOPモジュールの位置など若干の修正でそのまま利用することができます。<br>また、これらの互換用関数名が必要でない場合は、sceLibnetDisableAliasesをマクロ定義しておくことで無効にすることができます。<br></div>
+<div style="margin-left:67px;"><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>互換用関数名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>対応するLibnet関数</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;libnet_init( xcd, x1, x2, x3 )&nbsp;</td>
+<td valign="TOP">&nbsp;sceLibnetInitialize&nbsp;<br>&nbsp;( xcd, x1, x2, x3 )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;libnet_term( xcd )&nbsp;</td>
+<td valign="TOP">&nbsp;sceLibnetTerminate( xcd )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;reg_handler( xcd, xnet_buf )&nbsp;</td>
+<td valign="TOP">&nbsp;sceLibnetRegisterHandler&nbsp;<br>&nbsp;( xcd, xnet_buf )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unreg_handler( xcd, xnet_buf )&nbsp;</td>
+<td valign="TOP">&nbsp;sceLibnetUnregisterHandler&nbsp;<br>&nbsp;( xcd, xnet_buf )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;wait_get_addr( xcd, xnet_buf, x1, x2 )&nbsp;</td>
+<td valign="TOP">&nbsp;sceLibnetWaitGetAddress&nbsp;<br>&nbsp;( xcd, xnet_buf, x1, 1, x2, &nbsp;<br>&nbsp;sceLIBNETF_AUTO_UPIF )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;wait_get_addr_only( xcd, xnet_buf, x1, x2 )&nbsp;</td>
+<td valign="TOP">&nbsp;sceLibnetWaitGetAddress&nbsp;<br>&nbsp;( xcd, xnet_buf, x1, 1, x2, 0 )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;get_interface_id( xcd, xnet_buf, x1 )&nbsp;</td>
+<td valign="TOP">&nbsp;sceLibnetWaitGetInterfaceID&nbsp;<br>&nbsp;( xcd, xnet_buf, x1, 1 )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;up_interface( xcd, xnet_buf, x1 )&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetCtlUpInterface&nbsp;<br>&nbsp;( xcd, xnet_buf, x1 )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;down_interface( xcd, xnet_buf, x1 )&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetCtlDownInterface&nbsp;<br>&nbsp;( xcd, xnet_buf, x1 )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;load_set_conf( xcd, xnet_buf, x1, x2 )&nbsp;</td>
+<td valign="TOP">&nbsp;load_set_conf_extra&nbsp;<br>&nbsp;( xcd, xnet_buf, x1, x2, &nbsp;<br>&nbsp;sceLIBNETF_AUTO_LOADMODULE | &nbsp;<br>&nbsp;sceLIBNETF_AUTO_UPIF )&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;load_set_conf_only( xcd, xnet_buf, x1, x2 )&nbsp;</td>
+<td valign="TOP">&nbsp;load_set_conf_extra&nbsp;<br>&nbsp;( xcd, xnet_buf, x1, x2, &nbsp;<br>&nbsp;sceLIBNETF_AUTO_LOADMODULE )&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">さらに実用上の観点から、指定された設定ファイルを読み込みそれにしたがってコンフィグレーションを行う関数として、load_set_conf_extra()を用意してあります。この関数はあくまでも便宜のために用意してあるものですから、機能不足を感じられる場合もあることと思いますが、そのような場合にはNetcnfifライブラリを使用してください。<br>その際には、sceLibnetDisableCompatibleマクロを定義することによって、この関数を無効にしてください。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

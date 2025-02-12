@@ -1,0 +1,982 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>高レベルグラフィックスプラグインライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/hip_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+高レベルグラフィックスプラグインライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリ概要</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>概要</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>サンプルプログラム</b><br></a>
+    <a href="#Heading4_1_4"> <b>データフォーマット</b><br></a>
+    <a href="#Heading4_1_5"> <b>データコンバータ</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>各プラグインの機能概要</b><br></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>Frameプラグイン</b><br></a>
+    <a href="#Heading4_2_2"> <b>Microプラグイン</b><br></a>
+    <a href="#Heading4_2_3"> <b>２Ｄテクスチャプラグイン</b><br></a>
+    <a href="#Heading4_2_4"> <b>Tim2プラグイン</b><br></a>
+    <a href="#Heading4_2_5"> <b>Shapeプラグイン</b><br></a>
+    <a href="#Heading4_2_6"> <b>Hrchyプラグイン</b><br></a>
+    <a href="#Heading4_2_7"> <b>Animeプラグイン</b><br></a>
+    <a href="#Heading4_2_8"> <b>Shareプラグイン</b><br></a>
+    <a href="#Heading4_2_9"> <b>ClutBumpプラグイン</b><br></a>
+    <a href="#Heading4_2_10"> <b>FishEyeプラグイン</b><br></a>
+    <a href="#Heading4_2_11"> <b>Reflectionプラグイン</b><br></a>
+    <a href="#Heading4_2_12"> <b>Refractionプラグイン</b><br></a>
+    <a href="#Heading4_2_13"> <b>ShadowMapプラグイン</b><br></a>
+    <a href="#Heading4_2_14"> <b>ShadowBoxプラグイン</b><br></a>
+    <a href="#Heading4_2_15"> <b>LightMapプラグイン</b><br></a>
+    <a href="#Heading4_2_16"> <b>Clipプラグイン</b><br></a>
+    <a href="#Heading4_2_17"> <b>Cameraプラグイン</b><br></a>
+    <a href="#Heading4_2_18"> <b>Skinプラグイン</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>データアクセス関数使用例</b><br></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>SCE_HIP_SHAPE_DATA</b><br></a>
+    <a href="#Heading4_3_2"> <b>SCE_HIP_BASEMATRIX</b><br></a>
+    <a href="#Heading4_3_3"> <b>SCE_HIP_HRCHY_DATA</b><br></a>
+    <a href="#Heading4_3_4"> <b>SCE_HIP_PIVOT_DATA</b><br></a>
+    <a href="#Heading4_3_5"> <b>SCE_HIP_TEX2D_DATA</b><br></a>
+    <a href="#Heading4_3_6"> <b>SCE_HIP_TEX2D_ENV</b><br></a>
+    <a href="#Heading4_3_7"> <b>SCE_HIP_MICRO_DATA</b><br></a>
+    <a href="#Heading4_3_8"> <b>SCE_HIP_CLUTBUMP_DATA</b><br></a>
+    <a href="#Heading4_3_9"> <b>SCE_HIP_CLUTBUMP_NORMAL</b><br></a>
+    <a href="#Heading4_3_10"> <b>SCE_HIP_TIM2_DATA</b><br></a>
+    <a href="#Heading4_3_11"> <b>SCE_HIP_ANIME_DATA</b><br></a>
+    <a href="#Heading4_3_12"> <b>SCE_HIP_KEYFRAME</b><br></a>
+    <a href="#Heading4_3_13"> <b>SCE_HIP_KEYVALUE</b><br></a>
+    <a href="#Heading4_3_14"> <b>SCE_HIP_SHARE_DATA</b><br></a>
+    <a href="#Heading4_3_15"> <b>SCE_HIP_SHAREVERTEX</b><br></a>
+    <a href="#Heading4_3_16"> <b>SCE_HIP_SHARENORMAL</b><br></a>
+    <a href="#Heading4_3_17"> <b>SCE_HIP_VERTEXINDEX</b><br></a>
+    <a href="#Heading4_3_18"> <b>SCE_HIP_NORMALINDEX</b><br></a>
+    <a href="#Heading4_3_19"> <b>SCE_HIP_SRCDSTVERTEX</b><br></a>
+    <a href="#Heading4_3_20"> <b>SCE_HIP_SRCDSTNORMAL</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+<div style="margin-left:50px;"><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリ概要</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">高レベルグラフィックスライブラリ"HiG"に対応したグラフィックスプラグインライブラリとして、"HiP"をSCEIから提供します。HiPは、これまでグラフィックスサンプルプログラムとして提供されていたグラフィックス技法をプラグイン形式で実装したもので、次のプラグインを含んでいます（今後随時拡充する予定です）。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>プラグイン名（関数名）</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Microプラグイン&nbsp;<br>&nbsp;sceHiPlugMicro&nbsp;</td>
+<td valign="TOP">&nbsp;透視変換・光源計算のマイクロプログラムを&nbsp;<br>&nbsp;VU1へ転送する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2Dテクスチャプラグイン&nbsp;<br>&nbsp;sce HiPlugTex2D&nbsp;</td>
+<td valign="TOP">&nbsp;テクスチャデータをGSへ転送する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Tim2プラグイン&nbsp;<br>&nbsp;sceHiPlugTim2&nbsp;</td>
+<td valign="TOP">&nbsp;Tim2フォーマットテクスチャデータを&nbsp;<br>&nbsp;GSへ転送する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Shapeプラグイン&nbsp;<br>&nbsp;sceHiPlugShape&nbsp;</td>
+<td valign="TOP">&nbsp;形状データをVU1へ転送し&nbsp;<br>&nbsp;マイクロプログラムによって描画する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Hrchyプラグイン&nbsp;<br>&nbsp;sceHiPlugHrchy&nbsp;</td>
+<td valign="TOP">&nbsp;階層構造と座標変換に対応するマトリクスを&nbsp;<br>&nbsp;生成する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Animeプラグイン&nbsp;<br>&nbsp;sceHiPlugAnime&nbsp;</td>
+<td valign="TOP">&nbsp;キーフレーム間の補間を行う&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Shareプラグイン&nbsp;<br>&nbsp;sceHiPlugShare&nbsp;</td>
+<td valign="TOP">&nbsp;共有頂点・共有法線から形状を生成する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Frameプラグイン&nbsp;<br>&nbsp;（関数なし）&nbsp;</td>
+<td valign="TOP">&nbsp;他のプラグインを挿入してプラグインブロックを&nbsp;<br>&nbsp;構成するための仮想プラグイン&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ClutBumpプラグイン&nbsp;<br>&nbsp;sceHiPlugClutBump&nbsp;</td>
+<td valign="TOP">&nbsp;256の法線テーブルとテクスチャCLUTから&nbsp;<br>&nbsp;CLUTαを算出することでバンプ効果を行う&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;FishEyeプラグイン&nbsp;<br>&nbsp;sceHiPlugFishEye&nbsp;</td>
+<td valign="TOP">&nbsp;魚眼レンズ効果によるシーンレンダリングを行う。&nbsp;<br>&nbsp;Reflection,Refractionプラグインの&nbsp;<br>&nbsp;追加機能プラグイン。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Reflectionプラグイン&nbsp;<br>&nbsp;sceHiPlugReflect&nbsp;</td>
+<td valign="TOP">&nbsp;リフレクションマッピング（環境マッピング）&nbsp;<br>&nbsp;を行う。表面への写り込みの効果がある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Refractionプラグイン&nbsp;<br>&nbsp;sceHiPlugRefract&nbsp;</td>
+<td valign="TOP">&nbsp;リフラクションマッピング（屈折マッピング）&nbsp;<br>&nbsp;を行う。背景が屈折して見える効果がある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ShadowMapプラグイン&nbsp;<br>&nbsp;sceHiPlugShadowMap&nbsp;</td>
+<td valign="TOP">&nbsp;シャドーテクスチャのレンダリングおよび&nbsp;<br>&nbsp;シャドーテクスチャの背景への&nbsp;<br>&nbsp;シャドーマッピングによるシャドー効果。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ShadowBoxプラグイン&nbsp;<br>&nbsp;sceHiPlugShadowBox&nbsp;</td>
+<td valign="TOP">&nbsp;シャドーテクスチャのためのバウンディング&nbsp;<br>&nbsp;ボックス計算。ShadowMapプラグインの&nbsp;<br>&nbsp;サブプラグイン&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LightMapプラグイン&nbsp;<br>&nbsp;sceHiPlugLightMap&nbsp;</td>
+<td valign="TOP">&nbsp;ライト情報からテクスチャを投影することで光源&nbsp;<br>&nbsp;計算なしにライティング効果を演出する機能がある&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Clipプラグイン&nbsp;<br>&nbsp;sceHiPlugClip&nbsp;</td>
+<td valign="TOP">&nbsp;マトリクス単位のオブジェクトクリッピング処理を&nbsp;<br>&nbsp;行い、描画転送を制御する。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Cameraプラグイン&nbsp;<br>&nbsp;sceHiPlugCamera&nbsp;</td>
+<td valign="TOP">&nbsp;スクリーンマトリクスとビューマトリクスから&nbsp;<br>&nbsp;透視変換マトリクスとクリップボリュームを求める。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Skinプラグイン&nbsp;<br>&nbsp;sceHiPlugSkin&nbsp;</td>
+<td valign="TOP">&nbsp;頂点に対する重みとボーンのマトリクスから&nbsp;<br>&nbsp;スキンデフォメーション処理を行う。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">各々のプラグインは独立性を考慮して実装されていますので、シーン構成に応じて柔軟にプラグインブロックを構成することができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">グラフィックスプラグインライブラリに必要なファイルは次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ライブラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libhip.a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘッダファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libhip.h&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>サンプルプログラム</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プラグインライブラリを使用したサンプルプログラムおよびサンプルデータが以下にありますので参照してください。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_1_3_1"><h4>
+(1)&nbsp;<b>sce/ee/sample/graphics/hig</b></h4>
+</a></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_1_3_2"><h4>
+(2)&nbsp;<b>sce/ee/sample/graphics/hig/data</b><br></h4>
+</a></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_4">
+<a href="#Heading3_1"> 1. </a>4 <b>データフォーマット</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プラグインライブラリで使用するデータフォーマットの概要は、グラフィックスフォーマットドキュメント(gformat.doc)を参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_5">
+<a href="#Heading3_1"> 1. </a>5 <b>データコンバータ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">グラフィックスデータを中間ファイルフォーマットeSからHiGフォーマットに変換するコンバータとしてesconvが用意されています。esconvはアーティストツールとして提供されているeSパッケージに含まれていますので参照してください。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>各プラグインの機能概要</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">HiPに含まれる各プラグインの機能概要とタイプ属性、必要とするデータのタイプ属性を示します。詳細は別途、リファレンスドキュメントを参照してください。<br>タイプ属性のリポジトリ識別子はいずれもCOMMON（1）です。またプロジェクト識別子は、今回リリース分はgraphics framework sampleに基づいていることからFRAMEWORK（1）になっています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>Frameプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Frameプラグインは、他のプラグインを挿入してプラグインブロックを構成するための仮想的なプラグインで、それ自体には機能はありません（プラグイン関数を持たず、したがってデータブロックも不要です）。一連の処理を行うためにいくつかのプラグインブロックを使用する場合、それらをFrameプラグインに挿入しておくと、ユーザプログラムからはそのFrameプラグインを呼び出すことで一連の処理を行うことができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>Microプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Microプラグインは、透視変換・光源計算などのマイクロプログラムをVU１へ転送するDMAパケットを生成します。プロセス処理ごとにマイクロプログラムの登録、転送するマイクロプログラムの選択などの機能があります。実際のマイクロプログラムの転送・実行はsceHiDMASend()を呼び出すことで行なわれます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>２Ｄテクスチャプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">2Dテクスチャプラグインは、テクスチャデータをGSのローカルメモリへ転送するパケットを生成します。テクスチャの転送はsceHiDMASend()を呼び出すことで行なわれます。<br>sceHiPlugTex2dInitArg_tにおいてresident=TRUE,とすることによって、常駐テクスチャにすることが可能です。現状の２DテクスチャプラグインではGSメモリの管理をしていませんので、常駐、非常駐を共用する場合は、常駐テクスチャには適切サイズ分のGSメモリを割り当て、非常駐テクスチャ群は残りのGSメモリ（sceHiGsMemRestSize()で取得可能）を共有した形（同一Tblを割り当てる）で割り当てるなどのメモリ割り当てを行う必要があります。<br><br></div>
+<div style="margin-left:67px;">例：<br>sceHiPlugTex2dInitArg_t resi1, resi2, nonresi;<br>sceHiPlug *resplug1, *resiplug2, *nonresiplug1, *nonresiplug2, *nonresiplug3;<br></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:67px;">resi1.tbl = sceHiGsMemAlloc(SCE_HIGS_PAGE_ALIGN, RESI1_TEX_SIZE);<br>resi1.resident = TRUE;<br>resi2.tbl = sceHiGsMemAlloc(SCE_HIGS_PAGE_ALIGN, RESI2_TEX_SIZE);<br>resi2.resident = TRUE;<br>nonresi.tbl = sceHiGsMemAlloc(SCE_HIGS_PAGE_ALIGN, sceHiGsMemRestSize());<br>nonresi.resident = FALSE;<br>resiplug1-&gt;args = (u_int) &resi1;<br>resiplug2-&gt;args = (u_int) &resi2;<br>nonresiplug1-&gt;args = (u_int) &nonresi;<br>nonresiplug2-&gt;args = (u_int) &nonresi;<br>nonresiplug3-&gt;args = (u_int) &nonresi;<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>Tim2プラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Tim2プラグインは、Tim2フォーマットなテクスチャデータをGSのローカルメモリへ転送するパケットを生成します。テクスチャの転送はsceHiDMASend()を呼び出すことで行われます<br>sceHiPlugTim2InitArg_tにおいてresident=TRUE,とすることによって、常駐テクスチャにすることが可能です。現状の２DテクスチャプラグインではGSメモリの管理をしていませんので、常駐、非常駐を共用する場合は、常駐テクスチャには適切サイズ分のGSメモリを割り当て、非常駐テクスチャ群は残りのGSメモリ（sceHiGsMemRestSize()で取得可能）を共有した形（同一Tblを割り当てる）で割り当てるなどのメモリ割り当てを行う必要があります。上記Tex2dプラグインの例などを参考にしてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_5">
+<a href="#Heading3_2"> 2. </a>5 <b>Shapeプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Shapeプラグインは、形状データをVU1へ転送しマイクロプログラムの実行・描画を行うパケットを生成します。転送・実行・描画はsceHiDMASend()を呼び出すことで行なわれます。Shapeデータにはマテリアル、ジオメトリ、プリミティブ、頂点、法線、テクスチャ座標、頂点カラーなどが含めれます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_6">
+<a href="#Heading3_2"> 2. </a>6 <b>Hrchyプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Hrchyプラグインは、モデルの階層構造の累積座標変換を行いモデルのローカル座標からワールド座標への変換マトリクスを生成します。ここで生成されたマトリクスはShapeプラグインによりVU1メモリへ転送されます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_7">
+<a href="#Heading3_2"> 2. </a>7 <b>Animeプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Animeプラグインは、階層構造の座標変換をキーフレーム間で補間する処理を行います。<br>移動・回転・拡縮のそれぞれの座標変換パラメータを与えられた補間タイプにより計算して階層データに書き込みを行います。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_8">
+<a href="#Heading3_2"> 2. </a>8 <b>Shareプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Shareプラグインは、別々の座標変換で共有している頂点・法線に基づいて形状を生成します。擬似的なスキンデフォメーションの効果があります。生成された形状データはShapeデータの１つとしてShapeプラグインにより転送、描画が行われます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_9">
+<a href="#Heading3_2"> 2. </a>9 <b>ClutBumpプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">256個の法線テーブルからシェーディング強度を算出しテクスチャCLUTのα値として書き込みを行います。基底となるテクスチャとのαブレンドによる輝度の変化によりバンプ効果を演出します。<br>ClutBump引数で与えられるシェーディングパラメータと法線テーブル、ライトベクトルから下記演算式を使ってテクスチャCLUTのα値を求めます。<br></div>
+<div style="margin-left:67px;">演算式：<br>CLUTα = ambientα + diffuseα * (light.normal) + specularα*(light.normal)^shininess<br></div>
+<div style="margin-left:50px;"><br>ClutBumpで使用できるテクスチャは、TEXELフォーマットPSMT8、CLUTフォーマットRGBA32のみになります。それ以外のフォーマットには対応していませんので注意してください。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/libhip001.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/libhip002.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/libhip003.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/libhip004.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_10">
+<a href="#Heading3_2"> 2. </a>10 <b>FishEyeプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">魚眼レンズ効果の投影変換によるシーンレンダリングから球面状テクスチャを生成します。<br>与えられたFishEyeプラグイン引数を用いて変換マトリクスを生成します。<br>変換マトリクスは視点位置から長さ１の球面への投影変換処理を行います。<br></div>
+<div style="margin-left:67px;"><br>魚眼レンズの投影変換式：<br></div>
+<div style="margin-left:80px;">M:　視界変換マトリクス(world_view)<br>V:　頂点座標<br>texsize:　球面サイズ<br>ZA:　(rmax*near-rmin*far)/(near-far)<br>ZB:　(rmax*near*far-rmin*near*far)/(near-far)<br></div>
+<div style="margin-left:67px;"><br></div>
+<div style="margin-left:80px;">V' = M * V<br>FishEye.x = 1/|V'| * texsize/2 + 2048<br>FishEye.y = 1/|V'| * texsize/2 + 2048<br>FishEye.z = 1/|V'| * ZB + ZA<br></div>
+<div style="margin-left:67px;"><br></div>
+<div style="margin-left:50px;">適切なレンダリングイメージを得るには適切な描画環境が必要です。<br>SCISSOR,XYOFFSETなどのレジスタに正しく値を設定してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_11">
+<a href="#Heading3_2"> 2. </a>11 <b>Reflectionプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">環境マッピング手法のうち、もっとも一般的かつ簡単な球面反射マッピング(spherical reflection mapping)を採用しています。<br>法線ベクトルと視線ベクトルから反射ベクトルを計算した後、STベクトルを算出して１つの球面状テクスチャをマッピングすることで写りこみを再現しています。<br>リフレクションマッピングはマッピングテクスチャにより静的(static)と動的(dynamic)の２つの側面があります。<br>テクスチャが固定の場合は静的なリフレクションマッピングですがレンダリングコストはかかりません。動的なリフレクションマッピングは背景のレンダリングイメージをテクスチャとして使用することで実現します。これはFishEyeプラグインを併用することで可能です。ただし一旦背景のレンダリングを行いますのでレンダリングコストはかかります。よりリアルなリフレクションマッピングを実現したい場合に有効です。再現するには適切な描画環境が必要です。レンダリングイメージをマッピングテクスチャに使用するよう正しくレジスタ設定を行ってください。マッピングテクスチャのテクスチャファンクションはDECALを指定してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_12">
+<a href="#Heading3_2"> 2. </a>12 <b>Refractionプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">RefractionプラグインはReflectionプラグインとほぼ同じ手法で実現します。<br>違いは屈折ベクトルの算出とパラメータ屈折率(refract_index)が追加されていることです。<br>リフラクションマッピングもリフレクションマッピングと同様マッピングテクスチャにより静的(static)と動的(dynamic)の２つの側面があります。<br>動的なリフラクションマッピングはFishEyeプラグインを併用することで可能です。<br>再現するには適切な描画環境が必要です。レンダリングイメージをマッピングテクスチャに使用するよう正しくレジスタ設定を行ってください。マッピングテクスチャのテクスチャファンクションはDECALを指定してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_13">
+<a href="#Heading3_2"> 2. </a>13 <b>ShadowMapプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ShadowMapはいくつかあるリアルタイムシャドーイングテクニックの中で最も柔軟なシャドー効果を実現します。<br>概念的に２つのオブジェクトによる２つの処理を行います。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> シャドーオブジェクト</li>
+         <li VALUE=2> シャドーレシーバー</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">シャドーオブジェクトは影を作り出す側のオブジェクトです。レンダリング対象です。<br>シャドーレシーバーは影が投影される側のオブジェクトです。マッピング対象です。<br>シャドーオブジェクトをモノクロ（白黒）テクスチャとしてレンダリングします。これをシャドーテクスチャとします。次にシャドーテクスチャをシャドーレシーバーにテクスチャマッピングします。これは光源からシャドーオブジェクトへのプロジェクションマッピングが行われます。描画環境は減算ブレンドを設定します。事前にフレームバッファにレンダリングされているレシーバーからシャドーマッピングされたシャドーレシーバーのカラーが減算されシャドー効果を実現します。<br>シャドーオブジェクトには効率のためバウンディングボックスであるShadowBoxを持つようにしています。ShadowMapプラグイン引数に渡すかデータとしてShadowMapプラグインブロックが持つようにしてください。<br>光源は平行光源の０番の情報のみサポートしています。複数の光源には対応していません。複数光源が必要な場合はShadowMapの処理を複数繰り返してブレンドしてください。<br>シャドーマッピング用マイクロプログラムがもつマイクロデータの平行光源はShadowMapプラグインにより下記データに書き込まれます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	x, y, z, -		光源０の方向ベクトルX,Y,Z
+.float	-, -, -, -		未使用
+.float 	-, -, -, -		未使用
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_14">
+<a href="#Heading3_2"> 2. </a>14 <b>ShadowBoxプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">シャドーオブジェクトのバウンディングボックスのワールド座標値を計算するプラグインです。ShadowMapプラグインのサブプラグインという位置付けです。<br>ワールド座標変換する階層構造はルート階層（最初のハイアラキデータ）のみ対応しています。<br>ルートローカルでの最大値、最小値の対角線から構成されるバウンディングボックスを示します。<br>シャドーオブジェクトが複数の階層構造やアニメーションをもつ場合はそれらを考慮したバウンディングボックスを設定する必要があります。また、複数のシャドーオブジェクトを一回のシャドーマッピングする場合も複数のシャドーオブジェクトを含んだバウンディングボックスを設定する必要があります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_15">
+<a href="#Heading3_2"> 2. </a>15 <b>LightMapプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">LightMapはテクスチャによるライティングエフェクトを実現します。<br>光源からのプロジェクションマッピングが行われます。<br>光源は平行光源の０番の情報のみサポートしています。<br>平行光源から情報を読み取りますが、情報としてはスポットライトと同じ情報量を必要とします。<br>位置、ベクトル、カラー、強度、角度をそれぞれ設定してください。<br>LightMap用マイクロプログラムがもつマイクロデータの平行光源はLightMapプラグインにより下記データに書き込まれます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	x, y, z, -		光源０の方向ベクトルX,Y,Z
+.float	-, -, -, -		未使用
+.float 	-, -, -, -		未使用
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_16">
+<a href="#Heading3_2"> 2. </a>16 <b>Clipプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ClipプラグインはClipデータにあるバウンディングボックスとMicroデータにあるクリッピングボリュームからボリューム外のオブジェクトクリッピング処理を行い、描画転送を制御します。<br>クリッピング対象の場合はマトリクスの不可視フラグがONに、非対象の場合はマトリクスの不可視フラグがOFFに設定されます。不可視フラグがONのオブジェクトはDMA転送のエントリから外されDMA転送しません。これは無駄なDMA転送を制御します。<br>可視・不可視フラグの設定に関してはsceHiPlugShapeInvisible()関数もあわせて参照ください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_17">
+<a href="#Heading3_2"> 2. </a>17 <b>Cameraプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Cameraプラグインは与えられたCameraデータからスクリーンマトリクス、ビューマトリクス、クリッピングボリューム、カメラ位置を求めMicroデータに結果をコピーします。<br>内部でsceVu0ViewScreenMatrix(),sceVu0CameraMatrix()を呼び出しています。<br>今までMicroデータに直接データを書き込みしていた場合にこのプラグインを呼び出すと上書きされてしまいます。Cameraプラグインを使用する場合はCameraデータを書き換えてください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_18">
+<a href="#Heading3_2"> 2. </a>18 <b>Skinプラグイン</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Skinプラグインはボーンによる影響度を重み係数として各頂点に与えることでボーン階層のアニメーションによるスキンデフォメーション効果を得ることができます。<br>ライブラリとしてVU0とVU1の両方に対するスキニングを提供します。<br>それぞれ以下の特徴と制限があります。<br><br></div>
+<div style="margin-left:67px;">VU0: １スキン、ボーン制限なし、４ウェイト<br>VU1: １スキン、４ボーン、４ウェイト<br></div>
+<div style="margin-left:50px;"><br>１つの座標変換をもった１スキンモデルに対して、VU0はボーン制限なし、VU1は最大４ボーンまで、重みの数はVU0,VU1とも最大４ウェイトまでとなっています。<br>１頂点４ウェイトによる変換式は下記線形補間で求めています。<br><br></div>
+<div style="margin-left:67px;">v' = M0*v*w0 + M1*v*w1 + M2*v*w2 +M3*v*w3<br>または<br>v' = (M0*w0 + M1*w1 + M2*w2 + M3*w3)*v<br><br>w: 重み係数 , w0+w1+w2+w3 = 1.0<br>M: ボーンによる変換マトリクス , M = BW*LB = LW<br></div>
+<div style="margin-left:50px;"><br>ボーンによる変換マトリクスはワールド変換になるためVU0においてはマイクロプログラム上でスキンモデルの変換マトリクスが掛けられてしまいます。<br>これを解決するためモデル変換の逆マトリクスを求める機能オプションを用意しています。<br>また法線の正規化も必要な場合があるため正規化処理をするオプションも用意しています。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>データアクセス関数使用例</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>SCE_HIP_SHAPE_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+  int i,j,k,l;		/* loop counter */
+  sceHiPlugShapeHead_t *th;	/* top head */
+  sceHiPlugShapeHead_t *dh;	/* data head */
+  sceHiPlugShapeHead_t *mh;	/* material head */
+  sceHiPlugShapeHead_t *gh;	/* geometry head */
+  sceHiGsGiftag	*mg;	/* material giftag */
+  sceVu0FMATRIX	*md;	/* material attrib */
+  sceVu0FVECTOR	*vd;	/* vertex,normal,st,color */
+
+  th = sceHiPlugShapeGetHead(p, t);		/* t = SCE_HIP_SHAPE_DATA */
+  for(i=0;i&lt;th-&gt;top.num;i++){			/* num of data */
+	 dh = sceHiPlugShapeGetDataHead(th, i);
+	 for(j=0;j&lt;dh-&gt;dat.num;j++){		/* num of material */
+      mh = sceHiPlugShapeGetMaterialHead(dh, j);
+	   mg = sceHiPlugShapeGetMaterialGiftag(mh);
+	   md = sceHiPlugShapeGetMaterialAttrib(mh);
+	   for(k=0;k&lt;mh-&gt;mat.num;k++){		/* num of geometry */
+	     gh = sceHiPlugShapeGetGeometryHead(mh, k);
+	     for(l=0;l&lt;gh-&gt;geo.num;l++){		/* num of primitive */
+	       vd = sceHiPlugShapeGetGeometryVertex(gh, l);
+	       vd = sceHiPlugShapeGetGeometryNormal(gh, l);
+	       vd = sceHiPlugShapeGetGeometryST(gh, l);
+	       vd = sceHiPlugShapeGetGeometryColor(gh, l);
+	     }
+      }
+    }
+  }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>SCE_HIP_BASEMATRIX</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;				/* loop counter */
+    sceHiPlugShapeHead_t *h;		/* matrix head */
+    sceHiPlugShapeMatrix_t *d;	/* matrix data */
+
+    h = sceHiPlugShapeGetHead(p, t);		/* t = SCE_HIP_BASEMATRIX */
+    for(i=0;i&lt;h-&gt;top.num;i++){
+	    d = sceHiPlugShapeGetMatrix(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>SCE_HIP_HRCHY_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugHrchyHead_t *h;
+    sceHiPlugHrchyData_t *d;
+
+    h = sceHiPlugHrchyGetHead(p, t);	/* t = SCE_HIP_HRCHY_DATA */
+    for(i=0;i&lt;h-&gt;num;i++){
+	　 d = sceHiPlugHrchyGetData(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>SCE_HIP_PIVOT_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugHrchyHead_t *h;
+    sceVu0FVECTOR *d;
+
+    h = sceHiPlugHrchyGetHead(p, t);		/* t = SCE_HIP_PIVOT_DATA */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugHrchyGetPivot(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>SCE_HIP_TEX2D_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugTex2DHead_t *h;
+    sceHiPlugTex2DData_t *d;
+    u_int *texel,*clut;
+
+    h = sceHiPlugTex2DGetHead(p, t);		/* t = SCE_HIP_TEX2D_DATA */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugTex2DGetData(h, i);
+	   texel = sceHiPlugTex2DGetTexel(d);
+	   clut = sceHiPlugTex2DGetClut(d);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_6">
+<a href="#Heading3_3"> 3. </a>6 <b>SCE_HIP_TEX2D_ENV</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugTex2DHead_t *h;
+    sceHiGsGiftag *g;
+
+    h = sceHiPlugTex2DGetHead(p, t);
+    for(i=0;i&lt;h-&gt;num;i++){
+	   g = sceHiPlugTex2DGetEnv(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_7">
+<a href="#Heading3_3"> 3. </a>7 <b>SCE_HIP_MICRO_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    sceHiPlugMicroData_t *d;
+
+    d = sceHiPlugMicroGetData(p);	/* SCE_HIP_MICRO_DATA */
+}
+
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_8">
+<a href="#Heading3_3"> 3. </a>8 <b>SCE_HIP_CLUTBUMP_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugClutBumpHead_t *h;
+    sceHiPlugClutBumpData_t *d;
+
+    h = sceHiPlugClutBumpGetHead(p, t);	/* t = SCE_HIP_CLUTBUMP_DATA */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugClutBumpGetData(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_9">
+<a href="#Heading3_3"> 3. </a>9 <b>SCE_HIP_CLUTBUMP_NORMAL</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugClutBumpHead_t *h;
+    sceVu0FVECTOR *v;
+
+    h = sceHiPlugClutBumpGetHead(p, t);	/* t = SCE_HIP_CLUTBUMP_NORMAL */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   v = sceHiPlugClutBumpGetNormal(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_10">
+<a href="#Heading3_3"> 3. </a>10 <b>SCE_HIP_TIM2_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugTim2Head_t *h;
+    sceHiPlugTim2Data_t *d;
+
+    h = sceHiPlugTim2GetHead(p, t);		/* t = SCE_HIP_TIM2_DATA */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugTim2GetData(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_11">
+<a href="#Heading3_3"> 3. </a>11 <b>SCE_HIP_ANIME_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugAnimeHead_t *h;
+    sceHiPlugAnimeData_t *d;
+
+    h = sceHiPlugAnimeGetHead(p, t);		/* t = SCE_HIP_ANIME_DATA */
+    for(i=0;i&lt;h-&gt;top.num;i++){
+	   d = sceHiPlugAnimeGetData(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_12">
+<a href="#Heading3_3"> 3. </a>12 <b>SCE_HIP_KEYFRAME</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i,j;
+    sceHiPlugAnimeHead_t *th;
+    sceHiPlugAnimeHead_t *kh;
+    int *d;
+
+    th = sceHiPlugAnimeGetHead(p, t);	/* t = SCE_HIP_KEYFRAME */
+    for(i=0;i&lt;th-&gt;top.num;i++){
+	   kh = sceHiPlugAnimeGetKeyHead(th, i);
+	   for(j=0;j&lt;kh-&gt;key.num;j++){
+	      d = sceHiPlugAnimeGetFrame(kh, j);
+	   }
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_13">
+<a href="#Heading3_3"> 3. </a>13 <b>SCE_HIP_KEYVALUE</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i,j;
+    sceHiPlugAnimeHead_t *th;
+    sceHiPlugAnimeHead_t *kh;
+    sceVu0FVECTOR *v;
+
+    th = sceHiPlugAnimeGetHead(p, t);	/* t = SCE_HIP_KEYVALUE */
+    for(i=0;i&lt;th-&gt;top.num;i++){
+	   kh = sceHiPlugAnimeGetKeyHead(th, i);
+	   for(j=0;j&lt;kh-&gt;key.num;j++){
+	     v = sceHiPlugAnimeGetValue(kh, j);
+	   }
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_14">
+<a href="#Heading3_3"> 3. </a>14 <b>SCE_HIP_SHARE_DATA</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugShareHead_t *h;
+    sceHiPlugShareData_t *d;
+
+    h = sceHiPlugShareGetHead(p, t);		/* t = SCE_HIP_SHARE_DATA */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugShareGetData(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_15">
+<a href="#Heading3_3"> 3. </a>15 <b>SCE_HIP_SHAREVERTEX</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugShareHead_t *h;
+    sceHiPlugShareData_t *d;
+
+    h = sceHiPlugShareGetHead(p, t);		/* t = SCE_HIP_SHAREVERTEX */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugShareGetShare(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_16">
+<a href="#Heading3_3"> 3. </a>16 <b>SCE_HIP_SHARENORMAL</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugShareHead_t *h;
+    sceHiPlugShareData_t *d;
+
+    h = sceHiPlugShareGetHead(p, t);		/* t = SCE_HIP_SHARENORMAL */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugShareGetShare(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_17">
+<a href="#Heading3_3"> 3. </a>17 <b>SCE_HIP_VERTEXINDEX</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugShareHead_t *h;
+    int *d;
+
+    h = sceHiPlugShareGetHead(p, t);		/* t = SCE_HIP_VERTEXINDEX */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugShareGetIndex(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_18">
+<a href="#Heading3_3"> 3. </a>18 <b>SCE_HIP_NORMALINDEX</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugShareHead_t *h;
+    int *d;
+
+    h = sceHiPlugShareGetHead(p, t);		/* t = SCE_HIP_NOPMALINDEX */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   d = sceHiPlugShareGetIndex(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_19">
+<a href="#Heading3_3"> 3. </a>19 <b>SCE_HIP_SRCDSTVERTEX</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugShareHead_t *h;
+    sceVu0FVECTOR *s,*d;
+
+    h = sceHiPlugShareGetHead(p, t);		/* t = SCE_HIP_SRCDSTVERTEX */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   s = sceHiPlugShareGetSrc(h, i);
+	   d = sceHiPlugShareGetDst(h, i);
+    }
+}
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_20">
+<a href="#Heading3_3"> 3. </a>20 <b>SCE_HIP_SRCDSTNORMAL</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>{
+    int i;
+    sceHiPlugShareHead_t *h;
+    sceVu0FVECTOR *s,*d;
+
+    h = sceHiPlugShareGetHead(p, t);		/* t = SCE_HIP_SRCDSTNORMAL */
+    for(i=0;i&lt;h-&gt;num;i++){
+	   s = sceHiPlugShareGetSrc(h, i);
+	   d = sceHiPlugShareGetDst(h, i);
+    }
+}
+</pre></font></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

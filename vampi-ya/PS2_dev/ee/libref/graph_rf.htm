@@ -1,0 +1,4332 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>GS基本ライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/libgraph.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+GS基本ライブラリ
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsAlphaEnv"> sceGsAlphaEnv<br></a></td>
+<td>&nbsp;</td><td>アルファブレンディング関連の設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsAlphaEnv2"> sceGsAlphaEnv2<br></a></td>
+<td>&nbsp;</td><td>アルファブレンディング関連の設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsClear"> sceGsClear<br></a></td>
+<td>&nbsp;</td><td>バッファクリア用データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsDBuff"> sceGsDBuff<br></a></td>
+<td>&nbsp;</td><td>ダブルバッファに関する設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsDBuffDc"> sceGsDBuffDc<br></a></td>
+<td>&nbsp;</td><td>ダブルバッファに関する設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsDispEnv"> sceGsDispEnv<br></a></td>
+<td>&nbsp;</td><td>表示環境の設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsDrawEnv1"> sceGsDrawEnv1<br></a></td>
+<td>&nbsp;</td><td>描画環境の設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsDrawEnv2"> sceGsDrawEnv2<br></a></td>
+<td>&nbsp;</td><td>描画環境の設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsGParam"> sceGsGParam<br></a></td>
+<td>&nbsp;</td><td>ライブラリシステム情報<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsLoadImage"> sceGsLoadImage<br></a></td>
+<td>&nbsp;</td><td>LoadImageのためのデータ構造<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsStoreImage"> sceGsStoreImage<br></a></td>
+<td>&nbsp;</td><td>StoreImageのためのデータ構造<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsTexEnv"> sceGsTexEnv<br></a></td>
+<td>&nbsp;</td><td>テクスチャ関連の設定データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsTexEnv2"> sceGsTexEnv2<br></a></td>
+<td>&nbsp;</td><td>テクスチャ関連の設定データ<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsExecLoadImage"> sceGsExecLoadImage<br></a></td>
+<td>&nbsp;</td><td>LoadImageの実行<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsExecStoreImage"> sceGsExecStoreImage<br></a></td>
+<td>&nbsp;</td><td>StoreImageの実行<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsGetGParam"> sceGsGetGParam<br></a></td>
+<td>&nbsp;</td><td>ライブラリシステム情報を獲得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsGetIMR / isceGsGetIMR"> sceGsGetIMR / isceGsGetIMR<br></a></td>
+<td>&nbsp;</td><td>割り込みマスクの取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsPutDispEnv"> sceGsPutDispEnv<br></a></td>
+<td>&nbsp;</td><td>表示関連の初期設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsPutDrawEnv"> sceGsPutDrawEnv<br></a></td>
+<td>&nbsp;</td><td>描画関連の初期設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsPutIMR / isceGsPutIMR"> sceGsPutIMR / isceGsPutIMR<br></a></td>
+<td>&nbsp;</td><td>割り込みマスクの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsResetGraph"> sceGsResetGraph<br></a></td>
+<td>&nbsp;</td><td>GSの初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsResetPath"> sceGsResetPath<br></a></td>
+<td>&nbsp;</td><td>データパスデバイスの初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefAlphaEnv"> sceGsSetDefAlphaEnv<br></a></td>
+<td>&nbsp;</td><td>アルファブレンディング設定データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefAlphaEnv2"> sceGsSetDefAlphaEnv2<br></a></td>
+<td>&nbsp;</td><td>アルファブレンディング設定データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefClear"> sceGsSetDefClear<br></a></td>
+<td>&nbsp;</td><td>バッファクリア用データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefClear2"> sceGsSetDefClear2<br></a></td>
+<td>&nbsp;</td><td>バッファクリア用データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefDBuff"> sceGsSetDefDBuff<br></a></td>
+<td>&nbsp;</td><td>ダブルバッファの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefDBuffDc"> sceGsSetDefDBuffDc<br></a></td>
+<td>&nbsp;</td><td>ダブルバッファの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefDispEnv"> sceGsSetDefDispEnv<br></a></td>
+<td>&nbsp;</td><td>表示環境データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefDrawEnv"> sceGsSetDefDrawEnv<br></a></td>
+<td>&nbsp;</td><td>描画環境データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefDrawEnv2"> sceGsSetDefDrawEnv2<br></a></td>
+<td>&nbsp;</td><td>描画環境データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefLoadImage"> sceGsSetDefLoadImage<br></a></td>
+<td>&nbsp;</td><td>LoadImage情報の設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefStoreImage"> sceGsSetDefStoreImage<br></a></td>
+<td>&nbsp;</td><td>StoreImage情報の設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefTexEnv"> sceGsSetDefTexEnv<br></a></td>
+<td>&nbsp;</td><td>テクスチャ設定データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetDefTexEnv2"> sceGsSetDefTexEnv2<br></a></td>
+<td>&nbsp;</td><td>テクスチャ設定データの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetHalfOffset"> sceGsSetHalfOffset<br></a></td>
+<td>&nbsp;</td><td>描画オフセットデータの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSetHalfOffset2"> sceGsSetHalfOffset2<br></a></td>
+<td>&nbsp;</td><td>描画オフセットデータの作成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSwapDBuff"> sceGsSwapDBuff<br></a></td>
+<td>&nbsp;</td><td>ダブルバッファの切り替え<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSwapDBuffDc"> sceGsSwapDBuffDc<br></a></td>
+<td>&nbsp;</td><td>ダブルバッファの切り替え<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSyncPath"> sceGsSyncPath<br></a></td>
+<td>&nbsp;</td><td>データ転送の終了待ち<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSyncV"> sceGsSyncV<br></a></td>
+<td>&nbsp;</td><td>V-Blankとの同期待ち<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceGsSyncVCallback"> sceGsSyncVCallback<br></a></td>
+<td>&nbsp;</td><td>VSyncコールバック関数の設定<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsAlphaEnv"><font size=6>sceGsAlphaEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>アルファブレンディング関連の設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsAlpha <i>alpha1</i>;
+	long <i>alpha1addr</i>;
+	sceGsPabe <i>pabe</i>;
+	long <i>pabeaddr</i>;
+	sceGsTexa <i>texa</i>;
+	long <i>texaaddr</i>;
+	sceGsFba <i>fba1</i>;
+	long <i>fba1addr</i>;
+} <b>sceGsAlphaEnv</b> __attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>alpha1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ALPHA_1レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>alpha1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ALPHA_1レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pabe</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PABEレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pabeaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PABEレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>texa</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXAレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>texaaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXAレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>fba1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FBA_1レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>fba1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FBA_1レジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アルファブレンディング情報(コンテキスト1)を保持する構造体です。<br>sceGsSetDefAlphaEnv()関数で、構造体に値を設定できます。<br>構造体のメモリ上での直前に、GIFtag(PACKETモード,REGS=A+D)を付ければ、そのままGIFに転送できる構造になっています。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsAlphaEnv2"><font size=6>sceGsAlphaEnv2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>アルファブレンディング関連の設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsAlpha <i>alpha2</i>;
+	long <i>alpha2addr</i>;
+	sceGsPabe <i>pabe</i>;
+	long <i>pabeaddr</i>;
+	sceGsTexa <i>texa</i>;
+	long <i>texaaddr</i>;
+	sceGsFba <i>fba2</i>;
+	long <i>fba2addr</i>;
+} <b>sceGsAlphaEnv2</b> __attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>alpha2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ALPHA_2レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>alpha2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ALPHA_2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pabe</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PABEレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pabeaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PABEレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>texa</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXAレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>texaaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXAレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>fba2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FBA_2レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>fba2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FBA_2レジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アルファブレンディング情報(コンテキスト2)を保持する構造体です。<br>sceGsSetDefAlphaEnv2()関数で、構造体に値を設定できます。<br>構造体のメモリ上での直前に、GIFtag(PACKETモード,REGS=A+D)を付ければ、そのままGIFに転送できる構造になっています。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br>PABE, TEXAは、コンテキスト切り替えができませんので、コンテキスト1と異なる値を設定する場合には、注意してご使用ください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsClear"><font size=6>sceGsClear<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッファクリア用データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsTest <i>esta</i>;
+	long <i>testaaddr</i>;
+	sceGsPrim <i>prim</i>;
+	long <i>primaddr</i>;
+	sceGsRgbaq <i>rgbaq</i>;
+	long <i>rgbaqaddr</i>;
+	sceGsXyz <i>xyz2a</i>;
+	long <i>xyz2aaddr</i>;
+	sceGsXyz <i>xyz2b</i>;
+	long <i>xyz2baddr</i>;
+	sceGsTest <i>testb</i>;
+	long <i>testbaddr;</i>
+} <b>sceGsClear </b>__attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>testa</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クリア用TESTレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>testaaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TESTレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>prim</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クリア用スプライトのPRIM設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>primaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PRIMレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>rgbaq</i>&nbsp;</td>
+<td valign="TOP">&nbsp;フレームバッファクリア値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>rgbaqaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;RGBAQレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>xyz2a</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クリア用スプライトの左上端点座標&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>xyz2aaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;XYZ2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>xyz2b</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クリア用スプライトの右下端点座標&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>testb</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TESTレジスタの再設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>testbaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TESTレジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">バッファクリア用のデータを保持する構造体です。<br>構造体のメモリ上での直前に、GIFtag(PACKETモード,REGS=A+D)を付ければ、そのままGIFに転送できる構造になっています。<br>実体は単なるスプライト描画ですので、直前に設定されたXYOFFSETやSCISSOR等の描画環境設定の影響を受けます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsDBuff"><font size=6>sceGsDBuff<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ダブルバッファに関する設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsDispEnv <i>disp[2]</i>;
+	sceGifTag <i>giftag0</i>;
+	sceGsDrawEnv1 <i>draw0</i>;
+	sceGsClear <i>clear0</i>;
+	sceGifTag <i>giftag1</i>;
+	sceGsDrawEnv1 <i>draw1</i>;
+	sceGsClear <i>clear1</i>;
+}<b> sceGsDBuff</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>disp[2]</i>&nbsp;</td>
+<td valign="TOP">&nbsp;表示環境&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag0</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境用GIFtag(バッファ0用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>draw0</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境(バッファ0用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clear0</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画バッファクリア環境(バッファ0用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境用GIFtag(バッファ1用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>draw1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境(バッファ1用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clear1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画バッファクリア環境(バッファ1用)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ダブルバッファ情報を保持する構造体です。<br>sceGsSetDefDBuff()関数で、構造体に値を設定できます。<br>sceGsSwapDBuff()関数で、GS(GIF)に値を転送できます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br>この構造体は、コンテキスト1の設定のみを保持します。コンテキスト2を併用する場合は、sceGsDBuffDcを使用してください。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsDBuffDc"><font size=6>sceGsDBuffDc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ダブルバッファに関する設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsDispEnv <i>disp[2]</i>;
+	sceGifTag <i>giftag0</i>;
+	sceGsDrawEnv1 <i>draw01</i>;
+	sceGsDrawEnv2 <i>draw02</i>;
+	sceGsClear <i>clear0</i>;
+	sceGifTag <i>giftag1</i>;
+	sceGsDrawEnv1 <i>draw11</i>;
+	sceGsDrawEnv2 <i>draw12</i>;
+	sceGsClear <i>clear1</i>;
+} <b>sceGsDBuffDc</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>disp[2]</i>&nbsp;</td>
+<td valign="TOP">&nbsp;表示環境&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag0</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境用GIFtag(バッファ0用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>draw01</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境(コンテキスト1、バッファ0用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>draw02</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境(コンテキスト2、バッファ0用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clear0</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画バッファクリア環境(バッファ0用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境用GIFtag(バッファ1用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>draw11</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境(コンテキスト1、バッファ1用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>draw12</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境(コンテキスト2、バッファ1用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clear1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画バッファクリア環境(バッファ1用)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">2コンテキスト併用のダブルバッファ情報を保持する構造体です。<br>sceGsSetDefDBuffDc()関数で、構造体に値を設定できます。<br>sceGsSwapDBuffDc()関数で、GS(GIF)に値を転送できます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsDispEnv"><font size=6>sceGsDispEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>表示環境の設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	tGS_PMODE <i>pmode</i>;
+	tGS_SMODE2 <i>smode2</i>;
+	tGS_DISPFB2 <i>dispfb</i>;
+	tGS_DISPLAY2 <i>display</i>;
+	tGS_BGCOLOR <i>bgcolor</i>;
+} <b>sceGsDispEnv</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>pmode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PCRTCのモード設定値(PMODEレジスタの値)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>smode2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ビデオ同期モード設定値(SMODE2レジスタの値)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dispfb</i>&nbsp;</td>
+<td valign="TOP">&nbsp;表示フレームバッファの設定値(DISPFB2レジスタの値)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>display</i>&nbsp;</td>
+<td valign="TOP">&nbsp;テレビ画面上の表示位置の設定値(DISPLAY2レジスタの値)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bgcolor</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バックグラウンドカラーの設定値(BGCOLORレジスタの値)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">表示関連の設定、GSの矩形読み出し回路2に関する設定データを保持する構造体です。<br>sceGsSetDefDispEnv()関数で、構造体に値を設定できます。<br>sceGsPutDispEnv()関数で、構造体の値をGSに設定できます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsDrawEnv1"><font size=6>sceGsDrawEnv1<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>描画環境の設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsFrame <i>frame1</i>;
+	u_long <i>frame1addr</i>;
+	sceGsZbuf <i>zbuf1</i>;
+	long <i>zbuf1addr</i>;
+	sceGsXyoffset <i>xyoffset1</i>;
+	long <i>xyoffset1addr</i>;
+	sceGsScissor <i>scissor1;</i>
+	long <i>scissor1addr</i>;
+	sceGsPrmodecont <i>prmodecont</i>;
+	long <i>prmodecontaddr</i>;
+	sceGsColclamp <i>colclamp;</i>
+	long <i>colclampaddr</i>;
+	sceGsDthe <i>dthe</i>;
+	long <i>dtheaddr</i>;
+	sceGsTest <i>test1</i>;
+	long <i>test1addr</i>;
+} <b>sceGsDrawEnv1</b> __attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>frame1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FRAME_1レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>frame1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FRAME_1レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>zbuf1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ZBUF_1レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>zbuf1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ZBUF_1レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>xyoffset1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;XYOFFSET_1レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>xyoffset1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;XYOFFSET_1レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>scissor1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SCISSOR_1レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>scissor1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SCISSOR_1レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>prmodecont</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PRMODECONTレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>prmodecontaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PRMODECONTレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>colclamp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;COLCLAMPレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>colclampaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;COLCLAMPレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dthe</i>&nbsp;</td>
+<td valign="TOP">&nbsp;DTHEレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dtheaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;DTHEレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>test1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEST_1レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>test1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEST_1レジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">描画環境情報(コンテキスト1)を保持する構造体です。<br>sceGsSetDefDrawEnv()関数で、構造体に値を設定できます。<br>また、この構造体の直前にGIFtag（PACKEDモード,REGS=A+D）を付ければ、sceGsPutDrawEnv()関数を用いてGSにそのまま転送することができます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsDrawEnv2"><font size=6>sceGsDrawEnv2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>描画環境の設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsFrame <i>frame2</i>;
+	u_long <i>frame2addr</i>;
+	sceGsZbuf <i>zbuf2</i>;
+	long <i>zbuf2addr</i>;
+	sceGsXyoffset <i>xyoffset2</i>;
+	long <i>xyoffset2addr</i>;
+	sceGsScissor <i>scissor2</i>;
+	long <i>scissor2addr;</i>
+	sceGsPrmodecont <i>prmodecont</i>;
+	long <i>prmodecontaddr</i>;
+	sceGsColclamp <i>colclamp</i>;
+	long <i>colclampaddr</i>;
+	sceGsDthe <i>dthe</i>;
+	long <i>dtheaddr</i>;
+	sceGsTest <i>test2;</i>
+	long <i>test2addr</i>;
+} <b>sceGsDrawEnv2</b> __attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>frame2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FRAME_2レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>frame2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FRAME_2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>zbuf2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ZBUF_2レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>zbuf2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ZBUF_2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>xyoffset2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;XYOFFSET_2レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>xyoffset2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;XYOFFSET_2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>scissor2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SCISSOR_2レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>scissor2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SCISSOR_2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>prmodecont</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PRMODECONTレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>prmodecontaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;PRMODECONTレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>colclamp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;COLCLAMPレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>colcalmpaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;COLCLAMPレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dthe</i>&nbsp;</td>
+<td valign="TOP">&nbsp;DTHEレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dtheaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;DTHEレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>test2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEST_2レジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>test2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEST_2レジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">描画環境情報(コンテキスト2)を保持する構造体です。<br>sceGsSetDefDrawEnv2()関数で、構造体に値を設定できます。<br>また、この構造体の直前にGIFtag（PACKEDモード,REGS=A+D）を付ければ、sceGsPutDrawEnv()関数を用いてGSにそのまま転送することができます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br>PRMODECONT, COLCLAMP, DTHEは、コンテキスト切り替えができませんので、コンテキスト1の設定と異なる値を設定する場合は注意してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsGParam"><font size=6>sceGsGParam<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ライブラリシステム情報<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	short <i>sceGsInterMode</i>;
+	short <i>sceGsOutMode</i>;
+	short <i>sceGsFFMode</i>;
+	short <i>sceGsVersion</i>;
+	volatile int (*<i>sceGsVSCfunc</i>)(int);
+	int <i>sceGsVSCid</i>;
+} <b>sceGsGParam</b>__attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sceGsInterMode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;インタレース/ノンインタレースの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sceGsOutMode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;NTSC/PALの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sceGsFFMode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FIELD/FRAMEの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sceGsVersion</i>&nbsp;</td>
+<td valign="TOP">&nbsp;GSのバージョン&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sceGsVSCfunc</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSyncVCallbackで設定された&nbsp;<br>&nbsp;コールバック関数ポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sceGsVSCid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ライブラリで使用するパラメータを保持する構造体です。<br>ライブラリで使用中のデータはsceGsGetGParam()で参照できます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsLoadImage"><font size=6>sceGsLoadImage<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>LoadImageのためのデータ構造<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGifTag <i>giftag0</i>;
+	sceGsBitbltbuf <i>bitbltbuf</i>;
+	long <i>bitbltbufaddr</i>;
+	sceGsTrxpos <i>trxpos</i>;
+	long <i>trxposaddr</i>;
+	sceGsTrxreg <i>trxreg</i>;
+	long <i>trxregaddr</i>;
+	sceGsTrxdir <i>trxdir</i>;
+	long <i>trxdiraddr</i>;
+	sceGifTag <i>giftag1</i>;
+} <b>sceGsLoadImage</b> __attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag0</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送情報設定用GIFtag&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bitbltbuf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;BITBLTBUFレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bitbltbufaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;BITBLTBUFレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxpos</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXPOSレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxposaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXPOSレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxreg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXREGレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxregaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXREGレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxdir</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXDIRレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxdiraddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXDIRレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送イメージ用GIFtag&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">GSへのイメージデータ転送を行うための構造体です。<br>sceGsSetDefLoadImage()関数で、構造体に値を設定することができます。<br>この構造体はそのままGIFへ転送し、続けてイメージデータを転送することができます。<br>また、より簡便な方法として、sceGsExecLoadImage()関数でGSへイメージデータ転送を行うことができます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsStoreImage"><font size=6>sceGsStoreImage<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>StoreImageのためのデータ構造<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	u_int <i>vifcode</i>[4];
+	sceGifTag <i>giftag</i>;
+	sceGsBitbltbuf <i>bitbltbuf</i>;
+	long <i>bitbltbufaddr</i>;
+	sceGsTrxpos <i>trxpos</i>;
+	long <i>trxposaddr</i>;
+	sceGsTrxreg <i>trxreg</i>;
+	long <i>trxregaddr</i>;
+	sceGsFinish <i>finish</i>;
+	long <i>finishaddr</i>;
+	sceGsTrxdir <i>trxdir</i>;
+	long <i>trxdiraddr</i>;
+} <b>sceGsStoreImage</b> __attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>vifcode[4]</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Path2用VIFcodeの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送情報設定GIFtag&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bitbltbuf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;BITBLTBUFレジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bitbltbufaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;BITBLTBUFレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxpos</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXPOSレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxposaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXPOSレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxreg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXREGレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxregaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXREGレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>finish</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FINISHレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>finishaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;FINISHレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxdir</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXDIRレジスタの設定値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>trxdiraddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TRXDIRレジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">PATH2経由でGSからのイメージデータ転送を行うための構造体です。<br>sceGsSetDefStoreImage()関数で、構造体に値を設定することができます。<br>また、簡便な方法として、sceGsExecStoreImage()関数でイメージデータ転送を行うことができます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsTexEnv"><font size=6>sceGsTexEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>テクスチャ関連の設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsTexflush <i>texflush</i>;
+	long <i>texflushaddr</i>;
+	sceGsTex1 <i>tex11</i>;
+	long <i>tex11addr</i>;
+	sceGsTex0 <i>tex01</i>;
+	long <i>01addr</i>;
+	sceGsClamp <i>clamp1</i>;
+	long <i>clamp1addr</i>;
+} <b>sceGsTexEnv </b>__attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>texflush</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXFLUSHレジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>texflushaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXFLUSHレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex01</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX0_1レジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex01addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX0_1レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex11</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX1_1レジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex11addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX1_1レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clamp1</i>&nbsp;</td>
+<td valign="TOP">&nbsp;CLAMP_1レジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clamp1addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;CLAMP_1レジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">テクスチャ情報(コンテキスト1)を保持する構造体です。<br>sceGsSetDefTexEnv()関数で、構造体に値を設定できます。<br>構造体のメモリ上での直前に、GIFtag(PACKETモード,REGS=A+D)を付ければ、そのままGIFに転送できる構造になっています。<br>mipmapを使用する場合には、この他にMIPTBP1_1, MIPTBP2_1レジスタの設定が必要です。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsTexEnv2"><font size=6>sceGsTexEnv2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>テクスチャ関連の設定データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceGsTexflush <i>texflush</i>;
+	long <i>texflushaddr</i>;
+	sceGsTex1 <i>tex12</i>;
+	long <i>tex12addr</i>;
+	sceGsTex0 <i>tex02</i>;
+	long <i>tex02addr</i>;
+	sceGsClamp <i>clamp2</i>;
+	long <i>clamp2addr</i>;
+} <b>sceGsTexEnv2 </b>__attribute__((aligned(16)));
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>texflush</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXFLUSHレジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>texflushaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEXFLUSHレジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex02</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX0_2レジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex02addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX0_2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex12</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX1_2レジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tex12addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TEX1_2レジスタのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clamp2</i>&nbsp;</td>
+<td valign="TOP">&nbsp;CLAMP_2レジスタの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>clamp2addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;CLAMP_2レジスタのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">テクスチャ情報(コンテキスト2)を保持する構造体です。<br>sceGsSetDefTexEnv2()関数で、構造体に値を設定できます。<br>構造体のメモリ上での直前に、GIFtag(PACKETモード,REGS=A+D)を付ければ、そのままGIFに転送できる構造になっています。<br>mipmapを使用する場合には、この他にMIPTBP1_2, MIPTBP2_2レジスタの設定が必要です。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この構造体にはDMAで直接GSに転送されるデータが設定されますので、先頭を16byteアライメントに必ず合わせてメモリに配置してください。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsExecLoadImage"><font size=6>sceGsExecLoadImage<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>LoadImageの実行<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsExecLoadImage</b>(
+	sceGsLoadImage *<i>lp</i>,
+	u_long128 *<i>srcaddr</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>lp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;LoadImage情報が設定されている構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>srcaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ転送元アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">終了状態を返します。<br>正常終了の場合、0を返します。<br>Timeoutの場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">PATH3経由でメインメモリからGSのローカルメモリへイメージデータを転送します。転送に必要な情報はあらかじめsceGsSetDefLoadImage()関数を用いて構造体にセットしておいてください。<br>プロトタイピングやデバッグ用途を想定した簡易版ですので、DMAチャネル（ch-2）がアイドルでない場合は、アイドルになるまでプログラムがブロックされます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsLoadImage構造体をCachedに指定した場合、この関数を呼び出す前にD-cacheをフラッシュしてメモリに書き戻しておくよう注意してください。<br>新しいテクスチャをGSに転送したときには、テクスチャの再設定を行う必要があります。sceGsSetDefTexEnv()関数の説明を参照してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsExecStoreImage"><font size=6>sceGsExecStoreImage<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>StoreImageの実行<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsExecStoreImage</b>(
+	sceGsStoreImage *<i>sp</i>,
+	u_long128 *<i>dstaddr</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;StoreImage情報が設定されている構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dstaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ転送先アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">終了状態を返します。<br>正常終了の場合、0を返します。<br>Timeoutの場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">GSのローカルメモリからメインメモリへイメージデータを転送します。<br>転送に必要な情報はあらかじめsceGsSetDefStoreImage()関数を用いて構造体にセットしておいてください。<br>プロトタイピングやデバッグ用途を想定した簡易版ですので、転送が終了するまでプログラムはブロックされます。<br>また、データ転送に使用するデータパスはPATH2ですが、他のデータパスも停止されます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsStoreImage構造体ではDMA環境の待避を行いません。<br>そのため、実行直後はDl_CHCR.TTE=0に初期化されてしまいます。<br>sceGsStoreImage構造体をCachedに指定した場合、この関数を呼び出す前にD-cacheをフラッシュしてメモリに書き戻しておくよう注意してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsGetGParam"><font size=6>sceGsGetGParam<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ライブラリシステム情報を獲得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>sceGsGParam *<b>sceGsGetGParam</b>(void)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">システムで使用中の構造体のポインタを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ライブラリで使用中のシステム情報構造体のポインタを返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="sceGsGetIMR / isceGsGetIMR"><font size=6>sceGsGetIMR / isceGsGetIMR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>割り込みマスクの取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_long <b>sceGsGetIMR</b>(
+	void
+)
+u_long <b>isceGsGetIMR</b>(
+	void
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">直前にsceGsPutIMR/isceGsPutIMR関数で設定されたIMRレジスタの値を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">GSの割り込みマスクを設定するIMRレジスタは書き込み専用なので、現在の設定を確認することができません。IMRレジスタへの書き込みを必ずsceGsPutIMR関数を介して行うようにすれば、直前に設定されていた値を確認することが可能になります。<br><br>割り込みハンドラ中で割り込みマスクを取得する場合には、isceGsGetIMR()をご使用ください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsPutDispEnv"><font size=6>sceGsPutDispEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>表示関連の初期設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsPutDispEnv</b>(
+	sceGsDispEnv *<i>disp</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>disp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;表示環境を設定する構造体のアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>disp</i>の内容をGSのレジスタに設定します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsPutDrawEnv"><font size=6>sceGsPutDrawEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>描画関連の初期設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsPutDrawEnv</b>(
+	sceGifTag *<i>giftag</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>giftag</i>&nbsp;</td>
+<td valign="TOP">&nbsp;描画環境設定データの先頭アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">終了状態を返します。<br>正常終了の場合、0を返します。<br>Timeout(先行するCh-2 DMAが終了しない）の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">描画環境の設定データをGSに転送し、所要のレジスタに設定します。<br>適切な値が設定された描画環境構造体sceGsDrawEnvを用意し、その直前にGIFtag（PACKEDモード,REGS=A+D）を置き、そのGIFtagのアドレスを引数giftagに指定してください。<br>この関数はDMA転送を開始するとただちに（転送終了を待たずに）終了します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">データ転送はPATH3経由で行うため、この関数を呼び出す時点でtoGIFチャネルとGIFがアイドル状態で、PATH3がマスクされていないことが必要です。<br>アイドル状態でなければアイドル状態になるまでプログラムがブロックされます。<br>DMAを使用してデータ転送を行うため、GIFtagおよび後続のデータはメモリ上に置かれている必要があります。この関数を呼び出す前に、必ずユーザ側でD-cacheからフラッシュしてメモリ上に書き戻しておいてください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="sceGsPutIMR / isceGsPutIMR"><font size=6>sceGsPutIMR / isceGsPutIMR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>割り込みマスクの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_long <b>sceGsPutIMR</b>(
+	u_long <i>imr</i>
+)
+u_long <b>isceGsPutIMR</b>(
+	u_long <i>imr</i>
+)
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>imr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IMRレジスタに設定する値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">直前にsceGsPutIMR/isceGsPutIMR関数で設定されたIMRレジスタの値<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">GSの割り込みマスクを設定するIMRレジスタは書き込み専用なので、現在の設定を確認することができません。IMRレジスタへの書き込みを必ずこの関数を介して行うようにすれば、直前に設定されていた値を確認することが可能になります。<br><br>割り込みハンドラ中で割り込みマスクを設定する場合には、isceGsPutIMR()をご使用ください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsResetGraph"><font size=6>sceGsResetGraph<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>GSの初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsResetGraph</b>(
+	short <i>mode</i>,
+	short <i>inter</i>,
+	short <i>omode</i>,
+	short <i>ffmode</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td rowspan= 3  valign="top">&nbsp;<i>mode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;リセットモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;オールリセット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;描画リセット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>inter</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;インタレース/ノンインタレースの設定&nbsp;<br>&nbsp;(mode==0の時のみ有効)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;non-interlace&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;interlace&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>omode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ビデオ信号フォーマットの設定(mode==0の時のみ有効)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x02&nbsp;</td>
+<td valign="top">&nbsp;NTSC&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x03&nbsp;</td>
+<td valign="top">&nbsp;PAL&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0x50&nbsp;</td>
+<td valign="top">&nbsp;DTV480P&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ffmode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;FRAME/FIELDモードの設定(interlace時のみ有効)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;FIELDモード始点から1ラインおきに読む&nbsp;<br>&nbsp;(+0,+2,+4,... / +1,+3,+5,...)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;FRAMEモード始点から1ラインずつ読む&nbsp;<br>&nbsp;(+0,+1,+2,+3,...)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">GSを指定したモードでリセットします。<br><i>mode</i>に0を指定した場合はGS全体をリセットします。<br><i>mode</i>に1を指定した場合は、描画中の処理をキャンセルし、GSの内部バッファにあるプリミティブデータを破棄します（描画環境／表示環境は保持されます）。<br>テレビ画面に対する表示関連の設定がGSチップのバージョンによって異なりますので、その差異を吸収するために、必ずこの関数を用いて初期化を行ってください。<br>この関数を使用しない場合、画面表示が乱れることがあります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">オールリセット時は、GSのローカルメモリの内容は保証されません。<br>またオールリセット時は sceGsSyncVCallback 関数で登録したコールバック関数も削除されます。<br>sceSifRebootIop() を発行してから IOP が再起動したかどうかが確認できるまでは本関数を発行することはできません。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsResetPath"><font size=6>sceGsResetPath<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データパスデバイスの初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsResetPath</b>(
+	void
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">GSへのデータ転送経路にあたるデバイス、つまりVIF1, VU1, GIFをリセットします。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">VIF1の汎用レジスタを以下のように初期化します。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;STCYCL&nbsp;</td>
+<td valign="TOP">&nbsp;(WL=4, CL=4)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;STMASK&nbsp;</td>
+<td valign="TOP">&nbsp;(all 0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;STMOD&nbsp;</td>
+<td valign="TOP">&nbsp;(MOD=0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MSKPATH3&nbsp;</td>
+<td valign="TOP">&nbsp;(0:転送許可)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;BASE&nbsp;</td>
+<td valign="TOP">&nbsp;(0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;OFFSET&nbsp;</td>
+<td valign="TOP">&nbsp;(0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ITOP&nbsp;</td>
+<td valign="TOP">&nbsp;(0)&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;">またVIF1の特権レジスタVIF1_ERRのME0を1にします。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefAlphaEnv"><font size=6>sceGsSetDefAlphaEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>アルファブレンディング設定データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefAlphaEnv</b>(
+	sceGsAlphaEnv *<i>ap</i>,
+	short <i>pabe</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>ap</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;アルファブレンディング情報を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>pabe</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ピクセル単位のアルファブレンディングの制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;行わない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;行う（A値のMSBが0のピクセルに対しては&nbsp;<br>&nbsp;アルファブレンディングoff)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsAlphaEnv構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アルファブレンディングの設定(コンテキスト1)に関するデータを、sceGsAlphaEnv構造体の各メンバにセットします。<br>この構造体の直前にGIFtag（PACKEDモード,REGS=A+D）を置くと、そのままGIFに転送することができます。構造体がCachedの場合はD-cacheをフラッシュしてメモリに書き戻さないと正しいデータが転送されませんので注意してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数によってsceGsAlphaEnv構造体の各メンバに設定される値は次のとおりです。必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">alpha1.B = 1<br>alpha1.D = 1<br>pabe = pabe<br>texa.TA0 = 127<br>texa.AEM = 1<br>texa.TA1 = 129<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefAlphaEnv2"><font size=6>sceGsSetDefAlphaEnv2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>アルファブレンディング設定データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefAlphaEnv2</b>(
+	sceGsAlphaEnv2 *<i>ap</i>,
+	short <i>pabe</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>ap</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;アルファブレンディング情報を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>pabe</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ピクセル単位のアルファブレンディングの制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;行わない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;行う（A値のMSBが0のピクセルに対しては&nbsp;<br>&nbsp;アルファブレンディングoff)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsAlphaEnv2構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アルファブレンディングの設定(コンテキスト2)に関するデータを、sceGsAlphaEnv2構造体の各メンバにセットします。<br>この構造体の直前にGIFtag（PACKEDモード,REGS=A+D）を置くと、そのままGIFに転送することができます。構造体がCachedの場合はD-cacheをフラッシュしてメモリに書き戻さないと正しいデータが転送されませんので注意してください。<br>PABE, TEXAは、コンテキスト切り替えができませんので、コンテキスト1と異なる値を設定する場合は注意してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数によってsceGsAlphaEnv2構造体の各メンバに設定される値は次のとおりです。必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">alpha2.B = 1<br>alpha2.D = 1<br>pabe = pabe<br>texa.TA0 = 127<br>texa.AEM = 1<br>texa.TA1 = 129<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefClear"><font size=6>sceGsSetDefClear<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッファクリア用データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefClear</b>(
+	sceGsClear *<i>cp</i>,
+	short <i>ztest</i>,
+	short <i>x</i>, short <i>y</i>,
+	short <i>w</i>, short <i>h</i>,
+	u_char <i>r</i>, u_char <i>g</i>, u_char <i>b</i>, u_char <i>a</i>,
+	u_int <i>z</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;バッファクリア用データを設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ztest</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;デプステスト方式&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;デプステストなし（Zバッファ不使用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;Zバッファの値にかかわらず全ピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値以上のピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値より大きいピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;x, y&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;クリア領域左上端点座標&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;クリア領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;r,g,b,a&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;フレームバッファのクリア値&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>z</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;Zバッファのクリア値&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsClear構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">バッファクリア用のデータを、指定されたsceGsClear構造体の各メンバにセットします。この構造体の直前にGIFtag（PACKEDモード、A+D）を置いてGIFに転送すると、コンテキスト1のフレームバッファを<i>r,g,b,a</i>に指定した値で、同じくコンテキスト1のZバッファを<i>z</i>に指定した値でクリアすることになります。<br><i>ztest</i>に1-3を指定した場合は、デプステスト方式をいったんALWAYSとしてフレームバッファとZバッファをクリアし、あらためて<i>ztest</i>に指定した方式を設定するようになります。<br><i>ztest</i>に0を指定した場合は、<i>ztest</i>=1と等価な動作をしますので、必ず、ZBUFのZMSKの値を1にしてからご使用ください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>ztest</i> != 0を指定したとき、この関数によってsceGsClear構造体の各メンバにセットされる値は次のとおりです。<br>必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">testa.ZTE = 1<br>testa.ZTST = 1<br>prim = 6(SPRITE)<br>rgbaq.R = r<br>rgbaq.G = g<br>rgbaq.B = b<br>rgbaq.A = a<br>rgbaq.Q = 1.0f<br>xyz2a.X = x&lt;&lt;4<br>xyz2a.Y = y&lt;&lt;4<br>xyz2a.Z = z<br>xyz2b.X = (x+w)&lt;&lt;4<br>xyz2b.Y = (y+h)&lt;&lt;4<br>xyz2b.Z = z<br>testb.ZTE = 1<br>testb.ZTST = ztest<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefClear2"><font size=6>sceGsSetDefClear2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッファクリア用データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefClear2</b>(
+	sceGsClear *<i>cp</i>,
+	short <i>ztest</i>,
+	short <i>x</i>, short <i>y</i>,
+	short <i>w</i>, short <i>h</i>,
+	u_char <i>r</i>, u_char <i>g</i>, u_char <i>b</i>, u_char <i>a</i>,
+	u_int <i>z</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;バッファクリア用データを設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ztest</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;デプステスト方式&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;デプステストなし（Zバッファ不使用）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;Zバッファの値にかかわらず全ピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値以上のピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値より大きいピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;x, y&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;クリア領域左上端点座標&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;クリア領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;r,g,b,a&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;フレームバッファのクリア値&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>z</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;Zバッファのクリア値&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsClear構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">バッファクリア用のデータを、指定されたsceGsClear構造体の各メンバにセットします。この構造体の直前にGIFtag（PACKEDモード、A+D）を置いてGIFに転送すると、コンテキスト２のフレームバッファを<i>r,g,b,a</i>に指定した値で、同じくコンテキスト２のZバッファをzに指定した値でクリアすることになります。<br><i>ztest</i>に1-3を指定した場合は、デプステスト方式をいったんALWAYSとしてフレームバッファとZバッファをクリアし、あらためて<i>ztest</i>に指定した方式を設定するようになります。<br><i>ztest</i>に0を指定した場合は、<i>ztest</i>=1と等価な動作をしますので、必ず、ZBUFのZMSKの値を1にしてからご使用ください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>ztest</i> != 0を指定したとき、この関数によってsceGsClear構造体の各メンバにセットされる値は次のとおりです。<br>必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">testa.ZTE = 1<br>testa.ZTST = 1<br>prim = 6(SPRITE)<br>rgbaq.R = r<br>rgbaq.G = g<br>rgbaq.B = b<br>rgbaq.A = a<br>rgbaq.Q = 1.0f<br>xyz2a.X = x&lt;&lt;4<br>xyz2a.Y = y&lt;&lt;4<br>xyz2a.Z = z<br>xyz2b.X = (x+w)&lt;&lt;4<br>xyz2b.Y = (y+h)&lt;&lt;4<br>xyz2b.Z = z<br>testb.ZTE = 1<br>testb.ZTST = ztest<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefDBuff"><font size=6>sceGsSetDefDBuff<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ダブルバッファの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsSetDefDBuff</b>(
+	sceGsDBuff *<i>db</i>,
+	short <i>psm</i>,
+	short <i>w</i>, short <i>h</i>,
+	short <i>ztest</i>,
+	short <i>zpsm</i>
+	short <i>clear</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>db</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ダブルバッファ情報を設定する構造体アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>psm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画ピクセルフォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;表示/描画領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ztest</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;デプステスト方式&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;デプステストなし（Zバッファマスク）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;Zバッファの値にかかわらず全ピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値以上のピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値より大きいピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>zpsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;Z値格納フォーマット(ztest!=0の時のみ有効)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>clear</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画領域のクリア制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;クリアしない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;クリアする&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ダブルバッファ情報構造体中にある2組の描画環境/表示環境/バッファクリア用データに、引数にしたがってそれぞれ適切な値を設定します。<br><i>clear</i>に1を指定した場合、sceGsSwapDBuff()関数を用いてダブルバッファを切り替える際にフレームバッファとZバッファが0クリアされるようになります。<br>この関数は、コンテキスト1の環境のみを設定します。<br><i>ztest</i> = 0で呼び出した場合、<i>ztest</i>=1 ZBUF.ZMSK=1に設定されます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インタレース／FRAMEモードで<i>clear</i> = 1 , <i>psm</i> = PSMCT32と指定した場合、この関数によって構造体の各メンバに設定される値は次のとおりです。必要であれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;disp[0]&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDispEnv(&db-&gt;disp[0], psm, w, h, 0, 0)の結果&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;disp[1]&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDispEnv(&db-&gt;disp[1], psm, w, h, 0, 0)の結果、&nbsp;<br>&nbsp;ただしdisp[1].dispfb.FBP = ((w+63)/64)*((h+31)/32)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;draw0&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDrawEnv(&db-&gt;draw0, psm, w, h, ztest, zpsm)の結果、&nbsp;<br>&nbsp;ただしdraw0.frame1.FBP = ((w+63)/64)*((h+31)/32)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;draw1&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDrawEnv(&db-&gt;draw1, psm, w, h, ztest, zpsm)の結果&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;clear0&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefClear(&db-&gt;clear0, ztest, 2048-(w&gt;&gt;1),&nbsp;<br>&nbsp;2048-(h&gt;&gt;1), w, h, 0, 0, 0, 0, 0)の結果&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;clear1&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefClear(&db-&gt;clear1, ztest, 2048-(w&gt;&gt;1),&nbsp;<br>&nbsp;2048-(h&gt;&gt;1), w, h, 0, 0, 0, 0, 0)の結果&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefDBuffDc"><font size=6>sceGsSetDefDBuffDc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ダブルバッファの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsSetDefDBuffDc</b>(
+	sceGsDBuffDc *<i>db</i>,
+	short <i>psm</i>,
+	short <i>w</i>, short <i>h</i>,
+	short <i>ztest</i>,
+	short <i>zpsm</i>
+	short <i>clear</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>db</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ダブルバッファ情報を設定する構造体アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>psm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画ピクセルフォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;表示/描画領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ztest</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;デプステスト方式&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;デプステストなし（Zバッファマスク）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;Zバッファの値にかかわらず全ピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値以上のピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値より大きいピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>zpsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;Z値格納フォーマット(ztest!=0の時のみ有効)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>clear</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画領域のクリア制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;クリアしない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;クリアする&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ダブルバッファ情報構造体中にある2組の描画環境/表示環境/バッファクリア用データに、引数にしたがってそれぞれ適切な値を設定します。<br><i>clear</i>に1を指定した場合、sceGsSwapDBuff()関数を用いてダブルバッファを切り替える際にフレームバッファとZバッファが0クリアされるようになります。<br>この関数は、コンテキスト1と2の両方の環境を設定します。<br><i>ztest</i> = 0で呼び出した場合、<i>ztest</i>=1 ZBUF.ZMSK=1に設定されます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インタレース／FRAMEモードで<i>clear</i> = 1 , <i>psm</i> = PSMCT32と指定した場合、この関数によって構造体の各メンバに設定される値は次のとおりです。必要であれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;disp[0]&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDispEnv(&db-&gt;disp[0], psm, w, h, 0, 0)の結果&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;disp[1]&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDispEnv(&db-&gt;disp[1], psm, w, h, 0, 0)の結果、&nbsp;<br>&nbsp;ただしdisp[1].dispfb.FBP = ((w+63)/64)*((h+31)/32)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;draw01&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDrawEnv(&db-&gt;draw01, psm, w, h, ztest, zpsm)の結果、&nbsp;<br>&nbsp;ただしdraw01.frame1.FBP = ((w+63)/64)*((h+31)/32)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;draw02&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDrawEnv2(&db-&gt;draw02, psm, w, h, ztest, zpsm)の結果、&nbsp;<br>&nbsp;ただしdraw02.frame2.FBP = ((w+63)/64)*((h+31)/32)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;draw11&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDrawEnv(&db-&gt;draw11, psm, w, h, ztest, zpsm)の結果&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;draw12&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefDrawEnv2(&db-&gt;draw12, psm, w, h, ztest, zpsm)の結果&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;clear0&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefClear(&db-&gt;clear0, ztest, 2048-(w&gt;&gt;1),&nbsp;<br>&nbsp;2048-(h&gt;&gt;1), w, h, 0, 0, 0, 0, 0)の結果&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;clear1&nbsp;</td>
+<td valign="TOP">&nbsp;sceGsSetDefClear(&db-&gt;clear1, ztest, 2048-(w&gt;&gt;1),&nbsp;<br>&nbsp;2048-(h&gt;&gt;1), w, h, 0, 0, 0, 0, 0)の結果&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefDispEnv"><font size=6>sceGsSetDefDispEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>表示環境データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsSetDefDispEnv</b>(
+	sceGsDispEnv *<i>disp</i>,
+	short <i>psm</i>,
+	short <i>w</i>, short <i>h</i>,
+	short <i>dx</i>, short <i>dy</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>disp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;表示環境を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>psm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ピクセルフォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;表示領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;dx, dy&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;表示領域左上端点のテレビ画面上での位置 &nbsp;<br>&nbsp;(ピクセル単位)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">表示環境構造体のメンバに値を設定します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インタレース／FRAMEモードを指定したとき、この関数によって構造体の各メンバに設定される値を次に示します。<br>必要であれば適宜再設定してください。<br>NTSCモード：<br></div>
+<div style="margin-left:70px;">pmode = 0x66<br>smode2 = 3<br>dispfb2.PSM = psm;<br>dispfb.FBW = (w&gt;&gt;6)&lt;&lt;9<br>display2.DH = ((h&lt;&lt;1)-1) &lt;&lt; 44<br>display2.DW = (0x9ff)&lt;&lt;32<br>display2.MAGH = (((2560+w-1)/w)-1) &lt;&lt; 23<br>display2.DY = (50+dy) &lt;&lt;12<br>display2.DX = 0x27c + (dx*(2560/w))<br>bgcolor = 0<br></div>
+<div style="margin-left:50px;"><br>PALモード：<br></div>
+<div style="margin-left:70px;">pmode = 0x66<br>smode2 = 3<br>dispfb2.PSM = psm;<br>dispfb.FBW = (w&gt;&gt;6)&lt;&lt;9<br>display2.DH = ((h&lt;&lt;1)-1) &lt;&lt; 44<br>display2.DW = (0x9ff)&lt;&lt;32<br>display2.MAGH = (((2560+w-1)/w)-1) &lt;&lt; 23<br>display2.DY = 72+dy <br>display2.DX = 0x290 + (dx*(2560/w)) <br>bgcolor = 0<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefDrawEnv"><font size=6>sceGsSetDefDrawEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>描画環境データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefDrawEnv</b>(
+	sceGsDrawEnv1 *<i>draw</i>,
+	short <i>psm</i>,
+	short <i>w</i>, short <i>h</i>,
+	short <i>ztest</i>,
+	short <i>zpsm</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>draw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画環境を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>psm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画ピクセルフォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ztest</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;デプステスト方式&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;デプステストなし（Zバッファマスク）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;Zバッファの値にかかわらず全ピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値以上のピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値より大きいピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>zpsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;Z値格納フォーマット(ztest!=0の時のみ有効)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsDrawEnv1構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コンテキスト1用描画環境構造体のメンバに値を設定します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>draw</i>をcachedに指定した場合、この関数の終了時には<i>draw</i>の内容はcache上にありますので、DMAで転送する前にD-cacheをフラッシュしてメモリに書き戻しておく必要があります。<br><i>ztest</i> = 0で呼び出した場合、<i>ztest</i>=1 ZBUF.ZMSK=1に設定されます。<br><br><i>ztest</i> != 0, <i>psm</i> = PSMCT32と指定したとき、この関数によって作成される構造体の各メンバの値を次に示します。<br>必要であれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">frame1.PSM = psm<br>frame1.FBW = w<br>zbuf1.ZBP = ((w+63)/64)*((h+31)/32)*2;<br>zbuf1.ZPSM = zpsm<br>xyoffset1.OFX = (2048 - (w&gt;&gt;1))&lt;&lt;4;<br>xyoffset1.OFY = (2048 - (h&gt;&gt;1))&lt;&lt;4;<br>scissor1.SCAX1 = w-1<br>scissor1.SCAY1 = h-1<br>prmodecont.AC = 1<br>colclamp.CLAMP = 1<br>dthe.DTHE = 0<br>test1.ZTE = 1<br>test1.ZTST = ztest<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefDrawEnv2"><font size=6>sceGsSetDefDrawEnv2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>描画環境データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefDrawEnv2</b>(
+	sceGsDrawEnv2 *<i>draw</i>,
+	short <i>psm</i>,
+	short <i>w</i>, short <i>h</i>,
+	short <i>ztest</i>,
+	short <i>zpsm</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>draw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画環境を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>psm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画ピクセルフォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ztest</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;デプステスト方式&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;デプステストなし（Zバッファマスク）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;Zバッファの値にかかわらず全ピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値以上のピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;Z値がZバッファの値より大きいピクセルを描画&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>zpsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;Z値格納フォーマット(ztest!=0の時のみ有効)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsDrawEnv2構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コンテキスト2用描画環境構造体のメンバに値を設定します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>draw</i>をcachedに指定した場合、この関数の終了時には<i>draw</i>の内容はcache上にありますので、DMAで転送する前にD-cacheをフラッシュしてメモリに書き戻しておく必要があります。<br>PRMODECONT, COLCLAMP, DTHEは、コンテキスト切り替えができませんので、コンテキスト1と異なる値を設定する場合は注意してください。<br><i>ztest</i> = 0で呼び出した場合、<i>ztest</i>=1 ZBUF.ZMSK=1に設定されます。<br><br><i>ztest</i> != 0, <i>psm</i> = PSMCT32と指定したとき、この関数によって作成される構造体の各メンバの値を次に示します。<br>必要であれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">frame2.PSM = psm<br>frame2.FBW = w<br>zbuf2.ZBP = ((w+63)/64)*((h+31)/32)*2;<br>zbuf2.ZPSM = zpsm<br>xyoffset2.OFX = (2048 - (w&gt;&gt;1))&lt;&lt;4;<br>xyoffset2.OFY = (2048 - (h&gt;&gt;1))&lt;&lt;4;<br>scissor2.SCAX1 = w-1<br>scissor2.SCAY1 = h-1<br>prmodecont.AC = 1<br>colclamp.CLAMP = 1<br>dthe.DTHE = 0<br>test2.ZTE = 1<br>test2.ZTST = ztest<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefLoadImage"><font size=6>sceGsSetDefLoadImage<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>LoadImage情報の設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefLoadImage</b>(
+	sceGsLoadImage *<i>lp</i>,
+	short <i>dbp</i>,
+	short <i>dbw</i>,
+	short <i>dpsm</i>,
+	short <i>x</i>, short <i>y</i>,
+	short <i>w</i>, short <i>h</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>lp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;LoadImage情報を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>dbp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;dbp転送先バッファベースアドレス&nbsp;<br>&nbsp;(dpb x 64が実際のアドレスになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>dbw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;dbw転送先バッファ幅&nbsp;<br>&nbsp;(dbw x 64が実際の幅になる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>dpsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送データのピクセルフォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT32（ピクセルサイズ:32bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT24（ピクセルサイズ:24bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT16（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;19&nbsp;</td>
+<td valign="top">&nbsp;PSMT8（ピクセルサイズ:8bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;20&nbsp;</td>
+<td valign="top">&nbsp;PSMT4（ピクセルサイズ:4bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;27&nbsp;</td>
+<td valign="top">&nbsp;PSMT8H（ピクセルサイズ:8bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;36&nbsp;</td>
+<td valign="top">&nbsp;PSMT4HL（ピクセルサイズ:4bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;44&nbsp;</td>
+<td valign="top">&nbsp;PSMT4HH（ピクセルサイズ:4bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;48&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32（ピクセルサイズ:32bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;49&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24（ピクセルサイズ:24bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;50&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;58&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>x, y</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送先領域の左上端点&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>w, h</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsLoadImage構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">PATH3経由でGSへイメージデータを転送するための構造体を作成します。<br>作成した構造体はGIFtagを含んでいますので、イメージデータの転送に先立って、そのままGSへ転送することができます。<br>イメージデータのサイズ（<i>w</i>×<i>h</i>×ピクセルサイズ）は16byteの倍数で、32767×16byte以下でなければなりません。<br>また、ピクセルサイズが8bitの場合は<i>x,w</i>はともに2の倍数、ピクセルサイズが4bitの場合は<i>x,w</i>はともに4の倍数でなければなりません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数によってsceGsLoadImage構造体の各メンバにセットされる値は次のとおりです。必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">bitbltbuf.DBP = dbp<br>bitbltbuf.DBW = dbw<br>bitbltbuf.DPSM = dpsm<br>trxpos.DSAX = x<br>trxpos.DSAY = y<br>trxreg.RRW = w<br>trxreg.RRH = h<br></div>
+<div style="margin-left:50px;"><br>sceGsLoadImage構造体を使用して簡便にデータ転送を行う関数として、sceGsExecLoadImage()関数が用意されています。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefStoreImage"><font size=6>sceGsSetDefStoreImage<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>StoreImage情報の設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefStoreImage</b>(
+	sceGsStoreImage *<i>sp</i>,
+	short <i>sbp</i>,
+	short <i>sbw</i>,
+	short <i>spsm</i>,
+	short <i>x</i>, short <i>y</i>,
+	short <i>w</i>, short <i>h</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>sp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;StoreImage情報を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>sbp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送元バッファベースアドレス&nbsp;<br>&nbsp;(sbp x 64が実際のアドレスになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>sbw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送元バッファ幅&nbsp;<br>&nbsp;(sbw x 64が実際の幅になる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>spsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送データのピクセルフォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32（ピクセルサイズ:32bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24（ピクセルサイズ:24bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;19&nbsp;</td>
+<td valign="top">&nbsp;PSMT8（ピクセルサイズ:8bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;20&nbsp;</td>
+<td valign="top">&nbsp;PSMT4（ピクセルサイズ:4bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;27&nbsp;</td>
+<td valign="top">&nbsp;PSMT8H（ピクセルサイズ:8bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;48&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32（ピクセルサイズ:32bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;49&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24（ピクセルサイズ:24bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;50&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;58&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S（ピクセルサイズ:16bit）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>x, y</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送元領域の左上端点&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>w, h</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送領域の幅、高さ(ピクセル単位)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+<div style="margin-left:50px;">注意：ハード的な仕様によりPSMT4,PSMT4HH,PSMT4HLのlocal －&gt; hostへの転送は出来<br>ません。他のモードで取得しておき、そのデータを並び変えるといった処理が必要となります。<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsStoreImage構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">PATH2経由でGSからイメージデータを転送するための構造体を作成します。<br>作成した構造体はGIFtagを含んでいますので、そのままGSへ転送することができます。<br>イメージデータのサイズ（w×h×ピクセルサイズ）は16byteの倍数で、32767×16byte以下でなければなりません。<br>また、ピクセルサイズが8bitの場合は<i>x,w</i>はともに2の倍数でなければなりません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数によってsceGsStoreImage構造体の各メンバにセットされる値は次のとおりです。必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">vifcode[0] = VIFNOP<br>vifcode[1] = VIFMSKPATH3 (MASK on)<br>vifcode[2] = VIFFLUSHA<br>vifcode[3] = DIRECT<br>bitbltbuf,SBP = sbp<br>bitbltbuf.SBW = sbw<br>bitbltbuf.SPSM = spsm<br>trxpos.SSAX = x<br>trxpos.SSAY = y<br>trxreg.RRW = w<br>trxreg.RRH = h<br>trxdir.DIR = 1<br></div>
+<div style="margin-left:50px;"><br>sceGsStoreImage構造体を使用して簡便にデータ転送を行う関数として、sceGsExecStoreImage()関数が用意されています。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefTexEnv"><font size=6>sceGsSetDefTexEnv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>テクスチャ設定データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefTexEnv</b>(
+	sceGsTexEnv *<i>tp</i>,
+	short <i>flush</i>,
+	short <i>tbp0</i>,
+	short <i>tbw</i>,
+	short <i>psm</i>,
+	short <i>w</i>, <i>h</i>,
+	short <i>tfx</i>
+	short <i>cbp</i>,
+	short <i>cpsm</i>,
+	short <i>cld</i>,
+	short <i>filter</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>tp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャ情報を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flush</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャページバッファの無効化&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;無効化しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;無効化する&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>tbp0</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャバッファベースアドレス&nbsp;<br>&nbsp;(tpb0 x 64が実際のアドレスになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>tbw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャバッファ幅&nbsp;<br>&nbsp;(tbw x 64が実際の幅になる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>psm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャピクセル格納フォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;19&nbsp;</td>
+<td valign="top">&nbsp;PSMT8&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;20&nbsp;</td>
+<td valign="top">&nbsp;PSMT4&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;27&nbsp;</td>
+<td valign="top">&nbsp;PSMT8H&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;36&nbsp;</td>
+<td valign="top">&nbsp;PSMT4HL&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;44&nbsp;</td>
+<td valign="top">&nbsp;PSMT4HH&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;48&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;49&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;50&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;58&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>w, h</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャの幅、高さ&nbsp;<br>&nbsp;(2^wおよび2^nが実際のサイズになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>tfx</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャファンクション&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;MODULATE&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;DECAL&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;HILIGHT&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;HILIGHT2&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cbp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;CLUTデータのベースアドレス&nbsp;<br>&nbsp;(cbp x 64が実際のアドレスになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cpsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;CLUTエントリ格納フォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cld</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;CLUTバッファのロード制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;ロードしない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;cbpからロードする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;cbpからロードし,GS内部レジスタCBP0に&nbsp;<br>&nbsp;cbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;cbpからロードし,GS内部レジスタCBP1に&nbsp;<br>&nbsp;cbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;4&nbsp;</td>
+<td valign="top">&nbsp;CBP0!=cbpならロードし,CBP0に&nbsp;<br>&nbsp;cbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;5&nbsp;</td>
+<td valign="top">&nbsp;CBP1!=cbpならロードし,CBP1に&nbsp;<br>&nbsp;cbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>filter</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;フィルタリング方式の指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;NEAREST&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;LINEAR&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;NEAREST_MIPMAP_NEAREST&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;NEAREST_MIPMAP_LINEAR&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;4&nbsp;</td>
+<td valign="top">&nbsp;LINEAR_MIPMAP_NEAREST&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;5&nbsp;</td>
+<td valign="top">&nbsp;LINEAR_MIPMAP_LINEAR&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsTexEnv構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">テクスチャの設定に関するデータ(コンテキスト1)を、sceGsTexEnv構造体の各メンバに設定します。<br>この構造体の直前にGIFtag（PACKEDモード,REGS=A+D）を置くと、そのままGIFに転送することができます。ただし構造体がCachedの場合は、D-cacheをフラッシュしてメモリに書き戻さないと正しいデータが転送されませんので注意してください。<br>新しいテクスチャをGSに転送したときには、<i>flush</i>に1を指定して作成したsceGsTexEnv構造体を用いて、テクスチャの再設定を行ってください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数によってsceGsTexEnv構造体の各メンバに設定される値は次のとおりです。必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">tex01.TBP0 = tbp0<br>tex01.TBW = tbw<br>tex01.PSM = psm<br>tex01.TW = w<br>tex01.TH = h<br>tex01.TCC = 1<br>tex01.TFX = tfx<br>tex01.CBP = cbp<br>tex01.CPSM = cpsm<br>tex01.CLD = cld<br>tex11.MMAG = filter & 1<br>tex11.MMIN = filter<br>clamp1.WMS = 1<br>clamp1.WMT = 1<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetDefTexEnv2"><font size=6>sceGsSetDefTexEnv2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>テクスチャ設定データの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSetDefTexEnv2</b>(
+	sceGsTexEnv2 *<i>tp</i>,
+	short <i>flush</i>,
+	short <i>tbp0</i>,
+	short <i>tbw</i>,
+	short <i>psm</i>,
+	short <i>w</i>, <i>h</i>,
+	short <i>tfx</i>
+	short <i>cbp</i>,
+	short <i>cpsm</i>,
+	short <i>cld</i>,
+	short <i>filter</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>tp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャ情報を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flush</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャページバッファの無効化&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;無効化しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;無効化する&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>tbp0</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャバッファベースアドレス&nbsp;<br>&nbsp;(tpb0 x 64が実際のアドレスになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>tbw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャバッファ幅&nbsp;<br>&nbsp;(tbw x 64が実際の幅になる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>psm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャピクセル格納フォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2 &nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;19&nbsp;</td>
+<td valign="top">&nbsp;PSMT8&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;20&nbsp;</td>
+<td valign="top">&nbsp;PSMT4&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;27&nbsp;</td>
+<td valign="top">&nbsp;PSMT8H&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;36&nbsp;</td>
+<td valign="top">&nbsp;PSMT4HL&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;44&nbsp;</td>
+<td valign="top">&nbsp;PSMT4HH&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;48&nbsp;</td>
+<td valign="top">&nbsp;PSMZ32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;49&nbsp;</td>
+<td valign="top">&nbsp;PSMZ24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;50&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;58&nbsp;</td>
+<td valign="top">&nbsp;PSMZ16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;w, h&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャの幅、高さ&nbsp;<br>&nbsp;(2^wおよび2^nが実際のサイズになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>tfx</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;テクスチャファンクション&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;MODULATE&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;DECAL&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;HILIGHT&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;HILIGHT2&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cbp</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;CLUTデータのベースアドレス&nbsp;<br>&nbsp;(cbp x 64が実際のアドレスになる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cpsm</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;CLUTエントリ格納フォーマット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;PSMCT32&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;PSMCT24&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;10&nbsp;</td>
+<td valign="top">&nbsp;PSMCT16S&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cld</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;CLUTバッファのロード制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;ロードしない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;cbpからロードする&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;cbpからロードし,GS内部レジスタ&nbsp;<br>&nbsp;CBP0にcbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;cbpからロードし,GS内部レジスタ&nbsp;<br>&nbsp;CBP1にcbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;4&nbsp;</td>
+<td valign="top">&nbsp;CBP0!=cbpならロードし,CBP0に&nbsp;<br>&nbsp;cbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;5&nbsp;</td>
+<td valign="top">&nbsp;CBP1!=cbpならロードし,CBP1に&nbsp;<br>&nbsp;cbp値を設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>filter</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;フィルタリング方式の指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;NEAREST&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1&nbsp;</td>
+<td valign="top">&nbsp;LINEAR&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;2&nbsp;</td>
+<td valign="top">&nbsp;NEAREST_MIPMAP_NEAREST&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;3&nbsp;</td>
+<td valign="top">&nbsp;NEAREST_MIPMAP_LINEAR&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;4&nbsp;</td>
+<td valign="top">&nbsp;LINEAR_MIPMAP_NEAREST&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;5&nbsp;</td>
+<td valign="top">&nbsp;LINEAR_MIPMAP_LINEAR&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceGsTexEnv2構造体のサイズ(qword単位)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">テクスチャの設定に関するデータ(コンテキスト2)を、sceGsTexEnv2構造体の各メンバに設定します。<br>この構造体の直前にGIFtag（PACKEDモード,REGS=A+D）を置くと、そのままGIFに転送することができます。ただし構造体がCachedの場合は、D-cacheをフラッシュしてメモリに書き戻さないと正しいデータが転送されませんので注意してください。<br>新しいテクスチャをGSに転送したときには、<i>flush</i>に1を指定して作成したsceGsTexEnv2構造体を用いて、テクスチャの再設定を行ってください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数によってsceGsTexEnv2構造体の各メンバに設定される値は次のとおりです。必要があれば適宜修正して使用してください。<br><br></div>
+<div style="margin-left:70px;">tex02.TBP0 = tbp0<br>tex02.TBW = tbw<br>tex02.PSM = psm<br>tex02.TW = w<br>tex02.TH = h<br>tex02.TCC = 1<br>tex02.TFX = tfx<br>tex02.CBP = cbp<br>tex02.CPSM = cpsm<br>tex02.CLD = cld<br>tex12.MMAG = filter & 1<br>tex12.MMIN = filter<br>clamp2.WMS = 1<br>clamp2.WMT = 1<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetHalfOffset"><font size=6>sceGsSetHalfOffset<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>描画オフセットデータの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsSetHalfOffset</b>(
+	sceGsDrawEnv1 *<i>draw</i>,
+	short <i>centerx</i>, short <i>centery</i>,
+	short <i>halfoff</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>draw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画環境を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>centerx, centery</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画領域の中心座標&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>halfoff</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;オフセット加算の制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;加算しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;加算する&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">描画領域の中心座標から描画オフセット座標を計算し、描画環境構造体内のxyoffset1の値を設定します。<br>その際に、<i>halfoff</i>に1が指定されていれば、ハーフピクセル分としてy方向オフセットに8を加算して設定します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インタレースモードではoddフィールドとevenフィールドに半ピクセル分ずれた画像を描画させることによって、見かけ上の縦解像度を走査線数の2倍に引き上げることができます。<br>バッファをFRAMEモードとした場合は、両フィールドのオフセット値をずらすことで半ピクセル分ずれた画像を描画させることができます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSetHalfOffset2"><font size=6>sceGsSetHalfOffset2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>描画オフセットデータの作成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceGsSetHalfOffset2</b>(
+	sceGsDrawEnv2 *<i>draw</i>,
+	short <i>centerx</i>, short <i>centery</i>,
+	short <i>halfoff</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>draw</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画環境を設定する構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>centerx, centery</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;描画領域の中心座標&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>halfoff</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;オフセット加算の制御&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;加算しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;加算する&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">描画領域(コンテキスト2)の中心座標から描画オフセット座標を計算し、描画環境構造体内のxyoffset2の値を設定します。<br>その際に、<i>halfoff</i>に1が指定されていれば、ハーフピクセル分としてy方向オフセットに8を加算して設定します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インタレースモードではoddフィールドとevenフィールドに半ピクセル分ずれた画像を描画させることによって、見かけ上の縦解像度を走査線数の2倍に引き上げることができます。<br>バッファをFRAMEモードとした場合は、両フィールドのオフセット値をずらすことで半ピクセル分ずれた画像を描画させることができます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSwapDBuff"><font size=6>sceGsSwapDBuff<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ダブルバッファの切り替え<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSwapDBuff</b>(
+	sceGsDBuff *<i>db</i>,
+	int <i>id</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>db</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ダブルバッファ情報が設定されている構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッファ番号(最下位1bitのみ有効)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">終了状態を返します。<br>正常終了の場合、0を返します。<br>Timeout(先行するCh.2 DMAが終了しない）の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数<i>id</i>の指定にしたがって、ダブルバッファ情報構造体中にある2組のうちいずれかの描画環境および表示環境をGSに設定します。<br>この関数は、コンテキスト1の環境のみを設定します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ダブルバッファ情報構造体<i>db</i>がCachedの場合は、D-cacheをフラッシュしてメモリに書き戻してからこの関数を呼び出してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSwapDBuffDc"><font size=6>sceGsSwapDBuffDc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ダブルバッファの切り替え<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSwapDBuffDc</b>(
+	sceGsDBuffDc *<i>db</i>,
+	int <i>id</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>db</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ダブルバッファ情報が設定されている構造体のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッファ番号(最下位1bitのみ有効)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">終了状態を返します。<br>正常終了の場合、0を返します。<br>Timeout(先行するCh.2 DMAが終了しない）の場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数<i>id</i>の指定にしたがって、ダブルバッファ情報構造体中にある2組のうちいずれかの描画環境および表示環境をGSに設定します。<br>この関数は、コンテキスト1と2の両方の環境を設定します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ダブルバッファ情報構造体<i>db</i>がCachedの場合は、D-cacheをフラッシュしてメモリに書き戻してからこの関数を呼び出してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSyncPath"><font size=6>sceGsSyncPath<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データ転送の終了待ち<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSyncPath</b>(
+	int <i>mode</i>,
+	u_short <i>timeout</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>mode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;終了待ちモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0 &nbsp;</td>
+<td valign="top">&nbsp;待ち条件が解除されるまでブロックする。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;1 &nbsp;</td>
+<td valign="top">&nbsp;ブロックせずに、その時の各デバイス&nbsp;<br>&nbsp;のbusyステータスを返す。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>timeout</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;timeoutカウンタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;0&nbsp;</td>
+<td valign="top">&nbsp;システムデフォルト(約4VSync)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;正数 &nbsp;</td>
+<td valign="top">&nbsp;timeout発生時間(単位HSync) &nbsp;<br>&nbsp;(※not supported yet)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">終了状態を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;mode ==0 時&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了の場合、0を返します。&nbsp;<br>&nbsp;異常終了(タイムアウト発生)の場合、負数を返します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;mode == 1 時&nbsp;</td>
+<td valign="TOP">&nbsp;以下のデバイスのbusyステータス(正数）を返します。&nbsp;<br>&nbsp;待ち条件が解除されている場合、０を返します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;31　　　　　　　　　　　　　　　　　　　　　　　　　　&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　　　　　　　　　　　　　　　　　&nbsp;<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;<br>&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;G&nbsp;<br>&nbsp;I&nbsp;<br>&nbsp;F&nbsp;</td>
+<td valign="TOP">&nbsp;V&nbsp;<br>&nbsp;U&nbsp;<br>&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;V&nbsp;<br>&nbsp;I&nbsp;<br>&nbsp;F&nbsp;<br>&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;D&nbsp;<br>&nbsp;M&nbsp;<br>&nbsp;A&nbsp;<br>&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;D&nbsp;<br>&nbsp;M&nbsp;<br>&nbsp;A&nbsp;<br>&nbsp;1&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">0:idle<br>1:busy<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数<i>mode</i>に0が指定された場合、データパス(PATH1,2,3)中のデバイスがidleになるまでプログラムをブロックします。<i>timeout</i>で指定された期間にわたって転送が終了しない場合はタイムアウトとして、標準出力にメッセージを出力してエラー終了します。このとき、ロックしているデバイスはそのままで、リセットするなどの処置は行いません。<br>引数<i>timeout</i>には、最大何HSync分待機を続けるかを指定します。0を指定した場合は、4Vsync（1050Hsync)だけ待ちます。<br><br>引数<i>mode</i>に1が指定された場合、その時点でのデータパス中のデバイスのbusyステータスを返します。<br><br>引数<i>mode</i>に0が指定されて、異常終了時には以下のレジスタの内容をデバッグコンソールにプリントします。<br></div>
+<div style="margin-left:70px;">D1_CHCR, D1_TADR, D1_MADR, D1_QWC<br>D2_CHCR, D2_TADR, D2_MADR, D2_QWC<br>VIF1_STAT, GIF_STAT<br></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSyncV"><font size=6>sceGsSyncV<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>V-Blankとの同期待ち<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceGsSyncV</b>(
+	int <i>mode</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;reserved(0を指定すること)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インタレースモードでのFIELD情報を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;even field&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;odd field&nbsp;<br>&nbsp;（ノンインタレースモード時は必ず1を返す）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">V-Blank期間の開始までプログラムをブロックします。<br><i>mode</i>は将来の機能拡張に備えて用意されている引数です。現バージョンでは必ず0を指定してください。<br>本関数は、EEカーネルサービス関数のAddIntcHandler(INTC_VBLANK_S,  ,)<br>AddIntcHandler2(INTC_VBLANK_S,  ,)とともに併用することはできません。併用する場合は、AddIntcHandler(INTC_VBLANK_S,  ,) AddIntcHandler2(INTC_VBLANK_S,  ,)の代わりにsceGsSyncVCallbackをお使いください。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceGsSyncVCallback"><font size=6>sceGsSyncVCallback<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>VSyncコールバック関数の設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int *<b>sceGsSyncVCallback</b>(
+	int (*<i>func</i>)(int)
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コールバック関数のエントリアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">それまでに設定されていたコールバック関数のエントリアドレスを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">V-Blank期間の先頭で呼び出されるコールバック関数を設定します。<br>それまでの設定は破棄されます。<br>設定した関数のエントリアドレスはグローバル変数sceGsVSCfuncに保存されます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">Vsyncコールバック関数の設定は、sceGsResetGraph(0)を呼び出すとクリアされます。<br><br>この関数は、カーネルサービス関数AddIntcHandlerを使用していますので、<i>func</i>関数が-1を返す場合、AddIntcHandlerを使用して登録した他のVsync割り込みハンドラが呼ばれなくなる場合があります。<br><br><i>func</i>関数は割り込みハンドラとして実行されるため、プログラミングに際していくつか特別な注意が必要です。割り込みハンドラの記述について、\overview\eekernelに注意事項が記載されていますので参照してください。<br><br>また引数に NULL を指定した場合は登録されている割り込みハンドラの削除を行うことができます。削除をせずに2つ目の割り込みハンドラを登録した場合、関数内部で1つ目の割り込みハンドラを削除してから2つ目を登録するため、前に登録した割り込みハンドラはその後呼ばれることはありません。2つ以上を登録する場合はカーネルサービス関数AddIntcHandlerを使用して2つ目以降を登録してください。その際 DisableIntc を使用して一旦割り込みを停止してから追加を行い、その後 EnableIntc で再び割り込みを許可してあげるようにしてください。<br><br>本関数は、sceGsSyncVとの併用が可能です。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

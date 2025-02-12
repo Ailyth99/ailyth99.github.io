@@ -1,0 +1,615 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>SIF DMA</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/sif.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+SIF DMA
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifDmaData"> sceSifDmaData<br></a></td>
+<td>&nbsp;</td><td>DMA データ<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifDmaStat / isceSifDmaStat"> sceSifDmaStat / isceSifDmaStat<br></a></td>
+<td>&nbsp;</td><td>キューイングの状態<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifSetDChain / isceSifSetDChain"> sceSifSetDChain / isceSifSetDChain<br></a></td>
+<td>&nbsp;</td><td>DMAチャンネルの再設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifSetDma / isceSifSetDma"> sceSifSetDma / isceSifSetDma<br></a></td>
+<td>&nbsp;</td><td>相手メモリへの DMA 転送<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifSetDmaIntr"> sceSifSetDmaIntr<br></a></td>
+<td>&nbsp;</td><td>相手メモリへの DMA 転送（割り込み関数登録）(IOPのみ実装)<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifDmaData"><font size=6>sceSifDmaData<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>DMA データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	u_int <i>data</i>;
+	u_int <i>addr</i>;
+	u_int <i>size</i>;
+	u_int <i>mode</i>;
+}<b> sceSifDmaData</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>data</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;送出するデータのアドレス(EE 16byte/IOP 4byte アライン)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>addr</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;送るべき相手のアドレス(EE 16byte/IOP 4byte アライン)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>size</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;データのサイズ byte指定(EE 16byte/IOP 4byte 単位となる)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>mode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;注意：現在0(割り込みを起こさないモード)のみを&nbsp;<br>&nbsp;設定してください。SIF DMA関連の&nbsp;<br>&nbsp;割り込みは、現在SIF CMDで独占しているので&nbsp;<br>&nbsp;使用しないでください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SIF_DMA_INT_I&nbsp;</td>
+<td valign="top">&nbsp;転送終了後割り込み(送り手)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SIF_DMA_INT_O&nbsp;</td>
+<td valign="top">&nbsp;転送終了後割り込み(受け手)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SIF_DMA_TAG&nbsp;<br>&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;data の先頭の1qwordをTAG&nbsp;<br>&nbsp;として使用してもよい(EEでのみ指定)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SIF_DMA_ERT&nbsp;</td>
+<td valign="top">&nbsp;転送後 IOP の DMA を止める&nbsp;<br>&nbsp;(EEでのみ指定)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">DMA 転送すべきデータのアドレス、送り先アドレス、サイズ、モードを指定する構造体。<br>アドレスは、EE の場合は16バイト、IOP の場合は4バイトにアラインされます。<br>サイズは、EE の場合は16バイト、IOP の場合は4バイト単位となります<br>1回(ひとつのsceSifDmaDataで)の最大転送単位は、(1M - 16)バイトです。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSifSetDma">sceSifSetDma</a>()<br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="sceSifDmaStat / isceSifDmaStat"><font size=6>sceSifDmaStat / isceSifDmaStat<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キューイングの状態<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sif.h&gt;
+int  <b>sceSifDmaStat</b>(unsigned int <i>id</i>)
+int  <b>isceSifDmaStat</b>(unsigned int <i>id</i>)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sceSifDmaStat&nbsp;</td>
+<td valign="TOP">&nbsp;EE&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み許可状態で呼ぶこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;IOP&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない&nbsp;<br>&nbsp;（割り込み禁止状態で呼ぶこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;isceSifDmaStat&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifSetDma()が返したキューイング識別子&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正(&gt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;キューイングされて待機中&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;DMA 実行中&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;負(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;DMA 終了済&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">指定 id のDMAの状態を調べます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EE の場合は、割り込み関数内では isceSifDmaStat() を使用してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="sceSifSetDChain / isceSifSetDChain"><font size=6>sceSifSetDChain / isceSifSetDChain<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>DMAチャンネルの再設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sif.h&gt;
+void  <b>sceSifSetDChain</b>(void)
+void  <b>isceSifSetDChain</b>(void)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sceSifDmaStat&nbsp;</td>
+<td valign="TOP">&nbsp;EE&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み許可状態で呼ぶこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;IOP&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない&nbsp;<br>&nbsp;（割り込み禁止状態で呼ぶこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;isceSifDmaStat&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みその他の原因で、DMA が受けられない状態の時には、受け手側でこの関数を実行して、DMA チャネルの再設定を行います。<br>EE の場合、IOP から SIF DMA 割り込みが起ると、DMA の受け口が塞がりますので、この関数を使用して再設定しなければなりません。<br>IOP の場合、SIF_DMA_ERT が指定されたデータの転送後、同様に受け口が塞がりますので、この関数を使用して再設定しなければなりません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EE の場合、割り込み関数内では isceSifSetDChain() を使用してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="sceSifSetDma / isceSifSetDma"><font size=6>sceSifSetDma / isceSifSetDma<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>相手メモリへの DMA 転送<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sif.h&gt;
+unsigned int <b>sceSifSetDma</b>(
+	sceSifDmaData *<i>sdd</i>,
+	int <i>len</i>
+)
+
+unsigned int <b>isceSifSetDma</b>(
+	sceSifDmaData *<i>sdd</i>,
+	int <i>len</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sceSifDmaStat&nbsp;</td>
+<td valign="TOP">&nbsp;EE&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み許可状態で呼ぶこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;IOP&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない&nbsp;<br>&nbsp;（割り込み禁止状態で呼ぶこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;isceSifDmaStat&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し不可&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sdd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;DMA の内容&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sdd データの数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0以外&nbsp;</td>
+<td valign="TOP">&nbsp;キューイング識別子を返す&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;キューイングに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">相手のアドレスに対して DMA でデータを送ります。<br>データはsceSifDmaData構造体で、一度に複数を指定できます。<br>既にDMA中であれば、DMA終了後に発動されるようにキューイングされます。<br>キューイング識別子は、時間がたてば同じ値が返ることもあります。<br>キューの数は、現在の実装では、EE側 は32本のリングバッファ、IOP側は片方32本のダブルバッファです。そのため、IOP では、DMA 終了割り込み関数を占有しています。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EE の場合は、割り込み関数内では isceSifSetDma() を使用してください。<br>IOP の場合は、必ずこの関数は割り込み禁止領域で呼んでください。<br>現在の実装では SPR を扱うことはできません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifSetDmaIntr"><font size=6>sceSifSetDmaIntr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>相手メモリへの DMA 転送（割り込み関数登録）(IOPのみ実装)<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sif.h&gt;
+unsigned int <b>sceSifSetDmaIntr</b>(
+	sceSifDmaData *<i>sdd</i>,
+	int <i>len,</i>
+<i>	void (*func)(void *),</i>
+<i>	void *data</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sdd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;DMA の内容&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sdd データの数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;DMA終了後に呼ばれる関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;func に渡される引数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0以外&nbsp;</td>
+<td valign="TOP">&nbsp;キューイング識別子を返す&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;キューイングに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">データ転送終了後、割り込み関数として func() 呼ばれます。その際、引数として data が渡されます。それ以外は、sceSifSetDma() と同様です。<br>現在は、IOP においてのみ実装されています。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在の実装では SPR を扱うことはできません。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

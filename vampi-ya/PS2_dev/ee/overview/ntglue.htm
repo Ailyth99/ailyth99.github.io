@@ -1,0 +1,422 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>汎用ネットワークラッパーAPI(netglue)</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/ntglue_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+汎用ネットワークラッパーAPI(netglue)
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリ概要</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>概要</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>libinsck 用 netglueライブラリのソース公開について</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>API について</b><br></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>netglue API</b><br></a>
+    <a href="#Heading4_2_2"> <b>BSD ソケット API</b><br></a>
+    <a href="#Heading4_2_3"> <b>netglue 独自 API</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>errno について</b><br></a>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリ概要</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">汎用ネットワークラッパー API(netglue) は、様々なネットワーク関連ライブラリをネットワークスタックライブラリとは独立に使用できるよう、汎用の下位ネットワークライブラリとして規定された BSD ソケットベースの API です。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/ntglue001.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">netglue を下位 API として作成されたライブラリを使用する際には、使用するネットワークスタックライブラリに対応した netglue API ラッパーが必要となります。<br>SCEI スタック(libinet)用の netglue ライブラリは SDK に含まれていますので netglue ライブラリを作成する必要はなく、netglue API を意識する必要もありません。<br>netglue を利用したライブラリを、libinet 以外のネットワークスタックライブラリで使用する場合に、netglue ライブラリを作成する必要があります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">netglue ライブラリを作成するために必要なファイルは以下のとおりです。netglue 対応のネットワーク関連ライブラリをアプリケーションが利用する際に必要となるのは、各ネットワークスタックライブラリと、それ用のnetglue ライブラリのみです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘッダファイル&nbsp;</td>
+<td valign="TOP">&nbsp;include/netglue.h&nbsp;<br>&nbsp;(内部的に以下の3ファイルをinclude)&nbsp;<br>&nbsp;include/netglue/netdb.h&nbsp;<br>&nbsp;include/netglue/arpa/inet.h&nbsp;<br>&nbsp;include/netglue/netinet/in.h&nbsp;<br>&nbsp;include/netglue/netinet/tcp.h&nbsp;<br>&nbsp;include/netglue/sys/socket.h&nbsp;<br>&nbsp;各ネットワークスタックライブラリ用の&nbsp;<br>&nbsp;ヘッダファイル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ライブラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;各ネットワークスタックライブラリ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>libinsck 用 netglueライブラリのソース公開について</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">SCEI スタック(libinet)用の netglue ライブラリはソースを公開していますので、アプリケーション開発者が必要に応じて独自に修正しタイトルに組み込むことも可能です。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>API について</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>netglue API</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">netglue APIは基本的にはBSDソケットAPI準拠です。netglue APIを以下に列挙します。netglueライブラリを作成する場合には、以下のすべてのAPIに対応する必要があります。<br>各APIの詳細についてはライブラリリファレンスを参照して下さい。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>関数説明</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueAbort()&nbsp;</td>
+<td valign="TOP">&nbsp;指定ソケットの処理を中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueThreadInit()&nbsp;</td>
+<td valign="TOP">&nbsp;netglue 利用スレッド初期化&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueThreadTerminate()&nbsp;</td>
+<td valign="TOP">&nbsp;netglue利用スレッド終了処理&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;__sceNetGlueErrnoLoc()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケット関数のエラー値を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;__sceNetGlueHErrnoLoc()&nbsp;</td>
+<td valign="TOP">&nbsp;ホスト構造体関数のエラー値を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueGethostbyaddr()&nbsp;</td>
+<td valign="TOP">&nbsp;32ビットIPv4アドレスから&nbsp;<br>&nbsp;ホスト構造体を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueGethostbyname()&nbsp;</td>
+<td valign="TOP">&nbsp;ホスト名からホスト構造体を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueInetAddr()&nbsp;</td>
+<td valign="TOP">&nbsp;ドット形式 IPv4 アドレスから&nbsp;<br>&nbsp;32ビットアドレス取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueInetAton()&nbsp;</td>
+<td valign="TOP">&nbsp;ドット形式 IPv4 アドレスから&nbsp;<br>&nbsp;32ビットアドレス取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueInetLnaof()&nbsp;</td>
+<td valign="TOP">&nbsp;IPv4 アドレスからローカルネットワーク&nbsp;<br>&nbsp;アドレスの取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueInetMakeaddr()&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークアドレスから&nbsp;<br>&nbsp;IPv4アドレスの構築&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueInetNetof()&nbsp;</td>
+<td valign="TOP">&nbsp;IPv4アドレスからネットワーク&nbsp;<br>&nbsp;アドレスの取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueInetNetwork()&nbsp;</td>
+<td valign="TOP">&nbsp;ドット形式 IPv4 アドレスから&nbsp;<br>&nbsp;32ビットアドレス取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueInetNtoa()&nbsp;</td>
+<td valign="TOP">&nbsp;32ビットIPv4アドレスから&nbsp;<br>&nbsp;ドット形式アドレス取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueHtonl()&nbsp;</td>
+<td valign="TOP">&nbsp;4byte数値のバイトオーダをローカルから&nbsp;<br>&nbsp;ネットワークへ変換する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueHtons()&nbsp;</td>
+<td valign="TOP">&nbsp;2byte数値のバイトオーダをローカルから&nbsp;<br>&nbsp;ネットワークへ変換する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueNtohl()&nbsp;</td>
+<td valign="TOP">&nbsp;4byte数値のバイトオーダをネットワークから&nbsp;<br>&nbsp;ローカルへ変換する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueNtohs()&nbsp;</td>
+<td valign="TOP">&nbsp;2byte数値のバイトオーダをネットワークから&nbsp;<br>&nbsp;ローカルへ変換する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueAccept()&nbsp;</td>
+<td valign="TOP">&nbsp;TCPコネクション確立済ソケットの取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueBind()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットにアドレスをバインド&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueConnect()&nbsp;</td>
+<td valign="TOP">&nbsp;サーバに接続&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueGetpeername()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットの接続先情報を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueGetsockname()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットのローカル情報を取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueGetsockopt()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプションを取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueListen()&nbsp;</td>
+<td valign="TOP">&nbsp;TCP コネクションを受け付ける&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueRecv()&nbsp;</td>
+<td valign="TOP">&nbsp;データを受信&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueRecvfrom()&nbsp;</td>
+<td valign="TOP">&nbsp;データを受信&nbsp;<br>&nbsp;(送信元ホストのアドレス構造体も取得)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueSend()&nbsp;</td>
+<td valign="TOP">&nbsp;データを送信&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueSendto()&nbsp;</td>
+<td valign="TOP">&nbsp;データを送信&nbsp;<br>&nbsp;(送信先ホストのアドレス構造体を指定)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueSetsockopt()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプションを設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueShutdown()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットを閉じる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceNetGlueSocket()&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットを生成&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>BSD ソケット API</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">netglue API では基本的にほぼすべての関数が BSD ソケット API 準拠です。netglue の各 BSD ソケット API は、ブロッキングが前提です。ブロッキングを解除したい場合は、後述の netglue 独自 API であるsceNetGlueAbort() を他スレッドから呼び出します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>netglue 独自 API</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">netglue では BSD ソケット API の他に、独自の API として下記の3つがあります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>sceNetGlueAbort()</b><br></h4></div>
+
+<div style="margin-left:67px;">指定した socket に対する他スレッドの各 BSD ソケット API のブロッキングを解除する。<br></div>
+
+<div style="margin-left:40px;"><h4><b>sceNetGlueThreadInit()</b><br></h4></div>
+
+<div style="margin-left:67px;">netglue ライブラリを使用するに当たってスレッド毎に内部情報を保持するような初期化処理を行なう。netglue を使うスレッドはまず最初にこの API を呼ぶ。<br></div>
+
+<div style="margin-left:40px;"><h4><b>sceNetGlueThreadTerminate()</b><br></h4></div>
+
+<div style="margin-left:67px;">sceNetGlueThreadInit() に対応する終了処理を行なう。netglue を使うスレッドは終了時にこの API を呼ぶ。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>errno について</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">BSD ソケット API と同様、netglue では各 API のエラー値はsceNetGlueErrno で参照され、API としてはエラー時は単に負の値を返します。errno の各エラー値はライブラリリファレンスを参照して下さい。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

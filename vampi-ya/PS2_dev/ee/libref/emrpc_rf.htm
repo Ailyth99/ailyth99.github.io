@@ -1,0 +1,843 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>マルチスレッド対応SIF Remote Procedure Call (ee)</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/sif.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+マルチスレッド対応SIF Remote Procedure Call (EE)
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMClientData"> sceSifMClientData<br></a></td>
+<td>&nbsp;</td><td>RPC クライアント情報<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMEndFunc"> sceSifMEndFunc<br></a></td>
+<td>&nbsp;</td><td>RPC終了関数<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMRpcData"> sceSifMRpcData<br></a></td>
+<td>&nbsp;</td><td>RPCクライアントデータヘッダ<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMBindRpc"> sceSifMBindRpc<br></a></td>
+<td>&nbsp;</td><td>RPC サービス関数データの検索<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMBindRpcParam"> sceSifMBindRpcParam<br></a></td>
+<td>&nbsp;</td><td>RPC サービス関数データの検索<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMCallRpc"> sceSifMCallRpc<br></a></td>
+<td>&nbsp;</td><td>RPC サービス関数の呼び出し<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMExitRpc"> sceSifMExitRpc<br></a></td>
+<td>&nbsp;</td><td>MSIF RPC API の終了<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMInitRpc"> sceSifMInitRpc<br></a></td>
+<td>&nbsp;</td><td>MSIF RPC API の初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifMUnBindRpc"> sceSifMUnBindRpc<br></a></td>
+<td>&nbsp;</td><td>サーバスレッドの削除<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMClientData"><font size=6>sceSifMClientData<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>RPC クライアント情報<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct _sifm_client_data {
+	struct _sifM_rpc_data rpcd;
+	unsigned int <i>command</i>;
+	void *<i>buff</i>;
+	void *<i>cbuff</i>;
+	sceSifEndFunc <i>func</i>;
+	void *<i>para</i>;
+	void *<i>serve</i>;
+	int <i>sema</i>;
+	int <i>unbind</i>;
+	int <i>buffersize</i>;
+	int <i>stacksize</i>;
+	int <i>prio</i>;
+} <b>sceSifMClientData</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自動設定される為、プログラム側で設定する必要はありせん。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceSifMBindRpc()で取得したクライアント情報を格納する構造体です。<br>sceSifMCallRpc()でサービス関数を呼び出す際にも使用します。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSifMBindRpc">sceSifMBindRpc</a>()<a href="#"></a>,<a href="#sceSifMCallRpc">sceSifMCallRpc</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMEndFunc"><font size=6>sceSifMEndFunc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>RPC終了関数<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef void (* <b>sceSifMEndFunc</b>)(
+	void *<i>data</i>
+);
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;関数コール時に渡されるデータアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">RPCサービス関数が終了したときに割り込み領域で呼ばれる関数。<br>その際、<i>data</i>のアドレスが渡されます。<br>(MSIF RPC本バージョンでは、EndFuncは未実装です)<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSifMCallRpc">sceSifMCallRpc</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMRpcData"><font size=6>sceSifMRpcData<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>RPCクライアントデータヘッダ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct _sifm_rpc_data {
+	void *<i>paddr</i>;
+	unsigned int <i>pid</i>;
+	int <i>tid</i>;
+	unsigned int <i>mode</i>;
+} <b>sceSifMRpcData</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>paddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パケットのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パケットID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>tid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出しモード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">RPCクライアント共通のデータヘッダです。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSifMClientData">sceSifMClientData</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMBindRpc"><font size=6>sceSifMBindRpc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>RPC サービス関数データの検索<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMBindRpc</b>(
+	sceSifMClientData *<i>bd</i>,
+	unsigned int <i>request</i>,
+	unsigned int <i>mode</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クライアント情報を受け取る構造体のポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>request</i>&nbsp;</td>
+<td valign="TOP">&nbsp;リクエスト識別子&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出しモード。通常は0、必要に応じて次の定数を&nbsp;<br>&nbsp;指定する&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT    非同期実行（現在、未実装）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;サーバ側への通知成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;負(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;発行失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">リクエストを送るために必要なクライアント情報をサーバから取得します。<br>クライアント側で必要な関数です。<br>この関数を呼び出すと、<i>request</i>で指定したリクエスト識別子のサービス関数が登録されているかどうかをサーバ側で調べ、登録されていれば、呼び出しのキーとなるクライアント情報をbdで指定したsceSifMClinetData構造体に返してきます。<br>通常、この関数を呼び出したスレッドはサーバからの返答があるまでスリープ状態になります。SIF RPCではSIF_RPCM_NOWAITを指定することでリープせずにそのまま抜けますが、MSIF RPCでは未実装です。<br>この関数を用いた場合、IOP 側では sceMCallRpc() の作業を受け止めるスレッドが生成されます。そのスレッドの受信バッファ、スタックサイズ、プライオリティは、2kbyte,8kbyte,32 です。この値を指定したい場合は、sceSifMBindRpcParam() を使用してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EEではスリープではなく内部的に確保したセマフォを用いて終了を待ちます。<br>サービス関数が登録されていたか（Bindが成功したか）どうかは、返されたsceSifMClinetDataのserveメンバが0以外の値かどうかで判別できます。以下のようなコードになります。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>   #define BIND_ID  0x12345678
+   
+   while(1){
+   	if (sceSifMBindRpc( &cd0, BIND_ID, 0) &lt; 0) {
+   	printf("bind errr\n");
+   	exit(-1);
+   	}
+   	if (cd0.serve != 0) break;
+   }
+</pre></font></div>
+<div style="margin-left:50px;"><br>なお、上記のようなコードでEEからIOPへ頻繁に通信を行うと、EEがかなり速いためにIOPがほぼ停止状態になります。少し間をおいてリクエストを発行してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMBindRpcParam"><font size=6>sceSifMBindRpcParam<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>RPC サービス関数データの検索<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMBindRpcParam</b>(
+	sceSifMClientData *<i>bd</i>,
+	unsigned int <i>request</i>,
+	unsigned int <i>mode</i>,
+	unsigned int <i>buffersize</i>,
+	unsigned int <i>stacksize</i>,
+	int <i>priority</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クライアント情報を受け取る構造体のポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>request</i>&nbsp;</td>
+<td valign="TOP">&nbsp;リクエスト識別子&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出しモード。通常は0、必要に応じて次の定数を&nbsp;<br>&nbsp;指定する。&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT   非同期実行(現在、未実装)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buffersize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc() の send のデータを受け止める受信&nbsp;<br>&nbsp;バッファの大きさを指定します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>stacksize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc() のリクエストを行うIOP側のスレッド&nbsp;<br>&nbsp;のスタックサイズの大きさを指定します。大きさは、512&nbsp;<br>&nbsp;バイト以上を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>priority</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc() のリクエストを行うIOP側のスレッド&nbsp;<br>&nbsp;のプライオリティを指定します。10以下の値は、システム&nbsp;<br>&nbsp;が使用しますので、それ以上の値を指定してください。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;サーバ側への通知成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;負(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;発行失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">リクエストを送るために必要なクライアント情報をサーバから取得します。<br>クライアント側で必要な関数です。<br>この関数を呼び出すと、<i>request</i>で指定したリクエスト識別子のサービス関数が登録されているかどうかをサーバ側で調べ、登録されていれば、呼び出しのキーとなるクライアント情報を<i>bd</i>で指定したsceSifMClinetData構造体に返してきます。<br>通常、この関数を呼び出したスレッドはサーバからの返答があるまでスリープ状態になります。SIF RPCではSIF_RPCM_NOWAITを指定することでリープせずにそのまま抜けますが、MSIF RPCでは未実装です。<br>この関数を用いた場合、IOP 側では sceMCallRpc() の作業を受け止めるスレッドが生成されます。そのスレッドの受信バッファ、スタックサイズ、プライオリティは、buffersize/stacksize/priority の値が使用されます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EEではスリープではなく内部的に確保したセマフォを用いて終了を待ちます。<br>サービス関数が登録されていたか（Bindが成功したか）どうかは、返されたsceSifMClinetDataのserveメンバが0以外の値かどうかで判別できます。以下のようなコードになります。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>   #define BIND_ID  0x12345678
+
+   while(1){
+	if (sceSifMBindRpc( &cd0, BIND_ID, 0) &lt; 0) {
+	printf("bind errr\n");
+	exit(-1);
+	}
+	if (cd0.serve != 0) break;
+   }
+</pre></font></div>
+<div style="margin-left:50px;"><br>なお、上記のようなコードでEEからIOPへ頻繁に通信を行うと、EEがかなり速いためにIOPがほぼ停止状態になります。少し間をおいてリクエストを発行してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMCallRpc"><font size=6>sceSifMCallRpc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>RPC サービス関数の呼び出し<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMCallRpc</b>(
+	sceSifMClientData *<i>bd</i>,
+	unsigned int <i>fno</i>,
+	unsigned int <i>mode</i>,
+	void *<i>send</i>,
+	int <i>ssize</i>,
+	void *<i>receive</i>,
+	int <i>rsize</i>,
+	sceSifMEndFunc *<i>end_func</i>,
+	void *<i>end_para</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Bind済みのクライアント情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>fno</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出されるサービス関数に渡す番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出しモード。通常は0、必要に応じて次の定数を&nbsp;<br>&nbsp;マスク指定する。&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT  非同期実行（現在、未実装）&nbsp;<br>&nbsp;SIF_RPCM_NOWBDC  キャッシュのライトバックなし&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>send</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信するデータバッファ &nbsp;<br>&nbsp;(EE/IOPで16/4バイトアライメント)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ssize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信するデータサイズ (byte。EE/IOP で16/4byte単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>receive</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信するデータバッファ&nbsp;<br>&nbsp;(EE/IOPで16/4バイトアライメント)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>rsize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信するデータサイズ (byte。EE/IOP で16/4byte単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>end_func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;終了時に割り込み禁止区間で実行される関数 &nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>end_para</i>&nbsp;</td>
+<td valign="TOP">&nbsp;end_func のパラメータのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;"><i>ssize</i>/<i>rsize</i> の上限は、１回で送れる DMA の上限 1Mbyte - 16byteです。<br>注意：現在の実装では、<i>ssize</i>の上限は2048byteです。<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;サーバ側への通知成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;負(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;発行失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">登録されているサービス関数を呼び出します。クライアント側で使用する関数です。<br>引数<i>bd</i>には、あらかじめsceSifMBindRpc()でBind済みのクライアント情報の構造体を指定します。<br><i>send</i> で指定したデータ <i>ssize</i>バイトがサーバ側に送られ、サービス関数に第2 /第3引数として渡されます。<i>fno</i> が第１引数となります。<br>サービス関数の実行後、その返値のアドレスにあるデータ <i>rsize</i> バイトが、<i>receive</i> で指定した領域に送り返されます。<br>通常、sceSifMCallRpc() を呼び出したスレッドはサーバからの返答があるまでスリープ状態になります。SIF RPCではSIF_RPCM_NOWAITを指定することでスリープせずにそのまま抜けますが、MSIF RPCでは未実装です。<br>同一 sceSifMClientData への sceSifMCallRpc() は、セマフォを用いてブロックされます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EE ではスリープではなく内部的に確保したセマフォを用いて終了を待ちます。EE の場合、キャッシュ上に載っているデータを send/receive するときにはメモリへ write-back しますが、 <i>mode</i>に SIF_RPCM_NOWBDC をマスクしておくと write-back を行いません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMExitRpc"><font size=6>sceSifMExitRpc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>MSIF RPC API の終了<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void  <b>sceSifMExitRpc</b>(
+	void
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">MSIF RPC APIを終了します。<br>リブートするなど、再びsceSifMInitRpc()を呼び出してMSIF RPC API の初期化を行いたい場合は、一度sceSifMExitRpc()でMSIF RPC APIを終了させてください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMInitRpc"><font size=6>sceSifMInitRpc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>MSIF RPC API の初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void  <b>sceSifMInitRpc</b>(
+	unsigned int <i>mode</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;起動モード（現在の実装では0 固定）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">MSIF RPC API の初期化を行います。<br>内部変数を初期化し、リクエストを処理するためのコマンド関数をMSIF Command API のシステムバッファに登録します。<br>サーバ/クライアントの両方で行う必要があります。<br>内部では、同期のため片方が呼ばれるまでもう一方はこの関数内で待ちに入ります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifMUnBindRpc"><font size=6>sceSifMUnBindRpc<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>サーバスレッドの削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSifMUnBindRpc</b>(
+	sceSifMClientData *<i>bd</i>,
+	unsigned int <i>mode</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>bd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Bind済みのクライアント情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出しモード。通常は0、必要に応じて次の定数を&nbsp;<br>&nbsp;指定する&nbsp;<br>&nbsp;SIF_RPCM_NOWAIT   非同期実行（現在、未実装）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;SIFM_UB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;サーバスレッド削除成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;SIFM_UB_NOT_DORMANT&nbsp;</td>
+<td valign="TOP">&nbsp;サーバスレッドがDORMANT状態&nbsp;<br>&nbsp;ではなかった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;SIFM_UB_NOT_EXIST&nbsp;</td>
+<td valign="TOP">&nbsp;指定したサーバスレッドが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;負(&lt;0)&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;発行失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">スレッド終了時に、sceSifMBindRpc()によってサーバ側で生成されたサーバスレッドを削除するために必要な関数です。<br>この関数を呼び出すと、bdで指定したクライアント情報がBind済かどうかをサーバ側で調べ、登録されていれば、Bind時にサーバ側で生成されたサーバスレッドを削除します。<br>対応するサーバスレッドは、UNBIND要求がサーバ側に通知された際にDORMANT状態になっていなければなりません。<br>通常、この関数を呼び出したスレッドはサーバからの返答があるまでスリープ状態になります。SIF RPCではSIF_RPCM_NOWAITを指定することでリープせずにそのまま抜けますが、SIF RPCでは未実装です。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EEではスリープではなく内部的に確保したセマフォを用いて終了を待ちます。<br>UnBindが成功したかどうかは、返されたsceSifMClinetDataのcommandメンバがSIFM_UB_OKかどうかで判別できます。<br>以下のようなコードになります。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>   #define BIND_ID  0x12345678
+   
+   while(1){
+   	if (sceSifMUnBindRpc( &cd0, BIND_ID, 0) &lt; 0) {
+   	printf("bind errr\n");
+   	exit(-1);
+   	}
+   	if (cd0.command == SIFM_UB_OK) break;
+   }
+</pre></font></div>
+<div style="margin-left:50px;"><br>なお、上記のようなコードでEEからIOPへ頻繁に通信を行うと、EEがかなり速いためにIOPがほぼ停止状態になります。少し間をおいてリクエストを発行してください。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

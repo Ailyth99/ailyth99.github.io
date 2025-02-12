@@ -1,0 +1,331 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<title>dev9リファレンス</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+dev9リファレンス
+</h1></center>
+</a>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceDevctl"> sceDevctl <br></a></td>
+<td>&nbsp;</td><td>デバイスへの特殊操作<br></td></tr>
+</table><br>
+<font size=4><b>devctlコマンド</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#DDIOC_MODEL"> DDIOC_MODEL<br></a></td>
+<td>&nbsp;</td><td>デバイスのタイプを判断<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#DDIOC_OFF"> DDIOC_OFF<br></a></td>
+<td>&nbsp;</td><td>デバイスの電源 OFF<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceDevctl"><font size=6>sceDevctl <br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>デバイスへの特殊操作<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifdev.h&gt;
+int <b>sceDevctl</b>(
+	const char *<i>name</i>,
+	int <i>cmd</i>,
+	void *<i>arg</i>,
+	unsigned int <i>arglen</i>,
+	void *<i>bufp</i>,
+	unsigned int <i>buflen</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである(割り込み許可状態で呼ぶこと)<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;デバイス名(dev9x:)。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cmd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;操作コマンド。次のいずれかの定数で指定します。&nbsp;<br>&nbsp;DDIOC_MODEL&nbsp;<br>&nbsp;DDIOC_OFF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドに与える引数。cmd に依存します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドから受け取る引数。cmd に依存します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、<i>cmd</i> に依存した値を返します。<br>エラーの場合、各コマンドは以下の共通エラーを返します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-19&nbsp;</td>
+<td valign="TOP">&nbsp;-ENODEV&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたデバイスが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-24&nbsp;</td>
+<td valign="TOP">&nbsp;-EMFILE&nbsp;</td>
+<td valign="TOP">&nbsp;オープンできるディスクリプタの最大数に達している&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">デバイスに対して特殊操作を行います。<i>各cmd</i> については、「devctlコマンド一覧」を参照してください。デバイス名は、dev9 ではなく、dev9x です。間違わないようにしてください。<br>例)<br>sceDevctl ("dev9x:",DDIOC_OFF,  NULL, 0, NULL, 0);<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>devctlコマンド</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="DDIOC_MODEL"><font size=6>DDIOC_MODEL<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>デバイスのタイプを判断<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">デバイスが、PC Card タイプの場合、0 を、ハードディスクドライブ(EXPANTION BAYタイプ)の場合、1 を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">デバイスが、PC Card タイプかEXPANTION BAYタイプかを判断します。通常、アプリケーションがこの操作を行う必要はありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="DDIOC_OFF"><font size=6>DDIOC_OFF<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>デバイスの電源 OFF<br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arglen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;arg のサイズ。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bufp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;予約。NULL を指定してください。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buflen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;bufp のサイズ。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0 を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">dev9 デバイス全体の電源を切ります。<br>Release2.5.2までは、ハードディスクドライブとHDDイーサネットのどちらが接続されているかで電源OFF処理のコマンドが異なりましたが、Release2.5.3のdev9で機能を統一したため、どちらの場合でもこのコマンドを使用してください。<br>なお、HDIOC_DEV9OFFコマンドも互換性のために残されています。<br><br>詳細は、ネットワークライブラリ概要(inet)およびPlayStation File System概要(pfs)の「電源OFF処理」を参照して下さい。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

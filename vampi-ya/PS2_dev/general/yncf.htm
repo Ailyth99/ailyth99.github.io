@@ -1,0 +1,2967 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+<title>あなたのネットワーク設定ファイル使用規定Version 2.0</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+あなたのネットワーク設定ファイル使用規定Version 2.0
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>このドキュメントについて</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>バージョン管理について</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>あなたのネットワーク設定ファイル</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>あなたのネットワーク設定ファイルとは</b><br></a>
+    <a href="#Heading4_2_2"> <b>あなたのネットワーク設定ファイルの構成</b><br></a>
+    <a href="#Heading4_2_3"> <b>あなたのネットワーク設定ファイルの内容</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>ネットワーク設定アプリケーションの作成基準</b><b>（読み出し処理）</b></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>組み合わせの表示・選択</b><br></a>
+    <a href="#Heading4_3_2"> <b>組み合わせを用いた接続</b><br></a>
+    <a href="#Heading4_3_3"> <b>接続機器設定の表示・選択</b><br></a>
+    <a href="#Heading4_3_4"> <b>接続機器設定を用いた接続</b><br></a>
+    <a href="#Heading4_3_5"> <b>接続プロバイダ設定の表示・選択</b><br></a>
+    <a href="#Heading4_3_6"> <b>接続プロバイダ設定を用いた接続</b><br></a>
+    <a href="#Heading4_3_7"> <b>あなたのネットワーク設定ファイルの読み込み時のエラーについて</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>ネットワーク設定アプリケーションの作成基準</b><b>（書き込み処理）</b></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>組み合わせの追加・編集・削除</b><br></a>
+    <a href="#Heading4_4_2"> <b>接続機器設定の追加・編集・削除</b><br></a>
+    <a href="#Heading4_4_3"> <b>接続プロバイダ設定の追加・編集・削除</b><br></a>
+    <a href="#Heading4_4_4"> <b>メモリーカード(PS2)への保存</b><br></a>
+    <a href="#Heading4_4_5"> <b>ハードディスクドライブへの保存</b><br></a>
+    </ul>
+<p><a href="#Heading3_5">  5 <b>実装上の詳細基準</b></a>
+    <ul>
+    <a href="#Heading4_5_1"> <b>接続時のリダイアル処理</b><br></a>
+    <a href="#Heading4_5_2"> <b>接続機器の種別が矛盾する場合の接続処理</b><br></a>
+    <a href="#Heading4_5_3"> <b>使用できる文字</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>このドキュメントについて</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">このドキュメントでは、ネットワーク接続に関する情報を保存するファイルとして弊社が定めている「あなたのネットワーク設定ファイル」の内容等と、あなたのネットワーク設定ファイルを使用するプログラムの作成基準について解説したものです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>バージョン管理について</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">このドキュメントは、TRCと合わせてプログラミング上の規定事項となるため、単独にバージョン管理されています。<br>バージョンの管理方法は、以下のとおりです：<br><br>作成基準の項目追加、削除のあった場合……一の位を変更<br></div>
+<div style="margin-left:67px;">例)  Version 1.0 → Version 2.0<br></div>
+<div style="margin-left:50px;"><br>誤記修正、内容の補足のあった場合……小数点第一位を変更<br></div>
+<div style="margin-left:67px;">例)  Version 1.0 → Version 1.1<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>あなたのネットワーク設定ファイル</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>あなたのネットワーク設定ファイルとは</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルとは、ネットワーク接続に使用する機器や接続先プロバイダのアクセスポイントやユーザーアカウントなどユーザーごとの個別情報を、ユーザーが一度入力・設定すれば各アプリケーションで共通して利用できるようにするため規定されたネットワーク設定ファイルです。<br>ファイル形式は共通ネットワーク設定ライブラリ（netcnf）で規定されている共通ネットワーク設定ファイルのサブセットですが、一般的なネットワークアプリケーションで必要とする設定項目をカバーし、また、保存場所などの運用方法を規定して、より容易にアプリケーション間で共有できるようになっています。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/yncf001.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;"><br>あなたのネットワーク設定ファイルに対する操作は、共通ネットワーク設定ライブラリ（netcnf）及び、共通ネットワーク設定インタフェースライブラリ(netcnfif)を通して行わなければなりません。また、あなたのネットワーク設定ファイルは共有のリソースですので、これを使用するアプリケーション（以下ネットワーク設定アプリケーションと呼びます）は一定の基準に従う必要があります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>あなたのネットワーク設定ファイルの構成</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルは以下のファイルによって構成されます。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 設定管理ファイル
+         <li> 組み合わせファイル
+         <li> 接続機器設定ファイル
+         <li> 接続プロバイダ設定ファイル
+</ul></div>
+<div style="margin-left:50px;">これらのファイルに加えて保存先の各デバイスに応じて必要なファイルが追加されます。保存先のデバイスとしてはメモリーカード(PS2)とハードディスクドライブがあり、各デバイスでの保存場所とファイル構成は以下のようになっています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>メモリーカード(PS2)に保存する場合</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>保存場所</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;/BWNETCNF&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル種別</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>最大サイズ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>最大ファイル数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;設定管理ファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;BWNETCNF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;テンポラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;BWNETCNF.tmp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;組み合わせファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;6&nbsp;</td>
+<td valign="TOP">&nbsp;net???.cnf&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;接続機器設定ファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;dev???.dat&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;接続プロバイダ設定ファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;ifc???.dat&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アイコンファイル&nbsp;</td>
+<td valign="TOP">&nbsp;34Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;SYS_NET.ICO&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;icon.sys&nbsp;</td>
+<td valign="TOP">&nbsp;1Kbyte&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;icon.sys&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ファイルエントリ&nbsp;</td>
+<td valign="TOP">&nbsp;9Kbytes((18+1)/2)&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ディレクトリエントリ&nbsp;</td>
+<td valign="TOP">&nbsp;2Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> net???.cnf、dev???.dat、ifc???.datの???は共通ネットワーク設定ライブラリ(netcnf)が自動的に割り当てます。
+         <li> テンポラリファイルは共通ネットワーク設定ライブラリ(netcnf)がファイル操作時に一時的に作成するものです。
+         <li> ファイルエントリ、ディレクトリエントリはメモリーカードライブラリの仕様に従ったものです。
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>ハードディスクドライブに保存する場合</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>保存場所</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;__sysconfパーティション内/etc/network&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル種別</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>最大サイズ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>最大ファイル数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;設定管理ファイル&nbsp;</td>
+<td valign="TOP">&nbsp;17Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;net.db&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;テンポラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;17Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;net.db.tmp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;組み合わせファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;10&nbsp;</td>
+<td valign="TOP">&nbsp;net???.cnf&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;接続機器設定ファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;30&nbsp;</td>
+<td valign="TOP">&nbsp;dev???.dat&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;接続プロバイダ設定ファイル&nbsp;</td>
+<td valign="TOP">&nbsp;3Kbytes&nbsp;</td>
+<td valign="TOP">&nbsp;30&nbsp;</td>
+<td valign="TOP">&nbsp;ifc???.dat&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> net???.cnf、dev???.dat、ifc???.datの???は共通ネットワーク設定ライブラリ(netcnf)が自動的に割り当てます。
+         <li> テンポラリファイルは共通ネットワーク設定ライブラリ(netcnf)がファイル操作時に一時的に作成するものです。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>あなたのネットワーク設定ファイルの内容</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルはファイルごとに保存可能な設定内容が定められ、設定内容に応じて保存しなければならない設定項目が決められています。ファイルごとに保存可能な設定内容と設定内容ごとに保存しなければならない設定項目を以下に示します。<br>なお、設定項目の表における区分欄の表示は次の意味を持ちます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザーが必ず入力・選択し、設定されなければならない設定項目&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワーク設定アプリケーションが内部で判断し、&nbsp;<br>&nbsp;自動的に設定されなければならない設定項目&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;設定項目は存在するが、ユーザーが入力・選択しなければ&nbsp;<br>&nbsp;設定されない設定項目（設定されない場合は保存もされない）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">また、該当キーワード欄は、その設定項目に対応する共通ネットワーク設定ライブラリ(netcnf)で定められたキーワードを示しています（キーワードの詳細は共通ネットワーク設定ライブラリ(netcnf)概要を参照してください）。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_3_1"><h4>
+(1)&nbsp;<b>設定管理ファイルの内容</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">設定管理ファイルには、あなたのネットワーク設定ファイルが保存されるディレクトリ内に存在する組み合わせファイル、接続機器設定ファイル、接続プロバイダ設定ファイルの情報と、各ファイルの設定名が以下の形式のテキスト情報で保存されます。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3><i>ファイルの種類</i>,1,<i>ファイル名</i>,<i>設定名</i>\n
+
+</pre></font></div>
+<div style="margin-left:67px;">※ \nは改行です。<br>設定名はユーザーが入力するものですが、使用できる文字は','を除くASCII文字とひらがな、カタカナのみです。後に示す表（「あなたのネットワーク設定ファイルで使用できる文字」および「設定名として使用できるひらがな / カタカナ」）を参照してください。これ以外の文字はアプリケーション側で入力できないようにしなければなりません。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_3_2"><h4>
+(2)&nbsp;<b>組み合わせファイルの内容</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">組み合わせファイルには、以下の設定内容の保存が可能です。<br>使用できる文字はASCII文字のみです。<br><br></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器設定ファイルと接続プロバイダ設定ファイルの組み合わせ</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;接続機器設定と接続プロバイダ設定の&nbsp;<br>&nbsp;組み合わせ&nbsp;</td>
+<td valign="TOP">&nbsp;interface "ifc???.dat + &nbsp;<br>&nbsp;dev???.dat" "ifc???.dat" &nbsp;<br>&nbsp;"dev???.dat"&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_3_3"><h4>
+(3)&nbsp;<b>接続機器設定ファイルの内容</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">接続機器設定ファイルには、以下の設定内容の保存が可能です。<br>各項目で使用できる文字はASCII文字のみです。これ以外の文字はアプリケーション側で入力できないようにしなければなりません。<br>また、ベンダ名とプロダクト名は設定名として使われるため、','の文字は使用できません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてSCE製ネットワークアダプタのイーサネットアダプタを使用する設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type nic&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ベンダ名&nbsp;</td>
+<td valign="TOP">&nbsp;vendor "vendor"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;プロダクト名&nbsp;</td>
+<td valign="TOP">&nbsp;product "product"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;イーサネット接続機器の動作モード&nbsp;<br>&nbsp; 自動認識&nbsp;<br>&nbsp; 10Base-T Half-Duplex&nbsp;<br>&nbsp; 10Base-T Full-Duplex&nbsp;<br>&nbsp; 100Base-TX Half-Duplex&nbsp;<br>&nbsp; 100Base-TX Full-Duplex&nbsp;</td>
+<td valign="TOP">&nbsp;以下のうちのひとつ&nbsp;<br>&nbsp;phy_config auto&nbsp;<br>&nbsp;phy_config 10&nbsp;<br>&nbsp;phy_config 10_fd&nbsp;<br>&nbsp;phy_config tx&nbsp;<br>&nbsp;phy_config tx_fd&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてSCE製ネットワークアダプタ以外のイーサネットアダプタを使用する設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type eth&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ベンダ名&nbsp;</td>
+<td valign="TOP">&nbsp;vendor "vendor"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;プロダクト名&nbsp;</td>
+<td valign="TOP">&nbsp;product "product"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;イーサネット接続機器の動作モード&nbsp;<br>&nbsp; 自動認識&nbsp;<br>&nbsp; 10Base-T Half-Duplex&nbsp;<br>&nbsp; 10Base-T Full-Duplex&nbsp;<br>&nbsp; 100Base-TX Half-Duplex&nbsp;<br>&nbsp; 100Base-TX Full-Duplex&nbsp;</td>
+<td valign="TOP">&nbsp;以下のうちのひとつ&nbsp;<br>&nbsp;phy_config auto&nbsp;<br>&nbsp;phy_config 10&nbsp;<br>&nbsp;phy_config 10_fd&nbsp;<br>&nbsp;phy_config tx&nbsp;<br>&nbsp;phy_config tx_fd&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてモデム・TAを使用する設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type ppp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ベンダ名&nbsp;</td>
+<td valign="TOP">&nbsp;vendor "vendor"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;プロダクト名&nbsp;</td>
+<td valign="TOP">&nbsp;product "product"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ダイアル方法&nbsp;<br>&nbsp; トーン&nbsp;<br>&nbsp; パルス&nbsp;</td>
+<td valign="TOP">&nbsp;以下のうちのひとつ&nbsp;<br>&nbsp;dialing_type tone&nbsp;<br>&nbsp;dialing_type pulse&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;追加ATコマンド&nbsp;</td>
+<td valign="TOP">&nbsp;chat_additional "chat_script"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;外線発信番号&nbsp;</td>
+<td valign="TOP">&nbsp;outside_number "outside_number"&nbsp;<br>&nbsp;及び outside_delay &nbsp;<br>&nbsp;"outside_delay"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;回線切断（単位: 分）&nbsp;</td>
+<td valign="TOP">&nbsp;idle_timeout ?&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> 回線切断（単位: 分）設定は設定項目としては分単位だが、共通ネットワーク設定ライブラリ(netcnf)で定められたキーワードにおいては秒単位。
+         <li> 回線切断設定に設定できる値は0～90分とし、それ以外はアプリケーション側でエラーとすること。0は無限を意味し、デフォルトは10分とすること。
+</ul></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_3_4"><h4>
+(4)&nbsp;<b>接続プロバイダ設定ファイルの内容</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">接続プロバイダ設定ファイルには、以下の設定内容の保存が可能です。<br>各項目で使用できる文字はASCII文字のみです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてSCE製ネットワークアダプタのイーサネットアダプタを使用し、DHCPを使用しない設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type nic&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用しない&nbsp;</td>
+<td valign="TOP">&nbsp;-dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;IPアドレス&nbsp;</td>
+<td valign="TOP">&nbsp;address "?.?.?.?"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ネットマスク&nbsp;</td>
+<td valign="TOP">&nbsp;netmask "?.?.?.?"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;デフォルトルータ&nbsp;</td>
+<td valign="TOP">&nbsp;route add -net 0.0.0.0 &nbsp;<br>&nbsp;gw ?.?.?.? netmask 0.0.0.0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;プライマリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;セカンダリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> IPアドレス、ネットマスク、デフォルトルータ、プライマリDNS、セカンダリDNSの表示形式は、ドット形式で、以下のようにすること。<br>　　<i>num8</i>.<i>num8</i>.<i>num8</i>.<i>num8</i>（<i>num8</i>はunsigned 8bitで表せる範囲の10進数）
+         <li> IPアドレス、ネットマスク、デフォルトルータ、プライマリDNS、セカンダリDNSに設定できる値の範囲は0.0.0.0 ～ 255.255.255.255とし、それ以外はアプリケーション側でエラーとすること。
+         <li> IPアドレス、ネットマスク、デフォルトルータについては、0.0.0.0もエラーとすること。
+         <li> プライマリDNS、セカンダリDNSについては、0.0.0.0はエラーとするか、自動取得の指定とみなすこと。
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてSCE製ネットワークアダプタのイーサネットアダプタを使用し、DHCPを使用する設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type nic&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用する&nbsp;</td>
+<td valign="TOP">&nbsp;dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;プライマリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;セカンダリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;DHCP用ホスト名&nbsp;</td>
+<td valign="TOP">&nbsp;dhcp_host_name "host_name"&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> プライマリDNS、セカンダリDNSの表示形式は、ドット形式で、以下のようにすること。<br>　　<i>num8</i>.<i>num8</i>.<i>num8</i>.<i>num8</i>（<i>num8</i>はunsigned 8bitで表せる範囲の10進数）
+         <li> プライマリDNS、セカンダリDNSに設定できる値の範囲は0.0.0.0 ～ 255.255.255.255とし、それ以外はアプリケーション側でエラーとすること。
+         <li> プライマリDNS、セカンダリDNSについては、0.0.0.0はエラーとするか、自動取得の指定とみなすこと。
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてSCE製ネットワークアダプタ以外のイーサネットアダプタを使用し、DHCPを使用しない設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type eth&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用しない&nbsp;</td>
+<td valign="TOP">&nbsp;-dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;IPアドレス&nbsp;</td>
+<td valign="TOP">&nbsp;address "?.?.?.?"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ネットマスク&nbsp;</td>
+<td valign="TOP">&nbsp;netmask "?.?.?.?"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;デフォルトルータ&nbsp;</td>
+<td valign="TOP">&nbsp;route add -net 0.0.0.0 &nbsp;<br>&nbsp;gw ?.?.?.? netmask 0.0.0.0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;プライマリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;セカンダリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> IPアドレス、ネットマスク、デフォルトルータ、プライマリDNS、セカンダリDNSの表示形式は、ドット形式で、以下のようにすること。<br>  <i>num8</i>.<i>num8</i>.<i>num8</i>.<i>num8</i>（<i>num8</i>はunsigned 8bitで表せる範囲の10進数）
+         <li> IPアドレス、ネットマスク、デフォルトルータ、プライマリDNS、セカンダリDNSに設定できる値の範囲は0.0.0.0 ～ 255.255.255.255とし、それ以外はアプリケーション側でエラーとすること。
+         <li> IPアドレス、ネットマスク、デフォルトルータについては、0.0.0.0もエラーとすること。
+         <li> プライマリDNS、セカンダリDNSについては、0.0.0.0はエラーとするか、自動取得の指定とみなすこと。
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてSCE製ネットワークアダプタ以外のイーサネットアダプタを使用し、DHCPを使用する設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type eth&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用する&nbsp;</td>
+<td valign="TOP">&nbsp;dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;プライマリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;セカンダリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;DHCP用ホスト名&nbsp;</td>
+<td valign="TOP">&nbsp;dhcp_host_name &nbsp;<br>&nbsp;"host_name"&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> プライマリDNS、セカンダリDNSの表示形式は、ドット形式で、以下のようにすること。<br>  <i>num8</i>.<i>num8</i>.<i>num8</i>.<i>num8</i>（<i>num8</i>はunsigned 8bitで表せる範囲の10進数）
+         <li> プライマリDNS、セカンダリDNSに設定できる値の範囲は0.0.0.0 ～ 255.255.255.255とし、それ以外はアプリケーション側でエラーとすること。
+         <li> プライマリDNS、セカンダリDNSについては、0.0.0.0はエラーとするか、自動取得の指定とみなすこと。
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてイーサネットアダプタを使用し、PPPoEを使用し、DNSサーバーアドレスを自動取得する設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type ppp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;接続先の認証名&nbsp;</td>
+<td valign="TOP">&nbsp;peer_name "*"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;認証方法&nbsp;</td>
+<td valign="TOP">&nbsp;allow.auth chap/pap&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用しない&nbsp;</td>
+<td valign="TOP">&nbsp;-dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザーID&nbsp;</td>
+<td valign="TOP">&nbsp;auth_name "user_id"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;パスワード&nbsp;</td>
+<td valign="TOP">&nbsp;auth_key "password"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;DNSサーバーアドレスを自動取得する&nbsp;</td>
+<td valign="TOP">&nbsp;want.dns1_nego&nbsp;<br>&nbsp;want.dns2_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デフォルトルータ&nbsp;</td>
+<td valign="TOP">&nbsp;route add -net 0.0.0.0 &nbsp;<br>&nbsp;netmask 0.0.0.0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;PFCネゴシエーションの禁止&nbsp;</td>
+<td valign="TOP">&nbsp;-want.prc_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ACFCネゴシエーションの禁止&nbsp;</td>
+<td valign="TOP">&nbsp;-want.acc_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ACCMネゴシエーションの禁止&nbsp;</td>
+<td valign="TOP">&nbsp;-want.accm_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;MTUとMRUの設定（1454バイト）&nbsp;</td>
+<td valign="TOP">&nbsp;mtu 1454&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoEを使用する&nbsp;</td>
+<td valign="TOP">&nbsp;pppoe&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;回線切断（単位: 分）&nbsp;</td>
+<td valign="TOP">&nbsp;idle_timeout 0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてイーサネットアダプタを使用し、PPPoEを使用し、DNSサーバーアドレスを自動取得しない設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type ppp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;接続先の認証名&nbsp;</td>
+<td valign="TOP">&nbsp;peer_name "*"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;認証方法&nbsp;</td>
+<td valign="TOP">&nbsp;allow.auth chap/pap&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用しない&nbsp;</td>
+<td valign="TOP">&nbsp;-dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザーID&nbsp;</td>
+<td valign="TOP">&nbsp;auth_name "user_id"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;パスワード&nbsp;</td>
+<td valign="TOP">&nbsp;auth_key "password"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;プライマリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;セカンダリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デフォルトルータ&nbsp;</td>
+<td valign="TOP">&nbsp;route add -net 0.0.0.0 &nbsp;<br>&nbsp;netmask 0.0.0.0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;PFCネゴシエーションの禁止&nbsp;</td>
+<td valign="TOP">&nbsp;-want.prc_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ACFCネゴシエーションの禁止&nbsp;</td>
+<td valign="TOP">&nbsp;-want.acc_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;ACCMネゴシエーションの禁止&nbsp;</td>
+<td valign="TOP">&nbsp;-want.accm_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;MTUとMRUの設定（1454バイト）&nbsp;</td>
+<td valign="TOP">&nbsp;mtu 1454&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;PPPoEを使用する&nbsp;</td>
+<td valign="TOP">&nbsp;pppoe&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;回線切断（単位: 分）&nbsp;</td>
+<td valign="TOP">&nbsp;idle_timeout 0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> プライマリDNS、セカンダリDNSの表示形式は、ドット形式で、以下のようにすること。<br>  <i>num8</i>.<i>num8</i>.<i>num8</i>.<i>num8</i>（<i>num8</i>はunsigned 8bitで表せる範囲の10進数）
+         <li> プライマリDNS、セカンダリDNSに設定できる値の範囲は0.0.0.0 ～ 255.255.255.255とし、それ以外はアプリケーション側でエラーとすること。
+         <li> プライマリDNS、セカンダリDNSについては、0.0.0.0はエラーとするか、自動取得の指定とみなすこと。
+</ul></div>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてモデム・TAを使用し、DNSサーバーアドレスを自動取得する設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type ppp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;接続先の認証名&nbsp;</td>
+<td valign="TOP">&nbsp;peer_name "*"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;認証方法&nbsp;</td>
+<td valign="TOP">&nbsp;allow.auth chap/pap&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用しない&nbsp;</td>
+<td valign="TOP">&nbsp;-dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザーID&nbsp;</td>
+<td valign="TOP">&nbsp;auth_name "user_id"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;パスワード&nbsp;</td>
+<td valign="TOP">&nbsp;auth_key "password"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;接続先電話番号1&nbsp;</td>
+<td valign="TOP">&nbsp;phone_number0 ??????????&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;接続先電話番号2&nbsp;</td>
+<td valign="TOP">&nbsp;phone_number1 ??????????&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;接続先電話番号3&nbsp;</td>
+<td valign="TOP">&nbsp;phone_number2 ??????????&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;DNSサーバーアドレスを自動取得する&nbsp;</td>
+<td valign="TOP">&nbsp;want.dns1_nego&nbsp;<br>&nbsp;want.dns2_nego&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デフォルトルータ&nbsp;</td>
+<td valign="TOP">&nbsp;route add -net 0.0.0.0 &nbsp;<br>&nbsp;netmask 0.0.0.0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>接続機器としてモデム・TAを使用し、DNSサーバーアドレスを自動取得しない設定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>区分</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>該当キーワード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスレイヤの種別&nbsp;</td>
+<td valign="TOP">&nbsp;type ppp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;接続先の認証名&nbsp;</td>
+<td valign="TOP">&nbsp;peer_name "*"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;認証方法&nbsp;</td>
+<td valign="TOP">&nbsp;allow.auth chap/pap&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;DHCPを使用しない&nbsp;</td>
+<td valign="TOP">&nbsp;-dhcp&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザーID&nbsp;</td>
+<td valign="TOP">&nbsp;auth_name "user_id"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;パスワード&nbsp;</td>
+<td valign="TOP">&nbsp;auth_key "password"&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;接続先電話番号1&nbsp;</td>
+<td valign="TOP">&nbsp;phone_number0 ??????????&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;接続先電話番号2&nbsp;</td>
+<td valign="TOP">&nbsp;phone_number1 ??????????&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;接続先電話番号3&nbsp;</td>
+<td valign="TOP">&nbsp;phone_number2 ??????????&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須&nbsp;</td>
+<td valign="TOP">&nbsp;プライマリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オプション&nbsp;</td>
+<td valign="TOP">&nbsp;セカンダリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;nameserver add ?.?.?.?&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;必須・自動&nbsp;</td>
+<td valign="TOP">&nbsp;デフォルトルータ&nbsp;</td>
+<td valign="TOP">&nbsp;route add -net 0.0.0.0 &nbsp;<br>&nbsp;netmask 0.0.0.0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> プライマリDNS、セカンダリDNSの表示形式は、ドット形式で、以下のようにすること。<br>　<i>num8</i>.<i>num8</i>.<i>num8</i>.<i>num8</i>（<i>num8</i>はunsigned 8bitで表せる範囲の10進数）
+         <li> プライマリDNS、セカンダリDNSに設定できる値の範囲は0.0.0.0 ～ 255.255.255.255とし、それ以外はアプリケーション側でエラーとすること。
+         <li> プライマリDNS、セカンダリDNSについては、0.0.0.0はエラーとするか、自動取得の指定とみなすこと。
+</ul></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>ネットワーク設定アプリケーションの作成基準</b><b>（読み出し処理）</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルを読み出して使用するアプリケーションでは、それぞれの処理を以下で解説する基準に従って実装する必要があります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>組み合わせの表示・選択</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">組み合わせを表示・選択する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ユーザーが組み合わせを選択した場合、選択された組み合わせに登録されている接続機器設定と接続プロバイダ設定が表示されること。また、接続機器設定あるいは接続プロバイダ設定のいずれかまたは両方が登録されていない（削除された）組み合わせを選択可能な場合、それぞれの設定が存在しないため使用不可である旨のメッセージが表示されること。
+         <li> メモリーカード(PS2)に保存された組み合わせを表示する場合、設定名（組み合わせ名）は次のいずれかの形式で表示されること。
+    <div style="margin-left:70px;"><ul>
+            <li> 「組み合わせ1」～「組み合わせ6」
+            <li> 「Network configuration1」～「Network configuration6」
+            <li> 「Combination1」～「Combination6」
+            <li> 「1」～「6」
+</ul></div>
+         <li> ハードディスクドライブに保存された組み合わせを表示する場合、設定名（組み合わせ名）は次のいずれかの形式で表示されること。
+    <div style="margin-left:70px;"><ul>
+            <li> 「組み合わせ1」～「組み合わせ10」
+            <li> 「Network configuration1」～「Network configuration10」
+            <li> 「Combination1」～「Combination10」
+            <li> 「1」～「10」
+</ul></div>
+         <li> 「あなたのネットワーク設定ファイルの構成」で定められている最大ファイル数の組み合わせをすべて表示・選択できることが望ましい。
+         <li> デフォルトデータとして独自のデータ内に保存してある組み合わせを表示する場合、元となるあなたのネットワーク設定ファイルディレクトリ内に同じ内容の組み合わせが存在することを確認すること。この時、組み合わせに登録されている接続機器設定と接続プロバイダ設定の存在およびその内容も確認すること。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>組み合わせを用いた接続</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">組み合わせを用いてネットワークへの接続を行う処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 以下の条件が成り立つ組み合わせをユーザーが選択できないようになっていること、または、その組み合わせを選択した場合に接続できないことが表示されること。
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> 登録されている接続機器設定に記述されている機器が物理的に接続されていない</li>
+         <li VALUE=2> 組み合わせに登録されている接続機器設定と接続プロバイダ設定のいずれか、または両方が存在しない</li>
+</ol></div>
+         <li> デフォルトデータとして独自のデータ内に保存してある組み合わせを使用して接続する場合、元となるあなたのネットワーク設定ファイルディレクトリ内に同じ内容の組み合わせが存在することを確認すること。また、組み合わせに登録されている接続機器設定と接続プロバイダ設定の存在およびその内容も確認すること。
+         <li> 接続先電話番号１、接続先電話番号２、接続先電話番号３が設定されている場合、小さい番号の電話番号が話し中の場合、大きい電話番号へリダイアルする仕組みになっていること。
+         <li> イーサネットアダプタの種別について、以下のように接続プロバイダ設定が矛盾している場合でも接続できるようになっていること。
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> SCE製ネットワークアダプタのイーサネットアダプタで接続しようとする場合に、接続機器設定はtype nicだが接続プロバイダ設定がtype ethとなっている</li>
+         <li VALUE=2> SCE製以外のネットワークアダプタのイーサネットアダプタで接続しようとする場合に、接続機器設定はtype ethだが接続プロバイダ設定がtype nicとなっている</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>接続機器設定の表示・選択</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">接続機器設定を表示・選択する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 「あなたのネットワーク設定ファイルの構成」で定められている最大ファイル数の接続機器設定をすべて表示・選択できることが望ましい。
+         <li> 接続機器設定名を画面に表示する場合、接続機器設定名全体を表示可能とするか、少なくともベンダ名・プロダクト名ともに10文字以上の表示を行うこと。
+         <li> 接続機器設定に保存される設定項目の表示について、定められた設定項目名を使用していること（「あなたのネットワーク設定ファイルの内容」を参照）。
+         <li> 接続機器設定に保存される設定項目の内容の表示について、以下に示す最低表示文字数以上を表示すること。
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>最低表示文字数</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;追加ATコマンド&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;外線発信番号設定&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+         <li> デフォルトデータとして独自のデータ内に保存してある接続機器設定を表示する場合、元となるあなたのネットワーク設定ファイルディレクトリ内に同じ内容の接続機器設定が存在することを確認すること。
+         <li> 追加ATコマンドを表示する際には、あなたのネットワーク設定ファイルから読み込んだ文字列に対して共通ネットワーク設定ライブラリで提供されているsceNetCnfConvS2A()関数を実行してから表示すること。また、実行の結果sceNETCNF_TOO_LONG_STR(-19)が検出されないようにすること（書き込み時の最大サイズをカバーできるよう256バイトのバッファを用意すること）。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>接続機器設定を用いた接続</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">接続機器設定を用いてネットワークへの接続を行う処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 物理的に接続されていない機器の記述された接続機器設定をユーザーが選択できないようになっていること、または、その接続機器設定を選択した場合に接続できないことが表示されること。
+         <li> デフォルトデータとして独自のデータ内に保存してある接続機器設定を使用して接続する場合、元となるあなたのネットワーク設定ファイルディレクトリ内に同じ内容の接続機器設定が存在することを確認すること。
+         <li> イーサネットアダプタの種別について、以下のように接続プロバイダ設定が矛盾している場合でも接続できるようになっていること。
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> SCE製ネットワークアダプタのイーサネットアダプタで接続しようとする場合に、接続機器設定はtype nicだが接続プロバイダ設定がtype ethとなっている</li>
+         <li VALUE=2> SCE製以外のネットワークアダプタのイーサネットアダプタで接続しようとする場合に、接続機器設定はtype ethだが接続プロバイダ設定がtype nicとなっている</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>接続プロバイダ設定の表示・選択</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">接続プロバイダ設定を表示・選択する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 「あなたのネットワーク設定ファイルの構成」で定められている最大ファイル数の接続プロバイダ設定をすべて表示・選択できることが望ましい。
+         <li> 接続プロバイダ設定名を画面に表示する場合、接続プロバイダ設定名全体を表示可能とするか、少なくとも20文字以上の表示を行うこと。
+         <li> 接続プロバイダ設定に保存される設定項目の表示について、定められた設定項目名を使用していること（「あなたのネットワーク設定ファイルの内容」を参照）。
+         <li> 接続プロバイダ設定に保存される設定項目の内容の表示について、以下に示す最低表示文字数以上を表示すること。
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>最低表示文字数</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;IPアドレス&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ネットマスク&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;デフォルトルータ&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;プライマリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;セカンダリDNS&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;接続先電話番号1&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;接続先電話番号2&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;接続先電話番号3&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ユーザーID&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;パスワード&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DHCP用ホスト名&nbsp;</td>
+<td valign="TOP">&nbsp;256&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+         <li> デフォルトデータとして独自のデータ内に保存してある接続プロバイダ設定を表示する場合、元となるあなたのネットワーク設定ファイルディレクトリ内に同じ内容の接続プロバイダ設定が存在することを確認すること。
+         <li> ユーザーIDを表示する場合、必ずsceNetcnfifConvAuthname()をユーザーIDに対して実行した結果を表示すること。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_6">
+<a href="#Heading3_3"> 3. </a>6 <b>接続プロバイダ設定を用いた接続</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">接続プロバイダ設定を用いてネットワークへの接続を行う処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> デフォルトデータとして独自のデータ内に保存してある接続プロバイダ設定を使用して接続する場合、元となるあなたのネットワーク設定ファイルディレクトリ内に同じ内容の接続プロバイダ設定が存在することを確認すること。
+         <li> 接続先電話番号１、接続先電話番号２、接続先電話番号３が設定されている場合、小さい番号の電話番号が話し中の場合、大きい電話番号へリダイアルする仕組みになっていること。
+         <li> イーサネットアダプタの種別について、以下のように接続プロバイダ設定が矛盾している場合でも接続できるようになっていること。
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> SCE製ネットワークアダプタのイーサネットアダプタで接続しようとする場合に、接続機器設定はtype nicだが接続プロバイダ設定がtype ethとなっている</li>
+         <li VALUE=2> SCE製以外のネットワークアダプタのイーサネットアダプタで接続しようとする場合に、接続機器設定はtype ethだが接続プロバイダ設定がtype nicとなっている</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_7">
+<a href="#Heading3_3"> 3. </a>7 <b>あなたのネットワーク設定ファイルの読み込み時のエラーについて</b><br>
+</a>
+</h3>
+<div style="margin-left:40px;"><ul>
+         <li> sceNETCNF_MAGIC_ERRORを検出した場合には、他の"PlayStation 2"で作成されたあなたのネットワーク設定ファイルであり使用できない旨のメッセージを出力し、あなたのネットワーク設定ファイルを削除するかどうかを尋ねる旨のメッセージを出力し、削除しない場合はそのあなたのネットワーク設定ファイルを無視すること。
+         <li> sceNETCNF_NG,sceNETCNF_SYNTAX_ERROR等の回復不能なエラーを検出した場合には、あなたのネットワーク設定ファイルが修正不能である旨のメッセージを出力し、あなたのネットワーク設定ファイルを削除するかどうかを尋ねる旨のメッセージを出力し、削除しない場合はそのあなたのネットワーク設定ファイルを無視すること。
+</ul></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>ネットワーク設定アプリケーションの作成基準</b><b>（書き込み処理）</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルを操作（追加・編集・削除）する機能を持つアプリケーションでは、それぞれの処理を以下で解説する基準に従って作成する必要があります。読み出し処理については第3章で解説してある作成基準に従って作成してください。<br>この章で解説する機能を持たず、他のアプリケーションで作成されたあなたのネットワーク設定ファイルを使用するのみのアプリケーションに関しては、この章の規定は適用されません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>組み合わせの追加・編集・削除</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">組み合わせを操作（追加・編集・削除）する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 共通ネットワーク設定ライブラリ(netcnf)を使用すること。
+         <li> 組み合わせを追加・削除できること（既存の組み合わせを編集するだけという仕様は不可）。
+         <li> 定められたディレクトリに正しいファイル名で保存されること（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 定められた最大ファイル数より多い数の組み合わせファイルを保存できないこと（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 定められたすべての設定項目に対応していること。同時に、定められた設定項目以外の設定項目を保存しないこと（「あなたのネットワーク設定ファイルの内容」を参照）。
+         <li> 別のデバイスにファイルとして存在する接続機器設定と接続プロバイダ設定とを組み合わせに登録しないこと。
+         <li> メモリーカード(PS2)に保存する場合、設定名（組み合わせ名）は以下のいずれかの形式とすること。
+    <div style="margin-left:70px;"><ul>
+            <li> 「組み合わせ1」～「組み合わせ6」
+            <li> 「Network configuration1」～「Network configuration6」
+            <li> 「Combination1」～「Combination6」
+            <li> 「1」～「6」
+</ul></div>
+         <li> ハードディスクドライブに保存する場合、設定名（組み合わせ名）は以下のいずれかの形式とすること。
+    <div style="margin-left:70px;"><ul>
+            <li> 「組み合わせ1」～「組み合わせ10」
+            <li> 「Network configuration1」～「Network configuration10」
+            <li> 「Combination1」～「Combination10」
+            <li> 「1」～「10」
+</ul></div>
+         <li> 編集時、未知の設定項目があった場合にはその設定項目は変更せずに保存すること。
+         <li> デフォルトデータとする以外の目的で、アプリケーション独自のデータ内に同じ内容を保存しないこと。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_2">
+<a href="#Heading3_4"> 4. </a>2 <b>接続機器設定の追加・編集・削除</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">接続機器設定を操作（追加・編集・削除）する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 共通ネットワーク設定ライブラリ(netcnf)を使用すること。
+         <li> 使用する接続機器設定を追加・削除できること（既存の接続機器設定を編集するだけという仕様は不可）。
+         <li> 定められたディレクトリに正しいファイル名で保存されること（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 定められた最大ファイル数より多い数の接続機器設定ファイルを保存できないこと（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 定められたすべての設定項目に対応していること。同時に、定められた設定項目以外の設定項目を保存しないこと（「あなたのネットワーク設定ファイルの内容」を参照）。
+         <li> 設定名としては、デバイスドライバから取得できるベンダ名とプロダクト名を以下の形式で保存していること。
+</ul></div>
+<div style="margin-left:80px;">ベンダ名/プロダクト名<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 編集時、未知の設定項目があった場合にはその設定項目は変更せずに保存すること。
+         <li> 定められた文字を使用すること。同時に、定められた文字以外の文字の入力を防ぐしくみがあること（「使用できる文字」を参照）。
+         <li> 文字列を設定する項目に関しては、内部バッファを256バイト分用意し、最大255文字＋"\0"を正しく読み書きできるようになっていること（ひらがな / カタカナは1文字3バイトとなることに注意）。同時に、用意したバッファ以上の入力を防ぐ仕組みがあること。
+         <li> 追加ATコマンドとしては、共通ネットワーク設定ライブラリで提供されているsceNetCnfConvA2S()関数で変換可能なATコマンド、および、共通ネットワーク設定ライブラリ概要（overview）で定義されているチャットスクリプトを入力可能とすること。入力された文字列に対してsceNetCnfConvA2S()関数を実行してから保存すること。その際にsceNETCNF_TOO_LONG_STR(-19)が検出された場合、入力文字数が多い旨のメッセージを出力すること。
+         <li> デフォルトデータとする以外の目的でアプリケーション独自のデータ内に同じ内容を保存しないこと。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_3">
+<a href="#Heading3_4"> 4. </a>3 <b>接続プロバイダ設定の追加・編集・削除</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">接続プロバイダ設定を操作（追加・編集・削除）する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 共通ネットワーク設定ライブラリ(netcnf)を使用すること。
+         <li> 接続プロバイダ設定を追加・削除できること（既存の接続プロバイダ設定を編集するだけという仕様は不可）。
+         <li> 定められたディレクトリに正しいファイル名で保存されること（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 定められた最大ファイル数より多い数の接続プロバイダ設定ファイルを保存できないこと（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 定められたすべての設定項目に対応していること。同時に、定められた設定項目以外の設定項目を保存しないこと（「あなたのネットワーク設定ファイルの内容」を参照）。なお、以下の設定項目については表示ができることのみ必須であり、追加・編集・削除はできなくてもよい。
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> 接続先電話番号2</li>
+         <li VALUE=2> 接続先電話番号3</li>
+</ol></div>
+         <li> 編集時、未知の設定項目があった場合にはその設定項目は変更せずに保存すること。
+         <li> 定められた文字を使用すること。同時に、定められた文字以外の文字の入力を防ぐしくみがあること（「使用できる文字」を参照）。
+         <li> 文字列を設定する項目に関しては、内部バッファを256バイト分用意し、最大255文字＋"\0"を正しく読み書きできるようになっていること（ひらがな / カタカナは1文字3バイトとなることに注意）。同時に、用意したバッファ以上の入力を防ぐ仕組みがあること。
+         <li> デフォルトデータとする以外の目的でアプリケーション独自のデータ内に同じ内容を保存しないこと。
+         <li> sceNETCNF_AOL_CONFIGURATION(-20)を検出した接続プロバイダ設定の追加及び編集を行わないこと。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_4">
+<a href="#Heading3_4"> 4. </a>4 <b>メモリーカード(PS2)への保存</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルをメモリーカード(PS2)に保存する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 共通ネットワーク設定ライブラリ(netcnf)を使用すること。
+         <li> 定められたディレクトリに正しいファイル名で保存すること（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 接続機器設定ファイル、接続プロバイダ設定ファイルは符号化して保存されていること。
+         <li> 定められた最大ファイル数より多い数の設定ファイルを保存できないこと（「あなたのネットワーク設定ファイルの構成」を参照）。最大数を超えて保存しようとした場合には、その設定が最大数に達している旨のメッセージを出力すること。
+         <li> 94Kbytes以上の空き容量がない場合、保存時に空き容量がない旨のメッセージを出力すること。なお、あなたのネットワーク設定ファイルを削除する際にも、設定管理ファイルが保存されるため、空き容量のチェックが必要となる。
+         <li> アイコンファイルとicon.sysファイルは指定のものを使用すること。
+         <li> その他、メモリーカード(PS2)に関するTRCに準拠していること。
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_5">
+<a href="#Heading3_4"> 4. </a>5 <b>ハードディスクドライブへの保存</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルをハードディスクドライブに保存する処理を実装する場合は、以下の基準に従ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 共通ネットワーク設定ライブラリ(netcnf)を使用すること。
+         <li> 定められたディレクトリに正しいファイル名で保存すること（「あなたのネットワーク設定ファイルの構成」を参照）。
+         <li> 接続機器設定ファイル、接続プロバイダ設定ファイルは符号化して保存されていること。
+         <li> 定められた最大ファイル数より多い数の設定ファイルを保存できないこと（「あなたのネットワーク設定ファイルの構成」を参照）。最大数を超えて保存をしようとした場合には、その設定が最大数に達している旨のメッセージを出力すること。
+         <li> 244Kbytes以上の空き容量がない場合、保存時に空き容量がない旨のメッセージを出力すること。なお、あなたのネットワーク設定ファイルを削除する際にも、設定管理ファイルが保存されるため、空き容量のチェックが必要となる。
+         <li> その他、ハードディスクドライブに関するTRCに準拠していること。
+</ul></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>実装上の詳細基準</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_1">
+<a href="#Heading3_5"> 5. </a>1 <b>接続時のリダイアル処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ネットワーク設定アプリケーションで接続を行う際に、あなたのネットワーク設定ファイルで接続先電話番号1～3が設定されている場合は、接続先電話番号１が話し中であれば接続先電話番号２に、さらに話し中であれば接続先電話番号３に、というリダイアル処理が必要です（リダイアルの判定は各モデムドライバ付属のダイアリング定義ファイル（DIAL_CNF）で定義されたredial_string項目に従って行われます）。sceNetCnfLoadEntry()を用いてあなたのネットワーク設定ファイルを読み込んだだけではリダイアルの設定が不十分ですので、必ず以下の設定を行ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> 接続時において接続先電話番号１～３が設定されていた場合、設定されている接続先電話番号の個数から１を引いた値をsceNetCnfInterface構造体のメンバredial_countにセットする。
+</ul></div>
+<div style="margin-left:50px;">実装例は以下のようになります。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>
+sceNetCnfEnv_t env;
+int i, redial_count;
+
+// sceNetCnfLoadEntry() を実行
+sceNetCnfLoadEntry("設定管理ファイル名", type, "設定名(組み合わせ名)", &env);
+
+// redial_count を設定する
+for(i = 0, redial_count = 0; i &lt; sceNetCnf_MAX_PHONE_NUMBERS; i++){
+	if(NULL == (env.root-&gt;pair_head-&gt;ifc-&gt;phone_numbers[i])) continue;
+	switch(i){
+	case 0: redial_count++; break;
+	case 1: redial_count++; break;
+	case 2: redial_count++; break;
+	}
+}
+env.root-&gt;pair_head-&gt;ifc-&gt;redial_count = redial_count - 1;
+
+</pre></font></div>
+<div style="margin-left:50px;">なお、上記処理により設定したredial_count値をあなたのネットワーク設定ファイルとして保存することは禁止します。接続時のみの処理として実装してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_2">
+<a href="#Heading3_5"> 5. </a>2 <b>接続機器の種別が矛盾する場合の接続処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">共通ネットワーク設定ライブラリ（netcnf.irx）の仕様では接続プロバイダ設定で指定されている接続機器の種別が有効になるため、たとえば以下のような場合に接続不可となります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> 接続プロバイダ設定がtype eth、接続機器設定がtype nicでSCE製ネットワークアダプタのイーサネットアダプタを用いて接続しようとする場合</li>
+         <li VALUE=2> 接続プロバイダ設定がtype nic、接続機器設定がtype ethでSCE製ネットワークアダプタ以外のイーサネットアダプタを用いて接続しようとする場合</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">ネットワーク設定アプリケーションで接続を行う際には、このような場合でも接続できることが必要ですので、以下のような実装を行ってください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> PPPoEでなく接続プロバイダ設定のtypeがpppでない場合は、接続プロバイダ設定のtypeを接続機器設定のtypeで上書きする。
+</ul></div>
+<div style="margin-left:50px;">実装例は以下のようになります。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>
+sceNetCnfEnv_t env;
+
+// sceNetCnfLoadEntry() を実行
+sceNetCnfLoadEntry("設定管理ファイル名", type, "設定名(組み合わせ名)", &env);
+
+// PPPoE でなく接続プロバイダ設定の type が
+// ppp でない場合は type 合わせをする。
+if(env.root-&gt;pair_head-&gt;ifc-&gt;pppoe != 1 &&
+  env.root-&gt;pair_head-&gt;ifc-&gt;type != sceNetCnf_IFC_TYPE_PPP){
+	env.root-&gt;pair_head-&gt;ifc-&gt;type = env.root-&gt;pair_head-&gt;dev-&gt;type;
+}
+
+</pre></font></div>
+<div style="margin-left:50px;">なお、上記処理により設定した値をあなたのネットワーク設定ファイルとして保存することは禁止します。接続時のみの処理として実装してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_3">
+<a href="#Heading3_5"> 5. </a>3 <b>使用できる文字</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">あなたのネットワーク設定ファイルで使用できる文字は次のとおりです。ネットワーク設定アプリケーションはここで示す文字を扱うことができなければなりません。また、ここで示す以外の文字をあなたのネットワーク設定ファイルに保存してはなりません。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_5_3_1"><h4>
+(1)&nbsp;<b>あなたのネットワーク設定ファイルで使用できる文字</b><br></h4>
+</a></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Char</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Code(Hex)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Char</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Code(Hex)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Char</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Code(Hex)</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;（SPACE）&nbsp;</td>
+<td valign="TOP">&nbsp;20&nbsp;</td>
+<td valign="TOP">&nbsp;@&nbsp;</td>
+<td valign="TOP">&nbsp;40&nbsp;</td>
+<td valign="TOP">&nbsp;`&nbsp;</td>
+<td valign="TOP">&nbsp;60&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;!&nbsp;</td>
+<td valign="TOP">&nbsp;21&nbsp;</td>
+<td valign="TOP">&nbsp;A&nbsp;</td>
+<td valign="TOP">&nbsp;41&nbsp;</td>
+<td valign="TOP">&nbsp;a&nbsp;</td>
+<td valign="TOP">&nbsp;61&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;"&nbsp;</td>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;B&nbsp;</td>
+<td valign="TOP">&nbsp;42&nbsp;</td>
+<td valign="TOP">&nbsp;b&nbsp;</td>
+<td valign="TOP">&nbsp;62&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#&nbsp;</td>
+<td valign="TOP">&nbsp;23&nbsp;</td>
+<td valign="TOP">&nbsp;C&nbsp;</td>
+<td valign="TOP">&nbsp;43&nbsp;</td>
+<td valign="TOP">&nbsp;c&nbsp;</td>
+<td valign="TOP">&nbsp;63&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;$&nbsp;</td>
+<td valign="TOP">&nbsp;24&nbsp;</td>
+<td valign="TOP">&nbsp;D&nbsp;</td>
+<td valign="TOP">&nbsp;44&nbsp;</td>
+<td valign="TOP">&nbsp;d&nbsp;</td>
+<td valign="TOP">&nbsp;64&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;%&nbsp;</td>
+<td valign="TOP">&nbsp;25&nbsp;</td>
+<td valign="TOP">&nbsp;E&nbsp;</td>
+<td valign="TOP">&nbsp;45&nbsp;</td>
+<td valign="TOP">&nbsp;e&nbsp;</td>
+<td valign="TOP">&nbsp;65&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&&nbsp;</td>
+<td valign="TOP">&nbsp;26&nbsp;</td>
+<td valign="TOP">&nbsp;F&nbsp;</td>
+<td valign="TOP">&nbsp;46&nbsp;</td>
+<td valign="TOP">&nbsp;f&nbsp;</td>
+<td valign="TOP">&nbsp;66&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;'&nbsp;</td>
+<td valign="TOP">&nbsp;27&nbsp;</td>
+<td valign="TOP">&nbsp;G&nbsp;</td>
+<td valign="TOP">&nbsp;47&nbsp;</td>
+<td valign="TOP">&nbsp;g&nbsp;</td>
+<td valign="TOP">&nbsp;67&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;(&nbsp;</td>
+<td valign="TOP">&nbsp;28&nbsp;</td>
+<td valign="TOP">&nbsp;H&nbsp;</td>
+<td valign="TOP">&nbsp;48&nbsp;</td>
+<td valign="TOP">&nbsp;h&nbsp;</td>
+<td valign="TOP">&nbsp;68&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;)&nbsp;</td>
+<td valign="TOP">&nbsp;29&nbsp;</td>
+<td valign="TOP">&nbsp;I&nbsp;</td>
+<td valign="TOP">&nbsp;49&nbsp;</td>
+<td valign="TOP">&nbsp;i&nbsp;</td>
+<td valign="TOP">&nbsp;69&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;*&nbsp;</td>
+<td valign="TOP">&nbsp;2a&nbsp;</td>
+<td valign="TOP">&nbsp;J&nbsp;</td>
+<td valign="TOP">&nbsp;4a&nbsp;</td>
+<td valign="TOP">&nbsp;j&nbsp;</td>
+<td valign="TOP">&nbsp;6a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;+&nbsp;</td>
+<td valign="TOP">&nbsp;2b&nbsp;</td>
+<td valign="TOP">&nbsp;K&nbsp;</td>
+<td valign="TOP">&nbsp;4b&nbsp;</td>
+<td valign="TOP">&nbsp;k&nbsp;</td>
+<td valign="TOP">&nbsp;6b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;,（※）&nbsp;</td>
+<td valign="TOP">&nbsp;2c（※）&nbsp;</td>
+<td valign="TOP">&nbsp;L&nbsp;</td>
+<td valign="TOP">&nbsp;4c&nbsp;</td>
+<td valign="TOP">&nbsp;l&nbsp;</td>
+<td valign="TOP">&nbsp;6c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-&nbsp;</td>
+<td valign="TOP">&nbsp;2d&nbsp;</td>
+<td valign="TOP">&nbsp;M&nbsp;</td>
+<td valign="TOP">&nbsp;4d&nbsp;</td>
+<td valign="TOP">&nbsp;m&nbsp;</td>
+<td valign="TOP">&nbsp;6d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.&nbsp;</td>
+<td valign="TOP">&nbsp;2e&nbsp;</td>
+<td valign="TOP">&nbsp;N&nbsp;</td>
+<td valign="TOP">&nbsp;4e&nbsp;</td>
+<td valign="TOP">&nbsp;n&nbsp;</td>
+<td valign="TOP">&nbsp;6e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;/&nbsp;</td>
+<td valign="TOP">&nbsp;2f&nbsp;</td>
+<td valign="TOP">&nbsp;O&nbsp;</td>
+<td valign="TOP">&nbsp;4f&nbsp;</td>
+<td valign="TOP">&nbsp;o&nbsp;</td>
+<td valign="TOP">&nbsp;6f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;30&nbsp;</td>
+<td valign="TOP">&nbsp;P&nbsp;</td>
+<td valign="TOP">&nbsp;50&nbsp;</td>
+<td valign="TOP">&nbsp;p&nbsp;</td>
+<td valign="TOP">&nbsp;70&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;31&nbsp;</td>
+<td valign="TOP">&nbsp;Q&nbsp;</td>
+<td valign="TOP">&nbsp;51&nbsp;</td>
+<td valign="TOP">&nbsp;q&nbsp;</td>
+<td valign="TOP">&nbsp;71&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;32&nbsp;</td>
+<td valign="TOP">&nbsp;R&nbsp;</td>
+<td valign="TOP">&nbsp;52&nbsp;</td>
+<td valign="TOP">&nbsp;r&nbsp;</td>
+<td valign="TOP">&nbsp;72&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;33&nbsp;</td>
+<td valign="TOP">&nbsp;S&nbsp;</td>
+<td valign="TOP">&nbsp;53&nbsp;</td>
+<td valign="TOP">&nbsp;s&nbsp;</td>
+<td valign="TOP">&nbsp;73&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;34&nbsp;</td>
+<td valign="TOP">&nbsp;T&nbsp;</td>
+<td valign="TOP">&nbsp;54&nbsp;</td>
+<td valign="TOP">&nbsp;t&nbsp;</td>
+<td valign="TOP">&nbsp;74&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;5&nbsp;</td>
+<td valign="TOP">&nbsp;35&nbsp;</td>
+<td valign="TOP">&nbsp;U&nbsp;</td>
+<td valign="TOP">&nbsp;55&nbsp;</td>
+<td valign="TOP">&nbsp;u&nbsp;</td>
+<td valign="TOP">&nbsp;75&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;6&nbsp;</td>
+<td valign="TOP">&nbsp;36&nbsp;</td>
+<td valign="TOP">&nbsp;V&nbsp;</td>
+<td valign="TOP">&nbsp;56&nbsp;</td>
+<td valign="TOP">&nbsp;v&nbsp;</td>
+<td valign="TOP">&nbsp;76&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;7&nbsp;</td>
+<td valign="TOP">&nbsp;37&nbsp;</td>
+<td valign="TOP">&nbsp;W&nbsp;</td>
+<td valign="TOP">&nbsp;57&nbsp;</td>
+<td valign="TOP">&nbsp;w&nbsp;</td>
+<td valign="TOP">&nbsp;77&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;38&nbsp;</td>
+<td valign="TOP">&nbsp;X&nbsp;</td>
+<td valign="TOP">&nbsp;58&nbsp;</td>
+<td valign="TOP">&nbsp;x&nbsp;</td>
+<td valign="TOP">&nbsp;78&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;39&nbsp;</td>
+<td valign="TOP">&nbsp;Y&nbsp;</td>
+<td valign="TOP">&nbsp;59&nbsp;</td>
+<td valign="TOP">&nbsp;y&nbsp;</td>
+<td valign="TOP">&nbsp;79&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;:&nbsp;</td>
+<td valign="TOP">&nbsp;3a&nbsp;</td>
+<td valign="TOP">&nbsp;Z&nbsp;</td>
+<td valign="TOP">&nbsp;5a&nbsp;</td>
+<td valign="TOP">&nbsp;z&nbsp;</td>
+<td valign="TOP">&nbsp;7a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;;&nbsp;</td>
+<td valign="TOP">&nbsp;3b&nbsp;</td>
+<td valign="TOP">&nbsp;[&nbsp;</td>
+<td valign="TOP">&nbsp;5b&nbsp;</td>
+<td valign="TOP">&nbsp;{&nbsp;</td>
+<td valign="TOP">&nbsp;7b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&lt;&nbsp;</td>
+<td valign="TOP">&nbsp;3c&nbsp;</td>
+<td valign="TOP">&nbsp;＼（半角）&nbsp;</td>
+<td valign="TOP">&nbsp;5c&nbsp;</td>
+<td valign="TOP">&nbsp;|&nbsp;</td>
+<td valign="TOP">&nbsp;7c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;=&nbsp;</td>
+<td valign="TOP">&nbsp;3d&nbsp;</td>
+<td valign="TOP">&nbsp;]&nbsp;</td>
+<td valign="TOP">&nbsp;5d&nbsp;</td>
+<td valign="TOP">&nbsp;}&nbsp;</td>
+<td valign="TOP">&nbsp;7d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;&gt;&nbsp;</td>
+<td valign="TOP">&nbsp;3e&nbsp;</td>
+<td valign="TOP">&nbsp;^&nbsp;</td>
+<td valign="TOP">&nbsp;5e&nbsp;</td>
+<td valign="TOP">&nbsp;~&nbsp;</td>
+<td valign="TOP">&nbsp;7e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;?&nbsp;</td>
+<td valign="TOP">&nbsp;3f&nbsp;</td>
+<td valign="TOP">&nbsp;_&nbsp;</td>
+<td valign="TOP">&nbsp;5f&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">※「,」（0x2c）は設定名としては使用できません<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_5_3_2"><h4>
+(2)&nbsp;<b>設定名として使用できるひらがな / カタカナ</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ユーザーが指定する設定名としては、上の表のASCII文字に加えて次のひらがな / カタカナを使用できます。文字コードはUTF-8を使用してください。参考としてJIS / SJIS / Unicodeの文字コードを示してあります。<br></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>文字</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>UTF-8</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>JIS</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>SJIS</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Unicode</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぁ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 81&nbsp;</td>
+<td valign="TOP">&nbsp;2421&nbsp;</td>
+<td valign="TOP">&nbsp;829f&nbsp;</td>
+<td valign="TOP">&nbsp;3041&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;あ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 82&nbsp;</td>
+<td valign="TOP">&nbsp;2422&nbsp;</td>
+<td valign="TOP">&nbsp;82a0&nbsp;</td>
+<td valign="TOP">&nbsp;3042&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぃ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 83&nbsp;</td>
+<td valign="TOP">&nbsp;2423&nbsp;</td>
+<td valign="TOP">&nbsp;82a1&nbsp;</td>
+<td valign="TOP">&nbsp;3043&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;い&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 84&nbsp;</td>
+<td valign="TOP">&nbsp;2424&nbsp;</td>
+<td valign="TOP">&nbsp;82a2&nbsp;</td>
+<td valign="TOP">&nbsp;3044&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぅ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 85&nbsp;</td>
+<td valign="TOP">&nbsp;2425&nbsp;</td>
+<td valign="TOP">&nbsp;82a3&nbsp;</td>
+<td valign="TOP">&nbsp;3045&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;う&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 86&nbsp;</td>
+<td valign="TOP">&nbsp;2426&nbsp;</td>
+<td valign="TOP">&nbsp;82a4&nbsp;</td>
+<td valign="TOP">&nbsp;3046&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぇ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 87&nbsp;</td>
+<td valign="TOP">&nbsp;2427&nbsp;</td>
+<td valign="TOP">&nbsp;82a5&nbsp;</td>
+<td valign="TOP">&nbsp;3047&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;え&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 88&nbsp;</td>
+<td valign="TOP">&nbsp;2428&nbsp;</td>
+<td valign="TOP">&nbsp;82a6&nbsp;</td>
+<td valign="TOP">&nbsp;3048&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぉ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 89&nbsp;</td>
+<td valign="TOP">&nbsp;2429&nbsp;</td>
+<td valign="TOP">&nbsp;82a7&nbsp;</td>
+<td valign="TOP">&nbsp;3049&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;お&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 8a&nbsp;</td>
+<td valign="TOP">&nbsp;242a&nbsp;</td>
+<td valign="TOP">&nbsp;82a8&nbsp;</td>
+<td valign="TOP">&nbsp;304a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;か&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 8b&nbsp;</td>
+<td valign="TOP">&nbsp;242b&nbsp;</td>
+<td valign="TOP">&nbsp;82a9&nbsp;</td>
+<td valign="TOP">&nbsp;304b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;が&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 8c&nbsp;</td>
+<td valign="TOP">&nbsp;242c&nbsp;</td>
+<td valign="TOP">&nbsp;82aa&nbsp;</td>
+<td valign="TOP">&nbsp;304c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;き&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 8d&nbsp;</td>
+<td valign="TOP">&nbsp;242d&nbsp;</td>
+<td valign="TOP">&nbsp;82ab&nbsp;</td>
+<td valign="TOP">&nbsp;304d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぎ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 8e&nbsp;</td>
+<td valign="TOP">&nbsp;242e&nbsp;</td>
+<td valign="TOP">&nbsp;82ac&nbsp;</td>
+<td valign="TOP">&nbsp;304e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;く&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 8f&nbsp;</td>
+<td valign="TOP">&nbsp;242f&nbsp;</td>
+<td valign="TOP">&nbsp;82ad&nbsp;</td>
+<td valign="TOP">&nbsp;304f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぐ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 90&nbsp;</td>
+<td valign="TOP">&nbsp;2430&nbsp;</td>
+<td valign="TOP">&nbsp;82ae&nbsp;</td>
+<td valign="TOP">&nbsp;3050&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;け&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 91&nbsp;</td>
+<td valign="TOP">&nbsp;2431&nbsp;</td>
+<td valign="TOP">&nbsp;82af&nbsp;</td>
+<td valign="TOP">&nbsp;3051&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;げ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 92&nbsp;</td>
+<td valign="TOP">&nbsp;2432&nbsp;</td>
+<td valign="TOP">&nbsp;82b0&nbsp;</td>
+<td valign="TOP">&nbsp;3052&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;こ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 93&nbsp;</td>
+<td valign="TOP">&nbsp;2433&nbsp;</td>
+<td valign="TOP">&nbsp;82b1&nbsp;</td>
+<td valign="TOP">&nbsp;3053&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ご&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 94&nbsp;</td>
+<td valign="TOP">&nbsp;2434&nbsp;</td>
+<td valign="TOP">&nbsp;82b2&nbsp;</td>
+<td valign="TOP">&nbsp;3054&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;さ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 95&nbsp;</td>
+<td valign="TOP">&nbsp;2435&nbsp;</td>
+<td valign="TOP">&nbsp;82b3&nbsp;</td>
+<td valign="TOP">&nbsp;3055&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ざ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 96&nbsp;</td>
+<td valign="TOP">&nbsp;2436&nbsp;</td>
+<td valign="TOP">&nbsp;82b4&nbsp;</td>
+<td valign="TOP">&nbsp;3056&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;し&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 97&nbsp;</td>
+<td valign="TOP">&nbsp;2437&nbsp;</td>
+<td valign="TOP">&nbsp;82b5&nbsp;</td>
+<td valign="TOP">&nbsp;3057&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;じ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 98&nbsp;</td>
+<td valign="TOP">&nbsp;2438&nbsp;</td>
+<td valign="TOP">&nbsp;82b6&nbsp;</td>
+<td valign="TOP">&nbsp;3058&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;す&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 99&nbsp;</td>
+<td valign="TOP">&nbsp;2439&nbsp;</td>
+<td valign="TOP">&nbsp;82b7&nbsp;</td>
+<td valign="TOP">&nbsp;3059&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ず&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 9a&nbsp;</td>
+<td valign="TOP">&nbsp;243a&nbsp;</td>
+<td valign="TOP">&nbsp;82b8&nbsp;</td>
+<td valign="TOP">&nbsp;305a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;せ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 9b&nbsp;</td>
+<td valign="TOP">&nbsp;243b&nbsp;</td>
+<td valign="TOP">&nbsp;82b9&nbsp;</td>
+<td valign="TOP">&nbsp;305b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぜ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 9c&nbsp;</td>
+<td valign="TOP">&nbsp;243c&nbsp;</td>
+<td valign="TOP">&nbsp;82ba&nbsp;</td>
+<td valign="TOP">&nbsp;305c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;そ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 9d&nbsp;</td>
+<td valign="TOP">&nbsp;243d&nbsp;</td>
+<td valign="TOP">&nbsp;82bb&nbsp;</td>
+<td valign="TOP">&nbsp;305d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぞ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 9e&nbsp;</td>
+<td valign="TOP">&nbsp;243e&nbsp;</td>
+<td valign="TOP">&nbsp;82bc&nbsp;</td>
+<td valign="TOP">&nbsp;305e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;た&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 9f&nbsp;</td>
+<td valign="TOP">&nbsp;243f&nbsp;</td>
+<td valign="TOP">&nbsp;82bd&nbsp;</td>
+<td valign="TOP">&nbsp;305f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;だ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a0&nbsp;</td>
+<td valign="TOP">&nbsp;2440&nbsp;</td>
+<td valign="TOP">&nbsp;82be&nbsp;</td>
+<td valign="TOP">&nbsp;3060&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ち&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a1&nbsp;</td>
+<td valign="TOP">&nbsp;2441&nbsp;</td>
+<td valign="TOP">&nbsp;82bf&nbsp;</td>
+<td valign="TOP">&nbsp;3061&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぢ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a2&nbsp;</td>
+<td valign="TOP">&nbsp;2442&nbsp;</td>
+<td valign="TOP">&nbsp;82c0&nbsp;</td>
+<td valign="TOP">&nbsp;3062&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;っ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a3&nbsp;</td>
+<td valign="TOP">&nbsp;2443&nbsp;</td>
+<td valign="TOP">&nbsp;82c1&nbsp;</td>
+<td valign="TOP">&nbsp;3063&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;つ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a4&nbsp;</td>
+<td valign="TOP">&nbsp;2444&nbsp;</td>
+<td valign="TOP">&nbsp;82c2&nbsp;</td>
+<td valign="TOP">&nbsp;3064&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;づ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a5&nbsp;</td>
+<td valign="TOP">&nbsp;2445&nbsp;</td>
+<td valign="TOP">&nbsp;82c3&nbsp;</td>
+<td valign="TOP">&nbsp;3065&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;て&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a6&nbsp;</td>
+<td valign="TOP">&nbsp;2446&nbsp;</td>
+<td valign="TOP">&nbsp;82c4&nbsp;</td>
+<td valign="TOP">&nbsp;3066&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;で&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a7&nbsp;</td>
+<td valign="TOP">&nbsp;2447&nbsp;</td>
+<td valign="TOP">&nbsp;82c5&nbsp;</td>
+<td valign="TOP">&nbsp;3067&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;と&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a8&nbsp;</td>
+<td valign="TOP">&nbsp;2448&nbsp;</td>
+<td valign="TOP">&nbsp;82c6&nbsp;</td>
+<td valign="TOP">&nbsp;3068&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ど&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 a9&nbsp;</td>
+<td valign="TOP">&nbsp;2449&nbsp;</td>
+<td valign="TOP">&nbsp;82c7&nbsp;</td>
+<td valign="TOP">&nbsp;3069&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;な&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 aa&nbsp;</td>
+<td valign="TOP">&nbsp;244a&nbsp;</td>
+<td valign="TOP">&nbsp;82c8&nbsp;</td>
+<td valign="TOP">&nbsp;306a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;に&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 ab&nbsp;</td>
+<td valign="TOP">&nbsp;244b&nbsp;</td>
+<td valign="TOP">&nbsp;82c9&nbsp;</td>
+<td valign="TOP">&nbsp;306b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぬ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 ac&nbsp;</td>
+<td valign="TOP">&nbsp;244c&nbsp;</td>
+<td valign="TOP">&nbsp;82ca&nbsp;</td>
+<td valign="TOP">&nbsp;306c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ね&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 ad&nbsp;</td>
+<td valign="TOP">&nbsp;244d&nbsp;</td>
+<td valign="TOP">&nbsp;82cb&nbsp;</td>
+<td valign="TOP">&nbsp;306d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;の&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 ae&nbsp;</td>
+<td valign="TOP">&nbsp;244e&nbsp;</td>
+<td valign="TOP">&nbsp;82cc&nbsp;</td>
+<td valign="TOP">&nbsp;306e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;は&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 af&nbsp;</td>
+<td valign="TOP">&nbsp;244f&nbsp;</td>
+<td valign="TOP">&nbsp;82cd&nbsp;</td>
+<td valign="TOP">&nbsp;306f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ば&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b0&nbsp;</td>
+<td valign="TOP">&nbsp;2450&nbsp;</td>
+<td valign="TOP">&nbsp;82ce&nbsp;</td>
+<td valign="TOP">&nbsp;3070&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぱ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b1&nbsp;</td>
+<td valign="TOP">&nbsp;2451&nbsp;</td>
+<td valign="TOP">&nbsp;82cf&nbsp;</td>
+<td valign="TOP">&nbsp;3071&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ひ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b2&nbsp;</td>
+<td valign="TOP">&nbsp;2452&nbsp;</td>
+<td valign="TOP">&nbsp;82d0&nbsp;</td>
+<td valign="TOP">&nbsp;3072&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;び&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b3&nbsp;</td>
+<td valign="TOP">&nbsp;2453&nbsp;</td>
+<td valign="TOP">&nbsp;82d1&nbsp;</td>
+<td valign="TOP">&nbsp;3073&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぴ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b4&nbsp;</td>
+<td valign="TOP">&nbsp;2454&nbsp;</td>
+<td valign="TOP">&nbsp;82d2&nbsp;</td>
+<td valign="TOP">&nbsp;3074&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ふ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b5&nbsp;</td>
+<td valign="TOP">&nbsp;2455&nbsp;</td>
+<td valign="TOP">&nbsp;82d3&nbsp;</td>
+<td valign="TOP">&nbsp;3075&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぶ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b6&nbsp;</td>
+<td valign="TOP">&nbsp;2456&nbsp;</td>
+<td valign="TOP">&nbsp;82d4&nbsp;</td>
+<td valign="TOP">&nbsp;3076&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぷ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b7&nbsp;</td>
+<td valign="TOP">&nbsp;2457&nbsp;</td>
+<td valign="TOP">&nbsp;82d5&nbsp;</td>
+<td valign="TOP">&nbsp;3077&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;へ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b8&nbsp;</td>
+<td valign="TOP">&nbsp;2458&nbsp;</td>
+<td valign="TOP">&nbsp;82d6&nbsp;</td>
+<td valign="TOP">&nbsp;3078&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;べ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 b9&nbsp;</td>
+<td valign="TOP">&nbsp;2459&nbsp;</td>
+<td valign="TOP">&nbsp;82d7&nbsp;</td>
+<td valign="TOP">&nbsp;3079&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぺ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 ba&nbsp;</td>
+<td valign="TOP">&nbsp;245a&nbsp;</td>
+<td valign="TOP">&nbsp;82d8&nbsp;</td>
+<td valign="TOP">&nbsp;307a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ほ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 bb&nbsp;</td>
+<td valign="TOP">&nbsp;245b&nbsp;</td>
+<td valign="TOP">&nbsp;82d9&nbsp;</td>
+<td valign="TOP">&nbsp;307b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぼ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 bc&nbsp;</td>
+<td valign="TOP">&nbsp;245c&nbsp;</td>
+<td valign="TOP">&nbsp;82da&nbsp;</td>
+<td valign="TOP">&nbsp;307c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ぽ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 bd&nbsp;</td>
+<td valign="TOP">&nbsp;245d&nbsp;</td>
+<td valign="TOP">&nbsp;82db&nbsp;</td>
+<td valign="TOP">&nbsp;307d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ま&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 be&nbsp;</td>
+<td valign="TOP">&nbsp;245e&nbsp;</td>
+<td valign="TOP">&nbsp;82dc&nbsp;</td>
+<td valign="TOP">&nbsp;307e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;み&nbsp;</td>
+<td valign="TOP">&nbsp;e3 81 bf&nbsp;</td>
+<td valign="TOP">&nbsp;245f&nbsp;</td>
+<td valign="TOP">&nbsp;82dd&nbsp;</td>
+<td valign="TOP">&nbsp;307f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;む&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 80&nbsp;</td>
+<td valign="TOP">&nbsp;2460&nbsp;</td>
+<td valign="TOP">&nbsp;82de&nbsp;</td>
+<td valign="TOP">&nbsp;3080&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;め&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 81&nbsp;</td>
+<td valign="TOP">&nbsp;2461&nbsp;</td>
+<td valign="TOP">&nbsp;82df&nbsp;</td>
+<td valign="TOP">&nbsp;3081&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;も&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 82&nbsp;</td>
+<td valign="TOP">&nbsp;2462&nbsp;</td>
+<td valign="TOP">&nbsp;82e0&nbsp;</td>
+<td valign="TOP">&nbsp;3082&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゃ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 83&nbsp;</td>
+<td valign="TOP">&nbsp;2463&nbsp;</td>
+<td valign="TOP">&nbsp;82e1&nbsp;</td>
+<td valign="TOP">&nbsp;3083&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;や&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 84&nbsp;</td>
+<td valign="TOP">&nbsp;2464&nbsp;</td>
+<td valign="TOP">&nbsp;82e2&nbsp;</td>
+<td valign="TOP">&nbsp;3084&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゅ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 85&nbsp;</td>
+<td valign="TOP">&nbsp;2465&nbsp;</td>
+<td valign="TOP">&nbsp;82e3&nbsp;</td>
+<td valign="TOP">&nbsp;3085&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゆ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 86&nbsp;</td>
+<td valign="TOP">&nbsp;2466&nbsp;</td>
+<td valign="TOP">&nbsp;82e4&nbsp;</td>
+<td valign="TOP">&nbsp;3086&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ょ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 87&nbsp;</td>
+<td valign="TOP">&nbsp;2467&nbsp;</td>
+<td valign="TOP">&nbsp;82e5&nbsp;</td>
+<td valign="TOP">&nbsp;3087&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;よ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 88&nbsp;</td>
+<td valign="TOP">&nbsp;2468&nbsp;</td>
+<td valign="TOP">&nbsp;82e6&nbsp;</td>
+<td valign="TOP">&nbsp;3088&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ら&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 89&nbsp;</td>
+<td valign="TOP">&nbsp;2469&nbsp;</td>
+<td valign="TOP">&nbsp;82e7&nbsp;</td>
+<td valign="TOP">&nbsp;3089&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;り&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 8a&nbsp;</td>
+<td valign="TOP">&nbsp;246a&nbsp;</td>
+<td valign="TOP">&nbsp;82e8&nbsp;</td>
+<td valign="TOP">&nbsp;308a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;る&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 8b&nbsp;</td>
+<td valign="TOP">&nbsp;246b&nbsp;</td>
+<td valign="TOP">&nbsp;82e9&nbsp;</td>
+<td valign="TOP">&nbsp;308b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;れ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 8c&nbsp;</td>
+<td valign="TOP">&nbsp;246c&nbsp;</td>
+<td valign="TOP">&nbsp;82ea&nbsp;</td>
+<td valign="TOP">&nbsp;308c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ろ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 8d&nbsp;</td>
+<td valign="TOP">&nbsp;246d&nbsp;</td>
+<td valign="TOP">&nbsp;82eb&nbsp;</td>
+<td valign="TOP">&nbsp;308d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゎ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 8e&nbsp;</td>
+<td valign="TOP">&nbsp;246e&nbsp;</td>
+<td valign="TOP">&nbsp;82ec&nbsp;</td>
+<td valign="TOP">&nbsp;308e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;わ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 8f&nbsp;</td>
+<td valign="TOP">&nbsp;246f&nbsp;</td>
+<td valign="TOP">&nbsp;82ed&nbsp;</td>
+<td valign="TOP">&nbsp;308f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゐ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 90&nbsp;</td>
+<td valign="TOP">&nbsp;2470&nbsp;</td>
+<td valign="TOP">&nbsp;82ee&nbsp;</td>
+<td valign="TOP">&nbsp;3090&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゑ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 91&nbsp;</td>
+<td valign="TOP">&nbsp;2471&nbsp;</td>
+<td valign="TOP">&nbsp;82ef&nbsp;</td>
+<td valign="TOP">&nbsp;3091&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;を&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 92&nbsp;</td>
+<td valign="TOP">&nbsp;2472&nbsp;</td>
+<td valign="TOP">&nbsp;82f0&nbsp;</td>
+<td valign="TOP">&nbsp;3092&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ん&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 93&nbsp;</td>
+<td valign="TOP">&nbsp;2473&nbsp;</td>
+<td valign="TOP">&nbsp;82f1&nbsp;</td>
+<td valign="TOP">&nbsp;3093&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ァ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a1&nbsp;</td>
+<td valign="TOP">&nbsp;2521&nbsp;</td>
+<td valign="TOP">&nbsp;8340&nbsp;</td>
+<td valign="TOP">&nbsp;30a1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ア&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a2&nbsp;</td>
+<td valign="TOP">&nbsp;2522&nbsp;</td>
+<td valign="TOP">&nbsp;8341&nbsp;</td>
+<td valign="TOP">&nbsp;30a2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ィ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a3&nbsp;</td>
+<td valign="TOP">&nbsp;2523&nbsp;</td>
+<td valign="TOP">&nbsp;8342&nbsp;</td>
+<td valign="TOP">&nbsp;30a3&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;イ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a4&nbsp;</td>
+<td valign="TOP">&nbsp;2524&nbsp;</td>
+<td valign="TOP">&nbsp;8343&nbsp;</td>
+<td valign="TOP">&nbsp;30a4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゥ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a5&nbsp;</td>
+<td valign="TOP">&nbsp;2525&nbsp;</td>
+<td valign="TOP">&nbsp;8344&nbsp;</td>
+<td valign="TOP">&nbsp;30a5&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ウ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a6&nbsp;</td>
+<td valign="TOP">&nbsp;2526&nbsp;</td>
+<td valign="TOP">&nbsp;8345&nbsp;</td>
+<td valign="TOP">&nbsp;30a6&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ェ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a7&nbsp;</td>
+<td valign="TOP">&nbsp;2527&nbsp;</td>
+<td valign="TOP">&nbsp;8346&nbsp;</td>
+<td valign="TOP">&nbsp;30a7&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;エ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a8&nbsp;</td>
+<td valign="TOP">&nbsp;2528&nbsp;</td>
+<td valign="TOP">&nbsp;8347&nbsp;</td>
+<td valign="TOP">&nbsp;30a8&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ォ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 a9&nbsp;</td>
+<td valign="TOP">&nbsp;2529&nbsp;</td>
+<td valign="TOP">&nbsp;8348&nbsp;</td>
+<td valign="TOP">&nbsp;30a9&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;オ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 aa&nbsp;</td>
+<td valign="TOP">&nbsp;252a&nbsp;</td>
+<td valign="TOP">&nbsp;8349&nbsp;</td>
+<td valign="TOP">&nbsp;30aa&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;カ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 ab&nbsp;</td>
+<td valign="TOP">&nbsp;252b&nbsp;</td>
+<td valign="TOP">&nbsp;834a&nbsp;</td>
+<td valign="TOP">&nbsp;30ab&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ガ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 ac&nbsp;</td>
+<td valign="TOP">&nbsp;252c&nbsp;</td>
+<td valign="TOP">&nbsp;834b&nbsp;</td>
+<td valign="TOP">&nbsp;30ac&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;キ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 ad&nbsp;</td>
+<td valign="TOP">&nbsp;252d&nbsp;</td>
+<td valign="TOP">&nbsp;834c&nbsp;</td>
+<td valign="TOP">&nbsp;30ad&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ギ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 ae&nbsp;</td>
+<td valign="TOP">&nbsp;252e&nbsp;</td>
+<td valign="TOP">&nbsp;834d&nbsp;</td>
+<td valign="TOP">&nbsp;30ae&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ク&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 af&nbsp;</td>
+<td valign="TOP">&nbsp;252f&nbsp;</td>
+<td valign="TOP">&nbsp;834e&nbsp;</td>
+<td valign="TOP">&nbsp;30af&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;グ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b0&nbsp;</td>
+<td valign="TOP">&nbsp;2530&nbsp;</td>
+<td valign="TOP">&nbsp;834f&nbsp;</td>
+<td valign="TOP">&nbsp;30b0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ケ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b1&nbsp;</td>
+<td valign="TOP">&nbsp;2531&nbsp;</td>
+<td valign="TOP">&nbsp;8350&nbsp;</td>
+<td valign="TOP">&nbsp;30b1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゲ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b2&nbsp;</td>
+<td valign="TOP">&nbsp;2532&nbsp;</td>
+<td valign="TOP">&nbsp;8351&nbsp;</td>
+<td valign="TOP">&nbsp;30b2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;コ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b3&nbsp;</td>
+<td valign="TOP">&nbsp;2533&nbsp;</td>
+<td valign="TOP">&nbsp;8352&nbsp;</td>
+<td valign="TOP">&nbsp;30b3&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゴ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b4&nbsp;</td>
+<td valign="TOP">&nbsp;2534&nbsp;</td>
+<td valign="TOP">&nbsp;8353&nbsp;</td>
+<td valign="TOP">&nbsp;30b4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;サ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b5&nbsp;</td>
+<td valign="TOP">&nbsp;2535&nbsp;</td>
+<td valign="TOP">&nbsp;8354&nbsp;</td>
+<td valign="TOP">&nbsp;30b5&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ザ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b6&nbsp;</td>
+<td valign="TOP">&nbsp;2536&nbsp;</td>
+<td valign="TOP">&nbsp;8355&nbsp;</td>
+<td valign="TOP">&nbsp;30b6&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;シ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b7&nbsp;</td>
+<td valign="TOP">&nbsp;2537&nbsp;</td>
+<td valign="TOP">&nbsp;8356&nbsp;</td>
+<td valign="TOP">&nbsp;30b7&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ジ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b8&nbsp;</td>
+<td valign="TOP">&nbsp;2538&nbsp;</td>
+<td valign="TOP">&nbsp;8357&nbsp;</td>
+<td valign="TOP">&nbsp;30b8&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ス&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 b9&nbsp;</td>
+<td valign="TOP">&nbsp;2539&nbsp;</td>
+<td valign="TOP">&nbsp;8358&nbsp;</td>
+<td valign="TOP">&nbsp;30b9&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ズ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 ba&nbsp;</td>
+<td valign="TOP">&nbsp;253a&nbsp;</td>
+<td valign="TOP">&nbsp;8359&nbsp;</td>
+<td valign="TOP">&nbsp;30ba&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;セ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 bb&nbsp;</td>
+<td valign="TOP">&nbsp;253b&nbsp;</td>
+<td valign="TOP">&nbsp;835a&nbsp;</td>
+<td valign="TOP">&nbsp;30bb&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゼ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 bc&nbsp;</td>
+<td valign="TOP">&nbsp;253c&nbsp;</td>
+<td valign="TOP">&nbsp;835b&nbsp;</td>
+<td valign="TOP">&nbsp;30bc&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ソ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 bd&nbsp;</td>
+<td valign="TOP">&nbsp;253d&nbsp;</td>
+<td valign="TOP">&nbsp;835c&nbsp;</td>
+<td valign="TOP">&nbsp;30bd&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ゾ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 be&nbsp;</td>
+<td valign="TOP">&nbsp;253e&nbsp;</td>
+<td valign="TOP">&nbsp;835d&nbsp;</td>
+<td valign="TOP">&nbsp;30be&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;タ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 82 bf&nbsp;</td>
+<td valign="TOP">&nbsp;253f&nbsp;</td>
+<td valign="TOP">&nbsp;835e&nbsp;</td>
+<td valign="TOP">&nbsp;30bf&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ダ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 80&nbsp;</td>
+<td valign="TOP">&nbsp;2540&nbsp;</td>
+<td valign="TOP">&nbsp;835f&nbsp;</td>
+<td valign="TOP">&nbsp;30c0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;チ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 81&nbsp;</td>
+<td valign="TOP">&nbsp;2541&nbsp;</td>
+<td valign="TOP">&nbsp;8360&nbsp;</td>
+<td valign="TOP">&nbsp;30c1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヂ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 82&nbsp;</td>
+<td valign="TOP">&nbsp;2542&nbsp;</td>
+<td valign="TOP">&nbsp;8361&nbsp;</td>
+<td valign="TOP">&nbsp;30c2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ッ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 83&nbsp;</td>
+<td valign="TOP">&nbsp;2543&nbsp;</td>
+<td valign="TOP">&nbsp;8362&nbsp;</td>
+<td valign="TOP">&nbsp;30c3&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ツ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 84&nbsp;</td>
+<td valign="TOP">&nbsp;2544&nbsp;</td>
+<td valign="TOP">&nbsp;8363&nbsp;</td>
+<td valign="TOP">&nbsp;30c4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヅ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 85&nbsp;</td>
+<td valign="TOP">&nbsp;2545&nbsp;</td>
+<td valign="TOP">&nbsp;8364&nbsp;</td>
+<td valign="TOP">&nbsp;30c5&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;テ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 86&nbsp;</td>
+<td valign="TOP">&nbsp;2546&nbsp;</td>
+<td valign="TOP">&nbsp;8365&nbsp;</td>
+<td valign="TOP">&nbsp;30c6&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;デ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 87&nbsp;</td>
+<td valign="TOP">&nbsp;2547&nbsp;</td>
+<td valign="TOP">&nbsp;8366&nbsp;</td>
+<td valign="TOP">&nbsp;30c7&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ト&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 88&nbsp;</td>
+<td valign="TOP">&nbsp;2548&nbsp;</td>
+<td valign="TOP">&nbsp;8367&nbsp;</td>
+<td valign="TOP">&nbsp;30c8&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ド&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 89&nbsp;</td>
+<td valign="TOP">&nbsp;2549&nbsp;</td>
+<td valign="TOP">&nbsp;8368&nbsp;</td>
+<td valign="TOP">&nbsp;30c9&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ナ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 8a&nbsp;</td>
+<td valign="TOP">&nbsp;254a&nbsp;</td>
+<td valign="TOP">&nbsp;8369&nbsp;</td>
+<td valign="TOP">&nbsp;30ca&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ニ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 8b&nbsp;</td>
+<td valign="TOP">&nbsp;254b&nbsp;</td>
+<td valign="TOP">&nbsp;836a&nbsp;</td>
+<td valign="TOP">&nbsp;30cb&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヌ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 8c&nbsp;</td>
+<td valign="TOP">&nbsp;254c&nbsp;</td>
+<td valign="TOP">&nbsp;836b&nbsp;</td>
+<td valign="TOP">&nbsp;30cc&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ネ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 8d&nbsp;</td>
+<td valign="TOP">&nbsp;254d&nbsp;</td>
+<td valign="TOP">&nbsp;836c&nbsp;</td>
+<td valign="TOP">&nbsp;30cd&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ノ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 8e&nbsp;</td>
+<td valign="TOP">&nbsp;254e&nbsp;</td>
+<td valign="TOP">&nbsp;836d&nbsp;</td>
+<td valign="TOP">&nbsp;30ce&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ハ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 8f&nbsp;</td>
+<td valign="TOP">&nbsp;254f&nbsp;</td>
+<td valign="TOP">&nbsp;836e&nbsp;</td>
+<td valign="TOP">&nbsp;30cf&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;バ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 90&nbsp;</td>
+<td valign="TOP">&nbsp;2550&nbsp;</td>
+<td valign="TOP">&nbsp;836f&nbsp;</td>
+<td valign="TOP">&nbsp;30d0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;パ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 91&nbsp;</td>
+<td valign="TOP">&nbsp;2551&nbsp;</td>
+<td valign="TOP">&nbsp;8370&nbsp;</td>
+<td valign="TOP">&nbsp;30d1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヒ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 92&nbsp;</td>
+<td valign="TOP">&nbsp;2552&nbsp;</td>
+<td valign="TOP">&nbsp;8371&nbsp;</td>
+<td valign="TOP">&nbsp;30d2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ビ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 93&nbsp;</td>
+<td valign="TOP">&nbsp;2553&nbsp;</td>
+<td valign="TOP">&nbsp;8372&nbsp;</td>
+<td valign="TOP">&nbsp;30d3&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ピ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 94&nbsp;</td>
+<td valign="TOP">&nbsp;2554&nbsp;</td>
+<td valign="TOP">&nbsp;8373&nbsp;</td>
+<td valign="TOP">&nbsp;30d4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;フ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 95&nbsp;</td>
+<td valign="TOP">&nbsp;2555&nbsp;</td>
+<td valign="TOP">&nbsp;8374&nbsp;</td>
+<td valign="TOP">&nbsp;30d5&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ブ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 96&nbsp;</td>
+<td valign="TOP">&nbsp;2556&nbsp;</td>
+<td valign="TOP">&nbsp;8375&nbsp;</td>
+<td valign="TOP">&nbsp;30d6&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;プ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 97&nbsp;</td>
+<td valign="TOP">&nbsp;2557&nbsp;</td>
+<td valign="TOP">&nbsp;8376&nbsp;</td>
+<td valign="TOP">&nbsp;30d7&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 98&nbsp;</td>
+<td valign="TOP">&nbsp;2558&nbsp;</td>
+<td valign="TOP">&nbsp;8377&nbsp;</td>
+<td valign="TOP">&nbsp;30d8&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ベ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 99&nbsp;</td>
+<td valign="TOP">&nbsp;2559&nbsp;</td>
+<td valign="TOP">&nbsp;8378&nbsp;</td>
+<td valign="TOP">&nbsp;30d9&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ペ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 9a&nbsp;</td>
+<td valign="TOP">&nbsp;255a&nbsp;</td>
+<td valign="TOP">&nbsp;8379&nbsp;</td>
+<td valign="TOP">&nbsp;30da&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ホ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 9b&nbsp;</td>
+<td valign="TOP">&nbsp;255b&nbsp;</td>
+<td valign="TOP">&nbsp;837a&nbsp;</td>
+<td valign="TOP">&nbsp;30db&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ボ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 9c&nbsp;</td>
+<td valign="TOP">&nbsp;255c&nbsp;</td>
+<td valign="TOP">&nbsp;837b&nbsp;</td>
+<td valign="TOP">&nbsp;30dc&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ポ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 9d&nbsp;</td>
+<td valign="TOP">&nbsp;255d&nbsp;</td>
+<td valign="TOP">&nbsp;837c&nbsp;</td>
+<td valign="TOP">&nbsp;30dd&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;マ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 9e&nbsp;</td>
+<td valign="TOP">&nbsp;255e&nbsp;</td>
+<td valign="TOP">&nbsp;837d&nbsp;</td>
+<td valign="TOP">&nbsp;30de&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ミ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 9f&nbsp;</td>
+<td valign="TOP">&nbsp;255f&nbsp;</td>
+<td valign="TOP">&nbsp;837e&nbsp;</td>
+<td valign="TOP">&nbsp;30df&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ム&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a0&nbsp;</td>
+<td valign="TOP">&nbsp;2560&nbsp;</td>
+<td valign="TOP">&nbsp;8380&nbsp;</td>
+<td valign="TOP">&nbsp;30e0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;メ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a1&nbsp;</td>
+<td valign="TOP">&nbsp;2561&nbsp;</td>
+<td valign="TOP">&nbsp;8381&nbsp;</td>
+<td valign="TOP">&nbsp;30e1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;モ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a2&nbsp;</td>
+<td valign="TOP">&nbsp;2562&nbsp;</td>
+<td valign="TOP">&nbsp;8382&nbsp;</td>
+<td valign="TOP">&nbsp;30e2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ャ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a3&nbsp;</td>
+<td valign="TOP">&nbsp;2563&nbsp;</td>
+<td valign="TOP">&nbsp;8383&nbsp;</td>
+<td valign="TOP">&nbsp;30e3&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヤ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a4&nbsp;</td>
+<td valign="TOP">&nbsp;2564&nbsp;</td>
+<td valign="TOP">&nbsp;8384&nbsp;</td>
+<td valign="TOP">&nbsp;30e4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ュ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a5&nbsp;</td>
+<td valign="TOP">&nbsp;2565&nbsp;</td>
+<td valign="TOP">&nbsp;8385&nbsp;</td>
+<td valign="TOP">&nbsp;30e5&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ユ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a6&nbsp;</td>
+<td valign="TOP">&nbsp;2566&nbsp;</td>
+<td valign="TOP">&nbsp;8386&nbsp;</td>
+<td valign="TOP">&nbsp;30e6&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ョ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a7&nbsp;</td>
+<td valign="TOP">&nbsp;2567&nbsp;</td>
+<td valign="TOP">&nbsp;8387&nbsp;</td>
+<td valign="TOP">&nbsp;30e7&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヨ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a8&nbsp;</td>
+<td valign="TOP">&nbsp;2568&nbsp;</td>
+<td valign="TOP">&nbsp;8388&nbsp;</td>
+<td valign="TOP">&nbsp;30e8&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ラ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 a9&nbsp;</td>
+<td valign="TOP">&nbsp;2569&nbsp;</td>
+<td valign="TOP">&nbsp;8389&nbsp;</td>
+<td valign="TOP">&nbsp;30e9&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;リ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 aa&nbsp;</td>
+<td valign="TOP">&nbsp;256a&nbsp;</td>
+<td valign="TOP">&nbsp;838a&nbsp;</td>
+<td valign="TOP">&nbsp;30ea&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ル&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 ab&nbsp;</td>
+<td valign="TOP">&nbsp;256b&nbsp;</td>
+<td valign="TOP">&nbsp;838b&nbsp;</td>
+<td valign="TOP">&nbsp;30eb&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;レ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 ac&nbsp;</td>
+<td valign="TOP">&nbsp;256c&nbsp;</td>
+<td valign="TOP">&nbsp;838c&nbsp;</td>
+<td valign="TOP">&nbsp;30ec&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ロ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 ad&nbsp;</td>
+<td valign="TOP">&nbsp;256d&nbsp;</td>
+<td valign="TOP">&nbsp;838d&nbsp;</td>
+<td valign="TOP">&nbsp;30ed&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヮ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 ae&nbsp;</td>
+<td valign="TOP">&nbsp;256e&nbsp;</td>
+<td valign="TOP">&nbsp;838e&nbsp;</td>
+<td valign="TOP">&nbsp;30ee&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ワ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 af&nbsp;</td>
+<td valign="TOP">&nbsp;256f&nbsp;</td>
+<td valign="TOP">&nbsp;838f&nbsp;</td>
+<td valign="TOP">&nbsp;30ef&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヰ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 b0&nbsp;</td>
+<td valign="TOP">&nbsp;2570&nbsp;</td>
+<td valign="TOP">&nbsp;8390&nbsp;</td>
+<td valign="TOP">&nbsp;30f0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヱ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 b1&nbsp;</td>
+<td valign="TOP">&nbsp;2571&nbsp;</td>
+<td valign="TOP">&nbsp;8391&nbsp;</td>
+<td valign="TOP">&nbsp;30f1&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヲ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 b2&nbsp;</td>
+<td valign="TOP">&nbsp;2572&nbsp;</td>
+<td valign="TOP">&nbsp;8392&nbsp;</td>
+<td valign="TOP">&nbsp;30f2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ン&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 b3&nbsp;</td>
+<td valign="TOP">&nbsp;2573&nbsp;</td>
+<td valign="TOP">&nbsp;8393&nbsp;</td>
+<td valign="TOP">&nbsp;30f3&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヴ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 b4&nbsp;</td>
+<td valign="TOP">&nbsp;2574&nbsp;</td>
+<td valign="TOP">&nbsp;8394&nbsp;</td>
+<td valign="TOP">&nbsp;30f4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヵ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 b5&nbsp;</td>
+<td valign="TOP">&nbsp;2575&nbsp;</td>
+<td valign="TOP">&nbsp;8395&nbsp;</td>
+<td valign="TOP">&nbsp;30f5&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヶ&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 b6&nbsp;</td>
+<td valign="TOP">&nbsp;2576&nbsp;</td>
+<td valign="TOP">&nbsp;8396&nbsp;</td>
+<td valign="TOP">&nbsp;30f6&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ー&nbsp;</td>
+<td valign="TOP">&nbsp;e3 83 bc&nbsp;</td>
+<td valign="TOP">&nbsp;213C&nbsp;</td>
+<td valign="TOP">&nbsp;815B&nbsp;</td>
+<td valign="TOP">&nbsp;30fc&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>ネットワーク(INET)設定ライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/inctl.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+ネットワーク(INET)設定ライブラリ
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlEventHandlers"> sceInetCtlEventHandlers<br></a></td>
+<td>&nbsp;</td><td>イベントハンドラ登録用構造体<br></td></tr>
+</table><br>
+<font size=4><b>制御関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlDownInterface"> sceInetCtlDownInterface<br></a></td>
+<td>&nbsp;</td><td>インタフェースのDown<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlGetConfiguration"> sceInetCtlGetConfiguration<br></a></td>
+<td>&nbsp;</td><td>現在の設定データを得る<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlGetState"> sceInetCtlGetState<br></a></td>
+<td>&nbsp;</td><td>I/F の遷移状態を得る<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlRegisterEventHandler"> sceInetCtlRegisterEventHandler<br></a></td>
+<td>&nbsp;</td><td>イベントハンドラの登録<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlSetAutoMode"> sceInetCtlSetAutoMode<br></a></td>
+<td>&nbsp;</td><td>自動モードの設定/解除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlSetConfiguration"> sceInetCtlSetConfiguration<br></a></td>
+<td>&nbsp;</td><td>設定データの置き換え<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlUnregisterEventHandler"> sceInetCtlUnregisterEventHandler<br></a></td>
+<td>&nbsp;</td><td>イベントハンドラの登録抹消<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlUpInterface"> sceInetCtlUpInterface<br></a></td>
+<td>&nbsp;</td><td>インタフェースのUp<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlEventHandlers"><font size=6>sceInetCtlEventHandlers<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>イベントハンドラ登録用構造体<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct <b>sceInetCtlEventHandlers</b> {
+	struct sceInetCtlEventHandlers *<i>forw</i>, *<i>back</i>;
+	void (*<i>func</i>)(int id, int type);
+	int <i>gp</i>;
+} sceInetCtlEventHandlers_t;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>forw</i>&nbsp;</td>
+<td valign="TOP">&nbsp;inetctl.irxの内部で使われる順方向リンク&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>back</i>&nbsp;</td>
+<td valign="TOP">&nbsp;inetctl.irxの内部で使われる逆方向リンク&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;イベントハンドラ関数へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>gp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;イベントハンドラ呼び出し時の$gp値の保存領域&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInetCtlRegisterEventHandler()を用いてイベントハンドラを登録する際の引数となる呼び出し用のデータ構造です。呼び出し側で設定が必要なメンバは<i>func</i>のみです。<br>sceInetCtlUnregisterEventHandler()で登録を取り消すまで、そのデータ領域は保持されなければなりません。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInetCtlRegisterEventHandler">sceInetCtlRegisterEventHandler</a>()<a href="#"></a>,<a href="#sceInetCtlUnregisterEventHandler">sceInetCtlUnregisterEventHandler</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>制御関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlDownInterface"><font size=6>sceInetCtlDownInterface<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>インタフェースのDown<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlDownInterface</b>(
+	int <i>id</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>id</i>　　インタフェースID<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;Down失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>id</i>で指定されたインタフェースをDownします。<i>id</i>に0が指定された場合は、Down可能な状態にあるすべてのインターフェースをDownします。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlGetConfiguration"><font size=6>sceInetCtlGetConfiguration<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>現在の設定データを得る<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+sceNetCnf_t *<b> sceInetCtlGetConfiguration</b> (
+	void
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在の設定データへのポインタ<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInetCtlGetConfiguration()は常に最後のsceInetCtlSetConfiguration()の呼び出し時の引数である設定データへのポインタを返します。まだ一度もsceInetCtlSetConfiguration()を呼び出していない場合には、inetctl.irx が内部に持つ設定データ領域へのポインタを返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlGetState"><font size=6>sceInetCtlGetState<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>I/F の遷移状態を得る<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlGetState</b>(
+	int <i>id,</i>
+	int *<i>pstate</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pstate</i>&nbsp;</td>
+<td valign="TOP">&nbsp;移状態コードを格納する領域へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;指定された ID が存在しない&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了時には遷移状態コードとして以下のいずれかが設定されます。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_DETACHED&nbsp;</td>
+<td valign="TOP">&nbsp;I/F は接続されていない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STARTING&nbsp;</td>
+<td valign="TOP">&nbsp;Up 要求済で Running 待ち&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_RETRYING&nbsp;</td>
+<td valign="TOP">&nbsp;redial_interval による時間経過待ち&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STARTED&nbsp;</td>
+<td valign="TOP">&nbsp;Running 状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STOPPING&nbsp;</td>
+<td valign="TOP">&nbsp;Down 要求済で停止待ち&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STOPPED&nbsp;</td>
+<td valign="TOP">&nbsp;I/F は停止状態&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">I/F が PPP の時、リダイアル処理に入っても sceINETCTL_IEV_Error は通知されます。その時、この sceInetCtlGetState() を呼び出す事でリダイアル処理中なのかを判別できます。以下のように処理して下さい。<br><br></div>
+<div style="margin-left:35px;"><ul>
+         <li> sceINETCTL_S_STOPPED の時:<br>「接続に失敗しました」と表示する。
+         <li> それ以外の時:<br>「リダイアル中です」と表示し、次のイベント発生を待つ。
+</ul></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlRegisterEventHandler"><font size=6>sceInetCtlRegisterEventHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>イベントハンドラの登録<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlRegisterEventHandler</b>(
+	sceInetCtlEventHandlers_t *<i>eh</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>eh</i>　　イベントハンドラ登録データへのポインタ<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">0を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インタフェースのAttach / Detach / Start / Stop / Errorの各イベント発生時に呼び出されるイベントハンドラを登録します。<br>引数<i>eh</i>のメンバのうち、呼び出し側で設定しておく必要があるものはfuncのみです。<br>イベントハンドラのプロトタイプは次のとおりです。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>void interface_event_handler(
+	int id,
+	int type
+);
+
+</pre></font></div>
+<div style="margin-left:50px;">イベントハンドラはINETCTLのメモリ領域の許す限り複数登録できます。<br>イベントハンドラへの引数idにはイベントが発生したインタフェースのインタフェースID、typeにはイベントの種別を表す次のいずれかの値が渡されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>定数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Attach&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースが接続された（Attach）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Detach&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースが抜かれた（Detach）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Start&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースがUpし、使用可能になった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Stop&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースがDownし、使用不可能になった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Error&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースがerrorを通知した（Error=1）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Conf&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスに一致する設定があった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_NoConf&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスに一致する設定がなかった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Up&nbsp;</td>
+<td valign="TOP">&nbsp;アプリからの Up&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Down&nbsp;</td>
+<td valign="TOP">&nbsp;アプリからの Down&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_IEV_Retry&nbsp;</td>
+<td valign="TOP">&nbsp;redial_interval 経過後のリダイアル時の Up&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">sceINETCTL_IEV_Attachが通知される直前には、sceINETCTL_IEV_ConfまたはsceINETCTL_IEV_NoConfのどちらかのイベントが通知されます。<br>sceINETCTL_IEV_Up,Down,Retry は I/F の状態の変化によるイベントではなくアプリからの関数呼び出しや内部の時間経過によって発生するイベントです。<br>sceINETCTL_IEV_Up,sceINETCTL_IEV_Down はそれぞれ sceInetCtlUpInterface(),sceInetCtlDownInterface() が呼ばれた時に通知されるイベントです。ID=0 ですべての I/F が指定された場合にはそれぞれの I/F に対して個別にイベントを通知します。<br>sceINETCTL_IEV_Retry はリダイアル時に redial_interval 時間の経過直後に発生する Up イベントです。<br>イベントハンドラが呼び出されたとき、$gpレジスタにはイベントハンドラを登録したときの$gp値が設定されています。<br>イベントハンドラ内ではいかなる待ち処理も行ってはいけません。他の資源に対する待ち処理を行うと、inetctl.irx内のスレッドがひとつしかないため、イベントハンドラの呼び出しから戻ってくるまで通常のinetctl.irxの制御、および次のイベント通知が行われなくなってしまいます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlSetAutoMode"><font size=6>sceInetCtlSetAutoMode<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>自動モードの設定/解除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlSetAutoMode</b>(
+	int <i>f_auto</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>f_auto</i>&nbsp;</td>
+<td valign="TOP">&nbsp;== 0　非自動モード&nbsp;<br>&nbsp;!= 0　自動モード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">0を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">inetctl.irxの起動時にオプション-no_autoの有無によって指定されている自動モードの設定を、<i>f_auto</i>にしたがって変更します。<br>自動モードでは、inetctl.irxはデバイスの接続およびINETCTLの設定の書き換え時に、該当する設定を自動的にinet.irxに通知してインタフェースをUpします。<br>非自動モードでは、sceInetCnfUpInterface()を呼び出さない限りinet.irxへの設定通知やインタフェースのUpは行いません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlSetConfiguration"><font size=6>sceInetCtlSetConfiguration<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>設定データの置き換え<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;netcnf.h&gt;
+#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlSetConfiguration</b>(
+	sceNetCnfEnv_t *<i>e</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>e</i>　　ロード環境へのポインタ<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;設定失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">inetctl.irxが参照する設定データを引数<i>e</i>で指定されたロード環境に置き換えて再スタートを行う、つまり引数<i>e</i>にしたがってINETCTLへの設定書き込みを行います。実際に、INETへの設定通知をどうやって行うかについては、sceInetCtlSetAutoMode()を参照してください。<br>ロード環境は設定管理ファイルの１エントリに対応するデータ構造です。詳細はNETCNFのドキュメントを参照してください。<br>この中で参照される主なメンバはe-&gt;rootで、e-&gt;root-&gt;pair_headから辿ることのできるインタフェース定義もそれぞれ設定されている必要があります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInetCtlSetConfiguration()に渡したロード環境は、明示的に使用しない設定を行うまで、内容を変更したり領域を解放したりしてはいけません。<br>使用しない設定を行うには、<i>e</i>としてNULLを指定してsceInetCtlSetConfiguration()を呼び出してください。この後、以前の設定データによる接続等はできなくなります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlUnregisterEventHandler"><font size=6>sceInetCtlUnregisterEventHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>イベントハンドラの登録抹消<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlUnregisterEventHandler</b>(
+	sceInetCtlEventHandlers_t *<i>eh</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>eh</i>　　イベントハンドラ登録データへのポインタ<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">0を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInetCtlRegisterEventHandler()によって登録したイベントハンドラを削除します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlUpInterface"><font size=6>sceInetCtlUpInterface<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>インタフェースのUp<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlUpInterface</b>(
+	int <i>id</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>id　　</i>インタフェースID<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;Up失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在の設定内容をinet.irxに通知してから、<i>id</i>で指定されたインタフェースをUpします。<i>id</i>に0が指定された場合は、設定データが存在してUp可能な状態にあるすべてのインタフェースをUpします。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

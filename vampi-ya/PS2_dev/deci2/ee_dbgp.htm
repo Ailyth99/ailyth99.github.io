@@ -1,0 +1,761 @@
+<html lang=ja>
+<!-- 見出し　１，部見出し -->
+<head>
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+<title>DBGP Specification(for EE Thread Extension)</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+DBGP Specification(for EE Thread Extension)
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>概要</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>メッセージフォーマット</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>メッセージ</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>Thread List(THREADLIST/THREADLISTR)</b><br></a>
+    <a href="#Heading4_2_2"> <b>Thread Control Block(TCB/TCBR)</b><br></a>
+    <a href="#Heading4_2_3"> <b>Semaphore Block(SEMABLOCK/SEMABLOCKR)</b><br></a>
+    <a href="#Heading4_2_4"> <b>Handler List(HANDLERLIST/HANDLERLISTR)</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>概要</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">このドキュメントでは、DBGPのEEスレッド拡張について説明します。これらの機能は、DBGP Version 3.10以降でサポートされています。サポートされていないバージョンでは、DBGPヘッダresultフィールドにDBGP_RESULT_INVALREQを返します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>メッセージフォーマット</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">DBGPヘッダの各フィールドに設定する値は次のとおりです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>id</b><br></h4></div>
+
+<div style="margin-left:67px;">DBGP_CPUID_CPU　0　// CPU (ESDBGP)<br></div>
+
+<div style="margin-left:40px;"><h4><b>group</b><br></h4></div>
+
+<div style="margin-left:67px;">DBGP_GROUP_EE_THREAD　1<br></div>
+
+<div style="margin-left:40px;"><h4><b>type</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_THREADLIST&nbsp;</td>
+<td valign="TOP">&nbsp;0x30&nbsp;</td>
+<td valign="TOP">&nbsp;//Get Thread List Request&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_THREADLISTR&nbsp;</td>
+<td valign="TOP">&nbsp;0x31&nbsp;</td>
+<td valign="TOP">&nbsp;//Get Thread List Reply &nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_TCB&nbsp;</td>
+<td valign="TOP">&nbsp;0x32&nbsp;</td>
+<td valign="TOP">&nbsp;//Get TCB Request&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_TCBR&nbsp;</td>
+<td valign="TOP">&nbsp;0x33&nbsp;</td>
+<td valign="TOP">&nbsp;//Get TCB Reply&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_SEMABLOCK&nbsp;</td>
+<td valign="TOP">&nbsp;0x34&nbsp;</td>
+<td valign="TOP">&nbsp;//Get Semaphore Block Request&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_ SEMABLOCKR&nbsp;</td>
+<td valign="TOP">&nbsp;0x35&nbsp;</td>
+<td valign="TOP">&nbsp;//Get Semaphore Block Reply&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_HANDLERLIST&nbsp;</td>
+<td valign="TOP">&nbsp;0x36&nbsp;</td>
+<td valign="TOP">&nbsp;//Get Handler List Request&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_HANDLERLISTR&nbsp;</td>
+<td valign="TOP">&nbsp;0x37&nbsp;</td>
+<td valign="TOP">&nbsp;//Get Handler List Reply&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;">code、countは、typeの説明で説明します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>result</b><br></h4></div>
+
+<div style="margin-left:67px;">ターゲットからホストへのメッセージにおいて、次の表に示す結果コードが入ります。ホストからターゲットへ送信するメッセージでは常に 0 を設定します。<br>全グループ共通<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DBGP_RESULT_GOOD&nbsp;</td>
+<td valign="TOP">&nbsp;0x00&nbsp;</td>
+<td valign="TOP">&nbsp;// Good&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_RESULT_INVALREQ&nbsp;</td>
+<td valign="TOP">&nbsp;0x01&nbsp;</td>
+<td valign="TOP">&nbsp;// Invalid Request&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_RESULT_UNIMPREQ&nbsp;</td>
+<td valign="TOP">&nbsp;0x02&nbsp;</td>
+<td valign="TOP">&nbsp;// Unimplemented Request&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_RESULT_ERROR&nbsp;</td>
+<td valign="TOP">&nbsp;0x03&nbsp;</td>
+<td valign="TOP">&nbsp;// Error&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">ターゲットがタイプを認識した後に不正要求であると判断した場合や、認識できるが実装していないタイプのメッセージを受けとった場合は、それぞれ適切なタイプにはその応答タイプのメッセージを返します。<br><br>なお、このドキュメントで明示されていないフィールドには、送信側は常に 0 を設定しなければなりません。また受信側は、0 でない値を得たときにはできるだけエラー扱いとしなければなりません。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>メッセージ</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>Thread List(THREADLIST/THREADLISTR)</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EEカーネル上の有効なスレッドリストの要求メッセージとその応答メッセージです<br><br>以下のようなヘッダとデータで構成されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_&nbsp;<br>&nbsp;THREADLIST&nbsp;</td>
+<td valign="TOP">&nbsp;DECI2 ヘッダ + DBGP ヘッダ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_&nbsp;<br>&nbsp;THREADLISTR&nbsp;</td>
+<td valign="TOP">&nbsp;DECI2 ヘッダ + DBGP ヘッダ + &nbsp;<br>&nbsp;DBGP_EE_THREADLIST_HDR + &nbsp;<br>&nbsp;DBGP_EE_THREADLIST_DATA × &nbsp;<br>&nbsp;DBGP_EE_THREADLIST_HDR.count&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">DBGPヘッダのcodeフィールドには、<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;ALLTHREADLIST&nbsp;</td>
+<td valign="TOP">&nbsp;0x3f&nbsp;</td>
+<td valign="TOP">&nbsp;全スレッドのリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;THREADREADYQUEUELIST&nbsp;</td>
+<td valign="TOP">&nbsp;0x0&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドレディキューの&nbsp;<br>&nbsp;スレッドリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;RUN&nbsp;</td>
+<td valign="TOP">&nbsp;0x1&nbsp;</td>
+<td valign="TOP">&nbsp;RUN状態のスレッドリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;READY&nbsp;</td>
+<td valign="TOP">&nbsp;0x2&nbsp;</td>
+<td valign="TOP">&nbsp;READY状態のスレッドリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;0x4&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態のスレッドリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;SUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0x8&nbsp;</td>
+<td valign="TOP">&nbsp;SUSPEND状態のスレッドリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;WAITSUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0x20&nbsp;</td>
+<td valign="TOP">&nbsp;WAITSUSPEND状態の&nbsp;<br>&nbsp;スレッドリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;DORMANT&nbsp;</td>
+<td valign="TOP">&nbsp;0x10&nbsp;</td>
+<td valign="TOP">&nbsp;DORMANT状態のスレッドリスト&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_CODE_&nbsp;<br>&nbsp;RESET&nbsp;</td>
+<td valign="TOP">&nbsp;0x80&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドがRUN状態になった&nbsp;<br>&nbsp;回数を0に初期化します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以上のコードを組み合わせて設定します。<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp001.gif"><p>
+<b>図 1 Thread List Header(DBGP_EE_THREADLIST_HDR)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>count</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドリストに含まれるスレッドの数<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp002.gif"><p>
+<b>図 2 Thread List Data(DBGP_EE_THREADLIST_DATA)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>id</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドID<br></div>
+
+<div style="margin-left:40px;"><h4><b>priority</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドの優先度<br></div>
+
+<div style="margin-left:40px;"><h4><b>status</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドの状態<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;THS_RUN&nbsp;</td>
+<td valign="TOP">&nbsp;0x01&nbsp;</td>
+<td valign="TOP">&nbsp;RUN状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_READY&nbsp;</td>
+<td valign="TOP">&nbsp;0x02 &nbsp;</td>
+<td valign="TOP">&nbsp;READY状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;0x04&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_SUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0x08&nbsp;</td>
+<td valign="TOP">&nbsp;SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_WAITSUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0xc&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT-SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_DORMANT&nbsp;</td>
+<td valign="TOP">&nbsp;0x10&nbsp;</td>
+<td valign="TOP">&nbsp;DORMANT状態&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<div style="margin-left:40px;"><h4><b>cause</b><br></h4></div>
+
+<div style="margin-left:67px;">WAIT要因(None = 0, Sleep = 1, Sema = 2)<br></div>
+
+<div style="margin-left:40px;"><h4><b>waitid</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォID<br></div>
+
+<div style="margin-left:40px;"><h4><b>wakeupcount</b><br></h4></div>
+
+<div style="margin-left:67px;">起床要求回数<br></div>
+
+<div style="margin-left:40px;"><h4><b>count</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドがRUN状態になった回数<br></div>
+
+<div style="margin-left:40px;"><h4><b>pc</b><br></h4></div>
+
+<div style="margin-left:67px;">プログラムカウンタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>sp</b><br></h4></div>
+
+<div style="margin-left:67px;">スタックポインタ$29<br></div>
+
+<div style="margin-left:40px;"><h4><b>func</b><br></h4></div>
+
+<div style="margin-left:67px;">実行開始アドレス<br></div>
+
+<div style="margin-left:40px;"><h4><b>ra</b><br></h4></div>
+
+<div style="margin-left:67px;">リターンアドレス$31<br></div>
+
+<div style="margin-left:40px;"><h4><b>reserved[2]</b><br></h4></div>
+
+<div style="margin-left:67px;">予約領域<br></div>
+<div style="margin-left:50px;"><br>DBGP_EE_THREAD_TYPE_THREADLISTR応答は、DBGPヘッダのcountフィールドに1を返します。スレッドがRUN状態のとき、pc,sp,raには現在の値が入ります。<br><br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>Thread Control Block(TCB/TCBR)</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EEカーネル上の有効なスレッドIDを指定するメッセージと、その応答メッセージです。以下のようなヘッダとデータで構成されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_TCB&nbsp;</td>
+<td valign="TOP">&nbsp;DECI2 ヘッダ + DBGP ヘッダ&nbsp;<br>&nbsp;+DBGP_EE_THREADID_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_TCBR&nbsp;</td>
+<td valign="TOP">&nbsp; DECI2 ヘッダ + DBGP ヘッダ + &nbsp;<br>&nbsp;DBGP_EE_TCB_DATA&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;">DBGP_EE_THREADID_DATAの形式は次のとおりです。<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp003.gif"><p>
+<b>図 3 Thread Id Data(DBGP_EE_THREADID_DATA)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>id</b><br></h4></div>
+
+<div style="margin-left:67px;">指定する有効なスレッドID<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp004.gif"><p>
+<b>図 4 TCB Data (DBGP_EE_THREADTCB_DATA)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>id</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドID<br></div>
+
+<div style="margin-left:40px;"><h4><b>priority</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドの優先度<br></div>
+
+<div style="margin-left:40px;"><h4><b>status</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドの状態<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;THS_RUN &nbsp;</td>
+<td valign="TOP">&nbsp;0x01&nbsp;</td>
+<td valign="TOP">&nbsp;RUN状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_READY &nbsp;</td>
+<td valign="TOP">&nbsp;0x02 &nbsp;</td>
+<td valign="TOP">&nbsp;READY状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;0x04&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_SUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0x08&nbsp;</td>
+<td valign="TOP">&nbsp;SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_WAITSUSPEND&nbsp;</td>
+<td valign="TOP">&nbsp;0xc&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT-SUSPEND状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;THS_DORMANT&nbsp;</td>
+<td valign="TOP">&nbsp;0x10&nbsp;</td>
+<td valign="TOP">&nbsp;DORMANT状態&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<div style="margin-left:40px;"><h4><b>cause</b><br></h4></div>
+
+<div style="margin-left:67px;">WAIT要因(None = 0, Sleep = 1, Sema = 2)<br></div>
+
+<div style="margin-left:40px;"><h4><b>waitid</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォWAIT時,セマフォID<br></div>
+
+<div style="margin-left:40px;"><h4><b>wakeupcount</b><br></h4></div>
+
+<div style="margin-left:67px;">起床要求回数<br></div>
+
+<div style="margin-left:40px;"><h4><b>count</b><br></h4></div>
+
+<div style="margin-left:67px;">スレッドがRUN状態になった回数<br></div>
+
+<div style="margin-left:40px;"><h4><b>pc</b><br></h4></div>
+
+<div style="margin-left:67px;">プログラムカウンタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>stackpointer</b><br></h4></div>
+
+<div style="margin-left:67px;">ユーザーのスタックのトップアドレス（= $29(sp) + 0x280）<br></div>
+
+<div style="margin-left:40px;"><h4><b>func</b><br></h4></div>
+
+<div style="margin-left:67px;">実行開始アドレス<br></div>
+
+<div style="margin-left:40px;"><h4><b>args</b><br></h4></div>
+
+<div style="margin-left:67px;">StartThreadの引数<br></div>
+
+<div style="margin-left:40px;"><h4><b>argc</b><br></h4></div>
+
+<div style="margin-left:67px;">StartThreadの引数の数<br></div>
+
+<div style="margin-left:40px;"><h4><b>stack</b><br></h4></div>
+
+<div style="margin-left:67px;">スタックのボトムアドレス<br></div>
+
+<div style="margin-left:40px;"><h4><b>stacksize</b><br></h4></div>
+
+<div style="margin-left:67px;">スタックサイズ<br></div>
+
+<div style="margin-left:40px;"><h4><b>endofheap</b><br></h4></div>
+
+<div style="margin-left:67px;">ヒープの終端アドレス<br></div>
+
+<div style="margin-left:40px;"><h4><b>option</b><br></h4></div>
+
+<div style="margin-left:67px;">使用不可<br></div>
+
+<div style="margin-left:40px;"><h4><b>gpReg</b><br></h4></div>
+
+<div style="margin-left:67px;">グローバルポインタへのアドレス<br></div>
+
+<div style="margin-left:40px;"><h4><b>initpriority</b><br></h4></div>
+
+<div style="margin-left:67px;">優先度の初期値<br></div>
+
+<div style="margin-left:40px;"><h4><b>sa</b><br></h4></div>
+
+<div style="margin-left:67px;">saレジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>fcr31</b><br></h4></div>
+
+<div style="margin-left:67px;">fcr31レジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>gpr[32]</b><br></h4></div>
+
+<div style="margin-left:67px;">GPR<br></div>
+
+<div style="margin-left:40px;"><h4><b>hi</b><br></h4></div>
+
+<div style="margin-left:67px;">hiレジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>lo</b><br></h4></div>
+
+<div style="margin-left:67px;">loレジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>hi1</b><br></h4></div>
+
+<div style="margin-left:67px;">hi1レジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>lo1</b><br></h4></div>
+
+<div style="margin-left:67px;">lo1レジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>fpr[32]</b><br></h4></div>
+
+<div style="margin-left:67px;">fprレジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>facc</b><br></h4></div>
+
+<div style="margin-left:67px;">faccレジスタ<br></div>
+
+<div style="margin-left:40px;"><h4><b>reserved[3]</b><br></h4></div>
+
+<div style="margin-left:67px;">予約領域<br></div>
+<div style="margin-left:50px;"><br>DBGP_EE_THREAD_TYPE＿TCBR応答のDBGPヘッダのcountフィールドには、指定されたスレッドIDのスレッドが存在しないとき0を返します。存在するとき1を返します。スレッドがRUN状態のとき、gpr, fprt, facc, pc, sa, hi,lo, hi1, lo1には、現在のレジスタの値が入ります。<br></div>
+<div style="margin-left:80px;"><br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>Semaphore Block(SEMABLOCK/SEMABLOCKR)</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EEカーネル上の有効なセマフォ情報を要求するメッセージと、セマフォ情報を返す応答メッセージです。以下のようなヘッダとデータで構成されます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_&nbsp;<br>&nbsp;SEMABLOCK&nbsp;</td>
+<td valign="TOP">&nbsp;DECI2 ヘッダ + DBGP ヘッダ +&nbsp;<br>&nbsp; DBPG_EE_SEMAID_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_&nbsp;<br>&nbsp;SEMABLOCK R&nbsp;</td>
+<td valign="TOP">&nbsp; DECI2 ヘッダ + DBGP ヘッダ + &nbsp;<br>&nbsp;DBGP_EE_SEMABLOCKHDR + &nbsp;<br>&nbsp;(DBGP_EE_SEMABLOCK_DATA + &nbsp;<br>&nbsp;DBGP_EE_THREADID_DATA ×&nbsp;<br>&nbsp;DBGP_SEMABLOCK_DATA.numWaitThreads )×&nbsp;<br>&nbsp;DBGP_EE_THREADBLOCK_HDR.count&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;">DBGP_EE_THREAD_TYPE_SEMABLOCKのDBGPヘッダのcodeフィールドには、<br>DBGP_EE_THREAD_CODE_SEMAID 0 //セマフォIDをDBGP_EE_SEMAID_DATAに指定してセマフォ情報を取得します。<br>DBGP_EE_THREAD_CODE_SEMAALL　1　//すべてのセマフォ情報を取得します。<br>DBGP_EE_SEMAID_DATAは、0にしてください。<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp005.gif"><p>
+<b>図 5 セマフォIDデータ(DBGP_EE_SEMAID_DATA)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>sema id</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォID<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp006.gif"><p>
+<b>図 6 セマフォブロックデータ(DBGP_EE_SEMABLOCK_HDR)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>count</b><br></h4></div>
+
+<div style="margin-left:67px;">応答メッセージに含まれるセマフォの数<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp007.gif"><p>
+<b>図 7 セマフォの情報(DBGP_EE_SEMABLOCK_DATA + DBGP_EE_THREADID_DATA×DBGP_EE_SEMABLOCK_DATA.numWaitThreads)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>sema id</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォID<br></div>
+
+<div style="margin-left:40px;"><h4><b>count</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォ資源数<br></div>
+
+<div style="margin-left:40px;"><h4><b>maxcount</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォ資源の最大数<br></div>
+
+<div style="margin-left:40px;"><h4><b>attr</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォ属性<br></div>
+
+<div style="margin-left:40px;"><h4><b>option</b><br></h4></div>
+
+<div style="margin-left:67px;">ユーザー定義の付加情報<br></div>
+
+<div style="margin-left:40px;"><h4><b>numWaitThreads</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォ待ちをしているスレッドの数<br></div>
+
+<div style="margin-left:40px;"><h4><b>thread id</b><br></h4></div>
+
+<div style="margin-left:67px;">セマフォ待ちをしているスレッドのスレッドID。このIDはセマフォ待ちに入った順番で返される。<br><br></div>
+<div style="margin-left:50px;">DBGP_EE_THREAD_TYPE_SEMABLOCKR応答のDBGPヘッダのcountフィールドには、該当セマフォが存在するとき1を返します。存在しないとき0を返します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>Handler List(HANDLERLIST/HANDLERLISTR)</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EEカーネルAPIを用いて登録された割込みハンドラのリストの要求メッセージとその応答メッセージです。以下のようなヘッダとデータで構成されます。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_&nbsp;<br>&nbsp;HANDLERLIST&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DBGP_EE_THREAD_TYPE_&nbsp;<br>&nbsp;HANDLERLISTR&nbsp;</td>
+<td valign="TOP">&nbsp;DECI2ヘッダ + DBGPヘッダ +&nbsp;<br>&nbsp;DBGP_EE_HANDLER_DATA ×DBPGヘッダ.count&nbsp;</td>
+</tr>
+</table>
+</div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp008.gif"><p>
+<b>図 8 割り込みハンドラデータ(DBGP_EE_HANDLER_DATA)</b>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>kind</b><br></h4></div>
+
+<div style="margin-left:67px;">ハンドラの種類<br>DBGP_EE_INTC_HANDLER  0  // INTC割り込み<br>DBGP_EE_DMAC_HANDLER 1  // DMAC割り込み<br></div>
+
+<div style="margin-left:40px;"><h4><b>number</b><br></h4></div>
+
+<div style="margin-left:67px;">割り込みハンドラ番号(0-15)<br></div>
+
+<div style="margin-left:40px;"><h4><b>mask</b><br></h4></div>
+
+<div style="margin-left:67px;">割り込みハンドラが有効かどうか<br></div>
+
+
+<div align=center>
+<p>
+<img src="gif/ee_dbgp009.gif"><p>
+<b>図 9 DBGP_EE_HANDLER_DATA.mask</b>
+
+</div>
+<br>
+<div style="margin-left:67px;">ハンドラが有効な時には、該当番号のビットが1になります。無効時は、0です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>func</b><br></h4></div>
+
+<div style="margin-left:67px;">割り込みハンドラ関数のエントリーポイント<br></div>
+
+<div style="margin-left:40px;"><h4><b>arg</b><br></h4></div>
+
+<div style="margin-left:67px;">割り込みハンドラへの引数<br></div>
+<div style="margin-left:50px;"><br>DBGP_EE_THREAD_TYPE_HANDLERLISTR応答は、DBGPヘッダのcountフィールドに返すDBGP_EE_HANDLER_DATAの個数を返します。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

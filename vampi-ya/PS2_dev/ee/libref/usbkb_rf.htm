@@ -1,0 +1,1710 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>USBキーボードライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/libusbkb.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+USBキーボードライブラリ
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#USBKBDATA_t"> USBKBDATA_t<br></a></td>
+<td>&nbsp;</td><td>キーボードデータ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#USBKBINFO_t"> USBKBINFO_t<br></a></td>
+<td>&nbsp;</td><td>キーボード接続情報<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbClearRbuf"> sceUsbKbClearRbuf<br></a></td>
+<td>&nbsp;</td><td>リングバッファをクリアする<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbCnvRawCode"> sceUsbKbCnvRawCode<br></a></td>
+<td>&nbsp;</td><td>生キーコードを変換する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbEnd"> sceUsbKbEnd<br></a></td>
+<td>&nbsp;</td><td>キーボードライブラリの終了<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbGetInfo"> sceUsbKbGetInfo<br></a></td>
+<td>&nbsp;</td><td>キーボード接続情報の取得（非同期）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbGetLocation"> sceUsbKbGetLocation<br></a></td>
+<td>&nbsp;</td><td>キーボード接続位置の取得（非同期）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbInit"> sceUsbKbInit<br></a></td>
+<td>&nbsp;</td><td>ライブラリの初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbRead"> sceUsbKbRead<br></a></td>
+<td>&nbsp;</td><td>キーボードデータのリード（非同期）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbSetArrangement"> sceUsbKbSetArrangement<br></a></td>
+<td>&nbsp;</td><td>キー配置の設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbSetCodeType"> sceUsbKbSetCodeType<br></a></td>
+<td>&nbsp;</td><td>キーコード形式の設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbSetLEDMode"> sceUsbKbSetLEDMode<br></a></td>
+<td>&nbsp;</td><td>LEDの点灯モードの設定（非同期）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbSetLEDStatus"> sceUsbKbSetLEDStatus<br></a></td>
+<td>&nbsp;</td><td>LEDの点灯制御（非同期）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbSetReadMode"> sceUsbKbSetReadMode<br></a></td>
+<td>&nbsp;</td><td>キーボードデータのリードモードの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbSetRepeat"> sceUsbKbSetRepeat<br></a></td>
+<td>&nbsp;</td><td>キーリピートモードの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceUsbKbSync"> sceUsbKbSync<br></a></td>
+<td>&nbsp;</td><td>非同期関数の処理終了待ち<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="USBKBDATA_t"><font size=6>USBKBDATA_t<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーボードデータ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#define USBKB_MAX_KEYCODES 62
+typedef struct {
+	u_int <i>led</i>;
+	u_int <i>mkey</i>;
+	int <i>len</i>;
+	u_short <i>keycode</i>[USBKB_MAX_KEYCODES];
+} <b>USBKBDATA_t</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>led</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;LEDの点灯状態&nbsp;<br>&nbsp;各ビットの意味は、以下のマクロを参照。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;#define USBKB_LED_NUM_LOCK&nbsp;</td>
+<td valign="top">&nbsp;(1&lt;&lt;0)&nbsp;</td>
+<td valign="top">&nbsp;/* 0:OFF 1:ON */&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;#define USBKB_LED_CAPS_LOCK&nbsp;</td>
+<td valign="top">&nbsp;(1&lt;&lt;1)&nbsp;</td>
+<td valign="top">&nbsp;/* 0:OFF 1:ON */&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;#define USBKB_LED_SCROLL_LOCK&nbsp;</td>
+<td valign="top">&nbsp;(1&lt;&lt;2)&nbsp;</td>
+<td valign="top">&nbsp;/* 0:OFF 1:ON */&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;#define USBKB_LED_COMPOSE&nbsp;</td>
+<td valign="top">&nbsp;(1&lt;&lt;3)&nbsp;</td>
+<td valign="top">&nbsp;/* 0:OFF 1:ON */&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;#define USBKB_LED_KANA&nbsp;</td>
+<td valign="top">&nbsp;(1&lt;&lt;4)&nbsp;</td>
+<td valign="top">&nbsp;/* 0:OFF 1:ON */&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>mkey</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;Modifier keyの状態&nbsp;<br>&nbsp;各ビットの意味は、以下のマクロを参照。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;#define USBKB_MKEY_L_CTRL&nbsp;<br>&nbsp;#define USBKB_MKEY_L_SHIFT&nbsp;<br>&nbsp;#define USBKB_MKEY_L_ALT&nbsp;<br>&nbsp;#define USBKB_MKEY_L_WIN&nbsp;<br>&nbsp;#define USBKB_MKEY_R_CTRL&nbsp;<br>&nbsp;#define USBKB_MKEY_R_SHIFT&nbsp;<br>&nbsp;#define USBKB_MKEY_R_ALT&nbsp;<br>&nbsp;#define USBKB_MKEY_R_WIN&nbsp;</td>
+<td valign="top">&nbsp;(1&lt;&lt;0)&nbsp;<br>&nbsp;(1&lt;&lt;1)&nbsp;<br>&nbsp;(1&lt;&lt;2)&nbsp;<br>&nbsp;(1&lt;&lt;3)&nbsp;<br>&nbsp;(1&lt;&lt;4)&nbsp;<br>&nbsp;(1&lt;&lt;5)&nbsp;<br>&nbsp;(1&lt;&lt;6)&nbsp;<br>&nbsp;(1&lt;&lt;7)&nbsp;</td>
+<td valign="top">&nbsp;/* 0:Release 1:Push */&nbsp;<br>&nbsp;/* 0:Release 1:Push */&nbsp;<br>&nbsp;/* 0:Release 1:Push */&nbsp;<br>&nbsp;/* 0:Release 1:Push */&nbsp;<br>&nbsp;/* 0:Release 1:Push */&nbsp;<br>&nbsp;/* 0:Release 1:Push */&nbsp;<br>&nbsp;/* 0:Release 1:Push */&nbsp;<br>&nbsp;/* 0:Release 1:Push */&nbsp;</td>
+</tr></table>
+</div>
+<div style="margin-left:50px;">※Macintosh用キーボードの場合、ALTとWINはそれぞれOPTIONキーとAPPLEキーに対応します。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーコードの数（０のときはデータなし）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>keycode	</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーコードを指すポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceUsbKbRead()でキーボードからのデータ（キーコード）を得るための構造体です。<br>keycode[0]からkeycode[len-1]が有効なキーコードです。<br>キーコードは、USB仕様の独自キーコードかまたはそれをもとに変換したASCIIコードで得られます。どちらになるかはsceUsbKbSetCodeType()での選択によります。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceUsbKbRead">sceUsbKbRead</a>()<a href="#"></a>,<a href="#sceUsbKbSetCodeType">sceUsbKbSetCodeType</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="USBKBINFO_t"><font size=6>USBKBINFO_t<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーボード接続情報<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#define USBKB_MAX_STATUS 127
+typedef struct {
+	int <i>max_connect</i>;
+	int <i>now_connect</i>;
+	u_char <i>status</i>[USBKB_MAX_STATUS];
+} <b>USBKBINFO_t</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>max _connect</i>&nbsp;</td>
+<td valign="TOP">&nbsp;最大接続可能数m&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>now_connect</i>&nbsp;</td>
+<td valign="TOP">&nbsp;現在の接続数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>status</i>&nbsp;</td>
+<td valign="TOP">&nbsp;接続状態情報を指すポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceUsbKbGetInfo()でキーボードの接続状態を得るための構造体です。<br>接続状態情報は以下のような配列として返されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Index</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;status[0]&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードNo.0の接続情報&nbsp;<br>&nbsp;0　接続なし&nbsp;<br>&nbsp;1　接続中&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　:&nbsp;</td>
+<td valign="TOP">&nbsp;　:&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;status[m-1]&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードNo.(m-1)の接続情報&nbsp;<br>&nbsp;0　接続なし&nbsp;<br>&nbsp;1　接続中&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;status[m]&nbsp;</td>
+<td valign="TOP">&nbsp;未定義&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　:&nbsp;</td>
+<td valign="TOP">&nbsp;　:&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;status[USBKB_MAX_STATUS-1]&nbsp;</td>
+<td valign="TOP">&nbsp;未定義&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceUsbKbGetInfo">sceUsbKbGetInfo</a>()<br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbClearRbuf"><font size=6>sceUsbKbClearRbuf<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>リングバッファをクリアする<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbClearRbuf</b> (u_int <i>no</i>)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_SIF&nbsp;</td>
+<td valign="TOP">&nbsp;SIFエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">キーデータの格納されたリングバッファをクリアします。<br>usbkb.irx は、キーデータを格納するリングバッファを持っています。<br>sceUsbKbRead()を長い時間コールしない状態を続けると、usbkb.irxのリングバッファにキーデータが蓄積されていきます。<br>この蓄積したリングバッファのデータをクリアするときにsceUsbKbClearRbuf()を使用します。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceUsbKbRead">sceUsbKbRead</a>()<br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbCnvRawCode"><font size=6>sceUsbKbCnvRawCode<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>生キーコードを変換する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbCnvRawCode</b> (int <i>arrange</i>, u_int <i>mkey</i>, u_int <i>led</i>, u_short <i>rawcode</i>)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>arrange</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;キー配置&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;ARRANGEMENT_101&nbsp;</td>
+<td valign="top">&nbsp;101/104キーボード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;ARRANGEMENT_106&nbsp;</td>
+<td valign="top">&nbsp;106/109キーボード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;ARRANGEMENT_106_KANA&nbsp;</td>
+<td valign="top">&nbsp;106/109キーボード&nbsp;<br>&nbsp;（カナ状態）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>mkey</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;USBKBDATA_t構造体のmkeyメンバと同じ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>led</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;USBKBDATA_t構造体のledメンバと同じ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>rawcode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;変換したい生コード&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">変換されたキーコード<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">生キーコード（USBデバイスのキーコード）を各種情報（キー配列、Modifier keyとLEDの状態）に基づいて変換します。<br>sceUsbKbSetCodeType()でUSBKB_CODETYPE_RAWを指定したときに使用します。<br>この関数は、FEPを使用するときに必要となります。<br>FEPを使用しているとき、日本語を入力している最中でもCtrl+Uのようなショートカットの入力が必要になるときがあります。このときは、生コードの方が好都合です。<br>そして、FEPの状態に応じて、この関数で生キーコードを変換したものを、FEPに渡すことができます。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#USBKBDATA_t">USBKBDATA_t</a>,<a href="#sceUsbKbSetCodeType">sceUsbKbSetCodeType</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbEnd"><font size=6>sceUsbKbEnd<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーボードライブラリの終了<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbEnd</b>(void)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_NG&nbsp;</td>
+<td valign="TOP">&nbsp;開放に失敗した資源がある&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">キーボードライブラリを終了します。<br>sceUsbKbInit()で確保したセマフォ、メモリそして割込みハンドラを開放します。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceUsbKbInit">sceUsbKbInit</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbGetInfo"><font size=6>sceUsbKbGetInfo<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーボード接続情報の取得（非同期）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbGetInfo</b>(
+	USBKBINFO_t *<i>info</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>info</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボード接続情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_NG&nbsp;</td>
+<td valign="TOP">&nbsp;異常終了&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">キーボード接続情報を取得します。<br>この関数は非同期に実行され、リターンした時点では*<i>info</i>の内容は未定義です。sceUsbKbSync()で実行終了を検出してから*<i>info</i>を読み出してください。キーボード接続情報を取得できたかどうかは、sceUsbKbSync()でresultに返される値によって次のように示されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;【sceUsbKbSync()のresult】&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK（正常終了）&nbsp;<br>&nbsp;USBKB_NG（異常終了）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#USBKBINFO_t">USBKBINFO_t</a>,<a href="#USBsceUsbKbSync">USBsceUsbKbSync</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbGetLocation"><font size=6>sceUsbKbGetLocation<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーボード接続位置の取得（非同期）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbGetLocation</b>(
+	int <i>no</i>,
+	u_char *<i>location</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>location</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボード接続位置情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_SIF&nbsp;</td>
+<td valign="TOP">&nbsp;SIFエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたキーボードが接続されているUSBバス上の位置情報を取得します。*<i>location</i>には次のように位置情報が返されます。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;location[0]&nbsp;</td>
+<td valign="TOP">&nbsp;本体(RootHub)のポート番号（接続されていないときは０）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;location[1]&nbsp;</td>
+<td valign="TOP">&nbsp;第一段HUBのポート番号（接続されていないときは０）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;location[2]&nbsp;</td>
+<td valign="TOP">&nbsp;第二段HUBのポート番号（接続されていないときは０）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;location[3]&nbsp;</td>
+<td valign="TOP">&nbsp;第三段HUBのポート番号（接続されていないときは０）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;location[4]&nbsp;</td>
+<td valign="TOP">&nbsp;第四段HUBのポート番号（接続されていないときは０）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;location[5]&nbsp;</td>
+<td valign="TOP">&nbsp;第五段HUBのポート番号（接続されていないときは０）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;location[6]&nbsp;</td>
+<td valign="TOP">&nbsp;常に０&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">非同期関数なので、sceUsbKbSync()で終了を検出する必要があります。位置情報を取得できたかどうかは、sceUsbKbSync()でresultに返される値によって次のように示されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;【sceUsbKbSync()のresult】&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK（正常終了）&nbsp;<br>&nbsp;USBKB_NG（異常終了）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceUsbKbSync">sceUsbKbSync</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbInit"><font size=6>sceUsbKbInit<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ライブラリの初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbInit</b>(
+	int *<i>max_connect</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>max_connect</i>&nbsp;</td>
+<td valign="TOP">&nbsp;最大接続可能数&nbsp;<br>&nbsp;（USBKBINFO_tのmax_connectと同意）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_NG&nbsp;</td>
+<td valign="TOP">&nbsp;異常終了&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">RPCの情報の取得、資源の確保そして設定の初期化を行います。<br>この関数を呼んだ後の設定は下記のようになります。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;LED状態&nbsp;</td>
+<td valign="TOP">&nbsp;現状維持&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LED点灯モード&nbsp;</td>
+<td valign="TOP">&nbsp;AUTO1モード&nbsp;<br>&nbsp;（sceUsbKbSetLEDMode()を参照のこと）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;キーリピート&nbsp;</td>
+<td valign="TOP">&nbsp;OFF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;キーコード&nbsp;</td>
+<td valign="TOP">&nbsp;ASCII&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;キー配置&nbsp;</td>
+<td valign="TOP">&nbsp;106キーボード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;リードモード&nbsp;</td>
+<td valign="TOP">&nbsp;文字入力モード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+    <div style="margin-left:50px;"><ol>
+         <li VALUE=1> ライブラリを初期化すると、下記の資源を確保します。<br>1.セマフォをひとつ消費します。<br>2.V－BLANK終了割込みのハンドラを一つ登録します。<br>3.メモリを(54byte×最大接続可能数)分確保する。<br>上記の資源を解放するときは、sceUsbKbEnd() を使用して下さい。</li>
+         <li VALUE=2> sceUsbKbInit()を連続して2回呼ばないでください。<br>sceUsbKbInit()をもう一度呼びたいときは、sceUsbKbEnd()を呼んで資源を解放してから呼んでください。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceUsbKbEnd">sceUsbKbEnd</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbRead"><font size=6>sceUsbKbRead<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーボードデータのリード（非同期）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbRead</b>(
+	u_int <i>no</i>,
+	USBKBDATA_t *<i>data</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーデータ構造体を指すポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_SIF&nbsp;</td>
+<td valign="TOP">&nbsp;SIFエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたキーボードについて、usbkb.irxのリングバッファに格納されているデータを取得します。データがないときは、data-&gt;lenに0が格納されます。<br>非同期関数なので、sceUsbKbSync()で実行終了を検出する必要があります。キーボードデータを取得できたかどうかは、sceUsbKbSync()でresultに返される値によって次のように示されます。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;【sceUsbKbSync()のresult】&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK（正常終了）&nbsp;<br>&nbsp;USBKB_NG（異常終了：切断されたキーボードに&nbsp;<br>&nbsp;             アクセスしたとき等）&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;">usbkb.irxのリングバッファをクリアするには、sceUsbKbClearRbuf()を使って下さい。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#USBKBDATA_t">USBKBDATA_t</a>,<a href="#sceUsbKbSync">sceUsbKbSync</a>()<a href="#"></a>,<a href="#sceUsbKbReadMode">sceUsbKbReadMode</a>()<a href="#"></a>,<a href="#sceUsbKbClearRbuf">sceUsbKbClearRbuf</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbSetArrangement"><font size=6>sceUsbKbSetArrangement<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キー配置の設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbSetArrangement</b>(
+	int <i>no</i>,
+	int <i>arrange</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>no</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>arrange</i>&nbsp;</td>
+<td valign="top">&nbsp;キー配置&nbsp;</td>
+<td valign="top">&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;ARRANGEMENT_101&nbsp;</td>
+<td valign="top">&nbsp;101/104キーボード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;ARRANGEMENT_106&nbsp;</td>
+<td valign="top">&nbsp;106/109キーボード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;ARRANGEMENT_106_KANA&nbsp;</td>
+<td valign="top">&nbsp;106/109キーボード&nbsp;<br>&nbsp;（カナ状態）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR2&nbsp;</td>
+<td valign="TOP">&nbsp;arrangeの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたキーボードのキー配置データを切替えます。<br>USBの仕様上、自動判定ができないため、101 / 106キーボードの切替えは（ユーザの指定などにしたがって）この関数を用いて行ってください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbSetCodeType"><font size=6>sceUsbKbSetCodeType<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーコード形式の設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbSetCodeType</b>(
+	int <i>no</i>,
+	int <i>type</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>no</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>type</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;コードタイプの設定&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;USBKB_CODET YPE_RAW&nbsp;</td>
+<td valign="top">&nbsp;USBデバイスのコードそのまま&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;USBKB_CODETYPE_ASCII&nbsp;</td>
+<td valign="top">&nbsp;ASCIIコードに変換&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR2&nbsp;</td>
+<td valign="TOP">&nbsp;typeの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたキーボードについて、USBKBDATA_t構造体のkeycodeメンバに格納されるキーコードの種別を設定します。<br>typeにUSBKB_CODETYPE_RAWを指定すると、USBデバイスの返すキーコードがそのまま格納されるようになります。USBKB_CODETYPE_ASCIIを指定すると、ShiftキーとCAPSLOCK-LEDの状態を考慮してASCIIコードに変換されたコードが格納されます。ただし、キーパッド（テンキー）とASCII文字でないキーのコードについては扱いが異なります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbSetLEDMode"><font size=6>sceUsbKbSetLEDMode<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>LEDの点灯モードの設定（非同期）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbSetLEDMode</b>(
+	int <i>no</i>,
+	int <i>mode</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;LEDの点灯制御モード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_SIF&nbsp;</td>
+<td valign="TOP">&nbsp;SIFエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR2&nbsp;</td>
+<td valign="TOP">&nbsp;第２パラメータエラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたキーボード上のLEDの点灯 / 消灯を自動制御するかどうかを設定します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<i><b>mode</b></i>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>制御モード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LED_MODE_AUTO1&nbsp;<br>&nbsp;※デフォルト設定&nbsp;</td>
+<td valign="TOP">&nbsp;NumLock,CapsLock,ScrollLock LEDを&nbsp;<br>&nbsp;自動制御&nbsp;<br>&nbsp;（CAPSLOCKキー押下で&nbsp;<br>&nbsp;CAPSLOCK-LED点灯）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LED_MODE_AUTO2&nbsp;</td>
+<td valign="TOP">&nbsp;NumLock,CapsLock,ScrollLock LEDを&nbsp;<br>&nbsp;自動制御&nbsp;<br>&nbsp;（Shift+CAPSLOCKキー押下で&nbsp;<br>&nbsp;CAPSLOCK-LED点灯）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LED_MODE_MANUAL&nbsp;</td>
+<td valign="TOP">&nbsp;全LEDをEEアプリケーションから&nbsp;<br>&nbsp;マニュアル制御&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">LED_MODE_AUTO1 / 2のときは、IOP側モジュールusbkb.irxがLEDを制御します。LED_MODE_MANUALのときは、EE側で制御する必要があります。通常の使用では、LED_MODE_AUTO1 / 2を選択してください。<br>非同期関数なのでsceUsbKbSync()で終了を検出する必要があります。設定ができたかどうかは、sceUsbKbSync()でresultに返される値によって次のように示されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;【sceUsbKbSync()のresult】&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK（正常終了）&nbsp;<br>&nbsp;USBKB_NG（異常終了）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceUsbKbSync">sceUsbKbSync</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbSetLEDStatus"><font size=6>sceUsbKbSetLEDStatus<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>LEDの点灯制御（非同期）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbSetLEDStatus</b>(
+	int <i>no</i>,
+	u_char <i>led</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>led</i>&nbsp;</td>
+<td valign="TOP">&nbsp;設定するLEDの状態&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-2&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_SIF&nbsp;</td>
+<td valign="TOP">&nbsp;SIFエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたキーボード上のLEDの状態を変更します。ソフトの起動時に強制的にLEDを点灯させたいときや、sceUsbKbSetLEDMode()でマニュアル制御を選択している場合のLED制御に使用します。ledに指定する値の詳細については、USBKBDATA_t構造体のledメンバを参照してください。<br>非同期関数なので、sceUsbKbSync()で終了を検出する必要があります。設定ができたかどうかはsceUsbKbSync()でresultに返される値によって次のように示されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;【sceUsbKbSync()のresult】&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK（正常終了）&nbsp;<br>&nbsp;USBKB_NG（異常終了）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#USBKBDATA_t">USBKBDATA_t</a>,<a href="#sceUsbKbSync">sceUsbKbSync</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbSetReadMode"><font size=6>sceUsbKbSetReadMode<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーボードデータのリードモードの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbSetReadMode</b>(
+	u_int <i>no</i>,
+	int <i>rmode</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>no</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;キーボードNo.&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>rmode</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;キーデータを読むモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;USBKB_RMODE_INPUTCHAR&nbsp;</td>
+<td valign="top">&nbsp;文字入力モード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;USBKB_RMODE_PACKET&nbsp;</td>
+<td valign="top">&nbsp;パケットモード&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR2&nbsp;</td>
+<td valign="TOP">&nbsp;rmodeの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたUSBキーボードについて、sceUsbKbRead()がUSBKBDATA_tのkeycodeメンバにキーコードを格納する方法を設定します。<br><i>rmode</i>をUSBKB_RMODE_INPUTCHARに設定すると、文字入力に適したモードとなります。このモードのときは、keycodeメンバに入ったキーコードをそのまま使えば、文字入力を容易に実現することができます。<br><i>rmode</i>をUSBKB_RMODE_PACKETに設定すると、キーボードをパッドのように扱えるモードになります。<br>通常、USBキーボードから得られるデータパケットは、同時に押されたキーコードを全て含んでいます。このモードでは、同時押しされたキーコードを全てkeycodeメンバに格納します。<br>ただし、このモードではキーリピートが使えなくなります。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#USBKBDATA_t">USBKBDATA_t</a>,<a href="#sceUsbKbRead">sceUsbKbRead</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbSetRepeat"><font size=6>sceUsbKbSetRepeat<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーリピートモードの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbSetRepeat</b>(
+	int <i>no</i>,
+	int <i>sta_time</i>,
+	int <i>interval</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;キーボード番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sta_time</i>&nbsp;</td>
+<td valign="TOP">&nbsp;リピート開始時間（VSync単位：0はキーリピートなし）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>interval</i>&nbsp;</td>
+<td valign="TOP">&nbsp;リピート間隔（VSync単位：0はキーリピートなし）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR1&nbsp;</td>
+<td valign="TOP">&nbsp;noの指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-12&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PAR2&nbsp;</td>
+<td valign="TOP">&nbsp;sta_timeの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>no</i>で指定されたキーボードのキーリピートモードを設定します。<br>あるキーが押されてから<i>sta_time</i>だけ経過した時点からそのキーが押されつづけている間、<i>interval</i>で指定した間隔でキーコードが繰り返し発生するようになります。sta_time / intervalのどちらかに0を指定すると、キーリピートしなくなります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceUsbKbSync"><font size=6>sceUsbKbSync<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>非同期関数の処理終了待ち<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libusbkb.h&gt;
+int <b>sceUsbKbSync</b>(
+	int <i>mode</i>,
+	int *<i>result</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="top">&nbsp;USBKB_WAIT&nbsp;</td>
+<td valign="top">&nbsp;ブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;USBKB_NO_WAIT&nbsp;</td>
+<td valign="top">&nbsp;ノンブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>result</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;非同期関数の結果を格納するポインタ&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_EXEC&nbsp;</td>
+<td valign="TOP">&nbsp;実行中&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_DONE&nbsp;</td>
+<td valign="TOP">&nbsp;終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-11&nbsp;</td>
+<td valign="TOP">&nbsp;USBKB_E_PARA1&nbsp;</td>
+<td valign="TOP">&nbsp;modeの指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceUsbKbRead()など非同期関数の実行終了を待ちます。<br><i>mode</i>にUSBKB_WAITを指定すると、セマフォを使って実行中の非同期関数が終了するまで待ち、終了した時点でリターンします。そのため、待っている間に他のスレッドを動かすことができます。<br>USBKB_NO_WAITを指定したときは、非同期関数の実行状態を調べて直ちにリターンします。<br>sceUsbKbSync()と非同期関数は必ず１対１で使用してください。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>低レベルサウンドライブラリ(EE)</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/libsdr.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+低レベルサウンドライブラリ(EE)
+</h1></center>
+</a>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdCallBack"> sceSdCallBack<br></a></td>
+<td>&nbsp;</td><td>ノンブロック実行時の終了コールバックの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdRemote"> sceSdRemote<br></a></td>
+<td>&nbsp;</td><td>libsdコマンドのリモート実行<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdRemoteCallbackInit"> sceSdRemoteCallbackInit<br></a></td>
+<td>&nbsp;</td><td>libsdのコールバック環境の初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdRemoteInit"> sceSdRemoteInit<br></a></td>
+<td>&nbsp;</td><td>libsdリモート環境の初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdTransToIOP"> sceSdTransToIOP<br></a></td>
+<td>&nbsp;</td><td>EE 上のバッファを IOP メモリに転送<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<div style="margin-left:50px;"><br></div>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdCallBack"><font size=6>sceSdCallBack<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ノンブロック実行時の終了コールバックの設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>sceSifEndFunc <b>sceSdCallBack</b>( 
+	sceSifEndFunc <i>end_func</i> 
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>end_func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;終了コールバック関数のアドレス（初期値はNULL）&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;">注意：<br>コールバック関数<i>end_func</i>は割り込みハンドラとして実行されるため、プログラミングに際していくつか特別な注意が必要です。（割り込みハンドラの記述：\overview\eekernel参照）<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">直前に設定されていた終了コールバック関数のアドレスを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceSdRemote()をノンブロック実行するときのコールバック関数を設定します。コールバック関数は割り込みモードで実行されます。ブロック実行の場合、または<i>end_func</i>にNULLを指定した場合は、コールバック関数は実行されません。初期値はNULLです。<br><br>ノンブロック処理はEEの効率化のために行なうわけですが、EEに終了コールバックをかけることは、コンテキストスイッチを起こすということであり、これもまた処理効率低下につながります。最も効率が良いのは、ノンブロック処理して、IOP側の終了はコールバックではなくポーリングで確認することです。バッチコマンドのSD_WRITE_EEやSD_RETURN_EEが利用できます。(libsdを参照） これらはIOP側からSIF DMA転送をするだけなので、EE側に割り込みは発生しません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdRemote"><font size=6>sceSdRemote<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>libsdコマンドのリモート実行<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdRemote</b>( 
+	int <i>is_block</i>,
+	int <i>command</i>,
+	int <i>arg</i>,
+	...
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラからの呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>is_block</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IOP側の処理が終わるまでEE側をブロックするかどうかを見る。&nbsp;<br>&nbsp;1ならブロック。0ならノンブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>command</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンド&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>arg</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドに対する引数。可変長。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">そのコマンドの処理に相当する値を返します。<br>ただし<i>isBlock</i>に 0 を指定した場合、常に0を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>command</i>によって、IOP上にあるlibsd.irxのAPIをEEからリモート実行します。<br><i>command</i>には、libsdの関数の'sce'の代りに'r'を付けたものを指定します。詳細は  common/include/sdrcmd.h を参照してください。引数は可変長なので、そのコマンド（関数）に必要な数だけ指定してください。<br><br></div>
+<div style="margin-left:70px;">例： sceSdRemote( 1, rSdSetParam, SD_CORE_0|SD_P_MVOLL , 0x3fff );<br></div>
+<div style="margin-left:50px;"><br>sceSdRemoteの返り値が、そのコマンドの返り値となります。ただしノンブロックを指定した場合は常に0になります。引数と返り値の型は常にintなので、適宜キャストしてください。<br><br>ノンブロックを指定すると、IOP側の処理終了を待たずに関数からリターンします。IOP側の処理の終了を知るには、終了コールバック関数をsceSdCallBack()を用いて設定してください。<br>IOPの処理が終わらないうちに、次のコマンドを送ると誤動作することがあります。<br><br>コマンドがrSdProcBatchとrSdProcBatchExの場合、パラメータのアドレスはIOP側のアドレスです。別途、IOPに（またはIOPから）コマンド配列や返り値配列を転送する処理を行なってください。返り値配列の転送には、バッチコマンドのSD_RETURN_EEが利用できます（libsd参照）。<br><br>コマンドがrSdProcBatch2とrSdProcBatchEx2の場合、パラメータのアドレスはEE側のアドレスを指定することができます。ただし<i>command</i>に続く引数指定は、IOP側への転送の制約によりlibsd 関数sceSdProcBatch()/sceSdProcBatchEx() の引数指定・制限とは異なり、以下の通りになります。<br><br>rSdProcBatch2:<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数 (指定順)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceSdBatch *batch&nbsp;</td>
+<td valign="TOP">&nbsp;バッチのコマンド構造体配列 (EEメモリ内) のポインタ：16バイトアライメント&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unsigned int num&nbsp;</td>
+<td valign="TOP">&nbsp;バッチに登録されているコマンドの個数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unsigned int *returns&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドのリターン値が出力される領域 (EEメモリ内) の先頭アドレス：16バイトアライメント&nbsp;<br>&nbsp;NULLならば出力されない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unsigned int returns_size&nbsp;</td>
+<td valign="TOP">&nbsp;returnsが示す領域のサイズ (単位: バイト)&nbsp;<br>&nbsp;returns がNULLの場合は0を指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">rSdProcBatchEx2:<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>引数 (指定順)</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceSdBatch *batch&nbsp;</td>
+<td valign="TOP">&nbsp;バッチのコマンド構造体配列 (EEメモリ内) のポインタ：16バイトアライメント&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unsigned int num&nbsp;</td>
+<td valign="TOP">&nbsp;バッチに登録されているコマンドの個数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unsigned int *returns&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドのリターン値が出力される領域 (EEメモリ内) の先頭アドレス：16バイトアライメント&nbsp;<br>&nbsp;NULLならば出力されない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unsigned int returns_size&nbsp;</td>
+<td valign="TOP">&nbsp;returnsが示す領域のサイズ (単位: バイト)&nbsp;<br>&nbsp;returns がNULLの場合は0を指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;unsigned int voice&nbsp;</td>
+<td valign="TOP">&nbsp;ボイス一括処理を行うボイスをビットパターンで指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;"><i>batch</i>にはバッチ処理を行うコマンド列を指定します。指定された配列の0番目 (<i>batch </i>[0]) はIOPへの引数送信のために使われ、構造体のメンバが上書きされます。そのため、配列の1番目 (<i>batch</i> [1]) 以降に各コマンドの実際の指定を行います。<br><i>num</i>には実際に<i>batch</i>に指定されているコマンドの個数を指定します (<i>batch</i>の配列の大きさが5であれば4)。なお、現在の実装ではコマンドの個数は最大16です。<br><i>returns</i>には各コマンドの実行後の返り値が保存されます。配列の0番目 (<i>returns</i> [0]) はIOP側で呼ばれたsceSdProcBatch()/sceSdProcBatchEx() の返り値を受け渡すために使われ、本関数の返り値としてそのまま使用されます。そのため、各コマンドの実際の返り値は配列の1番目 (<i>returns</i> [1]) 以降になります。<br><i>returns_size</i>には<i>returns</i>のサイズをバイト単位で指定します。<br>rSdProcBatchEx2の場合、<i>voice</i>に一括処理を行うボイスをビットパターンで指定します。<br>それぞれの引数 (<i>returns_size</i>を除き) が持つデータの詳細はlibsd 関数sceSdProcBatch()/sceSdProcBatchEx() の解説を参照してください。<br><br> rSdSetEffectAttr, rSdSetEffectMode, rSdSetEffectModeParamsそしてrSdGetEffectAttrに関しては、libsdrの内部で転送を行ないますので、パラメータの構造体ポインタはEE上のアドレスをそのまま指定できます。libsdr概要の"転送データのメモリ配置について"も参照してください。<br><br>コールバックを指定するコマンド、rSdSetTransCallback, rSdSetIRQCallback, rSdSetTransIntrHandler, rSdSetSpu2IntrHandler ともEE上の関数をコールバックとして指定でき、その関数がスレッドとして呼び出されます。ただし、前もってsceSdRemoteCallbackInit() を行なっておく必要があります。rSdSetTransIntrHandler, rSdSetSpu2IntrHandler に渡すデータのポインタもEE上のアドレスです。<br><br>コマンドがrSdChangeThreadPriority の場合、引数を２つ取り、順にIOP側で動作しているsdrdrv のメインスレッド、コールバックスレッドのプライオリティ値を指定します。<br>デフォルトのスレッドプライオリティ値はどちらも24です。<br>コールバックスレッドのプライオリティ値はメインスレッドのプライオリティ値に対して同じか大きい値（プライオリティとしては低い）でなければいけません。<br>これらIOPスレッドプライオリティ値を変更する場合、他のモジュールのプライオリティに対して細心の注意を払う必要があります。そのため、安易にIOPスレッドプライオリティ値を変更する事はお勧めいたしません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdRemoteCallbackInit"><font size=6>sceSdRemoteCallbackInit<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>libsdのコールバック環境の初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdRemoteCallbackInit</b>(
+	int <i>priority</i> 
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラからの呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>priority</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コールバック用に起動されるEEスレッドのプライオリティ。&nbsp;<br>&nbsp;メインスレッドよりも高くする必要がある。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、コールバック用に起動されたEEスレッドのIDを返します。<br>エラーの場合、-１を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceSdRemoteのコマンドで、割り込みコールバックを指定する場合（rSdSetTransCallback, rSdSetIRQCallback）には、前もって１回だけ実行してください。IOP側のコールバック関数をEE側で受けるため、内部でスレッドを１つクリエイトします。したがって、コールバックは割り込みモードではなく、スレッドモードで動作します。１つのコールバックが動作している最中に他のコールバックが呼び出された場合は、キューに入って前のコールバックが終了するまで待ちます。<br><br>スレッドIDを返すので、不要になったときはDeleteThread等の後処理をしてください。<br><br>sceSdCallBack()で指定するコールバックは、sceSdRemote()のノンブロック実行に関するもので、ここで言うコマンドのコールバックとは別物ですので、このAPIによる初期化は必要ありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdRemoteInit"><font size=6>sceSdRemoteInit<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>libsdリモート環境の初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdRemoteInit</b>( void )
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラからの呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、-1を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">libsdリモート環境の初期化を行います。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdTransToIOP"><font size=6>sceSdTransToIOP<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>EE 上のバッファを IOP メモリに転送<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdTransToIOP</b>(
+	void *<i>buff</i>,
+	u_int <i>sendAddr</i>,
+	u_int <i>size</i>,
+	u_int <i>isBlock</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラからの呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>buff</i>&nbsp;</td>
+<td valign="TOP">&nbsp;EE メモリ上の転送元位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sendAddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IOP メモリ上の転送先位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
+<td valign="TOP">&nbsp;サイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>isBlock</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IOP 側の処理が終わるまで EE 側をブロックするかどうか。&nbsp;<br>&nbsp;1 ならブロック。0 ならノンブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、0を返します。<br>エラーの場合、-1を返します。<br>注意：<br>現在、ノンブロックには対応していません。ノンブロックを指定した場合、処理を行わず -1を返り値として返して終了しますのでご注意ください。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">EE メモリ上のデータを IOP メモリに転送します。<br><br>ノンブロックを指定すると、IOP側の処理終了を待たずに関数からリターンします。IOP側の処理の終了を知るには、終了コールバック関数をsceSdCallBack()を用いて設定してください。<br>IOPの処理が終わらないうちに、次のコマンドを送ると誤動作することがあります。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>
