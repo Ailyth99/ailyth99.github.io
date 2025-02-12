@@ -1,0 +1,571 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+<title>IOPプログラミングツール</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+IOPプログラミングツール
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>iopfixupユーティリティ</b><br></a>
+<p><a href="#Heading3_2">  2 <b>ioplibgenユーティリティ</b><br></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>ライブラリエントリ定義ファイルの書式</b><br></a>
+    <a href="#Heading4_2_2"> <b>ライブラリエントリ定義ファイルの例</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>ioplibldユーティリティ</b><br></a>
+<p><a href="#Heading3_4">  4 <b>ioplibdumpユーティリティ</b><br></a>
+<p><a href="#Heading3_5">  5 <b>irxsizeユーティリティ</b><br></a>
+<p><a href="#Heading3_6">  6 <b>iop-gcc</b><br></a>
+    <ul>
+    <a href="#Heading4_6_1"> <b>使用例</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>iopfixupユーティリティ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">iopfixupは、elf形式のリロケータブルオブジェクトをIOPリロケータブル実行形式(IRX フォーマット)に変換するユーティリティです。<br>IOPリロケータブル実行形式からシンボル情報を取り除く用途にも使えます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>形式</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>iopfixup [<i>options</i>...] <i>input_file</i>
+</pre></font></div>
+<div style="margin-left:67px;"><br><i>options</i>...には以下のものを指定できます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>option</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-o outfile&nbsp;</td>
+<td valign="TOP">&nbsp;変換結果の出力ファイル名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-r outfile&nbsp;</td>
+<td valign="TOP">&nbsp;変換結果の出力ファイル名（シンボル情報つき）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-e entry_symbol&nbsp;</td>
+<td valign="TOP">&nbsp;エントリポイントの指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-m &nbsp;</td>
+<td valign="TOP">&nbsp;input_fileのモジュール名とモジュールバージョン&nbsp;<br>&nbsp;を表示する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;--irx1&nbsp;</td>
+<td valign="TOP">&nbsp;IRX version 1 フォーマットのオブジェクトの生成を強制する。&nbsp;<br>&nbsp;input_fileが IRX version 1 フォーマットに変換できないもの&nbsp;<br>&nbsp;だった場合はエラー終了する。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-d flag&nbsp;</td>
+<td valign="TOP">&nbsp;input_file のダンプを行い、変換処理を行わないで終了する。&nbsp;<br>&nbsp;flag によりダンプする項目を指定する。詳細は下記参照。&nbsp;<br>&nbsp;flag を省略した場合は 1 とみなされる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-rbまたは &nbsp;<br>&nbsp;-relative-branch&nbsp;</td>
+<td valign="TOP">&nbsp;オブジェクトコード中の j 命令と jal 命令を b 命令と&nbsp;<br>&nbsp; bal 命令に書き換え、j/jal 命令に対応するリロケーション&nbsp;<br>&nbsp;レコードを削除します。&nbsp;<br>&nbsp;これにより、出力ファイルサイズが若干小さくなり IOP メモリ&nbsp;<br>&nbsp;へのロードに必要な時間、ワークメモリが多少小さくなります。&nbsp;<br>&nbsp;ロード後のモジュールサイズとモジュールの実行速度には&nbsp;<br>&nbsp;まったく変化はありません。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;"><i>input_file</i>には、elf形式のリロケータブルオブジェクトファイルまたはIOPリロケータブル実行形式ファイルを指定できます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>動作</b><br></h4></div>
+
+<div style="margin-left:67px;">iopfixupは入力ファイルを読み込んだのち、入力ファイルがelf形式のリロケータブルオブジェクトであったならば、以下の処理を行います。入力ファイルがIOPリロケータブル実行形式ファイルであった場合は変換処理を行いません。<br><br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPリロケータブル実行形式に固有のセクションの生成</li>
+         <li VALUE=2> セクションの再配置とセグメント範囲の決定</li>
+         <li VALUE=3> 予約シンボルの値の決定</li>
+         <li VALUE=4> 再配置情報をIOP用に変換</li>
+         <li VALUE=5> -eオプションが与えられていれば、エントリポイントの設定</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:67px;"><br>その後、-mオプションが与えられていれば、モジュール名とモジュールバージョンを表示し、-rオプションが与えられていれば指定された出力ファイルに出力し、-oオプションが与えられていればシンボル情報を削除してから指定された出力ファイルに出力します。<br><br>入力ファイルにIOPリロケータブル実行形式ファイルを指定して、-o オプションで出力ファイルを指定することで、既存のIOPリロケータブル実行形式ファイルからシンボル情報を取り除く用途にも使えます。<br><br>セグメントとセクションの配置は以下のようになります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>セグメント</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>含まれるセクションとその順番</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;TEXT&nbsp;</td>
+<td valign="TOP">&nbsp;.init, .text, .finit&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;DATA&nbsp;</td>
+<td valign="TOP">&nbsp;.rodata, .rodata1, .data, .data1, sdata, .lit8, .lit4&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;BSS&nbsp;</td>
+<td valign="TOP">&nbsp;.sbss, .bss&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">予約シンボルの名前と値は以下のようになります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>シンボル名</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_ftext&nbsp;</td>
+<td valign="TOP">&nbsp;TEXTセグメントの先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_etext&nbsp;</td>
+<td valign="TOP">&nbsp;TEXTセグメントの最後のbyteの次のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_fdata&nbsp;</td>
+<td valign="TOP">&nbsp;DATAセグメントの先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_edata&nbsp;</td>
+<td valign="TOP">&nbsp;DATAセグメントの最後のbyteの次のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_fbss&nbsp;</td>
+<td valign="TOP">&nbsp;BSSセグメントの先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_end&nbsp;</td>
+<td valign="TOP">&nbsp;BSSセグメントの最後のbyteの次のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;_gp&nbsp;</td>
+<td valign="TOP">&nbsp;gpレジスタの初期値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">-d オプションの <i>flag</i> は、以下の bit指定を16進数で表現したものを指定します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;セクションテーブルの表示&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;リロケーションテーブルの表示&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;シンボルテーブルの表示&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Bit 3&nbsp;</td>
+<td valign="TOP">&nbsp;プログラムコードの逆アセンブル表示&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Bit 4&nbsp;</td>
+<td valign="TOP">&nbsp;データセグメントの byte 形式表示&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Bit 5&nbsp;</td>
+<td valign="TOP">&nbsp;データセグメントの half word 形式表示&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Bit 6&nbsp;</td>
+<td valign="TOP">&nbsp;データセグメントの word 形式表示&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>ioplibgenユーティリティ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">ioplibgenは、ライブラリエントリ定義ファイルを読み込んで、常駐ライブラリ用のエントリテーブルのアセンブラソースおよびライブラリ使用者がリンク時に使用するデータファイル（拡張子.ilb）を生成するユーティリティです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>形式</b><br></h4></div>
+
+<div style="margin-left:67px;">ioplibgen [<i>options</i>...] <i>input_file</i><br><br><i>options</i>...には以下のものを指定できます。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>option</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-e entry_table_source&nbsp;</td>
+<td valign="TOP">&nbsp;エントリテーブルの出力ファイル名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-d stub_ilb_data&nbsp;</td>
+<td valign="TOP">&nbsp;データファイルの出力ファイル名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-l openlevel&nbsp;</td>
+<td valign="TOP">&nbsp;データファイルに出力するエントリの&nbsp;<br>&nbsp;公開レベル指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;"><i>input_file</i>には後述する書式のライブラリエントリ定義ファイルを指定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>動作</b><br></h4></div>
+
+<div style="margin-left:67px;">-eオプションが与えられていると、以下説明するライブラリエントリ定義中で宣言されたライブラリ名に "_entry" を付加したラベルのついたエントリテーブルが作成されます。<br>エントリテーブルをリンクしたIOPプログラムモジュールは、このラベルを引数にしてIOP kernelのモジュールマネージャのRegisterLibraryEntries()関数を呼び出すことで、自身の持つ関数群を他のプログラムモジュールから利用可能にします。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>ライブラリエントリ定義ファイルの書式</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ライブラリエントリ定義ファイルには以下の4種類の記述が入ります。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_1"><h4>
+(1)&nbsp;<b>コメント</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">'#'で始まる行はコメント行になります。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_2"><h4>
+(2)&nbsp;<b>ライブラリ名宣言</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ライブラリ名（8文字以内）を以下のように宣言します。<br></div>
+<div style="margin-left:80px;">Libname  <i>libname</i><br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_3"><h4>
+(3)&nbsp;<b>ライブラリバージョン宣言</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ライブラリのメジャーバージョン（8bit）とマイナーバージョン（8bit）を、 '.' で区切って10進数で以下のように指定します<br></div>
+<div style="margin-left:80px;">Version  <i>MM.mm</i><br></div>
+<div style="margin-left:67px;">メジャーバージョンとマイナーバージョンは、1以上255以下の数値を指定してください。0はリザーブされています。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_4"><h4>
+(4)&nbsp;<b>エントリ宣言</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">以下の書式で、ライブラリのエントリ関数名を複数宣言できます。<br></div>
+<div style="margin-left:80px;">Entry/<i>level  entry_symbol  [entry_internal_symbol]</i><br>Entry  <i>entry_symbol  [entry_internal_symbol]</i><br>Entry  -<br></div>
+<div style="margin-left:67px;"><i>level</i>は、<i>entry_symbol</i>の公開レベルを1桁の数値で指定します。ioplibgenの-lオプションで公開レベルを指定すると、その数値より以下の公開レベルを持つ<i>entry_symbol</i>のみがエントリテーブルファイルに出力されます。<i>level</i>を省略すると公開レベルは0とみなされます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>ライブラリエントリ定義ファイルの例</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ライブラリエントリ定義ファイルの例を次に示します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3># まず最初にライブラリ名を宣言。この例では 'mylib' と宣言する。
+Libname mylib
+# versionの宣言。
+Version 1.1
+# ========= 常駐ライブラリの各エントリの宣言 =============
+# 規約により最初の四つのエントリはシステム用にリザーブされている
+# １番目は、ライブラリの初期処理用に予約（詳細未定）
+# ２番目は、ライブラリの再初期化処理用に予約（詳細未定）
+# ３番目は、もしあれば、終了処理エントリ
+# ４番目は、予約
+Entry -
+Entry -
+Entry -
+Entry -
+Entry AllocMemory
+Entry ReAllocMemory
+#	外部から呼ぶときの関数名と、実際の関数名は以下のように異っていてもよい
+#	外部名			   内部名
+Entry FreeMemory		mylib_free_memory
+</pre></font></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>ioplibldユーティリティ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">ioplibldは、elf形式のオブジェクトファイル内の未定義シンボルを探し出し、あらかじめioplibgen -dで作成してあるエントリデータファイルから未定義シンボルに対応するエントリを探し出してstubソースファイルを生成するユーティリティです。常駐ライブラリを使用するモジュールに必要な呼び出しテーブル構造体を作成するために使用することができます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>形式</b><br></h4></div>
+
+<div style="margin-left:67px;">ioplibld [<i>options</i>...] <i>object_file</i>... : <i>stub_ilb_data</i>...<br><br><i>options</i>...には以下のものを指定できます。<br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>option</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-s stub_source&nbsp;</td>
+<td valign="TOP">&nbsp;出力するstubソースファイル名の指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-llib&nbsp;</td>
+<td valign="TOP">&nbsp;リンク時に使用予定のスタティック&nbsp;<br>&nbsp;ライブラリ名の指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-Ldir&nbsp;</td>
+<td valign="TOP">&nbsp;スタティックライブラリおよびilbファイル&nbsp;<br>&nbsp;のサーチパス指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;"><i>object_file</i>...には、リンクしてひとつのオブジェクトファイルになる予定のすべてのelf形式リロケータブルオブジェクトファイル名を指定します。<br><i>stub_ilb_data</i>...には、ioplibgenユーティリティで生成したエントリデータファイル名を指定します。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>ioplibdumpユーティリティ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">ioplibdumpは、IOPリロケータブル実行形式ファイルの中を調査し、どの常駐ライブラリのどのエントリを呼び出しているかを表示するユーティリティです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>形式</b><br></h4></div>
+
+<div style="margin-left:67px;">ioplibdump <i>object_file</i>... [: <i>stub_ilb_data</i>...]<br><br><i>object_file</i>...には、IOPリロケータブル実行形式ファイル名を指定します。<br><i>stub_ilb_data</i>...には、ioplibgenユーティリティで生成したエントリデータファイル名を指定します。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>irxsizeユーティリティ</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">irxsizeは、IOPリロケータブル実行形式ファイルの中を調査し、IOPのメモリ上にロードされたときに、どれだけのメモリサイズが必要とされるかを表示するユーティリティです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>形式</b><br></h4></div>
+
+<div style="margin-left:67px;">irxsize <i>object_file</i>... <br><br><i>object_file</i>...には、IOPリロケータブル実行形式ファイル名を指定します。<br><br></div>
+
+<div style="margin-left:40px;"><h4><b>用途</b><br></h4></div>
+
+<div style="margin-left:67px;">CDあるいはDVDから多くのIRXフォーマットファイルのロード/アンロードを繰り返すようなアプリケーションの場合、あらかじめモジュール用のIOPメモリを確保してメモリを管理したい場合があります。<br>このようなとき、ロードする予定のある IRXフォーマットファイルのロード後のサイズをアプリケーションプログラムは知っておく必要があります。<br>本ユーティリティで調査した結果をCD/DVD上にひとつのテキストファイルとして置いておけば、実行時に全モジュールのロードサイズを効率よく取得することができます。<br><br>本ユーティリティは、ソースコードを公開しています。必要に応じて各種環境に移植してご利用になれます。<br>詳しくはソースコードをご参照ください。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_6">
+<h2>
+ 6 <b>iop-gcc</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">iop-gccは、GNU gccをもとに、IOPプログラムをコンパイルするために改造されたコンパイラです。以下に示すオプションが追加されているほか、リンク時にioplibld / iopfixupコマンドを適切な順番で呼び出すようになっています。これにより、常駐ライブラリを利用するIOPリロケータブル実行形式ファイルを簡単にリンクできるようになります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オプション</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-ilb=stub_ilb_data&nbsp;</td>
+<td valign="TOP">&nbsp;ioplibgenユーティリティで生成したエントリ&nbsp;<br>&nbsp;データファイルの指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-startfiles&nbsp;</td>
+<td valign="TOP">&nbsp;crt0.oをリンクすることの指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-noiopilb&nbsp;</td>
+<td valign="TOP">&nbsp;IOP kernelのエントリデータファイルiop.ilb&nbsp;<br>&nbsp;の読み込み抑止&nbsp;<br>&nbsp;通常は、iop.ilbは自動的に読み込まれます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-msplit-addresses&nbsp;</td>
+<td valign="TOP">&nbsp;-G0 および ?O オプションと併用し、グローバル&nbsp;<br>&nbsp;データのアクセスコードを可能な場合に最適化&nbsp;<br>&nbsp;します。このオプションを使用すると、&nbsp;<br>&nbsp;出力ファイルは必要に応じて自動的に&nbsp;<br>&nbsp; IRX version 1 かIRX version 2 のどちらに&nbsp;<br>&nbsp;なるかが決定されます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-mno-split-addresses&nbsp;</td>
+<td valign="TOP">&nbsp;常に IRX version 1フォーマットの出力を&nbsp;<br>&nbsp;生成するように強制します。（デフォルト）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-rb または &nbsp;<br>&nbsp;-relative-branch&nbsp;</td>
+<td valign="TOP">&nbsp;iopfixup の リロケーションレコード削減機能を&nbsp;<br>&nbsp;有効にします。&nbsp;<br>&nbsp;詳細は iopfixup の説明をご覧下さい。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">また、gcc本来のオプションのうち以下のものが、IOPのプログラムをコンパイルするうえで有用なことがあります。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オプション</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-e entry_symbol&nbsp;</td>
+<td valign="TOP">&nbsp;エントリポイントの指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-t&nbsp;</td>
+<td valign="TOP">&nbsp;読み込むオブジェクトとライブラリのファイル名&nbsp;<br>&nbsp;を表示する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-v&nbsp;</td>
+<td valign="TOP">&nbsp;コンパイル手順の詳細を表示する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-nostdlib&nbsp;</td>
+<td valign="TOP">&nbsp;標準ライブラリのリンクを抑制する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-print-libgcc-file-name&nbsp;</td>
+<td valign="TOP">&nbsp;gccが参照するlibgcc.aのフルパスを表示する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-print-file-name=file&nbsp;</td>
+<td valign="TOP">&nbsp;gccのサーチパスからfileを探してフルパスで&nbsp;<br>&nbsp;表示する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-mstats&nbsp;</td>
+<td valign="TOP">&nbsp;コンパイル中の各関数のスタックサイズなどを&nbsp;<br>&nbsp;表示する（MIPS固有のオプション）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-H&nbsp;</td>
+<td valign="TOP">&nbsp;コンパイル時に include したヘッダファイル名を&nbsp;<br>&nbsp;表示します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_6_1">
+<a href="#Heading3_6"> 6. </a>1 <b>使用例</b><br>
+</a>
+</h3>
+        <div style="margin-left:80px;"><pre><font size=3>$ iop-gcc -c xxx1.c
+$ iop-gcc -c xxx2.c
+$ iop-gcc -o xyz.irx xxx1.o xxx2.o -ilb=stubs1.ilb -ilb=stubs2.ilb
+</pre></font></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

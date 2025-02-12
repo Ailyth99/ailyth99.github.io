@@ -1,0 +1,337 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=Content-Type CONTENT="text/html; charset=Shift_JIS">
+<TITLE>"PlayStation 2" Develop Sound Index Categories</TITLE>
+<style type="text/css"><!--
+	.Heading{line-height:100%;Font-size:11pt}
+	.CATEGORY{line-height:150%;Font-size:11pt;margin-left:10}
+	.MENU{line-height:100%;font-size:12pt;margin-left:23pt;font-weight:bold}
+	.MENUJ{line-height:100%;font-size:10pt;margin-left:15pt;font-weight:bold}
+	.TABLE{line-height:100%;font-size:12pt;font-weight:bold;margin-left:4pt}
+	.INTABLE{line-height:100%;font-size:12pt;font-weight:bold}
+	.INTABLE2{line-height:100%;font-size:10pt}
+	div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+//--></style>
+<STYLE TYPE="TEXT/CSS">
+<!--
+a {  text-decoration: none}
+a:hover { color: #FFCC00}
+-->
+</STYLE>
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+</HEAD>
+<body onload= "iniFunc()" bgcolor="#666666" text="#FFFFFF" link="#3399FF" alink="#FFCC00" vlink="#3399FF">
+<div id="fixedLay0" class="fixedLay">
+<a href="sound_category.htm"><img src="../logo/link.gif" border="0" alt="TOP"></a>
+</div>
+<table width="206" cellspacing="0" cellpadding="0" bgcolor="#373535">
+	<tr> 
+	<td width="59" height="60" valign="top"><img src="../logo/psf.gif" width="61" height="60"></td>
+	<td width="147" valign="top"><img src="../logo/ps2.gif" width="108" height="28"><br>
+	<font size="2"><b><font color="#FFFFFF">Programmer Tool Runtime Library Release 
+	2.5</font></b></font> </td>
+	</tr>
+</table>
+
+
+<FORM NAME="indx">
+<SELECT NAME=list onchange=top.location.href=this.form.list.options[this.form.list.selectedIndex].value>
+<OPTION VALUE="../develop.htm">開発分野別INDEX
+<OPTION VALUE="../category.htm">カテゴリINDEX
+<OPTION VALUE="sakuin_idx.htm">索引
+<OPTION VALUE="kernel_idx.htm">カーネル/SIF関連 
+<OPTION VALUE="cdvd_idx.htm">CD(DVD)-ROMライブラリ
+<OPTION VALUE="memory_idx.htm">メモリーカード関連 
+<OPTION VALUE="pad_idx.htm">コントローラ/マルチタップ関連　　　　
+<OPTION VALUE="graph_idx.htm">グラフィックス関連 
+<OPTION VALUE="sound_idx.htm" SELECTED>サウンド関連
+
+<OPTION VALUE="stream_idx.htm">ストリーミング関連
+<OPTION VALUE="net_idx.htm">ネットワーク関連 
+<OPTION VALUE="hdd_idx.htm">ハードディスク関連  
+<OPTION VALUE="usb_idx.htm">USB/i.LINK関連
+<OPTION VALUE="debug_idx.htm">デバッグ支援ライブラリ
+<OPTION VALUE="other_idx.htm">その他 
+<OPTION VALUE="deci2_idx.htm">開発ツールプロトコル
+<OPTION VALUE="first_idx.htm">開発支援ツール
+<OPTION VALUE="../web/html/index.htm">技術情報
+</SELECT>
+</FORM>
+<script language="JavaScript">
+<!--//
+  document.indx.list.selectedIndex = 8;
+// -->
+</script>
+<nobr> 
+<TABLE border="0" cellspacing="1" cellpadding="5" width="210" nowrap bgcolor="#FFFFFF">
+	<TR> 
+	<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">低レベルサウンド</DIV>
+	<DIV CLASS="TABLE">
+	<TABLE cellspacing="2" cellpadding="2" border="0">
+		<TR>
+			<TD VALIGN="bottom"><DIV CLASS="INTABLE2">EE</DIV></TD>
+			<TD VALIGN="bottom"><A HREF="../ee/overview/libsdr.htm" TARGET="main"><DIV CLASS="INTABLE">overview</DIV></A></TD>
+			<TD VALIGN="bottom"><A HREF="../ee/libref/sdr_rf.htm" TARGET="main"><DIV CLASS="INTABLE">　libref</DIV></A></TD>
+		</TR>
+		<TR>
+			<TD VALIGN="bottom"><DIV CLASS="INTABLE2">IOP</DIV></TD>
+			<TD VALIGN="bottom"><A HREF="../iop/overview/libsd.htm" TARGET="main"><DIV CLASS="INTABLE">overview</DIV></A></TD>
+			<TD VALIGN="bottom"><A HREF="../iop/libref/sd_rf.htm" TARGET="main"><DIV CLASS="INTABLE">　libref</DIV></A></TD>
+		</TR>
+	</TABLE></DIV>
+</TD></TR></TABLE>
+
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="210" nowrap bgcolor="#FFFFFF">
+	<TR><TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">SPU2ローカルメモリ管理(EE)</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libspu2m.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/spu2m_rf.htm" TARGET="main">　libref</A></div>
+		</TD></TR>
+	</TABLE>
+	</TD></TR>
+	</TABLE>
+<BR>
+
+<TABLE border="0" cellspacing="1" cellpadding="5" width="210" nowrap bgcolor="#FFFFFF">
+	<TR> 
+	<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">標準キット/サウンドシステム</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/libsk.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/sk_rf.htm" TARGET="main">　libref</A>
+			</div>
+		</TD></TR>
+	</TABLE>
+	</TD></TR>
+</TABLE>
+<BR>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="210" nowrap bgcolor="#FFFFFF">
+	<TR> 
+	<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">SPU2波形データ符合処理<BR>モジュール(IOP)</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENU">
+				<A HREF="../iop/overview/spucodec.htm" TARGET="main">overview</A>
+				<A HREF="../iop/libref/codec_rf.htm" TARGET="main">　libref</A>
+			</div>
+		</TD></TR>
+	</TABLE>
+	</TD></TR>
+</TABLE>
+<BR>
+
+
+<TABLE border="0" cellspacing="1" cellpadding="5" width="210" nowrap bgcolor="#FFFFFF">
+<TR> 
+<TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">CSL関連</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">CSL概要</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/csl.htm" TARGET="main">overview</A>
+			</DIV>
+		</TD></TR>
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">ラインアウト(EE)
+			</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../ee/overview/liblout.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/lout_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</TD></TR>
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">ハードェア・シンセサイザ（IOP)
+			</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../iop/overview/modhsyn.htm" TARGET="main">overview</A>
+				<A HREF="../iop/libref/hsyn_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+		</TD></TR>
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">ソフトウェア・シンセサイザ</DIV>
+			<DIV CLASS="TABLE">
+			<TABLE cellspacing="2" cellpadding="1" border="0">
+				<TR>
+					<TD VALIGN="bottom"><DIV CLASS="INTABLE2"> EE</DIV></TD>
+					<TD><A HREF="../ee/overview/libssyn.htm" TARGET="main"><DIV CLASS="INTABLE">overview</DIV></A></TD>
+					<TD><A HREF="../ee/libref/essyn_rf.htm" TARGET="main"><DIV CLASS="INTABLE">　libref</DIV></A></TD>
+				</TR>
+				<TR>
+					<TD VALIGN="bottom"><DIV CLASS="INTABLE2"> IOP</DIV></TD>
+					<TD><A HREF="../iop/overview/modssyn.htm" TARGET="main"><DIV CLASS="INTABLE">overview</DIV></A></TD>
+					<TD><A HREF="../iop/libref/issyn_rf.htm" TARGET="main"><DIV CLASS="INTABLE">　libref</DIV></A></TD>
+				</TR>
+			</TABLE>
+			</DIV>
+		</TD></TR>
+
+		<TR>
+			<TD VALIGN="bottom"><DIV CLASS="CATEGORY">MIDIディレイ（IOP)</DIV>
+				<DIV CLASS="MENU">
+					<A HREF="../iop/overview/moddelay.htm" TARGET="main">overview</A>
+					<A HREF="../iop/libref/delay_rf.htm" TARGET="main">　libref</A>
+				</DIV>
+			</TD>
+		</TR>
+
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">MIDI stream 生成</DIV>
+			<DIV CLASS="TABLE">
+			<TABLE cellspacing="2" cellpadding="1" border="0">
+				<TR>
+					<TD VALIGN="bottom"><DIV CLASS="INTABLE2"> EE</DIV></TD>
+					<TD VALIGN="bottom"><A HREF="../ee/overview/libmsin.htm" TARGET="main"><DIV CLASS="INTABLE">overview</DIV></A></TD>
+				</TR>
+				<TR>
+					<TD VALIGN="bottom"><DIV CLASS="INTABLE2"> IOP</DIV></TD>
+					<TD><A HREF="../iop/overview/modmsin.htm" TARGET="main"><DIV CLASS="INTABLE">overview</DIV></A></TD>
+					<TD><A HREF="../ee/libref/msin_rf.htm" TARGET="main"><DIV CLASS="INTABLE">　libref</DIV></A></TD>
+				</TR>
+			</TABLE>
+			</DIV>
+		</TD></TR>
+		<TR>
+			<TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">MIDIシーケンサ（IOP)
+			</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../iop/overview/modmidi.htm" TARGET="main">overview</A>
+				<A HREF="../iop/libref/midi_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+			</TD>
+		</TR>
+		<TR>
+			<TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">MIDIモノフォニック（IOP)
+			</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../iop/overview/modmono.htm" TARGET="main">overview</A>
+				<A HREF="../iop/libref/mono_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+			</TD>
+		</TR>
+		<TR>
+			<TD VALIGN="bottom">
+			<DIV CLASS="CATEGORY">効果音stream生成(EE/IOP)
+			</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../iop/overview/modsein.htm" TARGET="main">overview</A>
+				<A HREF="../ee/libref/sein_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+			</TD>
+		</TR>
+
+		<TR>
+			<TD VALIGN="bottom" >
+			<DIV CLASS="CATEGORY">効果音streamシーケンサ(IOP)</DIV>
+			<DIV CLASS="MENU">
+				<A HREF="../iop/overview/modsesq.htm" TARGET="main">overview</A>
+				<A HREF="../iop/libref/sesq_rf.htm" TARGET="main">　libref</A>
+			</DIV>
+			</TD>
+		</TR>
+	</TABLE>
+
+</TD></TR></TABLE>
+<br>
+<TABLE border="0" cellspacing="1" cellpadding="5" width="210" nowrap bgcolor="#FFFFFF">
+	<TR><TD nowrap width="194" bgcolor="#333333"><DIV CLASS="Heading">データフォーマット</DIV>
+	<TABLE cellspacing="2" cellpadding="1" border="0">
+		<TR><TD VALIGN="bottom">
+			<DIV CLASS="MENUJ">
+				<A HREF="../format/sformat.htm#Heading3_2" TARGET="main">"PlayStation 2" シーケンス<br>データフォーマット(SQ)</a><BR><BR>
+				<A HREF="../format/sformat.htm#Heading3_3" TARGET="main">"PlayStation 2" 音素<br>データフォーマット(HD/BD)</a><BR><BR>
+				<A HREF="../format/sformat.htm#Heading3_4" TARGET="main">ソフトウェア・シンセサイザ<br>波形データフォーマット(SS)</a>
+			</div>
+		</tr>
+	</table>
+</TD></TR></TABLE>
+</NOBR> 
+<P>
+</P>
+<p>
+</p>
+</BODY>
+</HTML>

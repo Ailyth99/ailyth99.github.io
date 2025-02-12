@@ -1,0 +1,4440 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+
+<title>Libnetライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/libnet.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+Libnetライブラリ
+</h1></center>
+</a>
+<font size=4><b>Libnet標準関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLibnetInitialize"> sceLibnetInitialize<br></a></td>
+<td>&nbsp;</td><td>Libnet初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLibnetRegisterHandler"> sceLibnetRegisterHandler<br></a></td>
+<td>&nbsp;</td><td>Libnetイベントハンドラ登録<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLibnetSetConfiguration"> sceLibnetSetConfiguration<br></a></td>
+<td>&nbsp;</td><td>設定内容登録<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLibnetTerminate"> sceLibnetTerminate<br></a></td>
+<td>&nbsp;</td><td>Libnet終了<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLibnetUnregisterHandler"> sceLibnetUnregisterHandler<br></a></td>
+<td>&nbsp;</td><td>Libnetイベントハンドラ抹消<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLibnetWaitGetAddress"> sceLibnetWaitGetAddress<br></a></td>
+<td>&nbsp;</td><td>自機IPアドレス取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceLibnetWaitGetInterfaceID"> sceLibnetWaitGetInterfaceID<br></a></td>
+<td>&nbsp;</td><td>インターフェースID取得<br></td></tr>
+</table><br>
+<font size=4><b>EE側のINET呼出関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetAbort"> sceInetAbort<br></a></td>
+<td>&nbsp;</td><td>処理中断<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetAbortLog"> sceInetAbortLog<br></a></td>
+<td>&nbsp;</td><td>ログの取得を中断する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetAddress2Name"> sceInetAddress2Name<br></a></td>
+<td>&nbsp;</td><td>ドット形式IPアドレスからホスト名への変換（逆引き）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetAddress2String"> sceInetAddress2String<br></a></td>
+<td>&nbsp;</td><td>内部形式IPアドレスからドット形式への変換<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetChangeThreadPriority"> sceInetChangeThreadPriority<br></a></td>
+<td>&nbsp;</td><td>スレッドのプライオリティ変更<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetClose"> sceInetClose<br></a></td>
+<td>&nbsp;</td><td>Connectionを閉じる<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetControl"> sceInetControl<br></a></td>
+<td>&nbsp;</td><td>Connectionの制御<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCreate"> sceInetCreate<br></a></td>
+<td>&nbsp;</td><td>Connection生成<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetGetInterfaceList"> sceInetGetInterfaceList<br></a></td>
+<td>&nbsp;</td><td>ネットワークインタフェースのリスト取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetGetLog"> sceInetGetLog<br></a></td>
+<td>&nbsp;</td><td>ログの取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetGetNameServers"> sceInetGetNameServers<br></a></td>
+<td>&nbsp;</td><td>ネームサーバ情報の取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetGetRoutingTable"> sceInetGetRoutingTable<br></a></td>
+<td>&nbsp;</td><td>経路制御表の取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetInterfaceControl"> sceInetInterfaceControl<br></a></td>
+<td>&nbsp;</td><td>ネットワークインタフェースの各パラメータの参照・設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetName2Address"> sceInetName2Address<br></a></td>
+<td>&nbsp;</td><td>ホスト名またはドット形式から内部形式IPアドレスへの変換<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetOpen"> sceInetOpen<br></a></td>
+<td>&nbsp;</td><td>Connection確立<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetPoll"> sceInetPoll<br></a></td>
+<td>&nbsp;</td><td>イベントを待つ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetRecv"> sceInetRecv<br></a></td>
+<td>&nbsp;</td><td>データの受信<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetRecvFrom"> sceInetRecvFrom<br></a></td>
+<td>&nbsp;</td><td>データ受信（送信元のIPアドレス・ポート番号も取得）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetSend"> sceInetSend<br></a></td>
+<td>&nbsp;</td><td>データ送信<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetSendTo"> sceInetSendTo<br></a></td>
+<td>&nbsp;</td><td>指定IPアドレス・ポート番号へのデータ送信<br></td></tr>
+</table><br>
+<font size=4><b>EE側のINETCTL呼出関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlDownInterface"> sceInetCtlDownInterface<br></a></td>
+<td>&nbsp;</td><td>インターフェースDown<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlGetState"> sceInetCtlGetState<br></a></td>
+<td>&nbsp;</td><td>I/F の遷移状態を得る<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlSetAutoMode"> sceInetCtlSetAutoMode<br></a></td>
+<td>&nbsp;</td><td>自動モードの設定 / 解除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInetCtlUpInterface"> sceInetCtlUpInterface<br></a></td>
+<td>&nbsp;</td><td>インターフェースUp<br></td></tr>
+</table><br>
+<font size=4><b>Libnet互換関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#load_set_conf_extra"> load_set_conf_extra<br></a></td>
+<td>&nbsp;</td><td>指定したファイルの内容を読み込み設定する<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>Libnet標準関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLibnetInitialize"><font size=6>sceLibnetInitialize<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Libnet初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceLibnetInitialize</b>(
+	sceSifMClientData *<i>cd</i>
+	unsigned int <i>buffersize</i>,
+	unsigned int <i>stacksize</i>,
+	int <i>priority</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>buffersize</i>&nbsp;</td>
+<td valign="top">&nbsp;sceSifMCallRpc() の send のデータを受け止める受信&nbsp;<br>&nbsp;バッファの大きさを指定します。&nbsp;<br>&nbsp;標準はsceLIBNET_BUFFERSIZE(=2048)バイトです。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>stacksize</i>&nbsp;</td>
+<td valign="top">&nbsp;sceSifMCallRpc() のリクエストを行うIOP側のスレッド&nbsp;<br>&nbsp;のスタックサイズの大きさを指定します。大きさは、512&nbsp;<br>&nbsp;バイト以上を指定してください。&nbsp;<br>&nbsp;標準はsceLIBNET_STACKSIZE(=8192)バイトです。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>priority</i>&nbsp;</td>
+<td valign="top">&nbsp;sceSifMCallRpc() のリクエストを行うIOP側のスレッド&nbsp;<br>&nbsp;のプライオリティを指定します。10以下の値は、システム&nbsp;<br>&nbsp;が使用しますので、それ以上の値を指定してください。&nbsp;<br>&nbsp;標準はsceLIBNET_PRIORITY(=32)です。&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;SIFシステムのBind失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-543&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_&nbsp;<br>&nbsp;INSUFFICIENT_RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;buffersizeが128バイトより&nbsp;<br>&nbsp;小さいか、またはbuffersize が&nbsp;<br>&nbsp;64バイト単位になっていません。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">Libnetの初期化を行います。<br>EEからIOPへSIFシステムを利用してデータを転送する際のバッファサイズを<i>buffersize</i>に指定します。<br>この<i>buffersize</i>には制御データも含まれます。つまり、<i>buffersize</i>はアプリケーションが必要とするデータサイズに制御データのサイズも含め、それを64バイト単位にしたものです。たとえば、sceInetSend()で1024バイトのデータを転送する場合、少なくとも<br><br>sceLIBNET_PAD( 1024 + sceLIBNET_CTRL_DATA_SIZE )<br><br>のバッファサイズが必要です（このサイズ以上であることに問題はありません）。<br>sceLIBNET_CTRL_DATA_SIZEは現在の制御データの最大サイズです。sceLIBNET_PADは64バイト単位に切り上げるためのマクロです。<br>Release 2.5.3以降、バッファの64bytes alignのほかに、バッファサイズも64バイト単位になるように指定します。これはSIFの転送でキャッシュを考慮した場合、64バイト単位以外では正しく行われない可能性があるためです。<br>データ転送を行う各関数は、データサイズがバッファサイズを超えた場合にはsceLIBNETE_INSUFFICIENT_RESOURCES（=-543）を返します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLibnetRegisterHandler"><font size=6>sceLibnetRegisterHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Libnetイベントハンドラ登録<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceLibnetRegisterHandler</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;Libnet共通エラー&nbsp;<br>&nbsp;IOP側のCreateEventFlag()の失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">inetctl.irxを用いて、AttachやStartをキャッチするイベントハンドラを登録します。<br>sceLibnetWaitGetAddress()のために必要です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLibnetSetConfiguration"><font size=6>sceLibnetSetConfiguration<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>設定内容登録<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceLibnetSetConfiguration</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	u_int <i>env_addr</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>env_addr</i>&nbsp;</td>
+<td>&nbsp;IOP側のsceNetCnfEnv_t*へのアドレス&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;設定失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">IOP側のsceNetCnfEnv_t*へのアドレスを使ってネットワークを設定します。<br>Release2.4.3以前のlibnetのように設定ファイルのファイル名を指定してネットワークを設定したい場合は、Libnetの互換関数load_set_conf_extra()を利用してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLibnetTerminate"><font size=6>sceLibnetTerminate<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Libnet終了<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceLibnetTerminate</b>(
+	sceSifMClientData *<i>cd</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;SIFシステムのUnbind失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">Libnetを終了させます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLibnetUnregisterHandler"><font size=6>sceLibnetUnregisterHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Libnetイベントハンドラ抹消<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceLibnetUnregisterHandler</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;Libnet共通エラー&nbsp;<br>&nbsp;IOP側のDeleteEventFlag()の失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceLibnetRegisterHandler()で登録したイベントハンドラの抹消を行います。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLibnetWaitGetAddress"><font size=6>sceLibnetWaitGetAddress<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>自機IPアドレス取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceLibnetWaitGetAddress</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int *<i>if_id</i>,
+	int <i>n</i>,
+	struct sceInetAddress *<i>myaddr</i>,
+	u_int <i>flags</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>if_id</i>&nbsp;</td>
+<td>&nbsp;インターフェースIDが格納される領域&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>n</i>&nbsp;</td>
+<td>&nbsp;if_idに格納されるインターフェースIDの最大数&nbsp;<br>&nbsp;（= sceLIBNET_MAX_INTERFACE）&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>myaddr</i>&nbsp;</td>
+<td>&nbsp;アドレスが格納される領域&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flags</i>&nbsp;</td>
+<td>&nbsp;モード指定などのフラグ&nbsp;<br>&nbsp;sceLIBNETF_AUTO_UPIF&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;IOP側のWaitEventFlag()が失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">その他のエラーコードはsceInetInterfaceControl ()と共通です。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自機IPアドレスを取得します。<br><i>flags</i>にsceLIBNETF_AUTO_UPIFが指定されているときは、同時にインターフェースをUpします。したがってsceLIBNETF_AUTO_UPIFを指定する際には、インターフェースが自動的にUpされる自動モードにしておかなければなりません（sceInetSetAutoMode()で指定できます）。<br><i>n</i>は取得するインターフェースの個数を指定します。通常はsceLIBNET_MAX_INTERFACE（= 2）で十分です。<br><i>if_id</i>に格納して返される値は、UPされるべきインターフェースIDです。格納された値が0の場合、インターフェースが存在しないことを示します。<br><i>if_id</i>[0]にはStartされるべきインターフェースIDが格納されます。PPPoEでは２つのインターフェースIDが返されますが、<i>if_id</i>[0]にppp側、<i>if_id</i>[1]にeth側が返されます。PPPoEではない場合には、インターフェースIDは1つだけ返されます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceLibnetWaitGetInterfaceID"><font size=6>sceLibnetWaitGetInterfaceID<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>インターフェースID取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceLibnetWaitGetInterfaceID</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int *<i>if_id</i>,
+	int <i>n</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>if_id</i>&nbsp;</td>
+<td>&nbsp;インターフェースIDが返される領域&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>n</i>&nbsp;</td>
+<td>&nbsp;if_idに格納されるインターフェースIDの最大個数&nbsp;<br>&nbsp;（= sceLIBNET_MAX_INTERFACE）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;IOP側のWaitEventFlag()が失敗&nbsp;<br>&nbsp;またはif_idが不適当&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;SceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インターフェースIDを取得します。<br>手動でインターフェースをUpさせる場合（sceInetCtlSetAutoMode()で指定できます）、この関数でインターフェースIDを取得し、sceInetCtlUpInterface()へ渡してUpさせます。<br><i>n</i>には取得するインターフェースIDの最大個数を指定しますが、通常はsceLIBNET_MAX_INTERFACE（= 2）で十分です。<br><i>if_id</i>に格納される値は、UpされるべきインターフェースIDです。格納値が0の場合、インターフェースが存在しないことを示します。PPPoEでは２つのインターフェースIDが返されますが、<i>if_id</i>[0]にppp側、<i>if_id</i>[1]にeth側が返されます。PPPoEではない場合には、インターフェースIDは1つだけ返されます。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>EE側のINET呼出関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetAbort"><font size=6>sceInetAbort<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>処理中断<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetAbort</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	int <i>flags</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>cid</i>&nbsp;</td>
+<td>&nbsp;Connection ID&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>flags</i>&nbsp;</td>
+<td>&nbsp;予約（0を指定すること）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（＝0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-508&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;DOES_NOT_EXIST&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-510&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;RESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた&nbsp;<br>&nbsp;（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cid</i>で指定したConnectionに関して待ち状態となっている関数（sceInetOpen / sceInetClose / sceInetRecv / sceInetRecvFrom / sceInetSend / sceInetSendTo）のすべての待ち状態を解消します。個別指定はできません。<br>アボートされた関数はすべてsceINETE_ABORTのエラーでリターンします。<br><i>flags</i>は将来のための予約です。常に0を指定してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetAbortLog"><font size=6>sceInetAbortLog<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ログの取得を中断する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetAbortLog</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正の値を返した場合、SetEventFlag() がエラーとなった回数を表します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInetGetLog() による待ち状態を sceINETE_ABORT で中断させます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetAddress2Name"><font size=6>sceInetAddress2Name<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ドット形式IPアドレスからホスト名への変換（逆引き）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetAddress2Name</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>flags</i>,
+	char *<i>name</i>,
+	int <i>len</i>,
+	sceInetAddress_t *<i>paddr</i>
+<i>	</i>int <i>ms</i>,
+	int <i>nretry</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変換フラグ（0固定）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変換結果を格納するバッファアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッファ長（バイト数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;内部形式IPアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>nretry</i>&nbsp;</td>
+<td valign="TOP">&nbsp;リトライ回数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0 ）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;その他のエラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">内部形式のIPアドレスをもとにDNSへの逆引き問い合わせを行い、得たドメイン名を<i>buf</i>と<i>len</i>で指定された領域に格納します。<br>変換フラグ（<i>flags</i>）には常に0を指定してください。<br>タイムアウト時間（<i>ms</i>）は、ひとつのDNSへの問い合わせに対するタイムアウト時間の指定です。0または負の値を指定した場合は、デフォルトである6秒とみなされます。<br>あるひとつのDNSへの問い合わせがタイムアウトとなった場合、複数のDNSが設定されていれば他のDNSへ問い合わせを試みます。すべてのDNSへの問い合わせで指定したリトライ回数（<i>nretry</i>）のタイムアウトが発生すると、エラー（sceINETE_TIMEOUT）としてリターンします。<br>リトライ回数（<i>nretry</i>）に0または負の値を指定した場合は、デフォルトである4回とみなされます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetAddress2String"><font size=6>sceInetAddress2String<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>内部形式IPアドレスからドット形式への変換<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetAddress2String</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	char *<i>name</i>,
+	int <i>len</i>,
+	sceInetAddress_t *<i>paddr</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変換結果を格納するバッファアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッファ長（バイト数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;内部形式IPアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">内部形式のIPアドレスをドット形式の文字列に変換します。<br>表示およびデバッグ用の関数です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetChangeThreadPriority"><font size=6>sceInetChangeThreadPriority<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>スレッドのプライオリティ変更<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetChangeThreadPriority</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>prio</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>prio</i>&nbsp;</td>
+<td valign="TOP">&nbsp;プライオリティ（1～63）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合sceLIBNETE_OK（＝0 ）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-403&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_PRIORITY&nbsp;</td>
+<td valign="TOP">&nbsp;優先度の指定が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">INETレイヤが生成したスレッドのプライオリティを<i>prio</i>に変更します。これ以後に生成するスレッドのプライオリティも<i>prio</i>になります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetClose"><font size=6>sceInetClose<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Connectionを閉じる<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetClose</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Connection ID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0 ）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-508&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;DOES_NOT_EXIST&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-509&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;CLOSING&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態&nbsp;<br>&nbsp;（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">TCPのみ以下の返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-501&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_ABORT&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-510&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;RESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた(TCP のみ)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">TCPのみIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-400&nbsp;</td>
+<td valign="TOP">&nbsp;KE_NO_MEMORY&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-401&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_ATTR&nbsp;</td>
+<td valign="TOP">&nbsp;attr の指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-409&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_EVFID&nbsp;</td>
+<td valign="TOP">&nbsp;対象イベントフラグが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">Connectionのクローズ処理を行います。<br>未送信（送信後確認応答を未確認）のデータがバッファに残っている場合には送信完了まで待ってから、FINを送信してTime-WaitまたはClosed状態になるのを待ちます。<br>タイムアウト時間（<i>ms</i>）はこの2つの待ち時間の合計の上限値となります。<br>sceInetClose()を呼び出した時点で<i>cid</i>に指定したConnection IDは無効になります。それ以後、sceInetAbort()も含めてそのConnection IDを用いた処理を行ってはいけません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetControl"><font size=6>sceInetControl<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Connectionの制御<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetControl</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	int <i>code</i>,
+	void *<i>ptr</i>,
+	int <i>len</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;操作対象のConnection ID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>code</i>&nbsp;</td>
+<td valign="TOP">&nbsp;操作の内容を表す制御コード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ptr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ領域の先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ領域のサイズ（バイト数）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（＝0 ）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-513&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_CALL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な関数呼び出し&nbsp;<br>&nbsp;（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cid</i>で指定されたConnectionに対してさまざまな制御操作を行う関数です。操作の内容は<i>code</i>で指定しますが、現在定義されている制御コードは次のとおりです。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>制御コード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetC_CODE_GET_INFO&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionの情報取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetC_CODE_GET_FLAGS&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;制御フラグの取得&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetC_CODE_SET_FLAGS&nbsp;</td>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;制御フラグの設定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCreate"><font size=6>sceInetCreate<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Connection生成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetCreate</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	sceInetParam_t *<i>param</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>param</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionパラメータ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">Connection IDを返します。<br>エラーの場合、エラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-505&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_LOCAL_&nbsp;<br>&nbsp;SOCKET_UNSPECIFIED&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した&nbsp;<br>&nbsp;(TCP,UDP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-506&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_FOREIGN_&nbsp;<br>&nbsp;SOCKET_UNSPECIFIED&nbsp;</td>
+<td valign="TOP">&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;<br>&nbsp;(TCP,UDP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-507&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;ALREAY_EXISTS &nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;<br>&nbsp;(TCP,UDP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;利用できないConnectionID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で&nbsp;<br>&nbsp;待ち状態に入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">Connectionを生成してConnection ID（cid）を返します。<br>このあとsceInetOpen()を呼ぶまでは、外部へのパケット送信は行われず、受信したパケットは破棄されます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetGetInterfaceList"><font size=6>sceInetGetInterfaceList<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ネットワークインタフェースのリスト取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetGetInterfaceList</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int *<i>interface_id</i>,
+	int <i>n</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="top">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="top">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>interface_id</i>&nbsp;</td>
+<td valign="top">&nbsp;インタフェースIDリストを格納するバッファのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>n</i>&nbsp;</td>
+<td valign="top">&nbsp;取得するインタフェースIDの最大数&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、取得した ID 数（0 &lt;= n）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">接続されているネットワークインタフェースのIDリストを取得します。<br>バッファの大きさはsizeof(int) ×<i>n</i>バイト必要になります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetGetLog"><font size=6>sceInetGetLog<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ログの取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetGetLog</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	char *<i>log_buf</i>,
+	int <i>len</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>log_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ログを格納するバッファへのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ログを格納するバッファのサイズ（バイト数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウトまでの時間（ミリ秒）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正の値を返す場合は、転送したログのバイト数を表します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定した&nbsp;<br>&nbsp;タイムアウトが起こった、&nbsp;<br>&nbsp;もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-501&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_ABORT&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE&nbsp;<br>&nbsp;_INSUFFICIENT _RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-400&nbsp;</td>
+<td valign="TOP">&nbsp;KE_NO_MEMORY&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-401&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_ATTR&nbsp;</td>
+<td valign="TOP">&nbsp;attr の指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-409&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_EVFID&nbsp;</td>
+<td valign="TOP">&nbsp;対象イベントフラグが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">INET内部に保存されているログを取得し、<i>log_buf</i>と<i>len</i>で示される領域に格納します。<br>この関数はブロック型で、ログを取得できるか、タイムアウトが発生するか、sceInetAbortLog()による中断までリターンしません。また<i>ms</i>に負の値を指定したときにはタイムアウト処理は行わず、ログを取得するか中断されるまでブロックします。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetGetNameServers"><font size=6>sceInetGetNameServers<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ネームサーバ情報の取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetGetNameServers</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	sceInetAddress_t *<i>paddr</i>,
+	int <i>n</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ネームサーバ情報を取得する領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>n</i>&nbsp;</td>
+<td valign="TOP">&nbsp;取得するエントリの最大数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、取得したエントリ数（0以上）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE&nbsp;<br>&nbsp;_INVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在のネームサーバアドレスを取得します。<br><i>paddr</i>が指す領域はsizeof(sceInetAddress_t) * <i>n</i> バイトのサイズが必要です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetGetRoutingTable"><font size=6>sceInetGetRoutingTable<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>経路制御表の取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetGetRoutingTable</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	sceInetRoutingEntry_t *<i>p</i>,
+	int <i>n</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>p </i>&nbsp;</td>
+<td valign="TOP">&nbsp;経路制御表を取得する領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>n </i>&nbsp;</td>
+<td valign="TOP">&nbsp;取得するエントリの最大数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、取得したエントリ数（0以上）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">INETが持っている経路制御表を<i>n</i>個まで取得し、<i>p</i>の指すアドレスに格納します。必要な領域のサイズはsizeof(sceInetRoutingEntry_t) * <i>n</i> バイトです。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetInterfaceControl"><font size=6>sceInetInterfaceControl<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ネットワークインタフェースの各パラメータの参照・設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetInterfaceControl</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>interface_id</i>,
+	int <i>code</i>,
+	void *<i>ptr</i>,
+	int <i>len</i>
+);
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="top">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="top">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>interface_id</i>&nbsp;</td>
+<td valign="top">&nbsp;操作対象のネットワークインタフェースID&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>code</i>&nbsp;</td>
+<td valign="top">&nbsp;操作の内容を表す制御コード&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ptr</i>&nbsp;</td>
+<td valign="top">&nbsp;データ領域の先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="top">&nbsp;データ領域のサイズ（バイト数）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceINETE_OK（＝0）または、正の値を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1 ～ -499&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEV レイヤもしくは&nbsp;<br>&nbsp;MODEM レイヤ内部で&nbsp;<br>&nbsp;IOP Kernel 関数を呼び出した場合の&nbsp;<br>&nbsp;エラーコード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-513&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;CALL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-550～-599&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEV レイヤ依存のエラーコード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-600～-649&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;MODEM レイヤ依存のエラーコード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_SEMID &nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ネットワークインタフェースの各パラメータの参照(一部設定も可能)を行う関数です。<br><i>code</i>は制御の種別を表すコードで、大きく次の5つに分類されています。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>範囲</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>種別</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0x00000000 - 0x7fffffff&nbsp;</td>
+<td valign="TOP">&nbsp;INETレイヤ用制御コード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0x80000000 - 0x8fffffff&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEVレイヤ共通制御コード ※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0x90000000 - 0xbfffffff&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEVモジュール依存制御コード ※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0xc0000000 - 0xcfffffff&nbsp;</td>
+<td valign="TOP">&nbsp;MODEMレイヤ共通制御コード ※&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0xd0000000 - 0xffffffff&nbsp;</td>
+<td valign="TOP">&nbsp;MODEMモジュール依存制御コード ※&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;"><i>code</i>のbit31が1のとき（上記の※）は、INETレイヤでは特別な処理は行わず、<i>code</i>, <i>ptr</i>, <i>len</i>をそのまま該当するNETDEVモジュールに中継します。<br><i>ptr</i>,<i>len</i>はデータの受渡しを伴う場合のデータ領域の先頭アドレスと、その領域のバイト数です。<br>制御コードによっては、データを関数の返り値として返す場合もあります。<br>INETレイヤ用に定義されている制御コードは次のとおりです。各制御コードはネットワークインタフェース構造体sceInetDevOps_tの各メンバに対応していますので、詳細はネットワークデバイスI/F仕様の該当箇所を参照してください。他のレイヤの制御コードについてはそれぞれのドキュメントを参照してください。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>制御コード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_&nbsp;<br>&nbsp;GetInterfaceName&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000000&nbsp;</td>
+<td valign="TOP">&nbsp;インターフェース名（文字列）&nbsp;<br>&nbsp;を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_&nbsp;<br>&nbsp;GetModuleName&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000001&nbsp;</td>
+<td valign="TOP">&nbsp;モジュール名（文字列）を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_&nbsp;<br>&nbsp;GetVendorName&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000002&nbsp;</td>
+<td valign="TOP">&nbsp;ベンダ名（文字列）を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_&nbsp;<br>&nbsp;GetDeviceName&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000003&nbsp;</td>
+<td valign="TOP">&nbsp;デバイス名（文字列）を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_&nbsp;<br>&nbsp;GetBusType&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000004&nbsp;</td>
+<td valign="TOP">&nbsp;バスの種別を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetBusLoc&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000005&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスの位置情報を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetProt&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000006&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEVレイヤのプロトコル&nbsp;<br>&nbsp;バージョンを取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetImpl&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000007&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEVレイヤの実装バージョン&nbsp;<br>&nbsp;を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetFlags&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000008&nbsp;</td>
+<td valign="TOP">&nbsp;NETDEVレイヤが持つsceInetDevOps&nbsp;<br>&nbsp;構造体中のフラグ（flags）を取得&nbsp;<br>&nbsp;する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetAddress&nbsp;</td>
+<td valign="TOP">&nbsp;0x00000009&nbsp;</td>
+<td valign="TOP">&nbsp;インターフェースのIPアドレス&nbsp;<br>&nbsp;を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetNetmask&nbsp;</td>
+<td valign="TOP">&nbsp;0x0000000a&nbsp;</td>
+<td valign="TOP">&nbsp;インターフェースのサブネット&nbsp;<br>&nbsp;マスクを取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetBroadcast&nbsp;</td>
+<td valign="TOP">&nbsp;0x0000000b&nbsp;</td>
+<td valign="TOP">&nbsp;インターフェースのブロード&nbsp;<br>&nbsp;キャストアドレスを取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetMTU&nbsp;</td>
+<td valign="TOP">&nbsp;0x0000000c&nbsp;</td>
+<td valign="TOP">&nbsp;インターフェースのMTU値を&nbsp;<br>&nbsp;取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_GetHWaddr&nbsp;</td>
+<td valign="TOP">&nbsp;0x0000000d&nbsp;</td>
+<td valign="TOP">&nbsp;インターフェースのハードウェア&nbsp;<br>&nbsp;アドレスを取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_&nbsp;<br>&nbsp;GetDHCPHostName&nbsp;</td>
+<td valign="TOP">&nbsp;0x0000000e&nbsp;</td>
+<td valign="TOP">&nbsp;DHCP用ホスト名を取得する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetCC_&nbsp;<br>&nbsp;GetDHCPFlags&nbsp;</td>
+<td valign="TOP">&nbsp;0x0001000f&nbsp;</td>
+<td valign="TOP">&nbsp;DHCP用制御フラグを取得する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ネットワークインタフェースに対する設定操作は、タイトルアプリケーションから直接この関数を呼び出して行うのではなく、NET設定ファイルとinetctl.irxを用いて行います（優先度設定およびアプリケーションから直接モデムレイヤ設定をする場合は例外として本関数で設定を行います）。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetName2Address"><font size=6>sceInetName2Address<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ホスト名またはドット形式から内部形式IPアドレスへの変換<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetName2Address</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>flags</i>,
+	sceInetAddress_t *<i>paddr</i>,
+	char *<i>name</i>,
+	int <i>ms</i>,
+	int <i>nretry</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変換フラグ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;内部形式IPアドレスを受け取る構造体変数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ドット形式のIPアドレスまたはホスト名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>nretry</i>&nbsp;</td>
+<td valign="TOP">&nbsp;リトライ回数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;その他のエラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;例外ハンドラ／割り込みハンドラからの&nbsp;<br>&nbsp;呼びだしだった&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-408&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_ SEMID&nbsp;</td>
+<td valign="TOP">&nbsp;対象セマフォが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ドット形式で表されたIPアドレスを内部形式のIPアドレスに変換します。ホスト名を与えて、DNS（ネームサーバ）からIPアドレスを得て内部形式に変換することもできます。<br>変換フラグ（<i>flags</i>）には、通常は0を指定しますが、必要に応じて以下のビット値のORを指定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>定数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetN2AF_NoDot&nbsp;</td>
+<td valign="TOP">&nbsp;0x01&nbsp;</td>
+<td valign="TOP">&nbsp;ドット形式の変換を禁止&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetN2AF_NoHosts&nbsp;</td>
+<td valign="TOP">&nbsp;0x02&nbsp;</td>
+<td valign="TOP">&nbsp;（予約）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceInetN2AF_NoDNS&nbsp;</td>
+<td valign="TOP">&nbsp;0x04&nbsp;</td>
+<td valign="TOP">&nbsp;DNSへの問い合わせを禁止&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">変換処理は以下の順序で行われ、すべて失敗した場合にはエラーとなります。<br><br></div>
+    <div style="margin-left:50px;"><ol>
+         <li VALUE=1> <i>name</i>がNULLの場合は、任意のアドレスに一致する内部形式に変換します。</li>
+         <li VALUE=2> 変換フラグでsceInetN2AF_NoDotが指定されていない場合は、<i>name</i>をドット形式のIPアドレスとみなして変換を試みます。</li>
+         <li VALUE=3> 変換フラグ中でsceInetN2AF_NoDNSが指定されていない場合は、<i>name</i>をホスト名とみなしてDNSへの問い合わせを試みます。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;"><br>タイムアウト時間（<i>ms</i>）は、ひとつのDNSへの問い合わせに対するタイムアウト時間の指定です。0または負の値を指定した場合は、デフォルトである6秒とみなされます。<br>あるひとつのDNSへの問い合わせがタイムアウトとなった場合、複数のDNSが設定されていれば他のDNSへ問い合わせを試みます。すべてのDNSへの問い合わせで指定したリトライ回数（<i>nretry</i>）のタイムアウトが発生すると、エラー（sceINETE_TIMEOUT）としてリターンします。<br>リトライ回数（<i>nretry</i>）に0または負の値を指定した場合は、デフォルトである4回とみなされます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ドット形式</b><br></h4></div>
+
+<div style="margin-left:50px;">ドット形式のIPアドレスとは、以下のいずれかの形式を指します。<br><br></div>
+    <div style="margin-left:50px;"><ol>
+         <li VALUE=1> <i>num8</i>.<i>num8</i>.<i>num8</i>.<i>num8　　</i>(Class C)</li>
+         <li VALUE=2> <i>num8</i>.<i>num8</i>.<i>num16</i>　　　　(Class B)</li>
+         <li VALUE=3> <i>num8</i>.<i>num24　　　　　　　</i>(Class A)</li>
+         <li VALUE=4> <i>num32</i>　　　　　　　　　　(直接指定)</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:70px;"><i>　　num8 </i>　unsigned 8bitで表現可能な範囲の8/10/16進数<br><i>　　num16　</i>unsigned 16bitで表現可能な範囲の8/10/16進数<br><i>　　num24</i>　unsigned 24bitで表現可能な範囲の8/10/16進数<br><i>　　num32</i>　unsigned 32bitで表現可能な範囲の8/10/16進数<br></div>
+<div style="margin-left:50px;"><br>8/10/16進数の表記規則はC言語でのそれと同様です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetOpen"><font size=6>sceInetOpen<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>Connection確立<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetOpen</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="TOP">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cid</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Connection ID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-501&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_ABORT&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;<br>&nbsp;(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-506&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_FOREIGN_&nbsp;<br>&nbsp;SOCKET_UNSPECIFIED&nbsp;</td>
+<td valign="TOP">&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-507&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;ALREADY_EXISTS&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-510&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE&nbsp;<br>&nbsp;_CONNECTION_RESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた&nbsp;<br>&nbsp;（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-514&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_NO_ROUTE &nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-400&nbsp;</td>
+<td valign="TOP">&nbsp;KE_NO_MEMORY&nbsp;</td>
+<td valign="TOP">&nbsp;(メモリ不足TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-401&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_ATTR&nbsp;</td>
+<td valign="TOP">&nbsp;attr の指定が不正(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-409&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_EVFID&nbsp;</td>
+<td valign="TOP">&nbsp;対象イベントフラグが存在しない(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;<br>&nbsp;(TCP のみ)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cid</i>で指定したConnectionを開きます。<br>TCPの場合は、以下いずれかの条件が成立するまで待ち状態となります。<br><br>(a) Connectionが確立した（=Established）<br>(b) タイムアウトを除くエラーが発生した<br>(c) 指定されたタイムアウト時間（<i>ms</i>）が経過した（sceINETE_TIMEOUT）<br><br>上記 (c) の場合この関数はsceINETE_TIMEOUTを返しますが、そのままsceInetRecv() / sceInetSend()を呼び出すと、その関数内でConnectionの確立を待つようになります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetPoll"><font size=6>sceInetPoll<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>イベントを待つ<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet.h&gt;
+int <b>sceInetPoll</b> (
+	sceInetPollFd_t *fds,
+	int nfds,
+	int ms
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fds</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetPollFd_t構造体の配列&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>nfds</i>&nbsp;</td>
+<td valign="TOP">&nbsp;配列の要素数(バイト数ではありません)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、以下の値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;イベントが一つもない状態でタイムアウトが発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正の値&nbsp;</td>
+<td valign="TOP">&nbsp;イベントが少なくとも 1 つあるコネクションの数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;<br>&nbsp;（fds が NULL、nfds が 0 または負)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;KE_XXX&nbsp;</td>
+<td valign="TOP">&nbsp;WaitSema() がエラーとなった時の戻り値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コネクションの集合を調べ、それらのコネクションのどれが入出力可能なのかを調べるための関数です。この関数を使用すれば単一スレッドでも複数コネクションの同時処理が可能です。<br>fds[0] から fds[nfds - 1] までが調査対象となります。<br><br>sceInetPollFd_t の各メンバは以下の通りです。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;cid&nbsp;</td>
+<td valign="TOP">&nbsp;調べるコネクションのConnection IDを指定します。&nbsp;<br>&nbsp;cid値が-1の時にはreventは0 に設定され、&nbsp;<br>&nbsp;eventは参照しません。sceInetCreate()されて&nbsp;<br>&nbsp;いないcid 値、もしくは既にsceInetClose()されて&nbsp;<br>&nbsp;解放済のcid値の場合には reventに&nbsp;<br>&nbsp;sceINET_POLLNVALが設定されます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;events&nbsp;</td>
+<td valign="TOP">&nbsp;調べるイベント&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;revents&nbsp;</td>
+<td valign="TOP">&nbsp;発生したイベント(sceInetPoll() の呼び出し前の設定は不要)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">events と revent の値は以下の値のビット OR です。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>定数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLIN&nbsp;</td>
+<td valign="TOP">&nbsp;Urgent データを除く通常データを&nbsp;<br>&nbsp;待ち状態に入る事なしに読み込む事ができます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLPRI&nbsp;</td>
+<td valign="TOP">&nbsp;Urgent データを待ち状態に入ることなしに&nbsp;<br>&nbsp;読み込む事ができます。(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLOUT&nbsp;</td>
+<td valign="TOP">&nbsp;Urgent データを除く通常データを&nbsp;<br>&nbsp;待ち状態に入る事なしに書き込む事ができます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLERR&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスまたはコネクション上で例外状態が発生。&nbsp;<br>&nbsp;現在の実装では発生しません。&nbsp;<br>&nbsp;将来のための予約ビットです。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLHUP&nbsp;</td>
+<td valign="TOP">&nbsp;デバイスまたはコネクションの切断された。&nbsp;<br>&nbsp;現在の実装では発生しません。&nbsp;<br>&nbsp;将来のための予約ビットです。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLNVAL&nbsp;</td>
+<td valign="TOP">&nbsp;指定された cid 値が不正。events で&nbsp;<br>&nbsp;指定されていなくても必ずチェックします。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLFIN&nbsp;</td>
+<td valign="TOP">&nbsp;待ち状態に入る事なしに FIN を送信できます。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINET_POLLCLS&nbsp;</td>
+<td valign="TOP">&nbsp;待ち状態に入る事なしにコネクションを&nbsp;<br>&nbsp;クローズできます。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">TCP の場合には以下の場合にも sceINET_POLLIN のイベントが発生します。<br><br></div>
+<div style="margin-left:35px;"><ul>
+         <li> FIN を受信した場合や RST を受信した等で sceInetRecv() が0もしくはエラーを返す状態の時。sceINET_POLLHUP ではない事に注意して下さい。
+         <li> Listen 状態のコネクションが Established 状態に遷移した最初の sceInetPoll() の呼び出し時。
+</ul></div>
+<div style="margin-left:50px;"><br>UDP,RAW の送信時および TCP の Urgent データの送信時に関しては待ち状態に入る事はなく sceINET_POLLOUT のイベントも発生しません。<br><br>タイムアウト引数 (ms) が正の値の場合には少なくとも 1 つのイベントが発生するまで指定されたタイムアウト時間を上限として待ち状態に入ります。タイムアウト引数 (ms) が負の値の場合には少なくとも 1 つのイベントが発生するまで無限に待ち状態に入ります。タイムアウト引数 (ms) が 0 の値の場合にはイベントの有無に関わらず待ち状態に入る事なしに呼び出し元へ戻ります。<br><br>注意: タイムアウト引数に 0 を指定し VSYNC ごとに sceInetPoll() を呼び出すような処理は行わないで下さい。転送効率が落ち CPU の使用効率が著しく落ちます。<br><br>sceInetClose() で待ち状態に入る事なしにコネクションをクローズする方法は、FIN のやり取りを含むシーケンスで、かつ sceInetPoll() を用いて単一スレッドで待ち状態に入らずにコネクションをクローズするには以下の手順で処理する必要があります。<br><br></div>
+    <div style="margin-left:50px;"><ol>
+         <li VALUE=1> sceInetPoll() を用いて sceINET_POLLFIN のイベントを待つ。このイベントを待つ事で step2 の待ち状態に入る事を回避できます。</li>
+         <li VALUE=2> sceInetControl(code=sceINETC_CODE_SEND_FIN) を呼び出し、相手側にFINを送信する。</li>
+         <li VALUE=3> sceInetPoll() を用いて sceINET_POLLCLS のイベントを待つ。このイベントを待つ事で step4 の待ち状態に入る事を回避できます</li>
+         <li VALUE=4> sceInetClose() を ms=0 (タイムアウト時間 0) で呼び出す。最後の sceInetClose() では先に FIN の送信を行っているため、ほとんどの場合に戻り値がsceINETE_CONNECTION_DOES_NOT_EXIST となりますが、これは状態を示すものであり、クローズ処理は正常に終了しています。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetRecv"><font size=6>sceInetRecv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データの受信<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetRecv</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	void *<i>ptr</i>,
+	int <i>count</i>,
+	int *<i>pflags</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="top">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="top">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cid</i>&nbsp;</td>
+<td valign="top">&nbsp;Connection ID&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ptr</i>&nbsp;</td>
+<td valign="top">&nbsp;受信データを格納するバッファアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>count</i>&nbsp;</td>
+<td valign="top">&nbsp;受信すべきデータサイズ（バイト数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>pflags</i>&nbsp;</td>
+<td valign="top">&nbsp;ステータスフラグを格納する変数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="top">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">受信したバイト数を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-501&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_ABORT&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-508&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;DOES_NOT_EXIST&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-509&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;CLOSING &nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-510&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE&nbsp;<br>&nbsp;_CONNECTION_RESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE&nbsp;<br>&nbsp;_INVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-400&nbsp;</td>
+<td valign="TOP">&nbsp;KE_NO_MEMORY&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-401&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_ATTR&nbsp;</td>
+<td valign="TOP">&nbsp;attr の指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-409&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_EVFID&nbsp;</td>
+<td valign="TOP">&nbsp;対象イベントフラグが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cid</i>で指定したConnectionからデータを受信し、<i>ptr</i>と<i>count</i>で指定したバッファに格納します。<br>*<i>pflags</i>には受信終了条件として下記定数のORを指定し、また終了ステータスとしても下記定数のORが返されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>定数</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETF_URG&nbsp;</td>
+<td valign="TOP">&nbsp;0x02&nbsp;</td>
+<td valign="TOP">&nbsp;Urgentフラグ付きセグメントを受信した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETF_FIN&nbsp;</td>
+<td valign="TOP">&nbsp;0x04&nbsp;</td>
+<td valign="TOP">&nbsp;Finフラグ付きセグメントを受信した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETF_TIM&nbsp;</td>
+<td valign="TOP">&nbsp;0x08&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウトが発生した&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;"><i>ms</i>にはデータ受信を待つ時間の上限を指定します。0は待ち時間なしでリターンすることの指定、負の値は無限に待つことの指定になります。<br><br>TCP接続の場合、次の条件でリターンします。【】内はステータスとして*<i>pflags</i>に返されるフラグを示します。<br></div>
+    <div style="margin-left:50px;"><ol>
+         <li VALUE=1> エラーが発生した（Connectionがリセットされたなど）</li>
+         <li VALUE=2> <i>count</i>で指定したデータ数を受信した</li>
+         <li VALUE=3> 少なくとも1バイトのデータを受信した</li>
+         <li VALUE=4> FINを受け取り、それまでのデータをすべて受信した<br>【sceINETF_FIN】</li>
+         <li VALUE=5> Urgentフラグ付きのセグメントを受信した<br>【sceINETF_URG】</li>
+         <li VALUE=6> <i>ms</i>で指定したタイムアウト時間が経過した<br>【sceINETF_TIM】</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">(3)の条件はRelease2.1.4までは特別なフラグを指定しないと成立しませんでしたが、Release2.2以降はデフォルトで成立するように変更されました。<br>なおUrgentデータの受信時には、<i>ptr</i>で示されるバッファにはUrgentデータのみが転送されます。通常データとUrgentデータが混在することはありません。<br><br>UDPやRaw IP接続の場合、*<i>pflags</i>には0を指定して呼び出してください。この場合1パケットを受信すると、<i>count</i>の指定に関らずリターンします。<i>count</i>よりも大きなパケットを受信したときは、指定サイズのデータだけをバッファに転送し、パケットの残りは破棄されます。ステータスとして*<i>pflags</i>に設定される値はsceINETF_TIMのみです。<br><br>タイムアウトが発生した場合でも、それまでに受信したバイト数が関数の返り値となります。タイムアウト発生の有無は*<i>pflags</i>のsceINETF_TIMビットで判断してください。<br><br>タイムアウト時間（<i>ms</i>）に負の値を指定してあれば（無限待ちであれば）、接続先から接続が閉じられた場合（FINを受信した場合）関数の返り値が0となります。しかし、タイムアウト時間に0または正の値を指定してあると、タイムアウト発生時にも0が返されますので、接続先から接続が閉じられたことの判定には*<i>pflags</i>のsceINETF_FINビットを参照してください。<br><br>タイムアウト時間（<i>ms</i>）に0を指定した場合は待ち時間なしでリターンしますが、他のスレッドが動作しなくなるため、次のように待ち時間なしでリードを繰り返す処理を行ってはいけません。Connectionごとに受信用スレッドを生成し、無限もしくは適切なタイムアウトを指定してください。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>while(1){
+     flags = 0;
+     if(0 &gt; (r = sceInetRecv(cid, buf, sizeof(buf), &flags, 0)))
+         エラー処理;
+     else
+         受信処理;
+}
+</pre></font></div>
+<div style="margin-left:50px;"><br>受信時にバッファリングできる上限サイズのデフォルト値は以下の通りです。<br><br></div>
+<div style="margin-left:70px;">TCP: 22 * 1460 = 32120 = 約 31.4 KB<br>UDP: 8MB<br>RAW: 32KB<br></div>
+<div style="margin-left:50px;"><br>この上限値は sceInetControl(code=sceINETC_CODE_SET_RCVBUF) を用いて変更することができます。<br>TCP の場合にはこの上限値が相手側への通知 window サイズとなります。<br>UDP,RAW の場合にはこの上限値を越えるデータは先に届いた順に破棄します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">TCP の受信バッファは固定領域ではなく常に動的に確保します。<br>TCP における相手側への通知 window サイズとして使用される値は、<br><br></div>
+<div style="margin-left:70px;">sceInetRecv() を呼び出さずに INET 内部に溜めておけるデータ量の上限値<br><br></div>
+<div style="margin-left:50px;">と等しくなります。この上限値を越えるデータは相手側から送られてこないことになり、万一送られてきた場合にも越えた部分は破棄されます。ちなみに、動的に確保されるメモリ消費量はEthernet の場合には１パケットあたり、<br><br></div>
+<div style="margin-left:35px;"><ul>
+         <li> データ量
+         <li> Ethernet,IP,TCP ヘッダ（通常14+20+20バイト）
+         <li> メモリ管理用ヘッダ（メモリの確保、解放用の12バイト）
+         <li> パケット管理用ヘッダ（パケットごとに必要なリンク、フラグ、ポインタの 24バイト）
+</ul></div>
+<div style="margin-left:50px;"><br>の合計となるので、データ量とメモリ消費量は一致しません。なお、TCPは信頼性のあるプロトコルですので、受信バッファがあふれてもデータが消滅することはありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetRecvFrom"><font size=6>sceInetRecvFrom<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データ受信（送信元のIPアドレス・ポート番号も取得）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetRecvFrom</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	void *<i>ptr</i>,
+	int <i>count</i>,
+	int *<i>pflags</i>,
+	sceInetAddress_t *<i>iadr</i>,
+	int *<i>port</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="top">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="top">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cid</i>&nbsp;</td>
+<td valign="top">&nbsp;Connection ID&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ptr</i>&nbsp;</td>
+<td valign="top">&nbsp;受信データを格納するバッファアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>count</i>&nbsp;</td>
+<td valign="top">&nbsp;受信すべきデータサイズ（バイト数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>pflags</i>&nbsp;</td>
+<td valign="top">&nbsp;ステータスフラグを格納する変数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>iadr</i>&nbsp;</td>
+<td valign="top">&nbsp;送信元のIPアドレスを格納する変数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>port</i>&nbsp;</td>
+<td valign="top">&nbsp;ポートを格納する変数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="top">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">受信したバイト数を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定した&nbsp;<br>&nbsp;タイムアウトが起こった、&nbsp;<br>&nbsp;もしくはTCPの&nbsp;<br>&nbsp;再送タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-501&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_ABORT&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-508&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;DOES_NOT_EXIST&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE&nbsp;<br>&nbsp;_INVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-513&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_CALL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-400&nbsp;</td>
+<td valign="TOP">&nbsp;KE_NO_MEMORY&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-401&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_ATTR&nbsp;</td>
+<td valign="TOP">&nbsp;attr の指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-409&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_EVFID&nbsp;</td>
+<td valign="TOP">&nbsp;対象イベントフラグが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInetRecv()と同様に<i>cid</i>で指定したConnectionからデータを受信して<i>ptr</i>と<i>count</i>で指定したバッファに格納し、さらに送信元のIPアドレスを*<i>iadr</i>に、ポートを*<i>port</i>に格納します。UDP接続の場合のみ使用可能で、TCP接続の場合はエラー（sceINETE_INVALID_CALL）となります。<br><br>UDPはTCPとは違ってstatelessなので、Connection生成時にsceInetParam中のremote_addrを任意とするかまたはremote_portをsceINETP_ANYとすると、ひとつのConnectionで複数の相手から受信することができます。sceInetRecvFrom()はそのような場合に、どの相手から受信したデータか判別するために使用します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetSend"><font size=6>sceInetSend<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データ送信<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetSend</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	void *<i>ptr</i>,
+	int <i>count</i>,
+	int *<i>pflags</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="top">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="top">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cid</i>&nbsp;</td>
+<td valign="top">&nbsp;Connection ID&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ptr</i>&nbsp;</td>
+<td valign="top">&nbsp;送信データを格納したバッファアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>count</i>&nbsp;</td>
+<td valign="top">&nbsp;送信データのサイズ（バイト数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>pflags</i>&nbsp;</td>
+<td valign="top">&nbsp;ステータスフラグを格納する変数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="top">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">送信したバイト数を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-500&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-501&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_ABORT&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;<br>&nbsp;(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-505&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_LOCAL_SOCKET_&nbsp;<br>&nbsp;UNSPECIFIED&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した&nbsp;<br>&nbsp;(TCP,UDP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-506&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_FOREIGN&nbsp;<br>&nbsp;_SOCKET_UNSPECIFIED &nbsp;</td>
+<td valign="TOP">&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した(TCP,UDP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-508&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;DOES_NOT_EXIST&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-509&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;CLOSING&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-510&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;RESET &nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-514&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_NO_ROUTE&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-400&nbsp;</td>
+<td valign="TOP">&nbsp;KE_NO_MEMORY&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ不足(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-401&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_ATTR&nbsp;</td>
+<td valign="TOP">&nbsp;attr の指定が不正(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-409&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_EVFID&nbsp;</td>
+<td valign="TOP">&nbsp;対象イベントフラグが存在しない(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された(TCP のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;<br>&nbsp;(TCP のみ)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cid</i>で指定したConnectionへ、<i>ptr</i>と<i>count</i>で指定したバッファにあるデータを送信し、エラーがなければ送信したバイト数を返します。<br>TCP接続の場合は、*<i>pflags</i>にはsceINETF_URGビットが指定できます。<br>sceINETF_URGビットを指定した場合はUrgentデータとして直接送信されるため、待ち状態が生じることはありませんが、通常データの場合は送信バッファに空きがないと待ち状態が生じます。タイムアウト時間（<i>ms</i>）は、この送信バッファの空き待ちに対する上限指定となります。<br>以前のバージョンでは、特別なフラグ指定によって指定データの最後のデータを含むセグメントをPUSHフラグ付で送信しましたが、現在ではスタック内部で自動的にPUSHフラグを付加するようになっており、アプリケーション側で意識する必要はありません。<br>TCPは、送信先から確認応答が返ってこない場合には再送処理を行います。確認応答を待つ時間は最初は1秒で、確認応答が来なければ64秒に達するまで順次2倍して、最大11回の再送を行います。したがって、タイムアウト時間（<i>ms</i>）に充分に大きな値を指定しても、まったく確認応答がなければ383秒後にタイムアウトとなります。<br>タイムアウトが発生した場合にもsceInetSend()は送信バイト数を返します。タイムアウト発生の有無は*<i>pflags</i>に返される値のsceINETF_TIMビットで判断してください。なおINETが設定するビットはこのビットのみです。<br><br>タイムアウト時間（<i>ms</i>）に0を指定すると待ち時間なしでリターンしますが、他のスレッドが動作しなくなるため、次のように待ち時間なしで送信を繰り返す処理を行ってはいけません。Connectionごとにスレッドを生成し、無限もしくは適切なタイムアウトを指定してください。<br><br></div>
+        <div style="margin-left:93px;"><pre><font size=3>while(1){
+    flags = 0;
+    if(0 &gt; (r = sceInetSend(cid, buf, sizeof(buf), &flags, 0)))
+        エラー処理;
+    else
+        送信処理;
+}
+</pre></font></div>
+<div style="margin-left:50px;"><br>UDPおよびRaw IPでは送信時にバッファを経由しないため、待ち状態が生じることはありません。<br>TCP の場合、送信バッファリング動作の上限サイズのデフォルト値は<br><br></div>
+<div style="margin-left:70px;">22 * 1460 = 32120 = 約 31.4 KB<br></div>
+<div style="margin-left:50px;"><br>ですが、この上限値はsceInetControl(code=sceINETC_CODE_SET_SNDBUF) を用いて変更することができます。<br>相手からの ACK がまだ届いていない sceInetSend() による送信データのバイト数の合計がこの上限値以上である場合には、その条件が満たされている間はsceInetSend() の処理は待ち状態に入ります。sceInetSend() の呼び出しによるネットワーク上への送信動作はsceInetControl() のcode=sceINETC_CODE_SET_FLAGS によって影響を受けます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">TCP の送信バッファは固定領域ではなく常に動的に確保します。<br>INETのバッファリング処理は相手側からの通知windowサイズには影響されず、上記の上限サイズまでINET内部でバッファリングすることができます。上限サイズまではINET内部でバッファに溜められるためsceInetSend()はすぐに呼び出し元へ返り、上限サイズを超えたときはバッファに空きができるまで呼び出したスレッドが待ち状態に入ります。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetSendTo"><font size=6>sceInetSendTo<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>指定IPアドレス・ポート番号へのデータ送信<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetSendTo</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>cid</i>,
+	void *<i>ptr</i>,
+	int <i>count</i>,
+	int <i>flags</i>,
+	sceInetAddress_t *<i>iadr</i>,
+	int <i>port</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>cd</i>&nbsp;</td>
+<td valign="top">&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>net_buf</i>&nbsp;</td>
+<td valign="top">&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>cid</i>&nbsp;</td>
+<td valign="top">&nbsp;Connection ID&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ptr</i>&nbsp;</td>
+<td valign="top">&nbsp;受信データを格納するバッファアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>count</i>&nbsp;</td>
+<td valign="top">&nbsp;受信すべきデータサイズ（バイト数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="top">&nbsp;ステータスフラグ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>iadr</i>&nbsp;</td>
+<td valign="top">&nbsp;送信元のIPアドレスを格納する変数のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>port</i>&nbsp;</td>
+<td valign="top">&nbsp;ポート&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="top">&nbsp;タイムアウト時間（ミリ秒）&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">送信したバイト数を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-504&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_&nbsp;<br>&nbsp;RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-505&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_LOCAL_SOCKET_&nbsp;<br>&nbsp;UNSPECIFIED &nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-506&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_FOREIGN_SOCKET&nbsp;<br>&nbsp;_UNSPECIFIED&nbsp;</td>
+<td valign="TOP">&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-508&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_&nbsp;<br>&nbsp;DOES_NOT_EXIST&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-512&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE&nbsp;<br>&nbsp;_INVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-513&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_CALL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-514&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_NO_ROUTE&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">以下のIOP Kernel APIの返り値を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-400&nbsp;</td>
+<td valign="TOP">&nbsp;KE_NO_MEMORY&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-401&nbsp;</td>
+<td valign="TOP">&nbsp;KE_ILLEGAL_ATTR&nbsp;</td>
+<td valign="TOP">&nbsp;attr の指定が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-409&nbsp;</td>
+<td valign="TOP">&nbsp;KE_UNKNOWN_EVFID&nbsp;</td>
+<td valign="TOP">&nbsp;対象イベントフラグが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-417&nbsp;</td>
+<td valign="TOP">&nbsp;KE_CAN_NOT_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;ディスパッチ禁止状態で待ち状態に&nbsp;<br>&nbsp;入ろうとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-418&nbsp;</td>
+<td valign="TOP">&nbsp;KE_RELEASE_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT状態は強制解除された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-425&nbsp;</td>
+<td valign="TOP">&nbsp;KE_WAIT_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;WAIT対象のオブジェクトが削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cid</i>で指定したConnectionに対し、送信先のIPアドレス（*<i>iadr</i>）とポート（<i>port</i>）を指定して、<i>ptr</i>と<i>count</i>で指定したバッファにあるデータをsceInetSend()と同様に送信し、エラーがなければ送信したバイト数を返します。UDP接続の場合のみ呼び出し可能で、TCP接続の場合はエラー（sceINETE_INVALID_CALL）となります。<br>UDPはTCPと違ってstatelessなので、sceInetCreate()でsceInetParam中のremote_addrを任意、またはremote_portをsceINETP_ANYと指定すると、ひとつのConnection IDで複数の相手に送信することが可能です。その場合に、このsceInetSendTo()を使って相手のIPアドレスとポート番号を指定します。<br>remote_addrが任意でない、もしくはremote_portがsceINETP_ANYではないConnectionに対してそれと異なる値を指定して送信しようとするなど、不整合がある場合はエラー（sceINETE_INVALID_ARGUMENT）となります。<br><br>現在、*<i>pflags</i>に返される値はありません。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>EE側のINETCTL呼出関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlDownInterface"><font size=6>sceInetCtlDownInterface<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>インターフェースDown<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetCtlDownInterface</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>id</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>id</i>&nbsp;</td>
+<td>&nbsp;DownさせるインターフェースID&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、０を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;Down失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>id</i>で指定されたインタフェースをDownします。<i>id</i>に0が指定された場合は、Down可能な状態にあるすべてのインターフェースをDownします。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlGetState"><font size=6>sceInetCtlGetState<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>I/F の遷移状態を得る<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;inet/inetctl.h&gt;
+int <b>sceInetCtlGetState</b>(
+	int <i>id,</i>
+	int *<i>pstate</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;インタフェースID&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pstate</i>&nbsp;</td>
+<td valign="TOP">&nbsp;移状態コードを格納する領域へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、０を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;指定された ID が存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了時には遷移状態コードとして以下のいずれかが設定されます。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_DETACHED&nbsp;</td>
+<td valign="TOP">&nbsp;I/F は接続されていない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STARTING&nbsp;</td>
+<td valign="TOP">&nbsp;Up 要求済で Running 待ち&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_RETRYING&nbsp;</td>
+<td valign="TOP">&nbsp;redial_interval による時間経過待ち&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STARTED&nbsp;</td>
+<td valign="TOP">&nbsp;Running 状態&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STOPPING&nbsp;</td>
+<td valign="TOP">&nbsp;Down 要求済で停止待ち&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;sceINETCTL_S_STOPPED&nbsp;</td>
+<td valign="TOP">&nbsp;I/F は停止状態&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">I/F が PPP の時、リダイアル処理に入っても sceINETCTL_IEV_Error は通知されます。その時、この sceInetCtlGetState() を呼び出す事でリダイアル処理中なのかを判別できます。以下のように処理して下さい。<br><br></div>
+<div style="margin-left:35px;"><ul>
+         <li> sceINETCTL_S_STOPPED の時:<br>「接続に失敗しました」と表示する。
+         <li> それ以外の時:<br>「リダイアル中です」と表示し、次のイベント発生を待つ。
+</ul></div>
+<div style="margin-left:50px;"><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlSetAutoMode"><font size=6>sceInetCtlSetAutoMode<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>自動モードの設定 / 解除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetCtlSetAutoMode</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>f_auto</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>f_auto</i>&nbsp;</td>
+<td>&nbsp;自動モードの指定&nbsp;<br>&nbsp;== 0のとき非自動モード、!= 0のとき自動モード&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">0を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">inetctl.irxの起動時にオプション-no_autoの有無によって指定されている自動モードの設定を、<i>f_auto</i>にしたがって変更します。<br>自動モードでは、inetctl.irxはデバイス接続およびINETCTLの設定の書き換え時に、該当する設定を自動的にinet.irxに通知してインタフェースをUpします。<br>非自動モードでは、sceInetCnfUpInterface()を呼び出さない限りinet.irxへの設定通知やインタフェースのUpは行いません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInetCtlUpInterface"><font size=6>sceInetCtlUpInterface<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>インターフェースUp<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>sceInetCtlUpInterface</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	int <i>id</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>id</i>&nbsp;</td>
+<td>&nbsp;UpさせるインターフェースID&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、０を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;Up失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE&nbsp;<br>&nbsp;_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在の設定内容をinet.irxに通知してから、<i>id</i>で指定されたインタフェースをUpします。<i>id</i>に0が指定された場合は、設定データが存在してUp可能な状態にあるすべてのインタフェースをUpします。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>Libnet互換関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="load_set_conf_extra"><font size=6>load_set_conf_extra<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>指定したファイルの内容を読み込み設定する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;libnet.h&gt;
+int <b>load_set_conf_extra</b>(
+	sceSifMClientData *<i>cd</i>,
+	u_int *<i>net_buf</i>,
+	char *<i>fname</i>,
+	char *<i>usr_name</i>,
+	u_int <i>flags</i>
+);
+
+</font></pre></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td>&nbsp;<i>cd</i>&nbsp;</td>
+<td>&nbsp;MSIFRPCシステムのクライアントデータ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>net_buf</i>&nbsp;</td>
+<td>&nbsp;SIFの送受信バッファ&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>fname</i>&nbsp;</td>
+<td>&nbsp;ネットワーク設定のDBファイル名&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;<i>usr_name</i>&nbsp;</td>
+<td>&nbsp;使用するネットワーク設定名&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flags</i>&nbsp;</td>
+<td>&nbsp;モード指定などのフラグ&nbsp;<br>&nbsp;sceLIBNETF_AUTO_LOADMODULE&nbsp;<br>&nbsp;sceLIBNETF_DECODE&nbsp;<br>&nbsp;sceLIBNETF_AUTO_UPIF&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、sceLIBNETE_OK（=0）を返します。<br>エラーの場合、以下のエラーコード（負の値）を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-540&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_NG&nbsp;</td>
+<td valign="TOP">&nbsp;netcnfif.irxの自動読み込みに失敗、&nbsp;<br>&nbsp;Netcnfifの各関数で失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-542&nbsp;</td>
+<td valign="TOP">&nbsp;sceLIBNETE_RPC_CALL_FAILED&nbsp;</td>
+<td valign="TOP">&nbsp;RPC サービス関数の呼び出しに失敗&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">sceInetCtlSetAutoMode()、sceLibnetSetConfiguration()のエラーコードの場合もあります。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>fname</i>、<i>user_name</i>で指定したネットワーク設定ファイルをロードし設定します。<br><i>flags</i>にsceLIBNETF_AUTO_LOADMODULEを指定すると自動的にNetcnfifで必要なモジュールをロードします。CDから起動するなど手動でirxモジュールをロードする場合は、<br>sceLIBNETF_AUTO_LOADMODULEフラグは指定しません。sceLIBNETF_DECODEを指定すると設定ファイルのdecodeに対応します。sceLIBNETF_AUTO_UPIFを指定すると自動的にインターフェースがUpするような準備を行います。<br>INETCTL でのオプションは使用されません。<br>例えば、sceLIBNETF_DECODEを指定して、INETCTLで-no_decodeオプションを定義してもINETCTLの定義は使用されることはなく、暗号化の設定ファイルに対応したloadとなります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数は便宜上の観点からRelease2.4.3以前のLibnetとの互換性を持たせるために用意されています。ネットワーク設定を行う関数としては最低限の機能ですので、読み込んだ設定を修正する必要がある場合など、この関数で対応できない場合にはNetcnfifライブラリの各関数を使用してください。<br>この関数が必要でない場合は、sceLibnetDisableCompatibleをマクロ定義してください。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

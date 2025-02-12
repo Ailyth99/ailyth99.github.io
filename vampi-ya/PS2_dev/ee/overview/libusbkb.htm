@@ -1,0 +1,989 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>USBキーボードライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/usbkb_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+USBキーボードライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b> ライブラリ概要</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>対応機種</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>サンプルプログラム</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>使用方法</b><br></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>USBキーボードライブラリの主な機能</b><br></a>
+    <a href="#Heading4_2_2"> <b>基本的な使用手順</b><br></a>
+    <a href="#Heading4_2_3"> <b>usbkb.irxの起動方法</b><br></a>
+    <a href="#Heading4_2_4"> <b>キーコード変換機能</b><br></a>
+    <a href="#Heading4_2_5"> <b>キーボードNo.について</b><br></a>
+    <a href="#Heading4_2_6"> <b>キーボードをパッドとして使うときの注意点</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b> ライブラリ概要</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">USBキーボードライブラリは、EEアプリケーションからUSBキーボードを制御するライブラリで、EE側のアーカイブファイルlibusbkb.aとIOP側のモジュールusbkb.irxで構成されています（IOPアプリケーションから使用することはできません）。<br>なお、本ライブラリの使用は強制いたしませんので、USBキーボードの制御には独自に開発したライブラリを使用してもかまいません。<br>Release2.4からusbkb.irxのアンロードに対応しました。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/libusbkb001.gif"><p>
+<b>図 1 USBキーボードライブラリの階層構造</b>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>対応機種</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBキーボードライブラリが対応するキーボードの条件は以下のとおりです。<br></div>
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> USB仕様1.0あるいはUSB仕様1.1準拠</li>
+         <li VALUE=2> PC-AT互換機あるいはMacintoshの101 / 104 / 106 / 109仕様のキー配列</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">ただし、これらの条件を満たしていても動作しないキーボードも一部にありますので、動作確認には注意してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBキーボードライブラリを使用するには、以下のファイルが必要です。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> sce/ee/include/libusbkb.h	（EE用外部ヘッダ）
+         <li> sce/ee/lib/libusbkb.a     	（EE用ライブラリファイル）
+         <li> sce/iop/modules/usbkb.irx	（USBキーボードドライバ）
+         <li> sce/iop/modules/usbd.irx  	（USBドライバ）
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>サンプルプログラム</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBキーボードライブラリを使用するプログラム例として、以下のサンプルが用意されています。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> sce/ee/sample/usb/libusbkb/*	（EE用サンプル）
+</ul></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>使用方法</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>USBキーボードライブラリの主な機能</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBキーボードライブラリの主な機能を次に示します。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_1"><h4>
+(1)&nbsp;<b>USBキーボードデータの抽象化（文字入力用）</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">通常、USBキーボードは次のように、押下されているキー全部のキーコードを返します。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;(1) aを押下&nbsp;</td>
+<td valign="TOP">&nbsp;→キーコード：a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;(2) そのままさらにbを押下&nbsp;</td>
+<td valign="TOP">&nbsp;→キーコード：a b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;(3) そのままさらにcを押下&nbsp;</td>
+<td valign="TOP">&nbsp;→キーコード：a b c&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">USBキーボードライブラリでは文字入力が容易になるように次のように抽象化を行うことができます。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;(1) aを押下&nbsp;</td>
+<td valign="TOP">&nbsp;→キーコード：a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;(2) そのままさらにbを押下&nbsp;</td>
+<td valign="TOP">&nbsp;→キーコード：b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;(3) そのままさらにcを押下&nbsp;</td>
+<td valign="TOP">&nbsp;→キーコード：c&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">このように抽象化が行われるため、アプリケーションはライブラリが返すコードをそのまま扱うことができます。<br>この抽象化機能は、リードモードを文字入力モードにしたときのみ機能します。<br>リードモードは、sceUsbKbSetReadMode()で設定します。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_2"><h4>
+(2)&nbsp;<b>キーコード変換</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">USBキーボードが返すキーコードは、USB仕様独自のデバイスコードです。<br>USBキーボードライブラリではShiftキーやCapsLockの状態を考慮してデバイスコードをASCIIコードに変換します。また必要に応じて、変換機能を無効にすることもできます。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_3"><h4>
+(3)&nbsp;<b>キーリピート</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">USBキーボードはハードレベルでのキーリピートを行いませんので、USBキーボードライブラリでソフトウェア的にキーリピートをサポートしています。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_1_4"><h4>
+(4)&nbsp;<b>LEDの点灯制御</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">キーボードに装備されているNumLock / CapsLock / ScrollLockの各LEDを、それぞれ対応するキーの押下によって自動的に点灯 / 消灯します。必要に応じて、自動制御を無効にしてアプリケーションで制御することもできます。<br>なお、COMPOSE-LED / KANA-LEDは、現在のところ自動制御対象外です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>基本的な使用手順</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBキーボードライブラリの基本的な使用手順を次に示します。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> IOPモジュールのロード<br>usbd.irxとusbkb.irxをIOP上にロード＆スタートします。</li>
+         <li VALUE=2> ライブラリ初期化<br>sceUsbKbInit()を呼び出し、初期化処理を行います。</li>
+         <li VALUE=3> 接続情報の取得<br>sceUsbKbGetInfo()を呼び出し、USBキーボードの接続情報を取得します。</li>
+         <li VALUE=4> キーボードの設定<br>新しく接続されたキーボードが見つかれば、sceUsbKbSetLEDStatus(), sceUsbKbSetLEDMode(), sceUsbKbSetRepeat(), sceUsbKbSetCodeType(), sceUsbKbSetArrangement(),sceUsbKbSetReadMode()を呼び出して、そのキーボードに関する各種モード設定を行います。<br>必要ならば、sceUsbKbClearRbuf()でリングバッファに溜まったデータをクリアして下さい。</li>
+         <li VALUE=5> キーボードデータの読み取り<br>1～4VSyncごとにsceUsbKbRead()を呼び出して、キーボードデータを読み取ります。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;"><br>(5)の処理中にリードエラー（接続切断）が発生したときは、(3)へ戻ってやり直してください。動的に接続されたキーボードに対応する場合は、sceUsbKbGetInfo()で接続情報を常に監視する必要があるかと思われます。<br>なお、USBキーボードライブラリの各APIはマルチスレッドセーフではありません。複数のスレッドからキーボードを操作する場合はセマフォ等を用いて排他制御を行ってください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>usbkb.irxの起動方法</b><br>
+</a>
+</h3>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_3_1"><h4>
+(1)&nbsp;<b>usbkb.irxの書式</b><br></h4>
+</a></div>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>書式</b><br></h4></div>
+<div style="margin-left:80px;">usbkb.irx [keybd=1-127] [debug=0|1] [lmode=AUTOLOAD|TESTLOAD]<br></div>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>オプション</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;keybd&nbsp;</td>
+<td valign="TOP">&nbsp;キーボードの最大接続数を指定します。デフォルトは２です。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;debug&nbsp;</td>
+<td valign="TOP">&nbsp;デバッグ用にprintf文で出力されるデータの内容を指定します。&nbsp;<br>&nbsp;　0:タイトルと致命的なエラー（デフォルト）&nbsp;<br>&nbsp;　1:USBキーボードから送られてくるパケット&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;lmode&nbsp;</td>
+<td valign="TOP">&nbsp;USBモジュールオートローダー（usbmload.irx）が使用する&nbsp;<br>&nbsp;オプションです。通常は指定しないでください。&nbsp;<br>&nbsp;詳細はUSBモジュールオートローダーの資料を参照してください。&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_3_2"><h4>
+(2)&nbsp;<b>起動方法</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">一般的には、EE上から以下のように起動すればよいでしょう。<br><br></div>
+        <div style="margin-left:80px;"><font size=3><pre>#define USBKEYBD_ARG "keybd=8\0debug=1"
+char *option = USBKEYBD_ARG;
+while(sceSifLoadModule("host0:/usr/local/sce/iop/modules/usbkb.irx",
+			sizeof(USBKEYBD_ARG),option) &lt; 0)
+{
+	printf("Can't load module usbkb\n");
+}
+</font></pre></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>キーコード変換機能</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBキーボードライブラリは、USBキーボードが返すデバイスキーコードを、Shiftキーなどの状態を考慮してASCIIコードに変換する機能を持ちます。このキーコード変換機能の詳細について解説します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>キーコードの定義</b><br></h4></div>
+
+<div style="margin-left:67px;">USBキーボードライブラリでは、以下のようにビット定義されたu_shortでキーコードを取り扱います。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット位置</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit0-7&nbsp;</td>
+<td valign="TOP">&nbsp;コード（ASCIIコードまたはデバイスキーコード）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit8-13&nbsp;</td>
+<td valign="TOP">&nbsp;(reserved)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit14&nbsp;</td>
+<td valign="TOP">&nbsp;テンキーフラグ&nbsp;<br>&nbsp; 0　通常キー&nbsp;<br>&nbsp; 1　テンキー（キーパッド）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;bit15&nbsp;</td>
+<td valign="TOP">&nbsp;変換フラグ&nbsp;<br>&nbsp; 0　ASCIIコード&nbsp;<br>&nbsp; 1　USB仕様のデバイスキーコード&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">bit0-7には、変換したASCIIコードまたは変換していないデバイスキーコードが入り、どちらであるかがbit15で示されます。<br>テンキーフラグと変換フラグについては、libusbkb.hでビットマスクが次のように定義されています。<br><br></div>
+        <div style="margin-left:80px;"><font size=3><pre>#define USBKB_RAWDAT 0x8000  /* ASCIIコードに変換できないコード */
+#define USBKB_KEYPAD 0x4000  /* キーパッドコード */
+</font></pre></div>
+
+<div style="margin-left:40px;"><h4><b>USB仕様独自のキーコード</b><br></h4></div>
+
+<div style="margin-left:67px;">USB仕様独自のキーコード（生キーコード）の詳細については、http://www.usb.org/developers/devclass_docs.html#approvedで配布されている"HID Usage Tables Document 1.1" p35を参照してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>変換できないキーコード</b><br></h4></div>
+
+<div style="margin-left:67px;">変換モードの設定に関わらず、対応するASCIIコードの存在しないキーコードについてはbit15を1にセットしてUSB仕様独自のデバイスキーコードがbit0-7に入ります。<br>変換できないキーコードの一部はlibusbkb.hで次のように定義されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_NO_EVENT&nbsp;</td>
+<td valign="TOP">&nbsp;0x00&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_E_ROLLOVER&nbsp;</td>
+<td valign="TOP">&nbsp;0x01&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_E_POSTFAIL&nbsp;</td>
+<td valign="TOP">&nbsp;0x02&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_E_UNDEF&nbsp;</td>
+<td valign="TOP">&nbsp;0x03&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_ESCAPE&nbsp;</td>
+<td valign="TOP">&nbsp;0x29&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_106_KANJI&nbsp;</td>
+<td valign="TOP">&nbsp;0x35　/* 半角／全角 漢字 */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_CAPS_LOCK&nbsp;</td>
+<td valign="TOP">&nbsp;0x39&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F1&nbsp;</td>
+<td valign="TOP">&nbsp;0x3a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F2&nbsp;</td>
+<td valign="TOP">&nbsp;0x3b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F3&nbsp;</td>
+<td valign="TOP">&nbsp;0x3c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F4&nbsp;</td>
+<td valign="TOP">&nbsp;0x3d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F5&nbsp;</td>
+<td valign="TOP">&nbsp;0x3e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F6&nbsp;</td>
+<td valign="TOP">&nbsp;0x3f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F7&nbsp;</td>
+<td valign="TOP">&nbsp;0x40&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F8&nbsp;</td>
+<td valign="TOP">&nbsp;0x41&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F9&nbsp;</td>
+<td valign="TOP">&nbsp;0x42&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F10&nbsp;</td>
+<td valign="TOP">&nbsp;0x43&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F11&nbsp;</td>
+<td valign="TOP">&nbsp;0x44&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F12&nbsp;</td>
+<td valign="TOP">&nbsp;0x45&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_PRINTSCREEN&nbsp;</td>
+<td valign="TOP">&nbsp;0x46&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_SCROLL_LOCK&nbsp;</td>
+<td valign="TOP">&nbsp;0x47&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_PAUSE&nbsp;</td>
+<td valign="TOP">&nbsp;0x48&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_INSERT&nbsp;</td>
+<td valign="TOP">&nbsp;0x49&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_HOME&nbsp;</td>
+<td valign="TOP">&nbsp;0x4a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_PAGE_UP&nbsp;</td>
+<td valign="TOP">&nbsp;0x4b&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_DELETE&nbsp;</td>
+<td valign="TOP">&nbsp;0x4c&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_END&nbsp;</td>
+<td valign="TOP">&nbsp;0x4d&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_PAGE_DOWN&nbsp;</td>
+<td valign="TOP">&nbsp;0x4e&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_RIGHT_ARROW&nbsp;</td>
+<td valign="TOP">&nbsp;0x4f&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_LEFT_ARROW&nbsp;</td>
+<td valign="TOP">&nbsp;0x50&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_DOWN_ARROW&nbsp;</td>
+<td valign="TOP">&nbsp;0x51&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_UP_ARROW&nbsp;</td>
+<td valign="TOP">&nbsp;0x52&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_NUM_LOCK&nbsp;</td>
+<td valign="TOP">&nbsp;0x53&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_APPLICATION&nbsp;</td>
+<td valign="TOP">&nbsp;0x65　/* アプリケーションキー */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KANA&nbsp;</td>
+<td valign="TOP">&nbsp;0x88　/* カタカナ／ひらがな／ローマ字 */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_HENKAN&nbsp;</td>
+<td valign="TOP">&nbsp;0x8a　/* 前候補／変換／全候補 */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_MUHENKAN&nbsp;</td>
+<td valign="TOP">&nbsp;0x8b　/* 無変換 */&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<div style="margin-left:40px;"><h4><b>代表的な生コード</b><br></h4></div>
+
+<div style="margin-left:67px;">sceUsbKbSetCodeType()でUSBKB_CODETYPE_RAWを設定したとき、USBデバイスが返す生コードを扱う必要があります。<br>下記のように生コードでよく使われるものを"libusbkb.h"に定義しています。<br>前述の「変換できないキーコード」と併せてお使い下さい。<br><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_A&nbsp;</td>
+<td valign="TOP">&nbsp;0x04&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_B&nbsp;</td>
+<td valign="TOP">&nbsp;0x05&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_C&nbsp;</td>
+<td valign="TOP">&nbsp;0x06&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_D&nbsp;</td>
+<td valign="TOP">&nbsp;0x07&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_E&nbsp;</td>
+<td valign="TOP">&nbsp;0x08&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_F&nbsp;</td>
+<td valign="TOP">&nbsp;0x09&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_G&nbsp;</td>
+<td valign="TOP">&nbsp;0x0A&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_H&nbsp;</td>
+<td valign="TOP">&nbsp;0x0B&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_I&nbsp;</td>
+<td valign="TOP">&nbsp;0x0C&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_J&nbsp;</td>
+<td valign="TOP">&nbsp;0x0D&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_K&nbsp;</td>
+<td valign="TOP">&nbsp;0x0E&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_L&nbsp;</td>
+<td valign="TOP">&nbsp;0x0F&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_M&nbsp;</td>
+<td valign="TOP">&nbsp;0x10&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_N&nbsp;</td>
+<td valign="TOP">&nbsp;0x11&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_O&nbsp;</td>
+<td valign="TOP">&nbsp;0x12&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_P&nbsp;</td>
+<td valign="TOP">&nbsp;0x13&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_Q&nbsp;</td>
+<td valign="TOP">&nbsp;0x14&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_R&nbsp;</td>
+<td valign="TOP">&nbsp;0x15&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_S&nbsp;</td>
+<td valign="TOP">&nbsp;0x16&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_T&nbsp;</td>
+<td valign="TOP">&nbsp;0x17&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_U&nbsp;</td>
+<td valign="TOP">&nbsp;0x18&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_V&nbsp;</td>
+<td valign="TOP">&nbsp;0x19&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_W&nbsp;</td>
+<td valign="TOP">&nbsp;0x1A&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_X&nbsp;</td>
+<td valign="TOP">&nbsp;0x1B&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_Y&nbsp;</td>
+<td valign="TOP">&nbsp;0x1C&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_Z&nbsp;</td>
+<td valign="TOP">&nbsp;0x1D&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_1&nbsp;</td>
+<td valign="TOP">&nbsp;0x1E&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_2&nbsp;</td>
+<td valign="TOP">&nbsp;0x1F&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_3&nbsp;</td>
+<td valign="TOP">&nbsp;0x20&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_4&nbsp;</td>
+<td valign="TOP">&nbsp;0x21&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_5&nbsp;</td>
+<td valign="TOP">&nbsp;0x22&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_6&nbsp;</td>
+<td valign="TOP">&nbsp;0x23&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_7&nbsp;</td>
+<td valign="TOP">&nbsp;0x24&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_8&nbsp;</td>
+<td valign="TOP">&nbsp;0x25&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_9&nbsp;</td>
+<td valign="TOP">&nbsp;0x26&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_0&nbsp;</td>
+<td valign="TOP">&nbsp;0x27&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_ENTER&nbsp;</td>
+<td valign="TOP">&nbsp;0x28&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_ESC&nbsp;</td>
+<td valign="TOP">&nbsp;0x29&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_BS&nbsp;</td>
+<td valign="TOP">&nbsp;0x2A&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_TAB&nbsp;</td>
+<td valign="TOP">&nbsp;0x2B&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_SPACE&nbsp;</td>
+<td valign="TOP">&nbsp;0x2C&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_MINUS&nbsp;</td>
+<td valign="TOP">&nbsp;0x2D&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_EQUAL_101&nbsp;</td>
+<td valign="TOP">&nbsp;0x2E  /* = and + */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_ACCENT_CIRCONFLEX_106&nbsp;</td>
+<td valign="TOP">&nbsp;0x2E  /* ^ and ~ */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_LEFT_BRACKET_101&nbsp;</td>
+<td valign="TOP">&nbsp;0x2F  /* [ */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_ATMARK_106&nbsp;</td>
+<td valign="TOP">&nbsp;0x2F  /* @ */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_RIGHT_BRACKET_101&nbsp;</td>
+<td valign="TOP">&nbsp;0x30  /* ] */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_LEFT_BRACKET_106&nbsp;</td>
+<td valign="TOP">&nbsp;0x30  /* [ */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_BACKSLASH_101&nbsp;</td>
+<td valign="TOP">&nbsp;0x31  /* \ and | */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_RIGHT_BRACKET_106&nbsp;</td>
+<td valign="TOP">&nbsp;0x32  /* ] */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_SEMICOLON&nbsp;</td>
+<td valign="TOP">&nbsp;0x33  /* ; */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_QUOTATION_101&nbsp;</td>
+<td valign="TOP">&nbsp;0x34  /* ' and " */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_COLON_106&nbsp;</td>
+<td valign="TOP">&nbsp;0x34  /* : and * */&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_COMMA&nbsp;</td>
+<td valign="TOP">&nbsp;0x36&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_PERIOD&nbsp;</td>
+<td valign="TOP">&nbsp;0x37&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_SLASH&nbsp;</td>
+<td valign="TOP">&nbsp;0x38&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_CAPS_LOCK&nbsp;</td>
+<td valign="TOP">&nbsp;0x39&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_NUMLOCK&nbsp;</td>
+<td valign="TOP">&nbsp;0x53&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_SLASH&nbsp;</td>
+<td valign="TOP">&nbsp;0x54&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_ASTERISK&nbsp;</td>
+<td valign="TOP">&nbsp;0x55&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_MINUS&nbsp;</td>
+<td valign="TOP">&nbsp;0x56&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_PLUS&nbsp;</td>
+<td valign="TOP">&nbsp;0x57&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_ENTER&nbsp;</td>
+<td valign="TOP">&nbsp;0x58&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_1&nbsp;</td>
+<td valign="TOP">&nbsp;0x59&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_2&nbsp;</td>
+<td valign="TOP">&nbsp;0x5A&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_3&nbsp;</td>
+<td valign="TOP">&nbsp;0x5B&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_4&nbsp;</td>
+<td valign="TOP">&nbsp;0x5C&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_5&nbsp;</td>
+<td valign="TOP">&nbsp;0x5D&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_6&nbsp;</td>
+<td valign="TOP">&nbsp;0x5E&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_7&nbsp;</td>
+<td valign="TOP">&nbsp;0x5F&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_8&nbsp;</td>
+<td valign="TOP">&nbsp;0x60&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_9&nbsp;</td>
+<td valign="TOP">&nbsp;0x61&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_0&nbsp;</td>
+<td valign="TOP">&nbsp;0x62&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;#define USBKEYC_KPAD_PERIOD&nbsp;</td>
+<td valign="TOP">&nbsp;0x63&nbsp;</td>
+</tr>
+</table>
+</div>
+
+<div style="margin-left:40px;"><h4><b>KEY OFFコード</b><br></h4></div>
+
+<div style="margin-left:67px;">数値が０のキーコードはKEY OFFコードと呼ばれ、以下の場合に発生します。<br></div>
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> Modifyer Key（Shift / Ctrl / Alt / Win）だけが押下されたとき</li>
+         <li VALUE=2> いずれかのキーが離されたとき</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:67px;">なお、KEY OFFコードでどのキーが離されたのかを知ることはできません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>例外的なキーコード変換</b><br></h4></div>
+
+<div style="margin-left:67px;">キーコード変換の結果得られるASCIIコードは、基本的にはキートップに刻印されている文字のASCIIコードですが、いくつか例外的な変換が行われるキーがあります。<br></div>
+    <div style="margin-left:65px;"><ol TYPE="a">
+         <li VALUE=1> ＼キー<br>106キーボードの＼（バックスラッシュ）キーは、￥キーと区別するために変換されません。ただし、Shiftキーといっしょに押下したときは、'_'に変換されます。</li>
+         <li VALUE=2> 制御コードに変換されるキー<br>Tab, Enter, Backspaceは、それぞれ'\t', '\n', '\b'に変換されます。</li>
+         <li VALUE=3> テンキー（キーパッド）<br>NumLock以外のキーはNumLockの状態に応じて得られるキーコードが変わります。<br>NumLock ONのときは、それぞれ数値や記号のASCIIコードに変換され、テンキーを表すUSBKB_KEYPADが1にセットされます。NumLock OFFのときは、以下のキーだけがコード変換されます。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:67px;"><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>キー</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>得られるキーコード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Home&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_HOME | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;End&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_END | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;PageUp&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_PAGE_UP | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;PageDown&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_PAGE_DOWN | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Insert&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_INSERT | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Delete&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_DELETE | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;↑&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_UP_ARROW | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;↓&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_DOWN_ARROW | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;→&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_RIGHT_ARROW | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;←&nbsp;</td>
+<td valign="TOP">&nbsp;USBKEYC_LEFT_ARROW | USBKB_KEYPAD | USBKB_RAWDAT&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_5">
+<a href="#Heading3_2"> 2. </a>5 <b>キーボードNo.について</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">USBキーボードライブラリでは、複数接続されるUSBキーボードをキーボードNo.で管理します。<br>キーボードNo.は、0～（最大接続可能数－１）の値を取ります。<br>キーボードNo.は、基本的にはエニュメレーションの順番で決まります。<br>つまり、USBキーボードを接続した順番とも言い変えられますが、下記のようにそう単純ではありません。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_5_1"><h4>
+(1)&nbsp;<b>usbkb.irxを起動する前に接続しているUSBデバイスが複数あった場合</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">ハードの仕様上ランダムな順番でエニュメレーションされますので、各キーボードのキーボードNo.は不定になります。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_2_5_2"><h4>
+(2)&nbsp;<b>以前にキーボードが接続されていたポートに再び別のキーボードを接続した場合</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">以前のキーボードに割り当てられたNo.と同じになります。<br>しかし、最大接続可能数よりも物理的なポート数が多いとき、必ずしもそのようにはなりません。以下にその例を示します。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> 最大接続可能数を２とする。つまり、キーボードNo.として使えるのは、0と１だけ。</li>
+         <li VALUE=2> ルートハブ（PS2に内蔵されているハブ）に４ポートハブを接続する。</li>
+         <li VALUE=3> ４ポートハブのポート１にキーボードAを接続する。キーボードNo.は０が割り当てられる。</li>
+         <li VALUE=4> ４ポートハブのポート２にキーボードBを接続する。キーボードNo.は１が割り当てられる。この時点で、<br>ハブポート１＝キーボードNo.０（キーボードA）<br>ハブポート２＝キーボードNo.１（キーボードB）<br>ハブポート３＝なし<br>となる。</li>
+         <li VALUE=5> キーボードAをハブから抜く。</li>
+         <li VALUE=6> ４ポートハブのポート３にキーボードAを接続する。このとき、空きキーボードNo.が0しかないので、ポート３にはキーボードNo.0が割り当てられる。この時点で、<br>ハブポート１＝なし<br>ハブポート２＝キーボードNo.１（キーボードB）<br>ハブポート３＝キーボードNo.０（キーボードA）<br>となる。</li>
+         <li VALUE=7> キーボードBをハブから抜く。<br>４ポートハブのポート１にキーボードBを接続する。<br>このとき、空きキーボードNo.が１しかないので、ポート１にはキーボードNo.１が割り当てられる。この時点で、<br>ハブポート１＝キーボードNo.１（キーボードB）<br>ハブポート２＝なし<br>ハブポート３＝キーボードNo.０（キーボードA）<br>となる。</li>
+</ol></div>
+</ul></div>
+<div style="margin-left:50px;">このように同じポートに接続しても必ずしも同じキーボードNo.になるわけではありません。<br>この問題に対する回避策としては、最大接続可能数を十分大きな値にしておくことが考えられます。<br>例えば、最大接続可能数を３２等に設定しておけば、最大接続可能数よりも物理的なポート数が多くなることは事実上ありえないと思われます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_6">
+<a href="#Heading3_2"> 2. </a>6 <b>キーボードをパッドとして使うときの注意点</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ネットワークゲーム等の仕様として、会話モード時はキーボードでチャットを行い、移動モード時は同じキーボードで移動もできるようにしたい場合が考えられます。<br>本ライブラリでは、文字入力モードとパケットモードという２つのデータ読み取りモードを用意していますので、そのようなことが可能です（usbkb_rf.docのsceUsbKbSetReadMode()を参照）。<br>しかし、キーボードをパッドとして使うときには、USBキーボードは同時押しに弱いということを理解しなければいけません。<br>USBキーボードは２つまでのキーの同時押しは確実に検出できますが、３つ同時押しの場合はRollOverErrorとなる組み合わせがあります。<br>問題なのは、どのような同時押しの組み合わせでRollOverErrorを発生するのかという仕様が、USBキーボード毎に異なっていることです。<br>ですから、キー配置の仕様は、特に注意する必要があります。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

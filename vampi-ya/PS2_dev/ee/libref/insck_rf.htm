@@ -1,0 +1,4294 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>ネットワークソケットライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/insock.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+ネットワークソケットライブラリ
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockHostent_t"> sceInsockHostent_t<br></a></td>
+<td>&nbsp;</td><td>インターネットホスト構造体<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInAddr_t"> sceInsockInAddr_t<br></a></td>
+<td>&nbsp;</td><td>IPv4アドレス構造体<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockIpMreq_t"> sceInsockIpMreq_t<br></a></td>
+<td>&nbsp;</td><td>IP マルチキャスト設定用構造体<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSockaddr_t"> sceInsockSockaddr_t<br></a></td>
+<td>&nbsp;</td><td>ソケットアドレス構造体<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSockaddrIn_t"> sceInsockSockaddrIn_t<br></a></td>
+<td>&nbsp;</td><td>インターネットソケットアドレス構造体<br></td></tr>
+</table><br>
+<font size=4><b>BSDソケットAPI互換関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockAccept"> sceInsockAccept<br></a></td>
+<td>&nbsp;</td><td>TCP コネクションの確立を完了したソケット取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockBind"> sceInsockBind<br></a></td>
+<td>&nbsp;</td><td>ソケットにアドレスをバインド<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockConnect"> sceInsockConnect<br></a></td>
+<td>&nbsp;</td><td>サーバに接続<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockErrno"> sceInsockErrno<br></a></td>
+<td>&nbsp;</td><td>ソケット関数のエラー値を取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockGethostbyaddr"> sceInsockGethostbyaddr<br></a></td>
+<td>&nbsp;</td><td>32ビットIPv4アドレスからホスト構造体を取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockGethostbyname"> sceInsockGethostbyname<br></a></td>
+<td>&nbsp;</td><td>ホスト名からホスト構造体を取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockGetpeername"> sceInsockGetpeername<br></a></td>
+<td>&nbsp;</td><td>ソケットの接続先情報を取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockGetSockName"> sceInsockGetSockName<br></a></td>
+<td>&nbsp;</td><td>ソケットのローカル情報を取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockGetsockopt"> sceInsockGetsockopt<br></a></td>
+<td>&nbsp;</td><td>ソケットオプションを取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockHErrno"> sceInsockHErrno<br></a></td>
+<td>&nbsp;</td><td>ホスト構造体関数のエラー値を取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInetAddr"> sceInsockInetAddr<br></a></td>
+<td>&nbsp;</td><td>ドット形式 IPv4 アドレスから32ビットアドレス取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInetAton"> sceInsockInetAton<br></a></td>
+<td>&nbsp;</td><td>ドット形式 IPv4 アドレスから32ビットアドレス取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInetLnaof"> sceInsockInetLnaof<br></a></td>
+<td>&nbsp;</td><td>IPv4 アドレスからローカルネットワークアドレスの取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInetMakeaddr"> sceInsockInetMakeaddr<br></a></td>
+<td>&nbsp;</td><td>ネットワークアドレスからIPv4アドレスの構築<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInetNetof"> sceInsockInetNetof<br></a></td>
+<td>&nbsp;</td><td>IPv4 アドレスからネットワークアドレスの取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInetNetwork"> sceInsockInetNetwork<br></a></td>
+<td>&nbsp;</td><td>ドット形式 IPv4 アドレスから 32 ビットアドレス取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockInetNtoa"> sceInsockInetNtoa<br></a></td>
+<td>&nbsp;</td><td>32ビットIPv4アドレスからドット形式アドレス取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockListen"> sceInsockListen<br></a></td>
+<td>&nbsp;</td><td>TCP コネクションを受け付ける<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockPoll"> sceInsockPoll<br></a></td>
+<td>&nbsp;</td><td>同期 I/O の多重化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockRecv"> sceInsockRecv<br></a></td>
+<td>&nbsp;</td><td>データを受信<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockRecvfrom"> sceInsockRecvfrom<br></a></td>
+<td>&nbsp;</td><td>データを受信(送信元ホストのアドレス構造体も取得)<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSend"> sceInsockSend<br></a></td>
+<td>&nbsp;</td><td>データを送信<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSendFin"> sceInsockSendFin<br></a></td>
+<td>&nbsp;</td><td>ソケットの送信側を閉じる<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSendto"> sceInsockSendto<br></a></td>
+<td>&nbsp;</td><td>データを送信(送信先ホストのアドレス構造体を指定)<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSetsockopt"> sceInsockSetsockopt<br></a></td>
+<td>&nbsp;</td><td>ソケットオプションを設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockShutdown"> sceInsockShutdown<br></a></td>
+<td>&nbsp;</td><td>ソケットを閉じる<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSocket"> sceInsockSocket<br></a></td>
+<td>&nbsp;</td><td>ソケットを生成<br></td></tr>
+</table><br>
+<font size=4><b>その他の関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockAbort"> sceInsockAbort<br></a></td>
+<td>&nbsp;</td><td>処理中断<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSetRecvTimeout"> sceInsockSetRecvTimeout<br></a></td>
+<td>&nbsp;</td><td>受信用タイムアウト設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSetSendTimeout"> sceInsockSetSendTimeout<br></a></td>
+<td>&nbsp;</td><td>送信用タイムアウト設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockSetSifMBindRpcValue"> sceInsockSetSifMBindRpcValue<br></a></td>
+<td>&nbsp;</td><td>バッファサイズ、スタックサイズ、優先度を指定する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceInsockTerminate"> sceInsockTerminate<br></a></td>
+<td>&nbsp;</td><td>メモリ領域の解放<br></td></tr>
+</table><br>
+<font size=4><b>エラーコード</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#エラーコード"> エラーコード<br></a></td>
+<td>&nbsp;</td><td>libinsckのエラーコード<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockHostent_t"><font size=6>sceInsockHostent_t<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>インターネットホスト構造体<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct sceInsockHostent {
+	char *<i>h_name</i>;
+	char **<i>h_aliases</i>;
+	int <i>h_addrtype</i>;
+	int <i>h_length</i>;
+	char **<i>h_addr_list</i>;
+#define h_addr <i>h_addr_list</i>[0]
+} <b>sceInsockHostent_t</b>;
+#define hostent sceInsockHostent
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>h_name</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ホスト名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>h_aliases</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エイリアス名(本ライブラリでは未対応)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>h_addrtype</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレスタイプ(AF_INET)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>h_length</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレスサイズ(4バイト)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>h_addr_list</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IPアドレスリスト(本ライブラリでは1つのアドレスのみ対応)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">インターネット上のホストを示す構造体。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockGethostbyaddr">sceInsockGethostbyaddr</a>()<a href="#"></a>,<a href="#sceInsockGethostbyname">sceInsockGethostbyname</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInAddr_t"><font size=6>sceInsockInAddr_t<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>IPv4アドレス構造体<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct sceInsockInAddr {
+	u_int <i>s_addr</i>;
+} <b>sceInsockInAddr_t</b>;
+#define in_addr sceInsockInAddr
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>s_addr　　</i>IPv4アドレス(4バイト)<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">IPv4アドレスを保持するための構造体。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddrIn_t">sceInsockSockaddrIn_t</a><br><a href="#sceInsockInetAton">sceInsockInetAton</a>()<a href="#"></a>,<a href="#sceInsockInetLnaof">sceInsockInetLnaof</a>()<a href="#"></a>,<a href="#sceInsockInetNetof">sceInsockInetNetof</a>()<br><a href="#sceInsockInetNtoa">sceInsockInetNtoa</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockIpMreq_t"><font size=6>sceInsockIpMreq_t<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>IP マルチキャスト設定用構造体<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct sceInsockIpMreq {
+	sceInsockInAddr_t imr_multiaddr;
+	sceInsockInAddr_t imr_interface;
+} <b>sceInsockIpMreq_t</b>;
+
+#define ip_mreq sceInsockIpMreq
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>imr_multiaddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャストグループ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>imr_interface</i>&nbsp;</td>
+<td valign="TOP">&nbsp;I/F のローカル IP アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">IP_ADD_MEMBERSHIP,IP_DROP_MEMBERSHIP で使用する構造体。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSetSockOpt">sceInsockSetSockOpt</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSockaddr_t"><font size=6>sceInsockSockaddr_t<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットアドレス構造体<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef u_char sceInsockSaFamily_t;
+typedef struct sceInsockSockaddr {
+	u_char <i>sa_len</i>;
+	sceInsockSaFamily_t <i>sa_family</i>;
+	char <i>sa_data</i>[14];
+} <b>sceInsockSockaddr_t</b>;
+#define sa_family_t sceInsockSaFamily_t
+#define sockaddr sceInsockSockaddr
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sa_len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレス構造体サイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sa_family</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレスファミリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sa_data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;プロトコル依存アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各プロトコルファミリ(現時点ではインターネットプロトコルのみ)のソケットアドレス構造体の参照渡しに用いられる。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockAccept">sceInsockAccept</a>()<a href="#"></a>,<a href="#sceInsockBind">sceInsockBind</a>()<a href="#"></a>,<a href="#sceInsockConnect">sceInsockConnect</a>()<br><a href="#sceInsockGetpeername">sceInsockGetpeername</a>()<a href="#"></a>,<a href="#sceInsockGetsockname">sceInsockGetsockname</a>()<a href="#"></a>,<a href="#sceInsockRecvfrom">sceInsockRecvfrom</a>()<br><a href="#sceInsockSendto">sceInsockSendto</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSockaddrIn_t"><font size=6>sceInsockSockaddrIn_t<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>インターネットソケットアドレス構造体<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct sceInsockSockaddrIn {
+	u_char <i>sin_len</i>;
+	u_char <i>sin_family</i>;
+	u_short <i>sin_port</i>;
+	sceInsockInAddr_t <i>sin_addr</i>;
+	char <i>sin_zero</i>[8];
+} <b>sceInsockSockaddrIn_t</b>;
+#define sockaddr_in sceInsockSockaddrIn
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>sin_len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレス構造体サイズ(16バイト)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sin_family</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレスファミリ(AF_INETのみ可)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sin_port</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TCPまたはUDPのポート番号(ネットワークバイト順序)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sin_addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IPv4アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>sin_zero</i>&nbsp;</td>
+<td valign="TOP">&nbsp;未使用&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケットAPI関数に対してソケットを指定するための構造体。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockAccept">sceInsockAccept</a>()<a href="#"></a>,<a href="#sceInsockBind">sceInsockBind</a>()<a href="#"></a>,<a href="#sceInsockConnect">sceInsockConnect</a>()<br><a href="#sceInsockGetpeername">sceInsockGetpeername</a>()<a href="#"></a>,<a href="#sceInsockGetsockname">sceInsockGetsockname</a>()<a href="#"></a>,<a href="#sceInsockRecvfrom">sceInsockRecvfrom</a>()<br><a href="#sceInsockSendto">sceInsockSendto</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>BSDソケットAPI互換関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockAccept"><font size=6>sceInsockAccept<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>TCP コネクションの確立を完了したソケット取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+int <b>sceInsockAccept</b>(
+	int <i>s</i>,
+	sceInsockSockaddr_t *<i>addr</i>,
+	sceInsockSocklen_t *<i>paddrlen</i>
+)
+#define accept <b>sceInsockAccept</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;リスニングソケット&nbsp;<br>&nbsp;(sceInsockBind()、sceInsockListen()済み)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;接続相手のアドレス構造体を格納する領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddrlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;addrのサイズを格納する領域へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、新たなクライアント用のソケットディスクリプタを返す。<br>エラーの場合、-1を返す。sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;不正な関数呼び出し、引数が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;95&nbsp;</td>
+<td valign="TOP">&nbsp;EOPNOTSUPP&nbsp;</td>
+<td valign="TOP">&nbsp;そのソケットに対しての不正な呼び出し&nbsp;<br>&nbsp;(例:SOCK_STREAM に対するsendto())&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウト&nbsp;<br>&nbsp;が起こった、もしくはTCPの再送&nbsp;<br>&nbsp;タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck中のEE上でのセマフォや&nbsp;<br>&nbsp;INET中のIOP上でのセマフォが途中で&nbsp;<br>&nbsp;不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">TCPサーバとして動作しているとき、クライアントからの接続済みコネクションを取り出して、そのソケットディスクリプタを返す。このとき、クライアントのアドレス構造体を引数で指定した<i>addr</i>に、そのサイズ(常に4バイト)を<i>paddrlen</i>に返す。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddr_t">sceInsockSockaddr_t</a>,<a href="#sceInsockSockaddrIn_t">sceInsockSockaddrIn_t</a>,<a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockBind"><font size=6>sceInsockBind<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットにアドレスをバインド<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+int <b>sceInsockBind</b>(
+	int <i>s</i>,
+	const sceInsockSockaddr_t *<i>addr</i>,
+	sceInsockSocklen_t <i>addrlen</i>
+);
+#define bind <b>sceInsockBind</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルアドレスをバインドしたい&nbsp;<br>&nbsp;ソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルアドレス構造体へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addrlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルアドレス構造体のサイズ(常に16バイト)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;106&nbsp;</td>
+<td valign="TOP">&nbsp;EAFNOSUPPORT&nbsp;</td>
+<td valign="TOP">&nbsp;bind() の&nbsp;<br>&nbsp;((sturct sockaddr_in*)addr)&gt;sin_family &nbsp;<br>&nbsp;が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;112&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRINUSE&nbsp;</td>
+<td valign="TOP">&nbsp;使用中の local port に対する bind() &nbsp;<br>&nbsp;を呼び出した&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>に(<i>addr</i>,<i>addrlen</i>)で示すローカルアドレス(IPアドレスとポート番号)をバインドする。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddr_t">sceInsockSockaddr_t</a>,<a href="#sceInsockSockaddrIn_t">sceInsockSockaddrIn_t</a>,<a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockConnect"><font size=6>sceInsockConnect<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>サーバに接続<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+int <b>sceInsockConnect</b>(
+	int <i>s</i>,
+	const sceInsockSockaddr_t *<i>addr</i>,
+	sceInsockSocklen_t <i>addrlen</i>
+);
+#define connect <b>sceInsockConnect</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;接続に用いるソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルアドレス構造体へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addrlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルアドレス構造体のサイズ(常に16バイト)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;106&nbsp;</td>
+<td valign="TOP">&nbsp;EAFNOSUPPORT&nbsp;</td>
+<td valign="TOP">&nbsp;bind() の&nbsp;<br>&nbsp; ((sturct sockaddr_in*)addr)&gt;sin_family &nbsp;<br>&nbsp;が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや INET 中&nbsp;<br>&nbsp;の IOP 上でのセマフォが途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>を用いて、(<i>addr</i>,<i>addrlen</i>)で示すアドレスに対して接続を行なう。TCPの場合はコネクションを確立、UDPの場合はコネクションを確立したように振舞う。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddr_t">sceInsockSockaddr_t</a>,<a href="#sceInsockSockaddrIn_t">sceInsockSockaddrIn_t</a>,<a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockErrno"><font size=6>sceInsockErrno<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケット関数のエラー値を取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockErrno</b>;
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エラーコードを参照のこと。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット関数(sceInsockAccept()、sceInsockBind()、sceInsockConnect()、sceInsockListen()、sceInsockRecv()、sceInsockRecvfrom()、sceInsockSend()、sceInsockSendto()、sceInsockShutdown()、sceInsockSocket())のエラーコードを返す。<br><br>参照可能なエラー値は<br></div>
+<div style="margin-left:70px;">/usr/local/sce/ee/gcc/ee/include/sys/errno.h<br></div>
+<div style="margin-left:50px;">に定義されている。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockAccept">sceInsockAccept</a>()<a href="#"></a>,<a href="#sceInsockBind">sceInsockBind</a>()<a href="#"></a>,<a href="#sceInsockConnect">sceInsockConnect</a>()<br><a href="#sceInsockListen">sceInsockListen</a>()<a href="#"></a>,<a href="#sceInsockRecv">sceInsockRecv</a>()<a href="#"></a>,<a href="#sceInsockRecvfrom">sceInsockRecvfrom</a>()<br><a href="#sceInsockSend">sceInsockSend</a>()<a href="#"></a>,<a href="#sceInsockSendto">sceInsockSendto</a>()<a href="#"></a>,<a href="#sceInsockShutdown">sceInsockShutdown</a>()<br><a href="#sceInsockSocket">sceInsockSocket</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockGethostbyaddr"><font size=6>sceInsockGethostbyaddr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>32ビットIPv4アドレスからホスト構造体を取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+sceInsockHostent_t *<b>sceInsockGethostbyaddr</b>(
+	const char *<i>addr</i>,
+	int <i>len</i>,
+	int <i>type</i>
+);
+#define gethostbyaddr <b>sceInsockGethostbyaddr</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;32ビットIPv4アドレス値へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレス構造体のサイズ(4バイト)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>type</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アドレスファミリ(AF_INETのみ可)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、インターネットホスト構造体へのポインタを返す。<br>エラーの場合、0を返す。sceInsockHErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;NETDB_INTERNAL &nbsp;<br>&nbsp;(EAFNOSUPPORT,EINVAL)&nbsp;</td>
+<td valign="TOP">&nbsp;内部的なエラー&nbsp;<br>&nbsp;(bind() &nbsp;<br>&nbsp;の((sturct sockaddr_in*)addr)&gt;sin_family&nbsp;<br>&nbsp;が不正、不正な関数呼び出し、引数が不正）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;HOST_NOT_FOUND&nbsp;</td>
+<td valign="TOP">&nbsp;目的のホストが見つからない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数で指定した32ビットIPv4アドレスに対応するインターネットホスト構造体を取得し、そのポインタを返す。<i>len</i>は常に4バイト、<i>type</i>は常にAF_INETとなる。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockHErrno">sceInsockHErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockGethostbyname"><font size=6>sceInsockGethostbyname<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ホスト名からホスト構造体を取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+sceInsockHostent_t *<b>sceInsockGethostbyname</b>(
+	const char *<i>name</i>
+);
+#define gethostbyname <b>sceInsockGethostbyname</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>name</i>　　インターネットホスト名<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、インターネットホスト構造体へのポインタを返す。<br>エラーの場合、0を返し、sceInsockHErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;NETDB_INTERNAL &nbsp;<br>&nbsp;(EAFNOSUPPORT,EINVAL)&nbsp;</td>
+<td valign="TOP">&nbsp;内部的なエラー&nbsp;<br>&nbsp;(bind()の((sturct sockaddr_in*)addr)&gt;sin_family&nbsp;<br>&nbsp;が不正、不正な関数呼び出し、引数が不正）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;HOST_NOT_FOUND&nbsp;</td>
+<td valign="TOP">&nbsp;目的のホストが見つからない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ホスト名 name に対応するインターネットホスト構造体を取得し、そのポインタを返す。<br>返されたポインタの先の h_name メンバへの設定は未サポートで常に NULL が設定される。<br>エラー時、エラー内容は sceInsockHErrno() によって取得できる。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockHErrno">sceInsockHErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockGetpeername"><font size=6>sceInsockGetpeername<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットの接続先情報を取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+int <b>sceInsockGetpeername</b>(
+	int <i>s</i>,
+	sceInsockSockaddr_t *<i>addr</i>,
+	sceInsockSocklen_t *<i>paddrlen</i>
+);
+#define getpeername <b>sceInsockGetpeername</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;情報を取得するソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;接続先ホストのアドレス構造体を格納する&nbsp;<br>&nbsp;領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddrlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;addrのサイズを格納する&nbsp;<br>&nbsp;領域へのポインタ(サイズは常に16バイト)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp; INET 中の IOP 上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>の接続先ホストのアドレス構造体を、(<i>addr,paddrlen</i>)で指定した領域に格納する。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddr_t">sceInsockSockaddr_t</a>,<a href="#sceInsockSockaddrIn_t">sceInsockSockaddrIn_t</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockGetSockName"><font size=6>sceInsockGetSockName<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットのローカル情報を取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockGetsockname</b>(
+	int <i>s</i>,
+	sceInsockSockaddr_t *<i>addr</i>,
+	sceInsockSocklen_t *<i>paddrlen</i>
+);
+#define getsockname <b>sceInsockGetsockname</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;情報を取得するソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットのローカルアドレス構造体を格納する&nbsp;<br>&nbsp;領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddrlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットのローカルアドレス構造体のサイズを格納する&nbsp;<br>&nbsp;領域へのポインタ(サイズは常に 16 バイト)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや INET 中の &nbsp;<br>&nbsp;IOP 上でのセマフォが途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>のローカルのアドレス構造体を、(<i>addr</i>,<i>paddrlen</i>)で指定した領域に格納する。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddr_t">sceInsockSockaddr_t</a>,<a href="#sceInsockSockaddrIn_t">sceInsockSockaddrIn_t</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockGetsockopt"><font size=6>sceInsockGetsockopt<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットオプションを取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+int <b>sceInsockGetsockopt</b>(
+	int <i>s</i>,
+	int <i>level</i>,
+	int <i>optname</i>,
+	void *<i>optval</i>,
+	sceInsockSocklen_t *<i>optlen</i>
+	);
+#define getsockopt <b>sceInsockGetsockopt</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプションを取得するソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>level</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプションのレベル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>optname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプション名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>optval</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプション値を格納する領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>optlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプション値のサイズを格納する領域へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;109&nbsp;</td>
+<td valign="TOP">&nbsp;ENOPROTOOPT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたレベル (level) と指定された&nbsp;<br>&nbsp;オプション(optname) の組合せが不正。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウト&nbsp;<br>&nbsp;が起こった、もしくはTCPの再送&nbsp;<br>&nbsp;タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>のソケットオプション(レベル<i>level</i>、オプション名<i>optname</i>)を、(<i>optval</i>, <i>optlen</i>)で指定した領域に格納する。現状では、対応するソケットオプションは以下の通り。<br></div>
+
+<div style="margin-left:40px;"><h4><b>IPPROTO_TCP (TCP関連)</b><br></h4></div>
+
+<div style="margin-left:50px;">レベルIPPROTO_TCPの場合、オプションは以下のとおり。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;TCP_NODELAY&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;Nagle のアルゴリズム ON、OFF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;int&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(int)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;0 - Nagle On (default)&nbsp;<br>&nbsp;1 - Nagle Off&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">このオプションを使用する場合、コネクションが確立するまではENOPROTOOPT でエラーとなる。<br></div>
+
+<div style="margin-left:40px;"><h4><b>IPROTO_IP（IP 関連）</b><br></h4></div>
+
+<div style="margin-left:50px;">レベルIPROTO_IPの場合、オプションは以下のとおり。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_MULTICAST_IF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャスト送信時に&nbsp;<br>&nbsp;使用する I/F の指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sceInsockInAddr_t&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(sceInsockInAddr_t)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;- routing table を参照 (default)&nbsp;<br>&nbsp;0.0.0.0/8 - I/F ID による指定&nbsp;<br>&nbsp;その他  - I/F の local IP address &nbsp;<br>&nbsp;による指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_MULTICAST_TTL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IPマルチキャスト送信時の&nbsp;<br>&nbsp;TTL 値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;int&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(int)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;省略時は1で&nbsp;<br>&nbsp;「このネットワーク内のみ」&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_MULTICAST_LOOP&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャスト送信時の&nbsp;<br>&nbsp;ループバック有無&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;int&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(int)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;0 - ループバックしない&nbsp;<br>&nbsp;1 - ループバックする(default)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockHErrno"><font size=6>sceInsockHErrno<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ホスト構造体関数のエラー値を取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockHErrno</b>;
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>エラーコード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;NETDB_SUCCESS&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;NETDB_INTERNAL&nbsp;</td>
+<td valign="TOP">&nbsp;内部的なエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;HOST_NOT_FOUND&nbsp;</td>
+<td valign="TOP">&nbsp;目的のホストが見つからない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;TRY_AGAIN&nbsp;</td>
+<td valign="TOP">&nbsp;一時的なエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;NO_RECOVERY&nbsp;</td>
+<td valign="TOP">&nbsp;サーバからの返答が不正等によるエラー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;NO_DATA NO_ADDRESS&nbsp;</td>
+<td valign="TOP">&nbsp;返答は正しいがIPアドレスが&nbsp;<br>&nbsp;登録されていない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ホスト構造体関数(sceInsockGethostbyaddr()、sceInsockGethostbyname())のエラーコードを返す。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockGethostbyaddr">sceInsockGethostbyaddr</a>()<a href="#"></a>,<a href="#sceInsockGethostbyname">sceInsockGethostbyname</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInetAddr"><font size=6>sceInsockInetAddr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ドット形式 IPv4 アドレスから32ビットアドレス取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+u_int <b>sceInsockInetAddr</b>(
+	const char *<i>cp</i>
+);
+#define inet_addr <b>sceInsockInetAddr</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cp</i>　　ドット10進IPv4アドレス文字列へのポインタ<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、32ビットのIPv4アドレス値(ネットワークバイト順序)を返す。<br>文字列が不正の場合、INADDR_NONE (0xffffffff)を返す。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数にドット10進表記のIPv4 アドレス文字列を取り、それを32ビットIPv4アドレス(ネットワークバイト順序)に変換した値を返す。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInetAton"><font size=6>sceInsockInetAton<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ドット形式 IPv4 アドレスから32ビットアドレス取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockInetAton</b>(
+	const char *<i>cp</i>,
+	sceInsockInAddr_t *<i>addr</i>
+);
+#define inet_aton <b>sceInsockInetAton</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>cp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ドット10進IPv4アドレス文字列へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;変換後の32ビットIPv4アドレス値を格納する&nbsp;<br>&nbsp;領域へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;文字列が不正&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数にドット10進表記のIPv4アドレス文字列を取り、それを32ビットIPv4アドレス(ネットワークバイト順序)に変換する。変換された値は<i>addr</i>で示される領域に格納される。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockInAddr_t">sceInsockInAddr_t</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInetLnaof"><font size=6>sceInsockInetLnaof<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>IPv4 アドレスからローカルネットワークアドレスの取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+u_int <b>sceInsockInetLnaof</b>(
+	sceInsockInAddr_t <i>in</i>
+);
+#define inet_lnaof <b>sceInsockInetLnaof</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>in</i>　　32ビットIPv4アドレス値<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ローカルネットワークアドレス値<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">32ビットIPv4アドレス値を引数に取り、ローカルネットワークアドレス部分のみを返す。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockInAddr_t">sceInsockInAddr_t</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInetMakeaddr"><font size=6>sceInsockInetMakeaddr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ネットワークアドレスからIPv4アドレスの構築<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+sceInsockInAddr_t <b>sceInsockInetMakeaddr</b>(
+	u_int <i>net</i>,
+	u_int <i>host</i>
+);
+#define inet_makeaddr <b>sceInsockInetMakeaddr</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>net</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ネットワークアドレス部&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>host</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルネットワークアドレス部&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">組み合わせたIPv4アドレス値<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数で示されたネットワークアドレス、ローカルネットワークアドレスを組み合わせて1つのIPv4アドレスを構築し、それを返す。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockInAddr_t">sceInsockInAddr_t</a><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInetNetof"><font size=6>sceInsockInetNetof<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>IPv4 アドレスからネットワークアドレスの取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+u_int <b>sceInsockInetNetof</b>(
+	sceInsockInAddr_t <i>in</i>
+);
+#define inet_netof <b>sceInsockInetNetof</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>in</i>　　32ビットIPv4アドレス値<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ネットワークアドレス値<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">32ビットIPv4アドレス値を引数に取り、ネットワークアドレス部分のみを返す。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockInAddr_t">sceInsockInAddr_t</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInetNetwork"><font size=6>sceInsockInetNetwork<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ドット形式 IPv4 アドレスから 32 ビットアドレス取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+u_int <b>sceInsockInetNetwork</b>(
+	const char *<i>cp</i>
+);
+#define inet_network <b>sceInsockInetNetwork</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>cp</i>　　ドット10進IPv4アドレス文字列へのポインタ<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">正常終了の場合、32ビットのIPv4アドレス値(ネットワークバイト順序)を返す。<br>文字列が不正の場合、INADDR_NONE(0xffffffff)を返す。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数にドット10進表記のIPv4アドレス文字列を取り、それを 32ビットIPv4 アドレス(ネットワークバイト順序)に変換した値を返す。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockInetNtoa"><font size=6>sceInsockInetNtoa<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>32ビットIPv4アドレスからドット形式アドレス取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+char *<b>sceInsockInetNtoa</b>(
+	sceInsockInAddr_t <i>in</i>
+);
+#define inet_ntoa <b>sceInsockInetNtoa</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>in　　</i>32ビットIPv4アドレス値<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ドット10進IPv4アドレス文字列へのポインタ<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">引数に32ビットIPv4 アドレス(ネットワークバイト順序)を取り、ドット10進表記のIPv4アドレス文字列に変換してそのポインタを返す。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockInAddr_t">sceInsockInAddr_t</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockListen"><font size=6>sceInsockListen<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>TCP コネクションを受け付ける<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockListen</b>(
+	int <i>s</i>,
+	int <i>backlog</i>
+);
+#define listen <b>sceInsockListen</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;TCP接続待ちを行なうソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>backlog</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コネクション受け付けキューのサイズ&nbsp;<br>&nbsp;(待ち受けコネクション数)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;95&nbsp;</td>
+<td valign="TOP">&nbsp;EOPNOTSUPP&nbsp;</td>
+<td valign="TOP">&nbsp;そのソケットに対しての不正な呼び出し&nbsp;<br>&nbsp;(例:SOCK_STREAM に対するsendto())&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウト&nbsp;<br>&nbsp;が起こった、もしくはTCPの再送&nbsp;<br>&nbsp;タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した、&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET 中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>に対して、TCPの接続待ちを行なう(サーバとして振舞う)ことを宣言する。<br><i>backlog</i>は、コネクション受け付けキューの最大長を意味する。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockPoll"><font size=6>sceInsockPoll<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>同期 I/O の多重化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockPoll</b> (
+	sceInetPollFd_t *fds,
+	int nfds,
+	int ms,
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>fds</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetPollFd_t構造体の配列&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>nfds</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetPollFd_t構造体の配列の要素数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト引数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;イベントが 1 つもない状態でタイムアウトが発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正数&nbsp;</td>
+<td valign="TOP">&nbsp;イベントが少なくとも 1 つ存在するコネクションの数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInsockPoll() 関数はコネクションの集合を調べ、それらのコネクションのどれが入出力可能なのかを調べるための関数。この関数を使用すれば単一スレッドでも複数コネクションの同時処理が可能となる。<br>sceInsockPoll() 関数は以下の点を除き sceInetPoll() と同じで、内部的にも sceInetPoll() を呼び出す事で処理を行っている。<br><br></div>
+<div style="margin-left:35px;"><ul>
+         <li> sceInetPollFd_t 中の cid が sceInsockPoll() の場合はソケットのディスリプタ値である。(sceInetPoll() の場合は Connection ID)
+         <li> エラーの場合の戻り値が-1で、エラーの詳細コードはsceInsockErrno()で示される。
+</ul></div>
+<div style="margin-left:50px;"><br>イベントの指定方法等に関しては sceInetPoll() の説明を参照のこと。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockRecv"><font size=6>sceInsockRecv<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データを受信<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+ssize_t <b>sceInsockRecv</b>(
+	int <i>s</i>,
+	void *<i>buf</i>,
+	size_t <i>len</i>,
+	int <i>flags</i>
+);
+#define recv <b>sceInsockRecv</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ受信を行なうソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信データを格納する領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信するデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="TOP">&nbsp;未対応(常に 0 を指定)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正数&nbsp;</td>
+<td valign="TOP">&nbsp;受信したデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;104&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNRESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;110&nbsp;</td>
+<td valign="TOP">&nbsp;ESHUTDOWN&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウト&nbsp;<br>&nbsp;が起こった、もしくはTCPの&nbsp;<br>&nbsp;再送タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した、&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>からデータを<i>len</i>バイト受信する。受信データは<i>buf</i>で指定した領域に格納される。<br><i>flags</i>引数は未対応なので、常に0を指定すること。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockRecvfrom"><font size=6>sceInsockRecvfrom<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データを受信(送信元ホストのアドレス構造体も取得)<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+ssize_t <b>sceInsockRecvfrom</b>(
+	int <i>s</i>,
+	void *<i>buf</i>,
+	size_t <i>len</i>,
+	int <i>flags</i>,
+	sceInsockSockaddr_t *<i>addr</i>,
+	sceInsockSocklen_t *<i>paddrlen</i>
+);
+#define recvfrom <b>sceInsockRecvfrom</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ受信を行なうソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信データを格納する領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;受信するデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="TOP">&nbsp;未対応(常に0を指定) &nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信元ホストのアドレス構造体を格納する&nbsp;<br>&nbsp;領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>paddrlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信元ホストのアドレス構造体のサイズを格納する&nbsp;<br>&nbsp;領域へのポインタ(サイズは常に 16 バイト)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正数&nbsp;</td>
+<td valign="TOP">&nbsp;受信したデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;95&nbsp;</td>
+<td valign="TOP">&nbsp;EOPNOTSUPP&nbsp;</td>
+<td valign="TOP">&nbsp;そのソケットに対しての不正な呼び出し&nbsp;<br>&nbsp;(例:SOCK_STREAM に対するsendto())&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;104&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNRESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;110&nbsp;</td>
+<td valign="TOP">&nbsp;ESHUTDOWN&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウト&nbsp;<br>&nbsp;が起こった、もしくはTCPの再送&nbsp;<br>&nbsp;タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した、&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET中のIOP上でのセマフォが途中で&nbsp;<br>&nbsp;不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>からデータを<i>len</i>バイト受信する。受信データは<i>buf</i>で指定した領域に格納される。<br><i>flags</i>引数は未対応なので、常に0を指定すること。アドレス構造体を格納する領域を(<i>addr, paddrlen</i>)で指定し、その領域にはデータ受信時に送信元ホストのアドレス構造体が格納される。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddr_t">sceInsockSockaddr_t</a>,<a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSend"><font size=6>sceInsockSend<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データを送信<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+ssize_t <b>sceInsockSend</b>(
+	int <i>s</i>,
+	const void *<i>buf</i>,
+	size_t <i>len</i>,
+	int <i>flags</i>
+);
+#define send <b>sceInsockSend</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s </i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ送信を行なうソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信データへのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信するデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="TOP">&nbsp;未対応(常に0を指定)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正数&nbsp;</td>
+<td valign="TOP">&nbsp;送信したデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;104&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNRESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;110&nbsp;</td>
+<td valign="TOP">&nbsp;ESHUTDOWN&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウト&nbsp;<br>&nbsp;が起こった、もしくはTCPの再送&nbsp;<br>&nbsp;タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した、&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET 中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>からデータを<i>len</i>バイト送信する。送信データは<i>buf</i>で指定する。<br><i>flags</i>引数は未対応なので、常に0を指定すること。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSendFin"><font size=6>sceInsockSendFin<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットの送信側を閉じる<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockSendFin</b>(
+	int <i>s</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s </i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET 中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">TCP の場合にソケットの送信側を閉じる処理を行います。これによって通常は相手側に FIN を送信します。<br>ms はタイムアウト指定で -1 の場合は上限なしで、0 の場合は待ち状態に入らずに呼び出し元へ戻ります。正の場合は待ち時間の細大指定となり、指定する時間の単位は [ms] (= 1 / 1000 秒) です。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSendto"><font size=6>sceInsockSendto<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>データを送信(送信先ホストのアドレス構造体を指定)<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+ssize_t <b>sceInsockSendto</b>(
+	int <i>s</i>,
+	const void *<i>buf</i>,
+	size_t <i>len</i>,
+	int <i>flags</i>,
+	const sceInsockSockaddr_t *<i>addr</i>,
+	sceInsockSocklen_t <i>addrlen</i>
+);
+#define sendto <b>sceInsockSendto</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;データ送信を行なうソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>buf</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信データへのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>len</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信するデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="TOP">&nbsp;未対応(常に0を指定)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信先ホストのアドレス構造体へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>addrlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;送信先ホストのアドレス構造体のサイズ(常に16 バイト)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正数&nbsp;</td>
+<td valign="TOP">&nbsp;送信したデータサイズ(バイト単位)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;95&nbsp;</td>
+<td valign="TOP">&nbsp;EOPNOTSUPP&nbsp;</td>
+<td valign="TOP">&nbsp;そのソケットに対しての不正な呼び出し&nbsp;<br>&nbsp;(例:SOCK_STREAM に対するsendto())&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;110&nbsp;</td>
+<td valign="TOP">&nbsp;ESHUTDOWN&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態&nbsp;<br>&nbsp;（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送タイム&nbsp;<br>&nbsp;アウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した、&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;すでに確立しているConnectionを&nbsp;<br>&nbsp;オープンしようとした&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET 中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>からデータを<i>len</i>バイト送信する。送信データは<i>buf</i>で、送信先ホストのアドレス構造体は(<i>addr</i>,<i>addrlen</i>)で指定する。<i>flags</i>引数は未対応なので、常に0を指定すること。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockSockaddr_t">sceInsockSockaddr_t</a>,<a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSetsockopt"><font size=6>sceInsockSetsockopt<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットオプションを設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+typedef u_int sceInsockSocklen_t;
+int <b>sceInsockSetsockopt</b>(
+	int <i>s</i>,
+	int <i>level</i>,
+	int <i>optname</i>,
+	const void *<i>optval</i>,
+	sceInsocksocklen_t <i>optlen</i>
+);
+#define setsockopt s<b>ceInsockSetsockopt</b>
+#define socklen_t sceInsockSocklen_t
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプションを取得するソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>level</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプションのレベル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>optname</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプション名&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>optval</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプション値を格納する領域へのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>optlen</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットオプション値のサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;109&nbsp;</td>
+<td valign="TOP">&nbsp;ENOPROTOOPT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたレベル (level) と指定された&nbsp;<br>&nbsp;オプション (optname) の組合せが不正。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウト&nbsp;<br>&nbsp;が起こった、もしくはTCPの&nbsp;<br>&nbsp;再送タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;相手先へのルーティングが存在しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;local_portとして不正な値を指定した、&nbsp;<br>&nbsp;remote_addr、remote_portとして&nbsp;<br>&nbsp;不正な値を指定した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;ALREADY_EXISTS&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET 中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>のソケットオプション(レベル<i>level</i>、オプション名<i>optname</i>)を、(<i>optval</i>, <i>optlen</i>)で指定した値に設定する。現状では、対応するソケットオプションは以下の通り。<br></div>
+
+<div style="margin-left:40px;"><h4><b>IPPROTO_TCP（TCP関連）</b><br></h4></div>
+
+<div style="margin-left:50px;">レベルIPPROTO_TCPの場合、オプションは以下のとおり。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;TCP_NODELAY&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;Nagle のアルゴリズム ON、OFF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;int&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(int)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;0 - Nagle On (default)&nbsp;<br>&nbsp;1 - Nagle Off&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">このオプションを使用する場合、コネクションが確立するまではENOPROTOOPT でエラーとなる。<br></div>
+
+<div style="margin-left:40px;"><h4><b>IPROTO_IP（IP 関連）</b><br></h4></div>
+
+<div style="margin-left:50px;">レベルIPROTO_IPの場合、オプションは以下のとおり。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_MULTICAST_IF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャスト送信時に&nbsp;<br>&nbsp;使用する I/F の指定&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sceInsockInAddr_t&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(sceInsockInAddr_t)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;- routing tableを参照(default)&nbsp;<br>&nbsp;0.0.0.0/8 - I/F IDによる指定&nbsp;<br>&nbsp;その他  - I/Fのlocal IP address&nbsp;<br>&nbsp;による指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_MULTICAST_TTL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャスト送信時の TTL 値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;int&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(int)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;省略時は 1 で&nbsp;<br>&nbsp;「このネットワーク内のみ」&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_MULTICAST_LOOP&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャスト送信時の&nbsp;<br>&nbsp;ループバック有無&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;int&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(int)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;0 - ループバックしない&nbsp;<br>&nbsp;1 - ループバックする(default)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_ADD_MEMBERSHIP&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャストグループへの参加&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sceInsockIpMreq_t&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(sceInsockIpMreq_t)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;imr_multiaddr は参加するIPマルチ&nbsp;<br>&nbsp;キャストのグループアドレス。&nbsp;<br>&nbsp;imr_multiaddr は受信時の I/F 指定で&nbsp;<br>&nbsp;IP_MULTICAST_IF と同じ指定。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;<b>オプション名</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP_DROP_MEMBERSHIP&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>説明</b>&nbsp;</td>
+<td valign="TOP">&nbsp;IP マルチキャストグループ&nbsp;<br>&nbsp;からの脱退&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域の型</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sceInsockIpMreq_t&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>領域のサイズ</b>&nbsp;</td>
+<td valign="TOP">&nbsp;sizeof(sceInsockIpMreq_t)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP">&nbsp;imr_multiaddrは脱退するIPマルチ&nbsp;<br>&nbsp;キャストのグループアドレス。&nbsp;<br>&nbsp;imr_multiaddr は受信時のI/F指定&nbsp;<br>&nbsp;でIP_MULTICAST_IF と同じ指定。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockShutdown"><font size=6>sceInsockShutdown<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットを閉じる<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockShutdown</b>(
+	int <i>s</i>,
+	int <i>how</i>
+);
+#define shutdown <b>sceInsockShutdown</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;閉じるソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>how</i>&nbsp;</td>
+<td valign="TOP">&nbsp;シャットダウン方法&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;104&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNRESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;110&nbsp;</td>
+<td valign="TOP">&nbsp;ESHUTDOWN&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがClosing状態（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceInetAbort()の呼び出しにより中断&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;各関数に引数で指定したタイムアウトが&nbsp;<br>&nbsp;起こった、もしくはTCPの再送&nbsp;<br>&nbsp;タイムアウト発生&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET 中のIOP上でのセマフォが&nbsp;<br>&nbsp;途中で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ソケット<i>s</i>を閉じる。<br>引数<i>how</i>によるシャットダウン方法はhalf closeが未対応で、将来の拡張時の互換性を保つために常にSHUT_RDWR（=2）を指定すること。過去の本ドキュメントではhowに0の指定が推奨されていたが、記述のミスである。<br>socket()関数などを呼ぶと、必要に応じてメモリを確保するが、そのメモリはshutdown()関数で自動的に解放されない。解放するには明示的にsceInsockTerminate()を呼び出す必要がある。<br>待ち状態が存在するソケットに対して別スレッドから sceInsockShutdown()を呼び出すことはできない。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSocket"><font size=6>sceInsockSocket<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソケットを生成<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+size_t <b>sceInsockSocket</b>(
+	int <i>family</i>,
+	int <i>type</i>,
+	int <i>protocol</i>
+	);
+#define socket <b>sceInsockSocket</b>
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>family</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;生成するソケットのアドレスファミリ&nbsp;<br>&nbsp;(AF_INETのみ可)&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>type</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;ソケットタイプ(以下のいずれか)&nbsp;</td>
+</tr>
+<tr>
+<td rowspan= 3  valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SOCK_STREAM&nbsp;</td>
+<td valign="top">&nbsp;1　TCP ソケット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;SOCK_DGRAM&nbsp;</td>
+<td valign="top">&nbsp;2　UDP ソケット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;SOCK_RAW&nbsp;</td>
+<td valign="top">&nbsp;3　raw ソケット&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>protocol</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;プロトコル(未対応なので、常に0を指定)&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;正数&nbsp;</td>
+<td valign="TOP">&nbsp;生成したソケットのディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;メモリ領域不足&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;96&nbsp;</td>
+<td valign="TOP">&nbsp;EPFNOSUPPORT&nbsp;</td>
+<td valign="TOP">&nbsp;socket() のfamily引数が&nbsp;<br>&nbsp;AF_INETではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;107&nbsp;</td>
+<td valign="TOP">&nbsp;EPROTOTYPE&nbsp;</td>
+<td valign="TOP">&nbsp;socket() の type 引数が未サポートの値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アドレスファミリ<i>family</i>(常にAF_INET)、ソケットタイプ<i>type</i>であるソケットを生成し、そのディスクリプタを返す。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceInsockErrno">sceInsockErrno</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>その他の関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockAbort"><font size=6>sceInsockAbort<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>処理中断<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockAbort</b>(
+	int <i>s</i>,
+	int <i>flags</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flags</i>&nbsp;</td>
+<td valign="TOP">&nbsp;フラグ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正、不正な関数呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;104&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNRESET&nbsp;</td>
+<td valign="TOP">&nbsp;ConnectionがResetされた（TCPのみ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;Connectionが確立していない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;libinsck 中のEE 上でのセマフォや&nbsp;<br>&nbsp;INET中のIOP上でのセマフォが途中&nbsp;<br>&nbsp;で不正に削除された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">指定されたソケット (<i>s</i>) に対して sceInetAbort() を呼び出します。<br>引数の <i>flags</i> は将来、拡張するためのものです。常に 0 を指定して下さい。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSetRecvTimeout"><font size=6>sceInsockSetRecvTimeout<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>受信用タイムアウト設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockSetRecvTimeout</b>(
+	int <i>s</i>,
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト時間&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInsockRecv() および sceInsockRecvFrom() のタイムアウト時間の指定です。<br>指定するタイムアウト時間 (<i>ms</i>) の単位は <i>ms</i> です。<br>この関数を呼び出さない時のタイムアウト時間のデフォルト値は -1 (無限) です。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSetSendTimeout"><font size=6>sceInsockSetSendTimeout<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>送信用タイムアウト設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockSetSendTimeout</b>(
+	int <i>s,</i>
+	int <i>ms</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>s</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソケットディスクリプタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ms</i>&nbsp;</td>
+<td valign="TOP">&nbsp;タイムアウト時間&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceInsockSend() および sceInsockSendTo() のタイムアウト時間の指定です。<br>指定するタイムアウト時間 (<i>ms</i>) の単位は <i>ms</i> です。<br>この関数を呼び出さない時のタイムアウト時間のデフォルト値は -1 (無限) です。<br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockSetSifMBindRpcValue"><font size=6>sceInsockSetSifMBindRpcValue<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッファサイズ、スタックサイズ、優先度を指定する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h&gt;
+int <b>sceInsockSetSifMBindRpcValue</b>(
+	u_int <i>buffersize</i>,
+	u_int <i>stacksize</i>,
+	int <i>priority</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>buffersize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;アプリケーションが必要とするバッファのサイズを&nbsp;<br>&nbsp;指定します。MSIFRPCのバッファサイズではありません&nbsp;<br>&nbsp;（備考を参照してください）。&nbsp;<br>&nbsp;標準は2048バイトです。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>stacksize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc() のリクエストを行うIOP側のスレッド&nbsp;<br>&nbsp;のスタックサイズの大きさを指定します。&nbsp;<br>&nbsp;大きさは、512バイト以上を指定してください。&nbsp;<br>&nbsp;標準は8192バイトです。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>priority</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifMCallRpc() のリクエストを行うIOP側のスレッドの&nbsp;<br>&nbsp;プライオリティを指定します。10以下の値は、システム&nbsp;<br>&nbsp;が使用しますので、それ以上の値を指定してください。&nbsp;<br>&nbsp;標準は32です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;">エラーの場合、sceInsockErrno()によって以下のエラー内容を取得できる<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">libinsck から libnet の libnet_init() を呼び出す際のバッファサイズ、スタックサイズ、優先度を指定します。この関数を呼び出していない場合は、バッファサイズ2048、スタックサイズ8192、優先度32が指定されたものとします。つまり、<br><br>sceInsockSetSifMBindRpcValue( 2048, 8192, 32 );<br><br>が暗黙のうちに呼び出されていることと同じです。<br>この関数による指定はスレッドごとに記録され、異なるスレッドへの影響はありません。また同一のスレッドから複数回呼び出した場合には最後の指定が有効となります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">buffersizeはMSIFRPCが必要とするバッファサイズではなく、アプリケーションが必要とするバッファサイズです。例えば、sceInsockRecv()でバッファサイズを2048バイトにするときは、<br><br>sceInsockSetSifMBindRpcValue( 2048, 8192, 32 );<br><br>のようにします。これはlibinsckがlibnetのlibnet_init()を呼び出す際に、libinsck内部で自動的に必要なサイズのバッファを準備することを意味します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceInsockTerminate"><font size=6>sceInsockTerminate<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>メモリ領域の解放<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt; libinsck.h &gt;
+int <b>sceInsockTerminate</b>(
+	int <i>thread_id</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>thread_id</i>&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドID&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-1&nbsp;</td>
+<td valign="TOP">&nbsp;エラー&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">libinsck 内で自動的に確保されたスレッドごとのメモリ領域を解放します。<br>引数の <i>thread_id</i> にはメモリ領域を解放するスレッドIDを指定します。<i>thread_id</i> に 0 を指定すると自スレッドの指定となります。<br>socket()関数などを呼ぶと、必要に応じてメモリを確保します。そのメモリはshutdown()関数で自動的に解放されません。明示的にこの関数を呼び出してください。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>エラーコード</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="エラーコード"><font size=6>エラーコード<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>libinsckのエラーコード<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>エラーコード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;9&nbsp;</td>
+<td valign="TOP">&nbsp;EBADF&nbsp;</td>
+<td valign="TOP">&nbsp;不正なソケット番号が指定された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;スレッドまたはソケットごとのメモリ確保に失敗した&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;引数が不正 (例: bind の addrlen の値が不正)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;95&nbsp;</td>
+<td valign="TOP">&nbsp;EOPNOTSUPP&nbsp;</td>
+<td valign="TOP">&nbsp;そのソケットに対しての不正な呼び出し&nbsp;<br>&nbsp;(例:SOCK_STREAM に対するsendto())&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;96&nbsp;</td>
+<td valign="TOP">&nbsp;EPFNOSUPPORT&nbsp;</td>
+<td valign="TOP">&nbsp;socket() の family 引数が AF_INET ではない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;106&nbsp;</td>
+<td valign="TOP">&nbsp;EAFNOSUPPORT&nbsp;</td>
+<td valign="TOP">&nbsp;bind() の ((sturct sockaddr_in*)addr)&gt;sin_family &nbsp;<br>&nbsp;が不正&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;107&nbsp;</td>
+<td valign="TOP">&nbsp;EPROTOTYPE&nbsp;</td>
+<td valign="TOP">&nbsp;socket() の type 引数が未サポートの値&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;112&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRINUSE&nbsp;</td>
+<td valign="TOP">&nbsp;使用中の local port に対する bind() を呼び出した&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">libnetを経由したINETのエラーコードとlibinsckのエラーコードの変換<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>エラーコード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>INETエラーコード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_OK&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12&nbsp;</td>
+<td valign="TOP">&nbsp;ENOMEM&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INSUFFICIENT_RESOURCES&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;16&nbsp;</td>
+<td valign="TOP">&nbsp;EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_BUSY&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;22&nbsp;</td>
+<td valign="TOP">&nbsp;EINVAL&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_INVALID_ARGUMENT&nbsp;<br>&nbsp;sceINETE_INVALID_CALL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;104&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNRESET&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_RESET&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;110&nbsp;</td>
+<td valign="TOP">&nbsp;ESHUTDOWN&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_CLOSING&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;111&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNREFUSED&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_REFUSED&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;113&nbsp;</td>
+<td valign="TOP">&nbsp;ECONNABORTED&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_ABORT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;115&nbsp;</td>
+<td valign="TOP">&nbsp;ENETDOWN&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_LINK_DOWN&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;116&nbsp;</td>
+<td valign="TOP">&nbsp;ETIMEDOUT&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_TIMEOUT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;118&nbsp;</td>
+<td valign="TOP">&nbsp;EHOSTUNREACH&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_NO_ROUTE&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;125&nbsp;</td>
+<td valign="TOP">&nbsp;EADDRNOTAVAIL&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_LOCAL_SOCKET_UNSPECIFIED&nbsp;<br>&nbsp;sceINETE_FOREIGN_SOCKET_UNSPECIFIED&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;127&nbsp;</td>
+<td valign="TOP">&nbsp;EISCONN&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_ALREADY_EXISTS&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;128&nbsp;</td>
+<td valign="TOP">&nbsp;ENOTCONN&nbsp;</td>
+<td valign="TOP">&nbsp;sceINETE_CONNECTION_DOES_NOT_EXIST&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

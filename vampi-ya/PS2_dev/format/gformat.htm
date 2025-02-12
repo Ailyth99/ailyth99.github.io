@@ -1,0 +1,4499 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+
+<title>グラフィックスデータフォーマット</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+グラフィックスデータフォーマット
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>eS中間ファイルフォーマット</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>eS文法の要約</b><br></a>
+    <a href="#Heading4_1_2"> <b>BNFによるeS文法</b><br></a>
+    <a href="#Heading4_1_3"> <b>eSTD</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>rawファイルフォーマット</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>rawファイルの生成</b><br></a>
+    <a href="#Heading4_2_2"> <b>eSTDとの対応</b><br></a>
+    <a href="#Heading4_2_3"> <b>rawファイルの構造</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>HiGデータフォーマット</b></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>HiGデータの全体構造</b><br></a>
+    <a href="#Heading4_3_2"> <b>ヘッダ</b><br></a>
+    <a href="#Heading4_3_3"> <b>プラグインブロック</b><br></a>
+    <a href="#Heading4_3_4"> <b>データブロック</b><br></a>
+    <a href="#Heading4_3_5"> <b>タイプ属性</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>HiPプラグインデータフォーマット</b></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>タイプ属性</b><br></a>
+    <a href="#Heading4_4_2"> <b>Frameプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_3"> <b>Microプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_4"> <b>2Dテクスチャプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_5"> <b>Shapeプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_6"> <b>Hrchyプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_7"> <b>Animeプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_8"> <b>Shareプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_9"> <b>TIM2プラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_10"> <b>ClutBumpプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_11"> <b>FIshEyeプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_12"> <b>Reflectionプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_13"> <b>Refractionプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_14"> <b>ShadowMapプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_15"> <b>ShadowBoxプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_16"> <b>LightMapプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_17"> <b>Clipプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_18"> <b>Cameraプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_19"> <b>Skinプラグインのデータ構造</b><br></a>
+    <a href="#Heading4_4_20"> <b>コンバータesconv</b><br></a>
+    <a href="#Heading4_4_21"> <b>esconvの出力するHiGバイナリファイルの概要</b><br></a>
+    </ul>
+<p><a href="#Heading3_5">  5 <b>GF-VU1標準メモリフォーマット</b></a>
+    <ul>
+    <a href="#Heading4_5_1"> <b>GF-VU1標準メモリフォーマットの概略</b><br></a>
+    <a href="#Heading4_5_2"> <b>Shapeデータ領域の詳細</b><br></a>
+    <a href="#Heading4_5_3"> <b>Microデータ領域</b><br></a>
+    <a href="#Heading4_5_4"> <b>ワーク領域</b><br></a>
+    <a href="#Heading4_5_5"> <b>ダブルバッファ領域</b><br></a>
+    <a href="#Heading4_5_6"> <b>Microプログラム依存領域の詳細</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>eS中間ファイルフォーマット</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">eSは、各種のグラフィックスオーサリングツールとミドルウェア / ゲーム間をつなぐ、グラフィックス記述のための汎用性の高いファイルフォーマットです。<br>eSはハンドリングが容易なアスキーテキストファイルで、構文ルールが規定されています。さまざまなデータを扱えるようにするため基本型 / 構造体を独自に定義できる枠組みに加えて、名前空間を使用して各ツール・ミドルウェア独自のグラフィックス機能を記述することができます。実データの記述には、イミディエイト値のほかにシンボルの参照を用いることができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>eS文法の要約</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">以下、eS文法を要約して示します。eS文法の完全な定義はBNF記法を用いてこの後に示します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>コメント</b><br></h4></div>
+
+<div style="margin-left:67px;"># または // からその行の行末まではコメントとみなされます（単一行コメント）。また、/* から */ までは複数行にわたるコメント（リージョンコメント）とみなされます。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>例：
+#  This is a comment
+// This too
+/*
+   This also
+*/
+</pre></font></div>
+<div style="margin-left:67px;">なお、eSパッケージにサンプルとして含まれているパーサーはリージョンコメントをサポートしていません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>改行文字</b><br></h4></div>
+
+<div style="margin-left:67px;">改行文字は、コメントの終了を意味するほか、空白と同じく文字の区切りとなります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>バージョン</b><br></h4></div>
+
+<div style="margin-left:67px;">ファイルの先頭には、コメント"#"として次の形式でバージョン識別子を記述します。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>形式：
+# eS v<i>major</i>.<i>minor</i> ascii
+例：
+# eS v0.3 ascii
+</pre></font></div>
+<div style="margin-left:67px;">現在のバージョンは"# eS v0.6"です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>予約語</b><br></h4></div>
+
+<div style="margin-left:67px;">eSの予約語を次に示します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>予約語</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;boolean&nbsp;</td>
+<td valign="TOP">&nbsp;ブール型の宣言に使用する。与えるデータが"TRUE","True","true"&nbsp;<br>&nbsp;であれば真、"FALSE","False","false"であれば偽&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;default&nbsp;</td>
+<td valign="TOP">&nbsp;デフォルトの名前空間を示す&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;enum&nbsp;</td>
+<td valign="TOP">&nbsp;列挙型の宣言に使用する。与えるデータは文字列で、&nbsp;<br>&nbsp;初期値は順に１からビットシフトされる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;integer&nbsp;</td>
+<td valign="TOP">&nbsp;整数型の宣言に使用する。この後に [] で括って符号部 / 指数部&nbsp;<br>&nbsp;のビット幅を指定する。整数型の小数部のビット幅は常に０&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;floating&nbsp;</td>
+<td valign="TOP">&nbsp;浮動小数型の宣言に使用する。この後に [] で括って符号部 / &nbsp;<br>&nbsp;指数部 / 小数部のビット幅を指定する。浮動小数型の小数部の&nbsp;<br>&nbsp;ビット幅は常に０以上&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;namespace&nbsp;</td>
+<td valign="TOP">&nbsp;名前空間の宣言に使用する。名前空間の名前は、その名前空間で&nbsp;<br>&nbsp;宣言された実体にアクセスすることができる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;string&nbsp;</td>
+<td valign="TOP">&nbsp;文字列型の宣言に使用する。与えるデータは "" で括られた文字列&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;struct&nbsp;</td>
+<td valign="TOP">&nbsp;構造体の宣言に使用する。スコープ内で複数の基本型 / 構造体を&nbsp;<br>&nbsp;１つの構造体にまとめる&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;typedef&nbsp;</td>
+<td valign="TOP">&nbsp;基本型の宣言に使用する。integer / floatingキーワードと組に&nbsp;<br>&nbsp;して使用する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">このほか、C/C++の予約語もeSの予約語となります。以下にC/C++の予約語を示します。<br></div>
+<div style="margin-left:80px;">asm auto<br>break<br>case catch char class const continue<br>default delete do double<br>else enum extern<br>float for friend<br>goto<br>if inline int<br>long<br>new<br>operator<br>private protected public<br>register return<br>short signed sizeof static struct switch<br>template this throw try typedef<br>union unsigned<br>virtual void volatile<br>while<br></div>
+
+<div style="margin-left:40px;"><h4><b>宣言文</b><br></h4></div>
+
+<div style="margin-left:67px;">宣言文はさまざまな基本型 / 構造体を宣言するステートメントです。各オーサリングツールやミドルウェアの独自データをパッケージ化するために、C++の名前空間のコンセプトを使用しています。宣言文としては以下の4つがあります。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> namespace : 独自の名前空間と名前を宣言し、宣言全体をパッケージ化します。
+</ul></div>
+        <div style="margin-left:80px;"><pre><font size=3><b>namespace</b> namespace.name {
+	...
+}
+</pre></font></div>
+<div style="margin-left:40px;"><ul>
+         <li> typedef : 基本となる整数型や浮動小数点型をビットフィールドを用いて宣言します。
+</ul></div>
+        <div style="margin-left:80px;"><pre><font size=3><b>typedef</b> (<b>integer</b>|<b>floating</b>)[sign:exponent:fraction] type.identifier
+</pre></font></div>
+<div style="margin-left:40px;"><ul>
+         <li> type : データ型やその型の名前を宣言します。
+</ul></div>
+        <div style="margin-left:80px;"><pre><font size=3>type.identifier type.name
+type.identifier type.name { initializer }
+</pre></font></div>
+<div style="margin-left:40px;"><ul>
+         <li> struct : 基本型や構造体をまとめて新たな構造体を宣言します。
+</ul></div>
+        <div style="margin-left:80px;"><pre><font size=3><b>struct</b> struct.identifier {
+	type.identifier type.name
+	type.identifier type.name { initial value }
+	...
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>実装文</b><br></h4></div>
+
+<div style="margin-left:67px;">実装文は宣言文で定義されたデータメンバを用いて、シーン構築の実データを記述するステートメントです。<br>実装文の基本的な形式は次のとおりです。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>namespace.name::struct.identifier struct.name {
+	type.name { literal }
+}
+</pre></font></div>
+<div style="margin-left:67px;">デフォルトの名前空間名を定義する場合には次のように記述します。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3><b>default namespace</b> namespace.name
+struct.identifier struct.name {
+	type.name { literal }
+}
+</pre></font></div>
+<div style="margin-left:67px;">シンボルによる構造体の参照を定義する場合は次のように記述します（基本型の参照はできません）。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct.identifier struct.name { struct.name }
+</pre></font></div>
+<div style="margin-left:67px;">{ }内に'NULL'を記述すると、何も参照しないことを示します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>演算子と区切り子</b><br></h4></div>
+
+<div style="margin-left:67px;">{ } は影響する型、構造体のスコープ範囲を意味します。スコープ内に違う名前を持ったブラケットが現れたとき、それは次の階層を示します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>インクルードファイル</b><br></h4></div>
+
+<div style="margin-left:67px;">eSでは宣言文を別ファイルからインクルードすることができます。次に例を示します。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>例：
+$include "eSTD.es"
+</pre></font></div>
+<div style="margin-left:67px;">ファイル名はダブルクオートで括られた文字列を使用します。<br>eS v0.6から実装文のインクルードができるようになりました。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>BNFによるeS文法</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">eSの文法を簡単なBNF記法によって示します。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>//	::=		is an assignment.
+//	...|...	means either this construct or that construct.
+//	[...]		means the bracketed construct is optional.
+//	{...}		means the bracketed construct is repeated one
+//			or more times.
+//	'...'		is a literal string definition.
+
+eS			::= version statement
+			;
+
+version			::= '# eS v0.6 ascii'
+			;
+
+statement		::= {declaration}
+			|   {declaration} default.namespace {implementation}
+			;
+
+declaration		::= include
+			|   type.declaration
+			|   namespace.declaration
+			;
+
+include			::= '$include' string.literal
+			;
+
+type.declaration	::= 'typedef' type.specifier '[' bitfield ']' 
+			    type.identifier
+			;
+
+namespace.declaration	::= namespace.identifier '{'{ struct.declaration } '}'
+			;
+
+struct.declaration	::= struct.identifier '{' { member.declaration } '}'
+			;
+
+member.declaration	::= type.declarator
+			;
+
+type.declartor		::= literal literal [ '{' initializer '}' ]
+			;
+
+initializer		::= integer.literal
+			|   floating.literal
+			|   string.literal
+			|   boolean.literal
+			|   literal
+			;
+
+implementation		::= definistion
+			|   include
+			;
+
+default.namespace	::= 'default' 'namespace' namespace.identifier
+			;
+	
+definition		::= struct.definition '{' member.implementation '}'
+			;
+
+struct.definition	::= literal '::' literal literal
+			|   literal literal
+			;
+
+member.implementation	::= member.name '{' member.implementation '}'
+			|   member.name '{' literal '}'
+			;
+
+literal			::= integer.literal
+			|   floating.literal
+			|   enum.literal
+			|   string.literal
+			|   boolean.literal
+			|   'NULL'
+			;
+
+integer.literal	::= -?[0-9]+
+			|   0x[0-9A-Fa-f]+
+			;
+
+floating.literal	::= -?[0-9]+\.?[0-9]+([eE][+-]?[0-9]+)?
+			;
+
+string.literal		::= \"[A-Za-z0-9_\./]+\"
+			;
+
+boolean.literal	::= 'TRUE'
+			|   'FALSE'
+			;
+enum.literal		::= literal
+			|   enum.literal '|' literal
+			;
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>eSTD</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">eSTDはSCEIが提供する標準名前空間で、インタラクティブワールドでの標準的なシーングラフを記述するために、いくつかの基本型と構造体が定義されています。<br></div>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_1_3_1"><h4>
+(1)&nbsp;<b>基本型</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">eSTDでは次の基本型がtypedefキーワードによって定義されています。<br></div>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>基本型</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>定義</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;char&nbsp;</td>
+<td valign="TOP">&nbsp;8ビット符号有り整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[1:7:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;short&nbsp;</td>
+<td valign="TOP">&nbsp;16ビット符号有り整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[1:15:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;int&nbsp;</td>
+<td valign="TOP">&nbsp;32ビット符号有り整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[1:31:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;long&nbsp;</td>
+<td valign="TOP">&nbsp;64ビット符号有り整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[1:63:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;uchar&nbsp;</td>
+<td valign="TOP">&nbsp;8ビット符号無し整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[0:8:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ushort&nbsp;</td>
+<td valign="TOP">&nbsp;16ビット符号無し整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[0:16:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;uint&nbsp;</td>
+<td valign="TOP">&nbsp;32ビット符号無し整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[0:32:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ulong&nbsp;</td>
+<td valign="TOP">&nbsp;64ビット符号無し整数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[0:64:0]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;fixeds&nbsp;</td>
+<td valign="TOP">&nbsp;16ビット固定小数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[1:4:11]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;fixedi&nbsp;</td>
+<td valign="TOP">&nbsp;32ビット固定小数&nbsp;</td>
+<td valign="TOP">&nbsp;integer[1:7:24]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;float&nbsp;</td>
+<td valign="TOP">&nbsp;32ビット単精度浮動小数（IEEE-754準拠）&nbsp;</td>
+<td valign="TOP">&nbsp;floating[1:8:23]&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;double&nbsp;</td>
+<td valign="TOP">&nbsp;64ビット倍精度浮動小数（IEEE-754準拠）&nbsp;</td>
+<td valign="TOP">&nbsp;floating[1:11:52]&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　５，（１） -->
+<div style="margin-left:40px;"><a name="Heading5_1_3_2"><h4>
+(2)&nbsp;<b>構造体</b><br></h4>
+</a></div>
+<div style="margin-left:67px;">eSTDでは次の構造体が定義されています。<br></div>
+
+<div style="margin-left:40px;"><h4><b>Version</b><br></h4></div>
+
+<div style="margin-left:67px;">eSTDのバージョン情報を記述する構造体です。現在のバージョンは"eSTD v0.6"です。<br><br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Version {
+	string version	{ "eSTD v0.6" }
+	string author	{ "Copyright (C) 2001
+		 by Sony Computer Entertainment Inc."}
+	string date	{ "2001/07/01" }
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Camera</b><br></h4></div>
+
+<div style="margin-left:67px;">視点方向 / 表示スクリーン / クリッピングを記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Camera {
+	float	fovy	// 視野角
+	float	aspect	//アスペクト
+	float	near	//ニアクリップ値
+	float	far	//ファークリップ値
+	float	position	//視点の位置
+	float	interest	//視線方向の位置
+	float	up	//視点の上方向ベクトル
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Light</b><br></h4></div>
+
+<div style="margin-left:67px;">光源モデルを記述する構造体です。光源には、平行光源 / 点光源 / スポットライトを指定できます。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Light {
+	enum	type	{ DIRECTION POINT SPOT }	//光源タイプ
+	float	coneangle	//スポットライトのカットオン・オフ角度
+	float	position	//光源位置
+	float	direction	//光源の向き
+	float	color	//光源カラー
+	float	attenuation	//減衰率
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Fog</b><br></h4></div>
+
+<div style="margin-left:67px;">霧モデルを記述する構造体です。混合比率にLINEAR / EXPONENTIALを指定できます。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Fog {
+	enum	type	{ LINEAR EXPONENTIAL }	//混合タイプ
+	float	density	//フォグ密度
+	float	start	//近景
+	float	end	//遠景
+	float	color	//フォグカラー
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Texel</b><br></h4></div>
+
+<div style="margin-left:67px;">テクスチャのテクセル情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Texel {
+	int	bpp	//ピクセルビット幅
+	int	width	//幅
+	int	height	//高さ
+	int	mipmap	//ミップマップレベル (0 - 6)
+	uint	image	//イメージピクセル
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Clut</b><br></h4></div>
+
+<div style="margin-left:67px;">テクスチャのカラールックアップテーブル情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Clut {
+	int	bpp	//ピクセルビット幅
+	int	width	//幅
+	int	height	//高さ
+	uint	image	//イメージピクセル
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Texture</b><br></h4></div>
+
+<div style="margin-left:67px;">テクスチャマップを示す構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Texture {
+	enum	type	{ EXTERN INLINE CLUT TIM2 }	//テクスチャタイプ
+	string	filename	//外部参照ファイル名
+	int	region	//リージョンリピート時のリージョンサイズ
+	int	filter	//テクスチャフィルター（GSレジスタに依存）
+	int	function	//テクスチャファンクション（GSレジスタに依存）
+	int	wrap	//S,T方向ラップモード（GSレジスタに依存）
+	Texel	texel	//テクセルの指定
+	Clut	clut	//カラールックアップテーブルの指定
+}
+</pre></font></div>
+<div style="margin-left:67px;">filenameには、ダブルコーテーション""で囲んでファイル名を指定します。<br>regionには、リージョンサイズ{ MINU MINV MAXU MAXV }を指定します。<br>filterには、テクスチャフィルター{ MMAG MMIN }を次の値で指定します。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;MMAG&nbsp;</td>
+<td valign="TOP">&nbsp;0 NEAREST&nbsp;<br>&nbsp;1 LINEAR&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MMIN&nbsp;</td>
+<td valign="TOP">&nbsp;0 NEAREST&nbsp;<br>&nbsp;1 LINEAR&nbsp;<br>&nbsp;2 NEAREST_MIPMAP_NEAREST&nbsp;<br>&nbsp;3 NEAREST_MIPMAP_LINEAR&nbsp;<br>&nbsp;4 LINEAR_MIPMAP_NEAREST&nbsp;<br>&nbsp;5 LINEAR_MIPMAP_LINEAR&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;">functionには、テクスチャファンクションを次の値で指定します。<br></div>
+<div style="margin-left:80px;">0 MODULATE<br>1 DECAL<br>2 HIGHLIGHT<br>3 HIGHLIGHT2<br></div>
+<div style="margin-left:67px;">wrapには、S,T方向ラップモード{ WMS WMT }を次の値で指定します。<br></div>
+<div style="margin-left:80px;">WMS	0 REPEAT, 1 CLAMP, 2 REGION_CLAMP, 3 REGION_REPEAT<br>WMT	0 REPEAT, 1 CLAMP, 2 REGION_CLAMP, 3 REGION_REPEAT<br></div>
+
+<div style="margin-left:40px;"><h4><b>Layer</b><br></h4></div>
+
+<div style="margin-left:67px;">マルチテクスチャを記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Layer {
+	enum	blend	{ NONE ADD SUB }	//ブレンドタイプ
+	float	alpha	//ブレンドアルファ値
+	Texture	texture	//テクスチャの指定
+}
+</pre></font></div>
+<div style="margin-left:67px;"><br>blendにはブレンドタイプを次のように指定します。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;NONE&nbsp;</td>
+<td valign="TOP">&nbsp;ブレンドなし&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ADD&nbsp;</td>
+<td valign="TOP">&nbsp;加算ブレンド&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SUB&nbsp;</td>
+<td valign="TOP">&nbsp;減算ブレンド&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;">alphaにはブレンドアルファ値を指定します。{ 0.0 }は完全透明、{ 128.0 }は不透明、{ 255.0 }は輝度２倍の指定となります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>Material</b><br></h4></div>
+
+<div style="margin-left:67px;">表面のマテリアルプロパティーを記述する構造体です。通常はLightとセットで使用します。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Material {
+	enum	type	{ CONSTANT LAMBERT PHONG BLINN VCOLOR }
+		//シェーディングタイプ
+	float	shininess	//鏡面係数{ 0.0 }以上を指定
+	float	transparency	//透過率
+	float	ambient	//環境カラー
+	float	diffuse	//拡散カラー
+	float	specular	//鏡面カラー
+	float	emission	//放射カラー
+	Texture	texture	//テクスチャの指定
+	Layer	layer	//マルチテクスチャの指定
+	Bump	bump	//バンプマップの指定
+	Environment environment	//環境マップの指定
+}
+</pre></font></div>
+<div style="margin-left:67px;">typeには	シェーディングの方式を指定します。VCOLORは、Shapeの頂点カラーを拡散カラーとして使用するシェーディング方式です。<br>transparencyには透過率を指定します。{ 0.0 }が完全透明、{ 128.0 }が不透明、{ 255.0 }は輝度2倍の指定になります。初期値は { 128.0} です。<br>ambient / diffuse / specular / emissionには、それぞれのカラー値を{ R G B }で、{ 0.0 0.0 0.0 }から{ 255.0 255.0 255.0 }までの範囲で指定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>Appearance</b><br></h4></div>
+
+<div style="margin-left:67px;">外観情報を記述する構造体です。そのシーンで使用するマテリアル情報、テクスチャ情報が記述されます。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Appearance {
+	Material	material	//マテリアルの指定
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Vertex</b><br></h4></div>
+
+<div style="margin-left:67px;">頂点情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Vertex {
+	int	num	//頂点数
+	float	value	//頂点座標
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Normal</b><br></h4></div>
+
+<div style="margin-left:67px;">法線情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Normal {
+	int	num	//法線数
+	float	value	//法線座標
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Vcolor</b><br></h4></div>
+
+<div style="margin-left:67px;">頂点カラーを記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Vcolor {
+	int	num	//頂点カラー数
+	float	value	//頂点カラー
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Tcoord</b><br></h4></div>
+
+<div style="margin-left:67px;">テクスチャ座標を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Tcoord {
+	int	num	//テクスチャ座標数
+	float	value	//テクスチャ座標
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Geometry</b><br></h4></div>
+
+<div style="margin-left:67px;">ポリゴン面による3Dオブジェクトを記述する構造体です。頂点座標、法線座標、共有情報、頂点カラー、テクスチャ座標、それらのインデックス情報などを記述します。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Geometry {
+	enum	type	{ POINT LINE TRIANGLE QUAD POLYGON STRIP FAN }
+		//描画プリミティブタイプ
+	boolean	ccw	//前方面の方向
+	boolean npv	//頂点毎法線のフラグ
+	boolean cpv	//頂点毎カラーのフラグ
+	boolean	tex	//テクスチャのフラグ
+	boolean	wpv	//スキン情報のフラグ
+	int	node	//１ポリゴンの頂点数
+	int	length	//プリミティブ数（ポリゴン数やストリップ長など）
+	Vertex	vertex	//頂点座標
+	Normal	normal	//法線座標
+	Vcolor	vcolor	//頂点カラー
+	Tcoord	tcoord	//テクスチャ座標（マルチテクスチャの場合複数指定）
+	SkinWeight	skinweight	//スキン情報
+	int	vertexindex	//頂点インデックス
+	int	normalindex	//法線インデックス
+	int	vcolorindex	//頂点カラーインデックス
+	int	tcoordindex	//テクスチャ座標インデックス
+	int	materialindex	//マテリアルインデックス（プリミティブ数分指定）
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Shape</b><br></h4></div>
+
+<div style="margin-left:67px;">GeometryとAppearance情報からなる形状情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Shape {
+	Geometry	geometry	//形状を構成するGeometryの指定
+	Appearance	appearance	//形状を構成するAppearanceの指定
+	SkinHeader	skinheader	//スキン情報の特性
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Share</b><br></h4></div>
+
+<div style="margin-left:67px;">GeometryとAppearance情報からなる共有形状情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct Share {
+	Geometry	geometry	//形状を構成するGeometryの指定
+	Appearance	appearance	//形状を構成するAppearanceの指定
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Transform</b><br></h4></div>
+
+<div style="margin-left:67px;">座標変換情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Transform {
+	enum	order	{ TRS TSR RTS RST STR SRT RXYZ RXZY RYXZ RYZX RZXY RZYX }
+		//座標変換順序
+	float	matrix
+		{ 1.0 0.0 0.0 0.0
+		  0.0 1.0 0.0 0.0
+		  0.0 0.0 1.0 0.0
+		  0.0 0.0 0.0 1.0 }	//変換行列
+	float	translate	{ 0.0 0.0 0.0 }	//平行移動
+	float	rotate		{ 0.0 0.0 0.0 }	//回転
+	float	scale		{ 1.0 1.0 1.0 }	//拡大縮小
+	float	pivot		{ 0.0 0.0 0.0 }	//中心のオフセット
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Hierarchy</b><br></h4></div>
+
+<div style="margin-left:67px;">Shapeをもちいた階層構造を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Hierarchy {
+	Transform	transform	//Transformの指定
+	Shape		shape	//Shapeの指定
+	Hierarchy	parent	//親階層にあたるHierarchyの指定
+	Hierarchy	child	//子供階層にあたるHierarchyの指定
+	Hierarchy	sibling	//兄弟階層にあたるHierarchyの指定
+	BoundingBox	boundingbox	//バウンディングボックスの指定
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Keyframe</b><br></h4></div>
+
+<div style="margin-left:67px;">キーフレームの情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Keyframe {
+	enum	interp	{ CONSTANT LINEAR HERMITE BEZIER BSPLINE }
+		//補間タイプの指定
+	enum	fcurve	{ TX TY TZ RX RY RZ SX SY SZ TXYZ
+			 RXYZ RXZY RYXZ RYZX RZXY RZYX SXYZ }
+			//ファンクションカーブの指定
+	int	frame	//キーとなるフレームの指定
+	float	value	//キーとなるコントロール値の指定
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Animation</b><br></h4></div>
+
+<div style="margin-left:67px;">アニメーション情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Animation {
+	enum	type { HIERARCHY }	//アニメーションタイプの指定
+	boolean	kpf	//フレーム毎キーのフラグ
+	int	key	//キーフレーム数
+	Hierarchy	hierarchy	//アニメーションする階層の指定
+	Keyframe	keyframe	//キーフレームの指定
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>SharedVN</b><br></h4></div>
+
+<div style="margin-left:67px;">共有頂点、共有法線の情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	SharedVN {
+	int	vertpos	//共有頂点の場所
+	int	vertlen	//共有頂点の長さ
+	int	normpos	//共有法線の場所
+	int	normlen	//共有法線の長さ
+	Hierarchy	hierarchy	//階層構造の場所指定
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Bump</b><br></h4></div>
+
+<div style="margin-left:67px;">バンプマップの情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Bump {
+	enum type { CLUT EMBOSS } //バンプタイプの指定
+	float scale //バンプα値　0.0 ~ 255.0
+	float shift //バンプシフト量(EMBOSSで使用)
+	Texture texture //バンプテクスチャの指定
+	Normal normal //法線テーブル(CLUTで使用)
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Fisheye</b><br></h4></div>
+
+<div style="margin-left:67px;">魚眼レンズの情報を記述する構造体です。(未使用)<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	 Fisheye {
+	int	depth
+	float	rmin
+	float	rmax
+	int	size
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Reflection</b><br></h4></div>
+
+<div style="margin-left:67px;">環境反射マップの情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Reflection {
+	enum method { STATIC DYNAMIC SPHERE } //手法の指定
+	float alpha　//α値
+	Texture texture　//環境反射マップテクスチャの指定(STATICで使用)
+	Fisheye fisheye //魚眼レンズの指定(DYNAMICで使用)
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Refraction</b><br></h4></div>
+
+<div style="margin-left:67px;">環境屈折マップの情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Refraction {
+	enum method { STATIC DYNAMIC SPHERE } //手法の指定
+	float alpha　//α値
+	float index　//屈折率
+	Texture texture　//環境屈折マップテクスチャの指定(STATICで使用)
+	Fisheye fisheye //魚眼レンズの指定(DYNAMICで使用)
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Environment</b><br></h4></div>
+
+<div style="margin-left:67px;">環境マップの情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Environment {
+	Reflection reflection //環境反射マップの指定
+	Refraction refraction //環境屈折マップの指定
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>BoundingBox</b><br></h4></div>
+
+<div style="margin-left:67px;">バウンディングボックスの情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	BoundingBox {
+	float min //最小サイズ
+	float max //最大サイズ
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ShadowMap</b><br></h4></div>
+
+<div style="margin-left:67px;">シャドウマップの情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	ShadowMap {
+	Hierarchy object　//シャドウオブジェクトの指定
+	Hierarchy reciever //シャドウレシーバーの指定
+	BoundingBox boundingbox //シャドウオブジェクトのバウンディングボックス
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Weight</b><br></h4></div>
+
+<div style="margin-left:67px;">頂点の重み情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	Weight {
+	int	num	//重みの数
+	int	index	//頂点インデックス
+	float	value	//重み係数
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>SkinWeight</b><br></h4></div>
+
+<div style="margin-left:67px;">スキン情報を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	SkinWeight {
+	Hierarchy	local		//頂点が属するローカル階層の指定
+	Hierarchy	hierarchy	//頂点に影響を及ぼすボーン階層の指定
+	float		matrix		//ローカルからボーン座標への変換マトリクス
+	Weight		weight		//ボーンの影響を受ける頂点の重み情報
+}
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>SkinHeader</b><br></h4></div>
+
+<div style="margin-left:67px;">スキン情報の特性を記述する構造体です。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>struct	SkinHeader {
+	int	max	//１つの頂点における重みの最大数
+	int	sum	//１つの頂点における使用している重みの数
+	int	num	//SkinWeight構造体の数
+}
+</pre></font></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>rawファイルフォーマット</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">rawファイルフォーマットは、Graphics Frameworkで使用しているデータフォーマットで、"PlayStation 2"のアーキテクチャに沿った効率的な描画処理と、開発効率の両立が図られています。rawファイルはeS（eSTD）ファイルをもとに、コンバータes2rawを用いて生成することができます。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>rawファイルの生成</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">rawファイルはeSファイルをコンバータes2rawで変換して作成することができます。変換結果はEEアセンブラのソースファイルとなり、必要ならばさらに修正を加えた後、アセンブルすることによってバイナリのrawファイルが得られます。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat001.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">なお、es2rawを実行する際にはヘッダファイルeSTD.esが必要です。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>eSTDとの対応</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">標準名前空間eSTDで定義されている構造体のうち、es2rawが対応しているものは次のとおりです。<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;・Shape&nbsp;</td>
+<td valign="TOP">&nbsp;形状情報と外観情報を含む構造体&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・Geometry&nbsp;</td>
+<td valign="TOP">&nbsp;幾何学形状の構造体&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・Material&nbsp;</td>
+<td valign="TOP">&nbsp;マテリアル情報の構造体&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・Texture&nbsp;</td>
+<td valign="TOP">&nbsp;テクスチャ情報の構造体&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・Share&nbsp;</td>
+<td valign="TOP">&nbsp;共有形状の構造体&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・Hierarchy&nbsp;</td>
+<td valign="TOP">&nbsp;階層構造の構造体&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;・Animation&nbsp;</td>
+<td valign="TOP">&nbsp;キーフレームアニメーションの構造体&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;">なおeSTDとrawではShapeの内部構造に違いがあります。eSTDではMaterial &lt; Geometryの関係になっているのに対して、es2rawの内部でMaterial単位にGeometryをソートし、Material &gt; Geometryの関係になっています。これは、テクスチャ転送を頻繁に行うと実機上で描画パフォーマンスが大きく低下するため、テクスチャ転送を軽減するためです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>rawファイルの構造</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">rawデータはおおよそ次のようなブロック構造になっています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;　　raw dataへッダー情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 形状データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　ベースマトリクスデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　テクスチャデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　 階層構造データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　  Microデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　アニメーションデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　キーフレームデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　キーバリューデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　 　共有データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　有頂点データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　 共有法線データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;共有頂点インデックスデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;共有法線インデックスデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　共有頂点連結データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　 有法線連結データ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">各ブロックの構造は以下に示しますが、おおよそ、それぞれヘッダーに続いてデータが必要なだけ並んだ構造になっています。グラフィックスの内容によってはいずれかのブロックが存在しない場合もあります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>raw dataへッダー情報</b><br></h4></div>
+
+<div style="margin-left:67px;">raw dataヘッダー情報は、他の各ブロックへのオフセットが集まったものです。オフセットデータは以下に示す固定順で並び、該当するブロックが存在しないときはNULL（＝0）となります。<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	形状データブロックへのアドレスオフセット
+.word	ベースマトリクスデータブロックへのアドレスオフセット
+.word	テクスチャデータブロックへのアドレスオフセット
+.word	階層構造データブロックへのアドレスオフセット
+.word	Microデータブロックへのアドレスオフセット
+.word	アニメーションデータブロックへのアドレスオフセット
+.word	キーフレームデータブロックへのアドレスオフセット
+.word	キーバリューデータブロックへのアドレスオフセット
+.word	共有データブロックへのアドレスオフセット
+.word	共有頂点データブロックへのアドレスオフセット
+.word	共有法線データブロックへのアドレスオフセット
+.word	共有頂点インデックスデータブロックへのアドレスオフセット
+.word	共有法線インデックスデータブロックへのアドレスオフセット
+.word	共有頂点連結データブロックへのアドレスオフセット
+.word	共有法線連結データブロックへのアドレスオフセット
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>形状データブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, Shape数
+</pre></font></div>
+<div style="margin-left:67px;">- shape -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	Shape ID, Shapeのワードサイズ, 未使用, Material数
+- material head -
+	.word	Material ID, Geometry数, Texture ID, Texture数
+- material info -
+	.float	0.0, 0.0, 0.0, 0.0	（未使用）
+	.float	0.0, 0.0, 0.0, 0.0	（未使用）
+	- geometry head -
+		.word	Geometry ID, Geometryワードサイズ, PRIMレジスタ, PRIM数
+		- vertex -
+		.float	x, y, z, 1.0
+		（PRIM数だけ繰り返し）
+		- normal -
+		.float	x, y, z, 1.0
+		（PRIM数だけ繰り返し）
+		- st -
+		.float	s, t, 1.0, 0.0
+		（PRIM数だけ繰り返し）
+		- color -
+		.float	r, g, b, a
+		（PRIM数だけ繰り返し）
+	- geometry head -
+		（上記と同様）
+	： Geometry数だけ繰り返し
+- material head -
+	（上記と同様）
+： Material数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">- shape -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	（上記と同様）
+： Shape数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ベースマトリクスデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, マトリクス数
+</pre></font></div>
+<div style="margin-left:67px;">- matrix -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, Shape ID
+sceVu0FMATRIX型 local_world	ローカルワールドマトリクス
+sceVu0FMATRIX型 light_rot	ライトロテーションマトリクス
+</pre></font></div>
+<div style="margin-left:67px;">- matrix -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3> (上記と同様）
+： マトリクス数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>テクスチャデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, テクスチャ数
+</pre></font></div>
+<div style="margin-left:67px;">- texture -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.dword	TEX0レジスタ, 0
+.dword	CLUT ワードサイズ | TEXEL ワードサイズ
+.dword	CLUT width | CLUT height | TEXEL width | TEXEL height
+.word	TEXEL data
+（TEXELワードサイズだけ繰り返し）
+.word	CLUT data
+（CLUTワードサイズだけ繰り返し）
+</pre></font></div>
+<div style="margin-left:67px;">- texture -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	(上記と同様）
+： テクスチャ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>階層構造データブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, Hrchy数
+</pre></font></div>
+<div style="margin-left:67px;">- hierarchy -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	trans X, trans Y, trans Z, 0.0
+.float	rot   X, rot   Y, rot   Z, 0.0
+.float	scale X, scale Y, scale Z, 0.0
+.word	Shape ID
+.word	Parent ID
+.word	-1 (未使用）
+.word	-1 (未使用）
+</pre></font></div>
+<div style="margin-left:67px;">- hierarchy -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	(上記と同様）
+： Hrchy数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Microデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>sceVu0FMATRIX型 world_screen	透視変換マトリクス
+sceVu0FMATRIX型 world_clip	ワールドクリップマトリクス
+sceVu0FMATRIX型 clip_screen	スクリーンクリップマトリクス
+sceVu0FMATRIX型 init_data	FOG/ANIT設定データ
+sceVu0FMATRIX型 light_vector0	光源0,1,2の方向ベクトルマトリクス
+				＋光源の広がり（for Spot）
+sceVu0FMATRIX型 light_point0	光源0,1,2の位置ベクトルマトリクス
+				＋光の強さ（for point/spot）
+sceVu0FMATRIX型 light_color0	光源0,1,2のカラーマトリクス
+					＋アンビエントカラー
+sceVu0FMATRIX型 light_vector1	光源3,4,5の方向ベクトルマトリクス
+				＋光源の広がり（for Spot）
+sceVu0FMATRIX型 light_point1	光源3,4,5の位置ベクトルマトリクス
+				＋光の強さ（for Point/Spot）
+sceVu0FMATRIX型 light_color1	光源3,4,5のカラーマトリクス
+				＋アンビエントカラー
+sceVu0FMATRIX型 light_vector2	光源6,7,8の方向ベクトルマトリクス
+				＋光源の広がり（for Spot）
+sceVu0FMATRIX型 light_point2	光源6,7,8の位置ベクトルマトリクス
+				＋光の強さ（for Point/Spot）
+sceVu0FMATRIX型 light_color2	光源6,7,8のカラーマトリクス
+				＋アンビエントカラー
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>アニメーションデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, アニメーションデータ数
+</pre></font></div>
+<div style="margin-left:67px;">- animation -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	Hrchyデータインデックス
+.word	キーフレーム数
+.word	キーフレームデータインデックス
+.word	キーバリューデータインデックス
+</pre></font></div>
+<div style="margin-left:67px;">- animation -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>(上記と同様）
+： アニメーションデータ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>キーフレームデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, キーフレームデータ数
+</pre></font></div>
+<div style="margin-left:67px;">- keyframe -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, インデックス, ワードサイズ, キーフレーム数
+.word	keyframe0, keyframe1, ... , keyframeN
+</pre></font></div>
+<div style="margin-left:67px;">- keyframe -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>(上記と同様）
+： キーフレームデータ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>キーバリューデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, キーバリューデータ数
+</pre></font></div>
+<div style="margin-left:67px;">- keyvalue -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, インデックス, ワードサイズ, キーフレーム数
+- keyframevalue-
+.float	trans X, trans Y, trans Z, 0.0
+ .float	rot X, rot Y, rot Z, 0.0
+- keyframevalue-
+	(上記と同様）
+： キーフレーム数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">- keyvalue -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>(上記と同様）
+： キーバリューデータ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有データブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, 共有データ数
+</pre></font></div>
+<div style="margin-left:67px;">- share -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	演算後共有頂点先頭位置, 演算後共有頂点長
+.word	演算後共有法線先頭位置, 演算後共有法線長
+</pre></font></div>
+<div style="margin-left:67px;">- share -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3> (上記と同様）
+：共有データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有頂点データブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, 共有頂点データ数
+</pre></font></div>
+<div style="margin-left:67px;">- share vertex -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	x, y, z, 1.0		共有頂点0
+</pre></font></div>
+<div style="margin-left:67px;">- share vertex-<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>(上記と同様）
+： 共有頂点データ数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">- calculated share vertex -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	x, y, z, 1.0		演算後共有頂点0
+</pre></font></div>
+<div style="margin-left:67px;">- calculated share vertex -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>(上記と同様）
+： 共有頂点データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有法線データブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, 共有法線データ数
+</pre></font></div>
+<div style="margin-left:67px;">- share normal -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	x, y, z, 1.0		共有法線0
+</pre></font></div>
+<div style="margin-left:67px;">- share normal -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3> (上記と同様）
+： 共有法線データ数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">- calculated share normal -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	x, y, z, 1.0		演算後共有法線0
+</pre></font></div>
+<div style="margin-left:67px;">- calculated share normal -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3> (上記と同様）
+： 共有法線データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有頂点インデックスデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, 共有頂点インデックス数
+</pre></font></div>
+<div style="margin-left:67px;">- vertex index -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3> .word	頂点0,   頂点1,   頂点2,   頂点3
+： 共有頂点インデックス数に達するまで繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有法線インデックスデータブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 0, 共有法線インデックス数	
+</pre></font></div>
+<div style="margin-left:67px;">- normal index -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	法線0,   法線1,   法線2,   法線3
+： 共有法線インデックス数に達するまで繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有頂点連結データブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 共有Shape ID, 共有頂点連結データ数
+</pre></font></div>
+<div style="margin-left:67px;">- share vertex -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	共有頂点インデックスデータの先頭位置, 共有Geometry ID,未使用, 共有頂点数
+</pre></font></div>
+<div style="margin-left:67px;">- share vertex -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+： 共有頂点連結データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有法線連結データブロック</b><br></h4></div>
+
+<div style="margin-left:67px;">- header -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, 共有Shape ID, 共有法線連結データ数
+</pre></font></div>
+<div style="margin-left:67px;">- share normal -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	共有法線インデックスデータの先頭位置, 共有Geometry ID, 未使用, 共有法線数
+</pre></font></div>
+<div style="margin-left:67px;">- share normal -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+：共有法線連結データ数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>HiGデータフォーマット</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">HiGデータフォーマットは高レベルグラフィックスライブラリ（HiG / HiP）で使用するグラフィックスデータのフォーマットです。高レベルグラフィックスライブラリのドキュメントも合わせて参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>HiGデータの全体構造</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">HiGデータフォーマットは、ヘッダに続いてプラグインブロックおよびデータブロックが任意個数並んだ構造を取ります。ただしブロック間はポインタでつながれるため、メモリイメージとしてはブロックごとにばらばらに配置されていてもかまいません。<br>データの幅は128bitで、ブロックの先頭はqwordバウンダリにしたがっている必要があります。サイズもすべてqword単位（バイトサイズを16で割った数値）になります。<br>一部のデータ（アドレス情報）は、メモリにロードした後、sceHiParseHeader()を呼び出してパース処理を行うことにより、実アドレスに書き換えられます。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/gformat002.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>ヘッダ</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ヘッダの構造は次のとおりです。オフセット0に相当するsceHiHeader構造体、オフセット1以降の各qwordに相当するsceHiHeadData構造体がlibhig.hで定義されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オフセット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット位置</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;119-96&nbsp;</td>
+<td valign="TOP">&nbsp;ヘッダサイズ（qword数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;31-24&nbsp;</td>
+<td valign="TOP">&nbsp;ステータス（パース処理済かどうか）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;23-0&nbsp;</td>
+<td valign="TOP">&nbsp;バージョン識別子&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;127-96&nbsp;</td>
+<td valign="TOP">&nbsp;プラグインブロックアドレス&nbsp;<br>&nbsp;（パース処理時に実アドレス化）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;95-0&nbsp;</td>
+<td valign="TOP">&nbsp;プラグインブロック名称&nbsp;<br>&nbsp;（12文字まで、12文字未満の場合は'\0'で埋める）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2～&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;オフセット1と同様&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">プラグインブロックアドレスは、当初はヘッダ先頭からのオフセットアドレスが保存されていますが、パース処理によって実アドレスに書き換えられます。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/gformat003.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>プラグインブロック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プラグインブロックの構造を次に示します。プラグインブロックの全体に相当するsceHiPlug構造体、オフセット2以降の各qwordに相当するsceHiList構造体がlibhig.hで定義されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オフセット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット位置</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;119-96&nbsp;</td>
+<td valign="TOP">&nbsp;ブロックサイズ（qword数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;95-64&nbsp;</td>
+<td valign="TOP">&nbsp;プラグイン関数へのポインタ&nbsp;<br>&nbsp;（パース処理時に実アドレス化）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;63-0&nbsp;</td>
+<td valign="TOP">&nbsp;タイプ属性&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;127-96&nbsp;</td>
+<td valign="TOP">&nbsp;引数領域&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;95-64&nbsp;</td>
+<td valign="TOP">&nbsp;プラグインスタック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;15-8&nbsp;</td>
+<td valign="TOP">&nbsp;データブロックリストのエントリ数（n1：最大255）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;7-0&nbsp;</td>
+<td valign="TOP">&nbsp;プラグインブロックリストのエントリ数&nbsp;<br>&nbsp;（n2：最大255）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;95-64&nbsp;</td>
+<td valign="TOP">&nbsp;データブロックへのポインタ&nbsp;<br>&nbsp;（パース処理時に実アドレス化）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;63-0&nbsp;</td>
+<td valign="TOP">&nbsp;データブロックのタイプ属性&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;～&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;（n1個繰り返し）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2+n1&nbsp;</td>
+<td valign="TOP">&nbsp;95-64&nbsp;</td>
+<td valign="TOP">&nbsp;プラグインブロックへのポインタ&nbsp;<br>&nbsp;（パース処理時に実アドレス化）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2+n1&nbsp;</td>
+<td valign="TOP">&nbsp;63-0&nbsp;</td>
+<td valign="TOP">&nbsp;プラグインブロックのタイプ属性&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;～&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;（n2個繰り返し）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">プラグイン関数へのポインタはロード時にはNULLであり、パース処理によって実アドレスに書き換えられます。<br>引数領域は、プラグインブロックを呼び出す際に引数または引数領域へのポインタを受け渡すために使用する領域です。引数の内容については各プラグインのドキュメントを参照してください。<br>プラグインスタックは、プラグインの側でデータ退避に使用する領域でロード時にはNULLとなっています。アプリケーションでは意識する必要はありませんが、プラグイン実行時に値を破壊しないように注意してください。<br>データブロックリストおよびプラグインブロックリストの各エントリにあるデータブロック／プラグインブロックへのポインタは、ロード時にはヘッダ先頭からのオフセットアドレスであり、パース処理によって実アドレスに書き換えられます。<br>データブロックリストは、このプラグインブロックが処理対象とするデータブロックのリストです。ここに指定すべきデータブロックの内容・順序はプラグインごとに決まっていますので、各プラグインのドキュメントを参照してください。<br>プラグインブロックリストは、このプラグインブロックを呼び出したときに引き続いて呼び出されるプラグインブロック（挿入プラグインブロック）のリストです。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/gformat004.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>データブロック</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">データブロックの構造を次に示します。データブロック全体に相当するsceHiData構造体がlibhig.hで定義されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>オフセット</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット位置</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;119-96&nbsp;</td>
+<td valign="TOP">&nbsp;ブロックサイズ（qword数）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;71-64&nbsp;</td>
+<td valign="TOP">&nbsp;リファレンスカウンタ（パース処理時に設定）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;63-0&nbsp;</td>
+<td valign="TOP">&nbsp;タイプ属性&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1～&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;データ（内容はデータブロックのタイプにより&nbsp;<br>&nbsp;異なる）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">リファレンスカウンタはこのデータブロックがいくつのプラグインブロックから参照されているかを表します。パース処理の際に設定されますので、アプリケーションでは意識する必要はありません。<br>データの内容・構造はデータブロックのタイプ属性によって異なりますので、各プラグインのドキュメントを参照してください。<br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/gformat005.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>タイプ属性</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">プラグインブロック／データブロックはそれぞれタイプ属性を持ち、プラグインとの対応チェックが行えるようになっています。<br>タイプ属性は64bit幅で、次のように6つのフィールドで構成されています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フィールド</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット位置</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ビット幅</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Repository&nbsp;</td>
+<td valign="TOP">&nbsp;7-0&nbsp;</td>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;プラグイン提供者コード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Project&nbsp;</td>
+<td valign="TOP">&nbsp;15-8&nbsp;</td>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;プロジェクトコード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Category&nbsp;</td>
+<td valign="TOP">&nbsp;23-16&nbsp;</td>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;カテゴリコード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Status&nbsp;</td>
+<td valign="TOP">&nbsp;31-24&nbsp;</td>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;（ライブラリ内部で使用するフラグ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Plugin ID&nbsp;<br>&nbsp; / Data ID&nbsp;</td>
+<td valign="TOP">&nbsp;55-32&nbsp;</td>
+<td valign="TOP">&nbsp;24&nbsp;</td>
+<td valign="TOP">&nbsp;プラグイン識別子&nbsp;<br>&nbsp;／データ識別子&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Revision&nbsp;</td>
+<td valign="TOP">&nbsp;63-56&nbsp;</td>
+<td valign="TOP">&nbsp;8&nbsp;</td>
+<td valign="TOP">&nbsp;リビジョン番号&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">このうちProject / Category / Plugin IDまたはData IDの3レベルが対応チェックに使用されます。Repositoryについては、同じデータを他社提供のプラグインで処理する場合などを想定して、チェック対象から外してあります。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>HiPプラグインデータフォーマット</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">以下に示すのは、HiGデータフォーマットの一部で、高レベルグラフィックスプラグインライブラリ（HiP）に含まれる各プラグインの使用するプラグインブロックとデータブロックのフォーマットです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>タイプ属性</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">HiPプラグインのプラグインブロックのタイプ属性を次に示します。いずれもRepositoryはSCE_HIP_COMMON、ProjectはSCE_HIP_FRAMEWORKです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>プラグイン</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Category</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>PlugIn ID</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Frameプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_FRAME&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_FRAME_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Microプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_MICRO&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_MICRO_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2Dテクスチャプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_TEX2D&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_TEX2D_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Shapeプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Hrchyプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_HRCHY&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_HRCHY_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Animeプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_ANIME&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_ANIME_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Shareプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;TIM2プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_TIM2&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_TIM2_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ClutBumpプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_BUMP&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CLUTBUMP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;FishEyeプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_REFLECT&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_FISHEYE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Reflectionプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_REFLECT&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_REFLECT_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Refractionプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_REFLECT&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_REFRACT_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ShadowMapプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOW&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOWMAP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ShadowBoxプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOW&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOWBOX_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LightMapプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_LIGHT&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_LIGHTMAP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Clipプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CLIP&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CLIP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Cameraプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CAMERA&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CAMERA_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Skinプラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN_PLUG&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">HiPプラグインが使用するデータブロックのタイプ属性は次のとおりです。いずれもRepositoryはSCE_HIP_COMMON、ProjectはSCE_HIP_FRAMEWORKであり、Categoryはそれぞれ対応するプラグインブロックと同じです。r/w欄は、プラグインがデータブロックに対して行う読み書き処理を、r/o（リードオンリー）またはr/w（リードライト）で示しています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>プラグイン</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>データブロック</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Data ID</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>r/w</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Frame&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;（なし）&nbsp;</td>
+<td valign="TOP">&nbsp;（なし）&nbsp;</td>
+<td valign="TOP">&nbsp;(なし)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Micro&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;Microデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_MICRO_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/w&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;2Dテクスチャ&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;2Dテクスチャデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_TEX2D_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;テクスチャ環境データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_TEX2D_ENV&nbsp;</td>
+<td valign="TOP">&nbsp;r/w&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Shape&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;Shapeデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;ベースマトリクスデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_BASEMATRIX&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Hrchy&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;Hrchyデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_HRCHY_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;Pivotデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_PIVOT_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Anime&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;キーフレームデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_KEYFRAME&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;キーバリューデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_KEYVALUE&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;Animeデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_ANIME_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Share&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;共有頂点データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SRCDSTVERTEX&nbsp;</td>
+<td valign="TOP">&nbsp;r/w&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;共有法線データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SRCDSTNORMAL&nbsp;</td>
+<td valign="TOP">&nbsp;r/w&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;頂点インデックスデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_VERTEXINDEX&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;法線インデックスデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_NORMALINDEX&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;共有頂点連結データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHAREVERTEX&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;共有法線連結データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHARENORMAL&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;共有データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;TIM2&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;TIM2データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_TIM2_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ClutBump&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;ClutBumpデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CLUTBUMP_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;ClutBump法線データブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CLUTBUMP_NORMAL&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ShadowBox&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;ShadowBoxデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOWBOX_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/w&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Clip&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;Clipデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CLIP_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Camera&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;Cameraデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_CAMERA_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;Skin&nbsp;<br>&nbsp;プラグイン&nbsp;</td>
+<td valign="TOP">&nbsp;Skinデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN_DATA&nbsp;</td>
+<td valign="TOP">&nbsp;r/w&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルボーンデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN_LB&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;ローカルワールドデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN_LW&nbsp;</td>
+<td valign="TOP">&nbsp;r/w&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;〃&nbsp;</td>
+<td valign="TOP">&nbsp;ボーンワールドデータブロック&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN_BW&nbsp;</td>
+<td valign="TOP">&nbsp;r/o&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_2">
+<a href="#Heading3_4"> 4. </a>2 <b>Frameプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Frameプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_FRAME / SCE_HIP_FRAME_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 挿入プラグインブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 挿入プラグインブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_FRAME, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_FRAME_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0,
+	Frameプラグインブロックサイズ
+.byte	挿入プラグインブロック数, 0, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 挿入プラグインブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, 挿入プラグインカテゴリ,
+	SCE_HIG_PLUGIN_STATUS
+.word	挿入プラグイン識別子 | (SCE_HIP_REVISION&lt;&lt;24),
+	挿入プラグインブロックアドレス, 0
+： 挿入プラグインブロック数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_3">
+<a href="#Heading3_4"> 4. </a>3 <b>Microプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Microプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_MICRO / SCE_HIP_MICRO_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 Microデータブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_MICRO_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0,
+	Microプラグインブロックサイズ
+.byte	0, 1, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- Microデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_MICRO_DATA | (SCE_HIP_REVISION&lt;&lt;24),
+	Microデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Microデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_MICRO / SCE_HIP_MICRO_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Microデータ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_DATA_STATUS 
+.word SCE_HIP_MICRO_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, Microデータブロックサイズ
+</pre></font></div>
+<div style="margin-left:67px;">- Microデータ -<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;.float(4x4)&nbsp;</td>
+<td valign="TOP">&nbsp;world_screen&nbsp;</td>
+<td valign="TOP">&nbsp;透視変換マトリクス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float(4x4)&nbsp;</td>
+<td valign="TOP">&nbsp;world_view&nbsp;</td>
+<td valign="TOP">&nbsp;視界変換マトリクス&nbsp;<br>&nbsp;テクスチャプロジェクションマトリクス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float(4x4)&nbsp;</td>
+<td valign="TOP">&nbsp;material&nbsp;</td>
+<td valign="TOP">&nbsp;マテリアルカラー,透過率,鏡面係数&nbsp;<br>&nbsp;Shapeデータから転送されるマテリアル情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;x, y, z&nbsp;</td>
+<td valign="TOP">&nbsp;カメラ位置ベクトル&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;aa1&nbsp;</td>
+<td valign="TOP">&nbsp;AA1カットオフ値 0.0~1.0+α&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;fogA&nbsp;</td>
+<td valign="TOP">&nbsp;フォグ値1/(start-end)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;fogB&nbsp;</td>
+<td valign="TOP">&nbsp;フォグ値 end&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.word&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;プリミティブ属性 (FGE|ABE|AA1)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;clipA&nbsp;</td>
+<td valign="TOP">&nbsp;クリップパラメータ (far-near)/width&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;clipB&nbsp;</td>
+<td valign="TOP">&nbsp;クリップパラメータ (far-near)/height&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;clipC&nbsp;</td>
+<td valign="TOP">&nbsp;クリップパラメータ (far+near)/2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;clipD&nbsp;</td>
+<td valign="TOP">&nbsp;クリップパラメータ (far-near)/2&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;x, y, z, w&nbsp;</td>
+<td valign="TOP">&nbsp;特殊パラメータ(Microに依存)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">- 光源データ -<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;x, x, x, 0.0&nbsp;</td>
+<td valign="TOP">&nbsp;光源0,1,2の方向ベクトル X&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;y, y, y, 0.0&nbsp;</td>
+<td valign="TOP">&nbsp;光源0,1,2の方向ベクトル Y&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;z, z, z, 0.0&nbsp;</td>
+<td valign="TOP">&nbsp;光源0,1,2の方向ベクトル Z&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;-, -, -, -&nbsp;</td>
+<td valign="TOP">&nbsp;未使用&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;x, y, z, a&nbsp;</td>
+<td valign="TOP">&nbsp;光源0の位置ベクトル, 角度&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;x, y, z, a&nbsp;</td>
+<td valign="TOP">&nbsp;光源1の位置ベクトル, 角度&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;x, y, z, a&nbsp;</td>
+<td valign="TOP">&nbsp;光源2の位置ベクトル, 角度&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;-, -, -, -&nbsp;</td>
+<td valign="TOP">&nbsp;未使用&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;r, g, b, i&nbsp;</td>
+<td valign="TOP">&nbsp;光源0のカラー, 強度&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;r, g, b, i&nbsp;</td>
+<td valign="TOP">&nbsp;光源1のカラー, 強度&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;r, g, b, i&nbsp;</td>
+<td valign="TOP">&nbsp;光源2のカラー, 強度&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;.float&nbsp;</td>
+<td valign="TOP">&nbsp;r, g, b, -&nbsp;</td>
+<td valign="TOP">&nbsp;ambient&nbsp;<br>&nbsp;(平行光源以外は未使用)&nbsp;</td>
+</tr>
+</table>
+</div>
+        <div style="margin-left:80px;"><pre><font size=3>： 平行光源、点光源、スポットライトの順に繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_4">
+<a href="#Heading3_4"> 4. </a>4 <b>2Dテクスチャプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>2Dテクスチャプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_TEX2D / SCE_HIP_TEX2D_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　 テクスチャデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　 テクスチャ環境データブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_TEX2D_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0,
+	2Dテクスチャプラグインブロックサイズ
+.byte	0, 2, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TEX2D_DATA | (SCE_HIP_REVISION&lt;&lt;24),
+	2Dテクスチャデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャ環境データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TEX2D_ENV | (SCE_HIP_REVISION&lt;&lt;24),
+	テクスチャ環境データブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>2Dテクスチャデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_TEX2D / SCE_HIP_TEX2D_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　テクスチャ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　テクスチャ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TEX2D_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	2Dテクスチャデータブロックサイズ
+.word	0, 0, 0, テクスチャ数
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.qword	TEX0レジスタ
+.word	TEXELワードサイズ, CLUTワードサイズ, 
+.word	TEXEL width &lt;&lt; 16 | TEXEL height, CLUT width &lt;&lt; 16 | CLUT height
+.word	TEXEL data
+（TEXELワードサイズだけ繰り返し）
+.word	CLUT data
+（CLUTワードサイズだけ繰り返し）
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>(上記と同様）
+： テクスチャ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>テクスチャ環境データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_TEX2D / SCE_HIP_TEX2D_ENV&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　テクスチャ環境データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　テクスチャ環境データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_DATA_STATUS 
+.word SCE_HIP_TEX2D_ENV | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	テクスチャ環境データブロックサイズ
+.word	0, 0, 0, テクスチャ環境数
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャ環境 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.qword	GIFtag
+.qword	TEX1レジスタ
+.qword	TEX0レジスタ
+.qword	CLAMPレジスタ
+.qword	MIPTBP1レジスタ
+.qword	MIPTBP2レジスタ
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャ環境 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+： テクスチャ環境数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_5">
+<a href="#Heading3_4"> 4. </a>5 <b>Shapeプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Shapeプラグインブロック＜テクスチャなしの場合＞</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE / SCE_HIP_SHAPE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 Shapeデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　ベースマトリクスデータブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_SHAPE_PLUG  | (SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte	0, 2, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- Shapeデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_SHAPE_DATA | (SCE_HIP_REVISION&lt;&lt;24), 
+	Shapeデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- ベースマトリクスデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION&lt;&lt;24), 
+	ベースマトリクスデータブロックアドレス,0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Shapeプラグインブロック＜テクスチャありの場合＞</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE / SCE_HIP_SHAPE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 Shapeデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　 ベースマトリクスデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　テクスチャ環境データブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_SHAPE_PLUG  | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Shapeプラグインブロックサイズ
+.byte	0, 3, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- Shapeデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIP_DATA_STAT
+.word	SCE_HIP_SHAPE_DATA | (SCE_HIP_REVISION&lt;&lt;24), 
+	Shapeデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- ベースマトリクスデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION&lt;&lt;24), 
+	ベースマトリクスデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャ環境データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TEX2D_ENV | (SCE_HIP_REVISION&lt;&lt;24), 
+	テクスチャ環境データブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Shapeデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE / SCE_HIP_SHAPE_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Shapeデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Shapeデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SHAPE_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, Shapeデータブロックサイズ
+.word	0, 0, 0, Shape数
+</pre></font></div>
+<div style="margin-left:67px;">- Shapeデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	Shape ID, Shapeワードサイズ, 未使用, Material数
+- material head -
+	.word	Material ID, Geometry数, Texture ID, Texture数
+	- material info -
+	.word	0, 0, 0, マテリアルデータQWORDサイズ
+	.qword	GIFtag
+	.qword	ALPHAレジスタ
+	.qword	TESTレジスタ
+	.float	diffuse R, diffuse G, diffuse B, transparency
+	.float	specular R, specular G, specular B, shininess
+	.float	emission R, emission G, emission B, 0.0
+	.float	ambient R, ambient G, ambient B, 0.0
+	- geometry head -
+		.word	Geometry ID, Geometryワードサイズ,
+			PRIMレジスタ, PRIM数
+		- vertex -
+			.float	x, y, z, 1.0
+		： PRIM数だけ繰り返し
+		- normal -
+			.float	x, y, z, 1.0
+		： PRIM数だけ繰り返し
+		- st -
+			.float	s, t, 1.0, 0.0
+		： PRIM数だけ繰り返し
+		- color -
+			.float	r, g, b, a
+		： PRIM数だけ繰り返し
+	- geometry head -
+		（上記と同様）
+	： Geometry数だけ繰り返し
+- material head -
+	（上記と同様）
+： Material数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">- Shapeデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+： Shape数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ベースマトリクスデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE / SCE_HIP_BASEMATRIX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　 マトリクス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　 　マトリクス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　 　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	マトリクスデータブロックサイズ
+.word	0, 0, 0, マトリクス数
+</pre></font></div>
+<div style="margin-left:67px;">- マトリクス -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	0, 0, flags, Shape ID	可視不可視フラグ,ShapeID
+sceVu0FMATRIX型 local_world	ローカルワールドマトリクス
+sceVu0FMATRIX型 light_rot	ライトロテーションマトリクス
+</pre></font></div>
+<div style="margin-left:67px;">- マトリクス -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+：マトリクス数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_6">
+<a href="#Heading3_4"> 4. </a>6 <b>Hrchyプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Hrchyプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_HRCHY / SCE_HIP_HRCHY_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　Hrchyデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　ベースマトリクスデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　Pivotデータブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_HRCHY, SCE_HIG_PLUGIN_STATUS 
+.word	SCE_HIP_HRCHY_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Hrchyプラグインブロックサイズ
+.byte	0, 3, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- Hrchyデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_HRCHY, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_HRCHY_DATA | (SCE_HIP_REVISION&lt;&lt;24), 
+	Hrchyデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- ベースマトリクスデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION&lt;&lt;24), 
+	ベースマトリクスデータブロックアドレス, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_HRCHY, SCE_HIG_DATA_STATUS 
+- Pivotデータブロックの情報 -
+.word	SCE_HIP_PIVOT_DATA | (SCE_HIP_REVISION&lt;&lt;24), 
+	Pivotデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Hrchyデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_HRCHY / SCE_HIP_HRCHY_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　Hrchy&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　Hrchy&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_HRCHY, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_HRCHY_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Hrchyデータブロックサイズ
+.word	0, 0, 回転順, Hrchy数
+</pre></font></div>
+<div style="margin-left:67px;">- Hrchy -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.float	trans X, trans Y, trans Z, 0.0
+.float	rot   X, rot   Y, rot   Z, 0.0
+.float	scale X, scale Y, scale Z, 0.0
+.word	Shape ID
+.word	Parent ID
+.word	-1 (未使用）
+.word	-1 (未使用）
+</pre></font></div>
+<div style="margin-left:67px;">- Hrchy -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+： Hrchy数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">回転順は次のように、マトリクスの左からの乗算順序をビットフラグによって表します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マトリクスの乗算順序</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>回転順の値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RXYZ&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;6)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RXZY&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;7)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RYXZ&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;8)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RYZX&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;9)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RZXY&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;10)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RZYX&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;11)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>Pivotデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_HRCHY / SCE_HIP_PIVOT_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Pivotデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Pivotデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_HRCHY, SCE_HIG_DATA_STATUS
+.word SCE_HIP_PIVOT_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, Pivotデータブロックサイズ
+.word	0, 0, 0, Pivot数
+</pre></font></div>
+<div style="margin-left:67px;">- Pivotデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	.float	X, Y, Z, 0.0
+： Pivot数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_7">
+<a href="#Heading3_4"> 4. </a>7 <b>Animeプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Animeプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_ANIME / SCE_HIP_ANIME_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　キーフレームデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　キーバリューデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　Animeデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　Hrchyデータブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_ANIME, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_ANIME_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Animeプラグインブロックサイズ
+.byte	0, 4, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- キーフレームデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_ANIME, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_KEYFRAME | (SCE_HIP_REVISION&lt;&lt;24), 
+	キーフレームデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- キーバリューデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_ANIME, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_KEYVALUE | (SCE_HIP_REVISION&lt;&lt;24), 
+	キーバリューデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- Animeデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_ANIME, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_ANIME_DATA | (SCE_HIP_REVISION&lt;&lt;24), 
+	Animeデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- Hrchyデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_HRCHY, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_HRCHY_DATA | (SCE_HIP_REVISION&lt;&lt;24), 
+	Hrchyデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>キーフレームデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_ANIME / SCE_HIP_KEYFRAME&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　キーフレームデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　キーフレームデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_ANIME, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_KEYFRAME | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	キーフレームデータブロックサイズ
+.word	0, 0, 0, キーフレームデータ数
+</pre></font></div>
+<div style="margin-left:67px;">- キーフレームデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	補間タイプ, インデックス, ワードサイズ, キーフレーム数N
+.word	keyframe0, keyframe1, ... , keyframeN
+</pre></font></div>
+<div style="margin-left:67px;">- キーフレームデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+： キーフレームデータ数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">補間タイプは次のようにビットフラグによって表します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>補間方式</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>補間タイプの値</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;コンスタント（CONSTANT）&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;リニア補間（LINEAR）&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;1)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;エルミート補間（HERMITE）&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;2)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ベジェ補間（BEZIER）&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;3)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;B-SPLINE補間（BSPLINE）　※&nbsp;</td>
+<td valign="TOP">&nbsp;(1&lt;&lt;4)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">※未対応<br></div>
+
+<div style="margin-left:40px;"><h4><b>キーバリューデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_ANIME / SCE_HIP_KEYVALUE&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　キーバリューデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　キーバリューデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_ANIME, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_KEYVALUE | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	キーバリューデータブロックサイズ
+.word	0, 0, 0, キーバリューデータ数
+</pre></font></div>
+<div style="margin-left:67px;">- キーバリューデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	カーブ指定 (TXYZ|RXYZ|SXYZ), インデックス, ワードサイズ, 
+	キーフレーム数
+</pre></font></div>
+<div style="margin-left:67px;">- キーフレーム -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	（内容は別記、補間方式によって異なる）
+： キーフレーム数だけ繰り返し
+</pre></font></div>
+<div style="margin-left:67px;">- キーバリューデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	（上記と同様）
+： キーバリューデータ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>- キーフレーム -＜コンスタント／リニア補間の場合＞</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>.float	trans X, trans Y, trans Z, 0.0
+.float	rot X, rot Y, rot Z, 0.0
+.float	scale X, scale Y, scale Z, 0.0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>- キーフレーム -＜エルミート補間の場合＞</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>.float	trans X0, trans X1, trans X2, trans X3
+.float	trans Y0, trans Y1, trans Y2, trans Y3
+.float	trans Z0, trans Z1, trans Z2, trans Z3
+.float	rot X0, rot X1, rot X2, rot X3
+.float	rot Y0, rot Y1, rot Y2, rot Y3
+.float	rot Z0, rot Z1, rot Z2, rot Z3
+.float	scale X0, scale X1, scale X2, scale X3
+.float	scale Y0, scale Y1, scale Y2, scale Y3
+.float	scale Z0, scale Z1, scale Z2, scale Z3
+並びはそれぞれ、始点,終点,始点からの接ベクトル,終点からの接ベクトルを表す
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>- キーフレーム -＜ベジェ補間の場合＞</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>.float	trans X0, trans X1, trans X2, trans X3
+.float	trans Y0, trans Y1, trans Y2, trans Y3
+.float	trans Z0, trans Z1, trans Z2, trans Z3
+.float	rot X0, rot X1, rot X2, rot X3
+.float	rot Y0, rot Y1, rot Y2, rot Y3
+.float	rot Z0, rot Z1, rot Z2, rot Z3
+.float	scale X0, scale X1, scale X2, scale X3
+.float	scale Y0, scale Y1, scale Y2, scale Y3
+.float	scale Z0, scale Z1, scale Z2, scale Z3
+並びはそれぞれ、始点,始点からの接ベクトルの位置,終点からの接ベクトルの位置,終点を表す
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Animeデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_ANIME / SCE_HIP_ANIME_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Animeデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Animeデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_ANIME, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_ANIME_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Animeデータブロックサイズ
+.word	0, 0, 0, Animeデータ数
+</pre></font></div>
+<div style="margin-left:67px;">- Animeデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	Hrchyデータインデックス
+.word	キーフレーム数
+.word	キーフレームデータインデックス
+.word	キーバリューデータインデックス
+</pre></font></div>
+<div style="margin-left:67px;">- Animeデータ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>（上記と同様）
+： Animeデータ数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_8">
+<a href="#Heading3_4"> 4. </a>8 <b>Shareプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Shareプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE / SCE_HIP_SHARE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　共有頂点データブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　共有法線データブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　共有頂点インデックスデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　共有法線インデックスデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　共有頂点連結データブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　共有法線連結データブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 共有データブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　ベースマトリクスデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　Shapeデータブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_SHARE_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Shareプラグインブロックサイズ
+.byte	0, 9, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 共有頂点データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_SRCDSTVERTEX | (SCE_HIP_REVISION&lt;&lt;24), 
+	共有頂点データブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 共有法線データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_SRCDSTNORMAL | (SCE_HIP_REVISION&lt;&lt;24), 
+	共有法線データブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 共有頂点インデックスデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_VERTEXINDEX | (SCE_HIP_REVISION&lt;&lt;24), 
+	共有頂点インデックスデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 共有法線インデックスデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_NORMALINDEX | (SCE_HIP_REVISION&lt;&lt;24), 
+	共有法線インデックスデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 共有頂点連結データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_SHAREVERTEX | (SCE_HIP_REVISION&lt;&lt;24), 
+	共有頂点連結データブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 共有法線連結データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_SHARENORMAL | (SCE_HIP_REVISION&lt;&lt;24), 
+	共有法線連結データブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- 共有データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_SHARE_DATA | (SCE_HIP_REVISION&lt;&lt;24), 共有データブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- ベースマトリクスデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION&lt;&lt;24), 
+	ベースマトリクスデータブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- Shapeデータブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS 
+.word	SCE_HIP_SHAPE_DATA | (SCE_HIP_REVISION&lt;&lt;24), 
+	Shapeデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有頂点データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE / SCE_HIP_SRCDSTVERTEX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　共有頂点データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　演算後共有頂点データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_SRCDSTVERTEX | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	共有頂点データブロックサイズ
+.word	0, 0, 0, 共有頂点データ数
+.float	x, y, z, 1.0		共有頂点
+： 共有頂点データ数だけ繰り返し
+.float	x, y, z, 1.0		演算後共有頂点
+： 共有頂点データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有法線データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE / SCE_HIP_SRCDSTNORMAL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　共有法線データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　算後共有法線データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SRCDSTNORMAL | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	共有法線データブロックサイズ
+.word	0, 0, 0, 共有法線データ数
+.float	x, y, z, 1.0		共有法線
+： 共有法線データ数だけ繰り返し
+.float	x, y, z, 1.0		演算後共有法線
+： 共有法線データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有頂点インデックスデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE / SCE_HIP_VERTEXINDEX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　共有頂点インデックス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_VERTEXINDEX | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	共有頂点インデックスデータブロックサイズ
+.word	0, 0, 0, 共有頂点インデックス数
+.word	頂点0,   頂点1,   頂点2,   頂点3
+： 共有頂点インデックス数に達するまで繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有法線インデックスデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE / SCE_HIP_NORMALINDEX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　共有法線インデックス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_NORMALINDEX | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	共有法線インデックスデータブロックサイズ
+.word	0, 0, 0, 共有法線インデックス数
+.word	法線0,   法線1,   法線2,   法線3
+： 共有法線インデックス数に達するまで繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有頂点連結データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE / SCE_HIP_SHAREVERTEX&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　共有頂点連結データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_SHAREVERTEX | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	共有頂点連結データブロックサイズ
+.word	0, 0, 共有Shape ID, 共有頂点連結データ数
+</pre></font></div>
+<div style="margin-left:67px;">- 共有頂点連結データ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	共有頂点インデックスデータの先頭位置, 共有Geometry ID, 未使用, 共有頂点数
+： 共有頂点連結データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有法線連結データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHARE / SCE_HIP_SHARENORMAL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　共有法線連結データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_SHARENORMAL | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	共有法線連結データブロックサイズ
+.word	0, 0, 共有 Shape ID, 共有法線連結データ数
+</pre></font></div>
+<div style="margin-left:67px;">- 共有法線連結データ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	共有法線インデックスデータの先頭位置, 共有 Geometry ID, 未使用, 共有法線数
+： 共有法線連結データ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>共有データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;　SCE_HIP_SHARE / SCE_HIP_SHARE_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　共有データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHARE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_SHARE_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, 共有データブロックサイズ
+.word	0, 0, 0, 共有データ数
+</pre></font></div>
+<div style="margin-left:67px;">- 共有データ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	.word	演算後共有頂点先頭位置, 演算後共有頂点長
+	.word	演算後共有法線先頭位置, 演算後共有法線長
+</pre></font></div>
+<div style="margin-left:67px;">- 共有データ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>	（上記と同様）
+： 共有データ数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_9">
+<a href="#Heading3_4"> 4. </a>9 <b>TIM2プラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>TIM2プラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_TIM2 / SCE_HIP_TIM2_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　TIM2データブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　 テクスチャ環境データブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TIM2, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_TIM2_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0, TIM2プラグインブロックサイズ
+.byte	0, 2, 0, 0
+.word	0, 0, 0
+</pre></font></div>
+<div style="margin-left:67px;">- TIM2データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TIM2, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TIM2_DATA | (SCE_HIP_REVISION&lt;&lt;24), TIM2データブロックアドレス, 0
+</pre></font></div>
+<div style="margin-left:67px;">- テクスチャ環境データブロックの情報 -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TEX2D_ENV | (SCE_HIP_REVISION&lt;&lt;24), 
+	テクスチャ環境データブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>TIM2データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_TIM2 / SCE_HIP_TIM2_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　TIM2データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TIM2, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TIM2_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, TIM2データブロックアドレス
+.word	0, 0, 0, TIM2データ数
+</pre></font></div>
+<div style="margin-left:67px;">- TIM2 データ -<br></div>
+        <div style="margin-left:80px;"><pre><font size=3>.word	  TIM2 ID, TIM2ファイルアドレス, ファイルサイズ, ファイル名文字数
+.ascii ファイル名 (QWORD固定で最大１６文字)
+: TIM2データ数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_10">
+<a href="#Heading3_4"> 4. </a>10 <b>ClutBumpプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>ClutBumpプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_BUMP / SCE_HIP_BUMP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　ClutBumpデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　 ClutBump法線データブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ベースマトリクスデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 テクスチャデータブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_BUMP, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_CLUTBUMP_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0, 
+	プラグインブロックサイズ
+.byte	0, 4, 0, 0
+.word	0, 0, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_BUMP, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_CLUTBUMP_DATA|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	ClutBumpデータブロックアドレス,0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_BUMP, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_CLUTBUMP_NORMAL|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	ClutBump法線データブロックアドレス,0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_BASEMATRIX|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	ベースマトリクスデータブロックアドレス,0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_TEX2D, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_TEX2D_DATA|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	テクスチャデータブロックアドレス,0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ClutBumpデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_BUMP / SCE_HIP_CLUTBUMP_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　ClutBumpデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_BUMP, SCE_HIG_DATA_STATUS
+.word SCE_HIP_CLUTBUMP_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, ClutBumpデータブロックサイズ
+.word 0, 0, 0, ClutBumpデータ数
+.word SHAPE ID, TEX2D ID, NORMAL LIST ID, 0
+：ClutBumpデータ数だけ繰り返し
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ClutBump法線データブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_BUMP / SCE_HIP_CLUTBUMP_NORMAL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　ClutBump法線データ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_BUMP, SCE_HIG_DATA_STATUS
+.word SCE_HIP_CLUTBUMP_NORMAL | (SCE_HIP_REVISION&lt;&lt;24), 0, データブロックサイズ
+.word 0, 0, 0, ClutBump法線データ数
+- NORMAL LIST -
+.float normal.x, normal.y, normal.z, 0.0	←256個続く
+: ClutBump法線データ数だけ繰り返し
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_11">
+<a href="#Heading3_4"> 4. </a>11 <b>FIshEyeプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>FishEyeプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_REFLECT / SCE_HIP_FISHEYE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　Microプラグインブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_REFLECT, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_FISHEYE_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, 	プラグインブロックサイズ
+.byte	1, 0, 0, 0
+.word	0, 0, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_MICRO_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Microプラグインブロックアドレス,0
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_12">
+<a href="#Heading3_4"> 4. </a>12 <b>Reflectionプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Reflectionプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_REFLECT / SCE_HIP_REFLECT_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　 　Microプラグインブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_REFLECT, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_REFLECT_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte	1, 0, 0, 0
+.word	0, 0, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_MICRO_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Microプラグインブロックアドレス,0
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_13">
+<a href="#Heading3_4"> 4. </a>13 <b>Refractionプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Refractionプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_REFLECT / SCE_HIP_REFRACT_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　 　Microプラグインブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_REFLECT, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_REFRACT_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte	1, 0, 0, 0
+.word	0, 0, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_MICRO_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0,
+	 Microプラグインブロックアドレス,0
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_14">
+<a href="#Heading3_4"> 4. </a>14 <b>ShadowMapプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>ShadowMapプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOW/ SCE_HIP_SHADOWMAP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　Microプラグインブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　ShadowBoxデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　Microデータブロックの情報&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHADOW, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_SHADOWMAP_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte	1, 2, 0, 0
+.word	0, 0, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_MICRO_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	Microプラグインブロックアドレス,0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHADOW, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_SHADOWBOX_DATA|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	ShadowBoxデータブロックアドレス,0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_MICRO_DATA | (SCE_HIP_REVISION&lt;&lt;24),
+	Microデータブロックアドレス, 0
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_15">
+<a href="#Heading3_4"> 4. </a>15 <b>ShadowBoxプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>ShadowBoxプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOW / SCE_HIP_SHADOWBOX_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　ShadowBoxデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　ベースマトリクスデータブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHADOW, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_SHADOWBOX_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte	0, 2, 0, 0
+.word	0, 0, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHADOW, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_SHADOWBOX_DATA|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	ShadowBoxデータブロックアドレス,0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_BASEMATRIX|(SCE_HIP_REVISION&lt;&lt;24), 0, 
+	ベースマトリクスデータブロックアドレス,0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ShadowBoxデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHADOW / SCE_HIP_SHADOWBOX_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　ShadowBoxデータ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHADOW, SCE_HIG_DATA_STATUS
+.word	SCE_HIP_SHADOWBOX_DATA|(SCE_HIP_REVISION&lt;&lt;24), 0,データブロックサイズ
+.float	min x, min y, min z, 1.0
+.float	max x, max y, max z, 1.0
+.float	0.0, 0.0, 0.0, 0.0	←8頂点分続く
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_16">
+<a href="#Heading3_4"> 4. </a>16 <b>LightMapプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>LightMapプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_LIGHT/ SCE_HIP_LIGHTMAP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　Microプラグインブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_LIGHT, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_LIGHTMAP_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte	1, 0, 0, 0
+.word	0, 0, 0
+.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_MICRO_PLUG|(SCE_HIP_REVISION&lt;&lt;24), 0, Microプラグインブロックアドレス,0
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_17">
+<a href="#Heading3_4"> 4. </a>17 <b>Clipプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Clipプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_CLIP/ SCE_HIP_CLIP_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　 Microデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ベースマトリクスデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　Clipデータブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_CLIP, SCE_HIG_PLUGIN_STATUS
+.word SCE_HIP_CLIP_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte 0, 3, 0, 0
+.word  0, 0, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_DATA_STATUS
+.word SCE_HIP_MICRO_DATA | (SCE_HIP_REVISION&lt;&lt;24), Microデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION&lt;&lt;24), ベースマトリクスデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_CLIP, SCE_HIG_DATA_STATUS
+.word SCE_HIP_CLIP_DATA | (SCE_HIP_REVISION&lt;&lt;24), Clipデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Clipデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_CLIP/ SCE_HIP_CLIP_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　Clipデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_CLIP, SCE_HIG_DATA_STATUS
+.word SCE_HIP_CLIP_DATA | (SCE_HIP_REVISION&lt;&lt;24), 0, データブロックサイズ
+.word 0,0,0, Clipデータ数
+.float min x, min y, min z, 1.0		バウンディングボックス最小サイズ
+.float max x, max y, max z, 1.0		バウンディングボックス最大サイズ
+: Clipデータ数分繰り返す
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_18">
+<a href="#Heading3_4"> 4. </a>18 <b>Cameraプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Cameraプラグインブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_CAMERA/ SCE_HIP_CAMERA_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　Microデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　 　　Cameraデータブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_CAMERA, SCE_HIG_PLUGIN_STATUS
+.word SCE_HIP_CAMERA_PLUG | (SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+.byte 0, 2, 0, 0
+.word  0, 0, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_MICRO, SCE_HIG_DATA_STATUS
+.word SCE_HIP_MICRO_DATA | (SCE_HIP_REVISION&lt;&lt;24), Microデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_CAMERA, SCE_HIG_DATA_STATUS
+.word SCE_HIP_CAMERA_DATA | (SCE_HIP_REVISION&lt;&lt;24), Cameraデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Cameraデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_CAMERA/ SCE_HIP_CAMERA_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　Cameraデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.word 0, 0, 0, 0
+.float width, height, distance, clipwide	スクリーン設定
+.float aspectx, aspecty, centerx, centery	ウィンドウ設定
+.float zmin, zmax, near, far			デプス設定
+.float position x, position y, position z, 0.0	視点
+.float rotation x, rotation y, rotation z, 0.0	回転
+.float interest x, interest y, interest z, 0.0	注視点
+.float upvector x, upvector y, upvector z, 0.0	上向きベクトル
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_19">
+<a href="#Heading3_4"> 4. </a>19 <b>Skinプラグインのデータ構造</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>Skinプラグインブロック VU1用</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN/ SCE_HIP_SKIN_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ローカルボーンデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　ローカルワールドデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　 ボーンワールドデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　ベースマトリクスデータブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_PLUGIN_STATUS
+.word SCE_HIP_SKIN_PLUG | (SCE_HIP_REVISION &lt;&lt; 24), 0,プラグインブロックサイズ
+.byte 0, 4, 0, 0
+.word 0, 0, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_LB | (SCE_HIP_REVISION &lt;&lt; 24),
+	ローカルボーンデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_LW | (SCE_HIP_REVISION &lt;&lt; 24),
+	ローカルワールドデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_BW | (SCE_HIP_REVISION &lt;&lt; 24),
+	ボーンワールドデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION &lt;&lt; 24),
+	ベースマトリクスデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Skinプラグインブロック VU0用</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN/ SCE_HIP_SKIN_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ローカルボーンデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　 ローカルワールドデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ボーンワールドデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　 ベースマトリクスデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　 　　　　Skinデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　Shapeデータブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_PLUGIN_STATUS
+.word SCE_HIP_SKIN_PLUG | (SCE_HIP_REVISION &lt;&lt; 24), 0,プラグインブロックサイズ
+.byte 0, 6, 0, 0
+.word 0, 0, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_LB | (SCE_HIP_REVISION &lt;&lt; 24),
+	ローカルボーンデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_LW | (SCE_HIP_REVISION &lt;&lt; 24),
+	ローカルワールドデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_BW | (SCE_HIP_REVISION &lt;&lt; 24),
+	ボーンワールドデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word SCE_HIP_BASEMATRIX | (SCE_HIP_REVISION &lt;&lt; 24),
+	ベースマトリクスデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_DATA | (SCE_HIP_REVISION &lt;&lt; 24),
+	Skinデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SHAPE_DATA | (SCE_HIP_REVISION &lt;&lt; 24),
+	Shapeデータブロックアドレス, 0
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Skinデータブロック VU0で使用</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN/ SCE_HIP_SKIN_DATA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　Skinデータ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_DATA | (SCE_HIP_REVISION &lt;&lt; 24), 0, データブロックサイズ
+.word 0, 0, 機能オプション, Skinデータ数
+.float vx, vy, vz, 0.0		頂点データ
+.float nx, ny, nz, 0.0		法線データ
+.float w0, w1, w2, w3		重み係数　w0+w1+w2+w3 = 1.0
+.word m0, m1, m2, m3		ローカルボーンマトリクスインデックス
+.word shape, material, geometry, vertex		Shapeデータインデックス
+: Skinデータ数分繰り返す
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ローカルボーンデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN/ SCE_HIP_SKIN_LB&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ローカルボーンマトリクス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_LB | (SCE_HIP_REVISION &lt;&lt; 24), 0, データブロックサイズ
+.word 0, 0, 0, マトリクス数
+.float(4x4) ローカルボーンマトリクス		LB
+: マトリクス数分繰り返す、LW,BWと同じ並びに対応
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ローカルワールドデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN/ SCE_HIP_SKIN_LW&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ローカルワールドマトリクス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_LW | (SCE_HIP_REVISION &lt;&lt; 24), 0, データブロックサイズ
+.word 0, 0, 0, マトリクス数
+.float(4x4) ローカルワールドマトリクス		LW = BW * LB
+: マトリクス数分繰り返す、LB,BWと同じ並びに対応
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>ボーンワールドデータブロック</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SKIN/ SCE_HIP_SKIN_BW&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　ボーンワールドインデックス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　：&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_BW | (SCE_HIP_REVISION &lt;&lt; 24), 0, データブロックサイズ
+.word 0, 0, 0, インデックス数
+.word m0, m1, m2, m3		ボーンのマトリクスインデックス
+: インデックス数分繰り返す、LB,LWと同じ並びに対応
+
+---------------------------------------------------------
+<b>VU1 の場合に下記データ追加</b>
+.word mtx, 0			対応するSkinモデルのマトリクスインデックス,reserve
+: インデックス数分繰り返す
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Shapeプラグインブロック VU1 の場合に下記データブロック追加</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP">&nbsp;SCE_HIP_SHAPE / SCE_HIP_SHAPE_PLUG&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　Shapeデータブロックの情報&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　　　　　　　　：&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　ローカルワールドデータブロック&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;　　　　ボーンワールドデータブロック&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+        <div style="margin-left:80px;"><pre><font size=3>.byte	SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SHAPE, SCE_HIG_PLUGIN_STATUS
+.word	SCE_HIP_SHAPE_PLUG  | (SCE_HIP_REVISION&lt;&lt;24), 0, プラグインブロックサイズ
+:
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_LW | (SCE_HIP_REVISION &lt;&lt; 24),
+	ローカルワールドデータブロックアドレス, 0
+.byte SCE_HIP_COMMON, SCE_HIP_FRAMEWORK, SCE_HIP_SKIN, SCE_HIG_DATA_STATUS
+.word SCE_HIP_SKIN_BW | (SCE_HIP_REVISION &lt;&lt; 24),
+	ボーンワールドデータブロックアドレス, 0
+
+</pre></font></div>
+
+<div style="margin-left:40px;"><h4><b>Shapeデータブロック VU1での重み係数</b><br></h4></div>
+
+        <div style="margin-left:80px;"><pre><font size=3>- geometry head -
+.word	Geometry ID, Geometryワードサイズ,PRIMレジスタ, PRIM数
+- vertex -
+.float	vx, vy, vz, w0		頂点xyz, 重み0
+.float vx, vy, vz, w4		頂点xyz, 重み4
+：
+- normal -
+.float	nx, ny, nz, w1		法線xyz, 重み1
+.float nx, ny, nz, w5		法線xyz, 重み5
+：
+- st -
+.float	s, t, w2, w3		ST, 重み2, 重み3
+.float s, t, w6, w7		ST, 重み6, 重み7
+：
+- color -
+</pre></font></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_20">
+<a href="#Heading3_4"> 4. </a>20 <b>コンバータesconv</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">eS（eSTD）ファイルをHiGフォーマットに変換するコンバータesconvが提供されています。esconvは直接バイナリデータを生成することもできますが、必要ならばEEアセンブラのソースファイルを出力させ修正を加えてアセンブルすることもできるようになっています。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat006.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">esconvを実行する際にはヘッダファイルeSTD.esが必要です。詳細はesconvのドキュメントを参照してください。<br></div>
+<div style="margin-left:67px;">なおeSTDとHiGではShapeの内部構造に違いがあります。eSTDではMaterial &lt; Geometryの関係になっているのに対して、esconvの内部でMaterial単位にGeometryをソートし、Material &gt; Geometryの関係になっています。これは、実機上での描画パフォーマンスがテクスチャ転送の頻度に大きく影響されるため、テクスチャ転送を減らしてパフォーマンスを向上するためです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_21">
+<a href="#Heading3_4"> 4. </a>21 <b>esconvの出力するHiGバイナリファイルの概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">esconvの出力するHiGバイナリファイルは、グラフィックスアーティストツールで汎用的に処理するため、ClutBump / EmbossBump / ShadowMapは複数のFrameプラグインを持つ仕様にしています。詳細はグラフィックスアーティストツールに同梱されているSAMPLE_DATAを参照してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ClutBump</b><br></h4></div>
+
+<div style="margin-left:67px;">ヘッダ部<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat007.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"Bump0"：ベースオブジェクト＝ベーステクスチャを持つFrame<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat008.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"Bump1"：ClutBumpオブジェクト＝ClutBumpテクスチャ（Texel&Normal）を持つFrame<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat009.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>EmbossBump</b><br></h4></div>
+
+<div style="margin-left:67px;">ヘッダ部<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat010.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"Bump0"：ベースオブジェクト＝ベーステクスチャを持つFrame<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat011.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"Bump1"：EmbossBumpオブジェクト＝EmbossBumpテクスチャ（Grayscale）を<br>　　　　　持つFrame<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat012.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>ShadowMap</b><br></h4></div>
+
+<div style="margin-left:40px;"><ul>
+         <li> シャドウオブジェクト
+</ul></div>
+<div style="margin-left:67px;">ヘッダ部<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat013.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"ShadowObj"：シャドウオブジェクト＝シャドウオブジェクトのFrame<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat014.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"ShadowTex"：シャドウテクスチャレンダリング用オブジェクト＝シャドウオブジェクトと<br>　　　　　　　共に使用するシャドウテクスチャFrame<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat015.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"ShadowMap"：シャドウマッピングレンダリング用オブジェクト＝シャドウマッピング<br>　　　　　　　　Frame（シャドウレシーバーとともに使用する）<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat016.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> シャドウレシーバー
+</ul></div>
+<div style="margin-left:67px;">ヘッダ部<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat017.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"ShadowRec"：シャドウレシーバーオブジェクト＝シャドウレシーバーFrame<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat018.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;">"ShadowRec1"：シャドウマッピングレンダリング用オブジェクト＝テクスチャを持たない<br>　　　　　　　　シャドウレシーバーFrame（シャドウオブジェクトとともに使用する）<br></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:80px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat019.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>GF-VU1標準メモリフォーマット</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">HiG / HiP / frameworkでは開発効率と処理効率を向上するために、VUMem1のメモリフォーマット、つまりVU1で処理するデータの形式とメモリ上の配置を標準化しています。<br>以下、このGF-VU1標準メモリフォーマットについて解説します。HiPプラグインフォーマットも合わせて参照してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_1">
+<a href="#Heading3_5"> 5. </a>1 <b>GF-VU1標準メモリフォーマットの概略</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">GF-VU1標準メモリフォーマットの概略を次に示します。アドレスはqword単位です。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat020.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_2">
+<a href="#Heading3_5"> 5. </a>2 <b>Shapeデータ領域の詳細</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Shapeデータ領域には、次に示すデータがShapeデータブロックごとに転送されます。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat021.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">light_rotationはlocal_worldマトリクスからscaleとtransを除いたマトリクスです。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_3">
+<a href="#Heading3_5"> 5. </a>3 <b>Microデータ領域</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Microデータ領域には、次に示すデータがMicroデータブロックごとに転送されます。ただしマテリアルデータはShapeデータブロックごとに転送されます。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat022.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">アドレス20-23は、Microプログラムの処理内容に応じて視界変換マトリクスとして使用される場合とテクスチャ変換マトリクスとして使用される場合があります。また、アドレス28-31もこのようなMicroプログラムごとに特有のパラメータ領域として使用されます。ただし、PRMODEやクリッピングパラメータ、カメラポジションなど多くのMicroプログラムに共通するパラメータもあり、それらはほぼ共通の配置となっています。各Microプログラムでの使用方法の詳細は後述します。<br>平行光源パラメータ・点光源パラメータ・スポットライトパラメータのフォーマットは共通で、次のようになっています。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat023.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">方向に関するパラメータは一見奇妙な形式ですが、転置行列の形式になっています。また、たとえば平行光源については位置というパラメータは無意味ですが、Microプログラムによっては他の目的で利用していることがあります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_4">
+<a href="#Heading3_5"> 5. </a>4 <b>ワーク領域</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ワーク領域は、一部のMicroプログラムがパラメータの退避に使用しています。<br>現在はCloneとSkinのMicroプログラムが以下の領域を使用しています。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat024.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_5">
+<a href="#Heading3_5"> 5. </a>5 <b>ダブルバッファ領域</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ダブルバッファ領域には、Shapeデータの一部である頂点データがGeometryごとに転送されます。また、VU1での計算結果が書きこまれて、XGKICKによってGSへと転送されていきます。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat025.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">頂点データのフォーマットは次のようになっています。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat026.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">vertexのwフィールド、normalのwフィールド、stのz,wフィールドは空いていますので、各頂点に関する特殊な情報を持たせることもできます。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat027.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_5_6">
+<a href="#Heading3_5"> 5. </a>6 <b>Microプログラム依存領域の詳細</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Microデータ領域（アドレス16～31）の使いかたはMicroプログラムごとに異なっていますが、次の表にまとめて示します。なお、一部の変数名は表に納めるため省略してあります（world_screen → w_screen、world_view → w_view、など）。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Microプログラム</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>16-19</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>20-23</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>24-27</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>28</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>29</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>30</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>31</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1basicVo&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1cullVo /&nbsp;<br>&nbsp;vu1pointVo /&nbsp;<br>&nbsp;vu1spotVo /&nbsp;<br>&nbsp;vu1basicClip /&nbsp;<br>&nbsp;vu1colorSat&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1fogVo&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;fog&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1antiVo&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;c_pos&nbsp;<br>&nbsp;/ AA1p&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1basicLo&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;material&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1cullLo /&nbsp;<br>&nbsp;vu1pointLo /&nbsp;<br>&nbsp;vu1spotLo&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;material&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1fogLo&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;material&nbsp;</td>
+<td valign="TOP">&nbsp;fog&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1antiLo&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;material&nbsp;</td>
+<td valign="TOP">&nbsp;c_pos&nbsp;<br>&nbsp;/ AA1p&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1cullSo /&nbsp;<br>&nbsp;vu1pointSo /&nbsp;<br>&nbsp;vu1spotSo /&nbsp;<br>&nbsp;vu1combiSo /&nbsp;<br>&nbsp;vu1cullBlinno&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;material&nbsp;</td>
+<td valign="TOP">&nbsp;c_pos&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1embossDir /&nbsp;<br>&nbsp;vu1embossPoint /&nbsp;<br>&nbsp;vu1embossSpot&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;emboss&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1shadowTex&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1shadowSTQ /&nbsp;<br>&nbsp;vu1shadowSTQCull /&nbsp;<br>&nbsp;vu1lightmapSTQ /&nbsp;<br>&nbsp;vu1lightmapSTQCull&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;tex_proj&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1fisheye&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;w_view&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;fisheye&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1reflectS&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;w_view&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;c_pos&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;zoom&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1reflectR&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;w_view&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;c_pos&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;zoom&nbsp;<br>&nbsp;/ zshift&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1refractS&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;w_view&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;c_pos&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;index&nbsp;<br>&nbsp;/ zoom&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;vu1refractR&nbsp;</td>
+<td valign="TOP">&nbsp;w_screen&nbsp;</td>
+<td valign="TOP">&nbsp;w_view&nbsp;</td>
+<td valign="TOP">&nbsp;－&nbsp;</td>
+<td valign="TOP">&nbsp;c_pos&nbsp;</td>
+<td valign="TOP">&nbsp;prmode&nbsp;</td>
+<td valign="TOP">&nbsp;clipping&nbsp;</td>
+<td valign="TOP">&nbsp;index&nbsp;<br>&nbsp;/ zoom&nbsp;<br>&nbsp;/ zshift&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">各変数の詳細は次のとおりです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>camera_pos（c_pos）</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat028.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>AA1p</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat029.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>fog</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat030.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>prmode</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat031.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>clipping</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat032.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>fisheye</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat033.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>emboss</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat034.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>ref_index（index）</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat035.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>ref_zoom（zoom）</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat036.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>ref_zshift（zshift）</b><br></h4></div>
+
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/gformat037.gif"><p>
+</div>
+<br>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

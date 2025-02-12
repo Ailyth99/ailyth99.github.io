@@ -1,0 +1,2455 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>ATOKライブラリ(β版) </title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/atok_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+ATOKライブラリ(β版) 
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリ概要</b></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>概要</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>使用リソース</b><br></a>
+    <a href="#Heading4_1_4"> <b>サンプルプログラム</b><br></a>
+    <a href="#Heading4_1_5"> <b>辞書ファイルについて</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>基本的な仕様手順</b></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>初期化</b><br></a>
+    <a href="#Heading4_2_2"> <b>各種設定</b><br></a>
+    <a href="#Heading4_2_3"> <b>変換・編集</b><br></a>
+    <a href="#Heading4_2_4"> <b>入力状態の取得</b><br></a>
+    <a href="#Heading4_2_5"> <b>終了処理</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>各種設定</b></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>各設定モード</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>変換・編集処理</b></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>編集処理</b><br></a>
+    </ul>
+<p><a href="#Heading3_5">  5 <b>入力状態別コマンド一覧</b></a>
+<p><a href="#Heading3_6">  6 <b>標準ローマ字組み合わせ一覧</b></a>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリ概要</b>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ATOKライブラリは、”PlayStation 2”用アプリケーションでのカナ漢字変換機能を実現するライブラリです。（ATOK は（株）ジャストシステムの登録商標です。）<br>ATOKライブラリの実行に必要なATOKエンジンや辞書ファイルは、”PlayStation 2”のハードディスクドライブのユーティリティディスクによってインストールされます。そのため、ハードディスクドライブの接続されていない”PlayStation 2”ではATOKライブラリを使用することはできません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ATOKライブラリを利用するために必要なファイルは次のとおりです。<br>ATOKエンジンと辞書ファイルは、”PlayStation 2”のハードディスクドライブ上にあるものを使用します。ハードディスクドライブのユーティリティディスクでインストールを行ったハードディスクドライブをお使い下さい。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ライブラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libatok.a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘッダファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libatok.h&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ATOKエンジン&nbsp;</td>
+<td valign="TOP">&nbsp;atok***.erx(***はバージョン)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;辞書ファイル(システム)&nbsp;</td>
+<td valign="TOP">&nbsp;atokp.dic&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;辞書ファイル(ユーザ)&nbsp;</td>
+<td valign="TOP">&nbsp;atokpyou.dic&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>使用リソース</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">atok***.erxをEEメモリにロードする為の領域として、512KB必要です。<br>この領域は、16バイトアラインメントに沿っていなければなりません。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_4">
+<a href="#Heading3_1"> 1. </a>4 <b>サンプルプログラム</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ATOKライブラリを使用したサンプルプログラムが以下にありますので参照してください。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> sce/ee/sample/atok/softkb
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_5">
+<a href="#Heading3_1"> 1. </a>5 <b>辞書ファイルについて</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">現バージョンでは、システム辞書やユーザ辞書ファイルの拡張・編集、単語登録はできません。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>基本的な仕様手順</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">この章では、アプリケーションにおけるATOKライブラリの基本的な使用手順について解説します。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>初期化</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Atokエンジンの初期化処理を行い、辞書ファイルをオープンします。<br></div>
+<div style="margin-left:67px;">sceAtokInit(<i>context, sysdic, userdic , sysconf,loadaddr</i>)<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_2">
+<a href="#Heading3_2"> 2. </a>2 <b>各種設定</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">各種の設定を行います。<br></div>
+<div style="margin-left:67px;">sceAtokSetConfig(<i>context</i>, <i>config</i>, <i>bits</i>);<br></div>
+<div style="margin-left:50px;">現在の各種の設定を取得します。<br></div>
+<div style="margin-left:67px;">sceAtokGetConfig(<i>context</i>, <i>config</i>, <i>bits</i>);<br></div>
+<div style="margin-left:50px;">詳しくは「3.各種設定」を参照して下さい。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_3">
+<a href="#Heading3_2"> 2. </a>3 <b>変換・編集</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ユーザーの操作に応じて、入力文字列の編集や変換等の処理を行う際、以下の関数をコールします。<br></div>
+<div style="margin-left:67px;">sceAtokEditConv(<i>context, cmd, param</i>);<br></div>
+<div style="margin-left:50px;">cmdが変換や編集のコマンドで、paramがそれに必要なパラメータです。詳しくは「4.変換・編集処理」を参照して下さい。<br><br>この関数で、変換や編集のほとんどの処理を行うことができますが、結果の文字列をアプリケーション側のバッファに取得する処理については、別の文字列取得関数郡を使用します。以下はその一例です。<br></div>
+<div style="margin-left:67px;">sceAtokGetConvertedStr ( *context, buf, size )<br>bufがアプリケーション側のバッファで、確定文字列を受け取ります。<br></div>
+<div style="margin-left:50px;"><br>変換・編集処理を図にすると以下のようになります。これは最もシンプルな場合で、例えば変換候補一覧を表示する場合には、別の処理が必要になります。<br><br></div>
+<div style="margin-left:50px;"></div>
+<div align=center>
+<p>
+<img src="gif/libatok001.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_4">
+<a href="#Heading3_2"> 2. </a>4 <b>入力状態の取得</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">ATOKエンジンは内部に“入力状態”を持っており、アプリケーションはそれを把握してコマンド等を実行させることが必要な場合があります。以下の関数で状態を取得します。<br></div>
+<div style="margin-left:67px;">sceAtokGetInputState (*<i>context</i>,)<br></div>
+<div style="margin-left:50px;"><br>状態の一覧表を以下に示します。<br>例えば「ああああ」と入力した場合<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok002.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:50px;">ここで言う“見た目”は、各状態に応じてアプリケーション側で描画する必要があります。<br>各状態とコマンドとの関係は、「5.入力状態別コマンド一覧」を参照して下さい。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_5">
+<a href="#Heading3_2"> 2. </a>5 <b>終了処理</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">Atokエンジンの終了処理を行い、辞書ファイルをクローズします。<br></div>
+<div style="margin-left:67px;">sceAtokExit(<i>context</i>)<br></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>各種設定</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">この章では、ATOKエンジンの各種設定について解説します。<br>ATOKエンジンの設定は、ATOK設定構造体 sceAtokConfig の各メンバに値をセットすることで行います。<br>セットした値を有効にするには、sceAtokSetConfig() 関数をコールします。<br><br></div>
+<div style="margin-left:67px;">sceAtokSetConfig(<i>context</i>, <i>config</i>, <i>bits</i>);<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>context</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ATOKコンテキストへのポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>config</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ATOK設定構造体(sceAtokConfig)のconstポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>bits</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ATOK設定構造体の設定モードを指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:50px;"><i>context</i>は、ATOKライブラリのコンテキスト領域（ワーク領域）へのポインタです。<br><i>bitsに</i>設定モードを指定することで、<i>config</i> の該当するメンバの設定値が有効になります。<br><br>これに対応する、現在の設定値を取得する関数は以下です。<br></div>
+<div style="margin-left:67px;">sceAtokGetConfig(<i>context</i>, <i>config</i>, <i>bits</i>);<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>各設定モード</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">以下に、各設定モードの機能と設定値について記述します。<br>見出しが、bits にセットする設定モード名です。<br>対応する構造体メンバと、それに設定できる値（マクロ）も併記します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_KANDSPTYPE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;KanDspType&nbsp;</td>
+<td valign="TOP">&nbsp;入力モードを指定されたモードに変更します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KANDSPTYPE_HIRA&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;ひらがな入力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KANDSPTYPE_ZENKANA&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;全角カタカナ入力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KANDSPTYPE_ZENRAW&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;全角無変換入力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KANDSPTYPE_HANKANA&nbsp;</td>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;半角カタカナ入力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KANDSPTYPE_HANRAW&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;半角無変換入力&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_CONVMODE </b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ConvMode&nbsp;</td>
+<td valign="TOP">&nbsp;変換モードを設定します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_CONVMODE_REN&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;連文節変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_CONVMODE_TAN&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;単文節変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_CONVMODE_AUTO&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;自動変換&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_LEARNINGMODE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LearningMode&nbsp;</td>
+<td valign="TOP">&nbsp;辞書学習モードを指定されたモードにします。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_LEARNINGMODE_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;学習しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_ LEARNINGMODE_ON&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;学習する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_FIXMODE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;FixMode&nbsp;</td>
+<td valign="TOP">&nbsp;固定入力モードを設定します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FIXMODE_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;固定解除&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FIXMODE_HIRAGANA&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;ひらがな&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FIXMODE_ZENKANA&nbsp;</td>
+<td valign="TOP">&nbsp;2&nbsp;</td>
+<td valign="TOP">&nbsp;全角カタカナ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FIXMODE_ZENRAW&nbsp;</td>
+<td valign="TOP">&nbsp;3&nbsp;</td>
+<td valign="TOP">&nbsp;全角無変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FIXMODE_HANKANA&nbsp;</td>
+<td valign="TOP">&nbsp;4&nbsp;</td>
+<td valign="TOP">&nbsp;半角カナカナ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FIXMODE_HANRAW&nbsp;</td>
+<td valign="TOP">&nbsp;5&nbsp;</td>
+<td valign="TOP">&nbsp;半角無変換&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">例１）固定文字種切替<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ホンジツハ&nbsp;</td>
+<td valign="TOP">&nbsp;せいてん&nbsp;</td>
+<td valign="TOP">&nbsp;nari&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;↑全角カタカナ固定&nbsp;</td>
+<td valign="TOP">&nbsp;↑ひらがな固定&nbsp;</td>
+<td valign="TOP">&nbsp;↑半角無変換固定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例２）固定解除・再設定<br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;ｈｏｎｎｊｉｔｓｕｈａ&nbsp;</td>
+<td valign="TOP">&nbsp;晴天&nbsp;</td>
+<td valign="TOP">&nbsp;ナリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;↑全角無変換固定&nbsp;</td>
+<td valign="TOP">&nbsp;↑固定解除&nbsp;</td>
+<td valign="TOP">&nbsp;↑全角カタカナ固定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">固定入力モードは、指定した時点から後に入力された文字に対して有効になります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_KUTOUCHARSET</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;KutouCharSet&nbsp;</td>
+<td valign="TOP">&nbsp;句読点のパターンを設定します。&nbsp;<br>&nbsp;どちらかの組み合わせを選択できます。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KUTOUCHARSET_SET0&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;句読点パターンを“, . [ ] /  ”&nbsp;<br>&nbsp;に設定。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KUTOUCHARSET_SET1&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;句読点パターンを“､ ｡ ｢ ｣ ･ ”&nbsp;<br>&nbsp;に設定。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_AUTOREGKIND</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;AutoRegKind&nbsp;</td>
+<td valign="TOP">&nbsp;自動登録学習の種類を設定します。&nbsp;<br>&nbsp;ビットフラグなのでOR設定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTOREGKIND_CLAUSEGAP&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;文節区切り学習自動登録&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTOREGKIND_MULTI&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;複合語学習自動登録&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTOREGKIND_CNVRAW&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;後変換学習自動登録&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTOREGKIND_NONREG&nbsp;</td>
+<td valign="TOP">&nbsp;bit 3&nbsp;</td>
+<td valign="TOP">&nbsp;未登録語学習自動登録&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_LEARNINGKIND</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;LearningKind&nbsp;</td>
+<td valign="TOP">&nbsp;学習の種類を設定します。&nbsp;<br>&nbsp;ビットフラグなのでOR設定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_LEARNINGKIND_CLAUSEGAP&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;区切り直し学習語&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_LEARNINGKIND_MULTI&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;複合語学習語&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_LEARNINGKIND_CNVRAW&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;後変換語&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_LEARNINGKIND_NONREG&nbsp;</td>
+<td valign="TOP">&nbsp;bit 3&nbsp;</td>
+<td valign="TOP">&nbsp;未登録語&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_ROMANRECOVER</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;RomanRecover&nbsp;</td>
+<td valign="TOP">&nbsp;ローマ字立ち直りする・しないを設定します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">ローマ字立ち直りをするとは、「n」の次に母音が来ない場合、「nn」と連ねて打たなくても「n」のみで「ん」と変換することです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_ROMANRECOVER_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_ROMANRECOVER_ON&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:40px;"><ul>
+         <li> ローマ字立ち直りをしない場合
+</ul></div>
+<div style="margin-left:80px;">「試験」と変換したい場合、「shikenn」と打たなければならない。<br>「shiken」と打った場合は、「時化ｎ」等に変換される。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ローマ字立ち直りをする場合
+</ul></div>
+<div style="margin-left:80px;">「試験」と変換したい場合、「shiken」又は、「shikenn」と打てば変換される。<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_HZCNVMODE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;HZCnvMode&nbsp;</td>
+<td valign="TOP">&nbsp;半角・全角変換モードを設定します。&nbsp;<br>&nbsp;ビットフラグなのでOR指定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">半角・全角変換とは、全角文字を半角に変換することです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVMODE_CNVHANZEN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;システム辞書への適用&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVMODE_INPUTCHARS&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;入力中文字列への適用&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVMODE_USERREG&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;ユーザ登録単語への適用&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVMODE_RAWCNV&nbsp;</td>
+<td valign="TOP">&nbsp;bit 3&nbsp;</td>
+<td valign="TOP">&nbsp;後変換単語への適用&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br>（例）<br> </div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok003.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_HZCNVDETAIL</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;HZCnvDetail&nbsp;</td>
+<td valign="TOP">&nbsp;半角・全角変換をする文字種を指定します。&nbsp;<br>&nbsp;ビットフラグなのでOR指定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVDETAIL_KANA2HAN &nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;カタカナは常に半角に変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVDETAIL_ALPH2HAN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;英字は常に半角に変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVDETAIL_NUM2HAN &nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;数字は常に半角に変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVDETAIL_KANA2ZEN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 4&nbsp;</td>
+<td valign="TOP">&nbsp;カタカナは常に全角に変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVDETAIL_ALPH2ZEN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 5&nbsp;</td>
+<td valign="TOP">&nbsp;英字は常に全角に変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_HZCNVDETAIL_NUM2ZEN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 6&nbsp;</td>
+<td valign="TOP">&nbsp;数字は常に全角に変換&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br>各ビットを立てることにより特定文字種（数字、英字、カタカナ）の半角・全角変換を<br>指定できます。<br>bit0とbit4, bit1とbit5, bit2とbit6は排他的に指定して下さい。<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_AUTORECMODE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;AutoRecMode&nbsp;</td>
+<td valign="TOP">&nbsp;入力支援をする・しないを設定します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">入力支援とは、うっかり間違えやすいパターンを検知して、ユーザーの意図した入力に修正する<br>機能です。ローマ字入力時とカナ入力時で、それぞれ３つの修正パターンをサポートしています。<br>打ち間違いやすい文字の自動置換機能も４パターンをサポートしています。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECMODE_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECMODE_ON&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_AUTORECROMAN</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;AutoRecRoman&nbsp;</td>
+<td valign="TOP">&nbsp;ローマ字入力時の入力支援の詳細設定を行います。&nbsp;<br>&nbsp;ビットフラグなのでOR設定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECROMAN_BOIN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;母音の過不足の入力支援&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECROMAN_SHIIN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;子音の超過の入力支援&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECROMAN_N&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;[N]の過不足の入力支援&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok004.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_AUTORECKANA</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;AutoRecKana&nbsp;</td>
+<td valign="TOP">&nbsp;かな入力時の入力支援の詳細設定を行います。&nbsp;<br>&nbsp;ビットフラグなのでOR設定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECKANA_HANDAKU2DAKU&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;「゜」 → 「゛」 &nbsp;<br>&nbsp;（半濁点を濁点に）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECKANA_TSU&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;「つ」 → 「っ」&nbsp;<br>&nbsp;（「つ」を拗音に）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECKANA_WA2WO&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;「わ」 → 「を」&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_AUTORECREP</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;AutoRecRep&nbsp;</td>
+<td valign="TOP">&nbsp;置換関係の入力支援の詳細設定を行います。&nbsp;<br>&nbsp;ビットフラグなのでOR設定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECREP_ONBIKI2HYPHEN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;「ー」→「－」&nbsp;<br>&nbsp;(音引きをハイフンに)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECREP_NAKAGURO2SLASH&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;「・」→「／」&nbsp;<br>&nbsp;(中黒をスラッシュに)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECREP_DOKUTEN2COMMA&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;「、」→「，」&nbsp;<br>&nbsp;(読点をカンマに)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_AUTORECREP_KUTEN2PERIOD&nbsp;</td>
+<td valign="TOP">&nbsp;bit 3&nbsp;</td>
+<td valign="TOP">&nbsp;「。」 → 「.」&nbsp;<br>&nbsp;（句点をピリオドに）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_APPENDATOHEN </b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;AppendAtoHen&nbsp;</td>
+<td valign="TOP">&nbsp;後変換候補を候補リストに追加する・しないを設定します。&nbsp;<br>&nbsp;ビットフラグなのでOR設定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_APPENDATOHEN_HIRAGANACAND&nbsp;</td>
+<td valign="TOP">&nbsp;bit 0&nbsp;</td>
+<td valign="TOP">&nbsp;ひらがな候補&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_APPENDATOHEN_ZENKATAKANACAND&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;全角カタカナ候補&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_APPENDATOHEN_HANKATAKANACAND&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;半角カタカナ候補&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_APPENDATOHEN_ZENCNVRAWCAND&nbsp;</td>
+<td valign="TOP">&nbsp;bit 3&nbsp;</td>
+<td valign="TOP">&nbsp;全角無変換候補&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_APPENDATOHEN_HANCNVRAWCAND&nbsp;</td>
+<td valign="TOP">&nbsp;bit 4&nbsp;</td>
+<td valign="TOP">&nbsp;半角無変換候補&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_KUTOUCNVMODE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;KutouCnvMode&nbsp;</td>
+<td valign="TOP">&nbsp;句読点変換（句読点が入力された時に変換を行う）をする・&nbsp;<br>&nbsp;しないを設定します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KUTOUCNVMOD_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_KUTOUCNVMOD_ON&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_KUTOUCNVDETAIL</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;KutouCnvDetail&nbsp;</td>
+<td valign="TOP">&nbsp;句読点変換の詳細を設定します。ビットフラグなので&nbsp;<br>&nbsp;OR設定が可能です。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_ KUTOUCNVDETAIL _KUTEN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 1&nbsp;</td>
+<td valign="TOP">&nbsp;。(句点)で変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_ KUTOUCNVDETAIL _DOKUTEN&nbsp;</td>
+<td valign="TOP">&nbsp;bit 2&nbsp;</td>
+<td valign="TOP">&nbsp;、(読点)で変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_ KUTOUCNVDETAIL _GIMONFU&nbsp;</td>
+<td valign="TOP">&nbsp;bit 4&nbsp;</td>
+<td valign="TOP">&nbsp;？(疑問符)で変換&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_ KUTOUCNVDETAIL _KANTANFU&nbsp;</td>
+<td valign="TOP">&nbsp;bit 8&nbsp;</td>
+<td valign="TOP">&nbsp;！(感嘆符)で変換&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">（0：しない　1：する）<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_FURIGANAMODE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;FuriganaMode&nbsp;<br>&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;ふりがな入力状態を設定します。ふりがな入力状態では、&nbsp;<br>&nbsp;変換の最初の候補が入力した“読み”そのもの（つまり&nbsp;<br>&nbsp;“ふりがな”）になります。&nbsp;<br>&nbsp;変換を行うと、自動的にふりがな入力状態は解除されます。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FURIGANAMODE_FINISH&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;ふりがな入力解除&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_FURIGANAMODE_START&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;ふりがな入力開始&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_ MAXINPUTCHARS</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;MaxInputChars&nbsp;</td>
+<td valign="TOP">&nbsp;最大入力文字数を設定します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:67px;">値設定用のマクロはありません。構造体メンバのMaxInputChars<i><b> </i></b>に直接、1～100の値を設定します。<br>0が指定された場合は初期値に設定されます。初期値は30です。<br></div>
+
+<div style="margin-left:40px;"><h4><b>SCE_ATOK_CONFIG_PUTCURSORMODE</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>構造体メンバ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>機能</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;PutCursorMode&nbsp;</td>
+<td valign="TOP">&nbsp;未確定文字列の末尾に論理カーソルがあるときに、&nbsp;<br>&nbsp;カーソル文字（＿）を未確定文字に追加するかどうかを&nbsp;<br>&nbsp;設定します。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>設定モード</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>モード</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_PUTCURSORMODE_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;追加しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SCE_ATOK_PUTCURSORMODE_ON&nbsp;</td>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;追加する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>変換・編集処理</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">この章では、変換や編集等の処理を行う関数、sceAtokEditConv()について解説します。<br><br>ユーザーの操作に応じて、変換や入力文字列の編集等の動作を行う際、<br>sceAtokEditConv(<i>context, cmd, param</i>);<br>をコールします。<br><i>context</i>は、ATOKライブラリのコンテキスト領域（ワーク領域）へのポインタです。<br><i>cmd</i>にコマンドを指定します。定義されているマクロを使って指定して下さい。<br><i>param</i>には、パラメータを指定します。パラメータを必要としない動作モードでは、ゼロを指定して下さい。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>編集処理</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>文字の入力</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;<i>f</i>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;"><i>ｆ</i>に文字コードを設定することで、ATOKエンジンに対して文字入力が行われます。20ｈ～7Eh及びA1～DFｈの半角英字・数字・記号・カタカナ文字が設定できます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>一文字削除（カーソルの左側）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_BACKSPACE&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok005.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>一文字削除（カーソル位置）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_DELETE&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok006.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>カーソル移動（一文字右へ）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CURRIGHT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok007.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>カーソル移動（一文字左へ）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CURLEFT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok008.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>カーソル移動（文末へ）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CUREND&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok009.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>カーソル移動（文頭へ）</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CURTOP&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok010.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>変換・次候補</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CONVFORWARD&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例1：変換） 最初の変換時には、先頭候補が選択されます。<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok011.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br>例２：次候補）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok012.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>変換・前候補</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CONVBACKWARD&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例1：変換） 最初の変換時には、最終候補が選択されます。<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok013.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br>例２：前候補）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok014.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>1音確定</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ 1ONKAKUTEI&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok015.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>ひらがな（後）変換</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ POSTCONVHIRA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok016.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>カタカナ（後）変換</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ POSTCONVKANA&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok017.gif"><p>
+
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>半角（後）変換</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ POSTCONVHALF&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok018.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>無変換（後）変換</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd:&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ POSTCONVRAW&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param: &nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok019.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>部分確定</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd:&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ KAKUTEIPART&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param:&nbsp;</td>
+<td valign="TOP">&nbsp;0 = 現在選択されている候補で確定&nbsp;<br>&nbsp;1以上 = 候補リスト中の指定の番号の候補で確定する。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok020.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>全文確定</b><br></h4></div>
+<div style="margin-left:80px;"><br></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd: &nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ KAKUTEIALL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param: &nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok021.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>全文字削除</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ DELETEALL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br><br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok022.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>確定リピート</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ KAKUTEIREP&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok023.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>確定アンドゥ</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ KAKUTEIUNDO&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok024.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br>確定アンドゥが無効化された後、確定後に入力等が行われた場合は、アンドゥは働かない。<br></div>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>部分出力（文頭）</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ KAKUTEIHEAD&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok025.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br>確定された文頭文字以外の注目文節内の文字は破棄される。<br></div>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>部分出力（文末）</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ KAKUTEITAIL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok026.gif"><p>
+
+</div>
+<br>
+<div style="margin-left:67px;"><br> 確定された文末文字以外の注目文節内の文字は破棄される。<br></div>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>変換取り消し（注目文節以降）</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CONVCANCEL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok027.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>変換取り消し（全て）</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ CANCELALL&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok028.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>文節区切り（一文字右）</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ FOCUSRIGHT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok029.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>文節区切り（一文字左）</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ FOCUSLEFT&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok030.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>注目文節移動</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ MOVFOCUSCLAUS&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;0 = 次文節&nbsp;<br>&nbsp;1 = 全文節&nbsp;<br>&nbsp;2 = 最終文節&nbsp;<br>&nbsp;3 = 先頭文節&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:67px;">注目文節を移動させます。<br><br>例）<br></div>
+<div style="margin-left:67px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok031.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　６ -->
+<div style="margin-left:63px;"><h4><b>候補仮選択</b><br></h4></div>
+<div style="margin-left:90px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;cmd :&nbsp;</td>
+<td valign="TOP">&nbsp;SCE_ATOK_EDIT_ SELECTCAND&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;param :&nbsp;</td>
+<td valign="TOP">&nbsp;仮選択する候補番号&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">指定の候補を仮選択させ、その候補を注目文節に適用した状態にします。<br><br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_5">
+<h2>
+ 5 <b>入力状態別コマンド一覧</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">編集・変換機能のコマンドは、ATOKエンジンの状態によって、有効な場合と無効な場合が存在します。下記の組み合わせ表を参照して下さい。<br>下表で○以外の呼び出しに対しての挙動は未定義となります。<br></div>
+<div style="margin-left:50px;"></div>
+<div style="margin-left:67px;">
+<p>
+<img src="gif/libatok032.gif"><p>
+
+</div>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_6">
+<h2>
+ 6 <b>標準ローマ字組み合わせ一覧</b>
+<hr noshade>
+</h2>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b></b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>A</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>I</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>U</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>E</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>O</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;あ&nbsp;</td>
+<td valign="TOP">&nbsp;い&nbsp;</td>
+<td valign="TOP">&nbsp;う&nbsp;</td>
+<td valign="TOP">&nbsp;え&nbsp;</td>
+<td valign="TOP">&nbsp;お&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>B?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ば&nbsp;</td>
+<td valign="TOP">&nbsp;び&nbsp;</td>
+<td valign="TOP">&nbsp;ぶ&nbsp;</td>
+<td valign="TOP">&nbsp;べ&nbsp;</td>
+<td valign="TOP">&nbsp;ぼ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>BY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;びゃ&nbsp;</td>
+<td valign="TOP">&nbsp;びぃ&nbsp;</td>
+<td valign="TOP">&nbsp;びゅ&nbsp;</td>
+<td valign="TOP">&nbsp;びぇ&nbsp;</td>
+<td valign="TOP">&nbsp;びょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>CH?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ちゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ち&nbsp;</td>
+<td valign="TOP">&nbsp;ちゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ちぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ちょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>CY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ちゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ちぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ちゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ちぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ちょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>D?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;だ&nbsp;</td>
+<td valign="TOP">&nbsp;ぢ&nbsp;</td>
+<td valign="TOP">&nbsp;づ&nbsp;</td>
+<td valign="TOP">&nbsp;で&nbsp;</td>
+<td valign="TOP">&nbsp;ど&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>DH?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;でゃ&nbsp;</td>
+<td valign="TOP">&nbsp;でぃ&nbsp;</td>
+<td valign="TOP">&nbsp;でゅ&nbsp;</td>
+<td valign="TOP">&nbsp;でぇ&nbsp;</td>
+<td valign="TOP">&nbsp;でょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>DW?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;どぅ&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>DY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ぢゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぢぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぢゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ぢぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ぢょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>F?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ふぁ&nbsp;</td>
+<td valign="TOP">&nbsp;ふぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ふ&nbsp;</td>
+<td valign="TOP">&nbsp;ふぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ふぉ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>FY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ふぁ&nbsp;</td>
+<td valign="TOP">&nbsp;ふぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ふゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ふぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ふょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>G?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;が&nbsp;</td>
+<td valign="TOP">&nbsp;ぎ&nbsp;</td>
+<td valign="TOP">&nbsp;ぐ&nbsp;</td>
+<td valign="TOP">&nbsp;げ&nbsp;</td>
+<td valign="TOP">&nbsp;ご&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>GW?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ぐぁ&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>GY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ぎゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぎぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぎゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ぎぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ぎょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>H?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;は&nbsp;</td>
+<td valign="TOP">&nbsp;ひ&nbsp;</td>
+<td valign="TOP">&nbsp;ふ&nbsp;</td>
+<td valign="TOP">&nbsp;へ&nbsp;</td>
+<td valign="TOP">&nbsp;ほ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>HY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ひゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ひぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ひゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ひぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ひょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>J?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;じゃ&nbsp;</td>
+<td valign="TOP">&nbsp;じ&nbsp;</td>
+<td valign="TOP">&nbsp;じゅ&nbsp;</td>
+<td valign="TOP">&nbsp;じぇ&nbsp;</td>
+<td valign="TOP">&nbsp;じょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>JY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;じゃ&nbsp;</td>
+<td valign="TOP">&nbsp;じぃ&nbsp;</td>
+<td valign="TOP">&nbsp;じゅ&nbsp;</td>
+<td valign="TOP">&nbsp;じぇ&nbsp;</td>
+<td valign="TOP">&nbsp;じょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>K?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;か&nbsp;</td>
+<td valign="TOP">&nbsp;き&nbsp;</td>
+<td valign="TOP">&nbsp;く&nbsp;</td>
+<td valign="TOP">&nbsp;け&nbsp;</td>
+<td valign="TOP">&nbsp;こ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>KW?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;くぁ&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>KY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;きゃ&nbsp;</td>
+<td valign="TOP">&nbsp;きぃ&nbsp;</td>
+<td valign="TOP">&nbsp;きゅ&nbsp;</td>
+<td valign="TOP">&nbsp;けぇ&nbsp;</td>
+<td valign="TOP">&nbsp;きょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>L?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ぁ&nbsp;</td>
+<td valign="TOP">&nbsp;ぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぅ&nbsp;</td>
+<td valign="TOP">&nbsp;ぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ぉ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>LK?</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;ヵ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;ヶ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>LT?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;つ&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>LW?</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;わ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>LY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>M?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ま&nbsp;</td>
+<td valign="TOP">&nbsp;み&nbsp;</td>
+<td valign="TOP">&nbsp;む&nbsp;</td>
+<td valign="TOP">&nbsp;め&nbsp;</td>
+<td valign="TOP">&nbsp;も&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>MY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;みゃ&nbsp;</td>
+<td valign="TOP">&nbsp;みぃ&nbsp;</td>
+<td valign="TOP">&nbsp;みゅ&nbsp;</td>
+<td valign="TOP">&nbsp;みぇ&nbsp;</td>
+<td valign="TOP">&nbsp;みょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>N?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;な&nbsp;</td>
+<td valign="TOP">&nbsp;に&nbsp;</td>
+<td valign="TOP">&nbsp;ぬ&nbsp;</td>
+<td valign="TOP">&nbsp;ね&nbsp;</td>
+<td valign="TOP">&nbsp;の&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>P?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ぱ&nbsp;</td>
+<td valign="TOP">&nbsp;ぴ&nbsp;</td>
+<td valign="TOP">&nbsp;ぷ&nbsp;</td>
+<td valign="TOP">&nbsp;ぺ&nbsp;</td>
+<td valign="TOP">&nbsp;ぽ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>PY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ぴゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぴぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぴゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ぴぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ぴょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>R?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ら&nbsp;</td>
+<td valign="TOP">&nbsp;り&nbsp;</td>
+<td valign="TOP">&nbsp;る&nbsp;</td>
+<td valign="TOP">&nbsp;れ&nbsp;</td>
+<td valign="TOP">&nbsp;ろ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>RY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;りゃ&nbsp;</td>
+<td valign="TOP">&nbsp;りぃ&nbsp;</td>
+<td valign="TOP">&nbsp;りゅ&nbsp;</td>
+<td valign="TOP">&nbsp;りぇ&nbsp;</td>
+<td valign="TOP">&nbsp;りょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>S?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;さ&nbsp;</td>
+<td valign="TOP">&nbsp;し&nbsp;</td>
+<td valign="TOP">&nbsp;す&nbsp;</td>
+<td valign="TOP">&nbsp;せ&nbsp;</td>
+<td valign="TOP">&nbsp;そ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>SH?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;しゃ&nbsp;</td>
+<td valign="TOP">&nbsp;し&nbsp;</td>
+<td valign="TOP">&nbsp;しゅ&nbsp;</td>
+<td valign="TOP">&nbsp;しぇ&nbsp;</td>
+<td valign="TOP">&nbsp;しょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>SY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;しゃ&nbsp;</td>
+<td valign="TOP">&nbsp;しぃ&nbsp;</td>
+<td valign="TOP">&nbsp;しゅ&nbsp;</td>
+<td valign="TOP">&nbsp;しぇ&nbsp;</td>
+<td valign="TOP">&nbsp;しょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>T?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;た&nbsp;</td>
+<td valign="TOP">&nbsp;ち&nbsp;</td>
+<td valign="TOP">&nbsp;つ&nbsp;</td>
+<td valign="TOP">&nbsp;て&nbsp;</td>
+<td valign="TOP">&nbsp;と&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>TH?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;てゃ&nbsp;</td>
+<td valign="TOP">&nbsp;てぃ&nbsp;</td>
+<td valign="TOP">&nbsp;てゅ&nbsp;</td>
+<td valign="TOP">&nbsp;てぇ&nbsp;</td>
+<td valign="TOP">&nbsp;てょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>TS?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;つぁ&nbsp;</td>
+<td valign="TOP">&nbsp;つぃ&nbsp;</td>
+<td valign="TOP">&nbsp;つ&nbsp;</td>
+<td valign="TOP">&nbsp;つぇ&nbsp;</td>
+<td valign="TOP">&nbsp;つぉ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>TW?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;とぅ&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>TY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ちゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ちぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ちゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ちぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ちょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>V?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;う゛ぁ&nbsp;</td>
+<td valign="TOP">&nbsp;う゛ぃ&nbsp;</td>
+<td valign="TOP">&nbsp;う゛&nbsp;</td>
+<td valign="TOP">&nbsp;う゛ぇ&nbsp;</td>
+<td valign="TOP">&nbsp;う゛ぉ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>W?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;わ&nbsp;</td>
+<td valign="TOP">&nbsp;うぃ&nbsp;</td>
+<td valign="TOP">&nbsp;う&nbsp;</td>
+<td valign="TOP">&nbsp;うぇ&nbsp;</td>
+<td valign="TOP">&nbsp;を&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>WY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;ゐ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;ゑ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>X?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ぁ&nbsp;</td>
+<td valign="TOP">&nbsp;ぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぅ&nbsp;</td>
+<td valign="TOP">&nbsp;ぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ぉ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>XK?</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;ヵ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;ヶ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>XT?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;っ&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>XW?</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp;ゎ(※)&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+<td valign="TOP">&nbsp;-----&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>XY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ゃ&nbsp;</td>
+<td valign="TOP">&nbsp;ぃ&nbsp;</td>
+<td valign="TOP">&nbsp;ゅ&nbsp;</td>
+<td valign="TOP">&nbsp;ぇ&nbsp;</td>
+<td valign="TOP">&nbsp;ょ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Y?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;や&nbsp;</td>
+<td valign="TOP">&nbsp;い&nbsp;</td>
+<td valign="TOP">&nbsp;ゆ&nbsp;</td>
+<td valign="TOP">&nbsp;いぇ&nbsp;</td>
+<td valign="TOP">&nbsp;よ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>Z?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ざ&nbsp;</td>
+<td valign="TOP">&nbsp;じ&nbsp;</td>
+<td valign="TOP">&nbsp;ず&nbsp;</td>
+<td valign="TOP">&nbsp;ぜ&nbsp;</td>
+<td valign="TOP">&nbsp;ぞ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ZY?</b>&nbsp;</td>
+<td valign="TOP">&nbsp;じゃ&nbsp;</td>
+<td valign="TOP">&nbsp;じぃ&nbsp;</td>
+<td valign="TOP">&nbsp;じゅ&nbsp;</td>
+<td valign="TOP">&nbsp;じぇ&nbsp;</td>
+<td valign="TOP">&nbsp;じょ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div style="margin-left:40px;"><h4><b>特殊</b><br></h4></div>
+
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>NN</b>&nbsp;</td>
+<td valign="TOP">&nbsp;ん&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<div style="margin-left:67px;">但し、Nに続いて [A][I][U][E][O][N] のアルファベットが入力された場合はNNとならなくても“ん”に変換される。<br>例）“SHANPANN” → “しゃんぱん”<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#f8f8f8">&nbsp; (※)&nbsp;</td>
+<td valign="TOP">&nbsp;旧仮名遣い対応オプションありの場合のみ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<div style="margin-left:40px;"><h4><b>その他例外規則</b><br></h4></div>
+
+<div style="margin-left:67px;">“KK”や“PP”のように [A][I][U][E][O][N] 以外のアルファベットが連続して入力された場合は“っK”、“っP”のように最初の1文字は“っ”となる。<br>例）“IKKAI” → “いっかい”<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

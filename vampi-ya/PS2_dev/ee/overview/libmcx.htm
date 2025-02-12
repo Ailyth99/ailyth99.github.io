@@ -1,0 +1,506 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>PDAライブラリ</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('libref','../libref/mcx_rf.htm')\"><img src=\"./gif/arrow.png\" border=0>構造体／関数一覧</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+PDAライブラリ
+</h1></center>
+</a>
+<div align=center>
+<table border=0 bgcolor=#F5F5F5 width=90%><tr><td>
+<h2><u>
+        <b>目次</b><br>
+</u></h2>
+
+<ul>
+<p><a href="#Heading3_1">  1 <b>ライブラリの概要</b><br></a>
+    <ul>
+    <a href="#Heading4_1_1"> <b>概要</b><br></a>
+    <a href="#Heading4_1_2"> <b>関連ファイル</b><br></a>
+    <a href="#Heading4_1_3"> <b>サンプルプログラム</b><br></a>
+    <a href="#Heading4_1_4"> <b>関連ドキュメント</b><br></a>
+    <a href="#Heading4_1_5"> <b>"PlayStation"におけるPDAライブラリとの相違</b><br></a>
+    </ul>
+<p><a href="#Heading3_2">  2 <b>PDAの概要</b><br></a>
+    <ul>
+    <a href="#Heading4_2_1"> <b>ハードウェアの特徴</b><br></a>
+    </ul>
+<p><a href="#Heading3_3">  3 <b>PDA使用手順の概略</b><br></a>
+    <ul>
+    <a href="#Heading4_3_1"> <b>PDAの抜き差し確認</b><br></a>
+    <a href="#Heading4_3_2"> <b>初期化（マルチタップを使わない場合）</b><br></a>
+    <a href="#Heading4_3_3"> <b>初期化（マルチタップを使う場合）</b><br></a>
+    <a href="#Heading4_3_4"> <b>処理登録と完了待ち</b><br></a>
+    <a href="#Heading4_3_5"> <b>PDAアプリケーションの保存手順</b><br></a>
+    <a href="#Heading4_3_6"> <b>フォーマット時の注意</b><br></a>
+    </ul>
+<p><a href="#Heading3_4">  4 <b>TRC規定事項</b><br></a>
+    <ul>
+    <a href="#Heading4_4_1"> <b>本編：12.1.2項「"PocketStation"に対応している」</b><br></a>
+    <a href="#Heading4_4_2"> <b>PocketStation編：1.0項「"PocketStation"対応について」</b><br></a>
+    <a href="#Heading4_4_3"> <b>PocketStation編：2.0項「PDAアプリケーションについて」</b><br></a>
+    </ul>
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<a name=#"Heading2">
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_1">
+<h2>
+ 1 <b>ライブラリの概要</b><br>
+<hr noshade>
+</h2>
+
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_1">
+<a href="#Heading3_1"> 1. </a>1 <b>概要</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">EE上でPDAを制御するためのライブラリとして、libmcxが提供されています。libmcxはPDA情報の取得・更新、ユーザインターフェイス情報の取得・更新、メモリアクセスなどを支援します。<br>アプリケーションの起動・終了、PDAへのアクセスはシリアル通信によって行われ、処理内容にもよりますが数フレーム～数十フレームの時間を要します。このため、libmcxのほとんどの関数は非同期処理を行います。関数が呼び出されたときには処理の登録のみを行って直ちにリターンし、処理の終了確認・ステータスの取得は別途sceMcxSync()を呼び出して行うしくみになっています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_2">
+<a href="#Heading3_1"> 1. </a>2 <b>関連ファイル</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libmcxに必要なファイルは次のとおりです。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>カテゴリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ファイル名</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ライブラリファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libmcx.a&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;ヘッダファイル&nbsp;</td>
+<td valign="TOP">&nbsp;libmcx.h&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;モジュールファイル&nbsp;</td>
+<td valign="TOP">&nbsp;sio2man.irx&nbsp;<br>&nbsp;mtapman.irx（マルチタップ使用時のみ）&nbsp;<br>&nbsp;mcxserv.irx&nbsp;<br>&nbsp;mcxman.irx&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_3">
+<a href="#Heading3_1"> 1. </a>3 <b>サンプルプログラム</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">libmcxを使用するサンプルプログラムとして、次のものがあります。<br></div>
+<div style="margin-left:40px;"><ul>
+         <li> ee/sample/mcx/basic<br>PDAの基本動作を確認できるサンプルプログラム
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_4">
+<a href="#Heading3_1"> 1. </a>4 <b>関連ドキュメント</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDA関連のドキュメントとして以下のファイルがあります。<br></div>
+<div style="margin-left:67px;">「PDA仕様書」<br>「PDAカーネル仕様書」<br>「ARM Architecture Reference Manual」<br>「メモリーカードファイルシステム(FAT)仕様」<br></div>
+<div style="margin-left:50px;">また、PDA用アプリケーションをPDAに書き込む際のデータフォーマットについては、次のドキュメントに記載されています。<br></div>
+<div style="margin-left:67px;">「メモリーカード(PS2)ファイルシステム」<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_1_5">
+<a href="#Heading3_1"> 1. </a>5 <b>"PlayStation"におけるPDAライブラリとの相違</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">"PlayStation 2"のPDAライブラリは、"PlayStation"のそれと比べて「PDAアプリケーションフラグ」の取り扱い方法が異なり、メモリーカード(PS2)のファイル属性として扱うようになっています。<br>すなわち、従来"PlayStation"ではPDAアプリケーションフラグをMcxExecFlag()を用いて参照・設定していましたが、"PlayStation 2"においてはlibmcのsceMcGetDir() / sceMcSetFileInfo()を用いて、メンバAttrFileのsceMcFileAttrPDAExecビットを参照・設定することになります。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_2">
+<h2>
+ 2 <b>PDAの概要</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">PDAは、ARM7TDMIをプロセッサコアとし、128KBのフラッシュメモリ、2KBのRAM、32×32ドットモノクロLCDほかの入出力装置を備えた小型コンピュータです。"PlayStation 2"のメモリーカード差込口に接続してメモリーカード(PS2)と同様の手順でプログラムファイル（PDAアプリケーション）を保存したり、保存されているプログラムファイルをARM7の仮想アドレス空間にマッピングして実行する機能を持っています。<br>"PlayStation 2"からはメモリーカードとしてアクセスするほか、PDA固有の情報の読み書き、LEDランプをはじめPDA上のデバイスの制御、PDAアプリケーションの実行などが可能です。ただしPDAを利用するためにはPDAアプリケーションを保有していなければならず、PDAに作成できるファイルはPDAアプリケーションに限られることが、TRC（Technical Requirement Checklist）で規定されています。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_2_1">
+<a href="#Heading3_2"> 2. </a>1 <b>ハードウェアの特徴</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAの主な特徴を次に示します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;プロセッサ&nbsp;</td>
+<td valign="TOP">&nbsp;ARM7TDMI&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;メモリ&nbsp;</td>
+<td valign="TOP">&nbsp;RAM2KB、フラッシュメモリ128KB&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;表示装置&nbsp;</td>
+<td valign="TOP">&nbsp;32×32ドットモノクロ液晶ディスプレイ、LED&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;入力装置&nbsp;</td>
+<td valign="TOP">&nbsp;ボタン5個&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;赤外線入出力&nbsp;</td>
+<td valign="TOP">&nbsp;IrDAモード / リモコンモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;サウンド&nbsp;</td>
+<td valign="TOP">&nbsp;10bitDAC、内蔵スピーカー&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;電源&nbsp;</td>
+<td valign="TOP">&nbsp;内蔵電池（CR2032）、または"PlayStation 2"から供給&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;省電力機能&nbsp;</td>
+<td valign="TOP">&nbsp;動作クロック設定機能、デバイスごとのスリープ機能&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;その他&nbsp;</td>
+<td valign="TOP">&nbsp;個体識別用シリアル番号内蔵&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">メモリーカードとしての機能について次に示します。<br><br></div>
+<div style="margin-left:90px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>項目</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;容量&nbsp;</td>
+<td valign="TOP">&nbsp;フォーマット時120Kバイト&nbsp;<br>&nbsp;（128バイトのセクタ単位でアクセス）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;通信形態&nbsp;</td>
+<td valign="TOP">&nbsp;コントローラポートを兼用した同期型シリアル通信&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;アクセス速度&nbsp;</td>
+<td valign="TOP">&nbsp;最大連続読みとり速度は約10Kバイト／秒&nbsp;<br>&nbsp;１セクタ書き込み後、20msはアクセス不可&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;その他&nbsp;</td>
+<td valign="TOP">&nbsp;ホットプラグ&nbsp;<br>&nbsp;（"PlayStation 2"の電源を入れたままで抜き差し可能）&nbsp;<br>&nbsp;10万回書き込み保障&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_3">
+<h2>
+ 3 <b>PDA使用手順の概略</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">以下、プログラム上でPDAを扱うときの処理手順を説明します。マルチタップに対応するかどうかによって初期化の処理が異なります。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_1">
+<a href="#Heading3_3"> 3. </a>1 <b>PDAの抜き差し確認</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAが抜き差しされたことを確認する機能はlibmcxにはありません。libmcのsceMcGetInfo()をお使いください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_2">
+<a href="#Heading3_3"> 3. </a>2 <b>初期化（マルチタップを使わない場合）</b><br>
+</a>
+</h3>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> PDAドライバ（IOPモジュール）のロード<br>sceSifLoadModule()を用いて、sio2man.irx, mcxman.irx ,mcxserv.irxをこの順番でロードします。padman.irx, mcman.irx, mcserv.irxはsio2man.irxより後であれば、mcxserv.irx, mcxman.irxより先にロードしても後にロードしてもかまいません。</li>
+         <li VALUE=2> メモリーカード・ドライバの初期化<br>sceMcxInit()を呼び出します。</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_3">
+<a href="#Heading3_3"> 3. </a>3 <b>初期化（マルチタップを使う場合）</b><br>
+</a>
+</h3>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> PDAドライバ（IOPモジュール）のロード<br>sceSifLoadModule()を用いて、sio2man.irx, mtapman.irx, mcxman.irx ,mcxserv.irxをこの順番でロードします。padman.irx, mcman.irx, mcserv.irxはmtapman.irxの後であれば、mcxserv.irx, mcxman.irxより先にロードしても後にロードしてもかまいません。</li>
+         <li VALUE=2> マルチタップ・ドライバの初期化<br>sceMtapInit()を呼び出します。</li>
+         <li VALUE=3> マルチタップスロット使用開始宣言<br>sceMtapPortOpen(2または3) を呼び出して、それぞれ"PlayStation 2"本体のメモリーカード差込口1，2に対してマルチタップ経由でアクセスできるように宣言します。</li>
+         <li VALUE=4> メモリーカード・ドライバの初期化<br>sceMcxInit()を呼び出します。</li>
+         <li VALUE=5> マルチタップの接続確認<br>sceMtapGetConnection(2 または 3) を呼び出して、マルチタップが接続されていることを確認します（初期化時だけでなく、随時確認することができます）。</li>
+         <li VALUE=6> 使用可能スロット数の確認<br>マルチタップが接続されていることがわかれば、sceMcGetSlotMax(0または1) を呼び出してマルチタップが装備している最大スロット数を調べます。libmcxの各関数で受け付けられるスロット番号は0～(最大数－1) となります。</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_4">
+<a href="#Heading3_3"> 3. </a>4 <b>処理登録と完了待ち</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAライブラリの関数はほとんどのメモリーカード操作関数と同じく、関数呼び出しによって処理の登録のみ行い、sceMcxSync()でポーリングして処理終了を待つしくみになっています。終了待ちの間、他のPDA操作処理を登録することはできません。プログラムとしては以下のいずれかの形になります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>同期待ち</b><br></h4></div>
+
+<div style="margin-left:67px;">sceMcxGetInfo など(  ,  ,  );<br>sceMcxSync(0,  ,  );<br></div>
+
+<div style="margin-left:40px;"><h4><b>非同期待ち</b><br></h4></div>
+
+<div style="margin-left:67px;">sceMcxGetInfo など(  ,  ,  );<br>while(!sceMcxSync(1,  ,  )) {<br>	/* 他の処理 */<br>}<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_5">
+<a href="#Heading3_3"> 3. </a>5 <b>PDAアプリケーションの保存手順</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAアプリケーションをPDAに保存する手順は、メモリーカード(PS2)にファイルを保存する場合とほぼ同じですが、代替セクタ使用を避けるための処理と、PDAアプリケーションフラグをセットする処理が必要となります。<br>代替セクタとは、メモリーカード上のある領域が物理的欠陥により使用できない場合に、その代わりに使用するための別の領域です。メモリーカードをフォーマットする際に欠陥の有無を調べておき、欠陥のある領域へアクセスしようとしたときには自動的に代替セクタへのアクセスに読み替えて処理するしくみになっています。通常のデータファイルであれば代替セクタが使用されていても差し支えないのですが、PDAアプリケーションはファイルイメージをARM7の仮想アドレス空間にマッピングして実行されるため、一部が代替セクタに書き込まれると本来連続しているはずのプログラムコードが分断されて、実行できなくなってしまいます。代替セクタの使用を抑止するには、ファイルを書き込む前にsceMcxShowTrans()を呼び出してください。書き込みが終わればsceMcxHideTrans()を呼び出して、代替セクタの使用を許可してかまいません。<br>PDAアプリケーションフラグは、ファイル属性として定義されています。ファイルを書き込んだ後で、libmcのsceMcSetFileInfo()を用いて、ファイル属性のsceMcFileAttrPDAExecビットを1にしてください。<br>PDAアプリケーション保存の手順をまとめると次のようになります。<br></div>
+    <div style="margin-left:55px;"><ol>
+         <li VALUE=1> sceMcxShowTrans(port, slot, 1, TimeOut);</li>
+         <li VALUE=2> ファイルオープン("filename");</li>
+         <li VALUE=3> ファイル書き込み</li>
+         <li VALUE=4> ファイルクローズ</li>
+         <li VALUE=5> sceMcxHideTrans(port, slot);</li>
+         <li VALUE=6> sceMcSetFileInfo(port, slot, "filename", info, sceMcFileInfoAttr);</li>
+</ol></div>
+</ul></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_3_6">
+<a href="#Heading3_3"> 3. </a>6 <b>フォーマット時の注意</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">PDAに対してlibmcのsceMcFormat()を用いてフォーマットを行うことができますが、この際に転送中表示を行わないようにしてください。<br>sceMcxShowTrans()で転送中表示を行うとsceMcxHideTrans()でその表示を消すまでの間、代替セクタへのアクセスがPDA側で禁止された状態になります。その結果、代替セクタの初期化ができずフォーマット処理が失敗することになります。<br></div>
+
+<!-- 見出し　３，節見出し -->
+<a name="Heading3_4">
+<h2>
+ 4 <b>TRC規定事項</b><br>
+<hr noshade>
+</h2>
+
+<div style="margin-left:50px;">タイトルアプリケーションでlibmcxを使用する際には、TRC（Technical Requirement Checklist）で次の事柄が規定されていますので注意してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_1">
+<a href="#Heading3_4"> 4. </a>1 <b>本編：12.1.2項「"PocketStation"に対応している」</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>非対応アプリケーションのアクセス禁止</b><br></h4></div>
+
+<div style="margin-left:67px;">PDAに対応しないアプリケーションは、接続チェック以外にPDAにアクセスしてはなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>PDAアプリケーションファイルの保有・ファイル作成</b><br></h4></div>
+
+<div style="margin-left:67px;">逆に、PDAに対応するアプリケーションは、PDAアプリケーションを保有していなければなりません。また、PDA上に作成してもよいファイルはファイル種別が"MCX0"のもの、すなわちPDAアプリケーションに限られます。データフォーマットや文書名は別ドキュメント「メモリーカード(PS2)ファイルシステム」に記載されていますので、それに従って作成してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_2">
+<a href="#Heading3_4"> 4. </a>2 <b>PocketStation編：1.0項「"PocketStation"対応について」</b><br>
+</a>
+</h3>
+
+<div style="margin-left:40px;"><h4><b>ファイル名・ファイルヘッダ・ファイルシステム</b><br></h4></div>
+
+<div style="margin-left:67px;">ファイル名・ファイルヘッダの内容・ファイルシステム等、ファイルを作成する際には別ドキュメント「メモリーカード(PS2)ファイルシステム」での解説に従ってください。ファイル種別として"MCX0"のほかに"CRD0"を許すような規定がありますが、これはメモリーカード(PS2)にファイルを作成する場合を想定して設けられているもので、PDAに作成できるファイルは"MCX0"のみです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>シグネチャ</b><br></h4></div>
+
+<div style="margin-left:67px;">PDAのシグネチャ（シリアル番号）を書き換えてはなりません（書き換える方法も提供されていません）。<br></div>
+
+<div style="margin-left:40px;"><h4><b>アイコンの表示</b><br></h4></div>
+
+<div style="margin-left:67px;">アプリケーションが作成したファイルのアイコンが、PDAの画面で適切に表示できることを確認してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>ロゴタイプ・各部名称</b><br></h4></div>
+
+<div style="margin-left:67px;">"PocketStation"ロゴタイプおよび各部名称は適切に使用してください。<br></div>
+
+<!-- 見出し　４，小見出し -->
+<h3>
+<a name="Heading4_4_3">
+<a href="#Heading3_4"> 4. </a>3 <b>PocketStation編：2.0項「PDAアプリケーションについて」</b><br>
+</a>
+</h3>
+<div style="margin-left:50px;">この項では主としてPDAアプリケーション自体の仕様について規定しています。タイトルアプリケーション側に直接関係する規定は以下のとおりです。<br></div>
+
+<div style="margin-left:40px;"><h4><b>PDAアプリケーションのセーブ</b><br></h4></div>
+
+<div style="margin-left:67px;">PDAアプリケーションをPDAに書き込む機能が正しく働くことを確認してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>固有のファイル名・文書名</b><br></h4></div>
+
+<div style="margin-left:67px;">PDAへ書き込むデータとメモリーカード(PS2)へ書き込むデータが異なるときは、それぞれ異なるファイル名・文書名を設定しなければなりません。<br></div>
+
+<div style="margin-left:40px;"><h4><b>適正な電源供給</b><br></h4></div>
+
+<div style="margin-left:67px;">タイトルアプリケーションからPDAのデバイスを制御する際には、消費電流に注意してください。"PlayStation 2"から供給可能な最大電流は、メモリーカード差込口2つの合計で160mAです。各デバイスの消費電流は、「PDA仕様書」に記載されています。<br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

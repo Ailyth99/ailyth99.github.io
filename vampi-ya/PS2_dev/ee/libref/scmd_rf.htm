@@ -1,0 +1,947 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+<title>SIF Command</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/sif.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+SIF Command
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifCmdData"> sceSifCmdData<br></a></td>
+<td>&nbsp;</td><td>コマンド関数登録データ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifCmdHandler"> sceSifCmdHandler<br></a></td>
+<td>&nbsp;</td><td>コマンド関数<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifCmdHdr"> sceSifCmdHdr<br></a></td>
+<td>&nbsp;</td><td>コマンドパケットヘッダ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifCmdSRData"> sceSifCmdSRData<br></a></td>
+<td>&nbsp;</td><td>ソフトウェアレジスタ変更パケット<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifAddCmdHandler"> sceSifAddCmdHandler<br></a></td>
+<td>&nbsp;</td><td>コマンド関数の登録<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifExitCmd"> sceSifExitCmd<br></a></td>
+<td>&nbsp;</td><td>SIF Command API の終了<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifGetSreg"> sceSifGetSreg<br></a></td>
+<td>&nbsp;</td><td>ソフトウェアレジスタの内容の取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifInitCmd"> sceSifInitCmd<br></a></td>
+<td>&nbsp;</td><td>SIF Command API の初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifRemoveCmdHandler"> sceSifRemoveCmdHandler<br></a></td>
+<td>&nbsp;</td><td>コマンド関数の削除<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifSendCmd"> sceSifSendCmd<br></a></td>
+<td>&nbsp;</td><td>コマンドパケットの送出<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifSendCmdIntr"> sceSifSendCmdIntr<br></a></td>
+<td>&nbsp;</td><td>コマンドパケットの送出(IOPのみ実装)<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifSetCmdBuffer"> sceSifSetCmdBuffer<br></a></td>
+<td>&nbsp;</td><td>コマンド関数用バッファの登録<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSifSetSreg"> sceSifSetSreg<br></a></td>
+<td>&nbsp;</td><td>ソフトウェアレジスタの内容の設定<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifCmdData"><font size=6>sceSifCmdData<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンド関数登録データ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceSifCmdHandler <i>func</i>;
+	void <i>*data</i>;
+}<b> sceSifCmdData</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンド関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;関数が実行時に引数として渡されるデータのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コマンド関数を登録する際のデータ構造です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifCmdHandler"><font size=6>sceSifCmdHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンド関数<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef void (* <b>sceSifCmdHandler</b>)(void *<i>pkt</i>,	void *<i>data</i>)
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>pkt</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifSendCmd() で指定された&nbsp;<br>&nbsp;コマンドパケットのコピーのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSifAddCmdHandler でコマンド関数と&nbsp;<br>&nbsp;ともに登録したデータアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数は、sceSifSendCmd() によって起される DMA 割り込み内で実行されるものです。その際、送り手のコマンドパケットと受け手の指定データのアドレスが引数として渡されます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifCmdHdr"><font size=6>sceSifCmdHdr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンドパケットヘッダ<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef  struct {
+	unsigned int <i>psize</i>:8;
+	unsigned int <i>dsize</i>:24;
+	unsigned int <i>daddr</i>;
+  	unsigned int <i>fcode</i>;
+	unsigned int <i>opt</i>;
+} <b>sceSifCmdHdr</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>psize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;このヘッダを含むコマンドパケットのサイズ(16以上112以下)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dsize</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パケットといっしょに送る、付随データの大きさ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>daddr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;付随データのアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>fcode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出されるコマンド関数の番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>opt</i>&nbsp;</td>
+<td valign="TOP">&nbsp;プログラマが使用してよいデータ領域&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コマンドパケットは、このデータ構造を先頭に持つ最大112バイトのデータです。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifCmdSRData"><font size=6>sceSifCmdSRData<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソフトウェアレジスタ変更パケット<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	sceSifCmdHdr <i>chdr</i>;
+	int <i>rno</i>;
+	unsigned int <i>value</i>;
+} <b>sceSifCmdSRData</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>chdr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドパケットヘッダ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>rno</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ソフトウェアレジスタ番号(0～31)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
+<td valign="TOP">&nbsp;設定値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SIF Command API システムは32bit×32個の配列（ソフトウェアレジスタ）を持っています。0～7番はシステム用ですが、残りはユーザプログラムで使用することができ、そのための関数もデフォルトで登録されています。<br>相手側のソフトウェアレジスタを設定する際には、この構造体を使って次のようにします（相手側の31番レジスタを0xffに設定する例）。<br></div>
+<div style="margin-left:70px;"><br>sceSifCmdSRData d;<br><br>d.rno = 31;<br>d.value = 0xff;<br>sceSifSendData(SIF_CMDC_SET_SREG,&d,sizeof(d),0,0,0);<br><br></div>
+<div style="margin-left:50px;">なお、自分側のソフトウェアレジスタの値を取得・設定するためには、sceSifGetSreg()/sceSifSetSreg() を使用します。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSifGetSreg">sceSifGetSreg</a>()<a href="#"></a>,<a href="#sceSifSetSreg">sceSifSetSreg</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifAddCmdHandler"><font size=6>sceSifAddCmdHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンド関数の登録<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+void  <b>sceSifAddCmdHandler</b>(
+	unsigned int <i>pos</i>,
+	sceSifCmdHandler <i>f</i>,
+	void <i>*data</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンド関数を登録するバッファの位置&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>f</i>&nbsp;</td>
+<td valign="TOP">&nbsp;登録するコマンド関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンド関数f に渡されるデータのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceSifSetCmdBuffer() で登録したバッファに、コマンドパケット呼出時に呼び出される関数（コマンド関数）を登録します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コマンド関数は割り込みハンドラとして実行されるため、プログラミングに際していくつか特別な注意が必要です。割り込みハンドラの記述について、\overview\eekernelに注意事項が記載されていますので参照してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifExitCmd"><font size=6>sceSifExitCmd<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SIF Command API の終了<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+void <b>sceSifExitCmd</b>(void)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceSifInitCmd() で登録した割り込み関数をはずします。<br>EE でオブジェクトの遷移を行い、その先で SIF Command API を使用する場合は、この関数で割り込み関数をはずし、遷移先で新たにsceSifInitCmd() を呼ばなければなりません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifGetSreg"><font size=6>sceSifGetSreg<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソフトウェアレジスタの内容の取得<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+unsigned int <b>sceSifGetSreg</b>(int <i>no</i>)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;レジスタ番号（0～31）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">レジスタの内容を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自分側のソフトウェアレジスタの値を取得します。<br>ソフトウェアレジスタの初期値は0です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifInitCmd"><font size=6>sceSifInitCmd<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SIF Command API の初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+void <b>sceSifInitCmd</b>(void)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SIF Command API の初期化を行います。内部変数の初期化と、コマンドを処理するための割り込み関数の登録を行います。<br>最初に呼ばれる sceSifInitCmd() は、EE/IOP 相互に同期をとるため、相手側で呼ばれるまでこの関数内で待ちに入ります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifRemoveCmdHandler"><font size=6>sceSifRemoveCmdHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンド関数の削除<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+void <b>sceSifRemoveCmdHandler</b>(unsigned int  <i>pos</i>)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
+<td valign="TOP">&nbsp;削除するバッファの位置&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>pos</i> に登録された関数を削除します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifSendCmd"><font size=6>sceSifSendCmd<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンドパケットの送出<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+unsigned int  <b>sceSifSendCmd</b>(
+	unsigned int <i>pos</i>,
+	void <i>*cp</i>,
+	int <i>ps</i>,
+	void <i>*src</i>,
+	void <i>*dest</i>,
+	int <i>size</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出す関数の位置(sceSifAddCmdHandler()で登録した位置)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンド(コマンドパケット)のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ps</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドパケットのサイズ(byte)(16以上112バイト以下)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>src</i>&nbsp;</td>
+<td valign="TOP">&nbsp;一緒に送るデータ（付随データ）のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dest</i>&nbsp;</td>
+<td valign="TOP">&nbsp;付随データを送る相手側のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
+<td valign="TOP">&nbsp;付随データのサイズ(byte)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">使用した sceSifSetDma() のキューイング識別子を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;キューイング失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0以外&nbsp;</td>
+<td valign="TOP">&nbsp;キューイング識別子&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">sceSifSetDma()を用いてコマンドパケットを送り、相手側の <i>pos</i> の位置に	登録されているコマンド関数を呼び出します。<br>コマンドが相手側に届いたかどうかは、返値と sceSifDmaStat() によって	判断できます。<br><i>cp</i>/<i>src</i>/<i>dest</i> は、EE 側は 16バイト、IOP側は 4バイトでアラインされたアドレスに置いてください。<i>size</i> は、EE の場合16バイト、IOPの場合4 バイトの倍数です。<br>EE の場合、<i>cp</i> は キャッシュ上にあれば write-back されますが、<i>src</i>はされませんので、プログラマの責任でキャッシュ上から吐き出して	おいてください。<br>割り込み関数内では、isceSifSendCmd() を呼んでください(EE/IOPとも)。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><i>size</i> の上限は、１回で送れる DMA の上限 1Mbyte - 16byte です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifSendCmdIntr"><font size=6>sceSifSendCmdIntr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンドパケットの送出(IOPのみ実装)<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+unsigned int  <b>sceSifSendCmdIntr </b>(
+	unsigned int <i>pos</i>,
+	void <i>*cp</i>,
+	int <i>ps</i>,
+	void <i>*src</i>,
+	void <i>*dest</i>,
+	int <i>size,</i>
+<i>	void (* func)(void *),</i>
+<i>	void *data</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>pos</i>&nbsp;</td>
+<td valign="TOP">&nbsp;呼び出す関数の位置(sceSifAddCmdHandler()で登録した位置)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>cp</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンド(コマンドパケット)のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>ps</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドパケットのサイズ(byte)(16以上112バイト以下)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>src</i>&nbsp;</td>
+<td valign="TOP">&nbsp;一緒に送るデータ（付随データ）のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>dest</i>&nbsp;</td>
+<td valign="TOP">&nbsp;付随データを送る相手側のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
+<td valign="TOP">&nbsp;付随データのサイズ(byte)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>func </i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンド転送後に呼ばれる関数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;func に渡される引数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">使用した sceSifSetDma() のキューイング識別子を返します。<br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;キューイング失敗&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0以外&nbsp;</td>
+<td valign="TOP">&nbsp;キューイング識別子&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コマンド転送後に割り込み関数として func() が呼ばれます。その際、引数として <i>data</i> が渡されます。それ以外は、sceSifSendCmd() と同様です。<br>割込み禁止領域では、isceSifSendCmdIntr() を読んでください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifSetCmdBuffer"><font size=6>sceSifSetCmdBuffer<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コマンド関数用バッファの登録<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+sceSifCmdData * <b>sceSifSetCmdBuffer</b>(
+	sceSifCmdData <i>*db</i>,
+	int <i>size</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>db</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッファの先頭アドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッファのサイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">以前に登録されていた、バッファのアドレスを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SIF Command API によって起動する関数（コマンド関数）を登録するためのバッファを設定します。初期状態では、バッファの設定はありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSifSetSreg"><font size=6>sceSifSetSreg<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ソフトウェアレジスタの内容の設定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>#include &lt;sifcmd.h&gt;
+unsigned int <b>sceSifSetSreg</b>(
+	 int <i>no</i>,
+	unsigned int <i>value</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>no</i>&nbsp;</td>
+<td valign="TOP">&nbsp;レジスタ番号（0～31）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
+<td valign="TOP">&nbsp;レジスタに設定する値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">設定した値を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">自分側のソフトウェアレジスタに指定値を設定します。<br><br></div>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>

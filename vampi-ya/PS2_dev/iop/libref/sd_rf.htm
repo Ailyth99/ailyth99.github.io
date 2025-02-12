@@ -1,0 +1,4096 @@
+<html lang="ja">
+<!-- 見出し　１，部見出し -->
+<head>
+
+<script language="JavaScript">
+<!--
+  function startFixed(){
+    fixedLAYER('fixedLay0','rightBottom',-35,-35)
+  }
+
+  var ie= !!document.all
+  var n4= !!document.layers
+  var w3c=!!document.getElementById
+  var mac45 
+    = navigator.userAgent.indexOf('MSIE 4.5; Mac_PowerPC')
+
+  if(document.layers)window.onresize=resizeFunc
+  function resizeFunc(e){location.reload()}
+
+  function iniFunc(){
+    if(ie&&!(mac45!=-1))window.onscroll = startFixed
+    startFixed()
+  }
+
+  var tid=new Array()
+
+  function fixedLAYER(layName,posString,offSetX,offSetY){
+
+    offSetX = parseInt(offSetX,10)
+    offSetY = parseInt(offSetY,10)
+
+ if( posString == 'rightBottom' ){
+
+      if(ie) offLeft = document.body.clientWidth   + offSetX
+      else   offLeft = window.innerWidth           + offSetX
+      if(ie) offTop  = document.body.clientHeight  + offSetY
+      else   offTop  = window.innerHeight          + offSetY
+
+    }
+    else {
+
+      if(ie) offLeft =                               offSetX
+      else   offLeft =                               offSetX
+      if(ie) offTop  =                               offSetY
+      else   offTop  =                               offSetY
+
+    }
+
+    offLeft = parseInt(offLeft)
+    offTop  = parseInt(offTop)
+
+    if(document.all){
+      var mx = parseInt(document.body.scrollLeft +offLeft)
+      var my = parseInt(document.body.scrollTop  +offTop)
+    } else {
+      var mx = parseInt(self.pageXOffset+offLeft)
+      var my = parseInt(self.pageYOffset+offTop)
+
+    }
+
+    moveLAYER(layName,mx,my)
+
+    if(!(ie&&!(mac45!=-1)))
+      setTimeout("fixedLAYER('"+layName+"','"+posString
+                   +"','" +offSetX+"','"+offSetY+"')",100)
+  }
+
+  function moveLAYER(layName,x,y){
+      
+      if(document.getElementById){
+        document.getElementById(layName).style.left=x
+        document.getElementById(layName).style.top=y
+      }
+      else if(document.all){
+        document.all(layName).style.pixelLeft=x
+        document.all(layName).style.pixelTop=y
+      }
+      else if(document.layers)
+        document.layers[layName].moveTo(x,y)
+  }
+
+// -->
+</script>
+
+<script language="JavaScript">
+<!--
+  function lj(ch,fm)
+  {
+    if ( parent.index ) {
+      if ( ch == "libref" ){ parent.index.location.href="../libref/category.htm"; }
+      else if ( ch == "../ee/libref" ){ parent.index.location.href="../../ee/libref/category.htm"; }
+      else if ( ch == "../iop/libref" ){ parent.index.location.href="../../iop/libref/category.htm"; }
+      else if ( ch == "../iop/overview" ){ parent.index.location.href="../../iop/overview/category.htm"; }
+      else if ( ch == "../ee/overview" ){ parent.index.location.href="../../ee/overview/category.htm"; }
+      else if ( ch == "overview" ){ parent.index.location.href="../overview/category.htm"; }
+    }
+    if ( parent.main ) {
+      if ( fm != "" ){ parent.main.location.href=fm; }
+    } else {
+      if ( fm != "" ){ location.href=fm; }
+    }
+  }
+//-->
+</script>
+
+<title>低レベルサウンドライブラリ(IOP)</title>
+<meta http-equiv="Content-Type"content= text/html; charset=Shift_JIS >
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Author" Content="Sony Computer Entertainment Inc.">
+<style type="text/css"><!--
+    div.fixedLay{position:absolute;z-index:100;left:0px;top:0px;}
+--></style>
+</head>
+<body onload="iniFunc()" bgcolor="#ffffff" text="#000000" >
+<div id="fixedLay0" class="fixedLay">
+<a href="#top"><img src="gif/link.gif" border="0" alt="TOP"></a>
+</div>
+<table WIDTH="100%">
+<tr><td>
+<h3>"PlayStation 2" Programmer Tool Runtime Library Release 2.5.3</h3>
+</td>
+</tr>
+<tr><td align= right >
+<script language="JavaScript">
+<!--
+   var p,q;
+   if ( parent.index ) {
+   p = parent.index.location;
+   q = p.toString();
+   result = q.match(/\/category\.htm/gi);
+   if(result == "/category.htm"){
+          document.writeln("<a href=\"JavaScript:lj('overview','../overview/libsd.htm')\"><img src=\"./gif/arrow.png\" border=0>ライブラリ概要</a>");
+    }
+}
+// -->
+</script>
+</td></tr>
+</table>
+<hr noshade size=6>
+<a name=Heading2>
+<center><h1>
+低レベルサウンドライブラリ(IOP)
+</h1></center>
+</a>
+<font size=4><b>構造体</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdBatch"> sceSdBatch<br></a></td>
+<td>&nbsp;</td><td>バッチコマンド<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdEffectAttr"> sceSdEffectAttr<br></a></td>
+<td>&nbsp;</td><td>エフェクト属性<br></td></tr>
+</table><br>
+<font size=4><b>関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdBlockTrans"> sceSdBlockTrans<br></a></td>
+<td>&nbsp;</td><td>入出力ブロックへの転送を行なう<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdBlockTransStatus"> sceSdBlockTransStatus<br></a></td>
+<td>&nbsp;</td><td>入出力ブロック転送の状態を取得する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdCleanEffectWorkArea"> sceSdCleanEffectWorkArea<br></a></td>
+<td>&nbsp;</td><td>エフェクトのワークエリアをクリア<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdClearEffectWorkArea"> sceSdClearEffectWorkArea<br></a></td>
+<td>&nbsp;</td><td>エフェクトのワークエリアをクリア<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdGetAddr"> sceSdGetAddr<br></a></td>
+<td>&nbsp;</td><td>レジスタラッパ - アドレス値Get用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdGetCoreAttr"> sceSdGetCoreAttr<br></a></td>
+<td>&nbsp;</td><td>擬似レジスタラッパ - コア設定Get用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdGetEffectAttr"> sceSdGetEffectAttr<br></a></td>
+<td>&nbsp;</td><td>エフェクト属性を取得<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdGetParam"> sceSdGetParam<br></a></td>
+<td>&nbsp;</td><td>レジスタラッパ - 基本パラメータGet用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdGetSpu2IntrHandlerArgument"> sceSdGetSpu2IntrHandlerArgument<br></a></td>
+<td>&nbsp;</td><td>SPU2割り込みハンドラデータを取得する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdGetSwitch"> sceSdGetSwitch<br></a></td>
+<td>&nbsp;</td><td>レジスタラッパ - ボイス制御パラメータGet用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdGetTransIntrHandlerArgument"> sceSdGetTransIntrHandlerArgument<br></a></td>
+<td>&nbsp;</td><td>転送終了割り込みハンドラデータを取得する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdInit"> sceSdInit<br></a></td>
+<td>&nbsp;</td><td>サウンドデバイスの初期化<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdNote2Pitch"> sceSdNote2Pitch<br></a></td>
+<td>&nbsp;</td><td>ノート値からピッチ値に変換<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdPitch2Note"> sceSdPitch2Note<br></a></td>
+<td>&nbsp;</td><td>ピッチ値からノート値に変換<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdProcBatch"> sceSdProcBatch<br></a></td>
+<td>&nbsp;</td><td>バッチ処理<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdProcBatchEx"> sceSdProcBatchEx<br></a></td>
+<td>&nbsp;</td><td>バッチ処理 ボイス一括処理付き<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetAddr"> sceSdSetAddr<br></a></td>
+<td>&nbsp;</td><td>レジスタラッパ - アドレス値Set用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetCoreAttr"> sceSdSetCoreAttr<br></a></td>
+<td>&nbsp;</td><td>擬似レジスタラッパ - コア設定Set用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetEffectAttr"> sceSdSetEffectAttr<br></a></td>
+<td>&nbsp;</td><td>エフェクト属性を設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetEffectMode"> sceSdSetEffectMode<br></a></td>
+<td>&nbsp;</td><td>エフェクトモードを設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetEffectModeParams"> sceSdSetEffectModeParams<br></a></td>
+<td>&nbsp;</td><td>エフェクトモード属性を設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetParam"> sceSdSetParam<br></a></td>
+<td>&nbsp;</td><td>レジスタラッパ - 基本パラメータSet用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetSpu2IntrHandler"> sceSdSetSpu2IntrHandler<br></a></td>
+<td>&nbsp;</td><td>SPU2 割り込みハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetSwitch"> sceSdSetSwitch<br></a></td>
+<td>&nbsp;</td><td>レジスタラッパ - ボイス制御パラメータSet用<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSetTransIntrHandler"> sceSdSetTransIntrHandler<br></a></td>
+<td>&nbsp;</td><td>転送終了割り込みハンドラの設定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdStopTrans"> sceSdStopTrans<br></a></td>
+<td>&nbsp;</td><td>SPU2との転送処理を停止する<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdVoiceTrans"> sceSdVoiceTrans<br></a></td>
+<td>&nbsp;</td><td>SPU2ローカルメモリへの転送を行なう<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdVoiceTransStatus"> sceSdVoiceTransStatus<br></a></td>
+<td>&nbsp;</td><td>ボイス転送の状態を取得する<br></td></tr>
+</table><br>
+<font size=4><b>コールバック関数</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdSpu2IntrHandler"> sceSdSpu2IntrHandler<br></a></td>
+<td>&nbsp;</td><td>SPU2 割り込みハンドラ仕様<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#sceSdTransIntrHandler"> sceSdTransIntrHandler<br></a></td>
+<td>&nbsp;</td><td>転送終了割り込みハンドラ仕様<br></td></tr>
+</table><br>
+<font size=4><b>レジスタマクロ</b></font>
+<a name=#"Heading2"></a>
+<hr border=1 width=100%><br>
+<table>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_A_EEA"> SD_A_EEA<br></a></td>
+<td>&nbsp;</td><td>エフェクト処理用ワークエリアの終端アドレス<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_A_ESA"> SD_A_ESA<br></a></td>
+<td>&nbsp;</td><td>エフェクト処理用ワークエリアの先頭アドレス<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_A_IRQA"> SD_A_IRQA<br></a></td>
+<td>&nbsp;</td><td>SPU2割り込みアドレスの指定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_A_TSA"> SD_A_TSA<br></a></td>
+<td>&nbsp;</td><td>転送開始アドレス<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_P_AVOLL / SD_P_AVOLR"> SD_P_AVOLL / SD_P_AVOLR<br></a></td>
+<td>&nbsp;</td><td>コア外部入力のボリューム（左） / コア外部入力のボリューム（右）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_P_BVOLL / SD_P_BVOLR"> SD_P_BVOLL / SD_P_BVOLR<br></a></td>
+<td>&nbsp;</td><td>サウンドデータ入力のボリューム（左） / サウンドデータ入力のボリューム（右）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_P_EVOLL / SD_P_EVOLR"> SD_P_EVOLL / SD_P_EVOLR<br></a></td>
+<td>&nbsp;</td><td>エフェクトリターンボリューム（左） / エフェクトリターンボリューム（右）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_P_MMIX"> SD_P_MMIX<br></a></td>
+<td>&nbsp;</td><td>ボイスミキシング後の出力指定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_P_MVOLL / SD_P_MVOLR"> SD_P_MVOLL / SD_P_MVOLR<br></a></td>
+<td>&nbsp;</td><td>マスターボリューム（左） / マスターボリューム（右）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_P_MVOLXL / SD_P_MVOLXR"> SD_P_MVOLXL / SD_P_MVOLXR<br></a></td>
+<td>&nbsp;</td><td>マスターボリュームの現在値（左） / マスターボリュームの現在値（右）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_S_ENDX"> SD_S_ENDX<br></a></td>
+<td>&nbsp;</td><td>エンドポイント通過フラグ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_S_KOFF"> SD_S_KOFF<br></a></td>
+<td>&nbsp;</td><td>キーオフ（ボイス発音終了）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_S_KON"> SD_S_KON<br></a></td>
+<td>&nbsp;</td><td>キーオン（ボイス発音開始）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_S_NON"> SD_S_NON<br></a></td>
+<td>&nbsp;</td><td>ノイズ発生器への割り当て<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_S_PMON"> SD_S_PMON<br></a></td>
+<td>&nbsp;</td><td>ピッチ変調の指定<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_S_VMIXL / SD_S_VMIXRSD_S_VMIXEL / SD_S_VMIXER"> SD_S_VMIXL / SD_S_VMIXR<br>SD_S_VMIXEL / SD_S_VMIXER<br></a></td>
+<td>&nbsp;</td><td>ボイス出力のミキシング指定（Dry 左） / ボイス出力のミキシング指定（Dry 右）<br>ボイス出力のミキシング指定（Wet 左） / ボイス出力のミキシング指定（Wet 右）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VA_LSAX"> SD_VA_LSAX<br></a></td>
+<td>&nbsp;</td><td>ループポイントのアドレス<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VA_NAX"> SD_VA_NAX<br></a></td>
+<td>&nbsp;</td><td>次に読みこまれるべき波形データのアドレス<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VA_SSA"> SD_VA_SSA<br></a></td>
+<td>&nbsp;</td><td>波形データの先頭アドレス<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VP_ADSR1"> SD_VP_ADSR1<br></a></td>
+<td>&nbsp;</td><td>エンベロープ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VP_ADSR2"> SD_VP_ADSR2<br></a></td>
+<td>&nbsp;</td><td>エンベロープ（２）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VP_ENVX"> SD_VP_ENVX<br></a></td>
+<td>&nbsp;</td><td>エンベロープ現在値<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VP_PITCH"> SD_VP_PITCH<br></a></td>
+<td>&nbsp;</td><td>発音時のピッチ<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VP_VOLL / SD_VP_VOLR"> SD_VP_VOLL / SD_VP_VOLR<br></a></td>
+<td>&nbsp;</td><td>ボイスボリューム（左） / ボイスボリューム（右）<br></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+<td><a href="#SD_VP_VOLXL / SD_VP_VOLXR"> SD_VP_VOLXL / SD_VP_VOLXR<br></a></td>
+<td>&nbsp;</td><td>ボリューム現在値（左） / ボリューム現在値（右）<br></td></tr>
+</table>
+
+<!-- 見出し　１，部見出し -->
+<br></td></tr></table></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>構造体</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdBatch"><font size=6>sceSdBatch<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッチコマンド<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	u_short <i>func</i>;
+	u_short <i>entry</i>;
+	u_int <i>value</i>;
+} <b>sceSdBatch</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>func</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;以下の機能のいずれかひとつを設定する。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BSET_PARAM&nbsp;</td>
+<td valign="top">&nbsp;0x01&nbsp;</td>
+<td valign="top">&nbsp;sceSdSetParamを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BGET_PARAM&nbsp;</td>
+<td valign="top">&nbsp;0x10&nbsp;</td>
+<td valign="top">&nbsp;sceSdGetParamを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BSET_SWITCH&nbsp;</td>
+<td valign="top">&nbsp;0x02&nbsp;</td>
+<td valign="top">&nbsp;sceSdSetSwitchを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BGET_SWITCH&nbsp;</td>
+<td valign="top">&nbsp;0x12&nbsp;</td>
+<td valign="top">&nbsp;sceSdGetSwitchを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BSET_ADDR&nbsp;</td>
+<td valign="top">&nbsp;0x03&nbsp;</td>
+<td valign="top">&nbsp;sceSdSetAddrを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BGET_ADDR&nbsp;</td>
+<td valign="top">&nbsp;0x13&nbsp;</td>
+<td valign="top">&nbsp;sceSdGetAddrを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BSET_CORE&nbsp;</td>
+<td valign="top">&nbsp;0x04&nbsp;</td>
+<td valign="top">&nbsp;sceSdSetCoreAttrを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_BGET_CORE&nbsp;</td>
+<td valign="top">&nbsp;0x14&nbsp;</td>
+<td valign="top">&nbsp;sceSdGetCoreAttrを実行&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_WRITE_IOP&nbsp;</td>
+<td valign="top">&nbsp;0x05&nbsp;</td>
+<td valign="top">&nbsp;IOPメモリに書きこみ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_WRITE_EE&nbsp;</td>
+<td valign="top">&nbsp;0x06&nbsp;</td>
+<td valign="top">&nbsp;EEメモリに書きこみ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_RETURN_EE&nbsp;</td>
+<td valign="top">&nbsp;0x07&nbsp;</td>
+<td valign="top">&nbsp;EEメモリにreturnsを転送&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>entry</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;funcに渡すエントリ。&nbsp;<br>&nbsp;ラッパAPIの場合は第１引数に相当。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>value</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;funcに渡す設定値。&nbsp;<br>&nbsp;ラッパAPIの場合は第２引数に相当。&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">バッチコマンドを表す構造体で、この構造体の配列をバッチコマンド列としてバッチ処理APIに渡します。<br><i>func</i>にSD_WRITE_IOPを指定した場合は、<i>value</i>で指定したIOPメモリのアドレスに<i>entry</i>の値を書きこみます。<br><i>func</i>にSD_WRITE_EEを指定した場合は、<i>value</i>で指定したEEメモリのアドレスに<i>entry</i>の値を書きこみます。内部でSIF DMAを使用します。<br><i>func</i>にSD_RETURN_EEを指定した場合は、<i>value</i>で指定したEEメモリのアドレスに、<i>returns</i>（返値の配列：sceSdProcBatch()を参照のこと）を、<i>entry</i>に示すバイト数だけ転送します。内部でSIF DMAを使用します。<br><i>func</i>にSD_BSET_*を指定した場合は、最終的に処理対象となるレジスタが複数回指定されないようにしてください。また、そのレジスタが持つ仕様を守った処理となるようにしてください。SD_BSET_COREについては一回の呼び出しに対して一つのみ含まれるようにしてください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdProcBatch">sceSdProcBatch</a>()<a href="#"></a>,<a href="#sceSdProcBatchEx">sceSdProcBatchEx</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdEffectAttr"><font size=6>sceSdEffectAttr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクト属性<br></div>
+
+<!-- 構造 -->
+<div style="margin-left:10px;"><b>構造</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef struct {
+	int <i>core</i>;
+	int <i>mode</i>;
+	short <i>depth_L</i>;
+	short <i>depth_R</i>;
+	int <i>delay</i>;
+	int <i>feedback</i>;
+} <b>sceSdEffectAttr</b>;
+
+</font></pre></div>
+
+<!-- メンバ -->
+<div style="margin-left:10px;"><b>メンバ</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コア指定 (現在未使用)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクトモード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>depth_L</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクトのリターンボリューム（深さ/左）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>depth_R</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクトのリターンボリューム（深さ/右）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>delay</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Delay Time (ECHO, DELAY のみ)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>feedback</i>&nbsp;</td>
+<td valign="TOP">&nbsp;Feedback (ECHO, DELAY のみ)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エフェクト属性を設定するための構造体です。<br></div>
+
+<div style="margin-left:40px;"><h4><i><b>mode</i></b><br></h4></div>
+
+<div style="margin-left:50px;">エフェクトのモードを指定します。指定できるモードとサウンドメモリで占有される容量は以下の通りです。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>種類</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>size(byte)</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;off&nbsp;</td>
+<td valign="TOP">&nbsp;0x 0080&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_ROOM&nbsp;</td>
+<td valign="TOP">&nbsp;ルーム&nbsp;</td>
+<td valign="TOP">&nbsp;0x 26c0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_STUDIO_A&nbsp;</td>
+<td valign="TOP">&nbsp;スタジオ(小)&nbsp;</td>
+<td valign="TOP">&nbsp;0x 1f40&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_STUDIO_B &nbsp;</td>
+<td valign="TOP">&nbsp;スタジオ(中)&nbsp;</td>
+<td valign="TOP">&nbsp;0x 4840&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_STUDIO_C&nbsp;</td>
+<td valign="TOP">&nbsp;スタジオ(大)&nbsp;</td>
+<td valign="TOP">&nbsp;0x 6fe0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_HALL&nbsp;</td>
+<td valign="TOP">&nbsp;ホール&nbsp;</td>
+<td valign="TOP">&nbsp;0x ade0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_SPACE&nbsp;</td>
+<td valign="TOP">&nbsp;スペースエコー&nbsp;</td>
+<td valign="TOP">&nbsp;0x f6c0&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_ECHO&nbsp;</td>
+<td valign="TOP">&nbsp;エコー&nbsp;</td>
+<td valign="TOP">&nbsp;0x18040&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_DELAY&nbsp;</td>
+<td valign="TOP">&nbsp;ディレイ&nbsp;</td>
+<td valign="TOP">&nbsp;0x18040&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_REV_MODE_PIPE&nbsp;</td>
+<td valign="TOP">&nbsp;パイプエコー&nbsp;</td>
+<td valign="TOP">&nbsp;0x 3c00&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">SD_REV_MODE_CLEAR_WA を<i>mode</i> に bit-OR で指定すると、モード設定と同時にエフェクトワークエリアをクリアします。クリア処理に使用される転送チャンネルはSD_REV_MODE_CLEAR_CH0（転送チャンネル0の指定）およびSD_REV_MODE_CLEAR_CH1（転送チャンネル1の指定）を<i>mode</i> に bit-OR することで指定します。転送は常にDMAにて行われます。転送チャンネルを指定しなかった場合、転送チャンネル0をDMAにて使用します。転送チャンネルは他の転送関数と共用で使われますので、使おうとしている転送チャンネルが既に使われている場合にこのクリア処理指定を行うとsceSdSetEffectAttr() およびsceSdSetEffectMode() はSCESD_EBUSYを返して異常終了します。クリア処理を個別に行いたい場合は、sceSdClearEffectWorkArea() あるいはsceSdCleanEffectWorkArea() を使用して下さい。<br></div>
+
+<div style="margin-left:40px;"><h4><i><b>depth</i></b><br></h4></div>
+
+<div style="margin-left:50px;">エフェクトのリターンボリューム（深さ）を -0x8000 ～ 0x7fff の範囲で左右独立に設定する。設定された値が負の場合エフェクト成分 (wet) の位相が反転する。<br>指定された値は基本パラメータレジスタSD_P_EVOLL/SD_P_EVOLRへの設定として使用される。<br></div>
+
+<div style="margin-left:40px;"><h4><i><b>delay</i></b><br></h4></div>
+
+<div style="margin-left:50px;">ECHO, DELAYのみ有効。ディレイタイムを 0 ～ 127 の範囲で設定する。<br></div>
+
+<div style="margin-left:40px;"><h4><i><b>feedback</i></b><br></h4></div>
+
+<div style="margin-left:50px;">ECHO, DELAYのみ有効。フィードバック値を 0 ～ 127 の範囲で設定する。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdSetEffectAttr">sceSdSetEffectAttr</a>()<a href="#"></a>,<a href="#sceSdGetEffectAttr">sceSdGetEffectAttr</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdBlockTrans"><font size=6>sceSdBlockTrans<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>入出力ブロックへの転送を行なう<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdBlockTrans</b>( 
+	short <i>channel</i>,
+	u_short <i>mode</i>,
+	u_char *<i>m_addr</i>,
+	u_int <i>size</i>[,
+	u_char *<i>start_addr</i>]
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送チャンネル。0または1を指定できる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送モード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>m_addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IOPメモリ側のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送サイズ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>start_addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IOP メモリ側の転送開始絶対アドレス &nbsp;<br>&nbsp;(mode にSD_TRANS_MODE_WRITE_FROM 指定時のみ。&nbsp;<br>&nbsp;指定しない場合、形式欄の[]内は省略可。)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0以上&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;転送したバイト数、あるいは&nbsp;<br>&nbsp;その時アクセスしていた位置+バッファ情報&nbsp;<br>&nbsp;(mode: SD_TRANS_MODE_STOP指定時)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EINVALID_&nbsp;<br>&nbsp;ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定したアドレスは転送範囲外&nbsp;<br>&nbsp;(mode: SD_TRANS_MODE_WRITE_FROMおよび&nbsp;<br>&nbsp;SD_BLOCK_LOOP指定時)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-210&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;指定した転送チャンネルは現在転送中&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">注意：<br><i>mode</i> に SD_TRANS_MODE_STOP を指定した場合、転送を中断します。その際、sceSdBlockTransStatus() と同等の値を返り値にとります。詳細は sceSdBlockTransStatus() を参照してください。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SPU2の入出力ブロックに関わる転送を行います。<br>転送チャンネルは他の転送関数と共用で使われます。そのため、既に使用している転送チャンネルを指定するとSCESD_EBUSYを返して異常終了します。<br></div>
+
+<div style="margin-left:40px;"><h4><i><b>mode </i>に設定できるビットマスク</b><br></h4></div>
+
+<div style="margin-left:35px;"><ul>
+         <li> 転送方向<br>SD_TRANS_MODE_WRITE　　　　　0<br>SD_TRANS_MODE_READ　　　　　　1<br>SD_TRANS_MODE_STOP　　　　　　2<br>SD_TRANS_MODE_WRITE_FROM　　3
+         <li> 転送設定（WRITE/READ/WRITE_FROMのみ）<br>SD_BLOCK_ONESHOT (0&lt;&lt;4) <br>SD_BLOCK_LOOP (1&lt;&lt;4) 
+         <li> 転送開始ブロック(READのみ）<br>SD_BLOCK_C0_VOICE1<br>SD_BLOCK_C0_VOICE3<br>SD_BLOCK_C1_SINL<br>SD_BLOCK_C1_SINR<br>SD_BLOCK_C1_VOICE1<br>SD_BLOCK_C1_VOICE3<br>SD_BLOCK_C0_MEMOUTL<br>SD_BLOCK_C0_MEMOUTR<br>SD_BLOCK_C0_MEMOUTEL<br>SD_BLOCK_C0_MEMOUTER<br>SD_BLOCK_C1_MEMOUTL<br>SD_BLOCK_C1_MEMOUTR<br>SD_BLOCK_C1_MEMOUTEL<br>SD_BLOCK_C1_MEMOUTER
+         <li> 転送ブロック数(READのみ）<br>SD_BLOCK_COUNT(x) ( (x)&lt;&lt;12 )
+</ul></div>
+<div style="margin-left:50px;"><br>IOP 側に置かれるデータ形式は、16bit, Little Endian, Signed のストレート PCM です。さらに現在の仕様では、左チャンネルと右チャンネルが 512 バイト毎にインターリーブされている必要があります。<br><br><i>mode</i> に SD_TRANS_MODE_WRITE を指定した場合は、IOP メモリから入力ブロックへデータを転送します。<br><i>mode</i> に SD_TRANS_MODE_READ を指定した場合は、<i>mode</i> で指定した出力ブロックから、IOP メモリへ転送が行われます。<br><br><i>mode</i> に SD_TRANS_MODE_WRITE_FROM を指定した場合、<i>start_addr</i> で指定した IOP メモリ内の位置から転送を開始します。<i>start_addr</i> で指定する位置はIOP メモリ内において (<i>m_addr</i> + <i>size</i>) の領域内である必要があります。他は SD_TRANS_MODE_WRITE と同様です。<br><i>start_addr</i> は <i>mode</i> に SD_TRANS_MODE_WRITE_FROM が指定された時のみ参照され、他の転送方向を指定した場合は <i>start_addr</i> を指定する必要はありません (すなわち引数は 4 つのみ)。<br><i>mode</i> に SD_TRANS_MODE_STOP を指定した場合、転送を中断します。その際、sceSdBlockTransStatus() と同等の値を返り値にとります。この返り値の仕様は sceSdBlockTransStatus() を参照してください。<br><i>mode</i> に SD_BLOCK_ONESHOT を指定した場合、設定した範囲の波形データの演奏を 1 回だけ行います。終了後はSPU2内のバッファに残った波形データがループ再生されるので、これを止めるには、再生の終了を転送終了割り込みハンドラかポーリングで検出して、SD_TRANS_MODE_STOP を実行します。<br>SD_BLOCK_LOOPを指定した場合、設定した範囲の波形データを繰り返し演奏します。この場合、<i>size</i> は2048の倍数である必要があります。<br><br>転送終了割り込みハンドラが設定されている場合、<i>mode</i> に SD_BLOCK_ONESHOT が指定された時には、IOP側のバッファの終端がアクセスされたときに転送終了割り込みハンドラが呼ばれます。<i>mode</i>にSD_BLOCK_LOOPが指定された時には、IOP側のバッファの中間地点と終端がアクセスされたときに転送終了割り込みハンドラが呼ばれます。<br><br>転送ブロック数は、数値を 12 bit 左シフトしたものを指定します。<br>転送ブロックは"転送開始ブロック"にある順番で並んでいるので、SD_BLOCK_C0_MEMOUTL と SD_BLOCK_C0_MEMOUTR を転送したい時は、転送開始ブロックに SD_BLOCK_C0_MEMOUTL を指定し、転送ブロック数に (2&lt;&lt;12) を指定します。一つのブロックのサイズは 1 kbyte です。<br>これらの設定は SD_TRANS_WRITE(_FROM) 時は必要ありません。<br><br>各転送ブロックは 512 byte のダブルバッファになっていますが、READ 時には、ダブルバッファの両方が IOP メモリに転送されます。<br>したがって、どちらか一方のバッファは古いデータ、あるいは書き換え中の状態となっているため無効となります。そのため、READ時はバッファの切り替えをSPU2割り込みにて捕捉し、ユーザ側で設定したSPU2割り込みのハンドラからこの関数を呼び出すことになります。その際、この関数の呼び出し以降にバッファが切り替わったタイミングで転送が開始されるため、有効となるバッファの判別はSPU2割り込みを起こすアドレスに依存します。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同一転送チャンネルに対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。結果として先に呼ばれた方の転送が実行され、後から呼ばれた方はSCESD_EBUSYを返して異常終了します。転送開始 (WRITE/READ/WRITE_FROM) と停止 (STOP) の同一転送チャンネルに対する同時呼び出しの場合は転送状態が不定になりますのでご注意ください。<br><br>USBアイソクロノス転送中に、SPU2 ローカルメモリ → IOP メモリの転送方向でデータ転送を行った場合、USB 側の動作がタイムアウトし、正しい動作が行えません。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdBlockTransStatus">sceSdBlockTransStatus</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdBlockTransStatus"><font size=6>sceSdBlockTransStatus<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>入出力ブロック転送の状態を取得する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int <b>sceSdBlockTransStatus</b>(
+	short <i>channel</i>,
+	short <i>flag</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送チャンネル。0または1を指定できる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>flag</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ステータスのフラグ（未実装）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">転送状態を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">入出力ブロック転送の状態を取得します。bit0～23がアクセス中のアドレス（IOPメモリ）を表します。転送が終了するとゼロになります。<br>bit24は転送中のバッファ番号で、SD_BLOCK_LOOP の場合のみ意味を持ちます。バッファの前半を転送中なら0、後半を転送中なら1を返します。<br>bit25～31はリザーブ領域です。将来使用する可能性があります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdCleanEffectWorkArea"><font size=6>sceSdCleanEffectWorkArea<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクトのワークエリアをクリア<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdCleanEffectWorkArea</b> (
+	int <i>core</i>,
+	int <i>channel</i>,
+	int <i>effect_mode</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コア指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クリアに使用する転送チャンネルの指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>effect_mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクトモードを指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたモードが範囲外&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-201&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_STATUS&nbsp;</td>
+<td valign="TOP">&nbsp;以前の転送において、転送確認のための&nbsp;<br>&nbsp;sceSdVoiceTransStatus() が未呼び出し&nbsp;<br>&nbsp;（転送終了割り込みハンドラ未指定時）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-210&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;指定した転送チャンネルは現在転送中&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SPU2ローカルメモリ内のエフェクトワークエリアをクリアします。<br>クリア処理にはDMA転送を使用するので、転送チャンネルを指定してください。<br>転送チャンネルは他の転送関数と共用で使われます。そのため、既に使用している転送チャンネルを指定するとSCESD_EBUSYを返して異常終了します。<br>コア指定では、どちらのコアが使っているエフェクトワークエリアをクリアするかを指定します。<br>クリア処理の終了にはsceSdVoiceTransStatus() による確認を行ってください。あるいは転送終了割り込みハンドラが指定されている場合、指定されたハンドラがクリア処理の終了時に呼ばれます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッドで同時に本関数を呼び出さないようにしてください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdClearEffectWorkArea"><font size=6>sceSdClearEffectWorkArea<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクトのワークエリアをクリア<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdClearEffectWorkArea</b> (
+	int <i>core</i>,
+	int <i>channel</i>,
+	int <i>effect_mode</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み許可状態で呼ぶこと）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コア指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;クリアに使用する転送チャンネルの指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>effect_mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクトモードを指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_OK&nbsp;</td>
+<td valign="TOP">&nbsp;正常終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-201&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_STATUS&nbsp;</td>
+<td valign="TOP">&nbsp;以前の転送において、転送確認のための&nbsp;<br>&nbsp;sceSdVoiceTransStatus() が未呼び出し&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-202&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みコンテキスト内にて呼び出された&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-210&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;指定した転送チャンネルは現在転送中&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SPU2ローカルメモリ内のエフェクトワークエリアをクリアします。<br>クリア処理にはDMA転送を使用するので、転送チャンネルを指定してください。<br>転送チャンネルは他の転送関数と共用で使われます。そのため、既に使用している転送チャンネルを指定するとSCESD_EBUSYを返して異常終了します。<br>コア指定では、どちらのコアが使っているエフェクトワークエリアをクリアするかを指定します。<br>指定した転送チャンネルに転送終了割り込みハンドラが指定されている場合、クリア処理中はハンドラが退避され、クリア処理が終わってもそのハンドラは呼び出されません。<br>クリア処理の終了にはDMAの終了を内部で待ちますので、sceSdVoiceTransStatus()による確認処理は不要です。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッドで同時に本関数を呼び出さないようにしてください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdGetAddr"><font size=6>sceSdGetAddr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>レジスタラッパ - アドレス値Get用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int <b>sceSdGetAddr</b>( 
+	u_short <i>register</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>register</i>&nbsp;</td>
+<td valign="TOP">&nbsp;読み出すレジスタ番号&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">レジスタから読み出した値（単位：バイト）を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">指定したレジスタが保持しているアドレス情報を読み出します。<br>SD_A_* および SD_VA_* シリーズのレジスタにはこのAPIを使用します。<br><br>SPU2ハードウエアの内部アドレス表現はShort Word ですが、このAPIではバイトで表現されます。<br></div>
+
+<div style="margin-left:40px;"><h4><b>レジスタ番号指定の形式</b><br></h4></div>
+
+<div style="margin-left:50px;">SD_A_* の場合 ： SD_CORE_? | SD_A_*<br>SD_VA_* の場合： SD_CORE_? | SD_VOICE_?? | SD_VA_*<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdGetCoreAttr"><font size=6>sceSdGetCoreAttr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>擬似レジスタラッパ - コア設定Get用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short <b>sceSdGetCoreAttr</b>( 
+	u_short <i>entry</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>entry</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ラメータを読み出すエントリ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エントリから読み出した値を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">指定エントリの保持しているコア設定パラメータを読み出します。<br>エントリはレジスタではありませんが、擬似的にラッパAPIと同じインタフェイスにしています。Batchコマンドとしても使用できます。<br>SD_C_*シリーズのエントリにはこのAPIを使用します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>エントリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_EFFECT_ENABLE&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクトワークエリアへの書きこみ許可&nbsp;<br>&nbsp;(0 or 1: デフォルト 0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_IRQ_ENABLE&nbsp;</td>
+<td valign="TOP">&nbsp;SPU2割り込み許可 (0 or 1: デフォルト 0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_MUTE_ENABLE&nbsp;</td>
+<td valign="TOP">&nbsp;ミュート (0 or 1: デフォルト 0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_NOISE_CLK&nbsp;</td>
+<td valign="TOP">&nbsp;ノイズ発生器のM系列シフト周波数（6bit:デフォルト0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_SPDIF_MODE&nbsp;</td>
+<td valign="TOP">&nbsp;SPDIFの設定（マスク: デフォルトは下記を参照）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">SD_C_*_ENABLEシリーズのエントリでは、enableのときは1、disableのときは0が返ります。<br>SD_C_NOISE_CLKは、0～63の値が返ります。<br>SD_C_SPDIF_MODEは、以下のフラグの論理和が返ります。SD_C_SPDIF_MODEはコア指定できず、またどちらを指定してもSPU2全体の設定が返ります。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_MEDIA_DVD&nbsp;</td>
+<td valign="TOP">&nbsp;メディアはDVD&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_MEDIA_CD&nbsp;</td>
+<td valign="TOP">&nbsp;メディアはCD（デフォルト）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;SPDIFに何も出力しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_PCM&nbsp;</td>
+<td valign="TOP">&nbsp;アナログ出力と同じ音をPCMで出力する&nbsp;<br>&nbsp;(デフォルト)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_BITSTREAM&nbsp;</td>
+<td valign="TOP">&nbsp;Core0の入力ブロックに入力されたデータを、&nbsp;<br>&nbsp;ビットストリームとして出力する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_BYPASS&nbsp;</td>
+<td valign="TOP">&nbsp;Core0の入力ブロックに入力されたデータを、&nbsp;<br>&nbsp;SPU2 内部をバイパスして出力する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_COPY_NORMAL&nbsp;</td>
+<td valign="TOP">&nbsp;通常のコピープロテクト&nbsp;<br>&nbsp;(１世代録音可・デフォルト)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_COPY_PROHIBIT&nbsp;</td>
+<td valign="TOP">&nbsp;デジタル録音禁止&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;"><b>＜エントリ指定の形式＞</b><br>SD_C_* の場合 ： SD_CORE_? | SD_C_*<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdGetEffectAttr"><font size=6>sceSdGetEffectAttr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクト属性を取得<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceSdGetEffectAttr</b> (
+	int <i>core</i>,
+	sceSdEffectAttr *<i>attr</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コア指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>attr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクト属性構造体へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エフェクトの属性を読み出します。<br>sceSdEffectAttrの解説を参照してください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdEffectAttr">sceSdEffectAttr</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdGetParam"><font size=6>sceSdGetParam<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>レジスタラッパ - 基本パラメータGet用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short <b>sceSdGetParam</b>(
+	u_short <i>register</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>register</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パラメータを読み出すレジスタ番号&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">レジスタから読み出した16bitの値を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">基本パラメータレジスタおよびボリュームレジスタから、16ビットのパラメータを読み出します。<br>SD_P_* および SD_VP_* シリーズのレジスタにはこのAPIを使用してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>レジスタ番号指定の形式</b><br></h4></div>
+
+<div style="margin-left:50px;">SD_P_* の場合 ： SD_CORE_? | SD_P_*<br>SD_VP_* の場合： SD_CORE_? | SD_VOICE_?? | SD_VP_*<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdGetSpu2IntrHandlerArgument"><font size=6>sceSdGetSpu2IntrHandlerArgument<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SPU2割り込みハンドラデータを取得する<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void* <b>sceSdGetSpu2IntrHandlerArgument</b> ( 
+	void
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、SPU2割り込みハンドラ設定時に登録されたデータへのポインタを返します。<br>エラーの場合、NULL (初期状態)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SPU2割り込みハンドラ設定時に登録されたデータのポインタを取得します。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdSetSpu2IntrHandler">sceSdSetSpu2IntrHandler</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdGetSwitch"><font size=6>sceSdGetSwitch<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>レジスタラッパ - ボイス制御パラメータGet用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int <b>sceSdGetSwitch</b>( 
+	u_short <i>register</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>register</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パラメータを読み出すレジスタ番号&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">レジスタから読み出した値（ビットマスク）を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ボイス制御パラメータレジスタから、ボイスごとのOn/Offフラグを読み出します。<br>SD_S_* シリーズのレジスタにはこのAPIを使用します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>レジスタ番号指定の形式</b><br></h4></div>
+
+<div style="margin-left:50px;">SD_S_* の場合 ： SD_CORE_? | SD_S_*<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdGetTransIntrHandlerArgument"><font size=6>sceSdGetTransIntrHandlerArgument<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>転送終了割り込みハンドラデータを取得する<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void* <b>sceSdGetTransIntrHandlerArgument</b> ( 
+	int <i>channel</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送チャンネル。0または1を指定できる。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、転送終了割り込みハンドラ設定時に登録されたデータへのポインタを返します。<br>エラーの場合、NULL (初期状態)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">転送終了割り込みハンドラ設定時に登録されたデータのポインタを取得します。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdSetTransIntrHandler">sceSdSetTransIntrHandler</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdInit"><font size=6>sceSdInit<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>サウンドデバイスの初期化<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdInit</b>( int <i>flag</i> )
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し不可<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>flag</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;初期化フラグ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_INIT_COLD&nbsp;</td>
+<td valign="top">&nbsp;すべて初期化する&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_INIT_HOT&nbsp;</td>
+<td valign="top">&nbsp;ボイス・ボリューム、エフェクトの設定を初期化しない&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_OK&nbsp;</td>
+<td valign="TOP">&nbsp;成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-301&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_ENO_RESOURCES&nbsp;</td>
+<td valign="TOP">&nbsp;転送終了用イベントフラグが確保できない&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">サウンドデバイスの初期化を行ないます。<br>SPU2に関係する割り込みコントローラの設定、およびライブラリ内部で使用する転送終了を処理するためのイベントフラグの確保も同時に行ないます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッドで同時に本関数を呼び出さないようにしてください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdNote2Pitch"><font size=6>sceSdNote2Pitch<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ノート値からピッチ値に変換<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short <b>sceSdNote2Pitch</b> (
+	u_short <i>center_note</i>,
+	u_short <i>center_fine</i>,
+	u_short <i>note</i>,
+	short <i>fine</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>center_note</i>&nbsp;</td>
+<td valign="TOP">&nbsp;サンプリング時のベースノート&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>center_fine</i>&nbsp;</td>
+<td valign="TOP">&nbsp;サンプリング時のベースノートに対するファイン&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>note</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ノート&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>fine</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ノートに対するファイン&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ピッチを返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">センターノートと発音ノートから、ピッチ（SPU2レジスタに設定する値）を計算します。<br>返り値は 0x3fff を超える場合があるため、上限を超えていないかを確認してsceSdSetParam(SD_VP_PITCH,)の第2引数に指定する必要があります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdPitch2Note"><font size=6>sceSdPitch2Note<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ピッチ値からノート値に変換<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short <b>sceSdPitch2Note</b> (
+	u_short <i>center_note</i>,
+	u_short <i>center_fine</i>,
+	u_short <i>pitch</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフである（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>center_note</i>&nbsp;</td>
+<td valign="TOP">&nbsp;サンプリング時のベースノート&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>center_fine</i>&nbsp;</td>
+<td valign="TOP">&nbsp;サンプリング時のベースノートに対するファイン&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>pitch</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ピッチ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ノート値（上８ビットがノート、下８ビットがファイン）を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">センターノートと発音ピッチ（SPU2レジスタに設定する値）から、発音ノートを計算します。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdProcBatch"><font size=6>sceSdProcBatch<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッチ処理<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdProcBatch</b>(
+	sceSdBatch* <i>batch</i>,
+	u_int <i>returns</i>[],
+	u_int <i>num</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">使用したコマンドの中で一番厳しい条件が最終的な呼出条件になります。<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_PARAM&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetParam を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_PARAM&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetParam を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_SWITCH&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetSwitch を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_SWITCH&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetSwitch を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetAddr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetAddr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_CORE&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetCoreAttr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_CORE&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetCoreAttr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_WRITE_IOP&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_WRITE_EE&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない(割り込み禁止状態で呼ぶこと)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_RETURN_EE&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない(割り込み禁止状態で呼ぶこと)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>batch</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッチのコマンド構造体配列のポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>returns[]</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドのリターン値が出力されるアドレス&nbsp;<br>&nbsp;NULLならば出力されない。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>num</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッチに登録されているコマンドの個数&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、処理されたコマンドの個数を返します。<br>エラーの場合、そのときに処理していたコマンドの番号（何番目か）を負の値にして返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">レジスタ設定・取得等をバッチ処理します。<br>バッチコマンドの種類、制限等についてはsceSdBatchの解説を参照してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、および (コマンドによっては) スレッドと割り込みハンドラ内で同一レジスタの設定に対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdBatch">sceSdBatch</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdProcBatchEx"><font size=6>sceSdProcBatchEx<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>バッチ処理 ボイス一括処理付き<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdProcBatchEx</b>(
+	sceSdBatch* <i>batch</i>,
+	u_int <i>returns</i>[],
+	u_int <i>num</i>
+	u_int <i>voice</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">使用したコマンドの中で一番厳しい条件が最終的な呼出条件になります<br></div>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_PARAM&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetParam を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_PARAM&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetParam を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_SWITCH&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetSwitch を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_SWITCH&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetSwitch を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetAddr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetAddr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BSET_CORE&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetCoreAttr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_BGET_CORE&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdGetCoreAttr を参照&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_WRITE_IOP&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_WRITE_EE&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない(割り込み禁止状態で呼ぶこと)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_RETURN_EE&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない(割り込み禁止状態で呼ぶこと)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>batch</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッチのコマンド構造体配列のポインタ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>returns[]</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コマンドのリターン値が出力されるアドレス&nbsp;<br>&nbsp;NULLならば出力されない。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>num</i>&nbsp;</td>
+<td valign="TOP">&nbsp;バッチに登録されているコマンドの個数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>voice</i>&nbsp;</td>
+<td valign="TOP">&nbsp;ボイス一括処理を行なうボイスをビットマスクで指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、処理されたコマンドの個数を返します。<br>エラーの場合、そのときに処理していたコマンドの番号（何番目か）を負の値にして返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">レジスタにボイス指定のあるコマンド（SD_V*シリーズ）の場合、sceSdProcBatchでは各ボイスについてコマンドを列挙する必要がありますが、sceSdProcBatchExでは、引数<i>voice</i>（ビットマスク）で指定されたものについて、１つのコマンドで複数ボイスの処理を一括して行なうことができます。一括処理を有効にするためには、バッチコマンド構造体の<i>entry</i>にSD_VOICE_XXを論理和で指定する必要があります。<br>（例：SD_CORE_0|SD_VP_ENVX|SD_VOICE_XX ）<br><br>引数の<i>num</i>はバッチコマンドのエントリ個数であり、ボイス一括処理を行なうコマンドも１つと数えます。一方、返値の個数はSPU2に対して実行されたコマンドの個数であり、ボイス一括処理を行なった場合は、各ボイスに対するコマンドを個別にカウントします。<br><br><i>returns</i>[]のエリアには、コマンド実行後の返値が入るので、コマンドの実行数（返値<i>num</i>と同じ）*4バイトの領域が必要となります。<br><br>バッチコマンドの種類、制限等についてはsceSdBatchの解説を参照してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、および (コマンドによっては) スレッドと割り込みハンドラ内で同一レジスタの設定に対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdBatch">sceSdBatch</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetAddr"><font size=6>sceSdSetAddr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>レジスタラッパ - アドレス値Set用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceSdSetAddr</b>( 
+	u_short <i>register</i>,
+	u_int <i>value</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>register</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パラメータをセットするレジスタ番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
+<td valign="TOP">&nbsp;レジスタにセットするパラメータ値（バイト）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">アドレス指定レジスタにアドレスをセットします。<br>SD_A_* および SD_VA_* シリーズのレジスタにはこのAPIを使用します。<br>それぞれのレジスタが持つ仕様を守った処理となるようにしてください。<br><br>ハードウェア上の制限から、アドレスは16の倍数である必要があります。それ以外の値をセットした場合、端数は無視されます。<br><br>SPU2ハードウエアの内部アドレス表現はShort Word ですが、このAPIではバイトで指定します。<br></div>
+
+<div style="margin-left:40px;"><h4><b>レジスタ番号指定の形式</b><br></h4></div>
+
+<div style="margin-left:50px;">SD_A_* の場合 ： SD_CORE_? | SD_A_*<br>SD_VA_* の場合： SD_CORE_? | SD_VOICE_?? | SD_VA_*<br><br>SD_VA_NAX は読み出し専用なのでセットできません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照するSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同一レジスタに対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetCoreAttr"><font size=6>sceSdSetCoreAttr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>擬似レジスタラッパ - コア設定Set用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceSdSetCoreAttr</b>( 
+	u_short <i>entry</i>,
+	u_short <i>value</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>entry</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パラメータをセットするエントリ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エントリにセットするパラメータ値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エントリに、コア設定パラメータをセットします。<br>エントリはレジスタではありませんが、擬似的にラッパAPIと同じインタフェイスにしています。Batchコマンドとしても使用できます。<br>SD_C_* シリーズのエントリにはこのAPIを使用します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>エントリ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>内容</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_EFFECT_ENABLE&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクトワークエリアへの書きこみ許可&nbsp;<br>&nbsp;(0 or 1: デフォルト 0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_IRQ_ENABLE&nbsp;</td>
+<td valign="TOP">&nbsp;SPU2割り込み許可 (0 or 1: デフォルト 0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_MUTE_ENABLE&nbsp;</td>
+<td valign="TOP">&nbsp;ミュート (0 or 1: デフォルト 0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_NOISE_CLK&nbsp;</td>
+<td valign="TOP">&nbsp;ノイズ発生器のM系列シフト周波数（6bit:デフォルト0)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_C_SPDIF_MODE&nbsp;</td>
+<td valign="TOP">&nbsp;SPDIFの設定（マスク: デフォルトは下記を参照）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">SD_C_*_ENABLEシリーズのエントリは、<i>value</i> に1（enable）か0（disable）を設定します。<br>SD_C_NOISE_CLK は、<i>value</i> に0～63の値を設定します。<br>SD_C_SPDIF_MODEは、<i>value</i> に以下のフラグをビット論理和で指定します。<br>SD_C_IRQ_ENABLEは、SPU2割り込みが起こった際に呼ばれるSPU2割り込みハンドラ内で一旦必ず0を指定します。その後、再度割り込みが必要な場合に、SPU2割り込みハンドラを終了する際、あるいは通常処理において1を指定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>フラグ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>意味</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_MEDIA_DVD&nbsp;</td>
+<td valign="TOP">&nbsp;メディアはDVD&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_MEDIA_CD&nbsp;</td>
+<td valign="TOP">&nbsp;メディアはCD（デフォルト）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_OFF&nbsp;</td>
+<td valign="TOP">&nbsp;SPDIFに何も出力しない&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_PCM&nbsp;</td>
+<td valign="TOP">&nbsp;アナログ出力と同じ音をPCMで出力する&nbsp;<br>&nbsp;(デフォルト)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_BITSTREAM&nbsp;</td>
+<td valign="TOP">&nbsp;Core0の入力ブロックに入力されたデータを、&nbsp;<br>&nbsp;ビットストリームとして出力する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_OUT_BYPASS&nbsp;</td>
+<td valign="TOP">&nbsp;Core0の入力ブロックに入力されたデータを、&nbsp;<br>&nbsp;SPU2 内部をバイパスして出力する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_COPY_NORMAL&nbsp;</td>
+<td valign="TOP">&nbsp;通常のコピープロテクト&nbsp;<br>&nbsp;(１世代録音可・デフォルト)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;SD_SPDIF_COPY_PROHIBIT&nbsp;</td>
+<td valign="TOP">&nbsp;デジタル録音禁止&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">SD_C_SPDIF_MODEはコア指定できません。どちらかのコアに対して設定すると、SPU2全体の設定になります。<br></div>
+
+<div style="margin-left:40px;"><h4><b>エントリ指定の形式</b><br></h4></div>
+
+<div style="margin-left:50px;">SD_C_SPDIF_MODE の場合 ：　SD_C_SPDIF_MODE  （コア指定は無視される）<br>SD_C_SPDIF_MODE 以外 ：　　SD_CORE_? | SD_C_*<br><br>SPDIF設定には、設定しなくても動作に問題無いものもありますが、規格に準拠する必要があるので、正しく設定するようにして下さい。<br><br>（例）メディアはDVD・出力はPCM・デジタル録音は禁止<br></div>
+<div style="margin-left:70px;">sceSdSetCoreAttr( SD_C_SPDIF_MODE,<br>SD_SPDIF_MEDIA_DVD|SD_SPDIF_OUT_PCM|SD_SPDIF_COPY_PROHIBIT );<br></div>
+<div style="margin-left:50px;"><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetEffectAttr"><font size=6>sceSdSetEffectAttr<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクト属性を設定<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdSetEffectAttr</b> (
+	int <i>core</i>,
+	sceSdEffectAttr *<i>attr</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;モードにSD_REV_MODE_CLEAR_WA指定時&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない&nbsp;<br>&nbsp;(割り込み許可状態で呼ぶこと)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;上記のモード以外&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフでない&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+</table>
+</div>
+<div style="margin-left:50px;">注意：<br>この関数の呼び出しよりも先に、エフェクトワークエリアの終端アドレスを設定しておく必要があります（SD_A_EEAマクロで設定）。開始アドレス（ESA）は、エフェクトの種類によって、関数の内部で設定されます。<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コア指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>attr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクト属性構造体へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_OK&nbsp;</td>
+<td valign="TOP">&nbsp;成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたモードが範囲外&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-201&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_STATUS&nbsp;</td>
+<td valign="TOP">&nbsp;以前の転送において、転送確認のための&nbsp;<br>&nbsp;sceSdVoiceTransStatus() が未呼び出し&nbsp;<br>&nbsp;(モードにSD_REV_MODE_CLEAR_WA&nbsp;<br>&nbsp;指定時)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-202&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みコンテキスト内にて呼び出された&nbsp;<br>&nbsp;(モードにSD_REV_MODE_CLEAR_WA&nbsp;<br>&nbsp;指定時)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-210&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;指定した転送チャンネルは現在転送中&nbsp;<br>&nbsp;(モードにSD_REV_MODE_CLEAR_WA&nbsp;<br>&nbsp;指定時)&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エフェクトの属性を設定します。<br>デフォルト時の設定状態はSD_REV_MODE_OFFです。<br><i>attr</i>の各メンバの指定については構造体sceSdEffectAttr の解説を参照してください。<br>特に、モードにSD_REV_MODE_CLEAR_WA を追加指定した場合には内部でクリア処理が行われるため、呼び出し条件が異なることにご注意ください。<br>クリア処理の終了には内部で転送終了を待ちますので、sceSdVoiceTransStatus()による確認処理は不要です。使用される転送チャンネルに転送終了割り込みハンドラが指定されている場合には、クリア処理中はハンドラが退避され、クリア処理が終わってもそのハンドラは呼び出されません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。モードにSD_REV_MODE_CLEAR_WAを指定した場合は、複数のスレッドで同時に本関数を呼び出さないようにしてください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdEffectAttr">sceSdEffectAttr</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetEffectMode"><font size=6>sceSdSetEffectMode<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクトモードを設定<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdSetEffectMode</b> (
+	int <i>core</i>,
+	sceSdEffectAttr *<i>attr</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br>注意：<br>この関数の呼び出しよりも先に、エフェクトワークエリアの終端アドレスを設定しておく必要があります（SD_A_EEAマクロで設定）。開始アドレス（ESA）は、エフェクトの種類によって、関数の内部で設定されます。<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コア指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>attr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクト属性構造体へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_OK&nbsp;</td>
+<td valign="TOP">&nbsp;成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたモードが範囲外&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-201&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_STATUS&nbsp;</td>
+<td valign="TOP">&nbsp;以前の転送において、転送確認のための&nbsp;<br>&nbsp;sceSdVoiceTransStatus() が未呼び出し&nbsp;<br>&nbsp;(モードにSD_REV_MODE_CLEAR_WA&nbsp;<br>&nbsp;指定時、かつ転送終了割り込みハンドラ&nbsp;<br>&nbsp;未指定時）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-210&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;指定した転送チャンネルは現在転送中&nbsp;<br>&nbsp;(モードにSD_REV_MODE_CLEAR_WA&nbsp;<br>&nbsp;指定時）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エフェクトのモードを設定します。<br>デフォルト時のエフェクトモードはSD_REV_MODE_OFFです。<br><i>attr</i>のメンバ mode のみが参照されます。<i>attr</i>の各メンバの指定については構造体sceSdEffectAttr の解説を参照してください。<br>エフェクトモードの設定後、エフェクトワークエリアへの書きこみ許可は不許可 (0)、エフェクトボリューム (SD_P_EVOLL/R) は L/R 共に0に設定されます。それぞれの値の再設定にはsceSdSetCoreAtttr(), sceSdSetEffectModeParams() ならびにsceSdSetParam() を使用してください。その際、以前にエフェクト処理が有効になっていた場合には、エフェクトワークエリアに以前のエフェクト処理の状態が残っている可能性があります。その場合にはエフェクトボリュームを上げずにエフェクトワークエリアへの書きこみ許可のみを有効にしてしばらく待つか、エフェクトワークエリアのクリア処理を行ってください。<br>エフェクトワークエリアのクリア処理を指定した場合、クリア処理の終了にはsceSdVoiceTransStatus() による確認を行ってください。あるいは転送終了割り込みハンドラが指定されている場合、指定されたハンドラがクリア処理の終了時に呼ばれます。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdSetEffectModeParams">sceSdSetEffectModeParams</a>,<a href="#sceSdEffectAttr">sceSdEffectAttr</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetEffectModeParams"><font size=6>sceSdSetEffectModeParams<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクトモード属性を設定<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdSetEffectModeParams</b> (
+	int <i>core</i>,
+	sceSdEffectAttr *<i>attr</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br>注意：<br>この関数の呼び出しよりも先に、エフェクトワークエリアの終端アドレスを設定しておく必要があります（SD_A_EEAマクロで設定）。開始アドレス（ESA）は、エフェクトの種類によって、関数の内部で設定されます。また、エフェクトモードを設定しておく必要があります（sceSdSetEffectAttr() あるいは sceSdSetEffectMode() で設定）。<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core</i>&nbsp;</td>
+<td valign="TOP">&nbsp;コア指定（ 0 or 1 ）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>attr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクト属性構造体へのポインタ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_OK&nbsp;</td>
+<td valign="TOP">&nbsp;成功&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-100&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EINVALID_ARGUMENT&nbsp;</td>
+<td valign="TOP">&nbsp;指定されたモードが範囲外&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エフェクトのモード属性を設定します。<br><i>attr</i>のメンバ modeがSD_REV_MODE_ECHOあるいはSD_REV_MODE_DELAYの場合、<i>attr</i>のメンバdelay ならびにfeedbackが参照され、値が設定されます。全てのモードにおいてメンバdepth_Lおよびdepth_Rが参照され、エフェクトボリュームが設定されます。<i>attr</i>の各メンバの指定については構造体sceSdEffectAttr の解説を参照してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdSetEffectMode">sceSdSetEffectMode</a>,<a href="#sceSdEffectAttr">sceSdEffectAttr</a><br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetParam"><font size=6>sceSdSetParam<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>レジスタラッパ - 基本パラメータSet用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceSdSetParam</b>(
+	u_short <i>register</i>,
+	u_short <i>value</i>,
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>register</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パラメータをセットするレジスタ番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
+<td valign="TOP">&nbsp;レジスタにセットするパラメータ値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">基本パラメータレジスタおよびボリュームレジスタに、16ビットのパラメータをセットします。<br>SD_P_* および SD_VP_* シリーズのレジスタにはこのAPIを使用してください。<br>それぞれのレジスタが持つ仕様を守った処理となるようにしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>レジスタ番号指定の形式</b><br></h4></div>
+
+<div style="margin-left:50px;">SD_P_* の場合 ： SD_CORE_? | SD_P_*<br>SD_VP_* の場合： SD_CORE_? | SD_VOICE_?? | SD_VP_*<br><br>SD_VP_ENVX、SD_VP_VOLXL、SD_VP_VOLXR、SD_P_MVOLX は読み出し専用なのでセットできません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照するSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同一レジスタに対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetSpu2IntrHandler"><font size=6>sceSdSetSpu2IntrHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SPU2 割り込みハンドラの設定<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>sceSdSpu2IntrHandler <b>sceSdSetSpu2IntrHandler</b> (
+	sceSdSpu2IntrHandler <i>func</i>,
+	void *<i>data</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br>SPU2割り込みが発生しない状態で呼ぶこと<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラへのポインタ&nbsp;<br>&nbsp;NULLを指定した場合、割り込みハンドラを無効にする&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラfuncに渡されるデータのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、以前設定されていた割り込みハンドラへのポインタを返します。<br>エラーの場合、NULL (初期状態)を返します<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SPU2割り込みのハンドラを設定します。<br>コア設定パラメータにおいてSPU2割り込み (SD_C_IRQ_ENABLE) が許可されていない (= 0) 状態で本関数を呼んでください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br>割り込みハンドラはスレッド独立部で実行されるため、プログラミングに際していくつか特別な注意が必要です。詳しくは\overview\iopkernlに注意事項が記載されていますので参照してください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetSwitch"><font size=6>sceSdSetSwitch<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>レジスタラッパ - ボイス制御パラメータSet用<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>void <b>sceSdSetSwitch</b>( 
+	u_short <i>register</i>,
+	u_int <i>value</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>register</i>&nbsp;</td>
+<td valign="TOP">&nbsp;パラメータをセットするレジスタ番号&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>value</i>&nbsp;</td>
+<td valign="TOP">&nbsp;レジスタにセットするパラメータ値（ビットマスク）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">なし<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ボイス制御パラメータレジスタに、ボイスごとのOn/Offフラグをセットします。<br>SD_S_* シリーズのレジスタにはこのAPIを使用してください。<br>それぞれのレジスタが持つ仕様を守った処理となるようにしてください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>レジスタ番号指定の形式</b><br></h4></div>
+
+<div style="margin-left:50px;">SD_S_* の場合 ： SD_CORE_? | SD_S_*<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照するSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同一レジスタに対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSetTransIntrHandler"><font size=6>sceSdSetTransIntrHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>転送終了割り込みハンドラの設定<br></div>
+
+<!-- 形式(IOP) -->
+<div style="margin-left:10px;"><b>形式(IOP)</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>sceSdTransIntrHandler <b>sceSdSetTransIntrHandler</b> ( 
+	int <i>channel</i>, 
+	sceSdTransIntrHandler <i>func</i>,
+	void *<i>data</i>
+);
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br>SPU2ローカルメモリとの転送が行われていない状態で呼ぶこと<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送チャンネル。0または1を指定できる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>func</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラへのポインタ&nbsp;<br>&nbsp;NULLを指定した場合、割り込みハンドラを無効にする&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラfuncに渡されるデータのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">成功の場合、以前設定されていた割り込みハンドラへのポインタを返します。<br>エラーの場合、NULL (初期状態)を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">転送 (ボイスの I/O 転送は除く) の終了割り込みハンドラを設定します。<br>転送が行われていない状態で本関数を呼んでください。<br>転送終了割り込みが起こるタイミングは転送モードの設定によって異なります。sceSdBlockTrans() におけるSD_BLOCK_ONESHOT、あるいはsceSdVoiceTrans() の場合は、設定したサイズの転送が終了したときに転送終了割り込みが起こります。sceSdBlockTrans() におけるSD_BLOCK_LOOPの場合は、転送サイズの中間点と終点で転送終了割り込みが起こります。<br>転送終了割り込みが入るのは、設定したサイズを"演奏したとき"ではありません。SPU2ローカルメモリへの"転送を行ったとき"になります。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。<br><br>割り込みハンドラはスレッド独立部で実行されるため、プログラミングに際していくつか特別な注意が必要です。詳しくは\overview\iopkernlに注意事項が記載されていますので参照してください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdBlockTrans">sceSdBlockTrans</a>()<a href="#"></a>,<a href="#sceSdVoiceTrans">sceSdVoiceTrans</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdStopTrans"><font size=6>sceSdStopTrans<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SPU2との転送処理を停止する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int <b>sceSdStopTrans</b>(
+	short <i>channel</i> 
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送チャンネル。0または1を指定できる。&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">転送を止める必要がない場合、SCESD_OKを返します。<br>転送を止めた場合、その時アクセスしていた位置+バッファ情報を返します。<br>(バッファ情報は入出力ブロック転送を止めた場合のみ有効)<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">稼働している SPU2 との転送処理を停止します。<br>SPU2ローカルメモリ（ボイスメモリ）、および入出力ブロックへの転送に関わらず転送を停止することができます。<br>sceSdVoiceTrans() にてSPU2ローカルメモリ（ボイスメモリ）への転送を行っている場合に本関数を呼んだ場合、転送処理のためにアクセスしていたアドレス位置を返します。<br>sceSdBlockTrans() にて入出力ブロックへの転送を行っている場合に本関数を呼んだ場合、sceSdBlockTransStatus() と同等の値を返り値にとります。この返り値の仕様は sceSdBlockTransStatus() を参照してください。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同一転送チャンネルに対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。結果として先に呼ばれた方の転送が実行され、後から呼ばれた方はSCESD_OKを返します。他の転送開始関数と本関数の同時呼び出しの場合は転送状態が不定になりますのでご注意ください。<br><br>現在の実装においては、sceSdVoiceTrans() にて転送デバイスにSD_TRANS_BY_IOを指定したSPU2ローカルメモリ（ボイスメモリ）への転送を正しく停止させることはできません。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdBlockTransStatus">sceSdBlockTransStatus</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdVoiceTrans"><font size=6>sceSdVoiceTrans<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SPU2ローカルメモリへの転送を行なう<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>int <b>sceSdVoiceTrans</b>(
+	short <i>channel</i>,
+	u_short <i>mode</i>,
+	u_char *<i>m_addr</i>,
+	u_int <i>s_addr</i>,
+	u_int <i>size</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">割り込みハンドラから呼び出し可能<br>スレッドから呼び出し可能<br>マルチスレッドセーフでない（割り込み禁止、許可状態に依存しない）<br><br></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送チャンネル。0または1を指定できる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>mode</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送モード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>m_addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;IOPメモリ側のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>s_addr</i>&nbsp;</td>
+<td valign="TOP">&nbsp;SPUメモリ側のアドレス&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>size</i>&nbsp;</td>
+<td valign="TOP">&nbsp;転送サイズ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0以上&nbsp;</td>
+<td valign="TOP">&nbsp;転送したバイト数&nbsp;</td>
+<td valign="TOP">&nbsp;転送したバイト数&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-201&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EINVALID_STATUS&nbsp;</td>
+<td valign="TOP">&nbsp;以前の転送において、転送確認のための&nbsp;<br>&nbsp;sceSdVoiceTransStatus() が未呼び出し&nbsp;<br>&nbsp;（転送終了割り込みハンドラ未指定時)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-210&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD_EBUSY&nbsp;</td>
+<td valign="TOP">&nbsp;指定した転送チャンネルは現在転送中&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SPU2ローカルメモリ（ボイスメモリ）と、IOPメモリとの転送を行ないます。<br>転送チャンネルは他の転送関数と共用で使われます。そのため、既に使用している転送チャンネルを指定するとSCESD_EBUSYを返して異常終了します。<br>ハードウェア上の制限から、SPUメモリ側のアドレスは16の倍数である必要があります。それ以外の値をセットした場合、端数は無視されます。<br>転送は64バイト単位で行なわれます。転送サイズが64バイトの倍数でない場合でも、転送は64バイト単位で行なわれる (端数は切り上げ) ので注意してください。<br></div>
+
+<div style="margin-left:40px;"><h4><b>modeに設定できるビットマスク</b><br></h4></div>
+
+<div style="margin-left:35px;"><ul>
+         <li> 転送方向<br>SD_TRANS_MODE_WRITE　　0<br>SD_TRANS_MODE_READ 　　1
+         <li> 転送デバイス<br>SD_TRANS_BY_DMA　(0x0&lt;&lt;3)<br>SD_TRANS_BY_IO　　(0x1&lt;&lt;3) （Writeのみ）
+</ul></div>
+<div style="margin-left:50px;"><br>転送デバイスにSD_TRANS_BY_DMAを指定した場合、DMA転送機能を用いてバックグラウンドで転送を行います。sceSdSetTransIntrHandler()にて転送終了割り込みハンドラが設定されている場合、その設定した転送終了割り込みハンドラが転送終了時に呼び出されます。転送終了割り込みハンドラが設定されていない場合にはsceSdVoiceTransStatus() にて必ず転送終了を確認してください。確認していない場合、再度転送処理を開始することができません。<br>SD_TRANS_BY_IOを指定した場合、IOPがSPU2側に逐一データを書きこむ形で転送を行い、転送処理が終了後に本関数が終了します (フォアグラウンド転送)。この場合にはsceSdVoiceTransStatus()による転送確認処理は不要です。SD_TRANS_BY_IOを指定した場合においても転送チャンネルを使用しますので、指定した転送チャンネルは本関数の呼び出し時に他に使用されていないことが必要です。また、IOPのデータ書きこみによって転送を行いますので、転送チャンネル0、1で同時にSD_TRANS_BY_IOを指定することはできません。<br><br></div>
+
+<!-- 備考 -->
+<div style="margin-left:10px;"><b>備考</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">本関数は効率を優先に考え、処理時に内部で参照する変数やSPU2ハードウェア資源を保護していません。複数のスレッド、およびスレッドと割り込みハンドラ内で同一転送チャンネルに対して同時に本関数を呼び出す可能性がある場合には、割り込みを禁止して本関数を呼んでください。結果として先に呼ばれた方の転送が実行され、後から呼ばれた方はSCESD_EBUSYを返して異常終了します。<br><br>USBアイソクロノス転送中に、SPU2 ローカルメモリ → IOP メモリの転送方向でデータ転送を行った場合、USB 側の動作がタイムアウトし、正しい動作が行えません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdVoiceTransStatus"><font size=6>sceSdVoiceTransStatus<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ボイス転送の状態を取得する<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int <b>sceSdVoiceTransStatus</b>(
+	short <i>channel</i>,
+	short <i>flag</i>
+)
+
+</font></pre></div>
+
+<!-- 呼出条件 -->
+<div style="margin-left:10px;"><b>呼出条件</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;flag = SD_TRANS_STATUS_WAIT&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し不可&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;flag = SD_TRANS_STATUS_CHECK&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みハンドラから呼び出し可能&nbsp;<br>&nbsp;スレッドから呼び出し可能&nbsp;<br>&nbsp;マルチスレッドセーフである&nbsp;<br>&nbsp;（割り込み禁止、許可状態に依存しない）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="top">&nbsp;<i>channel</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;転送チャンネル。0または1を指定できる。&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i>flag</i>&nbsp;</td>
+<td colspan= 2  valign="top">&nbsp;動作フラグ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_TRANS_STATUS_WAIT&nbsp;</td>
+<td valign="top">&nbsp;転送終了まで待つ&nbsp;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;<i></i>&nbsp;</td>
+<td valign="top">&nbsp;SD_TRANS_STATUS_CHECK&nbsp;</td>
+<td valign="top">&nbsp;待たずに現在の状態を返す&nbsp;</td>
+</tr></table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>値</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>マクロ</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>結果</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_TRANSFER_FINISHED&nbsp;</td>
+<td valign="TOP">&nbsp;転送終了&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_TRANSFER_CONTINUE&nbsp;</td>
+<td valign="TOP">&nbsp;転送中&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;-202&nbsp;</td>
+<td valign="TOP">&nbsp;SCESD&nbsp;<br>&nbsp;_EILLEGAL_CONTEXT&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みコンテキスト内にて呼び出された&nbsp;<br>&nbsp;（割り込みコンテキスト内にてflag に&nbsp;<br>&nbsp;SD_TRANS_STATUS_WAITが指定された&nbsp;<br>&nbsp;場合のみ）&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ボイス転送の状態を取得します。<br><i>flag</i>の指定により、ブロッキング処理 / ノンブロッキング処理を選択することができます。<br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>コールバック関数</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdSpu2IntrHandler"><font size=6>sceSdSpu2IntrHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SPU2 割り込みハンドラ仕様<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef int (*<b>sceSdSpu2IntrHandler</b>)(
+	int <i>core_bit</i>,
+	void *<i>data</i>
+)
+
+</font></pre></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>core_bit </i>&nbsp;</td>
+<td valign="TOP">&nbsp;SPU2 割り込みが発生したコアのビット表現&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data </i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetSpu2IntrHandler() で登録したデータアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在未使用。常に0を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数は、SPU2割り込み内で実行されるものです。その際、割り込みが発生したコアをビット (下位 2 ビットのみ有効) で表現した値、登録時に指定したデータのアドレスが引数として渡されます。<br><br></div>
+
+<div style="margin-left:40px;"><h4><i><b>core_bit</i></b><br></h4></div>
+
+<div style="margin-left:50px;">1 / 0 ビット<br>0  1　　CORE0 で SPU2割り込みが発生<br>1  0　　CORE1 で SPU2割り込みが発生<br>1  1　　CORE0, CORE1 の両方で同時に SPU2割り込みが発生<br><br>この関数内にて、sceSdSetCoreAttr() によりSPU2割り込みの設定を一旦必ず0に指定します。その後、再度SPU2割り込みが必要な場合に、この関数を終了する際、あるいは通常処理においてSPU2割り込みの設定を1に指定します。<br>ボイス処理が行われる範囲内にSPU2割り込みアドレスを設定していた場合、一定期間そのアドレスがボイス処理により複数回アクセスされますので、このような場合においてSPU2割り込みが発生し、SPU2割り込みアドレスの設定を変更せずに再度SPU2割り込みの設定を１に指定してこの関数を終了した場合、一定期間において再度SPU2割り込みが発生し、この関数が複数回実行されます。SPU2割り込みアドレスを変更せずに複数回のこの関数の実行を行わないためには、この関数の外でSPU2割り込みの１への再設定を行ってください。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdSetSpu2IntrHandler">sceSdSetSpu2IntrHandler</a>()<a href="#"></a>,<a href="#sceSdSetCoreAttr">sceSdSetCoreAttr</a>()<br><br><br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="sceSdTransIntrHandler"><font size=6>sceSdTransIntrHandler<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>転送終了割り込みハンドラ仕様<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>typedef int (*<b>sceSdTransIntrHandler</b>)(
+	int <i>channel</i>,
+	void *<i>data</i>
+)
+
+</font></pre></div>
+
+<!-- 引数 -->
+<div style="margin-left:10px;"><b>引数</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">
+<table border=0>
+<tr>
+<td valign="TOP">&nbsp;<i>channel</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetTransIntrHandler() でのハンドラ設定時に&nbsp;<br>&nbsp;指定した転送チャンネル(0 または 1)&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;<i>data</i>&nbsp;</td>
+<td valign="TOP">&nbsp;sceSdSetTransIntrHandler() でのハンドラ設定時に&nbsp;<br>&nbsp;指定したユーザ側データアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+
+<!-- 返り値 -->
+<div style="margin-left:10px;"><b>返り値</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">現在未使用。常に0を返します。<br><br></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">この関数は、DMA 転送終了時に発生する割り込み内で実行されるものです。その際、割り込みが発生した転送チャンネル番号と、登録時に指定したデータのアドレスが引数として渡されます。<br><br></div>
+
+<!-- 関連項目 -->
+<div style="margin-left:10px;"><b>関連項目</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><a href="#sceSdSetTransIntrHandler">sceSdSetTransIntrHandler</a>()<br><br><br><br></div>
+
+<!-- 見出し　２，章見出し -->
+<hr border=1 width=100%><br>
+<center><h2>レジスタマクロ</h2></center>
+<a name=#"Heading2"></a>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_A_EEA"><font size=6>SD_A_EEA<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクト処理用ワークエリアの終端アドレス<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetAddr(SD_CORE_?|<b>SD_A_EEA</b>);　　　　　　//取得
+void sceSdSetAddr(SD_CORE_?|<b>SD_A_EEA</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">デジタルエフェクト処理に使用する、ワークエリアの終端アドレスを指定します。<br>下位17bitはすべて1である必要があります。したがって、128KB境界にしか指定できません。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0-22&nbsp;</td>
+<td valign="TOP">&nbsp;ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクト用ワークエリアの終端アドレス&nbsp;<br>&nbsp;bit0-16はすべて1であること&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">アドレスの設定時には、コア設定パラメータにおいてエフェクトワークエリアへの書きこみ(SD_C_EFFECT_ENABLE) が許可されていない (= 0) 状態である必要があります。<br>エフェクト設定APIのsceSdSetEffectAttr() およびsceSdSetEffectMode()にてエフェクトを設定する前にSD_A_EEAを設定しておく必要があります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_A_ESA"><font size=6>SD_A_ESA<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクト処理用ワークエリアの先頭アドレス<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetAddr(SD_CORE_?|<b>SD_A_ESA</b>);　　　　　　//取得
+void sceSdSetAddr(SD_CORE_?|<b>SD_A_ESA</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">デジタルエフェクト処理に使用する、ワークエリアの先頭アドレスを指定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0-22&nbsp;</td>
+<td valign="TOP">&nbsp;ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;エフェクト用ワークエリアの先頭アドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">通常はエフェクト設定APIのsceSdSetEffectAttr() およびsceSdSetEffectMode()の内部で設定を行なうので、ユーザーがセットする必要はありません。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_A_IRQA"><font size=6>SD_A_IRQA<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>SPU2割り込みアドレスの指定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetAddr(SD_CORE_?|<b>SD_A_IRQA</b>);　　　　　　//取得
+void sceSdSetAddr(SD_CORE_?|<b>SD_A_IRQA</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各コアがローカルメモリの特定のアドレスをアクセスしたときに、ホスト（IOP）に対して割り込みを発生させることができますが、そのアドレスを指定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0-22&nbsp;</td>
+<td valign="TOP">&nbsp;ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;割り込みを発生させるアドレス&nbsp;<br>&nbsp;bit0-3は0であること&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">アドレスの設定時には、コア設定パラメータにおいてSPU2割り込み (SD_C_IRQ_ENABLE) が許可されていない (= 0) 状態である必要があります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_A_TSA"><font size=6>SD_A_TSA<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>転送開始アドレス<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetAddr(SD_CORE_?|<b>SD_A_TSA</b>);　　　　　　//取得
+void sceSdSetAddr(SD_CORE_?|<b>SD_A_TSA</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">SPU2ローカルメモリへの転送（入出力ブロックへの転送を除く）の転送先となる、ローカルメモリの先頭アドレスを指定します。<br>転送の実行状況によらず、値は不変です。<br>転送中に値を変更した場合、動作、ならびに転送されたデータは不定になります。<br>通常は転送用のライブラリ内でセットされるので、ユーザーがセットする必要はありません。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0-22&nbsp;</td>
+<td valign="TOP">&nbsp;ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;転送領域の先頭アドレス&nbsp;<br>&nbsp;bit0-3は0であること&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_P_AVOLL / SD_P_AVOLR"><font size=6>SD_P_AVOLL / SD_P_AVOLR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>コア外部入力のボリューム（左） / コア外部入力のボリューム（右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_1|<b>SD_P_AVOLx</b>);　　　　　　//取得
+void sceSdSetParam(SD_CORE_1|<b>SD_P_AVOLx</b>, u_short <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">コア外部入力のボリュームを指定します。<br>コア外部入力はコア1のみが有効のため、設定・取得の指定はSD_CORE_1のみ有効です。<br>SD_CORE_0は設定を行なわないでください。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15-0&nbsp;</td>
+<td valign="TOP">&nbsp;VALUE&nbsp;</td>
+<td valign="TOP">&nbsp;ボリューム値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_P_BVOLL / SD_P_BVOLR"><font size=6>SD_P_BVOLL / SD_P_BVOLR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>サウンドデータ入力のボリューム（左） / サウンドデータ入力のボリューム（右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|<b>SD_P_BVOLx</b>);　　　　　　//取得
+void sceSdSetParam(SD_CORE_?|<b>SD_P_BVOLx</b>, u_short <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">サウンドデータ入力のボリュームを指定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15-0&nbsp;</td>
+<td valign="TOP">&nbsp;VALUE&nbsp;</td>
+<td valign="TOP">&nbsp;ボリューム値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_P_EVOLL / SD_P_EVOLR"><font size=6>SD_P_EVOLL / SD_P_EVOLR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エフェクトリターンボリューム（左） / エフェクトリターンボリューム（右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|<b>SD_P_EVOLx</b>);　　　　　　//取得
+void sceSdSetParam(SD_CORE_?|<b>SD_P_EVOLx</b>, u_short <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エフェクトのリターンボリュームを指定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15-0&nbsp;</td>
+<td valign="TOP">&nbsp;VALUE&nbsp;</td>
+<td valign="TOP">&nbsp;ボリューム値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_P_MMIX"><font size=6>SD_P_MMIX<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ボイスミキシング後の出力指定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|<b>SD_P_MMIX</b>);　　　　　　//取得
+void sceSdSetParam(SD_CORE_?|<b>SD_P_MMIX</b>, u_short <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">出力をダイレクト／エフェクトのいずれに出力するかを指定します。<br>SINL/R, SINEL/ERはSD_CORE_0では常に0を指定してください。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;11&nbsp;<br>&nbsp;10&nbsp;</td>
+<td valign="TOP">&nbsp;MSNDL&nbsp;<br>&nbsp;MSNDR&nbsp;</td>
+<td valign="TOP">&nbsp;ボイス出力（ドライ:L）→ ダイレクト出力&nbsp;<br>&nbsp;ボイス出力（ドライ:R）→ ダイレクト出力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;09&nbsp;<br>&nbsp;08&nbsp;</td>
+<td valign="TOP">&nbsp;MSNDEL&nbsp;<br>&nbsp;MSNDER&nbsp;</td>
+<td valign="TOP">&nbsp;ボイス出力（ウエット:L）→ エフェクト出力&nbsp;<br>&nbsp;ボイス出力（ウエット:R）→ エフェクト出力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;07&nbsp;<br>&nbsp;06&nbsp;</td>
+<td valign="TOP">&nbsp;MINL&nbsp;<br>&nbsp;MINR&nbsp;</td>
+<td valign="TOP">&nbsp;サウンドデータ入力（L） → ダイレクト出力&nbsp;<br>&nbsp;サウンドデータ入力（R） → ダイレクト出力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;05&nbsp;<br>&nbsp;04&nbsp;</td>
+<td valign="TOP">&nbsp;MINEL&nbsp;<br>&nbsp;MINER&nbsp;</td>
+<td valign="TOP">&nbsp;サウンドデータ入力（L） → エフェクト出力&nbsp;<br>&nbsp;サウンドデータ入力（R） → エフェクト出力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;03&nbsp;<br>&nbsp;02&nbsp;</td>
+<td valign="TOP">&nbsp;SINL&nbsp;<br>&nbsp;SINR&nbsp;</td>
+<td valign="TOP">&nbsp;コア外部入力（L）→ ダイレクト出力&nbsp;<br>&nbsp;コア外部入力（R）→ ダイレクト出力&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;01&nbsp;<br>&nbsp;00&nbsp;</td>
+<td valign="TOP">&nbsp;SINEL&nbsp;<br>&nbsp;SINER&nbsp;</td>
+<td valign="TOP">&nbsp;コア外部入力（L）→ エフェクト出力&nbsp;<br>&nbsp;コア外部入力（R）→ エフェクト出力&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_P_MVOLL / SD_P_MVOLR"><font size=6>SD_P_MVOLL / SD_P_MVOLR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>マスターボリューム（左） / マスターボリューム（右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|<b>SD_P_MVOLx</b>);　　　　　　//取得
+void sceSdSetParam(SD_CORE_?|<b>SD_P_MVOLx</b>, u_short <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各コアのマスタボリュームを指定します。<br>id フィールド (bit15-12) の値で設定する内容が異なります。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ID</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>動作</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0xxx&nbsp;</td>
+<td valign="TOP">&nbsp;一定値指定モード&nbsp;<br>&nbsp;bit 0-14 で値を指定します。&nbsp;<br>&nbsp;負値の場合は位相が反転します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1000&nbsp;</td>
+<td valign="TOP">&nbsp;直線増加モード（正相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。&nbsp;<br>&nbsp;+1.0 まで直線的に増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は正であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1001&nbsp;</td>
+<td valign="TOP">&nbsp;直線増加モード（逆相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。 &nbsp;<br>&nbsp;-1.0 まで直線的に減少&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は負であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1010&nbsp;</td>
+<td valign="TOP">&nbsp;直線減少モード（正相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。&nbsp;<br>&nbsp; 0.0 まで直線的に減少&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は正であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1011&nbsp;</td>
+<td valign="TOP">&nbsp;直線減少モード（逆相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。&nbsp;<br>&nbsp; 0.0 まで直線的に増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は負であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1100&nbsp;</td>
+<td valign="TOP">&nbsp;疑似逆指数増加モード（正相)&nbsp;<br>&nbsp;1Ts に指定した値に比例して加算。&nbsp;<br>&nbsp;1.0 まで折れ線で増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は正であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1101&nbsp;</td>
+<td valign="TOP">&nbsp;疑似逆指数増加モード（逆相)&nbsp;<br>&nbsp;1Ts に指定した値に比例して加算。&nbsp;<br>&nbsp;-1.0 まで折れ線で増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は負であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1110&nbsp;</td>
+<td valign="TOP">&nbsp;指数減少モード&nbsp;<br>&nbsp;1Ts に指定した値づつ乗算。&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_P_MVOLXL / SD_P_MVOLXR"><font size=6>SD_P_MVOLXL / SD_P_MVOLXR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>マスターボリュームの現在値（左） / マスターボリュームの現在値（右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|<b>SD_P_MVOLXx</b>);　//取得
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">マスターボリュームの現在値を取得します。<br>取得専用で、設定できません。<br>なお、MVOL が一定値指定モード以外の場合、ボリュームの変化にしたがい 1 Ts 毎に値が変化します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15-0&nbsp;</td>
+<td valign="TOP">&nbsp;VALUE&nbsp;</td>
+<td valign="TOP">&nbsp;ボリューム現在値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_S_ENDX"><font size=6>SD_S_ENDX<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エンドポイント通過フラグ<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetSwitch(SD_CORE_?|<b>SD_S_ENDX</b>);　　　　　　//取得
+void sceSdSetSwitch(SD_CORE_?|<b>SD_S_ENDX</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各ボイスの発音処理が進んでエンドポイントブロックに到達したかどうかが示されます。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice0のエンドポイント通過フラグ&nbsp;<br>&nbsp;0: 未通過　1: 通過済み&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;省略&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;23&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice23のエンドポイント通過フラグ&nbsp;<br>&nbsp;0: 未通過　1: 通過済み&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">キーオンを指定することにより、そのボイスに該当するビットは 0 になります。<br>また、このレジスタに任意の値（0以外でもよい）を書き込むことにより、すべてのビットが0にクリアされます。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_S_KOFF"><font size=6>SD_S_KOFF<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーオフ（ボイス発音終了）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetSwitch(SD_CORE_?|<b>SD_S_KOFF</b>);　　　　　　//取得
+void sceSdSetSwitch(SD_CORE_?|<b>SD_S_KOFF</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各ボイスのキーオフ（発音終了）を指定します。１を書きこんだビットに対応するボイスのキーオフ処理が開始されます。キーオフ状態になると、エンベロープがリリースに移行します。即座に音が消えるとは限りません。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice0のキーオフスイッチ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;省略&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;23&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice23のキーオフスイッチ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">このレジスタを読み込んだ値は以前に設定された値であり、実際のキーオフ処理されているボイスを反映していません。<br>同一レジスタへの連続書き込みは 2 Ts 以上の間隔を開ける必要があります。2 Ts 以内に連続して書き込んだ場合、実際に発音終了の処理を行うボイスは不定です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_S_KON"><font size=6>SD_S_KON<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>キーオン（ボイス発音開始）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetSwitch(SD_CORE_?|<b>SD_S_KON</b>);　　　　　　//取得
+void sceSdSetSwitch(SD_CORE_?|<b>SD_S_KON</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各ボイスのキーオン（発音開始）を指定します。１を書きこんだビットに対応するボイスの発音処理が開始されます。<br>ゼロを書きこんでも、キーオフにはなりません。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice0のキーオンスイッチ&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;省略&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;23&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice23のキーオンスイッチ&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">このレジスタを読み込んだ値は以前に設定された値であり、実際の発音されているボイスを反映していません。<br>また、同一レジスタへの連続書き込みは 2 Ts 以上の間隔を開ける必要があります。2 Ts 以内に連続して書き込んだ場合、実際に発音開始の処理を行うボイスは不定です。<br>なお、発音処理を行っているボイスに対してキーオフを指定せずに再度ビット 1 を書き込むことによってキーオンの指定を行うことが可能です。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_S_NON"><font size=6>SD_S_NON<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ノイズ発生器への割り当て<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetSwitch(SD_CORE_?|<b>SD_S_NON</b>);　　　　　　//取得
+void sceSdSetSwitch(SD_CORE_?|<b>SD_S_NON</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各ボイスのサウンドソースとして、ノイズ発生器を割り当てるかどうかを指定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice0のサウンドソース指定&nbsp;<br>&nbsp;0: SD_VA_SSAで指定される波形データを使用する&nbsp;<br>&nbsp;1: ノイズ発生器を使用する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;省略&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;23&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice23のサウンドソース指定&nbsp;<br>&nbsp;0: SD_VA_SSAで指定される波形データを使用する&nbsp;<br>&nbsp;1: ノイズ発生器を使用する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_S_PMON"><font size=6>SD_S_PMON<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ピッチ変調の指定<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetSwitch(SD_CORE_?|<b>SD_S_PMON</b>);　　　　　　//取得
+void sceSdSetSwitch(SD_CORE_?|<b>SD_S_PMON</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各ボイスに対して、ピッチ変調をかけるかどうか指定します。<br>指定したボイスの一つ若い番号のボイスの波高値が、変調に使われます。したがって、Voice0に対応するbit0は指定できません。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice1のピッチ変調指定&nbsp;<br>&nbsp;0: off&nbsp;<br>&nbsp;1: on&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;省略&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;23&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice23のピッチ変調指定&nbsp;<br>&nbsp;0: off&nbsp;<br>&nbsp;1: on&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_S_VMIXL / SD_S_VMIXRSD_S_VMIXEL / SD_S_VMIXER"><font size=6>SD_S_VMIXL / SD_S_VMIXR<br>SD_S_VMIXEL / SD_S_VMIXER<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ボイス出力のミキシング指定（Dry 左） / ボイス出力のミキシング指定（Dry 右）<br>ボイス出力のミキシング指定（Wet 左） / ボイス出力のミキシング指定（Wet 右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetSwitch(SD_CORE_?|<b>SD_S_VMIXx</b>);　　　　　　//取得
+void sceSdSetSwitch(SD_CORE_?|<b>SD_S_VMIXx</b>, u_int <i>value</i>);　//設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各ボイスの出力を、L=Dry左 / R=Dry右 / EL=Wet左 / ER=Wet右それぞれに出力するかどうかを指定します。<br>Dryとはエフェクト無し側、Wetとはエフェクト有り側を意味します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice0の出力スイッチ&nbsp;<br>&nbsp;0: 該当チャンネルへ出力しない&nbsp;<br>&nbsp;1: 該当チャンネルへ出力する&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;省略&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+<td valign="TOP">&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;23&nbsp;</td>
+<td valign="TOP">&nbsp;VOICE&nbsp;</td>
+<td valign="TOP">&nbsp;Voice23のエンドポイント通過フラグ&nbsp;<br>&nbsp;0: 該当チャンネルへ出力しない&nbsp;<br>&nbsp;1: 該当チャンネルへ出力する&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_VA_LSAX"><font size=6>SD_VA_LSAX<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ループポイントのアドレス<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetAddr(SD_CORE_?|SD_VOICE_?|<b>SD_VA_LSAX</b>);	 //取得
+void sceSdSetAddr(SD_CORE_?|SD_VOICE_?|<b>SD_VA_LSAX</b>, u_int <i>value</i>);  //設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">波形データでループポイントに指定されているブロックの先頭アドレスが示されます。ループポイントブロックを通過した時に初めて設定されます。<br>発音処理中 (キーオン後 4 Ts の経過より後。4 Ts 以内の書き換えは無視されます）に、このレジスタの値を変更することができます。この場合、該当するボイスに対して設定されたアドレスが優先され、ループポイントブロックの情報は次にそのボイスがキーオンされるまで無効になります。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0-22&nbsp;</td>
+<td valign="TOP">&nbsp;ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;ループポイントのアドレス&nbsp;<br>&nbsp;bit0-3は0であること&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_VA_NAX"><font size=6>SD_VA_NAX<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>次に読みこまれるべき波形データのアドレス<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetAddr(SD_CORE_?|SD_VOICE_?|<b>SD_VA_NAX</b>);　//取得
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">波形データ中で、次に読みこまれる波形データのアドレスが示されます。発音処理が進むにつれて、自動的に更新されます。<br>キーオン後 4 Ts の経過より後に有効になります。<br>取得専用で、指定はできません。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0-22&nbsp;</td>
+<td valign="TOP">&nbsp;ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;次に読まれる波形データのアドレス&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_VA_SSA"><font size=6>SD_VA_SSA<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>波形データの先頭アドレス<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_int sceSdGetAddr(SD_CORE_?|SD_VOICE_?|<b>SD_VA_SSA</b>);	//取得
+void sceSdSetAddr(SD_CORE_?|SD_VOICE_?|<b>SD_VA_SSA</b>, u_int <i>value</i>);  //設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">各ボイスのサウンドソースとなる、波形データの先頭アドレスを指定します。<br>発音中に値を変更した場合、発音動作は不定になります。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0-22&nbsp;</td>
+<td valign="TOP">&nbsp;ADDR&nbsp;</td>
+<td valign="TOP">&nbsp;波形データの先頭アドレス&nbsp;<br>&nbsp;bit0-3は0であること&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_VP_ADSR1"><font size=6>SD_VP_ADSR1<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エンベロープ<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_ADSR1</b>);	 //取得
+void sceSdSetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_ADSR1</b>, u_short <i>value</i>);  //設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エンベロープを設定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15&nbsp;</td>
+<td valign="TOP">&nbsp;AM&nbsp;</td>
+<td valign="TOP">&nbsp;Attack Rate モード&nbsp;<br>&nbsp;0　　直線増加&nbsp;<br>&nbsp;1　　疑似指数増加&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;14-8&nbsp;</td>
+<td valign="TOP">&nbsp;AR&nbsp;</td>
+<td valign="TOP">&nbsp;Attack rate&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;7-4&nbsp;</td>
+<td valign="TOP">&nbsp;DR&nbsp;</td>
+<td valign="TOP">&nbsp;Decay rate&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;3-0&nbsp;</td>
+<td valign="TOP">&nbsp;SL&nbsp;</td>
+<td valign="TOP">&nbsp;Sustain level&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_VP_ADSR2"><font size=6>SD_VP_ADSR2<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エンベロープ（２）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_ADSR2</b>);	 //取得
+void sceSdSetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_ADSR2</b>, u_short <i>value</i>);  //設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エンベロープを設定します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15-13&nbsp;</td>
+<td valign="TOP">&nbsp;SM&nbsp;</td>
+<td valign="TOP">&nbsp;Sustain Rate モード&nbsp;<br>&nbsp;000　　直線的増加モード&nbsp;<br>&nbsp;010　　直線的減少モード&nbsp;<br>&nbsp;100　　疑似指数増加モード&nbsp;<br>&nbsp;110　　指数減少モード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;12-6&nbsp;</td>
+<td valign="TOP">&nbsp;SR&nbsp;</td>
+<td valign="TOP">&nbsp;Sustain rate&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;5&nbsp;</td>
+<td valign="TOP">&nbsp;RM&nbsp;</td>
+<td valign="TOP">&nbsp;Release rate モード&nbsp;<br>&nbsp;0　　直線的減少モード&nbsp;<br>&nbsp;1　　指数減少モード&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;4-0&nbsp;</td>
+<td valign="TOP">&nbsp;RR&nbsp;</td>
+<td valign="TOP">&nbsp;Release rate&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_VP_ENVX"><font size=6>SD_VP_ENVX<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>エンベロープ現在値<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_ENVX</b>);　//取得
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">エンベロープの現在値を取得します。<br>取得専用で、指定はできません。<br>なお、エンベロープの SR, RR の指定が直線的減少の指定の場合、1 Ts だけ負になることがあります。またループなしの波形データを発音している場合、ENDX レジスタのそのボイスに該当するビットが 1 となった時点でエンベロープの状態に関わらず ENVX は 0 になります。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15-0&nbsp;</td>
+<td valign="TOP">&nbsp;VALUE&nbsp;</td>
+<td valign="TOP">&nbsp;エンベロープの現在値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+<a name="SD_VP_PITCH"><font size=6>SD_VP_PITCH<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>発音時のピッチ<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_PITCH</b>);	 //取得
+void sceSdSetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_PITCH</b>, u_short <i>value</i>);  //設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;13-0&nbsp;</td>
+<td valign="TOP">&nbsp;VALUE&nbsp;</td>
+<td valign="TOP">&nbsp;ピッチ指定値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<div style="margin-left:50px;">各ボイスのピッチ（音の高さ）を指定します。<br>原音のピッチを f0 とすると、ピッチ指定値(VALUE)と発音されるピッチ f の関係は以下のとおりです。<br><br></div>
+<div style="margin-left:70px;">f = VALUE * f0 / 4096<br><br></div>
+<div style="margin-left:50px;">なお、サウンドソースをノイズ発生器とした場合はピッチ指定を変えても聴感上の変化はありません。ノイズの聴感上のピッチはコア設定ラッパにて指定します。<br>ピッチの指定は発音処理の進行速度に影響し、ピッチを低く指定すると発音処理がゆっくり進むことになります。<br><br></div>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_VP_VOLL / SD_VP_VOLR"><font size=6>SD_VP_VOLL / SD_VP_VOLR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ボイスボリューム（左） / ボイスボリューム（右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_VOLx</b>);	 //取得
+void sceSdSetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_VOLx</b>, u_short <i>value</i>);  //設定
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ボイスボリュームを指定します。<br>id フィールド (bit15-12) の値で設定する内容が異なります。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>ID</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>動作</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;0xxx&nbsp;</td>
+<td valign="TOP">&nbsp;一定値指定モード。&nbsp;<br>&nbsp;bit 0-14 で値を指定します。&nbsp;<br>&nbsp;負値の場合は位相が反転します。&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1000&nbsp;</td>
+<td valign="TOP">&nbsp;直線増加モード（正相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。&nbsp;<br>&nbsp;+1.0 まで直線的に増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は正であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1001&nbsp;</td>
+<td valign="TOP">&nbsp;直線増加モード（逆相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。&nbsp;<br>&nbsp;-1.0 まで直線的に減少&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は負であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1010&nbsp;</td>
+<td valign="TOP">&nbsp;直線減少モード（正相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。&nbsp;<br>&nbsp;0.0 まで直線的に減少&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は正であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1011&nbsp;</td>
+<td valign="TOP">&nbsp;直線減少モード（逆相)&nbsp;<br>&nbsp;1Ts に指定した値ずつ加算。&nbsp;<br>&nbsp;0.0 まで直線的に増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は負であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1100&nbsp;</td>
+<td valign="TOP">&nbsp;疑似逆指数増加モード（正相)&nbsp;<br>&nbsp;1Ts に指定した値に比例して加算。&nbsp;<br>&nbsp;1.0 まで折れ線で増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は正であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1101&nbsp;</td>
+<td valign="TOP">&nbsp;疑似逆指数増加モード（逆相)&nbsp;<br>&nbsp;1Ts に指定した値に比例して加算。&nbsp;<br>&nbsp;-1.0 まで折れ線で増加&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;<br>&nbsp;現在値は負であること&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;1110&nbsp;</td>
+<td valign="TOP">&nbsp;指数減少モード&nbsp;<br>&nbsp;1Ts に指定した値づつ乗算。&nbsp;<br>&nbsp;bit 0-7 で値を指定&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<!-- 関数名 -->
+<hr noshade Size=6 >
+
+<a name="SD_VP_VOLXL / SD_VP_VOLXR"><font size=6>SD_VP_VOLXL / SD_VP_VOLXR<br></font></a>
+<hr noshade Size=4 >
+<!-- 関数説明 -->
+<div align=right>ボリューム現在値（左） / ボリューム現在値（右）<br></div>
+
+<!-- 形式 -->
+<div style="margin-left:10px;"><b>形式</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;"><pre><font size=3>u_short sceSdGetParam(SD_CORE_?|SD_VOICE_?|<b>SD_VP_VOLXx</b>);　//取得
+
+</font></pre></div>
+
+<!-- 解説 -->
+<div style="margin-left:10px;"><b>解説</b></div>
+<hr noshade align="left" size=2 width=20%>
+<br>
+<div style="margin-left:50px;">ボリュームの現在値を取得します。<br>取得専用で、指定はできません。<br>なお、VOL が一定値指定モード以外の場合、ボリュームの変化にしたがい 1Ts 毎に値が変化します。<br><br></div>
+<div style="margin-left:50px;">
+<table border=1>
+<tr>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>bit</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>symbol</b>&nbsp;</td>
+<td valign="TOP" bgcolor="#cccccc">&nbsp;<b>contents</b>&nbsp;</td>
+</tr>
+<tr>
+<td valign="TOP">&nbsp;15-0&nbsp;</td>
+<td valign="TOP">&nbsp;VALUE&nbsp;</td>
+<td valign="TOP">&nbsp;ボリューム現在値&nbsp;</td>
+</tr>
+</table>
+</div>
+<br>
+<p><p><hr>
+<div ALIGN="right">
+    Copyright (c) 2002 Sony Computer Entertainment Inc.  All Rights Reserved.<br>
+    SCE CONFIDENTIAL
+</div>
+</body>
+</html>
