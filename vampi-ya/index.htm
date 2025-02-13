@@ -1,120 +1,66 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<title>ps2str ストリームコンバータ ツール</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
-<meta name="ProgId" content="FrontPage.Editor.Document">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>魑魅魍魎</title>
+   <link rel="stylesheet" href="PS2_dev\PS2STR_WIKI\style.css">
+   <style>
+       @font-face {
+           font-family: 'cmmFont'; 
+           src: url('PS2_dev/chimmr.ttf') format('truetype'); 
+       }
+
+       h1, h2 {
+           font-family: 'cmmFont', sans-serif;
+       }
+   </style>
 </head>
-
 <body>
+   <div class="wiki-content" style="width: 50%;margin: auto;margin-top: 60px;">
+       <h1 style="font-size: 60px;margin-top: -10px;">魑魅魍魎</h1>
 
-<h1>ps2str ストリームコンバータ ツール</h1>    
-<hr>    
-<h2>目的</h2>    
-<p>　各種メディアファイルを、PlayStation 2 で使用されるファイルへ変換します。</p>    
-<p>　</p>    
-<h2>機能</h2>    
-<ol>    
-  <li>MPEG 動画から IPU 動画への変換</li>    
-  <li>非圧縮音声データの ADPCM 圧縮およびフォーマット変換</li>    
-  <li>動画、音声、データ等の複数エレメンタリストリームの多重化</li>    
-  <li>多重化されているストリームの非多重化</li>    
-  <li>入力されたデータの属性情報の表示</li>    
-</ol>    
-<p>　</p>    
-<h2>コマンドライン 書式</h2>    
-<h3>一般形式</h3>    
-<p>&nbsp;&nbsp;&nbsp; ps2str [command] [options] [target file]</p>    
-<p>　</p>
-<h4>command 部</h4>    
-<p>　処理したい機能を指定します。省略形を使用することもできます。</p>   
-<p>　</p>   
-<h4>options 部</h4>    
-<p>　各機能によるオプション情報を記述します。</p>    
-<p>　指定可能な内容は、各機能によって異なります。</p>    
-<p>　</p>    
-<h4>target file 部</h4>    
-<p>　処理対象となるファイルを指定します。</p>    
-<p>　</p>    
-<p>　キーワードは、大文字小文字を区別して識別されます。</p>   
-<p>　command  
-部は、コマンドライン引数の先頭に記述してください。</p>  
-<p>　</p>  
-<h4>例：</h4>  
-<p>&nbsp;&nbsp;&nbsp; ps2str demux -video test_stream.pss</p>    
-<p>　</p>
-<h3>command</h3>
-<p>以下の機能が使用できます。</p>
-<p>　</p>
-<table border="1">
-  <tr>
-    <td>コマンド名</td>
-    <td>省略形</td>
-    <td>機能</td>
-  </tr>
-  <tr>
-    <td><a href="convert_cmd.htm">convert</a></td>
-    <td>c</td>
-    <td>MPEG 動画から IPU 動画への変換</td>    
-  </tr>    
-  <tr>    
-    <td><a href="encode_cmd.htm">encode</a></td>    
-    <td>e</td>    
-    <td>非圧縮音声データの ADPCM     
-      圧縮およびフォーマット変換</td>    
-  </tr>    
-  <tr>    
-    <td><a href="mux_cmd.htm">mux</a></td>   
-    <td>m</td>   
-    <td>動画、音声、データ等の複数エレメンタリストリームの多重化</td>   
-  </tr>   
-  <tr>   
-    <td><a href="demux_cmd.htm">demux</a></td>   
-    <td>d</td>   
-    <td>多重化されているストリームの非多重化</td>   
-  </tr>   
-  <tr>   
-    <td><a href="info_cmd.htm">info</a></td>   
-    <td>i</td>   
-    <td>入力されたデータの属性情報の表示</td>   
-  </tr>   
-  <tr>   
-    <td><a href="help_cmd.htm">help</a></td>   
-    <td>h</td>   
-    <td>ヘルプ</td>   
-  </tr>   
-</table>   
-<p>　</p>   
-<hr> 
-<h2>GUI 版</h2>  
-<p>　コマンドライン引数なして、ps2str を実行するか、ps2strw.exe 
-を直接起動すると、GUI により作業を行うことができます。</p>  
-<p><b>　(Windows 版のみの機能)</b></p>  
-<p>　</p>   
-<h2>メインウィンドウ</h2>   
-<p><img border="0" src="image/ipu_convert.gif" width="467" height="373"></p> 
-<p>　機能別に画面が用意されており、画面上部のタブコントロールで画面を選択します。</p> 
-<p>　</p> 
-<p>　<a href="ipu_convert_gui.htm">IPU Convert</a></p>  
-<p>　<a href="vag_encode_gui.htm">SPU Encode</a></p>  
-<p>　<a href="mux_gui.htm">Mux</a></p>
-<p>　<a href="demux_gui.htm">Demux</a></p>
-<p>　<a href="info_gui.htm">Info</a></p>
-<p>　</p>  
-<p>　</p>  
-<p><strong>[EOF]</strong></p>  
-<p>最終更新日：<!--webbot bot="Timestamp" startspan S-Type="EDITED"  
-S-Format="%Y/%m/%d" -->1999/09/27<!--webbot bot="Timestamp" i-CheckSum="12959"  
-endspan -->  
-</p>  
-<HR>
-<DIV ALIGN="right">
-<ADDRESS>
-    SCE CONFIDENTIAL
-    <BR>Copyright (c) 1999 Sony Computer Entertainment Inc.  All Rights Reserved.</BR>
-</ADDRESS>
-</DIV>  
-</body>  
-  
-</html>  
+       <div class="tools-grid">
+
+        <div class="tool-card">
+
+          <div class="tool-info">
+              <h2><a href="https://ailyth99.github.io/dizzy/text/">TEXT TOOL</a></h2>
+              <p>一些文本处理工具</p>
+
+          </div>
+        </div>
+
+        <div class="tool-card">
+
+          <div class="tool-info">
+              <h2><a href="https://ailyth99.github.io/dizzy/ps2cheat/">PCSX2 PNACH CONVERTER</a></h2>
+              <p>转换PAR格式金手指到PCSX2的PNACH格式（PAR->RAW）</p>
+
+          </div>
+        </div>
+
+
+
+           <!-- PS2STR -->
+           <div class="tool-card">
+
+               <div class="tool-info">
+                   <h2><a href="PS2_dev\PS2STR_WIKI\index.htm">PS2STR DOC</a></h2>
+
+                   <div class="tool-links">
+                       <a href="PS2_dev\PS2STR_WIKI\index.htm" class="demon-button">Documentation</a>
+
+                   </div>
+               </div>
+           </div>
+            <!-- TEXT TOOL -->
+
+       </div>
+        <div class="wiki-footer">
+           <p style="font-family: 'cmmFont';">最終更新日：2025/03/01</p>
+
+       </div>
+   </div>
+</body>
+</html>
