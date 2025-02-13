@@ -1,116 +1,116 @@
 <html>
 
 <head>
-<title>demux �R�}���h</title>
-<meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
+<title>demux コマンド</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
 <meta name="ProgId" content="FrontPage.Editor.Document">
 </head>
 
 <body>
 
-<h1>demux �R�}���h</h1>     
+<h1>demux コマンド</h1>     
 <hr>     
-<h2>�ړI</h2>     
-<p>�@���d������Ă���X�g���[���̔񑽏d�����s���܂��B</p>     
-<p>�@</p>     
-<h2>����</h2>     
-<h3>command ��</h3>     
-<p>�@demux (�ȗ��`�Fd)</p>     
-<p>�@</p>
-<h3>options ��</h3>     
+<h2>目的</h2>     
+<p>　多重化されているストリームの非多重化を行います。</p>     
+<p>　</p>     
+<h2>書式</h2>     
+<h3>command 部</h3>     
+<p>　demux (省略形：d)</p>     
+<p>　</p>
+<h3>options 部</h3>     
 <table border="1">     
   <tr>     
-    <td>�I�v�V����</td>     
-    <td>�Ӗ�</td>     
+    <td>オプション</td>     
+    <td>意味</td>     
   </tr>     
   <tr>     
     <td>-o</td>     
-    <td>�o�̓t�@�C�������ɑ��݂����ꍇ�A�㏑���o�͂��܂��B</td>     
+    <td>出力ファイルが既に存在した場合、上書き出力します。</td>     
   </tr>     
   <tr>     
-    <td>-d [�f�B���N�g��]</td>   
-    <td>�o�̓f�B���N�g�����w�肵�܂��B</td>   
+    <td>-d [ディレクトリ]</td>   
+    <td>出力ディレクトリを指定します。</td>   
   </tr>   
   <tr>   
     <td>-v</td>   
-    <td>��Ƃ̐i�s�󋵂��ڂ������|�[�g���܂��B</td>   
+    <td>作業の進行状況を詳しくレポートします。</td>   
   </tr>   
   <tr>   
-    <td>-video(:�ԍ�) (�ԍ��F0 - 15)</td>     
+    <td>-video(:番号) (番号：0 - 15)</td>     
     <td>MPEG      
-      �r�f�I�X�g���[���݂̂��o�͂��܂��B�ԍ� (�ȗ��\)      
-      ���w�肵���ꍇ�́A���̃X�g���[���ԍ��̃f�[�^�݂̂��o�͂���܂��B</td>     
+      ビデオストリームのみを出力します。番号 (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
   </tr>     
   <tr>     
-    <td>-audio(:�ԍ�) (�ԍ��F0 - 31)</td>     
+    <td>-audio(:番号) (番号：0 - 31)</td>     
     <td>MPEG      
-      �I�[�f�B�I�X�g���[���݂̂��o�͂��܂��B�ԍ�      
-      (�ȗ��\)      
-      ���w�肵���ꍇ�́A���̃X�g���[���ԍ��̃f�[�^�݂̂��o�͂���܂��B</td>     
+      オーディオストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
   </tr>     
   <tr>     
-    <td>-ipu(:�ԍ�) (�ԍ��F0 - 65535)</td>     
-    <td>ipu ����X�g���[���݂̂��o�͂��܂��B�ԍ�      
-      (�ȗ��\)      
-      ���w�肵���ꍇ�́A���̃X�g���[���ԍ��̃f�[�^�݂̂��o�͂���܂��B</td>     
+    <td>-ipu(:番号) (番号：0 - 65535)</td>     
+    <td>ipu 動画ストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
   </tr>     
   <tr>     
-    <td>-pcm(:�ԍ�) (�ԍ��F0 - 65535)</td>     
+    <td>-pcm(:番号) (番号：0 - 65535)</td>     
     <td>PCM      
-      �I�[�f�B�I�X�g���[���݂̂��o�͂��܂��B�ԍ�      
-      (�ȗ��\)      
-      ���w�肵���ꍇ�́A���̃X�g���[���ԍ��̃f�[�^�݂̂��o�͂���܂��B</td>     
+      オーディオストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
   </tr>     
   <tr>     
-    <td>-adpcm(:�ԍ�) (�ԍ��F0 - 65535)</td>     
+    <td>-adpcm(:番号) (番号：0 - 65535)</td>     
     <td>adpcm      
-      �I�[�f�B�I�X�g���[���݂̂��o�͂��܂��B�ԍ�      
-      (�ȗ��\)      
-      ���w�肵���ꍇ�́A���̃X�g���[���ԍ��̃f�[�^�݂̂��o�͂���܂��B</td>     
+      オーディオストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
   </tr>     
   <tr>     
-    <td>-data(:�ԍ�) (�ԍ��F0 - 65535)</td>     
-    <td>�C�Ӄf�[�^�X�g���[���݂̂��o�͂��܂��B�ԍ�      
-      (�ȗ��\)      
-      ���w�肵���ꍇ�́A���̃X�g���[���ԍ��̃f�[�^�݂̂��o�͂���܂��B</td>     
+    <td>-data(:番号) (番号：0 - 65535)</td>     
+    <td>任意データストリームのみを出力します。番号      
+      (省略可能)      
+      を指定した場合は、そのストリーム番号のデータのみが出力されます。</td>     
   </tr>     
 </table>     
-<p>�@�o�̓X�g���[�����w�肵�Ȃ������ꍇ�A���ׂẴX�g���[�����o�͂���܂��B</p>     
-<p>�@</p>     
-<h3>target file ��</h3>     
+<p>　出力ストリームを指定しなかった場合、すべてのストリームが出力されます。</p>     
+<p>　</p>     
+<h3>target file 部</h3>     
 <table border="1">     
   <tr>     
-    <td>�p�����[�^�P</td>     
-    <td>�񑽏d������� pss �t�@�C�� (MPEG2      
-      �v���O�����X�g���[���t�@�C��)</td>     
+    <td>パラメータ１</td>     
+    <td>非多重化される pss ファイル (MPEG2      
+      プログラムストリームファイル)</td>     
   </tr>     
 </table>     
-<p>�@�o�͂����t�@�C�����́A���̋K��ɂ���Ď����I�ɐ�������܂��B</p>
+<p>　出力されるファイル名は、次の規約によって自動的に生成されます。</p>
 <table border="1">
   <tr>
-    <td>�X�g���[��</td>
-    <td>�t�@�C���� (xxx �́A���̓t�@�C�����Bid      
-      �́A�X�g���[���ԍ�)</td>     
+    <td>ストリーム</td>
+    <td>ファイル名 (xxx は、入力ファイル名。id      
+      は、ストリーム番号)</td>     
   </tr>     
   <tr>     
-    <td>MPEG �r�f�I</td>     
+    <td>MPEG ビデオ</td>     
     <td>xxx_video_id.m2v</td>     
   </tr>     
   <tr>     
-    <td>MPEG �I�[�f�B�I</td>     
+    <td>MPEG オーディオ</td>     
     <td>xxx_audio_id.m2a</td>     
   </tr>     
   <tr>     
-    <td>ipu ����</td>     
+    <td>ipu 動画</td>     
     <td>xxx_ipu_id.ipu</td>     
   </tr>     
   <tr>     
-    <td>pcm �I�[�f�B�I</td>     
+    <td>pcm オーディオ</td>     
     <td>xxx_pcm_id.ads</td>    
   </tr>    
   <tr>    
-    <td>adpcm �I�[�f�B�I</td>     
+    <td>adpcm オーディオ</td>     
     <td>xxx_adpcm_id.ads</td>    
   </tr>    
   <tr>    
@@ -118,10 +118,10 @@
     <td>xxx_data_id.dat</td>   
   </tr>   
 </table>   
-<p>�@</p>
-<p>�@</p>
+<p>　</p>
+<p>　</p>
 <p><strong>[EOF]</strong></p>
-<p>�ŏI�X�V���F<!--webbot bot="Timestamp" startspan S-Type="EDITED"
+<p>最終更新日：<!--webbot bot="Timestamp" startspan S-Type="EDITED"
 S-Format="%Y/%m/%d" -->1999/09/28<!--webbot bot="Timestamp" i-CheckSum="12961"
 endspan -->
 </p>

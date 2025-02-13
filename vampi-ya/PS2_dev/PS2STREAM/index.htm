@@ -1,110 +1,110 @@
 <html>
 
 <head>
-<title>ps2str �X�g���[���R���o�[�^ �c�[��</title>
-<meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
+<title>ps2str ストリームコンバータ ツール</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
 <meta name="ProgId" content="FrontPage.Editor.Document">
 </head>
 
 <body>
 
-<h1>ps2str �X�g���[���R���o�[�^ �c�[��</h1>    
+<h1>ps2str ストリームコンバータ ツール</h1>    
 <hr>    
-<h2>�ړI</h2>    
-<p>�@�e�탁�f�B�A�t�@�C�����APlayStation 2 �Ŏg�p�����t�@�C���֕ϊ����܂��B</p>    
-<p>�@</p>    
-<h2>�@�\</h2>    
+<h2>目的</h2>    
+<p>　各種メディアファイルを、PlayStation 2 で使用されるファイルへ変換します。</p>    
+<p>　</p>    
+<h2>機能</h2>    
 <ol>    
-  <li>MPEG ���悩�� IPU ����ւ̕ϊ�</li>    
-  <li>�񈳏k�����f�[�^�� ADPCM ���k����уt�H�[�}�b�g�ϊ�</li>    
-  <li>����A�����A�f�[�^���̕����G�������^���X�g���[���̑��d��</li>    
-  <li>���d������Ă���X�g���[���̔񑽏d��</li>    
-  <li>���͂��ꂽ�f�[�^�̑������̕\��</li>    
+  <li>MPEG 動画から IPU 動画への変換</li>    
+  <li>非圧縮音声データの ADPCM 圧縮およびフォーマット変換</li>    
+  <li>動画、音声、データ等の複数エレメンタリストリームの多重化</li>    
+  <li>多重化されているストリームの非多重化</li>    
+  <li>入力されたデータの属性情報の表示</li>    
 </ol>    
-<p>�@</p>    
-<h2>�R�}���h���C�� ����</h2>    
-<h3>��ʌ`��</h3>    
+<p>　</p>    
+<h2>コマンドライン 書式</h2>    
+<h3>一般形式</h3>    
 <p>&nbsp;&nbsp;&nbsp; ps2str [command] [options] [target file]</p>    
-<p>�@</p>
-<h4>command ��</h4>    
-<p>�@�����������@�\���w�肵�܂��B�ȗ��`���g�p���邱�Ƃ��ł��܂��B</p>   
-<p>�@</p>   
-<h4>options ��</h4>    
-<p>�@�e�@�\�ɂ��I�v�V���������L�q���܂��B</p>    
-<p>�@�w��\�ȓ��e�́A�e�@�\�ɂ���ĈقȂ�܂��B</p>    
-<p>�@</p>    
-<h4>target file ��</h4>    
-<p>�@�����ΏۂƂȂ�t�@�C�����w�肵�܂��B</p>    
-<p>�@</p>    
-<p>�@�L�[���[�h�́A�啶������������ʂ��Ď��ʂ���܂��B</p>   
-<p>�@command  
-���́A�R�}���h���C�������̐擪�ɋL�q���Ă��������B</p>  
-<p>�@</p>  
-<h4>��F</h4>  
+<p>　</p>
+<h4>command 部</h4>    
+<p>　処理したい機能を指定します。省略形を使用することもできます。</p>   
+<p>　</p>   
+<h4>options 部</h4>    
+<p>　各機能によるオプション情報を記述します。</p>    
+<p>　指定可能な内容は、各機能によって異なります。</p>    
+<p>　</p>    
+<h4>target file 部</h4>    
+<p>　処理対象となるファイルを指定します。</p>    
+<p>　</p>    
+<p>　キーワードは、大文字小文字を区別して識別されます。</p>   
+<p>　command  
+部は、コマンドライン引数の先頭に記述してください。</p>  
+<p>　</p>  
+<h4>例：</h4>  
 <p>&nbsp;&nbsp;&nbsp; ps2str demux -video test_stream.pss</p>    
-<p>�@</p>
+<p>　</p>
 <h3>command</h3>
-<p>�ȉ��̋@�\���g�p�ł��܂��B</p>
-<p>�@</p>
+<p>以下の機能が使用できます。</p>
+<p>　</p>
 <table border="1">
   <tr>
-    <td>�R�}���h��</td>
-    <td>�ȗ��`</td>
-    <td>�@�\</td>
+    <td>コマンド名</td>
+    <td>省略形</td>
+    <td>機能</td>
   </tr>
   <tr>
     <td><a href="convert_cmd.htm">convert</a></td>
     <td>c</td>
-    <td>MPEG ���悩�� IPU ����ւ̕ϊ�</td>    
+    <td>MPEG 動画から IPU 動画への変換</td>    
   </tr>    
   <tr>    
     <td><a href="encode_cmd.htm">encode</a></td>    
     <td>e</td>    
-    <td>�񈳏k�����f�[�^�� ADPCM     
-      ���k����уt�H�[�}�b�g�ϊ�</td>    
+    <td>非圧縮音声データの ADPCM     
+      圧縮およびフォーマット変換</td>    
   </tr>    
   <tr>    
     <td><a href="mux_cmd.htm">mux</a></td>   
     <td>m</td>   
-    <td>����A�����A�f�[�^���̕����G�������^���X�g���[���̑��d��</td>   
+    <td>動画、音声、データ等の複数エレメンタリストリームの多重化</td>   
   </tr>   
   <tr>   
     <td><a href="demux_cmd.htm">demux</a></td>   
     <td>d</td>   
-    <td>���d������Ă���X�g���[���̔񑽏d��</td>   
+    <td>多重化されているストリームの非多重化</td>   
   </tr>   
   <tr>   
     <td><a href="info_cmd.htm">info</a></td>   
     <td>i</td>   
-    <td>���͂��ꂽ�f�[�^�̑������̕\��</td>   
+    <td>入力されたデータの属性情報の表示</td>   
   </tr>   
   <tr>   
     <td><a href="help_cmd.htm">help</a></td>   
     <td>h</td>   
-    <td>�w���v</td>   
+    <td>ヘルプ</td>   
   </tr>   
 </table>   
-<p>�@</p>   
+<p>　</p>   
 <hr> 
-<h2>GUI ��</h2>  
-<p>�@�R�}���h���C�������Ȃ��āAps2str �����s���邩�Aps2strw.exe 
-�𒼐ڋN������ƁAGUI �ɂ���Ƃ��s�����Ƃ��ł��܂��B</p>  
-<p><b>�@(Windows �ł݂̂̋@�\)</b></p>  
-<p>�@</p>   
-<h2>���C���E�B���h�E</h2>   
+<h2>GUI 版</h2>  
+<p>　コマンドライン引数なして、ps2str を実行するか、ps2strw.exe 
+を直接起動すると、GUI により作業を行うことができます。</p>  
+<p><b>　(Windows 版のみの機能)</b></p>  
+<p>　</p>   
+<h2>メインウィンドウ</h2>   
 <p><img border="0" src="image/ipu_convert.gif" width="467" height="373"></p> 
-<p>�@�@�\�ʂɉ�ʂ��p�ӂ���Ă���A��ʏ㕔�̃^�u�R���g���[���ŉ�ʂ�I�����܂��B</p> 
-<p>�@</p> 
-<p>�@<a href="ipu_convert_gui.htm">IPU Convert</a></p>  
-<p>�@<a href="vag_encode_gui.htm">SPU Encode</a></p>  
-<p>�@<a href="mux_gui.htm">Mux</a></p>
-<p>�@<a href="demux_gui.htm">Demux</a></p>
-<p>�@<a href="info_gui.htm">Info</a></p>
-<p>�@</p>  
-<p>�@</p>  
+<p>　機能別に画面が用意されており、画面上部のタブコントロールで画面を選択します。</p> 
+<p>　</p> 
+<p>　<a href="ipu_convert_gui.htm">IPU Convert</a></p>  
+<p>　<a href="vag_encode_gui.htm">SPU Encode</a></p>  
+<p>　<a href="mux_gui.htm">Mux</a></p>
+<p>　<a href="demux_gui.htm">Demux</a></p>
+<p>　<a href="info_gui.htm">Info</a></p>
+<p>　</p>  
+<p>　</p>  
 <p><strong>[EOF]</strong></p>  
-<p>�ŏI�X�V���F<!--webbot bot="Timestamp" startspan S-Type="EDITED"  
+<p>最終更新日：<!--webbot bot="Timestamp" startspan S-Type="EDITED"  
 S-Format="%Y/%m/%d" -->1999/09/27<!--webbot bot="Timestamp" i-CheckSum="12959"  
 endspan -->  
 </p>  
