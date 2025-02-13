@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPU Convert</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="wiki-nav">
+        <a href="index.htm">Home</a> |
+        <a href="ipu_convert_gui.htm">IPU Convert</a> |
+        <a href="vag_encode_gui.htm">SPU Encode</a> |
+        <a href="mux_gui.htm">Mux</a> |
+        <a href="demux_gui.htm">Demux</a> |
+        <a href="info_gui.htm">Info</a>
+    </nav>
+
+    <div class="wiki-content">
+        <h1>IPU Convert (IPU 動画変換)</h1>
+        
+        <h2>目的</h2>
+        <p>MPEG1/2 動画から IPU 動画への変換を行います。</p>
+
+        <h2>メインウィンドウ</h2>
+        <img src="image/ipu_convert.gif" alt="IPU Convert Window" class="screenshot">
+
+        <h3>入力ファイル (File List)</h3>
+        <p>処理対象となるファイルのリストが表示されます。ファイルは、エクスプローラからのドラッグ＆ドロップか、[追加] ボタンでファイルを選択することで、リストに追加することができます。</p>
+
+        <h3>ファイル操作</h3>
+        <ul>
+            <li><strong>削除 (Delete):</strong> 選択したファイルをファイルリストから削除します。</li>
+            <li><strong>クリア (Clear):</strong> ファイルリストをクリアします。</li>
+            <li><strong>追加 (Add):</strong> ファイルの選択ダイアログを表示し、入力ファイルのリストに追加するファイルを選びます。</li>
+        </ul>
+
+        <h3>入力ファイル形式</h3>
+        <ul>
+            <li><strong>ビデオエレメンタリストリームファイル:</strong> MPEG Video Elementary Stream</li>
+            <li><strong>プログラムストリームファイル:</strong> MPEG2 Program Stream (PSS)</li>
+        </ul>
+
+        <h3>出力設定</h3>
+        <ul>
+            <li><strong>出力フォルダ (Output Folder):</strong> ファイルを出力するフォルダを指定します。</li>
+            <li><strong>参照 (Browse):</strong> 出力フォルダを選択するダイアログを表示します。</li>
+            <li><strong>出力ファイルを上書きする (Overwrite):</strong> チェックすると、出力するファイルが既に存在する場合、そのファイルを上書きします。</li>
+        </ul>
+
+        <h3>開始 (Start)</h3>
+        <p>処理を開始します。</p>
+
+        <h2>処理画面</h2>
+        <img src="image/process.gif" alt="Process Window" class="screenshot">
+        
+        <h3>処理状況表示</h3>
+        <ul>
+            <li><strong>処理内容 (Caption):</strong> 処理の機能内容を表示します。</li>
+            <li><strong>処理ファイル (File, Total Process):</strong> 現在処理中のファイル名と、ファイルリスト内の進行状況を表示します。</li>
+            <li><strong>ファイルの処理状況 (Current Phase):</strong> 現在処理中のファイルの進行状況を表示します。</li>
+            <li><strong>中止 (Cancel):</strong> 処理を強制終了します。</li>
+        </ul>
+
+        <h3>処理結果</h3>
+        <img src="image/result.gif" alt="Result Window" class="screenshot">
+        <p>処理終了後、処理結果のログを表示します。</p>
+        
+        <ul>
+            <li><strong>保存 (Save):</strong> 処理結果テキストをファイルに保存します。</li>
+            <li><strong>コピー (Copy):</strong> 処理結果テキストをクリップボードにコピーします。</li>
+            <li><strong>閉じる (Close):</strong> ウィンドウを閉じます。</li>
+        </ul>
+
+        <h2>コマンドライン操作</h2>
+        <p>GUI の他に、コマンドラインからも同様の機能を利用できます。</p>
+
+        <h3>基本書式</h3>
+        <div class="command-box">
+            <code>convert [options] target_file [output_file]</code>
+            <p>省略形: <code>c [options] target_file [output_file]</code></p>
+        </div>
+
+        <h3>オプション一覧</h3>
+        <table class="command-table">
+            <tr>
+                <th>オプション</th>
+                <th>説明</th>
+            </tr>
+            <tr>
+                <td><code>-o</code></td>
+                <td>出力ファイルが既に存在した場合、上書き出力します。</td>
+            </tr>
+            <tr>
+                <td><code>-d [ディレクトリ]</code></td>
+                <td>出力ディレクトリを指定します。</td>
+            </tr>
+            <tr>
+                <td><code>-v</code></td>
+                <td>作業の進行状況を詳しくレポートします。</td>
+            </tr>
+            <tr>
+                <td><code>-pss(:ストリーム番号)</code></td>
+                <td>入力ファイルを MPEG2 プログラムストリームとして処理します。(ストリーム番号を省略した場合、最初に発見される、MPEG ビデオストリームが処理対象になります。)</td>
+            </tr>
+            <tr>
+                <td><code>-video</code> (デフォルト)</td>
+                <td>入力ファイルを MPEG ビデオエレメンタリストリームとして処理します。</td>
+            </tr>
+        </table>
+
+        <h3>target file 部</h3>
+        <table class="command-table">
+            <tr>
+                <td>パラメータ１</td>
+                <td>変換元となる MPEG ビデオファイル</td>
+            </tr>
+            <tr>
+                <td>パラメータ２ (省略可能)</td>
+                <td>出力ファイル (省略された場合は、変換元ファイルの拡張子を、ipu としたファイルに出力されます。)</td>
+            </tr>
+        </table>
+
+        <div class="wiki-footer">
+            <p>最終更新日：2024/03/21</p>
+            <address>
+                SCE CONFIDENTIAL
+                <br>Copyright (c) 1999 Sony Computer Entertainment Inc. All Rights Reserved.</br>
+            </address>
+        </div>
+    </div>
+</body>
+</html>

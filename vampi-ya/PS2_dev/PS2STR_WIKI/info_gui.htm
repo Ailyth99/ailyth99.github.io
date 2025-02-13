@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="wiki-nav">
+        <a href="index.htm">Home</a> |
+        <a href="ipu_convert_gui.htm">IPU Convert</a> |
+        <a href="vag_encode_gui.htm">SPU Encode</a> |
+        <a href="mux_gui.htm">Mux</a> |
+        <a href="demux_gui.htm">Demux</a> |
+        <a href="info_gui.htm">Info</a>
+    </nav>
+
+    <div class="wiki-content">
+        <h1>Info (ファイル情報表示)</h1>
+        
+        <h2>目的</h2>
+        <p>各種ファイルの属性情報を表示します。</p>
+        
+        <h2>メインウィンドウ</h2>
+        <img src="image/info.gif" alt="Info Window" class="screenshot">
+        
+        <h3>基本操作</h3>
+        <ul>
+            <li><strong>入力ファイル (File):</strong> 情報を表示するファイルを指定します。</li>
+            <li><strong>参照 (Browse):</strong> 入力ファイルを選択するダイアログを表示します。</li>
+            <li><strong>ファイル種別 (File Type):</strong> 情報を表示するファイルの種別を選択します。</li>
+            <li><strong>表示 (Show):</strong> ファイルの情報を表示させます。</li>
+        </ul>
+
+        <div class="tip-box">
+            <h4>Tip</h4>
+            <p>このウィンドウにファイルをドラッグ＆ドロップすると、ファイル情報が表示されます。</p>
+        </div>
+
+        <h2>ファイル情報表示</h2>
+        <img src="image/info_rslt.gif" alt="Info Result Window" class="screenshot">
+
+        <h3>表示される情報</h3>
+        <h4>pss ファイル (MPEG2 プログラムストリーム)</h4>
+        <ul>
+            <li>総パック数</li>
+            <li>総パケット数</li>
+            <li>プログラムストリーム転送レート (kbit/s, byte/s)</li>
+            <li>各エレメンタリストリームの情報
+                <ul>
+                    <li>ストリーム種別、ストリーム ID</li>
+                    <li>PES パケット数</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>ipu 動画ストリーム ファイル</h4>
+        <ul>
+            <li>画像サイズ (pixel)</li>
+            <li>フレーム数</li>
+        </ul>
+
+        <h4>spu ストリーム ファイル</h4>
+        <ul>
+            <li>データフォーマット (PCM Big Endian/Little Endian, ADPCM)</li>
+            <li>量子化ビット数</li>
+            <li>サンプリング周波数</li>
+            <li>チャンネル数</li>
+            <li>転送レート (kbit/s, byte/s)</li>
+            <li>サンプル数、再生時間</li>
+        </ul>
+
+        <h4>MPEG ビデオエレメンタリストリーム</h4>
+        <ul>
+            <li>画像サイズ (pixel)</li>
+            <li>フレームレート (f/s)</li>
+            <li>転送レート (kbit/s, byte/s)</li>
+            <li>プロファイルレベル</li>
+            <li>フレーム数、再生時間</li>
+            <li>各ピクチャタイプの数と割合 (I/P/B/D)</li>
+            <li>PS2 再生互換性</li>
+            <li>IPU 変換互換性</li>
+        </ul>
+
+        <h4>Windows WAVE / Macintosh AIFF オーディオファイル</h4>
+        <ul>
+            <li>データフォーマット (PCM, etc...)</li>
+            <li>量子化ビット数</li>
+            <li>サンプリング周波数</li>
+            <li>チャンネル数</li>
+            <li>転送レート (kbit/s, byte/s)</li>
+            <li>サンプル数、再生時間</li>
+        </ul>
+
+        <h3>操作ボタン</h3>
+        <ul>
+            <li><strong>保存 (Save):</strong> ファイル情報テキストをファイルに保存します。</li>
+            <li><strong>コピー (Copy):</strong> ファイル情報テキストをクリップボードにコピーします。</li>
+            <li><strong>閉じる (Close):</strong> ウィンドウを閉じます。</li>
+        </ul>
+
+        <div class="tip-box">
+            <h4>Tip</h4>
+            <p>ウィンドウのサイズを変更することができます。</p>
+        </div>
+
+        <h2>コマンドライン操作</h2>
+        <p>GUI の他に、コマンドラインからも同様の機能を利用できます。</p>
+
+        <h3>基本書式</h3>
+        <div class="command-box">
+            <code>info [options] target_file</code>
+            <p>省略形: <code>i [options] target_file</code></p>
+        </div>
+
+        <h3>オプション一覧</h3>
+        <table class="command-table">
+            <tr>
+                <th>オプション</th>
+                <th>説明</th>
+            </tr>
+            <tr>
+                <td><code>-v</code></td>
+                <td>作業の進行状況を詳しくレポートします。</td>
+            </tr>
+            <tr>
+                <td><code>-pss</code></td>
+                <td>pss ファイル (MPEG2 プログラムストリーム) の情報を出力します。</td>
+            </tr>
+            <tr>
+                <td><code>-ipu</code></td>
+                <td>ipu 動画ストリーム ファイルの情報を出力します。</td>
+            </tr>
+            <tr>
+                <td><code>-ads</code></td>
+                <td>spu ストリームファイルの情報を出力します。</td>
+            </tr>
+            <tr>
+                <td><code>-video</code></td>
+                <td>MPEG ビデオエレメンタリストリーム ファイルの情報を出力します。</td>
+            </tr>
+            <tr>
+                <td><code>-wave</code></td>
+                <td>Windows WAVE オーディオファイルの情報を出力します。</td>
+            </tr>
+            <tr>
+                <td><code>-aiff</code></td>
+                <td>Macintosh AIFF オーディオファイルの情報を出力します。</td>
+            </tr>
+        </table>
+
+        <h3>使用例</h3>
+        <div class="example-box">
+            <h4>基本的な使用方法</h4>
+            <code>info -pss video.pss</code>
+            <p>PSS ファイルの情報を表示します。</p>
+
+            <h4>詳細情報の表示</h4>
+            <code>info -v -video input.m2v</code>
+            <p>MPEG ビデオファイルの情報を詳細に表示します。</p>
+        </div>
+
+        <div class="tip-box">
+            <h4>コマンドライン Tips</h4>
+            <ul>
+                <li>ファイルタイプが明確な場合は、対応するオプションを指定すると処理が速くなります。</li>
+                <li>バッチ処理やスクリプトでの自動化に便利です。</li>
+                <li>-v オプションを使用すると、処理の詳細な進行状況を確認できます。</li>
+            </ul>
+        </div>
+
+        <div class="wiki-footer">
+            <p>最終更新日：2024/03/21</p>
+            <address>
+                SCE CONFIDENTIAL
+                <br>Copyright (c) 1999 Sony Computer Entertainment Inc. All Rights Reserved.</br>
+            </address>
+        </div>
+    </div>
+</body>
+</html> 
