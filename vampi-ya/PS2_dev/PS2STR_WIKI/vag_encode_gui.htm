@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPU Encode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="wiki-nav">
+        <a href="index.htm">Home</a> |
+        <a href="ipu_convert_gui.htm">IPU Convert</a> |
+        <a href="vag_encode_gui.htm">SPU Encode</a> |
+        <a href="mux_gui.htm">Mux</a> |
+        <a href="demux_gui.htm">Demux</a> |
+        <a href="info_gui.htm">Info</a>
+    </nav>
+
+    <div class="wiki-content">
+        <h1>SPU Encode (SPU 圧縮)</h1>
+        <h2>目的</h2>
+        <p>非圧縮音声データの ADPCM 圧縮、SPU ストリームファイル (*.ads) へのフォーマット変換を行います。</p>
+
+        <h2>メインウィンドウ</h2>
+        <img src="image/vag_encode.gif" alt="SPU Encode Window" class="screenshot">
+
+        <h3>入力ファイル (File List)</h3>
+        <p>処理対象となるファイルのリストが表示されます。ファイルは、エクスプローラからのドラッグ＆ドロップか、[追加] ボタンでファイルを選択することで、リストに追加することができます。</p>
+
+        <h3>ファイル操作</h3>
+        <ul>
+            <li><strong>削除 (Delete):</strong> 選択したファイルをファイルリストから削除します。</li>
+            <li><strong>クリア (Clear):</strong> ファイルリストをクリアします。</li>
+            <li><strong>追加 (Add):</strong> ファイルの選択ダイアログを表示し、入力ファイルのリストに追加するファイルを選びます。</li>
+        </ul>
+
+        <h3>変換設定</h3>
+        <ul>
+            <li><strong>出力フォルダ (Output Folder):</strong> ファイルを出力するフォルダを指定します。</li>
+            <li><strong>参照 (Browse):</strong> 出力フォルダを選択するダイアログを表示します。</li>
+            <li><strong>出力ファイルを上書きする (Overwrite):</strong> チェックすると、出力するファイルが既に存在する場合、そのファイルを上書きします。</li>
+        </ul>
+
+        <h3>開始 (Start)</h3>
+        <p>処理を開始します。</p>
+
+        <h4>使用されるパラメータ値</h4>
+        <table>
+            <tr>
+                <th>パラメータ</th>
+                <th>値</th>
+            </tr>
+            <tr>
+                <td>インターリーブサイズ</td>
+                <td>512 byte (PCM), 32 byte (ADPCM)</td>
+            </tr>
+            <tr>
+                <td>loop_start_block_address</td>
+                <td>0xffffffff (ループなし)</td>
+            </tr>
+            <tr>
+                <td>loop_end_block_address</td>
+                <td>0xffffffff (ループなし)</td>
+            </tr>
+        </table>
+
+        <h2>処理画面</h2>
+        <img src="image/process.gif" alt="Process Window" class="screenshot">
+        
+        <h3>処理状況表示</h3>
+        <ul>
+            <li><strong>処理内容 (Caption):</strong> 処理の機能内容を表示します。</li>
+            <li><strong>処理ファイル (File, Total Process):</strong> 現在処理中のファイル名と、ファイルリスト内の進行状況を表示します。</li>
+            <li><strong>ファイルの処理状況 (Current Phase):</strong> 現在処理中のファイルの進行状況を表示します。</li>
+            <li><strong>中止 (Cancel):</strong> 処理を強制終了します。</li>
+        </ul>
+
+        <h3>処理結果</h3>
+        <img src="image/result.gif" alt="Result Window" class="screenshot">
+        <p>処理終了後、処理結果のログを表示します。</p>
+        
+        <ul>
+            <li><strong>保存 (Save):</strong> 処理結果テキストをファイルに保存します。</li>
+            <li><strong>コピー (Copy):</strong> 処理結果テキストをクリップボードにコピーします。</li>
+            <li><strong>閉じる (Close):</strong> ウィンドウを閉じます。</li>
+        </ul>
+
+        <h2>コマンドライン操作</h2>
+        <p>GUI の他に、コマンドラインからも同様の機能を利用できます。</p>
+
+        <h3>基本書式</h3>
+        <div class="command-box">
+            <code>encode [options] target_file [output_file]</code>
+            <p>省略形: <code>e [options] target_file [output_file]</code></p>
+        </div>
+
+        <h3>オプション一覧</h3>
+        <table class="command-table">
+            <tr>
+                <th>オプション</th>
+                <th>説明</th>
+            </tr>
+            <tr>
+                <td><code>-o</code></td>
+                <td>出力ファイルが既に存在した場合、上書き出力します。</td>
+            </tr>
+            <tr>
+                <td><code>-d [ディレクトリ]</code></td>
+                <td>出力ディレクトリを指定します。</td>
+            </tr>
+            <tr>
+                <td><code>-v</code></td>
+                <td>作業の進行状況を詳しくレポートします。</td>
+            </tr>
+            <tr>
+                <td><code>-aiff</code></td>
+                <td>入力ファイルを Macintosh AIFF ファイルとして処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-wave</code></td>
+                <td>入力ファイルを Windows WAVE ファイルとして処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-raw</code></td>
+                <td>入力ファイルを Raw PCM ファイルとして処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-a</code></td>
+                <td>ADPCM 圧縮を行います。</td>
+            </tr>
+            <tr>
+                <td><code>-8</code></td>
+                <td>入力サンプルを 8 bit PCM として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-16</code></td>
+                <td>入力サンプルを 16 bit PCM として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-le</code></td>
+                <td>入力サンプルを リトルエンディアン (Intel 形式) として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-be</code></td>
+                <td>入力サンプルを ビッグエンディアン (Motorola 形式) として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-st</code></td>
+                <td>入力サンプルを ステレオ として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-mn</code></td>
+                <td>入力サンプルを モノラル として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-sn</code></td>
+                <td>入力サンプルを 符号付整数 として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-us</code></td>
+                <td>入力サンプルを 符号なし整数 として処理します。</td>
+            </tr>
+            <tr>
+                <td><code>-sr:サンプリングレート</code></td>
+                <td>サンプルのサンプリングレートを設定します。</td>
+            </tr>
+            <tr>
+                <td><code>-is:インターリーブサイズ</code></td>
+                <td>出力の際のインターリーブサイズを設定します。</td>
+            </tr>
+            <tr>
+                <td><code>-sba:アドレス</code></td>
+                <td>SPU ストリームファイルヘッダの loop_start_block_address の値を設定します。</td>
+            </tr>
+            <tr>
+                <td><code>-eba:アドレス</code></td>
+                <td>SPU ストリームファイルヘッダの loop_end_block_address の値を設定します。</td>
+            </tr>
+        </table>
+
+        <p>ファイル形式を指定するオプションが省略された場合、AIFF, WAVE ファイルを自動判別します。AIFF, WAVE に該当しないファイルの場合は、エラーとなります。</p>
+        <p>raw 形式のファイルを入力するときは、オプションを使用してサンプルの形式 (サンプリングレートなど) を設定してください。AIFF, WAVE ファイルの場合は、ファイルのヘッダ情報が反映されます。</p>
+
+        <h3>省略時パラメータ値</h3>
+        <table class="command-table">
+            <tr>
+                <th>パラメータ</th>
+                <th>値</th>
+            </tr>
+            <tr>
+                <td>サンプリングビット数</td>
+                <td>16 bit (raw 形式)</td>
+            </tr>
+            <tr>
+                <td>サンプル形式</td>
+                <td>ステレオ、リトルエンディアン、符号付 (raw 形式)</td>
+            </tr>
+            <tr>
+                <td>サンプリングレート</td>
+                <td>設定必須 (raw 形式)</td>
+            </tr>
+            <tr>
+                <td>インターリーブサイズ</td>
+                <td>512 byte (PCM), 32 byte (ADPCM)</td>
+            </tr>
+            <tr>
+                <td>loop_start_block_address</td>
+                <td>0xffffffff (ループなし)</td>
+            </tr>
+            <tr>
+                <td>loop_end_block_address</td>
+                <td>0xffffffff (ループなし)</td>
+            </tr>
+        </table>
+
+        <h3>target file 部</h3>
+        <table class="command-table">
+            <tr>
+                <td>パラメータ１</td>
+                <td>変換元となる 音声ファイル</td>
+            </tr>
+            <tr>
+                <td>パラメータ２ (省略可能)</td>
+                <td>音声ファイル (省略された場合は、変換元ファイルの拡張子を、ads としたファイルに出力されます。)</td>
+            </tr>
+        </table>
+
+        <div class="wiki-footer">
+            <p>最終更新日：2024/03/21</p>
+            <address>
+                SCE CONFIDENTIAL
+                <br>Copyright (c) 1999 Sony Computer Entertainment Inc. All Rights Reserved.</br>
+            </address>
+        </div>
+    </div>
+</body>
+</html> 
