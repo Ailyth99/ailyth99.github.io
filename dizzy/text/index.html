@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Text Processing Tools</title>
+    <title>TextPixie - Text Processing Tools</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1 style="text-align: center; color: #ff3366;">TextPixie</h1>
     <div class="tab-container">
         <div class="tabs">
             <button class="tab-button active" data-tab="vertical">Vertical Text</button>
@@ -12,6 +13,8 @@
             <button class="tab-button" data-tab="sjis">SHIFT-JIS</button>
             <button class="tab-button" data-tab="font">Font Test</button>
             <button class="tab-button" data-tab="sort">Text Sorting</button>
+            <button class="tab-button" data-tab="crop">Text Crop</button>
+            <button class="tab-button" data-tab="compare">Text Compare</button>
         </div>
     </div>
 
@@ -189,6 +192,60 @@ Sample text The quick brown fox jumps over the lazy dog 1234567890
                         <input type="radio" name="sortMethod" value="unicode">
                         <span>By Unicode Value</span>
                     </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文字裁剪 -->
+        <div class="tab-content" id="crop-content">
+            <h2>Text Crop Tool</h2>
+            <div class="container">
+                <div>
+                    <p>Original Text:</p>
+                    <textarea class="input" placeholder="Enter text to crop..."></textarea>
+                </div>
+                <div>
+                    <p>Characters to Crop:</p>
+                    <textarea class="input" placeholder="Enter characters to crop..."></textarea>
+                </div>
+                <div>
+                    <p>Result:</p>
+                    <textarea class="output" readonly></textarea>
+                </div>
+            </div>
+            <div class="button-group">
+                <button onclick="textCropper.crop()">Crop</button>
+            </div>
+        </div>
+
+        <!-- 文字比较 -->
+        <div class="tab-content" id="compare-content">
+            <h2>Text Comparison Tool</h2>
+            <div class="container">
+                <div>
+                    <p>Text 1:</p>
+                    <textarea class="input" placeholder="Enter first text..."></textarea>
+                </div>
+                <div>
+                    <p>Text 2:</p>
+                    <textarea class="input" placeholder="Enter second text..."></textarea>
+                </div>
+            </div>
+            <div class="button-group">
+                <button onclick="textComparer.compare()">Compare</button>
+            </div>
+            <div class="container">
+                <div>
+                    <p>Common Characters:</p>
+                    <textarea class="output" readonly></textarea>
+                </div>
+                <div>
+                    <p>Only in Text 1:</p>
+                    <textarea class="output" readonly></textarea>
+                </div>
+                <div>
+                    <p>Only in Text 2:</p>
+                    <textarea class="output" readonly></textarea>
                 </div>
             </div>
         </div>

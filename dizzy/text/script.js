@@ -292,6 +292,74 @@ const textSorter = {
     }
 };
 
+// 文字裁剪器
+const textCropper = {
+    crop() {
+        const originalText = this.getOriginalText();
+        const charactersToCrop = this.getCharactersToCrop();
+        
+        // 创建正则表达式，匹配需要裁剪的字符
+        const regex = new RegExp(`[${charactersToCrop}]`, 'g');
+        const result = originalText.replace(regex, '').trim(); // 替换并去掉多余空格
+        
+        this.setOutput(result);
+    },
+
+    getOriginalText() {
+        return document.querySelector('#crop-content .input').value;
+    },
+
+    getCharactersToCrop() {
+        return document.querySelectorAll('#crop-content .input')[1].value; // 第二个输入框
+    },
+
+    setOutput(value) {
+        document.querySelector('#crop-content .output').value = value;
+    }
+};
+
+// 文字比较器
+const textComparer = {
+    compare() {
+        const text1 = this.getText1();
+        const text2 = this.getText2();
+
+        const set1 = new Set(text1);
+        const set2 = new Set(text2);
+
+        // 找到共同字符
+        const commonChars = [...set1].filter(char => set2.has(char)).join('');
+        // 找到只在文本1中的字符
+        const onlyInText1 = [...set1].filter(char => !set2.has(char)).join('');
+        // 找到只在文本2中的字符
+        const onlyInText2 = [...set2].filter(char => !set1.has(char)).join('');
+
+        this.setCommonChars(commonChars);
+        this.setOnlyInText1(onlyInText1);
+        this.setOnlyInText2(onlyInText2);
+    },
+
+    getText1() {
+        return document.querySelector('#compare-content .input').value;
+    },
+
+    getText2() {
+        return document.querySelectorAll('#compare-content .input')[1].value; // 第二个输入框
+    },
+
+    setCommonChars(value) {
+        document.querySelectorAll('#compare-content .output')[0].value = value;
+    },
+
+    setOnlyInText1(value) {
+        document.querySelectorAll('#compare-content .output')[1].value = value;
+    },
+
+    setOnlyInText2(value) {
+        document.querySelectorAll('#compare-content .output')[2].value = value;
+    }
+};
+
 // 初始化所有功能
 document.addEventListener('DOMContentLoaded', () => {
     // Tab 切换功能

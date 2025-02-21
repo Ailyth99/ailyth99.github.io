@@ -1,0 +1,264 @@
+/* Dark Theme with Demonic Touches */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #1a1a1a;
+    color: #c0c0c0;
+    background-image: linear-gradient(45deg, #1a1a1a 25%, #201920 25%, #201920 50%, #1a1a1a 50%, #1a1a1a 75%, #201920 75%, #201920 100%);
+    background-size: 56.57px 56.57px;
+}
+
+/* Demonic Navigation */
+.wiki-nav {
+    background: linear-gradient(to right, #2b1216, #1a0f12);
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #4a1018;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+}
+
+.wiki-nav a {
+    color: #ff3366;
+    margin: 0 10px;
+    text-shadow: 0 0 5px rgba(255, 51, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.wiki-nav a:hover {
+    color: #ff6699;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+}
+
+/* Demonic Headers */
+h1, h2, h3, h4 {
+    color: #ff3366;
+    border-bottom: 2px solid #4a1018;
+    padding-bottom: 5px;
+    text-shadow: 0 0 5px rgba(255, 51, 102, 0.3);
+}
+
+/* Mystical Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+    background: rgba(26, 15, 18, 0.7);
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #4a1018;
+}
+
+th {
+    background: #2b1216;
+    color: #ff3366;
+}
+
+/* Arcane Content Box */
+.wiki-content {
+    background: rgba(26, 15, 18, 0.9);
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+    border: 1px solid #4a1018;
+}
+
+/* Demonic Footer */
+.wiki-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #4a1018;
+    text-align: right;
+    font-size: 0.9em;
+    color: #8b8b8b;
+}
+
+/* Glowing Links */
+a {
+    color: #ff3366;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #ff6699;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a1018;
+    border-radius: 5px;
+}
+
+/* Selection */
+::selection {
+    background: #4a1018;
+    color: #ff3366;
+}
+
+/* Language Switcher */
+.lang-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.lang-btn {
+    background: rgba(74, 16, 24, 0.8);
+    color: #ff3366;
+    border: 1px solid #ff3366;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 51, 102, 0.2);
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+}
+
+.lang-btn.active {
+    background: #ff3366;
+    color: #1a1a1a;
+}
+
+/* Hide language specific content */
+[lang="en"], [lang="zh"] {
+    display: none;
+}
+
+/* Show Japanese content by default */
+[lang="ja"] {
+    display: block;
+}
+
+/* Show active language content */
+[lang].active {
+    display: block !important; /* 使用 !important 确保能覆盖默认样式 */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .lang-switch {
+        position: relative;
+        top: 0;
+        right: 0;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .wiki-nav {
+        margin-top: 10px;
+    }
+}
+
+/* Code Block Styles */
+pre {
+    background: #1a0f12;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #4a1018;
+    color: #ff6699;
+    font-family: 'Consolas', monospace;
+    overflow-x: auto;
+    margin: 15px 0;
+}
+
+.code-block {
+    background: #2b1216;
+    padding: 20px;
+    border-radius: 4px;
+    margin: 15px 0;
+    border: 1px solid #4a1018;
+}
+
+.code-block h4 {
+    color: #ff6699;
+    margin-top: 0;
+    border-bottom: none;
+}
+
+/* 图片响应式布局 */
+.screenshot {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 确保表格在移动端也能正常显示 */
+.command-table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+    margin: 1em 0;
+}
+
+/* 移动端优化 */
+@media screen and (max-width: 768px) {
+    .wiki-content {
+        padding: 10px;
+    }
+    
+    .command-box {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    /* 调整导航栏在移动端的显示 */
+    .wiki-nav {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .wiki-nav a {
+        font-size: 14px;
+    }
+}
+
+/* 优化代码块显示 */
+.command-box code {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* 输入框和按钮样式 */
+.input, .output {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #4a1018; /* 使用魔界风格的边框颜色 */
+    border-radius: 8px;
+    resize: vertical;
+    background: rgba(26, 15, 18, 0.8); /* 背景颜色 */
+    color: #c0c0c0; /* 字体颜色 */
+}
+
+.button-group button {
+    background-color: #ff3366; /* 按钮颜色 */
+    color: #1a1a1a; /* 按钮字体颜色 */
+    border: 1px solid #4a1018; /* 边框颜色 */
+    transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+    background-color: #ff6699; /* 悬停效果 */
+}
