@@ -349,3 +349,26 @@ button:hover {
     color: #ff3366;
     font-size: 16px;
 }
+
+
+#sjis-content .debug-container {
+    margin-top: 20px;
+}
+
+#sjis-content .debug-output {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 2px solid #4a1018;
+    border-radius: 8px;
+    background-color: rgba(26, 15, 18, 0.9);
+    color: #ff6699; 
+    font-size: 14px;
+    resize: vertical;
+}
+
+#sjis-content .debug-container p {
+    margin-bottom: 5px;
+    color: #ff3366; /* 标题文字也改为粉色 */
+    font-weight: bold;
+}
