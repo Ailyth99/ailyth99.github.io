@@ -1,6 +1,4 @@
-//转换算法来自：http://www5.airnet.ne.jp/kajapon/ps2par.html
 
-// 竖排转换器
 const verticalConverter = {
     convert() {
         const input = this.getInput();
@@ -23,13 +21,11 @@ const verticalConverter = {
         const output = this.getOutput();
         output.select();
         document.execCommand('copy');
-        alert('Copied to clipboard ✨');
+        alert('已复制到剪贴板 ✨');
     },
 
     getInput() {
-        const input = document.querySelector('#vertical-content .input');
-        input.addEventListener('input', () => this.updateCharCount());
-        return input.value;
+        return document.querySelector('#vertical-content .input').value;
     },
 
     getOutput() {
@@ -41,7 +37,7 @@ const verticalConverter = {
     },
 
     updateCharCount() {
-        const input = this.getInput();
+        const input = document.querySelector('#vertical-content .input').value;
         const total = input.length;
         const noSpace = input.replace(/\s+/g, '').length;
         
@@ -51,18 +47,18 @@ const verticalConverter = {
     }
 };
 
-// 字频统计器
+
 const frequencyAnalyzer = {
     analyze() {
         const input = this.getInput();
         const charMap = new Map();
         
-        // 统计每个字符出现的次数
+        
         input.replace(/\s+/g, '').split('').forEach(char => {
             charMap.set(char, (charMap.get(char) || 0) + 1);
         });
 
-        // 获取输出格式
+        
         const format = document.querySelector('input[name="frequencyFormat"]:checked').value;
         let results;
 
@@ -77,6 +73,23 @@ const frequencyAnalyzer = {
             results = [...charMap.keys()]
                 .sort((a, b) => charMap.get(b) - charMap.get(a)) // 按出现次数排序
                 .join('\n');
+            
+            
+            const uniqueCharsCount = charMap.size;
+            
+            
+            const outputArea = document.querySelector('#frequency-content .output');
+            let charTypeCounter = document.querySelector('#frequency-content .char-type-counter');
+            
+            if (!charTypeCounter) {
+                
+                charTypeCounter = document.createElement('div');
+                charTypeCounter.className = 'char-type-counter';
+                outputArea.parentNode.insertBefore(charTypeCounter, outputArea.nextSibling);
+            }
+            
+            // 更新显示内容
+            charTypeCounter.textContent = `包含字符种类：${uniqueCharsCount}`;
         }
 
         this.setOutput(results);
@@ -87,13 +100,11 @@ const frequencyAnalyzer = {
         const output = this.getOutput();
         output.select();
         document.execCommand('copy');
-        alert('Copied to clipboard ✨');
+        alert('已复制到剪贴板 ✨');
     },
 
     getInput() {
-        const input = document.querySelector('#frequency-content .input');
-        input.addEventListener('input', () => this.updateCharCount());
-        return input.value;
+        return document.querySelector('#frequency-content .input').value;
     },
 
     getOutput() {
@@ -105,7 +116,7 @@ const frequencyAnalyzer = {
     },
 
     updateCharCount() {
-        const input = this.getInput();
+        const input = document.querySelector('#frequency-content .input').value;
         const total = input.length;
         const noSpace = input.replace(/\s+/g, '').length;
         
@@ -146,7 +157,7 @@ const sjisConverter = {
         // 设置转换结果
         this.setOutput(results.join('\n'));
         
-        // 设置未匹配字符
+        
         const debugOutput = Array.from(unmatchedChars).join('');
         this.setDebugOutput(debugOutput);
     },
@@ -155,7 +166,7 @@ const sjisConverter = {
         const output = this.getOutput();
         output.select();
         document.execCommand('copy');
-        alert('Copied to clipboard ✨');
+        alert('已复制到剪贴板 ✨');
     },
 
     getInput() {
@@ -175,7 +186,7 @@ const sjisConverter = {
     }
 };
 
-// 字体测试器
+
 const fontTester = {
     init() {
         this.loadFontsBtn = document.getElementById('loadFontsBtn');
@@ -195,7 +206,7 @@ const fontTester = {
             if ('queryLocalFonts' in window) {
                 try {
                     this.loadFontsBtn.disabled = true;
-                    this.loadFontsBtn.textContent = 'Loading Fonts...';
+                    this.loadFontsBtn.textContent = '正在加载字体...';
                     
                     const fonts = await window.queryLocalFonts();
                     const uniqueFonts = new Set(fonts.map(font => font.family));
@@ -210,15 +221,15 @@ const fontTester = {
 
                     this.fontSelect.style.display = 'block';
                     this.fontControls.style.display = 'block';
-                    this.loadFontsBtn.textContent = 'Fonts Loaded!';
+                    this.loadFontsBtn.textContent = '字体加载完成！';
                     this.updatePreview();
                 } catch (err) {
                     console.error('获取字体失败:', err);
-                    this.loadFontsBtn.textContent = 'Load Failed, Retry';
+                    this.loadFontsBtn.textContent = '加载失败，请重试';
                     this.loadFontsBtn.disabled = false;
                 }
             } else {
-                alert('Browser does not support Font Access API');
+                alert('浏览器不支持字体访问API');
             }
         });
 
@@ -244,7 +255,7 @@ const fontTester = {
     }
 };
 
-// 文字排序器
+
 const textSorter = {
     sort() {
         const input = this.getInput();
@@ -289,18 +300,38 @@ const textSorter = {
 
     setOutput(value) {
         this.getOutput().value = value;
+        this.updateCharCount();
+    },
+
+    updateCharCount() {
+        
+        const input = document.querySelector('#sort-content .input').value;
+        const inputTotal = input.length;
+        const inputNoSpace = input.replace(/\s+/g, '').length;
+        
+        const inputCounter = document.querySelector('#sort-content .input').nextElementSibling;
+        inputCounter.querySelector('.total').textContent = inputTotal;
+        inputCounter.querySelector('.no-space').textContent = inputNoSpace;
+
+        
+        const output = this.getOutput().value;
+        const outputTotal = output.length;
+        const outputNoSpace = output.replace(/\s+/g, '').length;
+        
+        const outputCounter = this.getOutput().nextElementSibling;
+        outputCounter.querySelector('.total').textContent = outputTotal;
+        outputCounter.querySelector('.no-space').textContent = outputNoSpace;
     }
 };
 
-// 文字裁剪器
+
 const textCropper = {
     crop() {
         const originalText = this.getOriginalText();
         const charactersToCrop = this.getCharactersToCrop();
         
-        // 创建正则表达式，匹配需要裁剪的字符
         const regex = new RegExp(`[${charactersToCrop}]`, 'g');
-        const result = originalText.replace(regex, '').trim(); // 替换并去掉多余空格
+        const result = originalText.replace(regex, '').trim();
         
         this.setOutput(result);
     },
@@ -310,11 +341,41 @@ const textCropper = {
     },
 
     getCharactersToCrop() {
-        return document.querySelectorAll('#crop-content .input')[1].value; // 第二个输入框
+        return document.querySelectorAll('#crop-content .input')[1].value;
     },
 
     setOutput(value) {
         document.querySelector('#crop-content .output').value = value;
+        this.updateCharCount();
+    },
+
+    updateCharCount() {
+        
+        const originalText = document.querySelector('#crop-content .input').value;
+        const originalTotal = originalText.length;
+        const originalNoSpace = originalText.replace(/\s+/g, '').length;
+        
+        const originalCounter = document.querySelector('#crop-content .input').nextElementSibling;
+        originalCounter.querySelector('.total').textContent = originalTotal;
+        originalCounter.querySelector('.no-space').textContent = originalNoSpace;
+
+        
+        const cropChars = document.querySelectorAll('#crop-content .input')[1].value;
+        const cropTotal = cropChars.length;
+        const cropNoSpace = cropChars.replace(/\s+/g, '').length;
+        
+        const cropCounter = document.querySelectorAll('#crop-content .input')[1].nextElementSibling;
+        cropCounter.querySelector('.total').textContent = cropTotal;
+        cropCounter.querySelector('.no-space').textContent = cropNoSpace;
+
+        
+        const output = document.querySelector('#crop-content .output').value;
+        const outputTotal = output.length;
+        const outputNoSpace = output.replace(/\s+/g, '').length;
+        
+        const outputCounter = document.querySelector('#crop-content .output').nextElementSibling;
+        outputCounter.querySelector('.total').textContent = outputTotal;
+        outputCounter.querySelector('.no-space').textContent = outputNoSpace;
     }
 };
 
@@ -327,11 +388,8 @@ const textComparer = {
         const set1 = new Set(text1);
         const set2 = new Set(text2);
 
-        // 找到共同字符
         const commonChars = [...set1].filter(char => set2.has(char)).join('');
-        // 找到只在文本1中的字符
         const onlyInText1 = [...set1].filter(char => !set2.has(char)).join('');
-        // 找到只在文本2中的字符
         const onlyInText2 = [...set2].filter(char => !set1.has(char)).join('');
 
         this.setCommonChars(commonChars);
@@ -344,39 +402,112 @@ const textComparer = {
     },
 
     getText2() {
-        return document.querySelectorAll('#compare-content .input')[1].value; // 第二个输入框
+        return document.querySelectorAll('#compare-content .input')[1].value;
     },
 
     setCommonChars(value) {
         document.querySelectorAll('#compare-content .output')[0].value = value;
+        this.updateCharCount();
     },
 
     setOnlyInText1(value) {
         document.querySelectorAll('#compare-content .output')[1].value = value;
+        this.updateCharCount();
     },
 
     setOnlyInText2(value) {
         document.querySelectorAll('#compare-content .output')[2].value = value;
+        this.updateCharCount();
+    },
+
+    updateCharCount() {
+        
+        const text1 = document.querySelector('#compare-content .input').value;
+        const text1Total = text1.length;
+        const text1NoSpace = text1.replace(/\s+/g, '').length;
+        
+        const text1Counter = document.querySelector('#compare-content .input').nextElementSibling;
+        text1Counter.querySelector('.total').textContent = text1Total;
+        text1Counter.querySelector('.no-space').textContent = text1NoSpace;
+
+        
+        const text2 = document.querySelectorAll('#compare-content .input')[1].value;
+        const text2Total = text2.length;
+        const text2NoSpace = text2.replace(/\s+/g, '').length;
+        
+        const text2Counter = document.querySelectorAll('#compare-content .input')[1].nextElementSibling;
+        text2Counter.querySelector('.total').textContent = text2Total;
+        text2Counter.querySelector('.no-space').textContent = text2NoSpace;
+
+        
+        const outputs = document.querySelectorAll('#compare-content .output');
+        outputs.forEach((output, index) => {
+            const total = output.value.length;
+            const noSpace = output.value.replace(/\s+/g, '').length;
+            
+            const counter = output.nextElementSibling;
+            counter.querySelector('.total').textContent = total;
+            counter.querySelector('.no-space').textContent = noSpace;
+        });
     }
 };
 
-// 初始化所有功能
-document.addEventListener('DOMContentLoaded', () => {
-    // Tab 切换功能
-    document.querySelectorAll('.tab-button').forEach(button => {
+
+window.addEventListener('DOMContentLoaded', () => {
+    
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            const tabName = button.getAttribute('data-tab');
+            
+            
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
             
             button.classList.add('active');
-            document.getElementById(`${button.dataset.tab}-content`).classList.add('active');
+            document.getElementById(`${tabName}-content`).classList.add('active');
         });
     });
 
-    // 初始化字体测试器
+    
     fontTester.init();
-
-    // 初始化字符计数
+    
+    
+    document.querySelector('#vertical-content .input').addEventListener('input', () => {
+        verticalConverter.updateCharCount();
+    });
+    
+    
+    document.querySelector('#frequency-content .input').addEventListener('input', () => {
+        frequencyAnalyzer.updateCharCount();
+    });
+    
+    
+    document.querySelector('#sort-content .input').addEventListener('input', () => {
+        textSorter.updateCharCount();
+    });
+    
+    
+    document.querySelectorAll('#crop-content .input').forEach(input => {
+        input.addEventListener('input', () => {
+            textCropper.updateCharCount();
+        });
+    });
+    
+    
+    document.querySelectorAll('#compare-content .input').forEach(input => {
+        input.addEventListener('input', () => {
+            textComparer.updateCharCount();
+        });
+    });
+    
+    
     verticalConverter.updateCharCount();
     frequencyAnalyzer.updateCharCount();
+    textSorter.updateCharCount();
+    textCropper.updateCharCount();
+    textComparer.updateCharCount();
 });
