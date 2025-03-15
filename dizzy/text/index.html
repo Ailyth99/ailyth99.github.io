@@ -1,255 +1,299 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TextPixie - Text Processing Tools</title>
+    <title>TextPixie - 文本处理工具集</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 style="text-align: center; color: #ff3366;">TextPixie</h1>
+    <h1 class="title">TextPixie</h1>
     <div class="tab-container">
         <div class="tabs">
-            <button class="tab-button active" data-tab="vertical">Vertical Text</button>
-            <button class="tab-button" data-tab="frequency">Character Frequency</button>
+            <button class="tab-button active" data-tab="vertical">竖排转换</button>
+            <button class="tab-button" data-tab="frequency">字符频率</button>
             <button class="tab-button" data-tab="sjis">SHIFT-JIS</button>
-            <button class="tab-button" data-tab="font">Font Test</button>
-            <button class="tab-button" data-tab="sort">Text Sorting</button>
-            <button class="tab-button" data-tab="crop">Text Crop</button>
-            <button class="tab-button" data-tab="compare">Text Compare</button>
+            <button class="tab-button" data-tab="font">字体测试</button>
+            <button class="tab-button" data-tab="sort">文本排序</button>
+            <button class="tab-button" data-tab="crop">文本裁剪</button>
+            <button class="tab-button" data-tab="compare">文本对比</button>
         </div>
     </div>
 
     <div class="content-container">
         <!-- 竖排转换 -->
         <div class="tab-content active" id="vertical-content">
-            <h2>Vertical Text Converter</h2>
+            <h2>竖排转换工具</h2>
             <div class="format-selector">
-                <label>Output Format:</label>
+                <label>输出格式：</label>
                 <div class="radio-group">
                     <label class="radio-label">
                         <input type="radio" name="verticalFormat" value="vertical" checked>
-                        <span>Vertical Text</span>
+                        <span>竖排文本</span>
                     </label>
                     <label class="radio-label">
                         <input type="radio" name="verticalFormat" value="single_line">
-                        <span>Single Line</span>
+                        <span>单行文本</span>
                     </label>
                 </div>
             </div>
             <div class="container">
                 <div>
-                    <p>Input Text:</p>
-                    <textarea class="input" placeholder="Enter text to convert..."></textarea>
+                    <p>输入文本：</p>
+                    <textarea class="input" placeholder="请输入要转换的文本..."></textarea>
                     <div class="char-counter">
-                        Total: <span class="total">0</span> | 
-                        Without Spaces: <span class="no-space">0</span>
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
                     </div>
                 </div>
                 <div>
-                    <p>Result:</p>
+                    <p>转换结果：</p>
                     <textarea class="output"></textarea>
                 </div>
             </div>
             <div class="button-group">
-                <button onclick="verticalConverter.convert()">Convert</button>
-                <button onclick="verticalConverter.copyOutput()">Copy Result</button>
+                <button onclick="verticalConverter.convert()">转换</button>
+                <button onclick="verticalConverter.copyOutput()">复制结果</button>
             </div>
         </div>
 
         <!-- 字频统计 -->
         <div class="tab-content" id="frequency-content">
-            <h2>Character Frequency Counter</h2>
+            <h2>字符频率统计</h2>
             <div class="format-selector">
-                <label>Output Format:</label>
+                <label>输出格式：</label>
                 <div class="radio-group">
                     <label class="radio-label">
                         <input type="radio" name="frequencyFormat" value="with_count" checked>
-                        <span>With Count</span>
+                        <span>显示计数</span>
                     </label>
                     <label class="radio-label">
                         <input type="radio" name="frequencyFormat" value="only_chars">
-                        <span>Only Characters</span>
+                        <span>仅显示字符（相当于去重）</span>
                     </label>
                 </div>
             </div>
             <div class="container">
                 <div>
-                    <p>Input Text:</p>
-                    <textarea class="input" placeholder="Enter text to analyze..."></textarea>
+                    <p>输入文本：</p>
+                    <textarea class="input" placeholder="请输入要分析的文本..."></textarea>
                     <div class="char-counter">
-                        Total: <span class="total">0</span> | 
-                        Without Spaces: <span class="no-space">0</span>
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
                     </div>
                 </div>
                 <div>
-                    <p>Result:</p>
+                    <p>分析结果：</p>
                     <textarea class="output"></textarea>
                 </div>
             </div>
             <div class="button-group">
-                <button onclick="frequencyAnalyzer.analyze()">Analyze</button>
-                <button onclick="frequencyAnalyzer.copyOutput()">Copy Result</button>
+                <button onclick="frequencyAnalyzer.analyze()">分析</button>
+                <button onclick="frequencyAnalyzer.copyOutput()">复制结果</button>
             </div>
         </div>
 
         <!-- SHIFT-JIS转换 -->
         <div class="tab-content" id="sjis-content">
-            <h2>SHIFT-JIS Encoder</h2>
+            <h2>SHIFT-JIS 编码转换</h2>
             <div class="format-selector">
-                <label>Output Format:</label>
+                <label>输出格式：</label>
                 <div class="radio-group">
                     <label class="radio-label">
                         <input type="radio" name="sjisFormat" value="code" checked>
-                        <span>Code Only</span>
+                        <span>仅显示编码</span>
                     </label>
                     <label class="radio-label">
                         <input type="radio" name="sjisFormat" value="char_code">
-                        <span>Character,Code</span>
+                        <span>字符,编码</span>
                     </label>
                     <label class="radio-label">
                         <input type="radio" name="sjisFormat" value="code_char">
-                        <span>Code,Character</span>
+                        <span>编码,字符</span>
                     </label>
                 </div>
             </div>
             <div class="container">
                 <div>
-                    <p>Input Text:</p>
-                    <textarea class="input" placeholder="Enter text to encode..."></textarea>
+                    <p>输入文本：</p>
+                    <textarea class="input" placeholder="请输入要转换的文本..."></textarea>
                 </div>
                 <div>
-                    <p>Result:</p>
+                    <p>转换结果：</p>
                     <textarea class="output"></textarea>
                 </div>
             </div>
             <div class="button-group">
-                <button onclick="sjisConverter.convert()">Convert</button>
-                <button onclick="sjisConverter.copyOutput()">Copy Result</button>
+                <button onclick="sjisConverter.convert()">转换</button>
+                <button onclick="sjisConverter.copyOutput()">复制结果</button>
             </div>
             <div class="debug-container">
-                <p>Unmatched Characters:</p>
+                <p>未匹配字符：</p>
                 <textarea class="debug-output" readonly></textarea>
             </div>
         </div>
 
         <!-- 字体测试 -->
         <div class="tab-content" id="font-content">
-            <h2>Font Testing Tool</h2>
+            <h2>字体测试工具</h2>
             <div class="controls">
-                <button id="loadFontsBtn">Load System Fonts</button>
+                <button id="loadFontsBtn">加载系统字体</button>
                 <select id="fontSelect"></select>
                 
                 <div class="font-controls">
                     <div class="control-group">
-                        <label for="fontSize">Font Size:</label>
+                        <label for="fontSize">字体大小：</label>
                         <div class="size-control">
                             <input type="range" id="fontSize" min="8" max="72" value="25" class="slider">
-                            <span id="fontSizeDisplay">25px</span>
+                            <span id="fontSizeDisplay">25像素</span>
                         </div>
                     </div>
                     
                     <div class="control-group">
-                        <label for="fontColor">Font Color:</label>
+                        <label for="fontColor">字体颜色：</label>
                         <input type="color" id="fontColor" value="#000000">
                     </div>
                 </div>
             </div>
 
-            <textarea id="testInput" placeholder="Enter test text here...">这是一段测试文本界于魔界与人间界之间，由称为"扉"的空间歪斜所连接着。
+            <textarea id="testInput" placeholder="在此输入测试文本...">这是一段测试文本界于魔界与人间界之间，由称为"扉"的空间歪斜所连接着。
 Sample text The quick brown fox jumps over the lazy dog 1234567890
 以上のように快楽主義や刹那主義の傾向があり、魔界の諸々な事情には怠惰的かつ関心</textarea>
             <div id="preview"></div>
         </div>
 
-        <!-- 文字排序 -->
+        <!-- 文本排序 -->
         <div class="tab-content" id="sort-content">
-            <h2>Text Sorting Tool</h2>
+            <h2>文本排序工具</h2>
             <div class="container">
                 <div>
-                    <p>Input Text:</p>
-                    <textarea class="input" placeholder="Enter text to sort..."></textarea>
+                    <p>输入文本：</p>
+                    <textarea class="input" placeholder="请输入要排序的文本..."></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
                 <div>
-                    <p>Result:</p>
+                    <p>排序结果：</p>
                     <textarea class="output"></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
             </div>
             <div class="button-group">
-                <button onclick="textSorter.sort()">Sort</button>
-                <button onclick="textSorter.shuffle()">Shuffle</button>
+                <button onclick="textSorter.sort()">排序</button>
+                <button onclick="textSorter.shuffle()">随机打乱</button>
             </div>
             <div class="format-selector">
-                <label>Sort By:</label>
+                <label>排序方式：</label>
                 <div class="radio-group">
                     <label class="radio-label">
                         <input type="radio" name="sortMethod" value="alphabetical" checked>
-                        <span>Alphabetical Order</span>
+                        <span>按字母顺序</span>
                     </label>
                     <label class="radio-label">
                         <input type="radio" name="sortMethod" value="frequency">
-                        <span>By Frequency</span>
+                        <span>按出现频率</span>
                     </label>
                     <label class="radio-label">
                         <input type="radio" name="sortMethod" value="unicode">
-                        <span>By Unicode Value</span>
+                        <span>按Unicode值</span>
                     </label>
                 </div>
             </div>
         </div>
 
-        <!-- 文字裁剪 -->
+        <!-- 文本裁剪 -->
         <div class="tab-content" id="crop-content">
-            <h2>Text Crop Tool</h2>
+            <h2>文本裁剪工具</h2>
             <div class="container">
                 <div>
-                    <p>Original Text:</p>
-                    <textarea class="input" placeholder="Enter text to crop..."></textarea>
+                    <p>原始文本：</p>
+                    <textarea class="input" placeholder="请输入要裁剪的文本..."></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
                 <div>
-                    <p>Characters to Crop:</p>
-                    <textarea class="input" placeholder="Enter characters to crop..."></textarea>
+                    <p>需要裁剪的字符：</p>
+                    <textarea class="input" placeholder="请输入要裁剪的字符..."></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
                 <div>
-                    <p>Result:</p>
+                    <p>裁剪结果：</p>
                     <textarea class="output" readonly></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
             </div>
             <div class="button-group">
-                <button onclick="textCropper.crop()">Crop</button>
+                <button onclick="textCropper.crop()">裁剪</button>
             </div>
         </div>
 
-        <!-- 文字比较 -->
+        <!-- 文本对比 -->
         <div class="tab-content" id="compare-content">
-            <h2>Text Comparison Tool</h2>
+            <h2>文本对比工具</h2>
             <div class="container">
                 <div>
-                    <p>Text 1:</p>
-                    <textarea class="input" placeholder="Enter first text..."></textarea>
+                    <p>文本一：</p>
+                    <textarea class="input" placeholder="请输入第一段文本..."></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
                 <div>
-                    <p>Text 2:</p>
-                    <textarea class="input" placeholder="Enter second text..."></textarea>
+                    <p>文本二：</p>
+                    <textarea class="input" placeholder="请输入第二段文本..."></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
             </div>
             <div class="button-group">
-                <button onclick="textComparer.compare()">Compare</button>
+                <button onclick="textComparer.compare()">开始对比</button>
             </div>
             <div class="container">
                 <div>
-                    <p>Common Characters:</p>
+                    <p>共同字符：</p>
                     <textarea class="output" readonly></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
                 <div>
-                    <p>Only in Text 1:</p>
+                    <p>仅在文本一中：</p>
                     <textarea class="output" readonly></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
                 <div>
-                    <p>Only in Text 2:</p>
+                    <p>仅在文本二中：</p>
                     <textarea class="output" readonly></textarea>
+                    <div class="char-counter">
+                        总字数：<span class="total">0</span> | 
+                        不含空格：<span class="no-space">0</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="copyright">
+        TextPixie © 2023 魑魅魍魎
+    </footer>
 
     <script src="sjismap.js"></script>
     <script src="script.js"></script>

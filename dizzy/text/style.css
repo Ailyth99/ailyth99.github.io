@@ -3,7 +3,7 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #1a1a1a; /* 深色背景 */
+    background-color: #1a1a1a; 
     color: #c0c0c0; /* 字体颜色 */
 }
 
@@ -14,7 +14,7 @@ body {
 .tabs {
     display: flex;
     gap: 10px;
-    border-bottom: 2px solid #4a1018; /* 深色边框 */
+    border-bottom: 2px solid #4a1018; 
     padding-bottom: 10px;
 }
 
@@ -52,7 +52,7 @@ body {
     height: 100px;
     padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
     border-radius: 8px;
     resize: vertical;
     background: rgba(26, 15, 18, 0.8); /* 背景颜色 */
@@ -91,8 +91,8 @@ button:hover {
 .debug-output {
     width: 100%;
     height: 60px;
-    background-color: rgba(26, 15, 18, 0.9); /* 深色背景 */
-    border: 2px solid #4a1018; /* 深色边框 */
+    background-color: rgba(26, 15, 18, 0.9); 
+    border: 2px solid #4a1018; 
     border-radius: 8px;
     padding: 10px;
     resize: vertical;
@@ -103,7 +103,7 @@ button:hover {
     background-color: #ffffff; /* 白色背景 */
     padding: 20px;
     border-radius: 8px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
 }
 
 #loadFontsBtn {
@@ -152,7 +152,7 @@ button:hover {
 
 #preview {
     padding: 20px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
     border-radius: 8px;
     min-height: 100px;
     word-wrap: break-word;
@@ -180,7 +180,7 @@ button:hover {
 .slider::-moz-range-thumb {
     width: 16px;
     height: 16px;
-    background: #ff3366; /* 滑块颜色 */
+    background: #ff3366; 
     border-radius: 50%;
     cursor: pointer;
     transition: background .2s;
@@ -243,7 +243,7 @@ button:hover {
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
     border-radius: 50%;
     background-color: white;
     transition: all 0.2s;
@@ -277,7 +277,7 @@ button:hover {
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
     border-radius: 8px;
     resize: vertical;
 }
@@ -287,9 +287,9 @@ button:hover {
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
     border-radius: 8px;
-    background-color: rgba(26, 15, 18, 0.9); /* 深色背景 */
+    background-color: rgba(26, 15, 18, 0.9); 
 }
 
 /* 文字比较样式 */
@@ -298,7 +298,7 @@ button:hover {
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
     border-radius: 8px;
     resize: vertical;
 }
@@ -308,7 +308,44 @@ button:hover {
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid #4a1018; /* 深色边框 */
+    border: 2px solid #4a1018; 
     border-radius: 8px;
-    background-color: rgba(26, 15, 18, 0.9); /* 深色背景 */
+    background-color: rgba(26, 15, 18, 0.9); 
+}
+
+
+@font-face {
+    font-family: 'Chimmr';
+    src: url('chimmr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TSlanted';
+    src: url('TSlanted.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.title {
+    font-family: 'TSlanted', sans-serif;
+    text-align: center;
+    color: #ff3366;
+    font-size: 42px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+
+.copyright {
+    font-family: 'Chimmr', sans-serif;
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #4a1018;
+    color: #ff3366;
+    font-size: 16px;
 }
