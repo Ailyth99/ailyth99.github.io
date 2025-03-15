@@ -1,4 +1,3 @@
-
 const verticalConverter = {
     convert() {
         const input = this.getInput();
@@ -262,13 +261,16 @@ const textSorter = {
         const method = document.querySelector('input[name="sortMethod"]:checked').value;
         let output;
 
+         
+        const cleanInput = input.replace(/[\r\n]+/g, '');
+
         switch (method) {
             case 'alphabetical':
-                output = input.split('').sort((a, b) => a.localeCompare(b)).join('');
+                output = cleanInput.split('').sort((a, b) => a.localeCompare(b)).join('');
                 break;
             case 'frequency':
                 const charMap = new Map();
-                input.replace(/\s+/g, '').split('').forEach(char => {
+                cleanInput.replace(/\s+/g, '').split('').forEach(char => {
                     charMap.set(char, (charMap.get(char) || 0) + 1);
                 });
                 output = [...charMap.entries()]
@@ -277,17 +279,21 @@ const textSorter = {
                     .join('');
                 break;
             case 'unicode':
-                output = input.split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('');
+                output = cleanInput.split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('');
                 break;
         }
 
         this.setOutput(output);
+        this.updateCharCount();
     },
 
     shuffle() {
         const input = this.getInput();
-        const shuffled = input.split('').sort(() => Math.random() - 0.5).join('');
+        
+        const cleanInput = input.replace(/[\r\n]+/g, '');
+        const shuffled = cleanInput.split('').sort(() => Math.random() - 0.5).join('');
         this.setOutput(shuffled);
+        this.updateCharCount();
     },
 
     getInput() {
@@ -304,7 +310,7 @@ const textSorter = {
     },
 
     updateCharCount() {
-        
+        // 更新输入框字符计数
         const input = document.querySelector('#sort-content .input').value;
         const inputTotal = input.length;
         const inputNoSpace = input.replace(/\s+/g, '').length;
@@ -313,7 +319,7 @@ const textSorter = {
         inputCounter.querySelector('.total').textContent = inputTotal;
         inputCounter.querySelector('.no-space').textContent = inputNoSpace;
 
-        
+        // 更新输出框字符计数
         const output = this.getOutput().value;
         const outputTotal = output.length;
         const outputNoSpace = output.replace(/\s+/g, '').length;
