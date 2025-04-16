@@ -1,10 +1,8 @@
- 
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>TextPixie - 文本处理工具集</title>
-    <meta charset="UTF-8"> <!-- Add character encoding -->
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +17,8 @@
             <button class="tab-button" data-tab="crop">文本裁剪</button>
             <button class="tab-button" data-tab="compare">文本对比</button>
             <button class="tab-button" data-tab="width">半/全角转换</button>
+            <!-- 合并后的颜色转换 Tab -->
+            <button class="tab-button" data-tab="color-convert">颜色格式转换</button>
         </div>
     </div>
 
@@ -29,39 +29,15 @@
             <div class="format-selector">
                 <label>输出格式：</label>
                 <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="verticalFormat" value="vertical" checked>
-                        <span>竖排文本</span>
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="verticalFormat" value="single_line">
-                        <span>单行文本</span>
-                    </label>
+                    <label class="radio-label"><input type="radio" name="verticalFormat" value="vertical" checked><span>竖排文本</span></label>
+                    <label class="radio-label"><input type="radio" name="verticalFormat" value="single_line"><span>单行文本</span></label>
                 </div>
             </div>
             <div class="container">
-                <div>
-                    <p>输入文本：</p>
-                    <textarea class="input" placeholder="请输入要转换的文本..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-                <div>
-                    <p>转换结果：</p>
-                    <textarea class="output"></textarea>
-                     <!-- Add counter for output -->
-                     <div class="char-counter">
-                         总字数：<span class="total">0</span> |
-                         不含空格：<span class="no-space">0</span>
-                     </div>
-                </div>
+                <div><p>输入文本：</p><textarea class="input" placeholder="请输入要转换的文本..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                <div><p>转换结果：</p><textarea class="output"></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
             </div>
-            <div class="button-group">
-                <button onclick="verticalConverter.convert()">转换</button>
-                <button onclick="verticalConverter.copyOutput()">复制结果</button>
-            </div>
+            <div class="button-group"><button onclick="verticalConverter.convert()">转换</button><button onclick="verticalConverter.copyOutput()">复制结果</button></div>
         </div>
 
         <!-- Character Frequency -->
@@ -70,111 +46,42 @@
             <div class="format-selector">
                 <label>输出格式：</label>
                 <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="frequencyFormat" value="with_count" checked>
-                        <span>显示计数</span>
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="frequencyFormat" value="only_chars">
-                        <span>仅显示字符（相当于去重）</span>
-                    </label>
+                    <label class="radio-label"><input type="radio" name="frequencyFormat" value="with_count" checked><span>显示计数</span></label>
+                    <label class="radio-label"><input type="radio" name="frequencyFormat" value="only_chars"><span>仅显示字符（相当于去重）</span></label>
                 </div>
             </div>
             <div class="container">
-                <div>
-                    <p>输入文本：</p>
-                    <textarea class="input" placeholder="请输入要分析的文本..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-                <div>
-                    <p>分析结果：</p>
-                    <textarea class="output"></textarea>
-                     <!-- Add counter for output -->
-                     <div class="char-counter">
-                         总字数：<span class="total">0</span> |
-                         不含空格：<span class="no-space">0</span>
-                     </div>
-                </div>
+                <div><p>输入文本：</p><textarea class="input" placeholder="请输入要分析的文本..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                <div><p>分析结果：</p><textarea class="output"></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
             </div>
-            <div class="button-group">
-                <button onclick="frequencyAnalyzer.analyze()">分析</button>
-                <button onclick="frequencyAnalyzer.copyOutput()">复制结果</button>
-            </div>
-            <!-- Unique character count display will be added dynamically here by JS -->
+            <div class="button-group"><button onclick="frequencyAnalyzer.analyze()">分析</button><button onclick="frequencyAnalyzer.copyOutput()">复制结果</button></div>
+            <!-- Unique character count display (JS will add if needed) -->
         </div>
 
         <!-- SHIFT-JIS Conversion -->
         <div class="tab-content" id="sjis-content">
             <h2>SHIFT-JIS 编码转换</h2>
-            <div class="format-selector">
-                <label>输出格式：</label>
-                <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="sjisFormat" value="code" checked>
-                        <span>仅显示编码</span>
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="sjisFormat" value="char_code">
-                        <span>字符,编码</span>
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="sjisFormat" value="code_char">
-                        <span>编码,字符</span>
-                    </label>
-                </div>
-            </div>
+             <div class="format-selector">
+                 <label>输出格式：</label>
+                 <div class="radio-group">
+                     <label class="radio-label"><input type="radio" name="sjisFormat" value="code" checked><span>仅显示编码</span></label>
+                     <label class="radio-label"><input type="radio" name="sjisFormat" value="char_code"><span>字符,编码</span></label>
+                     <label class="radio-label"><input type="radio" name="sjisFormat" value="code_char"><span>编码,字符</span></label>
+                 </div>
+             </div>
             <div class="container">
-                <div>
-                    <p>输入文本：</p>
-                    <textarea class="input" placeholder="请输入要转换的文本..."></textarea>
-                    <!-- No counter needed for SJIS input -->
-                </div>
-                <div>
-                    <p>转换结果：</p>
-                    <textarea class="output"></textarea>
-                     <!-- No counter needed for SJIS output -->
-                </div>
+                <div><p>输入文本：</p><textarea class="input" placeholder="请输入要转换的文本..."></textarea></div>
+                <div><p>转换结果：</p><textarea class="output"></textarea></div>
             </div>
-            <div class="button-group">
-                <button onclick="sjisConverter.convert()">转换</button>
-                <button onclick="sjisConverter.copyOutput()">复制结果</button>
-            </div>
-            <div class="debug-container">
-                <p>不属于SHIFT-JIS的字符：</p>
-                <textarea class="debug-output" readonly></textarea>
-            </div>
+            <div class="button-group"><button onclick="sjisConverter.convert()">转换</button><button onclick="sjisConverter.copyOutput()">复制结果</button></div>
+            <div class="debug-container"><p>不属于SHIFT-JIS的字符：</p><textarea class="debug-output" readonly></textarea></div>
         </div>
 
         <!-- Font Tester -->
         <div class="tab-content" id="font-content">
             <h2>字体测试工具</h2>
-            <div class="controls">
-                <button id="loadFontsBtn">加载系统字体</button>
-                <select id="fontSelect"></select>
-
-                <div class="font-controls">
-                    <div class="control-group">
-                        <label for="fontSize">字体大小：</label>
-                        <div class="size-control">
-                            <input type="range" id="fontSize" min="8" max="72" value="25" class="slider">
-                            <span id="fontSizeDisplay">25像素</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label for="fontColor">字体颜色：</label>
-                        <input type="color" id="fontColor" value="#000000">
-                    </div>
-                </div>
-            </div>
-
-            <textarea id="testInput" placeholder="在此输入测试文本...">
-                这是一段测试文本界于魔界与人间界之间，由称为"扉"的空间歪斜所连接着。
-Sample text The quick brown fox jumps over the lazy dog 1234567890
-以上のように快楽主義や刹那主義の傾向があり、魔界の諸々な事情には怠惰的かつ関心</textarea>
+            <div class="controls"><button id="loadFontsBtn">加载系统字体</button><select id="fontSelect"></select><div class="font-controls"><div class="control-group"><label for="fontSize">字体大小：</label><div class="size-control"><input type="range" id="fontSize" min="8" max="72" value="25" class="slider"><span id="fontSizeDisplay">25像素</span></div></div><div class="control-group"><label for="fontColor">字体颜色：</label><input type="color" id="fontColor" value="#000000"></div></div></div>
+            <textarea id="testInput" placeholder="在此输入测试文本...">这是一段测试文本界于魔界与人间界之间，由称为"扉"的空间歪斜所连接着。Sample text The quick brown fox jumps over the lazy dog 1234567890 以上のように快楽主義や刹那主義の傾向があり、魔界の諸々な事情には怠惰的かつ関心</textarea>
             <div id="preview"></div>
         </div>
 
@@ -182,176 +89,111 @@ Sample text The quick brown fox jumps over the lazy dog 1234567890
         <div class="tab-content" id="sort-content">
             <h2>文本排序工具</h2>
             <div class="container">
-                <div>
-                    <p>输入文本：</p>
-                    <textarea class="input" placeholder="请输入要排序的文本..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-                <div>
-                    <p>排序结果：</p>
-                    <textarea class="output"></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
+                <div><p>输入文本：</p><textarea class="input" placeholder="请输入要排序的文本..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                <div><p>排序结果：</p><textarea class="output"></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
             </div>
-             <div class="format-selector"> <!-- Moved format selector below text areas -->
-                 <label>排序方式：</label>
-                 <div class="radio-group">
-                     <label class="radio-label">
-                         <input type="radio" name="sortMethod" value="alphabetical" checked>
-                         <span>按字母顺序</span>
-                     </label>
-                     <label class="radio-label">
-                         <input type="radio" name="sortMethod" value="frequency">
-                         <span>按出现频率</span>
-                     </label>
-                     <label class="radio-label">
-                         <input type="radio" name="sortMethod" value="unicode">
-                         <span>按Unicode值</span>
-                     </label>
-                 </div>
-             </div>
-            <div class="button-group"> <!-- Moved buttons below format selector -->
-                <button onclick="textSorter.sort()">排序</button>
-                <button onclick="textSorter.shuffle()">随机打乱</button>
-                <button onclick="textSorter.copyOutput()">复制结果</button> <!-- Added copy button -->
-            </div>
+             <div class="format-selector"><label>排序方式：</label><div class="radio-group"><label class="radio-label"><input type="radio" name="sortMethod" value="alphabetical" checked><span>按字母顺序</span></label><label class="radio-label"><input type="radio" name="sortMethod" value="frequency"><span>按出现频率</span></label><label class="radio-label"><input type="radio" name="sortMethod" value="unicode"><span>按Unicode值</span></label></div></div>
+            <div class="button-group"><button onclick="textSorter.sort()">排序</button><button onclick="textSorter.shuffle()">随机打乱</button><button onclick="textSorter.copyOutput()">复制结果</button></div>
         </div>
 
         <!-- Text Cropping -->
         <div class="tab-content" id="crop-content">
-            <h2>文本裁剪工具</h2>
-            <div class="container">
-                <div>
-                    <p>原始文本：</p>
-                    <textarea class="input" placeholder="请输入要裁剪的文本..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-                <div>
-                    <p>需要裁剪的字符：</p>
-                    <textarea class="input" placeholder="请输入要裁剪的字符..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-                <div>
-                    <p>裁剪结果：</p>
-                    <textarea class="output" readonly></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-            </div>
-            <div class="button-group">
-                <button onclick="textCropper.crop()">裁剪</button>
-                <button onclick="textCropper.copyOutput()">复制结果</button> <!-- Added copy button -->
-            </div>
+             <h2>文本裁剪工具</h2>
+             <div class="container">
+                 <div><p>原始文本：</p><textarea class="input" placeholder="请输入要裁剪的文本..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                 <div><p>需要裁剪的字符：</p><textarea class="input" placeholder="请输入要裁剪的字符..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                 <div><p>裁剪结果：</p><textarea class="output" readonly></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+             </div>
+             <div class="button-group"><button onclick="textCropper.crop()">裁剪</button><button onclick="textCropper.copyOutput()">复制结果</button></div>
         </div>
 
         <!-- Text Comparison -->
         <div class="tab-content" id="compare-content">
-            <h2>文本对比工具</h2>
-            <div class="container">
-                <div>
-                    <p>文本一：</p>
-                    <textarea class="input" placeholder="请输入第一段文本..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-                <div>
-                    <p>文本二：</p>
-                    <textarea class="input" placeholder="请输入第二段文本..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
-                </div>
-            </div>
-            <div class="button-group">
-                <button onclick="textComparer.compare()">开始对比</button>
-                 <!-- Add copy buttons for compare results? Maybe too many buttons. -->
-            </div>
-            <div class="container"> <!-- Results in separate divs -->
-                 <div>
-                     <p>共同字符：</p>
-                     <textarea class="output" readonly></textarea>
-                     <div class="char-counter">
-                         总字数：<span class="total">0</span> |
-                         不含空格：<span class="no-space">0</span>
-                     </div>
-                 </div>
-                 <div>
-                     <p>仅在文本一中：</p>
-                     <textarea class="output" readonly></textarea>
-                     <div class="char-counter">
-                         总字数：<span class="total">0</span> |
-                         不含空格：<span class="no-space">0</span>
-                     </div>
-                 </div>
-                 <div>
-                     <p>仅在文本二中：</p>
-                     <textarea class="output" readonly></textarea>
-                     <div class="char-counter">
-                         总字数：<span class="total">0</span> |
-                         不含空格：<span class="no-space">0</span>
-                     </div>
-                 </div>
+             <h2>文本对比工具</h2>
+             <div class="container">
+                 <div><p>文本一：</p><textarea class="input" placeholder="请输入第一段文本..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                 <div><p>文本二：</p><textarea class="input" placeholder="请输入第二段文本..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+             </div>
+             <div class="button-group"><button onclick="textComparer.compare()">开始对比</button></div>
+             <div class="container">
+                 <div><p>共同字符：</p><textarea class="output" readonly></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                 <div><p>仅在文本一中：</p><textarea class="output" readonly></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                 <div><p>仅在文本二中：</p><textarea class="output" readonly></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
              </div>
         </div>
 
-        <!-- START: Half/Full Width Converter (Modified) -->
+        <!-- Half/Full Width Converter -->
         <div class="tab-content" id="width-content">
-            <h2>半角/全角字符转换</h2>
-            <!-- REMOVED format-selector div -->
-            <div class="container">
-                <div>
-                    <p>输入文本：</p>
-                    <textarea class="input" placeholder="请输入要转换的文本..."></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
+             <h2>半角/全角字符转换</h2>
+             <div class="container">
+                 <div><p>输入文本：</p><textarea class="input" placeholder="请输入要转换的文本..."></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+                 <div><p>转换结果：</p><textarea class="output"></textarea><div class="char-counter">总字数：<span class="total">0</span> | 不含空格：<span class="no-space">0</span></div></div>
+             </div>
+             <div class="button-group"><button onclick="widthConverter.convertToFull()">半角 转 全角</button><button onclick="widthConverter.convertToHalf()">全角 转 半角</button><button onclick="widthConverter.copyOutput()">复制结果</button></div>
+        </div>
+
+       <!-- START: 合并后的 Color Format Converter -->
+        <div class="tab-content" id="color-convert-content">
+            <h2>PS2 TIM2 CLUT颜色格式转换 (RGBA <=> ABGR1555)</h2>
+
+            <!-- Section 1: RGBA to ABGR1555 -->
+            <div class="color-converter-section rgba-to-abgr-section" style="border-bottom: 1px solid #4a1018; padding-bottom: 20px; margin-bottom: 20px;">
+                <h3>RGBA 转 ABGR1555</h3>
+                <p style="font-size:0.9em; color:#aaa;">32位RGBA HEX值转换为PS2 16bit ABGR1555（小端序）。</p>
+                <div class="container" style="flex-direction: row; gap: 20px; align-items: flex-start;">
+                    <div style="flex: 1;">
+                        <!-- MODIFIED: Added color preview span -->
+                        <p>输入 32位 RGBA (Hex, 例: CA4A47FF): <span class="color-preview" id="rgba-input-preview"></span></p>
+                        <input type="text" class="input rgba-input" placeholder="8位Hex..." maxlength="8">
+                    </div>
+                    <div style="flex: 1;">
+                        <p>输出 16位 ABGR1555 (小端序 Hex):</p>
+                        <input type="text" class="output abgr-output" readonly>
+                        <p style="font-size: 0.8em; color: #aaa; margin-top: 5px;">
+                            逻辑值: <span class="logical-value-rgba" style="font-family: monospace;">N/A</span> |
+                            二进制: <span class="binary-value-rgba" style="font-family: monospace;">N/A</span>
+                        </p>
                     </div>
                 </div>
-                <div>
-                    <p>转换结果：</p>
-                    <textarea class="output"></textarea>
-                    <div class="char-counter">
-                        总字数：<span class="total">0</span> |
-                        不含空格：<span class="no-space">0</span>
-                    </div>
+                <div class="button-group">
+                    <button onclick="colorConverter.convertToAbgr()">转换 R->A</button>
+                    <button onclick="colorConverter.copyAbgrOutput()">复制 ABGR Hex</button>
                 </div>
             </div>
-            <div class="button-group">
-                <!-- ADDED two specific conversion buttons -->
-                <button onclick="widthConverter.convertToFull()">半角 转 全角</button>
-                <button onclick="widthConverter.convertToHalf()">全角 转 半角</button>
-                <!-- Kept copy button -->
-                <button onclick="widthConverter.copyOutput()">复制结果</button>
+
+            <!-- Section 2: ABGR1555 to RGBA -->
+            <div class="color-converter-section abgr-to-rgba-section">
+                <h3>ABGR1555转 RGBA（近似转换）</h3>
+                <p style="font-size:0.9em; color:#aaa;">16位ABGR1555（小端序）转换为32位RGBA HEX（近似值）。</p>
+                <div class="container" style="flex-direction: row; gap: 20px; align-items: flex-start;">
+                    <div style="flex: 1;">
+                        <p>输入 16位 ABGR1555 (小端序 Hex, 例: 39A1):</p>
+                        <input type="text" class="input abgr-input" placeholder="4位Hex..." maxlength="4">
+                    </div>
+                    <div style="flex: 1;">
+                         <!-- MODIFIED: Added color preview span -->
+                        <p>输出 32位 RGBA (Hex): <span class="color-preview" id="rgba-output-preview"></span></p>
+                        <input type="text" class="output rgba-output" readonly>
+                        <p style="font-size: 0.8em; color: #aaa; margin-top: 5px;">
+                            逻辑值: <span class="logical-value-abgr" style="font-family: monospace;">N/A</span> |
+                            提取 (A1B5G5R5): <span class="extracted-values" style="font-family: monospace;">N/A</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button onclick="colorConverter.convertToRgba()">转换 A->R</button>
+                    <button onclick="colorConverter.copyRgbaOutput()">复制 RGBA Hex</button>
+                </div>
             </div>
         </div>
-        <!-- END: Half/Full Width Converter (Modified) -->
 
-    </div>
+    </div> <!-- End content-container -->
 
     <footer class="copyright">
         TextPixie © 2023 魑魅魍魎
     </footer>
 
-    <script src="sjismap.js"></script>
+    <script src="sjismap.js"></script> <!-- Assuming you still need this -->
     <script src="script.js"></script>
 </body>
 </html>
-
- 
