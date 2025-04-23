@@ -1,8 +1,8 @@
-﻿/* --- Jet Set Radio Inspired Theme (Dark Gray BG - Video Background) --- */
+﻿
 
 @font-face {
   font-family: 'JSRCustomFont'; 
-  src: url('lg.ttf') format('truetype'); /* 确认 lg.ttf 路径 */
+  src: url('lg.ttf') format('truetype'); 
   font-weight: normal;
   font-style: normal;
 }
@@ -16,19 +16,19 @@ html {
 }
 
 body{
-  background-color: #222; /* 深灰色背景 */
-  color: #e0e0e0; /* 浅灰色文字 */
+  background-color: #222;
+  color: #e0e0e0; /
   margin: 0; 
   padding: 0; 
   font-family: sans-serif;
   font-weight: 400;
-  /* ***** PC 端基础字号增大 ***** */
-  font-size: 18px; /* 从 16px 增大到 18px */
-  line-height: 1.7; /* 稍微增加行高适应更大的字体 */
+  
+  font-size: 18px; 
+  line-height: 1.7; 
   -webkit-text-size-adjust: 100%; 
 }
 
-/* 背景视频容器样式 */
+
 .video-background-container {
   position: fixed; 
   top: 0;
@@ -39,7 +39,7 @@ body{
   z-index: -1; 
 }
 
-/* 背景视频样式 */
+
 .background-video {
   position: absolute;
   top: 50%;
@@ -52,15 +52,15 @@ body{
   z-index: 1; 
 }
 
-/* 视频遮罩层样式 */
+
 .video-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* ***** 增加遮罩不透明度 ***** */
-  background-color: rgba(0, 0, 0, 0.85); /* 从 0.7 改为 0.85，让背景更暗 */
+  
+  background-color: rgba(0, 0, 0, 0.85); 
   z-index: 2; 
 }
 
@@ -69,11 +69,10 @@ body{
   position: relative; 
   z-index: 3; 
   color: #e0e0e0; 
-  /* ***** PC 端主内容区域边距 ***** */
-  margin-left: 55px; /* 稍微加大左边距 */
-  margin-right: 55px; /* 同时增加右边距，让内容居中一些 */
+   margin-left: 55px;  
+  margin-right: 55px; 
   margin-bottom: 128px; 
-  padding-top: 40px; /* 顶部内边距也加大一点 */
+  padding-top: 40px; 
 }
 
 
@@ -92,14 +91,12 @@ img.header-logo {
   display: block; 
   max-width: 100%; 
   height: auto; 
-  /* PC Logo 左对齐，并根据 main-content 的边距调整 */
-  margin: 0 auto 40px 10px; /* 左边距相对于 #main-content */ 
+   margin: 0 auto 40px 10px;  
 }
 
 section{
   display: block;
-  /* PC Section 边距 (相对于 #main-content) */
-  margin: 64px 0; /* 移除左右外边距，由 #main-content 控制 */
+   margin: 64px 0;  
   padding: 0 20px;
   border-left: 3px solid #6FB043; 
 }
@@ -121,8 +118,8 @@ p{
 
 pre{
   font-family: monospace, sans-serif;
-  line-height: 1.4; /* 代码块行高 */
-  background-color: rgba(51, 51, 51, 0.85); /* 代码块背景透明度也可稍增 */
+  line-height: 1.4;  
+  background-color: rgba(51, 51, 51, 0.85);  
   padding: 1em;
   border: 1px solid #444; 
   border-radius: 4px;
@@ -138,8 +135,7 @@ strong{
 }
 
 
-/* --- 标题样式 --- */
-h1, h2, h3 {
+ h1, h2, h3 {
   font-family: 'JSRCustomFont', Impact, Charcoal, sans-serif; 
   color: #ECDC00; 
   font-weight: normal; 
@@ -150,7 +146,6 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
-/* PC 端标题大小 (rem 单位会自动基于 body 的 18px 缩放) */
 h1 { font-size: 2.5rem; } 
 h2 { font-size: 2rem; } 
 h3 { font-size: 1.6rem; }
@@ -162,16 +157,14 @@ small{
   font-weight: bold;
   text-decoration: none;
   margin-bottom: 1.5em;
-  /* PC 端副标题大小 (rem) */
+   
   font-size: 0.9rem; 
 }
 
-/* --- 响应式设计 --- */
-/* 中等屏幕及以下 (平板/手机) */
+ 
 @media (max-width: 768px) {
   body {
-    /* ***** 手机端基础字号 (保持较大) ***** */
-    font-size: 19px; 
+     font-size: 19px; 
   }
   
   #main-content {
@@ -184,7 +177,7 @@ small{
   img.header-logo {
     width: 80%; 
     max-width: 90%; 
-    margin: 0 auto 30px auto; /* 手机 Logo 居中 */
+    margin: 0 auto 30px auto;  
   }
 
   section {
@@ -192,8 +185,7 @@ small{
     padding: 0 10px; 
   }
 
-  /* 手机端标题大小 (rem 会自动基于 body 的 19px 缩放) */
-  h1 { font-size: 2.2rem; } 
+   h1 { font-size: 2.2rem; } 
   h2 { font-size: 1.8rem; }
   h3 { font-size: 1.5rem; }
 
@@ -201,11 +193,9 @@ small{
   pre { font-size: 0.9rem; line-height: 1.4; }
 }
 
-/* 针对更小的屏幕 */
-@media (max-width: 480px) {
+ @media (max-width: 480px) {
   body {
-    /* ***** 极小屏幕基础字号 ***** */
-    font-size: 18px; 
+     font-size: 18px; 
   }
 
    #main-content {
@@ -213,8 +203,7 @@ small{
     margin-right: 10px;
    }
 
-  /* 极小屏幕标题大小 (rem 会自动基于 body 的 18px 缩放) */
-  h1 { font-size: 2rem; } 
+   h1 { font-size: 2rem; } 
   h2 { font-size: 1.6rem; }
   h3 { font-size: 1.4rem; }
 
@@ -222,14 +211,4 @@ small{
    pre { font-size: 0.85rem; }
 }
 
-/* ***** 这个媒体查询是为了确保字体调整只影响 PC 端 ***** */
-/* Body 字体大小调整 (这部分现在只控制移动端) */
-/* 
-@media (max-width: 768px) {
-  body { font-size: 19px; }
-}
-@media (max-width: 480px) {
-  body { font-size: 18px; }
-} 
-*/
-/* 上面这两条规则实际上已经被包含在之前的媒体查询中了，所以可以移除，保持简洁 */
+ 
