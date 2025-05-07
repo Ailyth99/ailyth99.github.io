@@ -40,14 +40,15 @@
             <div class="button-group"><button onclick="verticalConverter.convert()">转换</button><button onclick="verticalConverter.copyOutput()">复制结果</button></div>
         </div>
 
-        <!-- Character Frequency -->
+     <!-- Character Frequency -->
         <div class="tab-content" id="frequency-content">
             <h2>字符频率统计</h2>
             <div class="format-selector">
                 <label>输出格式：</label>
                 <div class="radio-group">
-                    <label class="radio-label"><input type="radio" name="frequencyFormat" value="with_count" checked><span>显示计数</span></label>
-                    <label class="radio-label"><input type="radio" name="frequencyFormat" value="only_chars"><span>仅显示字符（相当于去重）</span></label>
+                    <label class="radio-label"><input type="radio" name="frequencyFormat" value="with_count" checked><span>显示计数 (按输入文本统计)</span></label>
+                    <label class="radio-label"><input type="radio" name="frequencyFormat" value="only_chars"><span>仅显示字符 (按输入文本,相当于去重功能)</span></label>
+                    <label class="radio-label"><input type="radio" name="frequencyFormat" value="internet_frequency"><span>按互联网使用频率排序</span></label> 
                 </div>
             </div>
             <div class="container">
@@ -193,7 +194,7 @@
         TextPixie © 2023 魑魅魍魎
     </footer>
 
-    <script src="sjismap.js"></script> <!-- Assuming you still need this -->
+    <script src="sjismap.js"></script> <script src="frequency_data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
