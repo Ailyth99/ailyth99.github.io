@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS2 贴图格式技术文档</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for scrollbar and active states */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .content-section {
+            display: none; /* Hidden by default */
+        }
+        .content-section.active {
+            display: block; /* Shown when active */
+        }
+        /* Styling for preformatted text and code */
+        pre {
+            background-color: #2d3748; /* Tailwind gray-800 */
+            color: #e2e8f0; /* Tailwind gray-300 */
+            border: 1px solid #4a5568; /* Tailwind gray-700 */
+            border-radius: 0.375rem; /* Tailwind rounded-md */
+            padding: 1rem; /* Tailwind p-4 */
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875em; /* text-sm */
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        code { /* Inline code */
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e2e8f0; /* Tailwind gray-200 */
+            color: #2d3748; /* Tailwind gray-800 */
+            padding: 0.125rem 0.25rem; /* Tailwind px-1 py-0.5 */
+            border-radius: 0.25rem; /* Tailwind rounded-sm */
+            font-size: 0.875em; /* text-sm */
+        }
+        pre code { /* Reset for code inside pre */
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+            font-size: 1em; /* Inherit from pre */
+        }
+        /* Table styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* Tailwind shadow-md */
+            border-radius: 0.375rem; /* Tailwind rounded-md */
+            overflow: hidden; /* For rounded corners on table */
+        }
+        th, td {
+            border: 1px solid #e2e8f0; /* Tailwind gray-200 */
+            padding: 0.75rem; /* Tailwind p-3 */
+            text-align: left;
+            font-size: 0.875rem; /* text-sm */
+        }
+        th {
+            background-color: #f7fafc; /* Tailwind gray-50 */
+            font-weight: 600; /* Tailwind font-semibold */
+            color: #4a5568; /* Tailwind gray-700 */
+        }
+        td {
+            background-color: #ffffff; /* White */
+            color: #2d3748; /* Tailwind gray-800 */
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 0.8rem;
+                padding: 0.5rem;
+            }
+            pre {
+                font-size: 0.8rem;
+            }
+        }
+        /* Active link styling */
+        nav a.active-link {
+            background-color: #4a5568; /* Tailwind gray-700 */
+            font-weight: 600; /* Tailwind font-semibold */
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-100 text-gray-900">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <nav class="w-full md:w-72 bg-gray-800 text-white p-5 space-y-1 overflow-y-auto shadow-lg">
+            <h1 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-3">文档导航</h1>
+            <a href="#basics" class="block py-2.5 px-4 rounded hover:bg-gray-700 transition duration-200 nav-link">1. PS2纹理格式基础</a>
+            <a href="#tm2_format" class="block py-2.5 px-4 rounded hover:bg-gray-700 transition duration-200 nav-link">2. TM2 文件格式规范</a>
+            <a href="#clut2_format" class="block py-2.5 px-4 rounded hover:bg-gray-700 transition duration-200 nav-link">3. CLUT2 文件格式规范</a>
+            <a href="#implementation_guide" class="block py-2.5 px-4 rounded hover:bg-gray-700 transition duration-200 nav-link">4. 处理与实现指南</a>
+            <a href="#appendices" class="block py-2.5 px-4 rounded hover:bg-gray-700 transition duration-200 nav-link">5. 附录</a>
+        </nav>
+
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto bg-white shadow-inner">
+            <section id="section-basics" class="content-section prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none">
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2 text-gray-700">1. PS2 TM2纹理格式基础概念</h2>
+                <div class="space-y-4 text-gray-800">
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">1.1. 数据对齐 (16字节及128字节边界)</h3>
+                    <p>TM2 和 CLUT2 格式对数据对齐有严格要求，这是为了确保 Emotion Engine (EE) 的直接内存访问 (DMA) 控制器能够高效运作。文件头中的 <code>FormatId</code> 字段指定了文件所采用的对齐模式：</p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><code>0x00</code>: 16字节对齐</li>
+                        <li><code>0x01</code>: 128字节对齐</li>
+                    </ul>
+                    <p>选择128字节（即8个四字，8 QWORD）对齐能够最大化 EE DMA 的传输性能，尽管这可能因为需要更多填充字节而略微增大文件体积。这体现了游戏开发中常见的性能与存储空间的权衡。</p>
+                    <p>以下关键组件需要遵循指定的对齐规则：</p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>图像数据 (Picture Data)</strong>: 每个图像数据块的起始地址相对于文件头部进行16字节或128字节对齐。</li>
+                        <li><strong>图像数据区 (Image Data)</strong>: 图像数据区的起始地址对齐。</li>
+                        <li><strong>CLUT数据区 (CLUT Data)</strong>: CLUT 数据区的起始地址对齐。</li>
+                        <li><strong>MIPMAP纹理</strong>: 如果图像数据包含多个MIPMAP层级，从第二个MIPMAP纹理开始，其数据起始地址按16字节对齐。</li>
+                    </ul>
+                    <p>一个重要的设计点是，头部信息中所有关于“大小”的成员字段（如 <code>TotalSize</code>, <code>ImageSize</code>, <code>ClutSize</code> 等）在创建文件时已经针对对齐要求进行了调整。这意味着解析程序在计算数据偏移量时，无需再进行额外的对齐调整，简化了地址计算逻辑。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">1.2. 字节序 (小端) 与标准数据类型</h3>
+                    <p>TM2 和 CLUT2 文件中的所有多字节数据均采用小端 (Little Endian) 字节序存储，这与 Emotion Engine 的字节序一致。文件格式定义中使用了基于 <code>ee-gcc</code> 编译器的标准C数据类型及其大小。了解这些对于正确解析文件至关重要。</p>
+                    <p><strong>表 1.2.1: 标准数据类型及大小</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>类型</th><th>大小 (字节)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>char</td><td>1</td></tr>
+                            <tr><td>short</td><td>2</td></tr>
+                            <tr><td>int</td><td>4</td></tr>
+                            <tr><td>long</td><td>8</td></tr>
+                            <tr><td>u_long128</td><td>16</td></tr>
+                        </tbody>
+                    </table>
+                    <p>此表为解析和序列化TM2/CLUT2文件中的数据结构提供了基础。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">1.3. 填充字节与保留区域的处理</h3>
+                    <p>为了保持数据对齐而添加的填充字节，以及结构中定义的保留成员字段，都必须用 <code>0x00</code> 进行填充。规范指出，这样做是为了“未来的兼容性”。这意味着未来的格式版本或相关工具可能会利用这些当前未被定义的区域。因此，创建TM2/CLUT2文件的开发者必须严格遵守将这些区域清零的规则。解析器在处理这些区域时，虽然可以容忍非零值（或许伴随一个警告），但不应依赖其内容，除非格式版本明确指示这些区域已被启用。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">1.4. Graphics Synthesizer (GS) 寄存器数据在头部的重要性</h3>
+                    <p>TM2 的图像头部 (Picture Header) 和 MIPMAP 头部 (MIPMAP Header) 中包含了一些特殊的成员字段，它们存储的是预计算好的、旨在直接加载到 Graphics Synthesizer (GS) 相关寄存器的原始数据值，例如 <code>GsTex0</code>, <code>GsTex1</code>, <code>GsMiptbp1</code>, <code>GsMiptbp2</code> 等。</p>
+                    <p>一个基本规则是：“图像头部或MIPMAP头部中所有与GS寄存器相关的成员，其设置不能与其他成员所指示的其他设置相冲突”。这种设计将纹理数据与其预期的渲染设置（如纹理单元参数、MIPMAP配置）紧密耦合。这意味着TM2文件本身就携带了一份用于渲染该纹理的、一致且有效的GS状态片段。这简化了游戏开发者在运行时的纹理设置工作，因为大部分GS配置已预先烘焙到资源文件中。反过来，创建TM2文件的工具需要对GS寄存器编程有深入理解，才能正确填充这些字段。文件中无效的GS配置可能导致渲染错误或程序崩溃。</p>
+                </div>
+            </section>
+
+            <section id="section-tm2_format" class="content-section prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none">
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2 text-gray-700">2. TM2 文件格式规范</h2>
+                <div class="space-y-4 text-gray-800">
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">2.1. 总体结构：文件头部与图像数据块</h3>
+                    <p>一个TM2文件由一个固定16字节长度的文件头部 (File Header) 开始，其后跟随一个或多个图像数据块 (Picture Data blocks)。文件头部中的 <code>Pictures</code> 字段指明了文件中包含的图像数据块的数量。每个图像数据块都根据文件头部 <code>FormatId</code> 字段指定的对齐方式（16字节或128字节）从文件起始处对齐。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">2.2. TM2 文件头部 (<code>TIM2_FILEHEADER</code>)</h3>
+                    <p>TM2文件头部结构定义如下：</p>
+                    <pre><code class="language-c">typedef struct tagTIM2_FILEHEADER {
+    char    FileId[4];    // 文件标识 (必须为 'T', 'I', 'M', '2')
+    u_char  FormatVersion;  // 格式版本号
+    u_char  FormatId;       // 格式ID (对齐方式)
+    u_short Pictures;       // 图像数据块数量
+    char    Reserved[8];    // 保留 (必须为 0x00)
+} TIM2_FILEHEADER;</code></pre>
+                    <p><strong>表 2.2.1: TM2 文件头部结构</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>偏移</th><th>大小</th><th>成员名称</th><th>数据类型</th><th>描述</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>+0</td><td>4</td><td><code>FileId</code></td><td>char[4]</td><td>文件标识，必须为 'T', 'I', 'M', '2'</td></tr>
+                            <tr><td>+4</td><td>1</td><td><code>FormatVersion</code></td><td>u_char</td><td>TIM2格式的版本号。例如，规范版本为 <code>0x04</code>。不同范围的值代表保留、私有（非标准增强）和私有（兼容增强）版本。</td></tr>
+                            <tr><td>+5</td><td>1</td><td><code>FormatId</code></td><td>u_char</td><td>格式ID，定义文件对齐方式：<code>0x00</code> 为16字节对齐，<code>0x01</code> 为128字节对齐。</td></tr>
+                            <tr><td>+6</td><td>2</td><td><code>Pictures</code></td><td>u_short</td><td>文件中包含的图像数据块数量。</td></tr>
+                            <tr><td>+8</td><td>8</td><td><code>Reserved</code></td><td>char[8]</td><td>填充字节，必须全部为 <code>0x00</code>。</td></tr>
+                        </tbody>
+                    </table>
+                    <p>此头部是文件的入口点，对于初步的文件识别、确定整体结构（图像数量、对齐方式）至关重要。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">2.3. TM2 图像数据</h3>
+                    <p>每个图像数据块 (Picture Data) 均由以下部分组成：图像头部 (Picture Header)、可选的MIPMAP头部 (MIPMAP Header)、用户空间 (User Space)、图像数据区 (Image Data)，以及可选的CLUT数据区 (CLUT Data)。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">2.3.1. 图像头部 (<code>TIM2_PICTUREHEADER</code>)</h4>
+                    <p>图像头部长度固定为48字节，其起始地址根据文件对齐方式（16或128字节）对齐。其C结构定义如下：</p>
+                    <pre><code class="language-c">typedef struct tagTIM2_PICTUREHEADER {
+    u_int   TotalSize;      // 图像数据总大小 (字节)
+    u_int   ClutSize;       // CLUT数据大小 (字节)
+    u_int   ImageSize;      // 图像数据区大小 (字节)
+    u_short HeaderSize;     // 头部区域大小 (字节)
+    u_short ClutColors;     // CLUT中的颜色总数
+    u_char  PictFormat;     // 图像格式ID (当前版本必须为0)
+    u_char  MipMapTextures; // MIPMAP纹理数量
+    u_char  ClutType;       // CLUT数据类型
+    u_char  ImageType;      // 图像数据类型
+    u_short ImageWidth;     // 图像宽度
+    u_short ImageHeight;    // 图像高度
+    u_long  GsTex0;         // GS TEX0寄存器数据
+    u_long  GsTex1;         // GS TEX1寄存器数据
+    u_int   GsRegs;         // GS TEXA, FBA, PABE寄存器数据
+    u_int   GsTexClut;      // GS TEXCLUT寄存器数据
+} TIM2_PICTUREHEADER;</code></pre>
+                    <p><strong>表 2.3.1.1: TM2 图像头部结构</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>偏移</th><th>大小</th><th>成员名称</th><th>数据类型</th><th>描述</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>+0</td><td>4</td><td><code>TotalSize</code></td><td>u_int</td><td>当前图像数据的总字节数 (等于<code>ClutSize</code> + <code>ImageSize</code> + <code>HeaderSize</code>)，必须是对齐字节的倍数。</td></tr>
+                            <tr><td>+4</td><td>4</td><td><code>ClutSize</code></td><td>u_int</td><td>CLUT数据的字节数，必须是对齐字节的倍数。</td></tr>
+                            <tr><td>+8</td><td>4</td><td><code>ImageSize</code></td><td>u_int</td><td>图像数据区的字节数 (若存在MIPMAP，则为所有MIPMAP层级数据大小之和)，必须是对齐字节的倍数。</td></tr>
+                            <tr><td>+12</td><td>2</td><td><code>HeaderSize</code></td><td>u_short</td><td>头部区域的总字节数 (等于图像头部大小 + MIPMAP头部大小 + 用户空间大小，已对齐调整)，必须是对齐字节的倍数。</td></tr>
+                            <tr><td>+14</td><td>2</td><td><code>ClutColors</code></td><td>u_short</td><td>CLUT数据中实际使用的颜色数量。若<code>ImageType</code>为<code>TIM2_IDTEX4</code>，此值须为16的倍数；若为<code>TIM2_IDTEX8</code>，须为256的倍数。若<code>ImageType</code>为<code>TIM2_IDTEX4</code>且<code>ClutType</code>指示CSM1复合模式，则此值须为32的倍数。</td></tr>
+                            <tr><td>+16</td><td>1</td><td><code>PictFormat</code></td><td>u_char</td><td>定义图像格式类型，当前版本此值必须为<code>0x00</code>。</td></tr>
+                            <tr><td>+17</td><td>1</td><td><code>MipMapTextures</code></td><td>u_char</td><td>MIPMAP纹理的数量。<code>0x01</code>表示仅有LV0纹理；<code>0x07</code>表示拥有LV0至LV6所有纹理；<code>0x00</code>表示该图像数据仅含CLUT。若文件为TM2文件，则第一个图像数据的此值不为<code>0x00</code>。</td></tr>
+                            <tr><td>+18</td><td>1</td><td><code>ClutType</code></td><td>u_char</td><td>定义CLUT数据的存储模式 (位7: 0=CSM1, 1=CSM2)，复合标志 (位6，仅用于CSM1/16色模式)，以及CLUT像素格式 (位5-0: <code>TIM2_NONE</code>, <code>TIM2_RGB16</code>, <code>TIM2_RGB24</code>, <code>TIM2_RGB32</code>)。</td></tr>
+                            <tr><td>+19</td><td>1</td><td><code>ImageType</code></td><td>u_char</td><td>定义图像数据区的像素格式 (位7-0: <code>TIM2_RGB16</code>, <code>TIM2_RGB24</code>, <code>TIM2_RGB32</code>, <code>TIM2_IDTEX4</code>, <code>TIM2_IDTEX8</code>)。</td></tr>
+                            <tr><td>+20</td><td>2</td><td><code>ImageWidth</code></td><td>u_short</td><td>图像宽度。根据MIPMAP层级和<code>ImageType</code>有特定限制。</td></tr>
+                            <tr><td>+22</td><td>2</td><td><code>ImageHeight</code></td><td>u_short</td><td>图像高度。</td></tr>
+                            <tr><td>+24</td><td>8</td><td><code>GsTex0</code></td><td>u_long</td><td>用于GS TEX0寄存器的原始数据 (控制CLUT参数、纹理功能、尺寸、像素格式、基址指针等)。</td></tr>
+                            <tr><td>+32</td><td>8</td><td><code>GsTex1</code></td><td>u_long</td><td>用于GS TEX1寄存器的原始数据 (控制LOD参数、MIPMAP基址指定、滤波模式等)。</td></tr>
+                            <tr><td>+40</td><td>4</td><td><code>GsRegs</code></td><td>u_int</td><td>用于GS TEXA, FBA, PABE寄存器的数据。</td></tr>
+                            <tr><td>+44</td><td>4</td><td><code>GsTexClut</code></td><td>u_int</td><td>用于GS TEXCLUT寄存器的数据 (用于CSM2模式下的CLUT寻址)。</td></tr>
+                        </tbody>
+                    </table>
+                    <p>图像头部是TM2文件的心脏，它详尽描述了每一个独立图像/纹理的属性，包括尺寸、格式类型以及关键的GS寄存器设置。这些信息对于正确解析和使用图像数据至关重要。例如，<code>ImageType</code>、<code>ClutType</code>、<code>ImageWidth</code>、<code>ImageHeight</code> 和 <code>MipMapTextures</code> 等字段定义了纹理的基本属性，而 <code>GsTex0</code>、<code>GsTex1</code> 等字段则直接存储了GS硬件的配置值。这些描述性字段与GS寄存器字段之间必须保持语义上的一致性。例如，图像头部中的 <code>ImageWidth</code> 应与编程到 <code>GsTex0</code> 中的纹理宽度 (TW) 相对应；<code>GsTex0</code> 中的像素存储模式 (PSM) 必须与 <code>ImageType</code> 所隐含的格式相匹配；<code>ClutType</code> (CSM1/CSM2) 也必须与 <code>GsTex0</code> 中的 CSM 位一致。这种一致性要求生成TM2文件的工具不仅要填充这些字段，还要确保它们之间的逻辑正确性，否则可能导致GS错误解读纹理数据。因此，TM2格式实际上携带了一个“微型”的GS状态信息。详细的GS寄存器位域表见附录。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">2.3.2. MIPMAP头部 (<code>TIM2_MIPMAPHEADER</code>) (条件存在)</h4>
+                    <p>仅当图像头部中的 <code>MipMapTextures</code> 成员值大于等于2时，MIPMAP头部才会存在。若 <code>MipMapTextures</code> 为1（即只有LV0纹理），则用户空间紧随图像头部之后，没有MIPMAP头部。MIPMAP头部大小可变，并会进行16字节对齐填充。其C结构定义如下：</p>
+                    <pre><code class="language-c">typedef struct tagTIM2_MIPMAPHEADER {
+    u_long  GsMiptbp1;  // GS MIPTBP1寄存器值
+    u_long  GsMiptbp2;  // GS MIPTBP2寄存器值
+    u_int   Size[/*n*/];    // 各MIPMAP层级纹理大小数组 (n depends on MipMapTextures)
+} TIM2_MIPMAPHEADER;</code></pre>
+                    <p><strong>表 2.3.2.1: TM2 MIPMAP头部结构</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>成员名称</th><th>数据类型</th><th>描述</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>GsMiptbp1</code></td><td>u_long</td><td>用于GS MIPTBP1寄存器的原始数据 (控制MIPMAP LV1, LV2, LV3的基址指针和缓冲宽度)。</td></tr>
+                            <tr><td><code>GsMiptbp2</code></td><td>u_long</td><td>用于GS MIPTBP2寄存器的原始数据 (控制MIPMAP LV4, LV5, LV6的基址指针和缓冲宽度)。</td></tr>
+                            <tr><td><code>Size[n]</code></td><td>u_int[]</td><td>一个u_int数组，存储每个MIPMAP纹理层级 (从LV0到LVn-1) 的字节大小。数组元素数量 <code>n</code> 等于图像头部中的 <code>MipMapTextures</code> 值。每个元素的大小必须是16的倍数。所有 <code>Size[n]</code> 元素之和等于图像头部中的 <code>ImageSize</code> 值。</td></tr>
+                        </tbody>
+                    </table>
+                    <p>MIPMAP头部定义了MIPMAP层级1至6的参数，包括它们的GS寄存器设置和各自的大小，这对于处理带MIPMAP的纹理至关重要。详细的GS MIPTBP寄存器位域表见附录。</p>
+                    <p><strong>表 2.3.2.2: MIPMAP头部大小与填充</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>MIPMAP数量</th><th>MIPMAP头部大小 (字节)</th><th>填充大小 (字节)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>0</td><td></td></tr>
+                            <tr><td>2</td><td>32</td><td>8</td></tr>
+                            <tr><td>3</td><td>32</td><td>4</td></tr>
+                            <tr><td>4</td><td>32</td><td>0</td></tr>
+                            <tr><td>5</td><td>48</td><td>12</td></tr>
+                            <tr><td>6</td><td>48</td><td>8</td></tr>
+                            <tr><td>7</td><td>48</td><td>4</td></tr>
+                        </tbody>
+                    </table>
+                    <p>此表对于在存在MIPMAP头部时计算用户空间的正确偏移量非常重要，因为它的大小可变且包含填充。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">2.3.3. 用户空间 (User Space)</h4>
+                    <p>用户空间是一个可变长度的数据区域，其用途未被预先定义，开发者可以自由使用。它紧跟在图像头部或MIPMAP头部（如果存在）之后。其大小可以通过从图像头部的 <code>HeaderSize</code> 中减去图像头部自身大小 (48字节) 和MIPMAP头部大小（如果存在，包括其填充）来计算。</p>
+                    <p><strong>可选的扩展头部 (<code>TIM2_EXHEADER</code>)</strong><br>
+                    规范推荐使用扩展头部来管理用户空间，尤其是在采用128字节对齐模式或用户空间包含注释、自定义数据时。扩展头部有助于明确用户空间的有效大小，并将用户数据与注释字符串分开，避免因对齐填充导致用户空间大小意外增长的问题。扩展头部固定为16字节，位于用户空间的起始位置。其C结构定义如下：</p>
+                    <pre><code class="language-c">typedef struct tagTIM2_EXHEADER {
+    char    ExHeaderId[4];  // 扩展头部ID ('e', 'X', 't', '\\x00')
+    u_int   UserSpaceSize;  // 用户空间总大小
+    u_int   UserDataSize;   // 用户数据大小
+    u_int   Reserved;       // 保留 (0x00000000)
+} TIM2_EXHEADER;</code></pre>
+                    <p><strong>表 2.3.3.1: TM2 扩展头部 (<code>TIM2_EXHEADER</code>) 结构</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>偏移</th><th>大小</th><th>成员名称</th><th>数据类型</th><th>描述</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>+0</td><td>4</td><td><code>ExHeaderId</code></td><td>char[4]</td><td>扩展头部标识字符串，必须为 'e', 'X', 't', <code>\x00</code>。</td></tr>
+                            <tr><td>+4</td><td>4</td><td><code>UserSpaceSize</code></td><td>u_int</td><td>用户空间的<em>有效</em>总字节数，包含扩展头部自身的大小 (16字节)。此值可能因对齐填充而小于通过<code>HeaderSize</code>计算出的用户空间大小。</td></tr>
+                            <tr><td>+8</td><td>4</td><td><code>UserDataSize</code></td><td>u_int</td><td>跟随在扩展头部之后的自定义用户数据的字节大小。此成员也作为注释字符串的偏移量。若无自定义数据，则此值为0。</td></tr>
+                            <tr><td>+12</td><td>4</td><td><code>Reserved</code></td><td>u_int</td><td>保留字段，必须为 <code>0x00000000</code>。</td></tr>
+                        </tbody>
+                    </table>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>用户数据 (User Data)</strong>: 紧随 <code>TIM2_EXHEADER</code> 之后，其大小由 <code>UserDataSize</code> 指定。</li>
+                        <li><strong>注释字符串 (Comment String)</strong>: 紧随用户数据之后，是一个以 <code>\x00</code> 结尾的ASCII字符串 (字符范围 <code>0x20</code>-<code>0x7f</code>)。</li>
+                    </ul>
+                    <p>游戏开发者常需要在资源文件中嵌入自定义元数据（如作者、版本、特殊标记等）。用户空间为此提供了可能，但若无标准，不同工具可能破坏或误解这些数据。<code>TIM2_EXHEADER</code> 是一个<em>推荐</em>的标准，工具链对其的采纳将改善元数据的持久性和互操作性。规范中关于工具对用户空间信息保留与否的依赖性提示，强调了如果工具不遵循扩展头部（或甚至不保留基本用户空间内容），元数据可能丢失的风险。因此，强烈建议依赖用户空间数据的开发者确保其工具链一致地支持它，最好是通过扩展头部。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">2.3.4. 图像数据区 (Image Data)</h4>
+                    <p>图像数据区包含实际的纹理像素数据，其格式可以直接传输到GS的本地显存中。图像头部的 <code>ImageType</code> 成员定义了像素数据的格式。图像数据区的起始地址根据文件对齐方式（16或128字节）对齐。如果包含MIPMAP，后续的MIPMAP层级数据则按16字节对齐。</p>
+                    <p>支持的像素格式包括：</p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><code>TIM2_RGB32</code>: 每像素32位 (R8G8B8A8)。</li>
+                        <li><code>TIM2_RGB24</code>: 每像素24位 (R8G8B8)。</li>
+                        <li><code>TIM2_RGB16</code>: 每像素16位 (R5G5B5A1)。</li>
+                        <li><code>TIM2_IDTEX8</code>: 每像素8位索引颜色 (使用CLUT)。</li>
+                        <li><code>TIM2_IDTEX4</code>: 每像素4位索引颜色 (使用CLUT)。</li>
+                    </ul>
+                    <p><strong>表 2.3.4.1: TM2 图像数据像素格式摘要</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>格式名称</th><th>每像素位数</th><th>颜色分量/索引</th><th>详细位元布局 (示例)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>TIM2_RGB32</code></td><td>32</td><td>R,G,B,A (各8位)</td><td><code>A1 B1 G1 R1 A0 B0 G0 R0</code> (64位中的2像素)</td></tr>
+                            <tr><td><code>TIM2_RGB24</code></td><td>24</td><td>R,G,B (各8位)</td><td><code>G2 R2 B1 G1 R1 B0 G0 R0</code> (64位中的~2.6像素，复杂交错)</td></tr>
+                            <tr><td><code>TIM2_RGB16</code></td><td>16</td><td>R,G,B (各5位), A (1位)</td><td><code>RGBA3 RGBA2 RGBA1 RGBA0</code> (64位中的4像素)</td></tr>
+                            <tr><td><code>TIM2_IDTEX8</code></td><td>8</td><td>索引 (8位)</td><td><code>T7 T6 T5 T4 T3 T2 T1 T0</code> (64位中的8个索引)</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td>4</td><td>索引 (4位)</td><td><code>T15 T14... T1 T0</code> (64位中的16个索引)</td></tr>
+                        </tbody>
+                    </table>
+                    <p>这些位元布局并非随意设定，它们精确反映了GS期望的本地像素格式和内存组织方式。例如，<code>TIM2_RGB32</code> 在一个64位字中存储像素的顺序可能是 <code>A1,B1,G1,R1</code> 紧接着 <code>A0,B0,G0,R0</code>，这看似“反向”（像素1后是像素0），但却是GS处理数据的方式。<code>TIM2_RGB24</code> 的交错方式更为复杂。这意味着图像数据通常以GS特定的方式进行了“像素重排 (swizzled)”或打包。因此，将标准图像格式（如BMP, PNG）转换为TM2格式时，需要进行精确的像素操作以匹配这些布局，简单地转储原始像素数据是行不通的。同样，在PC上显示TM2文件也需要根据这些规则进行解包。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">2.3.5. CLUT (颜色查找表) 数据区</h4>
+                    <p>当图像使用索引颜色格式（<code>TIM2_IDTEX4</code>, <code>TIM2_IDTEX8</code>）且图像头部中的 <code>ClutSize</code> 大于0时，CLUT数据区存在。CLUT数据的格式和像素顺序由图像头部的 <code>ClutType</code> 和 <code>ImageType</code> 成员共同定义。CLUT数据区的起始地址根据文件对齐方式（16或128字节）对齐。</p>
+                    <p>需要注意的是，CLUT数据<em>可能不</em>总是能直接传输到GS。例如，当CLUT存储模式为CSM2时，GS不接受PSMCT32（32位）像素格式的CLUT条目，这意味着如果源CLUT是32位的，在传输到GS本地内存前可能需要在主机端进行转换。</p>
+                    <p><strong>CLUT存储模式 (由<code>ClutType</code>的位7决定):</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>CSM1</strong>: 可能涉及“复合 (compounded)”数据顺序，以匹配GS的内存布局。
+                            <ul class="list-circle list-inside ml-6">
+                                <li>CSM1模式下的像素顺序图示可参考相关规范文档。</li>
+                                <li>针对RGB16, RGB24, RGB32 CLUT的复合规则涉及特定的字节交换模式。</li>
+                                <li>如果 <code>ClutType</code> 的位6被设置 (表示CSM1, 16色模式, 复合)，则 <code>ClutColors</code> 必须是32的倍数。</li>
+                            </ul>
+                        </li>
+                        <li><strong>CSM2</strong>: 存储方式更直接，但如前所述，GS在CSM2模式下对某些CLUT像素格式（如PSMCT32）的支持有限。</li>
+                    </ul>
+                    <p><strong>表 2.3.5.1: TM2 CLUT数据的有效 <code>ImageType</code> 与 <code>ClutType</code> 组合</strong><br>
+                    (详见附录，该表是理解CLUT数据结构和解释的关键，列出了所有有效组合及其含义。)</p>
+                    <p>CLUT在TM2中的处理相当复杂。GS对其本地内存中的CLUT数据布局有特定要求（CSM1与CSM2，以及CSM1独特的复合顺序）。CSM1的“复合”顺序（例如，颜色索引0-7, 16-23，然后是8-15, 24-31等）是一种像素重排形式，旨在优化GS的缓存访问或寻址。针对不同CLUT位深的CSM1复合模式下的字节交换规则进一步增加了复杂性。开发者需要密切关注 <code>ClutType</code>、<code>ImageType</code> 以及像素排序/交换规则。创建带CLUT的TM2文件的工具必须实现这些转换。</p>
+                </div>
+            </section>
+
+            <section id="section-clut2_format" class="content-section prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none">
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2 text-gray-700">3. CLUT2 文件格式规范</h2>
+                <div class="space-y-4 text-gray-800">
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">3.1. 用途及与TM2的关系</h3>
+                    <p>CLUT2是专为PlayStation 2设计的颜色查找表数据格式，它直接采用了TIM2的文件结构。它由Web Technology Corp.指定，作为PS2的标准CLUT格式。CLUT2文件的扩展名通常为 <code>.CL2</code> 或 <code>.cl2</code>。</p>
+                    <p>CLUT2并非一个全新的格式，而是TM2的一个“特化配置文件 (profile)”。它重用了TM2的基本构建块（如头部、数据区段），并通过将TM2头部中的特定字段设置为固定值（例如 <code>ImageSize=0</code>, <code>MipMapTextures=0</code>）以及省略某些数据区段（如图像数据区、MIPMAP头部）来实现其专用性。这种设计促进了代码重用，并简化了相关工具和库的生态系统。一个为TM2设计的健壮解析库，只需稍作条件逻辑调整，便能支持CLUT2。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">3.2. CLUT2 文件头部</h3>
+                    <p>CLUT2文件头部与 <code>TIM2_FILEHEADER</code> 结构相同。其主要区别在于 <code>FileId</code> 字段：</p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><code>FileId</code> (char[4]): 必须为 'C', 'L', 'T', '2'。这是在文件级别区分CLUT2文件的主要标识。</li>
+                    </ul>
+                    <p>其他字段 (<code>FormatVersion</code>, <code>FormatId</code>, <code>Pictures</code>, <code>Reserved</code>) 遵循TM2的规则。如果文件头部的 <code>FileId</code> 为 'CLT2'，则文件中的第一个图像数据块保证是CLUT2格式的数据。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">3.3. CLUT2 图像数据</h3>
+                    <p>CLUT2的图像数据 (Picture Data) 遵循TM2的通用结构，但有特定的约束和省略。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">3.3.1. 图像头部 (CLUT2特定修改)</h4>
+                    <p>CLUT2使用标准的 <code>TIM2_PICTUREHEADER</code> 结构，但对部分成员有特定约束：</p>
+                    <p><strong>表 3.3.1.1: CLUT2 图像头部字段约束</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>成员名称</th><th>CLUT2中的约束/值</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ImageSize</code></td><td>总是 <code>0</code></td></tr>
+                            <tr><td><code>MipMapTextures</code></td><td>总是 <code>0x00</code></td></tr>
+                            <tr><td><code>ImageType</code></td><td>仅限 <code>0x04</code> (TIM2_IDTEX4) 或 <code>0x05</code> (TIM2_IDTEX8)</td></tr>
+                            <tr><td><code>ImageWidth</code></td><td>必须为 <code>0</code></td></tr>
+                            <tr><td><code>ImageHeight</code></td><td>必须为 <code>0</code></td></tr>
+                        </tbody>
+                    </table>
+                    <p><code>MipMapTextures</code> 为 <code>0x00</code> 是一个关键特征，即使在 <code>.TM2</code> 文件中，符合此条件的图像数据块也可被判断为CLUT2类型的数据（即仅含CLUT）。图像头部中的其他字段（如 <code>TotalSize</code>, <code>ClutSize</code>, <code>HeaderSize</code>, <code>ClutColors</code>, <code>ClutType</code> 以及GS寄存器相关字段）则与TM2中定义的一样，用于描述CLUT数据本身。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">3.3.2. MIPMAP头部与图像数据区的缺失</h4>
+                    <p>CLUT2格式中不存在MIPMAP头部；用户空间直接跟随在图像头部之后。同样，CLUT2中也不存在图像数据区（因为图像头部的 <code>ImageSize</code> 成员为0）。然而，规范建议，在计算到CLUT数据区的偏移量时，为了与TIM2的处理方式保持一致并考虑未来的兼容性，仍应通过加上 <code>ImageSize</code> 的值（即使为0）来跳过理论上的图像数据区位置。这种为仅含CLUT数据而精简的结构，使得CLUT2文件更紧凑，并直接反映其内容。解析CLUT2文件在数据区段方面更为简单，但高度依赖于对图像头部中CLUT相关字段的正确解读。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">3.3.3. 用户空间 (与TM2一致)</h4>
+                    <p>CLUT2中用户空间的定义和使用（包括可选的 <code>TIM2_EXHEADER</code> 扩展头部）与TM2完全相同，没有任何修改。</p>
+
+                    <h4 class="text-xl font-semibold mt-3 mb-1 text-gray-700">3.3.4. CLUT数据区 (主要内容，与TM2 CLUT定义一致)</h4>
+                    <p>CLUT2文件的核心内容是CLUT数据。其数据定义、格式分配（通过 <code>ClutType</code> 和 <code>ImageType</code> 决定）、像素顺序以及与GS寄存器的交互方式，均与TM2中的CLUT数据完全一致。所有适用于TM2 CLUT数据的规则都同样适用于CLUT2。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">3.4. 通用规则 (对齐、填充、GS寄存器等)</h3>
+                    <p>所有其他TIM2格式的通用规则，包括数据对齐、填充字节、保留区域处理、GS寄存器设置、CLUT数据格式分配和像素顺序等，都完全适用于CLUT2格式，没有任何修改。</p>
+                </div>
+            </section>
+
+            <section id="section-implementation_guide" class="content-section prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none">
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2 text-gray-700">4. 处理与实现指南</h2>
+                <div class="space-y-4 text-gray-800">
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">4.1. 识别文件与图像数据类型</h3>
+                    <p><strong>文件级别识别:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>检查文件头部的 <code>FileId</code>：'T','I','M','2' 表示TM2文件；'C','L','T','2' 表示CLUT2文件。</li>
+                        <li>文件扩展名 (<code>.TM2</code>/<code>.CL2</code>) 可作为提示，但 <code>FileId</code> 是权威判断依据。</li>
+                        <li>对于混合内容的文件：若扩展名为 <code>.CL2</code>，则第一个图像数据必须是CLUT2格式。若扩展名为 <code>.TM2</code>，则第一个图像数据必须是TM2格式。</li>
+                    </ul>
+                    <p><strong>图像数据块级别识别 (在TM2或CLUT2文件中):</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>如果一个图像数据块的图像头部中 <code>MipMapTextures</code> 成员为 <code>0x00</code>，则该数据块可被判断为CLUT2类型的数据（即仅含CLUT）。这是在可能混合内容的TM2文件中识别仅含CLUT的图像数据块的主要方法。</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">4.2. 解析策略</h3>
+                    <p>推荐使用与文件格式镜像的C结构（例如，来自 <code>tim2.h</code> 的 <code>TIM2_FILEHEADER</code>, <code>TIM2_PICTUREHEADER</code> 等）进行解析。</p>
+                    <p><strong>逐步解析流程:</strong></p>
+                    <ol class="list-decimal list-inside ml-4 space-y-1">
+                        <li>读取文件头部 (<code>TIM2_FILEHEADER</code>)。验证 <code>FileId</code>。获取 <code>Pictures</code> 数量和 <code>FormatId</code> (用于确定对齐方式)。</li>
+                        <li>根据 <code>Pictures</code> 数量循环处理每个图像数据块：
+                            <ol class="list-alpha list-inside ml-6 space-y-1">
+                                <li>计算当前图像数据块的偏移量，考虑对齐。</li>
+                                <li>读取图像头部 (<code>TIM2_PICTUREHEADER</code>)。</li>
+                                <li>检查 <code>MipMapTextures</code> 以确定是完整图像还是仅含CLUT的数据。</li>
+                                <li>如果为仅含CLUT的数据 (CLUT2风格)：<code>ImageSize</code>, <code>ImageWidth</code>, <code>ImageHeight</code> 应为0。此时不存在MIPMAP头部和图像数据区。</li>
+                                <li>计算 <code>HeaderSize</code> 的组成部分：<code>sizeof(TIM2_PICTUREHEADER)</code> + (若 <code>MipMapTextures &gt;= 2</code>) <code>sizeof(TIM2_MIPMAPHEADER)</code> (包括其填充) + 用户空间大小。</li>
+                                <li>若 <code>MipMapTextures &gt;= 2</code>，则读取MIPMAP头部 (大小可变，有填充，参考表2.3.2.2)。</li>
+                                <li>读取用户空间 (可能包含 <code>TIM2_EXHEADER</code>)。</li>
+                                <li>计算图像数据区偏移量 (在用户空间之后，已对齐)。若 <code>ImageSize &gt; 0</code>，则读取图像数据。</li>
+                                <li>计算CLUT数据区偏移量 (在图像数据区之后，已对齐)。若 <code>ClutSize &gt; 0</code>，则读取CLUT数据。</li>
+                            </ol>
+                        </li>
+                    </ol>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">4.3. 数据提取、解释与验证</h3>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>图像数据</strong>: 根据图像头部的 <code>ImageType</code> 和表2.3.4.1解码像素。</li>
+                        <li><strong>CLUT数据</strong>: 根据图像头部的 <code>ClutType</code>、<code>ImageType</code> 和附录中的相关表格解码CLUT条目，必要时应用CSM1复合/像素重排规则。</li>
+                        <li><strong>验证</strong>: 检查描述性字段与GS寄存器字段之间的一致性。确保各项大小加和正确（例如，<code>TotalSize</code>，<code>ImageSize</code> 作为MIPMAP大小之和）。检查保留字段是否为零。</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">4.4. 创建和修改TM2/CLUT2文件的注意事项</h3>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>严格遵守所有区段的对齐要求。</li>
+                        <li>正确计算并填充所有大小字段 (<code>TotalSize</code>, <code>ImageSize</code>, <code>ClutSize</code>, <code>HeaderSize</code>)。</li>
+                        <li>准确填充GS寄存器相关字段，并确保与其他参数的一致性。</li>
+                        <li>根据GS要求，正确格式化和重排像素/CLUT数据。</li>
+                        <li>将所有填充字节和保留区域清零。</li>
+                        <li>若使用用户空间，则正确使用 <code>TIM2_EXHEADER</code>。</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">4.5. 实践示例：<code>tim2clut</code> 工具功能概念</h3>
+                    <p><code>tim2clut</code> 程序的功能是从一个TM2文件中提取CLUT部分，并将其转换为一个CLUT2文件。这表明开发者可能拥有同时包含图像和CLUT数据的TM2资源，但在某些情况下（如调色板交换，或系统期望CLUT以CLUT2格式存在时）仅需要独立的CLUT资源。<code>tim2clut</code> 实现了这种提取和重新打包的自动化。</p>
+                    <p>其大致处理流程如下：</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-1">
+                        <li><strong>输入</strong>: 一个TM2文件。</li>
+                        <li><strong>处理</strong>:
+                            <ol class="list-alpha list-inside ml-6 space-y-1">
+                                <li>解析TM2文件结构。</li>
+                                <li>识别包含CLUT数据的图像数据块（可能通过检查 <code>ClutSize &gt; 0</code>，或者如果目标是提取仅含CLUT的部分，则检查 <code>MipMapTextures == 0</code>；也可能适用于任何包含CLUT的图像数据块）。</li>
+                                <li>从TM2图像头部提取CLUT数据本身以及相关的CLUT参数（如 <code>ClutColors</code>, <code>ClutType</code>, 用于CLUT上下文的 <code>ImageType</code>, 以及与CLUT相关的GS寄存器设置）。</li>
+                                <li>构建一个新的CLUT2文件：
+                                    <ol class="list-roman list-inside ml-8 space-y-1">
+                                        <li>创建CLUT2文件头部，设置 <code>FileId</code> 为 'CLT2'。</li>
+                                        <li>创建CLUT2图像头部：
+                                            <ul class="list-disc list-inside ml-10">
+                                                <li>设置 <code>ImageSize=0</code>, <code>MipMapTextures=0</code>, <code>ImageWidth=0</code>, <code>ImageHeight=0</code>。</li>
+                                                <li>从源TM2复制或调整与CLUT相关的字段（如 <code>ClutSize</code>, <code>ClutColors</code>, <code>ClutType</code>, 用于CLUT的 <code>ImageType</code>, 以及用于CLUT的GS寄存器值）。</li>
+                                                <li>为CLUT2结构恰当计算 <code>TotalSize</code> 和 <code>HeaderSize</code>。</li>
+                                            </ul>
+                                        </li>
+                                        <li>复制用户空间（如果存在且需要）。</li>
+                                        <li>写入提取出的CLUT数据。</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li><strong>输出</strong>: 一个CLUT2文件。</li>
+                    </ol>
+                    <p>此工具的存在证明了CLUT2格式作为一种管理源自通用TM2资源的CLUT的简化方式的实用性，并强化了两种格式之间的结构关联。</p>
+                </div>
+            </section>
+
+            <section id="section-appendices" class="content-section prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none">
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2 text-gray-700">5. 附录</h2>
+                <div class="space-y-4 text-gray-800">
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">5.1. GS寄存器位域表</h3>
+                    <p><strong>GS TEX0 寄存器 (<code>GsTex0</code>)</strong></p>
+                    <table>
+                        <thead><tr><th>位</th><th>字段名称</th><th>描述</th></tr></thead>
+                        <tbody>
+                            <tr><td>63..61</td><td>CLD</td><td>CLUT缓冲加载控制</td></tr>
+                            <tr><td>60..56</td><td>CSA</td><td>CLUT条目偏移</td></tr>
+                            <tr><td>55</td><td>CSM</td><td>CLUT存储模式 (0=CSM1, 1=CSM2)</td></tr>
+                            <tr><td>54..51</td><td>CPSM</td><td>CLUT像素存储格式</td></tr>
+                            <tr><td>50..37</td><td>CBP</td><td>CLUT缓冲基址指针</td></tr>
+                            <tr><td>36..35</td><td>TFX</td><td>纹理功能</td></tr>
+                            <tr><td>34</td><td>TCC</td><td>纹理颜色分量</td></tr>
+                            <tr><td>33..30</td><td>TH</td><td>纹理高度 (以2为底的对数)</td></tr>
+                            <tr><td>29..26</td><td>TW</td><td>纹理宽度 (以2为底的对数)</td></tr>
+                            <tr><td>25..20</td><td>PSM</td><td>纹理像素存储格式</td></tr>
+                            <tr><td>19..14</td><td>TBW</td><td>纹理缓冲宽度 (以64字节为单位)</td></tr>
+                            <tr><td>13..0</td><td>TBP0</td><td>纹理基址指针 (LV0)</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>GS TEX1 寄存器 (<code>GsTex1</code>)</strong></p>
+                    <table>
+                        <thead><tr><th>位</th><th>字段名称</th><th>描述</th></tr></thead>
+                        <tbody>
+                            <tr><td>63..44</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>43..32</td><td>K</td><td>LOD参数K值</td></tr>
+                            <tr><td>31..21</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>20..19</td><td>L</td><td>LOD参数L值</td></tr>
+                            <tr><td>18..10</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>9</td><td>MTBA</td><td>MIPMAP纹理LV1及以上基址指定</td></tr>
+                            <tr><td>8..6</td><td>MMIN</td><td>纹理缩小时的滤波器</td></tr>
+                            <tr><td>5</td><td>MMAG</td><td>纹理放大时的滤波器</td></tr>
+                            <tr><td>4..2</td><td>MXL</td><td>最大MIP层级</td></tr>
+                            <tr><td>1</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>0</td><td>LCM</td><td>LOD计算方法</td></tr>
+                        </tbody>
+                    </table>
+                    
+                    <p><strong>GS TEXA, FBA, PABE 寄存器 (<code>GsRegs</code>)</strong></p>
+                    <table>
+                        <thead><tr><th>位</th><th>字段名称</th><th>描述</th></tr></thead>
+                        <tbody>
+                            <tr><td>31</td><td>FBA</td><td>FBA_1和FBA_2寄存器的FBA位</td></tr>
+                            <tr><td>30</td><td>PABE</td><td>PABE寄存器的PABE位</td></tr>
+                            <tr><td>29..24</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>23..16</td><td>TA1</td><td>TEXA寄存器的TA1字段</td></tr>
+                            <tr><td>15</td><td>AEM</td><td>TEXA寄存器的AEM位</td></tr>
+                            <tr><td>14..8</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>7..0</td><td>TA0</td><td>TEXA寄存器的TA0字段</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>GS TEXCLUT 寄存器 (<code>GsTexClut</code>)</strong></p>
+                    <table>
+                        <thead><tr><th>位</th><th>字段名称</th><th>描述</th></tr></thead>
+                        <tbody>
+                            <tr><td>31..22</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>21..12</td><td>COV</td><td>CLUT偏移V</td></tr>
+                            <tr><td>11..6</td><td>COU</td><td>CLUT偏移U</td></tr>
+                            <tr><td>5..0</td><td>CBW</td><td>CLUT缓冲宽度</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-gray-600 italic">注意: <code>GsTexClut</code> 仅在 <code>ClutType</code> 显示CLUT存储模式为CSM2时有效。</p>
+
+                    <p><strong>GS MIPTBP1 寄存器 (<code>GsMiptbp1</code>)</strong></p>
+                     <table>
+                        <thead><tr><th>位</th><th>字段名称</th><th>描述</th></tr></thead>
+                        <tbody>
+                            <tr><td>63..60</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>59..54</td><td>TBW3</td><td>MIPMAP LV3 纹理缓冲宽度</td></tr>
+                            <tr><td>53..40</td><td>TBP3</td><td>MIPMAP LV3 纹理基址指针</td></tr>
+                            <tr><td>39..34</td><td>TBW2</td><td>MIPMAP LV2 纹理缓冲宽度</td></tr>
+                            <tr><td>33..20</td><td>TBP2</td><td>MIPMAP LV2 纹理基址指针</td></tr>
+                            <tr><td>19..14</td><td>TBW1</td><td>MIPMAP LV1 纹理缓冲宽度</td></tr>
+                            <tr><td>13..0</td><td>TBP1</td><td>MIPMAP LV1 纹理基址指针</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>GS MIPTBP2 寄存器 (<code>GsMiptbp2</code>)</strong></p>
+                    <table>
+                        <thead><tr><th>位</th><th>字段名称</th><th>描述</th></tr></thead>
+                        <tbody>
+                            <tr><td>63..60</td><td>-</td><td>保留 (必须为0)</td></tr>
+                            <tr><td>59..54</td><td>TBW6</td><td>MIPMAP LV6 纹理缓冲宽度</td></tr>
+                            <tr><td>53..40</td><td>TBP6</td><td>MIPMAP LV6 纹理基址指针</td></tr>
+                            <tr><td>39..34</td><td>TBW5</td><td>MIPMAP LV5 纹理缓冲宽度</td></tr>
+                            <tr><td>33..20</td><td>TBP5</td><td>MIPMAP LV5 纹理基址指针</td></tr>
+                            <tr><td>19..14</td><td>TBW4</td><td>MIPMAP LV4 纹理缓冲宽度</td></tr>
+                            <tr><td>13..0</td><td>TBP4</td><td>MIPMAP LV4 纹理基址指针</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">5.2. CLUT数据的有效 <code>ImageType</code> 与 <code>ClutType</code> 组合表</h3>
+                    <table>
+                        <thead>
+                            <tr><th><code>ImageType</code></th><th><code>ClutType</code></th><th>CLUT数据的像素格式</th><th>CLUT存储模式与像素顺序</th><th>CLUT颜色数</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>TIM2_RGB16</code></td><td><code>TIM2_NONE</code></td><td>无</td><td>无</td><td>无</td></tr>
+                            <tr><td><code>TIM2_RGB24</code></td><td><code>TIM2_NONE</code></td><td>无</td><td>无</td><td>无</td></tr>
+                            <tr><td><code>TIM2_RGB32</code></td><td><code>TIM2_NONE</code></td><td>无</td><td>无</td><td>无</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB16</code></td><td>16色, 每像素16位</td><td>CSM1, 顺序</td><td>n x 16色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB24</code></td><td>16色, 每像素24位</td><td>CSM1, 顺序</td><td>n x 16色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB32</code></td><td>16色, 每像素32位</td><td>CSM1, 顺序</td><td>n x 16色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB16 | 0x40</code></td><td>16色, 每像素16位</td><td>CSM1, 复合</td><td>n x 32色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB24 | 0x40</code></td><td>16色, 每像素24位</td><td>CSM1, 复合</td><td>n x 32色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB32 | 0x40</code></td><td>16色, 每像素32位</td><td>CSM1, 复合</td><td>n x 32色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB16 | 0x80</code></td><td>16色, 每像素16位</td><td>CSM2, 顺序</td><td>n x 16色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB24 | 0x80</code></td><td>16色, 每像素24位</td><td>CSM2, 顺序</td><td>n x 16色</td></tr>
+                            <tr><td><code>TIM2_IDTEX4</code></td><td><code>TIM2_RGB32 | 0x80</code></td><td>16色, 每像素32位</td><td>CSM2, 顺序</td><td>n x 16色</td></tr>
+                            <tr><td><code>TIM2_IDTEX8</code></td><td><code>TIM2_RGB16</code></td><td>256色, 每像素16位</td><td>CSM1, 复合</td><td>n x 256色</td></tr>
+                            <tr><td><code>TIM2_IDTEX8</code></td><td><code>TIM2_RGB24</code></td><td>256色, 每像素24位</td><td>CSM1, 复合</td><td>n x 256色</td></tr>
+                            <tr><td><code>TIM2_IDTEX8</code></td><td><code>TIM2_RGB32</code></td><td>256色, 每像素32位</td><td>CSM1, 复合</td><td>n x 256色</td></tr>
+                            <tr><td><code>TIM2_IDTEX8</code></td><td><code>TIM2_RGB16 | 0x80</code></td><td>256色, 每像素16位</td><td>CSM2, 顺序</td><td>n x 256色</td></tr>
+                            <tr><td><code>TIM2_IDTEX8</code></td><td><code>TIM2_RGB24 | 0x80</code></td><td>256色, 每像素24位</td><td>CSM2, 顺序</td><td>n x 256色</td></tr>
+                            <tr><td><code>TIM2_IDTEX8</code></td><td><code>TIM2_RGB32 | 0x80</code></td><td>256色, 每像素32位</td><td>CSM2, 顺序</td><td>n x 256色</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-gray-600 italic">注: 若 <code>ClutType</code> 的位6被设置，CLUT颜色数必须是32的倍数。</p>
+
+                    <h3 class="text-2xl font-semibold mt-4 mb-2 text-gray-700">5.3. <code>ImageWidth</code> 基于MIPMAP和像素格式的限制表</h3>
+                    <table>
+                        <thead>
+                            <tr><th>MIPMAP数量</th><th>像素格式</th><th><code>ImageWidth</code> 成员限制</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>仅LV0</td><td><code>TIM2_RGB32</code>, <code>_RGB24</code>, <code>_RGB16</code></td><td>无</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX8</code></td><td>2的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX4</code></td><td>4的倍数</td></tr>
+                            <tr><td>LV0 和 LV1</td><td><code>TIM2_RGB32</code>, <code>_RGB24</code>, <code>_RGB16</code></td><td>2的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX8</code></td><td>4的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX4</code></td><td>8的倍数</td></tr>
+                            <tr><td>LV0 至 LV2</td><td><code>TIM2_RGB32</code>, <code>_RGB24</code>, <code>_RGB16</code></td><td>4的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX8</code></td><td>8的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX4</code></td><td>16的倍数</td></tr>
+                            <tr><td>LV0 至 LV3</td><td><code>TIM2_RGB32</code>, <code>_RGB24</code>, <code>_RGB16</code></td><td>8的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX8</code></td><td>16的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX4</code></td><td>32的倍数</td></tr>
+                            <tr><td>LV0 至 LV4</td><td><code>TIM2_RGB32</code>, <code>_RGB24</code>, <code>_RGB16</code></td><td>16的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX8</code></td><td>32的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX4</code></td><td>64的倍数</td></tr>
+                            <tr><td>LV0 至 LV5</td><td><code>TIM2_RGB32</code>, <code>_RGB24</code>, <code>_RGB16</code></td><td>32的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX8</code></td><td>64的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX4</code></td><td>128的倍数</td></tr>
+                            <tr><td>LV0 至 LV6</td><td><code>TIM2_RGB32</code>, <code>_RGB24</code>, <code>_RGB16</code></td><td>64的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX8</code></td><td>128的倍数</td></tr>
+                            <tr><td></td><td><code>TIM2_IDTEX4</code></td><td>256的倍数</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-gray-600 italic">注: 最高级MIPMAP纹理的宽度必须是整数。</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // JavaScript for single-page navigation (Corrected)
+        const navLinks = document.querySelectorAll('nav a.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+        const mainContent = document.querySelector('main');
+
+        // Function to set the active link in the navigation
+        function setActiveLink(targetIdFragment) {
+            navLinks.forEach(navLink => {
+                if (navLink.getAttribute('href') === '#' + targetIdFragment) {
+                    navLink.classList.add('active-link');
+                } else {
+                    navLink.classList.remove('active-link');
+                }
+            });
+        }
+
+        // Function to show the correct content section
+        function showContent(targetIdFragment) {
+            const targetId = 'section-' + targetIdFragment;
+            let actualFragmentShown = targetIdFragment;
+            let sectionFound = false;
+
+            contentSections.forEach(section => {
+                if (section.id === targetId) {
+                    section.classList.add('active');
+                    sectionFound = true;
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+
+            // If the target fragment doesn't exist, default to the first section
+            const defaultFragmentForShowContent = navLinks.length > 0 ? navLinks[0].getAttribute('href').substring(1) : 'basics';
+            if (!sectionFound && contentSections.length > 0) {
+                const firstSectionId = defaultFragmentForShowContent;
+                const firstSectionElement = document.getElementById('section-' + firstSectionId);
+                if (firstSectionElement) {
+                    firstSectionElement.classList.add('active');
+                }
+                actualFragmentShown = firstSectionId; 
+            }
+            
+            setActiveLink(actualFragmentShown); // Update the active link based on what's actually shown
+
+            // Scroll to top of main content area
+            if (mainContent) {
+                mainContent.scrollTop = 0;
+            }
+            return actualFragmentShown; // Return the fragment that was actually displayed
+        }
+
+        // Event listener for navigation link clicks
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default anchor behavior
+                let targetIdFragment = link.getAttribute('href').substring(1);
+                
+                const actualFragment = showContent(targetIdFragment);
+                
+                if (window.location.hash !== '#' + actualFragment) {
+                     history.pushState({ fragment: actualFragment }, null, '#' + actualFragment);
+                }
+            });
+        });
+
+        // Event listener for browser back/forward navigation
+        window.addEventListener('popstate', (event) => {
+            const defaultFragmentForPopState = navLinks.length > 0 ? navLinks[0].getAttribute('href').substring(1) : 'basics';
+            let fragmentToShow = defaultFragmentForPopState; 
+            if (event.state && event.state.fragment) {
+                fragmentToShow = event.state.fragment;
+            } else {
+                fragmentToShow = window.location.hash.substring(1) || defaultFragmentForPopState;
+            }
+            showContent(fragmentToShow);
+        });
+
+        // Initial page load handling
+        window.addEventListener('DOMContentLoaded', () => {
+            const defaultFragmentForLoad = navLinks.length > 0 ? navLinks[0].getAttribute('href').substring(1) : 'basics';
+            let initialFragment = window.location.hash.substring(1) || defaultFragmentForLoad;
+            
+            // Ensure the initialFragment corresponds to an existing section
+            let sectionExists = false;
+            for(let i=0; i < navLinks.length; i++) {
+                if (navLinks[i].getAttribute('href').substring(1) === initialFragment) {
+                    sectionExists = true;
+                    break;
+                }
+            }
+            if (!sectionExists) {
+                initialFragment = defaultFragmentForLoad;
+            }
+
+            if (window.location.hash.substring(1) !== initialFragment) {
+                 history.replaceState({ fragment: initialFragment }, null, '#' + initialFragment);
+            }
+            showContent(initialFragment);
+        });
+    </script>
+</body>
+</html>
