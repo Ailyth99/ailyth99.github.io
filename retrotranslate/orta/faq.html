@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - PANZER DRAGOON ORTA 中文版</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <style>
+        @keyframes flowLines {
+            0% { background-position: 0 0; }
+            100% { background-position: 100vw 50vh; }
+        }
+
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.35; }
+        }
+
+        body, h1, h2, h3, p, dl, dt, dd { /* 添加了 dl, dt, dd */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            background-color: #000000;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::before {
+            background-image:
+                linear-gradient(135deg, rgba(0, 80, 80, 0.07) 1px, transparent 1px),
+                linear-gradient(45deg, rgba(0, 50, 50, 0.05) 1px, transparent 1px);
+            background-size: 130px 130px, 90px 90px;
+            animation: flowLines 160s linear infinite, subtlePulse 20s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            background-image:
+                radial-gradient(rgba(0, 120, 120, 0.03) 0.5px, transparent 0.5px);
+            background-size: 18px 18px;
+            opacity: 0.35;
+            animation: flowLines 220s linear infinite reverse, subtlePulse 25s ease-in-out infinite alternate-reverse;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 20px 0; /* 为FAQ页面顶部增加一些留白 */
+        }
+
+        /* 页面标题 */
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        .page-title h1 {
+            font-size: 3em;
+            font-weight: 700;
+            color: #60E8E8;
+            text-shadow: 0 0 15px rgba(0, 200, 200, 0.5);
+            letter-spacing: 2px;
+        }
+
+        /* FAQ 内容区域 */
+        .faq-content {
+            background-color: rgba(0, 15, 15, 0.7);
+            padding: 35px;
+            border: 1px solid #003838;
+            border-radius: 10px;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.7);
+        }
+
+        .faq-content h2 { /* 指南视频提示的标题 */
+            font-size: 1.5em;
+            color: #78F8F8;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #207878;
+            padding-bottom: 10px;
+        }
+
+        .faq-content p, .faq-content dl {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        dl dt { /* 问题 */
+            font-weight: bold;
+            color: #60E8E8; /* 问题使用标题色 */
+            margin-top: 25px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        dl dt::before {
+            content: "Q: ";
+            font-weight: bold;
+        }
+
+        dl dd { /* 回答 */
+            margin-left: 0; /* 移除默认缩进 */
+            padding-left: 1.5em; /* 自定义缩进 */
+            position: relative;
+            color: #E0E0E0; /* 回答用稍暗的白色 */
+        }
+        dl dd::before {
+            content: "A: ";
+            font-weight: normal; /* 回答的A不用加粗 */
+            position: absolute;
+            left: 0;
+            color: #A0C0C0; /* A的颜色可以不同 */
+        }
+
+
+        a {
+            color: #78F8F8;
+            text-decoration: none;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+        a:hover {
+            color: #98FFFF;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+        }
+
+        /* 返回主页链接 */
+        .back-to-home {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            padding: 15px 0;
+        }
+        .back-to-home a {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: rgba(0, 50, 50, 0.5); /* 按钮背景 */
+            border-radius: 8px;
+            border: 1px solid #007070;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .back-to-home a:hover {
+            background-color: rgba(0, 80, 80, 0.8);
+            color: #FFFFFF;
+            text-shadow: none;
+        }
+
+        /* 页脚访问统计 */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+        }
+        footer img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-title">
+            <h1>常见问题解答 (FAQ)</h1>
+        </div>
+
+        <div class="faq-content">
+            <h2>模拟器使用重要提示</h2>
+            <p>模拟器使用请务必先观看指南视频：<a href="https://www.bilibili.com/video/BV1B1J6zkEjN" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/video/BV1B1J6zkEjN</a></p>
+
+            <h2>FAQ 列表</h2>
+            <dl>
+                <dt>能不能在手机玩？</dt>
+                <dd>手机目前尚无可以稳定运行此游戏的XBOX模拟器。</dd>
+
+                <dt>为什么游戏显示是乱码？</dt>
+                <dd>这通常是因为您的模拟器或主机之前运行过日版《Panzer Dragoon Orta》，并保存了相关缓存数据。您需要首先清除这些缓存：
+                    <ul>
+                        <li><strong>模拟器 (如Xemu):</strong> 加载工具盘ISO：NevolutionX.iso (<a href="https://github.com/dracc/NevolutionX/releases/tag/v0.2.1" target="_blank" rel="noopener noreferrer">点此下载NevolutionX v0.2.1</a>)，进入 Setting -> Wipe Cache Partitions 清除缓存。此操作不会影响您的游戏存档。</li>
+                        <li><strong>XBOX360:</strong> 设定 > 系统 > 储存装置 > 记忆体（或硬盘等储存设备，将光标停留在该选项上） > 按Y键（装置选项） > 清除系统快取。（此方法由 我干UFO 提供）</li>
+                    </ul>
+                </dd>
+
+                <dt>如何将游戏存档导入模拟器？</dt>
+                <dd>请参考XEMU官方指南：<a href="https://xemu.app/docs/ftp/" target="_blank" rel="noopener noreferrer">https://xemu.app/docs/ftp/</a>，通过FTP方式传输存档文件。</dd>
+
+                <dt>XEMU模拟器支持自定义键盘和手柄按键吗？</dt>
+                <dd>目前XEMU模拟器不支持按键自定义功能。</dd>
+            </dl>
+
+            <div class="back-to-home">
+                <!-- 假设您的主页文件名为 index.html -->
+                <a href="index.html">返回主页</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <img src="https://visitor-badge.laobi.icu/badge?page_id=Ailyth/orta_faq&left_text=FAQ_VIEWS&left_color=teal&right_color=black" alt="FAQ Visitor Badge">
+            <!-- 注意：我稍微修改了 page_id 和 left_text, left_color 以便区分主页和FAQ页的统计，您可以根据需要调整 -->
+        </div>
+    </footer>
+</body>
+</html>

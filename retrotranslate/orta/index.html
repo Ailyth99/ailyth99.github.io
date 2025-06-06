@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANZER DRAGOON ORTA 中文版</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <style>
+        @keyframes flowLines {
+            0% { background-position: 0 0; }
+            100% { background-position: 100vw 50vh; }
+        }
+
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.15; }  
+            50% { opacity: 0.35; }
+        }
+
+        body, h1, h2, h3, p, ul, li, video {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            background-color: #000000;  
+            color: #FFFFFF;   
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::before {
+            background-image:
+                linear-gradient(135deg, rgba(0, 80, 80, 0.07) 1px, transparent 1px),
+                linear-gradient(45deg, rgba(0, 50, 50, 0.05) 1px, transparent 1px);
+            background-size: 130px 130px, 90px 90px;
+            animation: flowLines 160s linear infinite, subtlePulse 20s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            background-image:
+                radial-gradient(rgba(0, 120, 120, 0.03) 0.5px, transparent 0.5px);
+            background-size: 18px 18px;
+            opacity: 0.35;
+            animation: flowLines 220s linear infinite reverse, subtlePulse 25s ease-in-out infinite alternate-reverse;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section {
+            height: 75vh;  
+            min-height: 450px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #E8FFFF;  
+            overflow: hidden;
+            border-bottom: 3px solid #004040;  
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+            background-size: cover;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 10, 10, 0.6);  
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 25px rgba(0, 230, 230, 0.65), 0 0 10px rgba(0,255,255,0.45);
+            letter-spacing: 3px;
+            color: #FFFFFF;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.35em;
+            font-weight: 300;
+            color: #D0F0F0;  
+            margin-bottom: 30px;
+            text-shadow: 0 0 7px rgba(0,0,0,0.7);
+        }
+
+ 
+        main {
+            padding: 40px 0;
+        }
+
+        section {
+            background-color: rgba(0, 15, 15, 0.7); 
+            margin-bottom: 40px;
+            padding: 35px;
+            border: 1px solid #003838;  
+            border-radius: 10px;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.7);  
+        }
+
+        section h2 {
+            font-size: 2.2em;
+            color: #60E8E8; /* 标题颜色 */
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #207878; /* 下划线颜色 */
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(0,190,190,0.4);
+        }
+
+ 
+        section p, section ul {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+ 
+        }
+
+        section ul { list-style-type: none; }
+        section ul li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+        section ul li::before {
+            content: '►';
+            color: #60E8E8;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        #screenshots .screenshot-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        #screenshots .screenshot-gallery img {
+            width: 100%;
+            height: auto;
+            border: 3px solid #005858;  
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 20, 20, 0.6);  
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        #screenshots .screenshot-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 40, 40, 0.8);
+        }
+
+        a {
+            color: #78F8F8;  
+            text-decoration: none;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+        a:hover {
+            color: #98FFFF;
+            text-shadow: 0 0 12px rgba(0,255,255,0.7);
+        }
+        #usage a {
+            font-weight: bold;
+            font-size: 1.15em;
+            display: inline-block;
+            padding: 5px 0;
+        }
+        #acknowledgements ul li strong { color: #78F8F8; }
+        #disclaimer p { font-size: 0.95em; color: #D0D0D0;   }
+        #disclaimer a { color: #58B8B8; }
+        #disclaimer a:hover { color: #78D8D8; }
+        #disclaimer hr { border-color: #003838; margin: 30px 0; }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 20px 0;  
+            margin-top: 20px;  
+        }
+        footer img {  
+            display: inline-block;  
+            vertical-align: middle; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <video autoplay muted loop playsinline id="hero-video">
+            <source src="orta.webm" type="video/webm">
+ 
+ 
+            您的浏览器不支持HTML5视频。请尝试升级或更换浏览器。
+        </video>
+        <div class="hero-content">
+            <h1>PANZER DRAGOON ORTA</h1>
+            <p class="subtitle">简体中文汉化版 · 黄昏天际的最终回响</p>
+        </div>
+    </div>
+
+   
+
+    <main class="container">
+        <section id="intro">
+            <p>本项目致力于为这款永恒的世嘉XBOX经典空战射击游戏，带来高质量的简体中文本地化。让更多玩家能够无障碍地沉浸在那个独特而苍凉的“黄昏时代”，与少女奥尔塔和她的飞龙一同冒险。</p>
+        </section>
+
+        <section id="features">
+            <h2>汉化内容一览</h2>
+            <p>本次中文化版本基于日版游戏进行修改，已将游戏内所有日文显示文本翻译为简体中文，具体包括：</p>
+            <ul>
+                <li>菜单界面及各项功能说明</li>
+                <li>主线关卡中所有角色的对话与即时提示</li>
+                <li>解锁附加关卡（副故事）的完整前置剧情、内部对话及操作提示</li>
+                <li>过场动画字幕</li>
+                <li>庞大而详实的百科全书资料库</li>
+                <li>附加影像（特典影像）内嵌字幕</li>
+            </ul>
+            <p>请注意：部分原版游戏中即为英文显示的元素（如每关结束后的结算画面、主菜单标题美术字等）均予以保留，以维持游戏原始风貌。</p>
+        </section>
+
+        <section id="screenshots">
+            <h2>中文版截图</h2>
+            <div class="screenshot-gallery">
+                <img src="screenshot-min.png" alt="游戏截图1">
+            </div>
+        </section>
+
+        <section id="usage">
+            <h2>使用与说明</h2>
+            <p>请访问汉化发布视频获取：<br>
+                <a href="#">[点击此处跳转至发布视频/下载页面]</a>
+            </p>
+            <p>本中文化游戏补丁已在XBOX模拟器（推荐Xemu最新版）上经过多次完整通关测试，并在XBOX360实机上进行了通关验证。由于条件所限，未在原版XBOX初代主机上进行测试，理论上兼容，但请原版主机玩家自行尝试。如果您在原版XBOX上成功运行，欢迎在评论区分享您的宝贵经验，以帮助其他玩家。</p>
+            <p>若在模拟器使用过程中遇到任何问题，请首先参考我们提供的模拟器设置指南视频。</p>
+<p>遇到问题？请查看 <a href="faq.html">常见问题解答 (FAQ)</a>。</p>
+        </section>
+
+        <section id="acknowledgements">
+            <h2>致谢</h2>
+            <ul>
+                <li><strong>Rabatini：</strong>指出了游戏数据压缩方法PCMP的关键解压方式，并提供了示例代码。<br>我在其方法上实现了重压缩，并用Golang实现了压缩/解压工具，已经开源：<a href="https://github.com/Ailyth99/pdo_tex_tool" target="_blank" rel="noopener noreferrer">https://github.com/Ailyth99/pdo_tex_tool</a>。本工具可能应用于SEGA的另一个XBOX游戏《枪之女武神》或者PS2的《如龙》系列之上（压缩方法一致），但需要做少许修改。</li>
+                <li><strong>DKDave：</strong>点明了游戏中部分模型贴图所采用的特殊格式（RGBA8888+Morton重排</li>
+                <li><strong>Google Gemini：</strong>Gemini 2.5 Pro在整个汉化过程中，为文本的初步翻译与深度语言润色提供了持续高效的辅助。</li>
+                <li><strong>我干UFO：</strong>进行XBOX360实机测试，并反馈了多处文本问题与翻译瑕疵</li>
+                <li><strong><a href="https://panzerdragoon.fandom.com/" target="_blank" rel="noopener noreferrer">Fandom Panzer Dragoon Wiki</a></strong> 与 <strong><a href="https://panzerdragoonlegacy.com/" target="_blank" rel="noopener noreferrer">Panzer Dragoon Legacy</a></strong>：这两个卓越的爱好者站点提供了大量系列的设定资料参考。</li>
+            </ul>
+        </section>
+
+        <section id="disclaimer">
+            <h2>声明</h2>
+            <p>本中文汉化版本是汉化作者基于对《Panzer Dragoon Orta》这款游戏的热爱而自发制作的免费、非官方本地化作品，其目的仅为方便中文玩家学习和交流，不代表SEGA官方立场。</p>
+            <p>《Panzer Dragoon Orta》游戏本身的所有版权、商标及知识产权均归属于 SEGA CORPORATION。请注意，本中文汉化版并未获取SEGA官方的任何授权。</p>
+            <p>严禁将本中文汉化游戏及其任何部分用于任何形式的商业目的，包括但不限于销售、内置于付费产品或服务等。</p>
+            <p>因下载、安装或使用本中文汉化游戏而可能造成的任何直接或间接的损失（包括但不限于数据损坏、硬件故障等），中文版制作者不承担任何法律责任。您需要明确认知并自行承担所有使用风险。</p>
+            <hr>
+            <p>本项目汉化成果遵循“署名—非商业性使用—相同方式共享 4.0 协议国际版”（CC BY-NC-SA 4.0）许可协议（详情请参阅：<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-hans" target="_blank" rel="noopener noreferrer">Creative Commons 官方中文说明</a>）进行授权。</p>
+            <p>如果您希望基于本汉化版本进行二次修改、创作、移植或以其他形式再分发，您必须严格遵守以下协议要求：</p>
+            <ul>
+                <li><strong>署名 (Attribution / BY):</strong> 您必须在您的衍生作品中清晰、显著地标示本项目原汉化作者 (aikika)，并提供指向本项目原始发布页面（或可公开访问的来源说明）的有效链接。</li>
+                <li><strong>非商业性使用 (NonCommercial / NC):</strong> 您不得将本汉化项目或基于本项目产生的任何衍生作品用于任何直接或间接的商业目的。</li>
+                <li><strong>相同方式共享 (ShareAlike / SA):</strong> 如果您对本汉化项目进行了修改、转换或再创作，您必须以与本项目相同的 CC BY-NC-SA 4.0 许可协议来分发您的贡献。</li>
+            </ul>
+            <p>在进行任何形式的再利用前，请务必仔细阅读并理解完整的授权协议条款。</p>
+            <p>如有意愿发布基于本汉化版的修改版本，请预先联系原作者（aikika）获取相关的文本和工具，并遵循上述CC BY-NC-SA 4.0许可协议。</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <img src="https://visitor-badge.laobi.icu/badge?page_id=Ailyth/orta&left_text=PANZER&left_color=purple&right_color=black" alt="Visitor Badge">
+        </div>
+    </footer>
+</body>
+</html>
