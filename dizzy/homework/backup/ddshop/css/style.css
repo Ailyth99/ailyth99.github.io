@@ -1,0 +1,486 @@
+
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.content
+{  /*主页整个页面主体采用flex弹性布局，并设置布局方式为纵向，这样div1，div2 ，导航等模块就会
+    呈现在一条竖线上下垂直分布
+    */
+    display: flex;
+    flex-direction: column; 
+}
+
+
+.navbar {
+    height: 50px;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    background-color: #a1ded2;
+    padding: 1px;
+    font-size: 17px;
+ }
+.navbar .logo {
+    width: 15%;
+    float: left;
+}
+.navbar .login {
+    width: 15%;
+    float: right;
+    line-height:50px;
+    text-align: center;
+}
+.navbar .navs {
+    width: 70%;
+    margin: 0 auto;
+    line-height:50px;
+    text-align: center;
+    float: left;
+ }
+.navbar a {
+    margin-right: 30px;
+    color: #fff;
+    text-decoration: none;
+}
+.navbar a:hover {
+    font-weight: bold;
+    color: #FC8288;
+}
+
+.div1 {
+    width: 100%;
+    height: 500px;
+    background-color:#FC8288;
+    display: flex;
+    align-items: center; /* 这行代码会让.content_container在.div1中垂直居中 */
+    justify-content: center; /* 这行代码会让.content_container在.div1中水平居中 */
+}
+
+
+.imgbox1 {
+    flex: 1; /* 会让图片占据一半所在div的空间 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 15%;
+}
+
+.imgbox1 img {
+
+    border-radius: 15px;
+    margin-top: 50px;
+
+
+}
+
+.textbox1 {
+    flex: 1; /* 让文字占据一半的空间 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:#fcfcfc;
+    line-height: 30px;
+    padding-right: 15%;
+}
+
+.textbox1 h3 {padding-right: 20px;font-family: 'MyFont';font-size: 25px;}
+
+.div2 {
+    width: 100%;
+    height: 100%;
+    background-color:#ffffff;
+    
+}
+
+.title{
+    width: 100%;
+    text-align: center;
+    font-family: 'MyFont';
+    font-size: 60px;
+    color: #FC8288;
+    padding-top: 20px;
+}
+
+.productbox{
+    width: 40%;
+   
+    margin-top: 30px;
+    float: left;
+    margin-left: 6.5%;
+    margin-bottom: 30px;
+}
+
+.productbox img
+{ width: 100%;
+    border-radius: 20px;
+}
+
+.productbox h3
+{
+    font-family: 'MyFont';
+    font-size: 25px;
+    color: #FC8288;
+}
+
+.productbox p
+{
+    line-height: 50px;
+    color: #a1ded2;
+    font-weight: 500;
+}
+
+.productbox a
+{
+    text-decoration: none;
+}
+
+.detailbox{
+    height: 50px;
+    width: 170px;
+    background-color: #a1ded2;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 15px;
+
+}
+
+.detailbox:hover {
+    background-color: #FC8288;
+}
+
+.title2{
+    width: 100%;
+    text-align: center;
+    font-family: 'MyFont';
+    font-size: 40px;
+    color:#FC8288;
+    padding-top: 20px;
+}
+
+.div3 {
+    width: 100%;
+    height: 100%;
+    background-color:#a1ded2;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 这行代码会将内容垂直居中显示 */
+    justify-content: center;
+    overflow: hidden;
+}
+
+.media {
+    width: 90%;
+    margin: 0 7% 0 20%;
+}
+
+.mediabox {
+    width: 30%;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    float: left;
+
+}
+
+.mediabox img {
+    width: 80%;
+    border-radius: 15px;
+
+}
+
+.mediabox img:hover {
+    box-shadow: 10px 10px 5px rgb(122, 121, 121); 
+    /* 鼠标悬停在图片上时，让图片出现阴影 
+    上面的参数表示阴影的水平偏移量为10px，垂直偏移量为10px，模糊半径为5px，
+    阴影的颜色为RGB值(122, 121, 121)。
+    
+    */
+}
+
+.mediabox h4 {
+    color: #fff;
+    text-align: left;
+}
+
+.detailbox2 {
+
+    height: 50px;
+    width: 270px;
+    background-color:#FC8288;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+
+
+}
+
+.detailbox2:hover {
+    background-color:#a1ded2;
+    border: #FC8288 1px solid;
+}
+
+.footer {
+    background-color: #FC8288;
+    height: 60px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    display: flex; /* 弹性盒子的方式排列 */
+    align-items: center; 
+    justify-content: center;
+}
+
+
+/*商品主体区域*/
+.item
+{ 
+    overflow: hidden;
+    background-color: #a1ded2;
+    padding-top: 100px;
+    padding-bottom: 80px;
+}
+
+
+.itemimg {
+    float: left;
+    margin-left: 150px;
+    width: 40%;
+ }
+
+.descript {
+    float: right;
+    width: 50%;
+    margin-right: -120px;
+ }
+
+ .descript h3 {
+    font-family:'MyFont';
+    font-size: 40px;
+    color:#FC8288;
+
+ }
+
+ .descript p {
+    color: #ffffff;
+    line-height: 35px;
+    margin-bottom: 47px;
+  }
+
+  .info{
+    width: 100%;
+    height: 100%;
+    background-color:#FC8288;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 这行代码会将内容垂直居中显示 */
+    justify-content: center;
+}
+
+.info p{
+
+    line-height: 30px;
+    color: #fafafa;
+
+
+
+}
+
+.info img{
+
+    border-radius: 15px;
+
+
+}
+
+
+.title3{
+    width: 100%;
+    text-align: center;
+    font-family: 'MyFont';
+    font-size: 40px;
+    color:#a1ded2;
+    padding:40px 0 40px 0;
+}
+
+
+/*注册页面用到的样式*/
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .logo {
+    margin-bottom: 80px;
+
+  }
+
+  .formgroup {
+    margin-bottom: 20px;
+  }
+
+  .formgroup label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #FC8288;
+  }
+
+  .formgroup input {
+    width: 100%;
+    padding: 10px;
+    border: 3px solid #a1ded2;
+    border-radius: 13px;
+  }
+
+  .checkboxgroup {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .checkboxgroup label {
+    font-weight: normal;
+    color:#00c8fa
+  }
+
+  .register {
+    margin-bottom: 20px;
+  }
+
+  .register a {
+    color:#00c8fa;
+    text-decoration: none;
+    
+  }
+
+  .loginbutton {
+
+    height: 50px;
+    width: 270px;
+    background-color:#FC8288;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+    border: 0;
+    cursor: pointer; /*让鼠标停留时显示可以点击的图标*/
+}
+
+
+
+.loginbutton:active {
+    background-color: #a1ded2;
+    border: #FC8288 1px solid;
+    font-weight: bold;
+  }
+
+  /*商品列表  list页面用的css*/
+
+
+  .foodhead {
+    background-color: #fff;
+    padding: 100px 20px 20px 60px;
+    font-size: 45px;
+    font-family: 'MyFont';
+    color: #FC8288;
+
+  }
+
+  .foodlist {
+    display: flex;
+    flex-wrap: wrap;/*允许项目在多行上进行换行显示，而不是挤在一行上。*/
+    justify-content: center;
+    padding: 20px;
+  }
+
+
+  .fooditem {/*单个商品区域*/
+    width: 45%;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+
+  .fooditem img {
+    width: 100%;
+    border-radius:15px;
+  }
+
+  .fooditem h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color:#54e0c4;
+  }
+
+  .fooditem .buybutton {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #FC8288;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+    line-height:30px;
+    font-weight: bold;
+
+  }
+
+
+  .more {
+    height: 50px;
+    width: 200px;
+    background-color: #FC8288;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 15px;
+    margin: 50px auto;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+/*新闻页*/
+  .news {
+    width: 60%;
+    padding-top: 10px;
+    margin: auto;
+    font-family: 'MyFont';
+    color:#FC8288;
+    font-size: 25px;
+  }
+
+.newsname{
+    color: #727272;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif; /*使用默认字体*/
+    cursor: pointer;
+}
+
+.newsname:hover {
+
+    color: #00c8fa;
+
+}
+  .newsitem {
+    margin-bottom: 20px;
+  }
+  .newsitem hr {  /*横线占位*/
+    border: none;
+    border-top: 1px solid #FC8288; /*横线宽度，形式(solid是实线),颜色*/
+  }

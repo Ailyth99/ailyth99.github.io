@@ -1,0 +1,117 @@
+@keyframes change-Background {
+    0% {
+      background-image: url('../img/bg5.jpg');
+    }
+    33% {
+      background-image: url('../img/bg6.jpg');
+    }
+    66% {
+      background-image: url('../img/bg3.jpg');
+    }
+    100% {
+      background-image: url('../img/bg4.jpg');
+    }
+  }
+   /*以上定义动画形式，由于我有四张图，要匀速播放，
+   要变化三次，所有每次增加33%，这动画的功能实质上就是改变了背景图*/
+
+  
+  body {
+    /* 添加动画效果，循环播放 */
+    animation: change-Background 20s infinite;
+    background-size: cover; /* 背景图片尺寸自适应 */
+    background-repeat: no-repeat;/* 背景图片不重复 */
+    background-size: 100% 100%;/* 背景图片尺寸铺满整个屏幕 */
+    /* 背景图片固定不滚动 */
+    background-attachment: fixed;
+    font-family: 'siyuan';
+
+  }
+
+   
+
+
+
+  .pro-box {
+    
+    margin: auto;
+    width: 90%;
+    height: 70vh;/*vh是一种单位，大概和%差不多*/
+    background-color: transparent;
+    overflow: hidden; /* 添加这行代码来清除浮动 */
+
+    display: flex;
+    /* 内容垂直居中显示和上下居中 */
+    align-items: center;        
+    justify-content: center;
+
+  }
+  
+  /*设置这两个class共有属性*/
+  .pro-video {
+    width: 45%;
+    height: 100%;
+    float: left; /* 使用 float 属性来使元素浮动 */
+  }
+  
+  .video-right .pro-video {
+    float: right; /* 在 .video-right 中，我们将视频浮动到右边 */
+  }
+
+  /*单独设置pro-text属性*/
+  .pro-text {
+    color: aliceblue;
+    float: left;
+    width: 50%;
+    height: 70%;
+    line-height: 30px;
+    font-weight: bold;
+
+    display: flex;
+        /* 内容垂直居中显示和上下居中 */
+    align-items: center;        
+    justify-content: center;
+   
+  }
+
+  .pro-box h1 {
+    font-family: 'siyuan'; 
+    font-size: 80px;
+    margin:auto 30px;
+    font-weight: bold;
+    color: #a7f4f7;   
+}
+
+
+
+
+.pro-button {
+    font-family: 'siyuan';
+    margin: 100px auto;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #d6d3d3b7;
+    width: 300px;
+    cursor: pointer;
+    text-align: center;
+    color: #000000;
+
+  
+
+  }
+  
+  .pro-button:hover {
+   background-color: #a7f4f7;
+  }
+
+  /*处理按钮内的a链接文字颜色*/
+  .pro-button a {
+    color: #000000; /* 设置文字颜色为黑色 */
+}
+
+.pro-button a:visited {
+    color: #080808; /* 设置访问过的链接颜色为黑色 */
+}
+
+ 
