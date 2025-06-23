@@ -1,0 +1,211 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Pirulen';
+    src: url('../extra/pirulen.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'siyuan';
+    src: url('../extra/SourceHanSansSC-ExtraLight-2.otf') format('opentype');
+}
+
+a {  
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+    }
+    
+a:hover {
+    color: inherit;
+    }
+
+    
+.lunartrek {
+    width: 100%;
+    font-family: 'Pirulen';
+    line-height: 60px;
+    text-align: center;
+    font-size: 30px;
+    color: #cccccc;
+    top: 0;
+    cursor: pointer;
+    
+}
+
+
+.title {
+    font-family: 'Pirulen'; 
+    font-size: 88px;
+    margin-left: 90px;
+    font-weight: bold;
+    color: #a7f4f7;
+    position: relative; /* 添加这一行，不然背景的视频层会把这部分遮住*/
+    z-index: 988; /*垂直层级，数字写大一些*/
+}
+
+
+.subtitle {
+    font-family: 'siyuan'; 
+    line-height: 60px;
+    font-size: 35px;
+    color: #ffffff;
+    margin-left: 90px;
+    margin-top: -40px;
+    color: #a7f4f7;;
+    position: relative;
+    z-index: 988;
+}
+
+/*纵向文字滚动*/
+
+.moonlight-expedition {
+    font-family: 'Pirulen'; 
+    position: fixed; /*固定位置显示*/
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%) rotate(90deg); /* 将文字倾斜90度 */
+    font-size: 40px; /* 设置大字体大小 */
+    font-weight: bold; /* 设置字体加粗 */
+    color:#4e4e4e; /* 设置字体颜色为白色 */
+    z-index: 555; /* 设置层级，确保文字显示在最前面 ，数字越大越上面*/
+    white-space: nowrap; /* 禁止文字换行 */
+    margin-left: 35px;
+    animation: scroll-down 12s infinite linear; /* 设置文字从上往下滚动的动画 */
+    overflow: hidden;
+     
+}
+
+@keyframes scroll-down {
+    0% { /*起始位置*/
+        transform: translate(-50%, -50%) rotate(90deg) translateX(-100%);
+    }
+    100% {/* 结束位置*/
+        transform: translate(-50%, -50%) rotate(90deg) translateX(100%); 
+    }
+}
+
+
+/*横向文字滚动*/
+.moonlight-expedition-project {
+    font-family: 'Pirulen'; 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    transform: translateX(100%); /* 将文字移动到屏幕左侧 */
+    font-size: 40px;
+    font-weight: bold;
+    color: #4e4e4e;
+    white-space: nowrap;
+    animation: scroll2 17s infinite linear; /* 设置文字从左往右滚动的动画 */
+    overflow: hidden;
+  }
+  
+  @keyframes scroll2 {
+    0% {
+      transform: translateX(100%);/*起始位置*/
+    }
+    100% {
+      transform: translateX(-100%); /* 将文字移动到屏幕右侧 */
+    }
+  }
+
+
+/*设置视频作为背景*/
+.video-background { 
+    position: absolute; /*使用绝对定位，视频的位置不会发生任何变化*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;/* 高宽都是100%。占满整个屏幕显示范围*/
+    overflow: hidden; /*如果超出页面范围，则隐藏，不会出现滚动条*/
+}
+
+.video-background video {
+    min-width: 100%; 
+    min-height: 100%; 
+    /* 以上设置视频最小高度高度为100% */
+    position: absolute; /* 使用绝对定位 */
+    top: 50%; /* 设置视频顶部距离为屏幕高度的一半 */
+    left: 50%; /* 视频左侧距离为屏幕宽度一半 */
+    transform: translate(-50%, -50%); /* 将视频居中显示 */
+}
+
+.overlay {
+    position: fixed; /* 位置固定*/
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    /* 覆盖层高度和宽度为100% */
+    background: rgba(0, 0, 0, 0.7); /* 覆盖层背景颜色为半透明黑色 */
+    
+
+}
+
+.year {
+    font-family: 'Pirulen';
+    line-height: 60px;
+    font-size: 20px;
+     margin-left: 90px;
+    color: #9c9c9c;
+    position: fixed; 
+    bottom: 0;
+    right: 10px; 
+    z-index: 988;
+}
+
+/* 定义菜单区域*/
+.menu {
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0px;
+    margin:0 0 30px 90px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*定义li的样式，页面的每个按钮就是一个li*/
+.menu ul li {
+    font-family: 'siyuan'; 
+    margin-bottom: 10px;
+    padding-left: 15px;
+    color: #c1c2c2;
+    border: 1px solid #A7F4F7;
+    font-size: 20px;
+    background-color:transparent;
+    width:320px;
+    height:50px;
+    line-height: 50px;
+    font-weight: bolder;
+    cursor: pointer; /* 设置鼠标样式为可点击 */
+    
+}
+
+/*定义鼠标滑过li时候的效果，主要改变背景色和文字色，边框也能改改*/
+
+.menu ul li:hover {
+    background-color: #A7F4F7; /* 设置背景颜色为反色 */
+    color: #000000; /* 设置文字颜色为反色 */
+    border: 1px dotted #b3b1b1;
+}
+

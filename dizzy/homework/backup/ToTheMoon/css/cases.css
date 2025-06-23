@@ -1,0 +1,108 @@
+@keyframes change-Background {
+    0% {
+      background-image: url('../img/case1.jpg');
+    }
+    25% {
+      background-image: url('../img/case15.jpg');
+    }
+    50% {
+      background-image: url('../img/case2.jpg');
+    }
+    75% {
+      background-image: url('../img/case3.jpg');
+    }
+    100% {
+        background-image: url('../img/case4.jpg');
+      }
+
+
+  }
+  
+
+  
+  body {
+    /* 添加动画效果，循环播放 */
+    animation: change-Background 15s infinite;
+    background-size: cover; /* 背景图片尺寸自适应 */
+    background-repeat: no-repeat;/* 背景图片不重复 */
+    background-size: 100% 100%;/* 背景图片尺寸铺满整个屏幕 */
+    /* 背景图片固定不滚动 */
+    background-attachment: fixed;
+    font-family: 'siyuan';
+
+  }
+
+
+  .anli {
+    display: flex;
+    /*设置弹性盒子的主轴上的对齐方式为两端对齐 */
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .case-box {
+    width: 30%;
+    text-align: center;
+    margin: 30px auto;
+  }
+  
+  .case-box img:hover {
+    border: #A7F4F7 1px solid;
+  }
+
+  .case-box img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .case-title {
+    color: #A7F4F7;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: left;
+  }
+  
+  .case-button {
+    margin: 30px auto;
+    width: 200px;
+    padding: 10px 20px;
+    background-color: #b3b1b1;
+    color: #A7F4F7;
+    border: none;
+    cursor: pointer;
+    float: left;
+    background-color:transparent;
+    border: 1px solid #A7F4F7;
+  }
+  
+  .case-button:hover {
+    background-color: #a7f4f7;
+   color: #000000;
+  }
+
+
+
+  .load-more-button {
+    cursor: pointer;
+    font-family: 'siyuan'; 
+    border: 1px solid #A7F4F7;
+    background-color: transparent;
+    color: aliceblue;
+    font-size: 18px;
+    width: 400px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    margin: 80px auto;
+ }
+
+.load-more-button:hover {
+    background-color: #a7f4f7;
+   color: #000000;
+}
+
+
+
