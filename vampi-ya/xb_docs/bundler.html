@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bundler Tool 技术文档</title>
+    <style>
+        :root {
+            --bg-color: #1e1e1e;
+            --text-color: #d4d4d4;
+            --header-color: #569cd6;
+            --code-bg-color: #252526;
+            --code-text-color: #ce9178;
+            --border-color: #333333;
+            --inline-code-bg: rgba(86, 156, 214, 0.15);
+            --inline-code-text: #9cdcfe;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: var(--header-color);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            border-bottom: none;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+        
+        h2 code {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            border-bottom-style: dashed;
+        }
+
+        p, ul {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--header-color);
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            background-color: var(--inline-code-bg);
+            color: var(--inline-code-text);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--code-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        pre code {
+            background-color: transparent;
+            color: var(--text-color);
+            padding: 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+            white-space: pre;
+        }
+        
+        .comment {
+            color: #6a9955; /* Green for comments */
+        }
+        
+        .keyword {
+            color: #569cd6; /* Blue for keywords */
+        }
+        
+        .string {
+            color: #ce9178; /* Orange for strings */
+        }
+        
+        .number {
+            color: #b5cea8; /* Light green for numbers */
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Bundler Tool 技术文档</h1>
+
+        <pre><code><span class="comment">//-----------------------------------------------------------------------------</span>
+<span class="comment">// 名称: Bundler Tool (打包工具)</span>
+<span class="comment">//</span> 
+<span class="comment">// 版权所有 (c) 2000 Microsoft Corporation. 保留所有权利。</span>
+<span class="comment">//-----------------------------------------------------------------------------</span></code></pre>
+
+        <h2>描述</h2>
+        <p>
+            打包工具 (Bundler Tool) 演示了如何创建为在 Xbox 上加载而优化的二进制 Direct3D 资源文件。
+            通过 Xbox 上的 <code>Register()</code> API，您可以简单地将 Direct3D 资源数据流式传输到连续的内存中，
+            创建资源头结构体，然后调用 <code>Register()</code> 来修正数据地址以指向物理内存。
+        </p>
+        <p>
+            打包工具有三个输出文件。<strong>打包资源文件</strong> (packed resource file) 包含所有二进制格式的资源。
+            <strong>头文件</strong> (header file) 包含一系列 <code>#define</code> 定义，用于指定每个资源在文件中的偏移量。
+            <strong>错误文件</strong> (error file) 包含处理过程中发生的错误。
+        </p>
+
+        <h2>命令行选项</h2>
+        <p>支持以下命令行选项：</p>
+        <ul>
+            <li><code>-o &lt;打包资源文件名&gt;</code></li>
+            <li><code>-h &lt;头文件名&gt;</code></li>
+            <li><code>-p &lt;头文件常量的前缀&gt;</code></li>
+            <li><code>-e &lt;错误文件名&gt;</code></li>
+        </ul>
+        <p>
+            资源定义文件 (<code>.rdf</code>) 的名称是必需的。Bundler 支持一种特殊模式，
+            在该模式下，单个纹理文件可以被转换为 <code>.xpr</code> 格式，而无需 <code>.rdf</code> 文件。
+            当命令行中指定的文件名扩展为 <code>.bmp</code>、<code>.tga</code> 或 <code>.png</code> 时，将启用此模式。
+            这对于将单个图像转换为可被 Xbox 主界面加载的格式非常有用。
+        </p>
+
+        <h2>资源定义文件 (<code>.rdf</code>) 语法</h2>
+        <p>
+            Bundler 的输入是一个 RDF (资源定义文件)，它描述了应打包到 XPR (Xbox 打包资源) 文件中的资源。
+            可以在 RDF 文件中指定以下内容：
+        </p>
+        <ul>
+            <li><code>OUT_PACKEDRESOURCE &lt;文件名&gt;</code>  (覆盖 <code>-o</code> 选项)</li>
+            <li><code>OUT_HEADER &lt;文件名&gt;</code>          (覆盖 <code>-h</code> 选项)</li>
+            <li><code>OUT_PREFIX &lt;文件名&gt;</code>          (覆盖 <code>-p</code> 选项)</li>
+            <li><code>OUT_ERROR &lt;文件名&gt;</code>           (覆盖 <code>-e</code> 选项)</li>
+            <li><code>Texture &lt;纹理名称&gt;</code></li>
+            <li><code>VolumeTexture &lt;纹理名称&gt;</code></li>
+            <li><code>Cubemap &lt;纹理名称&gt;</code></li>
+            <li><code>Vertexbuffer &lt;顶点缓冲区名称&gt;</code></li>
+        </ul>
+
+        <h3>Texture (纹理)</h3>
+        <p>
+            <code>Texture</code> 后面必须跟一系列用花括号 <code>{}</code> 括起来的属性。支持的属性有：
+        </p>
+        <ul>
+            <li><code>Source &lt;文件名&gt;</code></li>
+            <li><code>Format &lt;Direct3D 格式，默认为源文件格式&gt;</code></li>
+            <li><code>Filter &lt;纹理过滤方式，默认为带 WRAP 寻址的 TRIANGLE 过滤器&gt;</code></li>
+            <li><code>Width &lt;图像宽度，默认为源文件宽度&gt;</code></li>
+            <li><code>Height &lt;图像高度，默认为源文件高度&gt;</code></li>
+            <li><code>Levels &lt;mipmap 层级数，默认为 1，0 表示尽可能多&gt;</code></li>
+            <li><code>Alphasource &lt;Alpha 通道源文件&gt;</code></li>
+        </ul>
+        <p>例如：</p>
+<pre><code><span class="keyword">Texture</span> MyTex
+{
+   <span class="keyword">Source</span> <span class="string">c:\images\landscape.bmp</span>
+   <span class="keyword">Format</span> D3DFMT_DXT1
+   <span class="keyword">Filter</span> TRIANGLE|CLAMP
+   <span class="keyword">Width</span> <span class="number">256</span>
+   <span class="keyword">Height</span> <span class="number">256</span>
+   <span class="comment">// Levels (层级) 将默认为 1</span>
+}</code></pre>
+
+        <h3>VolumeTexture (体积纹理)</h3>
+        <p>
+            与普通纹理类似，但它还需要一个 <code>depth</code> (深度) 属性，以及数量与深度相等的 <code>source</code> (源文件)。Xbox 硬件不支持体积纹理的线性格式，也不支持任何维度大于 512 的体积纹理。支持的属性有：
+        </p>
+        <ul>
+            <li><code>Source &lt;文件名&gt;</code></li>
+            <li><code>Alphasource &lt;文件名&gt;</code></li>
+            <li><code>Format &lt;Direct3D 格式，默认为源文件格式&gt;</code></li>
+            <li><code>Filter &lt;纹理过滤方式，默认为带 WRAP 寻址的 TRIANGLE 过滤器&gt;</code></li>
+            <li><code>Width &lt;图像宽度，默认为源文件宽度&gt;</code></li>
+            <li><code>Height &lt;图像高度，默认为源文件高度&gt;</code></li>
+            <li><code>Depth &lt;图像深度，默认为源文件深度&gt;</code></li>
+            <li><code>Levels &lt;mipmap 层级数，默认为 1，0 表示尽可能多&gt;</code></li>
+        </ul>
+        <p>例如：</p>
+<pre><code><span class="keyword">VolumeTexture</span> MyTex
+{
+   <span class="keyword">Depth</span> <span class="number">4</span>
+   <span class="keyword">Source</span> <span class="string">c:\images\Slice0.bmp</span>
+   <span class="keyword">Source</span> <span class="string">c:\images\Slice1.bmp</span>
+   <span class="keyword">Source</span> <span class="string">c:\images\Slice2.bmp</span>
+   <span class="keyword">Source</span> <span class="string">c:\images\Slice3.bmp</span>
+   <span class="keyword">Format</span> D3DFMT_DXT1
+}</code></pre>
+
+        <h3>Cubemap (立方体贴图)</h3>
+        <p>
+            与普通纹理类似，但它有 6 个面，每个面都需要一个源文件和可选的 Alpha 源文件。立方体贴图的尺寸必须是 2 的幂。支持的属性有：
+        </p>
+        <ul>
+            <li><code>SourceXP &lt;文件名&gt;</code>, <code>SourceXN &lt;文件名&gt;</code></li>
+            <li><code>SourceYP &lt;文件名&gt;</code>, <code>SourceYN &lt;文件名&gt;</code></li>
+            <li><code>SourceZP &lt;文件名&gt;</code>, <code>SourceZN &lt;文件名&gt;</code></li>
+            <li><code>AlphaSourceXP &lt;文件名&gt;</code>, etc.</li>
+            <li><code>Format &lt;Direct3D 格式，默认为源文件格式&gt;</code></li>
+            <li><code>Filter &lt;纹理过滤方式，默认为带 WRAP 寻址的 TRIANGLE 过滤器&gt;</code></li>
+            <li><code>Width &lt;图像宽度，默认为源文件宽度&gt;</code></li>
+            <li><code>Height &lt;图像高度，默认为源文件高度&gt;</code></li>
+            <li><code>Levels &lt;mipmap 层级数，默认为 1，0 表示尽可能多&gt;</code></li>
+        </ul>
+        <p>例如：</p>
+<pre><code><span class="keyword">Cubemap</span> MyTex
+{
+   <span class="keyword">Width</span> <span class="number">64</span>
+   <span class="keyword">Height</span> <span class="number">64</span>
+   <span class="keyword">SourceXP</span> <span class="string">c:\images\EnvironmentXP.bmp</span>
+   <span class="keyword">SourceXN</span> <span class="string">c:\images\EnvironmentXN.bmp</span>
+   <span class="keyword">SourceYP</span> <span class="string">c:\images\EnvironmentYP.bmp</span>
+   <span class="keyword">SourceYN</span> <span class="string">c:\images\EnvironmentYN.bmp</span>
+   <span class="keyword">SourceZP</span> <span class="string">c:\images\EnvironmentZP.bmp</span>
+   <span class="keyword">SourceZN</span> <span class="string">c:\images\EnvironmentZN.bmp</span>
+   <span class="keyword">Format</span> D3DFMT_DXT1
+}</code></pre>
+        
+        <h3>VertexBuffer (顶点缓冲区)</h3>
+        <p>
+            <code>Vertexbuffer</code> 后面必须跟一系列用花括号 <code>{}</code> 括起来的属性。支持的属性有：
+        </p>
+        <ul>
+            <li><code>VertexFormat { &lt;属性格式列表&gt; }</code></li>
+            <li><code>VertexData { &lt;数字列表&gt; }</code></li>
+        </ul>
+        <p>
+            顶点缓冲区中每个顶点的数据被指定为一系列浮点数、整数或十六进制数。每个属性的每个分量都应提供一个单独的数字。例如，一个法线由三个分量 (x,y,z) 组成，因此应使用三个独立的数字来指定。格式 (formats) 指定了如何将这些数字转换为顶点缓冲区中的打包数据。例如，如下定义的 <code>VertexFormat</code> 和 <code>VertexData</code>：
+        </p>
+<pre><code><span class="keyword">VertexFormat</span> { D3DVSDT_FLOAT3 D3DVSDT_NORMPACKED3 }
+<span class="keyword">VertexData</span> { <span class="number">1.0 2.0 3.0 0.5 0.2 0.2</span> }</code></pre>
+        <p>
+            将产生一个包含单个顶点的顶点缓冲区，该顶点由 16 字节定义 (3 个浮点数 1.0 2.0 3.0，以及被打包成一个 DWORD 的 0.5 0.2 0.2)。请注意，<code>.XPR</code> 文件中不存储格式信息。图元类型和顶点缓冲区格式必须由使用该顶点缓冲区的游戏项目来指定。
+        </p>
+        <p>这是一个顶点缓冲区定义的示例：</p>
+<pre><code><span class="keyword">VertexBuffer</span> QuadVB
+{
+    <span class="keyword">VertexFormat</span> { D3DVSDT_FLOAT3 D3DVSDT_FLOAT3 D3DVSDT_D3DCOLOR D3DVSDT_FLOAT1 D3DVSDT_FLOAT1 }
+    <span class="keyword">VertexData</span> 
+    { 
+        <span class="comment">//           位置 xyz     法线 xyz       颜色 rgba      纹理 uv</span>
+        <span class="number">-0.5 -0.5 1.0</span> <span class="number">0.0 0.0 -1.0</span> <span class="number">1 1 1 1</span> <span class="number">0.0 1.0</span>      <span class="comment">// 顶点0</span>
+        <span class="number">-0.5  0.5 1.0</span> <span class="number">0.0 0.0 -1.0</span> <span class="number">1 1 1 1</span> <span class="number">0.0 0.0</span>      <span class="comment">// 顶点1</span>
+         <span class="number">0.5 -0.5 1.0</span> <span class="number">0.0 0.0 -1.0</span> <span class="number">1 1 1 1</span> <span class="number">1.0 1.0</span>      <span class="comment">// 顶点2</span>
+         <span class="number">0.5  0.5 1.0</span> <span class="number">0.0 0.0 -1.0</span> <span class="number">1 1 1 1</span> <span class="number">1.0 0.0</span>      <span class="comment">// 顶点3</span>
+    }
+}</code></pre>
+        <p>支持 <code>//</code> 和 <code>/* */</code> 两种注释结构。</p>
+
+        <h2>所需文件和媒体</h2>
+        <p>无。</p>
+
+        <h2>编程说明</h2>
+        <p>
+            XPR 格式旨在通过 <code>Register()</code> API 实现 Direct3D 资源的快速加载。
+            打包工具处理资源（格式转换、数据重排 (swizzling) 等），
+            然后以 Xbox GPU 使用的格式写出纹理数据。
+            之后，纹理数据可以被读入一个连续的内存块中，
+            然后通过 <code>Register()</code> API 将 Direct3D 纹理指向该数据。
+            有关更多详细信息，请参阅关于 <code>Register()</code> 的文档和 XPRViewer 示例。
+        </p>
+
+    </main>
+</body>
+</html>
