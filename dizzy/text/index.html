@@ -13,7 +13,7 @@
         <div class="tabs">
             <button class="tab-button active" data-tab="vertical">竖排转换</button>
             <button class="tab-button" data-tab="frequency">字符频率</button>
-            <button class="tab-button" data-tab="sjis">SHIFT-JIS</button>
+            <button class="tab-button" data-tab="sjis">编码转换</button>
             <button class="tab-button" data-tab="font">字体测试</button>
             <button class="tab-button" data-tab="sort">文本排序</button>
             <button class="tab-button" data-tab="crop">文本裁剪</button>
@@ -65,9 +65,20 @@
         </div>
 
         <!-- SHIFT-JIS Conversion -->
+      <!-- Encoding Conversion (原 SHIFT-JIS 改名) -->
         <div class="tab-content" id="sjis-content">
-            <h2>SHIFT-JIS 编码转换</h2>
-             <div class="format-selector">
+            <h2>字符编码转换 (SJIS / Unicode)</h2>
+            
+            <!-- 新增：编码选择 -->
+            <div class="format-selector">
+                <label>目标编码：</label>
+                <div class="radio-group">
+                    <label class="radio-label"><input type="radio" name="targetEncoding" value="sjis" checked><span>SHIFT-JIS</span></label>
+                    <label class="radio-label"><input type="radio" name="targetEncoding" value="utf16le"><span>Unicode (UTF-16 LE)</span></label>
+                </div>
+            </div>
+
+            <div class="format-selector" style="margin-top: 15px;">
                  <label>输出格式：</label>
                  <div class="radio-group">
                      <label class="radio-label"><input type="radio" name="sjisFormat" value="code" checked><span>仅显示编码</span></label>
@@ -75,12 +86,14 @@
                      <label class="radio-label"><input type="radio" name="sjisFormat" value="code_char"><span>编码,字符</span></label>
                  </div>
              </div>
+
             <div class="container">
                 <div><p>输入文本：</p><textarea class="input" placeholder="请输入要转换的文本..."></textarea></div>
                 <div><p>转换结果：</p><textarea class="output"></textarea></div>
             </div>
-            <div class="button-group"><button onclick="sjisConverter.convert()">转换</button><button onclick="sjisConverter.copyOutput()">复制结果</button></div>
-            <div class="debug-container"><p>不属于SHIFT-JIS的字符：</p><textarea class="debug-output" readonly></textarea></div>
+            <div class="button-group"><button onclick="encodingConverter.convert()">转换</button><button onclick="encodingConverter.copyOutput()">复制结果</button></div>
+            <!-- debug-container 仅在 SJIS 模式下有用，但在 UTF-16 下我们可以隐藏它或留空 -->
+            <div class="debug-container" id="sjis-debug-area"><p>未找到映射的字符 (仅SJIS)：</p><textarea class="debug-output" readonly></textarea></div>
         </div>
 
         <!-- Font Tester -->

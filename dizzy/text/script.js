@@ -185,54 +185,103 @@ const frequencyAnalyzer = {
 };
 
 // --- SHIFT-JIS Converter ---
-const sjisConverter = {
+// --- Encoding Converter (SJIS & UTF-16 LE) ---
+// Renamed from sjisConverter to encodingConverter to reflect new capabilities
+const encodingConverter = {
     convert() {
         const input = this.getInput();
+        // 获取编码类型
+        const encodingTypeEl = document.querySelector('#sjis-content input[name="targetEncoding"]:checked');
+        const encodingType = encodingTypeEl ? encodingTypeEl.value : 'sjis';
+        
+        // 获取输出格式
         const formatEl = document.querySelector('#sjis-content input[name="sjisFormat"]:checked');
-         if (!formatEl) return;
+        if (!formatEl) return;
         const format = formatEl.value;
-        const unmatchedChars = new Set();
+
         const results = [];
-
-        if (typeof sjisMapping === 'undefined') {
-            alert("错误：SHIFT-JIS 映射表 (sjismap.js) 未加载！");
-            this.setOutput('');
-            this.setDebugOutput('SJIS Map Error');
-            return;
-        }
-
-        for (const char of input) {
-            if (char === '\n' || char === '\r') continue;
-            const code = sjisMapping.get(char);
-            if (code) {
-                switch(format) {
-                    case 'code': results.push(code); break;
-                    case 'char_code': results.push(`${char},${code}`); break;
-                    case 'code_char': results.push(`${code},${char}`); break;
-                }
-            } else if (char.trim()) {
-                unmatchedChars.add(char);
+        
+        // SJIS 逻辑
+        if (encodingType === 'sjis') {
+            const unmatchedChars = new Set();
+            if (typeof sjisMapping === 'undefined') {
+                alert("错误：SHIFT-JIS 映射表 (sjismap.js) 未加载！");
+                return;
             }
+
+            for (const char of input) {
+                if (char === '\n' || char === '\r') continue;
+                const code = sjisMapping.get(char);
+                if (code) {
+                    this.formatAndPush(results, char, code, format);
+                } else if (char.trim()) {
+                    unmatchedChars.add(char);
+                }
+            }
+            this.setDebugOutput(Array.from(unmatchedChars).join(''));
+            this.toggleDebugArea(true); // 显示 Debug 区
+        } 
+        // UTF-16 LE 逻辑 (新功能)
+        else if (encodingType === 'utf16le') {
+            for (const char of input) {
+                if (char === '\n' || char === '\r') continue;
+                
+                // 获取 UTF-16 编码单元 (0-65535)
+                const codeUnit = char.charCodeAt(0);
+                
+                // 拆分高低字节
+                const lowByte = codeUnit & 0xFF;
+                const highByte = (codeUnit >> 8) & 0xFF;
+                
+                // 转换为 Hex 字符串，并补零
+                const lowHex = lowByte.toString(16).toUpperCase().padStart(2, '0');
+                const highHex = highByte.toString(16).toUpperCase().padStart(2, '0');
+                
+                // 组合为 Little Endian (低位在前)
+                // 例如 "汉" (U+6C49) -> LE hex: "496C"
+                const hexCode = lowHex + highHex;
+                
+                this.formatAndPush(results, char, hexCode, format);
+            }
+            this.setDebugOutput(''); // UTF-16 理论上支持所有字符，清空 Debug
+            this.toggleDebugArea(false); // 隐藏 Debug 区 (因为不需要)
         }
+
         this.setOutput(results.join('\n'));
-        this.setDebugOutput(Array.from(unmatchedChars).join(''));
     },
+
+    // 辅助函数：根据格式推入结果
+    formatAndPush(resultsArray, char, code, format) {
+        switch(format) {
+            case 'code': resultsArray.push(code); break;
+            case 'char_code': resultsArray.push(`${char},${code}`); break;
+            case 'code_char': resultsArray.push(`${code},${char}`); break;
+        }
+    },
+
     copyOutput() {
         const output = this.getOutput();
         if (!output || !output.value) {
-             // Check debug output only if main output is empty
-             const debugOutput = this.getDebugOutput();
-             if (!debugOutput || !debugOutput.value) {
-                 showNoCopyAlert();
+             // 仅在 SJIS 模式下检查 Debug 输出
+             const encodingType = document.querySelector('#sjis-content input[name="targetEncoding"]:checked')?.value;
+             if (encodingType === 'sjis') {
+                 const debugOutput = this.getDebugOutput();
+                 if (!debugOutput || !debugOutput.value) {
+                     showNoCopyAlert();
+                     return;
+                 }
+                 alert('转换结果为空，未复制。'); 
                  return;
              }
-             alert('转换结果为空，未复制。'); // Don't copy debug output automatically
+             showNoCopyAlert();
              return;
         }
         output.select();
         document.execCommand('copy');
         showCopyAlert('转换结果');
     },
+
+    // Getters & Setters
     getInput() { return document.querySelector('#sjis-content .input')?.value ?? ''; },
     getOutput() { return document.querySelector('#sjis-content .output'); },
     getDebugOutput() { return document.querySelector('#sjis-content .debug-output'); },
@@ -243,9 +292,14 @@ const sjisConverter = {
     setDebugOutput(value) {
          const debugEl = this.getDebugOutput();
          if(debugEl) debugEl.value = value;
+    },
+    toggleDebugArea(show) {
+        const debugArea = document.getElementById('sjis-debug-area');
+        if (debugArea) {
+            debugArea.style.display = show ? 'block' : 'none';
+        }
     }
 };
-
 // --- Font Tester ---
 const fontTester = {
     loadFontsBtn: null, fontSelect: null, testInput: null, preview: null,
@@ -275,40 +329,66 @@ const fontTester = {
         this.bindEvents();
         this.updatePreview();
     },
-    bindEvents() {
+ 
+
+
+bindEvents() {
         this.loadFontsBtn.addEventListener('click', async () => {
-            // Check for Font Access API support
-            if (!navigator.fonts || typeof navigator.fonts.query !== 'function') {
-                 alert('抱歉，您的浏览器不支持本地字体访问 API。\n无法加载系统字体列表。');
-                 this.loadFontsBtn.disabled = true; // Disable button if API not supported
-                 return;
+            // --- 修复开始：使用新版 API window.queryLocalFonts ---
+            
+            // 1. 检查浏览器支持性 (Chrome 87+, Edge 87+)
+            if (!('queryLocalFonts' in window)) {
+                 alert('抱歉，您的浏览器不支持本地字体访问 API (window.queryLocalFonts)。\n请使用最新版的 Chrome, Edge 或 Opera 浏览器。');
+                 // 既然不支持，就没必要禁用了，万一用户换了浏览器呢，或者只是误报
+                 return; 
              }
-            this.loadFontsBtn.textContent = '加载中...';
+
+            this.loadFontsBtn.textContent = '请在弹窗中允许访问...';
             this.loadFontsBtn.disabled = true;
 
             try {
-                const availableFonts = await navigator.fonts.query();
-                // Use a Set to get unique family names, then sort
-                const fontFamilies = [...new Set(availableFonts.map(font => font.family))].sort((a, b) => a.localeCompare(b));
+                // 2. 请求权限并获取字体列表
+                const availableFonts = await window.queryLocalFonts();
+                
+                // 3. 数据处理：去重
+                // queryLocalFonts 会返回字体的每个变体(粗体、斜体等)，我们需要提取唯一的 family 名称
+                const fontFamilies = new Set();
+                for (const fontData of availableFonts) {
+                    fontFamilies.add(fontData.family);
+                }
 
-                this.fontSelect.innerHTML = '<option value="">选择字体...</option>'; // Clear previous options
-                fontFamilies.forEach(family => {
+                // 4. 排序
+                const sortedFonts = [...fontFamilies].sort((a, b) => a.localeCompare(b));
+
+                // 5. 更新 UI
+                this.fontSelect.innerHTML = '<option value="">选择字体...</option>'; 
+                
+                sortedFonts.forEach(family => {
                     const option = document.createElement('option');
                     option.value = family;
                     option.textContent = family;
-                     // Attempt to set the font-family for the option itself for better preview
-                    try { option.style.fontFamily = `"${family}"`; } catch (e) { /* Ignore errors for problematic font names */ }
+                    // 尝试在下拉菜单中直接预览字体样式（部分字体可能加载较慢）
+                    try { option.style.fontFamily = `"${family}"`; } catch (e) { }
                     this.fontSelect.appendChild(option);
                 });
+
                 this.fontSelect.style.display = 'block';
-                this.fontControls.style.display = 'flex'; // Show controls like size/color
-                this.loadFontsBtn.style.display = 'none'; // Hide button after success
+                this.fontControls.style.display = 'flex'; 
+                this.loadFontsBtn.style.display = 'none'; // 成功后隐藏按钮
+
             } catch (err) {
                 console.error('Error loading system fonts:', err);
-                alert('加载系统字体时出错。请检查浏览器控制台获取详细信息。\n可能是权限问题或 API 错误。');
-                this.loadFontsBtn.textContent = '加载字体失败'; // Update button text
-                this.loadFontsBtn.disabled = false; // Re-enable button on error
+                // 专门处理用户拒绝权限的情况
+                if (err.name === 'SecurityError' || err.name === 'NotAllowedError') {
+                    alert('您拒绝了字体访问权限，无法加载系统字体。');
+                } else {
+                    alert('加载系统字体时出错: ' + err.message);
+                }
+                
+                this.loadFontsBtn.textContent = '重试加载系统字体'; 
+                this.loadFontsBtn.disabled = false; 
             }
+            // --- 修复结束 ---
         });
 
         this.fontSelect.addEventListener('change', this.updatePreview.bind(this));
@@ -319,6 +399,8 @@ const fontTester = {
         this.fontColor.addEventListener('input', this.updatePreview.bind(this));
         this.testInput.addEventListener('input', this.updatePreview.bind(this));
     },
+
+
     updatePreview() {
          if (!this.preview || !this.fontSelect || !this.fontSize || !this.fontColor || !this.testInput) {
              return; // Element check
