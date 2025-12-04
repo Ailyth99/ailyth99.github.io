@@ -3,6 +3,7 @@
     --bg-panel: #1a0f12;
     --bg-input: rgba(26, 15, 18, 0.8);
     
+    /* 预览区背景：黑灰棋盘格 */
     --bg-checker-1: #000000;
     --bg-checker-2: #333333;
     
@@ -23,7 +24,7 @@ body {
     margin: 0;
     display: flex;
     height: 100vh;
-    overflow: hidden; 
+    overflow: hidden; /* 防止Body出现滚动条 */
     color: var(--text-main);
     background-color: var(--bg-body);
     background-image: linear-gradient(45deg, #1a1a1a 25%, #201920 25%, #201920 50%, #1a1a1a 50%, #1a1a1a 75%, #201920 75%, #201920 100%);
@@ -35,6 +36,7 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 ::-webkit-scrollbar-corner { background: var(--bg-body); }
 
+/* --- 侧边栏 --- */
 .sidebar {
     width: 300px;
     flex-shrink: 0; /* 关键：防止被右侧挤压 */
@@ -76,6 +78,7 @@ textarea { width: 100%; height: 100px; resize: vertical; font-family: monospace;
 .input-wrap span { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); font-size: 10px; color: var(--text-muted); pointer-events: none; }
 .input-wrap input { width: 100%; }
 
+/* 滑块组合样式 */
 .slider-row-label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; display: flex; justify-content: space-between; }
 .slider-row-label span { color: var(--primary); }
 .slider-input-group { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
@@ -132,6 +135,7 @@ button { cursor: pointer; border-radius: 4px; font-size: 12px; padding: 6px 12px
 .tool-label { font-size: 12px; color: var(--primary); font-weight: bold; }
 .divider { width: 1px; height: 24px; background: var(--border); margin: 0 5px; }
 
+/* 迷你开关按钮 */
 .btn-mini-toggle {
     background: var(--bg-input); border: 1px solid var(--border); color: var(--text-muted);
     padding: 4px 10px; font-size: 11px; width: 80px;
@@ -153,6 +157,16 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
 }
 .tool-checkbox:hover { border-color: var(--primary); color: var(--primary); }
 .tool-checkbox input { accent-color: var(--primary); margin: 0; }
+
+
+.char-count-display {
+    font-size: 11px;
+    color: var(--primary);
+    text-align: right;
+    margin-top: 4px;
+    opacity: 0.8;
+    font-family: monospace;
+}
 
 /* 滑块通用样式 */
 input[type=range] { -webkit-appearance: none; background: transparent; height: 20px; cursor: pointer;}
