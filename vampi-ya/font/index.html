@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>字体图像生成器 web</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- 左侧控制面板 -->
 <div class="sidebar">
     <div class="sidebar-header">
         <h2>Font Image Generator</h2>
@@ -16,7 +16,6 @@
     </div>
 
     <div class="scroll-content">
-        <!-- 字体加载 -->
         <div class="control-group">
             <label>1. 字体来源</label>
             <div class="file-upload-wrapper">
@@ -105,21 +104,28 @@
         <!-- 样式组 -->
         <div class="tool-group">
             <div class="tool-item">
-                <span class="tool-label">颜色</span>
+                <span class="tool-label">字色</span>
                 <input type="color" id="textColor" value="#ffffff" title="文字颜色">
             </div>
             
             <div class="tool-item">
-                 <button class="btn-mini-toggle" id="btnToggleBg">背景: 透明</button>
+                <span class="tool-label">底色</span>
+                <input type="color" id="bgColor" value="#000000" title="背景颜色 (仅在非透明时生效)">
             </div>
 
+            <div class="tool-item">
+                <label class="tool-checkbox" title="勾选后背景为完全透明">
+                    <input type="checkbox" id="bgTransparent" checked> 透明底
+                </label>
+            </div>
+
+            
             <div class="tool-item">
                 <label class="tool-checkbox">
                     <input type="checkbox" id="showGrid" checked> 网格
                 </label>
             </div>
         </div>
-
         <div class="divider"></div>
 
         <div class="tool-group">
@@ -135,8 +141,8 @@
         <div class="divider"></div>
 
         <div class="tool-group" style="flex:1; justify-content: flex-end;">
-            <span class="tool-label">预览: <span id="zoomValue">100%</span></span>
-            <input type="range" id="zoomRange" min="0.1" max="4.0" step="0.1" value="1.0" title="可使用鼠标滚轮缩放">
+            <span class="tool-label">预览: <span id="zoomValue">150%</span></span>
+            <input type="range" id="zoomRange" min="0.1" max="4.0" step="0.1" value="1.5" title="可使用鼠标滚轮缩放">
         </div>
     </div>
 
