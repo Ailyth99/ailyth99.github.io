@@ -1,10 +1,8 @@
 :root {
-    /* 魔界主题配色 */
     --bg-body: #1a1a1a;
     --bg-panel: #1a0f12;
     --bg-input: rgba(26, 15, 18, 0.8);
     
-    /* 预览区背景：黑灰棋盘格 */
     --bg-checker-1: #000000;
     --bg-checker-2: #333333;
     
@@ -25,7 +23,7 @@ body {
     margin: 0;
     display: flex;
     height: 100vh;
-    overflow: hidden; /* 防止Body出现滚动条 */
+    overflow: hidden; 
     color: var(--text-main);
     background-color: var(--bg-body);
     background-image: linear-gradient(45deg, #1a1a1a 25%, #201920 25%, #201920 50%, #1a1a1a 50%, #1a1a1a 75%, #201920 75%, #201920 100%);
@@ -37,10 +35,9 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 ::-webkit-scrollbar-corner { background: var(--bg-body); }
 
-/* --- 侧边栏 --- */
 .sidebar {
     width: 300px;
-    flex-shrink: 0; /* 关键：防止被右侧挤压 */
+    flex-shrink: 0; 
     background: var(--bg-panel);
     border-right: 2px solid var(--border);
     display: flex;
@@ -79,14 +76,12 @@ textarea { width: 100%; height: 100px; resize: vertical; font-family: monospace;
 .input-wrap span { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); font-size: 10px; color: var(--text-muted); pointer-events: none; }
 .input-wrap input { width: 100%; }
 
-/* 滑块组合样式 */
 .slider-row-label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; display: flex; justify-content: space-between; }
 .slider-row-label span { color: var(--primary); }
 .slider-input-group { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
 .slider-input-group input[type="range"] { flex: 1; }
 .slider-input-group input[type="number"] { width: 60px; text-align: right; }
 
-/* 按钮通用 */
 button { cursor: pointer; border-radius: 4px; font-size: 12px; padding: 6px 12px; transition: all 0.3s; }
 
 .btn-primary {
@@ -111,12 +106,11 @@ button { cursor: pointer; border-radius: 4px; font-size: 12px; padding: 6px 12px
 .status { font-size: 10px; color: var(--primary); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sidebar-footer { padding: 15px; border-top: 2px solid var(--border); background: var(--bg-panel); }
 
-/* --- 顶部工具栏 --- */
 .main-area {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-width: 0; /* 关键：防止Flex子元素溢出 */
+    min-width: 0; 
     background: rgba(26, 15, 18, 0.6);
 }
 
@@ -136,14 +130,12 @@ button { cursor: pointer; border-radius: 4px; font-size: 12px; padding: 6px 12px
 .tool-label { font-size: 12px; color: var(--primary); font-weight: bold; }
 .divider { width: 1px; height: 24px; background: var(--border); margin: 0 5px; }
 
-/* 迷你开关按钮 */
 .btn-mini-toggle {
     background: var(--bg-input); border: 1px solid var(--border); color: var(--text-muted);
     padding: 4px 10px; font-size: 11px; width: 80px;
 }
 .btn-mini-toggle:hover { border-color: var(--primary); color: var(--text-main); }
 
-/* 颜色选择器 */
 input[type="color"] {
     -webkit-appearance: none; border: 1px solid var(--border);
     width: 24px; height: 24px; padding: 0; background: none; cursor: pointer; border-radius: 3px;
@@ -151,7 +143,6 @@ input[type="color"] {
 input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
 input[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
 
-/* 复选框样式 */
 .tool-checkbox { 
     display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; color: var(--text-main); font-weight: normal; 
     border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; background: var(--bg-input); user-select: none;
@@ -169,7 +160,6 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
     font-family: monospace;
 }
 
-/* 滑块通用样式 */
 input[type=range] { -webkit-appearance: none; background: transparent; height: 20px; cursor: pointer;}
 input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #1a0f12; border: 1px solid var(--border); border-radius: 2px; }
 input[type=range]::-webkit-slider-thumb {
@@ -178,16 +168,15 @@ input[type=range]::-webkit-slider-thumb {
 }
 #zoomRange { width: 120px; }
 
-/* --- 画布区域 --- */
 .canvas-container {
     flex: 1;
-    overflow: auto; /* 关键：开启滚动 */
+    overflow: auto; 
     padding: 40px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     
-    /* 黑灰棋盘格 */
+    
     background-color: var(--bg-checker-1);
     background-image: 
         linear-gradient(45deg, var(--bg-checker-2) 25%, transparent 25%), 
