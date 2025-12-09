@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抖动文字生成器</title>
+    <script src="gif.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="mobileModal">
+        <div class="modal-content">
+            <h3>⚠️ 提示</h3>
+            <p>本工具未针对移动端适配。</p>
+            <p>建议在电脑浏览器上使用</p>
+            <button id="btnCloseModal">我知道了</button>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="scroll-content">
+            <div class="control-group">
+                <label>文本内容</label>
+                <textarea id="textInput" spellcheck="false">VLOG&#13;流浪地球&#13;28天</textarea>
+            </div>
+
+            <div class="control-group">
+                <label>排版与字体</label>
+                <select id="fontSelect"></select>
+                <button id="btnLoadSystemFonts" class="btn-outline" style="margin-top: 8px;">📂 加载系统字体</button>
+                <div id="sysFontStatus" class="status"></div>
+
+                <div class="radio-group" style="margin-top: 15px;">
+                    <label class="radio-btn"><input type="radio" name="align" value="start"> 居左</label>
+                    <label class="radio-btn"><input type="radio" name="align" value="middle" checked> 居中</label>
+                    <label class="radio-btn"><input type="radio" name="align" value="end"> 居右</label>
+                </div>
+                
+                <div class="tool-checkbox" style="margin-top: 10px;">
+                    <input type="checkbox" id="checkItalic"> <i>斜体 (Italic)</i>
+                </div>
+                
+                <div class="slider-row-label" style="margin-top:15px;">
+                    字体大小 <span id="valSize">250px</span>
+                </div>
+                <div class="slider-input-group">
+                    <input type="range" id="rangeSize" min="20" max="600" step="5" value="250">
+                </div>
+
+                <div class="slider-row-label">
+                    行间距 <span id="valLineHeight">1.1</span>
+                </div>
+                <div class="slider-input-group">
+                    <input type="range" id="rangeLineHeight" min="0.5" max="3.0" step="0.1" value="1.1">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>颜色与样式</label>
+                <div class="row">
+                    <div class="tool-item">
+                        <input type="color" id="colorText" value="#ffffff">
+                        <span class="status" style="margin-left:5px">文字</span>
+                    </div>
+                    <div class="tool-item" style="margin-left: 15px;">
+                        <input type="color" id="colorBg" value="#1a1a1a">
+                        <span class="status" style="margin-left:5px">背景</span>
+                    </div>
+                </div>
+                
+                <div class="tool-checkbox">
+                    <input type="checkbox" id="checkFill"> 实心填充
+                </div>
+
+                <div class="slider-row-label" style="margin-top:10px;">
+                    描边粗细 <span id="valStroke">2px</span>
+                </div>
+                <div class="slider-input-group">
+                    <input type="range" id="rangeStroke" min="0" max="10" step="0.5" value="2">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>特效控制</label>
+                <select id="effectType" style="margin-bottom: 10px;">
+                    <option value="filter-basic">✍️ 基础手绘 (Boiling)</option>
+                    <option value="filter-glitch">📺 信号故障 (Glitch)</option>
+                    <option value="filter-liquid">💧 液态融化 (Liquid)</option>
+                </select>
+
+                <div class="slider-row-label">动画速度 (FPS) <span id="valSpeed">12</span></div>
+                <div class="slider-input-group">
+                    <input type="range" id="rangeSpeed" min="1" max="30" value="12">
+                </div>
+
+                <div class="slider-row-label">抖动幅度 <span id="valScale">5</span></div>
+                <div class="slider-input-group">
+                    <input type="range" id="rangeScale" min="1" max="20" value="5">
+                </div>
+
+                <div class="slider-row-label">噪点密度 <span id="valFreq">0.02</span></div>
+                <div class="slider-input-group">
+                    <input type="range" id="rangeFreq" min="0.001" max="0.05" step="0.001" value="0.02">
+                </div>
+            </div>
+            
+            <div class="control-group" style="border-bottom:none;">
+                 <button id="btnExportCode" class="btn-outline">📥 下载 SVG 文件 (动态)</button>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="record-box">
+                <button id="btnGif" class="btn-action btn-blue">🎞️ 导出 GIF (透明背景)</button>
+                <div id="gifStatus" class="status" style="display:none; color: #00d2ff; margin-bottom: 5px;">处理中...</div>
+
+                <button id="btnRecord" class="btn-action btn-red">🔴 开始录制 (WebM)</button>
+                <div class="timer-display" id="recordTimer">00:00</div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <svg id="mainSvg" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <style id="injectedCSS">
+                    text { font-family: 'Arial', sans-serif; }
+                </style>
+                <filter id="filter-basic" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" seed="0" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+                </filter>
+                <filter id="filter-glitch" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="turbulence" baseFrequency="0.05 0.001" numOctaves="2" result="noise" seed="0" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+                </filter>
+                <filter id="filter-liquid" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="2" result="noise" seed="0" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+                    <feDisplacementMap in="blur" in2="noise" scale="15" />
+                </filter>
+            </defs>
+            <text id="svgText" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"></text>
+        </svg>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
