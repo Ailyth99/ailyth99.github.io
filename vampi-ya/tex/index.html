@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS2 Texture Debug Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="wasm_exec.js"></script>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2>PS2 Theia <br> Texture Debug Tool</h2>
+        <span class="version" data-i18n="version">v2.2 / aikika</span>
+    </div>
+
+    <div class="scroll-content">
+        <!-- 来源文件 -->
+        <div class="control-group">
+            <label data-i18n="sec_file">Source File</label>
+            <div class="file-upload-wrapper">
+                <input type="file" id="fileInput">
+                <div class="file-upload-btn" id="fileBtnText" data-i18n="btn_load">📂 Load File</div>
+            </div>
+            <div class="status" id="fileStatus" data-i18n="no_file">No file loaded</div>
+        </div>
+
+        <!-- 尺寸与格式 -->
+        <div class="control-group">
+            <label data-i18n="sec_dims">Dimensions & Format</label>
+            <div class="row">
+                <div class="input-wrap">
+                    <span data-i18n="lbl_w">W</span>
+                    <input type="number" id="width" value="256">
+                </div>
+                <div class="input-wrap">
+                    <span data-i18n="lbl_h">H</span>
+                    <input type="number" id="height" value="256">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-wrap" style="flex: 2;">
+                    <span style="right: 25px;">BPP</span>
+                    <select id="bpp">
+                        <option value="4">4bpp (16 colors)</option>
+                        <option value="8">8bpp (256 colors)</option>
+                        <option value="16">16bpp</option>
+                        <option value="32">32bpp</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 偏移量 -->
+        <div class="control-group">
+            <label data-i18n="sec_offsets">Data Start Offsets (Dec/Hex)</label>
+            <div class="input-wrap mb-2">
+                <span data-i18n="lbl_pixel">Pixel Offset</span>
+                <input type="text" id="pixelOff" value="0" placeholder="0">
+            </div>
+            <div class="input-wrap">
+                <span data-i18n="lbl_clut">CLUT Offset</span>
+                <input type="text" id="clutOff" value="0" placeholder="0">
+            </div>
+        </div>
+
+        <!-- 重排模式 -->
+        <div class="control-group">
+            <label data-i18n="sec_swizzle">Swizzle Modes</label>
+            
+            <div class="row-label" data-i18n="lbl_swp">Pixel Swizzle</div>
+            <select id="swp" class="mb-2">
+                <option value="4packed" selected>4bpp Packed</option>
+                <option value="4native">4bpp Native</option>
+                <option value="4as8">4bpp as 8bpp</option>
+                <option value="std">Standard</option>
+                <option value="linear">Linear</option>
+            </select>
+
+            <div class="row-label" data-i18n="lbl_swc">CLUT Swizzle</div>
+            <select id="swc">
+                <option value="csm1">CSM1 (Standard)</option>
+                <option value="linear">Linear</option>
+            </select>
+        </div>
+
+        <!-- 颜色 -->
+        <div class="control-group">
+            <label data-i18n="sec_color">CLUT Format & Alpha</label>
+            <div class="row">
+                <div class="input-wrap">
+                    <select id="cf">
+                        <option value="rgba8888">RGBA8888</option>
+                        <option value="abgr1555">ABGR1555</option>
+                    </select>
+                </div>
+                <div class="input-wrap">
+                    <select id="alpha">
+                        <option value="ps2">Alpha: PS2 (x2)</option>
+                        <option value="ps2x2">Alpha: Low (x4)</option>
+                        <option value="raw">Alpha: Raw</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <label class="tool-checkbox" style="width:100%">
+                    <input type="checkbox" id="doSwap"> <span data-i18n="lbl_swap">Nibble Swap (Fix Noise)</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 日志 -->
+        <div class="control-group" style="border:none;">
+            <label>Log</label>
+            <textarea id="logArea" readonly></textarea>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <button id="btnDownload" class="btn-primary" data-i18n="btn_save">💾 Save PNG</button>
+    </div>
+</div>
+
+<div class="main-area">
+    <div class="toolbar">
+        <div class="tool-group">
+            <button class="btn-mini-toggle" id="btnToggleBg">BG: Dark</button>
+            <div class="tool-label" id="imgInfo" data-i18n="no_img" style="color: var(--color-success)">No Image</div>
+        </div>
+        <div class="divider"></div>
+        <div class="tool-group" style="flex:1; justify-content: flex-end;">
+            <span class="tool-label"><span data-i18n="lbl_zoom">Zoom</span>: <span id="zoomValue">100%</span></span>
+            <input type="range" id="zoomRange" min="0.1" max="5.0" step="0.1" value="1.0">
+            <button class="btn-mini-toggle" id="btnFit" style="width: auto;" data-i18n="btn_fit">Fit</button>
+        </div>
+    </div>
+
+    <div class="canvas-container dark-grid" id="canvasContainer" style="cursor: grab;">
+        <img id="previewImage" src="" style="display: none;" draggable="false">
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
