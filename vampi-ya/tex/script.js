@@ -75,12 +75,30 @@ function applyLanguage() {
 async function initWasm() {
     const go = new Go();
     try {
-        const result = await WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject);
+  
+        const response = await fetch("main.wasm");
+        
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+        }
+        
+        const buffer = await response.arrayBuffer();
+        const result = await WebAssembly.instantiate(buffer, go.importObject);
+        
         go.run(result.instance);
         state.wasmLoaded = true;
-        log("Wasm Core Loaded.");
+        
+        const indicator = document.getElementById('wasmStatus'); // 既然html删了这行，这里其实可以删掉或者try-catch一下
+        if(indicator) {
+             indicator.innerText = t("core_ready");
+             indicator.classList.remove('loading');
+             indicator.classList.add('ready');
+        }
+        
+        log("Wasm Core Loaded Successfully.");
     } catch (err) {
-        log("Wasm Load Failed: " + err);
+        console.error(err); 
+                log("Wasm Load Failed: " + err);
     }
 }
 
