@@ -293,9 +293,13 @@ function updateZoomUI() {
 function parseHex(val) {
     val = (val || "").trim();
     if (!val) return 0;
+    
+    if (val.toLowerCase().startsWith("0x")) {
         return parseInt(val, 16) || 0;
     }
-    return parseInt(val) || 0;
+    
+   
+    return parseInt(val, 10) || 0;
 }
 
 function log(msg) {
