@@ -72,37 +72,86 @@ function applyLanguage() {
     updateBgBtn(); 
 }
 
+
 async function initWasm() {
     const go = new Go();
+    const wasmUrl = "https://cdn.jsdelivr.net/gh/Ailyth99/ailyth99.github.io@main/vampi-ya/tex/main.wasm";
+    
+    const mask = document.getElementById('loadingMask');
+    const pBar = document.getElementById('progressBar');
+    const pText = document.getElementById('progressText');
+    const statusText = document.querySelector('.loading-text');
+
     try {
-  
-        const response = await fetch("main.wasm");
-        
+        log(`Connecting to: ${wasmUrl}...`);
+        const response = await fetch(wasmUrl);
+
         if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
         }
+
+        const contentLength = response.headers.get('Content-Length');
+        const total = parseInt(contentLength, 10);
+        const reader = response.body.getReader();
         
-        const buffer = await response.arrayBuffer();
-        const result = await WebAssembly.instantiate(buffer, go.importObject);
-        
-        go.run(result.instance);
-        state.wasmLoaded = true;
-        
-        const indicator = document.getElementById('wasmStatus'); // 既然html删了这行，这里其实可以删掉或者try-catch一下
-        if(indicator) {
-             indicator.innerText = t("core_ready");
-             indicator.classList.remove('loading');
-             indicator.classList.add('ready');
+        let receivedLength = 0; 
+        let chunks = []; 
+
+        while(true) {
+            const {done, value} = await reader.read();
+            if (done) break;
+
+            chunks.push(value);
+            receivedLength += value.length;
+
+            if (total) {
+                const percent = Math.round((receivedLength / total) * 100);
+                pBar.style.width = `${percent}%`;
+                pText.innerText = `${percent}%`;
+                statusText.innerText = `Downloading Core... ${(receivedLength/1024/1024).toFixed(2)}MB`;
+            } else {
+                pBar.style.width = '100%';
+                pText.innerText = 'Downloading...';
+            }
         }
+
+        statusText.innerText = "Assembling Binary...";
+        const chunksAll = new Uint8Array(receivedLength);
+        let position = 0;
+        for(let chunk of chunks) {
+            chunksAll.set(chunk, position);
+            position += chunk.length;
+        }
+
+        statusText.innerText = "Instantiating Wasm...";
+        const result = await WebAssembly.instantiate(chunksAll, go.importObject);
+        go.run(result.instance);
         
+        state.wasmLoaded = true;
         log("Wasm Core Loaded Successfully.");
+
+        statusText.innerText = "Ready!";
+        pBar.style.width = '100%';
+        
+        setTimeout(() => {
+            mask.classList.add('hidden');
+            setTimeout(() => { mask.style.display = 'none'; }, 500);
+        }, 500);
+
     } catch (err) {
-        console.error(err); 
-                log("Wasm Load Failed: " + err);
+        console.error(err);
+        statusText.innerText = "Load Failed!";
+        statusText.style.color = "#ff3366";
+        pText.innerText = "Error";
+        log("Wasm Load Failed: " + err);
+        alert("核心加载失败，请检查网络或刷新页面。\n" + err);
     }
 }
 
+
+
 function bindEvents() {
+    // 文件
     document.getElementById('fileInput').addEventListener('change', async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -116,18 +165,18 @@ function bindEvents() {
         requestRender();
     });
 
-    
     document.getElementById('bpp').addEventListener('change', () => {
         updateSwizzleUI();
         requestRender();
     });
 
     document.querySelectorAll('input, select').forEach(el => {
-        if (el.id !== 'fileInput' && el.id !== 'bpp') { 
+        if (el.id !== 'fileInput' && el.id !== 'bpp') { // bpp 单独处理了
             el.addEventListener('input', () => debounceRender(el.type === 'text' ? 500 : 100));
         }
     });
 
+    // 背景
     document.getElementById('btnToggleBg').addEventListener('click', () => {
         state.isDarkBg = !state.isDarkBg;
         const container = document.getElementById('canvasContainer');
@@ -293,13 +342,11 @@ function updateZoomUI() {
 function parseHex(val) {
     val = (val || "").trim();
     if (!val) return 0;
-    
+ 
     if (val.toLowerCase().startsWith("0x")) {
         return parseInt(val, 16) || 0;
     }
-    
-   
-    return parseInt(val, 10) || 0;
+    return parseInt(val) || 0;
 }
 
 function log(msg) {

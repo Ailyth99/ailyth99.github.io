@@ -16,7 +16,6 @@
     </div>
 
     <div class="scroll-content">
-        <!-- 来源文件 -->
         <div class="control-group">
             <label data-i18n="sec_file">Source File</label>
             <div class="file-upload-wrapper">
@@ -26,7 +25,6 @@
             <div class="status" id="fileStatus" data-i18n="no_file">No file loaded</div>
         </div>
 
-        <!-- 尺寸与格式 -->
         <div class="control-group">
             <label data-i18n="sec_dims">Dimensions & Format</label>
             <div class="row">
@@ -53,7 +51,6 @@
             </div>
         </div>
 
-        <!-- 偏移量 -->
         <div class="control-group">
             <label data-i18n="sec_offsets">Data Start Offsets (Dec/Hex)</label>
             <div class="input-wrap mb-2">
@@ -66,7 +63,6 @@
             </div>
         </div>
 
-        <!-- 重排模式 -->
         <div class="control-group">
             <label data-i18n="sec_swizzle">Swizzle Modes</label>
             
@@ -111,7 +107,6 @@
             </div>
         </div>
 
-        <!-- 日志 -->
         <div class="control-group" style="border:none;">
             <label>Log</label>
             <textarea id="logArea" readonly></textarea>
@@ -141,6 +136,20 @@
         <img id="previewImage" src="" style="display: none;" draggable="false">
     </div>
 </div>
+
+<!--  加载遮罩层 -->
+<div id="loadingMask" class="loading-mask">
+    <div class="loading-content">
+        <h2 class="loading-title">THEIA</h2>
+        <div class="loading-text">Initializing Core...</div>
+        
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div id="progressText" class="progress-info">0%</div>
+    </div>
+</div>
+
 
 <script src="script.js"></script>
 </body>
