@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS2 Texture Debug Tool</title>
+    <title>PS2 ReTX</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
     <script src="wasm_exec.js"></script>
 </head>
 <body>
 
 <div class="sidebar">
     <div class="sidebar-header">
-        <h2>PS2 Theia <br> Texture Debug Tool</h2>
-        <span class="version" data-i18n="version">v2.2 / aikika</span>
+        <a href="help.html" target="_blank" class="help-link" title="Open Manual">
+            <img src="logo.png" alt="PS2 ReTX" class="app-logo">
+        </a>
+        <span class="version" data-i18n="version">v2.4 / Wasm Core</span>
     </div>
 
     <div class="scroll-content">
@@ -26,7 +29,7 @@
         </div>
 
         <div class="control-group">
-            <label data-i18n="sec_dims">Dimensions & Format</label>
+            <label data-i18n="sec_dim_off">Dimensions & Offsets</label>
             <div class="row">
                 <div class="input-wrap">
                     <span data-i18n="lbl_w">W</span>
@@ -37,35 +40,27 @@
                     <input type="number" id="height" value="256">
                 </div>
             </div>
-            
-            <div class="row">
-                <div class="input-wrap" style="flex: 2;">
-                    <span style="right: 25px;">BPP</span>
-                    <select id="bpp">
-                        <option value="4">4bpp (16 colors)</option>
-                        <option value="8">8bpp (256 colors)</option>
-                        <option value="16">16bpp</option>
-                        <option value="32">32bpp</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label data-i18n="sec_offsets">Data Start Offsets (Dec/Hex)</label>
-            <div class="input-wrap mb-2">
+            <div class="input-wrap mt-2">
                 <span data-i18n="lbl_pixel">Pixel Offset</span>
                 <input type="text" id="pixelOff" value="0" placeholder="0">
             </div>
-            <div class="input-wrap">
+            <div class="input-wrap mt-2">
                 <span data-i18n="lbl_clut">CLUT Offset</span>
                 <input type="text" id="clutOff" value="0" placeholder="0">
             </div>
         </div>
 
         <div class="control-group">
-            <label data-i18n="sec_swizzle">Swizzle Modes</label>
+            <label data-i18n="sec_swizzle">Format & Swizzle</label>
             
+            <div class="row-label">BPP (Bits Per Pixel)</div>
+            <select id="bpp" class="mb-2">
+                <option value="4">4bpp (16 colors)</option>
+                <option value="8">8bpp (256 colors)</option>
+                <option value="16">16bpp</option>
+                <option value="32">32bpp</option>
+            </select>
+
             <div class="row-label" data-i18n="lbl_swp">Pixel Swizzle</div>
             <select id="swp" class="mb-2">
                 <option value="4packed" selected>4bpp Packed</option>
@@ -82,7 +77,6 @@
             </select>
         </div>
 
-        <!-- 颜色 -->
         <div class="control-group">
             <label data-i18n="sec_color">CLUT Format & Alpha</label>
             <div class="row">
@@ -102,7 +96,7 @@
             </div>
             <div class="row mt-2">
                 <label class="tool-checkbox" style="width:100%">
-                    <input type="checkbox" id="doSwap"> <span data-i18n="lbl_swap">Nibble Swap (Fix Noise)</span>
+                    <input type="checkbox" id="doSwap"> <span data-i18n="lbl_swap">Nibble Swap</span>
                 </label>
             </div>
         </div>
@@ -114,6 +108,7 @@
     </div>
 
     <div class="sidebar-footer">
+        <!-- 仅保留保存按钮 -->
         <button id="btnDownload" class="btn-primary" data-i18n="btn_save">💾 Save PNG</button>
     </div>
 </div>
@@ -121,10 +116,20 @@
 <div class="main-area">
     <div class="toolbar">
         <div class="tool-group">
-            <button class="btn-mini-toggle" id="btnToggleBg">BG: Dark</button>
-            <div class="tool-label" id="imgInfo" data-i18n="no_img" style="color: var(--color-success)">No Image</div>
+            <a href="help.html" target="_blank" class="btn-mini-toggle help-btn" title="Help">❓ Help</a>
+            <div class="divider"></div>
+            
+            <button class="btn-mini-toggle" id="btnToggleBg" data-i18n="bg_dark">BG: Dark</button>
+            <input type="color" id="bgColorPicker" value="#333333" title="Custom Background Color">
+            
+            <div class="divider"></div>
+            
+            <button class="btn-mini-toggle" id="btnFlipV" title="Flip Vertical" data-i18n="btn_flip_v">Flip Vert</button>
+<button class="btn-mini-toggle" id="btnFlipH" title="Flip Horizontal" data-i18n="btn_flip_h">Flip Horz</button>
+            
+            <div class="tool-label" id="imgInfo" data-i18n="no_img" style="color: var(--color-success); margin-left: 10px;">No Image</div>
         </div>
-        <div class="divider"></div>
+        
         <div class="tool-group" style="flex:1; justify-content: flex-end;">
             <span class="tool-label"><span data-i18n="lbl_zoom">Zoom</span>: <span id="zoomValue">100%</span></span>
             <input type="range" id="zoomRange" min="0.1" max="5.0" step="0.1" value="1.0">
@@ -137,19 +142,16 @@
     </div>
 </div>
 
-<!--  加载遮罩层 -->
 <div id="loadingMask" class="loading-mask">
     <div class="loading-content">
-        <h2 class="loading-title">THEIA</h2>
+        <img src="logo.png" alt="PS2 ReTX" class="loading-logo">
         <div class="loading-text">Initializing Core...</div>
-        
         <div class="progress-container">
             <div id="progressBar" class="progress-bar"></div>
         </div>
         <div id="progressText" class="progress-info">0%</div>
     </div>
 </div>
-
 
 <script src="script.js"></script>
 </body>

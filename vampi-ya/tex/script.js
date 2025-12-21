@@ -1,45 +1,47 @@
 const I18N = {
     "en": {
-        "version": "v2.2 / aikika",
+        "version": "v2.4 / Wasm Core",
         "sec_file": "Source File",
         "btn_load": "📂 Load File",
         "no_file": "No file loaded",
-        "sec_dims": "Dimensions & Format",
+        "sec_dim_off": "Dimensions & Offsets",
         "lbl_w": "W", "lbl_h": "H",
-        "sec_offsets": "Data Start Offsets (Dec/Hex)",
         "lbl_pixel": "Pixel Offset", "lbl_clut": "CLUT Offset",
-        "sec_swizzle": "Swizzle Modes",
+        "sec_swizzle": "Format & Swizzle",
         "lbl_swp": "Pixel Swizzle", "lbl_swc": "CLUT Swizzle",
         "sec_color": "CLUT Format & Alpha",
-        "lbl_swap": "Nibble Swap (Fix Noise)",
+        "lbl_swap": "Nibble Swap",
         "btn_save": "💾 Save PNG",
+	"btn_flip_v": "Flip Vert",
+        "btn_flip_h": "Flip Horz",
         "no_img": "No Image",
         "lbl_zoom": "Zoom",
         "btn_fit": "Fit",
         "bg_dark": "BG: Dark", "bg_light": "BG: Light",
         "status_ready": "Ready. Load a file.",
-        "status_render_fail": "Render Failed"
+        "status_render_fail": "Render Failed (Out of bounds, check offset)"
     },
     "zh": {
-        "version": "v2.2 / aikika",
+        "version": "v2.4 / Wasm 核心",
         "sec_file": "来源文件",
         "btn_load": "📂 加载文件 (BIN/RAW)",
         "no_file": "未加载文件",
-        "sec_dims": "尺寸与格式",
+        "sec_dim_off": "尺寸与数据起始偏移量",
         "lbl_w": "宽", "lbl_h": "高",
-        "sec_offsets": "数据起始偏移量 (10进制/16进制)",
-        "lbl_pixel": "像素偏移", "lbl_clut": "CLUT偏移",
-        "sec_swizzle": "重排模式 (Swizzle)",
+        "lbl_pixel": "像素偏移 (10进制/16进制)", "lbl_clut": "CLUT偏移 (10进制/16进制)",
+        "sec_swizzle": "格式与重排模式",
         "lbl_swp": "像素重排", "lbl_swc": "CLUT重排",
         "sec_color": "CLUT颜色格式和ALPHA值调整",
-        "lbl_swap": "高低位交换 (修复噪点)",
+        "lbl_swap": "高低位交换",
         "btn_save": "💾 保存图片",
         "no_img": "无预览",
         "lbl_zoom": "缩放",
         "btn_fit": "适应",
         "bg_dark": "背景: 深色", "bg_light": "背景: 浅色",
         "status_ready": "就绪。请加载文件。",
-        "status_render_fail": "渲染失败 (检查偏移量)"
+	  "btn_flip_v": "上下翻转",
+        "btn_flip_h": "左右翻转",
+        "status_render_fail": "渲染失败 (超出文件数据范围，检查偏移量)"
     }
 };
 
@@ -48,6 +50,8 @@ const state = {
     wasmLoaded: false,
     zoom: 1.0,
     isDarkBg: true,
+    flipV: false, // 垂直翻转状态
+    flipH: false, // 水平翻转状态
     debounceTimer: null,
     lang: navigator.language.startsWith('zh') ? 'zh' : 'en'
 };
@@ -59,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initWasm();
     bindEvents();
     initDragAndDrop();
-    updateSwizzleUI(); 
+    updateSwizzleUI();
 });
 
 function applyLanguage() {
@@ -72,7 +76,6 @@ function applyLanguage() {
     updateBgBtn(); 
 }
 
-
 async function initWasm() {
     const go = new Go();
     const wasmUrl = "https://cdn.jsdelivr.net/gh/Ailyth99/ailyth99.github.io@main/vampi-ya/tex/main.wasm";
@@ -83,27 +86,22 @@ async function initWasm() {
     const statusText = document.querySelector('.loading-text');
 
     try {
-        log(`Connecting to: ${wasmUrl}...`);
+        log(`Connecting to: ${wasmUrl}`);
         const response = await fetch(wasmUrl);
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
-        }
+        if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
 
         const contentLength = response.headers.get('Content-Length');
         const total = parseInt(contentLength, 10);
         const reader = response.body.getReader();
         
-        let receivedLength = 0; 
-        let chunks = []; 
+        let receivedLength = 0;
+        let chunks = [];
 
         while(true) {
             const {done, value} = await reader.read();
             if (done) break;
-
             chunks.push(value);
             receivedLength += value.length;
-
             if (total) {
                 const percent = Math.round((receivedLength / total) * 100);
                 pBar.style.width = `${percent}%`;
@@ -144,14 +142,10 @@ async function initWasm() {
         statusText.style.color = "#ff3366";
         pText.innerText = "Error";
         log("Wasm Load Failed: " + err);
-        alert("核心加载失败，请检查网络或刷新页面。\n" + err);
     }
 }
 
-
-
 function bindEvents() {
-    // 文件
     document.getElementById('fileInput').addEventListener('change', async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -171,15 +165,15 @@ function bindEvents() {
     });
 
     document.querySelectorAll('input, select').forEach(el => {
-        if (el.id !== 'fileInput' && el.id !== 'bpp') { // bpp 单独处理了
+        if (el.id !== 'fileInput' && el.id !== 'bpp' && el.type !== 'color') {
             el.addEventListener('input', () => debounceRender(el.type === 'text' ? 500 : 100));
         }
     });
 
-    // 背景
     document.getElementById('btnToggleBg').addEventListener('click', () => {
         state.isDarkBg = !state.isDarkBg;
         const container = document.getElementById('canvasContainer');
+        container.style.backgroundColor = ""; 
         if (state.isDarkBg) {
             container.classList.remove('light-grid');
             container.classList.add('dark-grid');
@@ -190,10 +184,30 @@ function bindEvents() {
         updateBgBtn();
     });
 
+    document.getElementById('bgColorPicker').addEventListener('input', (e) => {
+        const container = document.getElementById('canvasContainer');
+        container.classList.remove('dark-grid', 'light-grid');
+        container.style.backgroundColor = e.target.value;
+    });
+
+    // 翻转按钮事件
+    document.getElementById('btnFlipV').addEventListener('click', (e) => {
+        state.flipV = !state.flipV;
+        e.target.classList.toggle('active', state.flipV);
+        updateZoomUI(); // 通过 CSS transform 实现翻转，无需重新渲染
+    });
+
+    document.getElementById('btnFlipH').addEventListener('click', (e) => {
+        state.flipH = !state.flipH;
+        e.target.classList.toggle('active', state.flipH);
+        updateZoomUI();
+    });
+
     document.getElementById('zoomRange').addEventListener('input', (e) => {
         state.zoom = parseFloat(e.target.value);
         updateZoomUI();
     });
+    
     document.getElementById('canvasContainer').addEventListener('wheel', (e) => {
         if(e.ctrlKey || true) {
             e.preventDefault();
@@ -204,16 +218,30 @@ function bindEvents() {
             updateZoomUI();
         }
     }, { passive: false });
+
     document.getElementById('btnFit').addEventListener('click', () => {
         state.zoom = 1.0;
         updateZoomUI();
     });
+
     document.getElementById('btnDownload').addEventListener('click', () => {
+        // 保存时需要创建一个临时的 Canvas 来应用翻转，否则保存下来是未翻转的
         const img = document.getElementById('previewImage');
         if (!img.src || img.style.display === 'none') return;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+
+        // 应用翻转矩阵
+        ctx.translate(state.flipH ? canvas.width : 0, state.flipV ? canvas.height : 0);
+        ctx.scale(state.flipH ? -1 : 1, state.flipV ? -1 : 1);
+        ctx.drawImage(img, 0, 0);
+
         const link = document.createElement('a');
         link.download = 'extracted.png';
-        link.href = img.src;
+        link.href = canvas.toDataURL('image/png');
         link.click();
     });
 }
@@ -221,32 +249,38 @@ function bindEvents() {
 function updateSwizzleUI() {
     const bpp = parseInt(document.getElementById('bpp').value);
     const swpSelect = document.getElementById('swp');
-    const options = swpSelect.options;
-    
-    // 4bpp 模式: 4packed, 4native, 4as8, linear
-    // 8/16/32bpp: std, linear
-    
-    let hasValidSelection = false;
+    const swcSelect = document.getElementById('swc');
+    const clutOffInput = document.getElementById('clutOff');
+    const cfSelect = document.getElementById('cf');
+    const alphaSelect = document.getElementById('alpha');
+    const swapCheck = document.getElementById('doSwap');
 
-    for (let i = 0; i < options.length; i++) {
-        const val = options[i].value;
+    const swpOptions = swpSelect.options;
+    let hasValidSwp = false;
+    for (let i = 0; i < swpOptions.length; i++) {
+        const val = swpOptions[i].value;
         let enable = false;
-
         if (bpp === 4) {
             if (val.startsWith('4') || val === 'linear') enable = true;
         } else {
             if (val === 'std' || val === 'linear') enable = true;
         }
-
-        options[i].disabled = !enable;
-        options[i].hidden = !enable; 
-        if (enable && options[i].selected) hasValidSelection = true;
+        swpOptions[i].disabled = !enable;
+        swpOptions[i].hidden = !enable;
+        if (enable && swpOptions[i].selected) hasValidSwp = true;
+    }
+    if (!hasValidSwp) {
+        swpSelect.value = (bpp === 4) ? '4packed' : 'std';
     }
 
-    if (!hasValidSelection) {
-        if (bpp === 4) swpSelect.value = '4packed';
-        else swpSelect.value = 'std';
-    }
+    const isTrueColor = (bpp > 8);
+    swcSelect.disabled = isTrueColor;
+    clutOffInput.disabled = isTrueColor;
+    cfSelect.disabled = isTrueColor;
+    alphaSelect.disabled = isTrueColor;
+    
+    swapCheck.disabled = (bpp !== 4);
+    if(bpp !== 4) swapCheck.checked = false;
 }
 
 function initDragAndDrop() {
@@ -332,17 +366,23 @@ function updateZoomUI() {
     const percent = Math.round(state.zoom * 100);
     document.getElementById('zoomValue').innerText = percent + "%";
     document.getElementById('zoomRange').value = state.zoom;
+    
     const img = document.getElementById('previewImage');
     if (img.naturalWidth) {
+        const scaleX = state.flipH ? -1 : 1;
+        const scaleY = state.flipV ? -1 : 1;
+        
         img.style.width = (img.naturalWidth * state.zoom) + 'px';
-        img.style.height = 'auto';
+        img.style.height = 'auto'; 
+        
+        img.style.transformOrigin = "center center"; 
+        img.style.transform = `scale(${scaleX}, ${scaleY})`;
     }
 }
 
 function parseHex(val) {
     val = (val || "").trim();
     if (!val) return 0;
- 
     if (val.toLowerCase().startsWith("0x")) {
         return parseInt(val, 16) || 0;
     }

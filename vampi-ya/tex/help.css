@@ -1,0 +1,117 @@
+/* 复用 style.css 的变量，但针对阅读优化 */
+:root {
+    --bg-body: #1a1a1a;
+    --bg-paper: #1f1f1f;
+    --primary: #ff3366;
+    --text-main: #d0d0d0;
+    --code-bg: #111;
+    --border: #4a1018;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Segoe UI', "Microsoft YaHei", sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max_width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* 标题样式 */
+header {
+    text-align: center;
+    margin-bottom: 50px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 20px;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+}
+
+.subtitle { color: #666; font-family: monospace; }
+
+h2 {
+    color: #fff;
+    border-left: 4px solid var(--primary);
+    padding-left: 15px;
+    margin-top: 40px;
+    background: linear-gradient(90deg, rgba(255,51,102,0.1), transparent);
+}
+
+h3 { color: var(--primary); margin-top: 25px; font-size: 1.1em; }
+
+/* 内容卡片 */
+.param-block {
+    background: var(--bg-paper);
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.param-name {
+    font-family: monospace;
+    font-weight: bold;
+    color: #fff;
+    background: var(--border);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 1.1em;
+}
+
+.param-desc { margin-top: 10px; font-size: 0.95em; color: #aaa; }
+
+/* 选项列表 */
+ul.options { list-style: none; padding: 0; margin-top: 10px; }
+ul.options li {
+    margin-bottom: 8px;
+    padding-left: 15px;
+    position: relative;
+    border-left: 2px solid #333;
+}
+ul.options li strong { color: var(--primary); font-family: monospace; }
+
+/* 代码与提示 */
+code {
+    background: var(--code-bg);
+    color: #4caf50;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Consolas', monospace;
+}
+
+.tip {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    color: #ffd54f;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.back-btn {
+    position: fixed; top: 20px; left: 20px;
+    text-decoration: none; color: #fff;
+    background: #333; padding: 8px 15px; border-radius: 4px;
+    font-size: 14px; border: 1px solid #555;
+    transition: 0.2s;
+}
+.back-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 8px; background: #111; }
+::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }

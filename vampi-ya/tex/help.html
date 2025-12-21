@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PS2 ReTX - Manual</title>
+    <link rel="stylesheet" href="help.css">
+</head>
+<body>
+
+<a href="index.html" class="back-btn">← Back to Tool</a>
+
+<div class="container">
+    <header>
+        <h1>PS2 ReTX</h1>
+        <div class="subtitle">Texture Reverse Engineering & Debugging System</div>
+    </header>
+
+    <div class="tip">
+        <strong>⚡ 快速入门：</strong>
+        大部分游戏只需要调节 <code>Width</code>, <code>BPP</code> 和 <code>Pixel Offset</code>。
+        如果图像呈马赛克状，尝试切换 <code>Pixel Swizzle</code>。
+        如果颜色错乱，尝试切换 <code>CLUT Swizzle</code>。
+    </div>
+
+    <h2>1. 核心参数 (Core)</h2>
+    
+    <div class="param-block">
+        <span class="param-name">Width / Height</span>
+        <div class="param-desc">
+            纹理的宽度和高度。PS2 纹理通常是 2 的幂次方 (如 256, 512)，但也存在非标准尺寸（如字库）。
+            <br><i>技巧：如果不确定宽度，可以观察图像是否“倾斜”。调节宽度直到图像垂直对齐。</i>
+        </div>
+    </div>
+
+    <div class="param-block">
+        <span class="param-name">BPP (Bits Per Pixel)</span>
+        <div class="param-desc">
+            位深，决定了一个像素占用多少位。
+            <ul class="options">
+                <li><strong>4bpp</strong>: 16 色 (索引模式)。最常见于字体、图标。需要 CLUT。</li>
+                <li><strong>8bpp</strong>: 256 色 (索引模式)。最常见于角色、场景贴图。需要 CLUT。</li>
+                <li><strong>16bpp</strong>: 真彩色 (ABGR1555)。无需 CLUT。</li>
+                <li><strong>32bpp</strong>: 真彩色 (RGBA8888)。无需 CLUT。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="param-block">
+        <span class="param-name">Offsets (Pixel / CLUT)</span>
+        <div class="param-desc">
+            数据在文件中的起始位置。支持十进制 (如 <code>67196</code>) 或十六进制 (如 <code>0x1067C</code>)。
+            <ul class="options">
+                <li><strong>Pixel Offset</strong>: 图像本体数据的起始位置。</li>
+                <li><strong>CLUT Offset</strong>: 调色板数据的起始位置 (仅 4/8bpp 需要)。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>2. 重排模式 (Swizzle Modes)</h2>
+    <p style="color:#888; font-size:0.9em;">PS2 为了渲染性能，通常将像素打乱存放 (Z-Order)。我们需要“反重排”来还原图像。</p>
+
+    <div class="param-block">
+        <span class="param-name">Pixel Swizzle</span>
+        <div class="param-desc">
+            <ul class="options">
+                <li><strong>4packed (Type 2)</strong>: <span style="color:var(--primary)">[通用]</span> 将 4bpp 数据解压为 8bpp 进行重排。最常见的 4bpp 模式。</li>
+                <li><strong>4native (Type 1)</strong>: <span style="color:var(--primary)">[特殊]</span> 原生 4bpp 页面映射。常见于 EA 游戏 (如 FIFA, 极品飞车)。</li>
+                <li><strong>4as8</strong>: <span style="color:var(--primary)">[特殊]</span> 将 4bpp 视为宽度减半的 8bpp。</li>
+                <li><strong>std</strong>: 标准模式。适用于所有的 8bpp, 16bpp, 32bpp。</li>
+                <li><strong>linear</strong>: 线性模式。不做任何重排，按顺序读取。常见于字库或 UI 条。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="param-block">
+        <span class="param-name">CLUT Swizzle</span>
+        <div class="param-desc">
+            调色板的存储顺序。
+            <ul class="options">
+                <li><strong>CSM1</strong>: <span style="color:var(--primary)">[通用]</span> 复合模式。PS2 显存的标准存储方式，每 32 个颜色会交换中间两组。如果颜色是对的但位置错了，选这个。</li>
+                <li><strong>Linear</strong>: <span style="color:var(--primary)">[字库]</span> 线性模式。如果开了 CSM1 导致图像支离破碎，请改回 Linear。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>3. 颜色与通道 (Color & Alpha)</h2>
+
+    <div class="param-block">
+        <span class="param-name">Alpha Fix</span>
+        <div class="param-desc">
+            修复透明度问题。PS2 的透明度范围通常是 0x00-0x80 (0-128)，直接显示会变暗。
+            <ul class="options">
+                <li><strong>PS2 (x2)</strong>: 将 0-128 拉伸到 0-255。最通用的做法。</li>
+                <li><strong>Raw</strong>: 保持原始数据。</li>
+                <li><strong>Low (x4)</strong>: 针对 0-64 的低精度 Alpha 进行拉伸。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="param-block">
+        <span class="param-name">Nibble Swap</span>
+        <div class="param-desc">
+            <strong>仅用于 4bpp。</strong> 交换字节中的高低 4 位。
+            <br>如果你发现 4bpp 图像轮廓清晰，但充满了噪点或横向拉丝，请勾选此项。
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px; color: #444; font-size: 0.8em;">
+        POWERED BY GOLANG & WEBASSEMBLY &bull; PS2 RETX
+    </div>
+</div>
+
+</body>
+</html>
