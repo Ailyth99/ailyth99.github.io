@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>DEF 坐标数据生成工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app_container">
+    <div class="app_sidebar">
+        <div class="sidebar_header">
+            <h1>DEF 坐标生成器</h1>
+        </div>
+
+        <div class="sidebar_body">
+            <div class="input_group">
+                <label>1. 贴图源文件</label>
+                <div class="upload_wrapper">
+                    <input type="file" id="image_loader" accept=".png,.jpg,.bmp">
+                    <div class="upload_trigger">上传字库贴图 (PNG)</div>
+                </div>
+                <div id="image_info" class="status_info">等待上传...</div>
+            </div>
+
+            <div class="input_group">
+                <label>2. 文字序列 (支持换行与空格定位)</label>
+                <textarea id="sequence_input" spellcheck="false">示例文字</textarea>
+            </div>
+
+            <div class="input_group">
+                <label>3. 网格布局配置</label>
+                <div class="field_row"><span>起始 X (左边距)</span><input type="number" id="origin_x" value="0"></div>
+                <input type="range" id="slider_x" min="0" max="1024" value="0">
+                
+                <div class="field_row"><span>起始 Y (顶边距)</span><input type="number" id="origin_y" value="0"></div>
+                <input type="range" id="slider_y" min="0" max="1024" value="0">
+                
+                <div class="field_row"><span>格子宽度 (W)</span><input type="number" id="cell_w" value="16"></div>
+                <input type="range" id="slider_w" min="4" max="128" value="16">
+                
+                <div class="field_row"><span>格子高度 (H)</span><input type="number" id="cell_h" value="16"></div>
+                <input type="range" id="slider_h" min="4" max="128" value="16">
+            </div>
+        </div>
+
+        <div class="sidebar_footer">
+            <button id="export_button" class="btn_primary">生成 HEX 坐标数据</button>
+        </div>
+    </div>
+
+    <div class="app_main">
+        <div class="app_toolbar">
+            <div class="toolbar_item">
+                <span class="toolbar_label">预览背景色:</span>
+                <input type="color" id="bg_picker" value="#000000">
+            </div>
+            <div class="toolbar_divider"></div>
+            <div class="toolbar_item">
+                <label class="ui_checkbox"><input type="checkbox" id="toggle_grid" checked> 显示网格</label>
+                <label class="ui_checkbox"><input type="checkbox" id="toggle_overlay" checked> 叠加文字预览</label>
+            </div>
+            <div class="toolbar_spacer"></div>
+            <div class="toolbar_item">
+                <span class="toolbar_label">缩放: <span id="zoom_display">100%</span></span>
+                <input type="range" id="zoom_slider" min="0.1" max="8.0" step="0.1" value="1.0">
+            </div>
+        </div>
+
+        <div class="app_viewport" id="viewport">
+            <div class="canvas_container">
+                <canvas id="main_canvas"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="export_modal" class="modal_overlay" style="display:none;">
+    <div class="modal_content">
+        <div class="modal_header">
+            <span>生成的连续 HEX 数据</span>
+            <button id="close_modal">×</button>
+        </div>
+        <textarea id="hex_output" readonly></textarea>
+        <div class="modal_footer">
+            <button id="copy_button" class="btn_primary">复制到剪贴板</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
