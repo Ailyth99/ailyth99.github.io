@@ -12,19 +12,13 @@
 <div class="sidebar">
     <div class="sidebar-header">
         <h2>Font Image Generator</h2>
-        <span class="version">v1.4 / aikika</span>
+        <span class="version">v1.6 / aikika</span>
     </div>
 
     <div class="scroll-content">
         <div class="control-group">
-            <label>1. 字体来源</label>
-            <div class="file-upload-wrapper">
-                <input type="file" id="fontInput" accept=".ttf,.otf,.woff,.woff2">
-                <div class="file-upload-btn">📂 上传字体文件 (.ttf/otf)</div>
-            </div>
-
-            <div id="systemFontArea" style="margin-top: 10px; display: none;">
-                <button id="btnLoadSystemFonts" class="btn-outline">🖥️读取系统字体</button>
+            <div id="systemFontArea">
+                <button id="btnLoadSystemFonts" class="btn-outline">🖥️ 读取系统安装的字体</button>
                 <select id="systemFontSelect" style="display:none; margin-top:5px;">
                     <option value="" disabled selected>请选择字体...</option>
                 </select>
@@ -33,12 +27,14 @@
         </div>
 
         <div class="control-group">
-            <label>2. 字符列表</label>
-            <textarea id="charList" placeholder="在此输入字符...">0123456789 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 测试文字绑获队铅岛颗锰纷镜阔兰环狞垫贾偿从鸟龙娄仑畅录脸滥馏奋龄构榄测舰钓鹏鉴绊咙抡鸣赣锄鳄骇览桨级辽冲肤颊阁观篮飘驹澜场电谋沧农辅贡顷赐锣贿饵挎辉秸巅请顾错鹃涧</textarea><div id="charCountDisplay" class="char-count-display">当前字数: 0</div>
+            <textarea id="charList" placeholder="在此输入字符...">0123456789*&…%￥#@ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 测试文字绑获队铅岛颗锰纷镜阔兰环狞垫贾偿从鸟龙娄仑畅录脸滥馏奋龄构榄测舰钓鹏鉴绊咙抡鸣赣锄鳄骇览桨级辽冲肤颊阁观篮飘驹澜场电谋沧农辅贡顷赐锣贿饵挎辉秸巅请顾「」《》？。，！异丁好十分哦机拿\(^おコザすぢ—团托脱亡望五伍息习翔象消</textarea>
+            <div class="char-controls">
+                <label class="checkbox-simple"><input type="checkbox" id="showText" checked> 显示输入文字</label>
+                <div id="charCountDisplay" class="char-count-display">当前字数: 0</div>
+            </div>
         </div>
 
         <div class="control-group">
-            <label>画布设置</label>
             <div class="row">
                 <div class="input-wrap">
                     <span>宽</span>
@@ -49,45 +45,51 @@
                     <input type="number" id="canvasH" value="512">
                 </div>
             </div>
-            <button class="btn-outline" id="btnFitHeight">自动适应高度</button>
         </div>
 
         <div class="control-group">
-            <label>排版参数</label>
-            
-            <!-- 格宽 -->
-            <div class="slider-row-label">格宽 <span id="val_cellW">16</span>px</div>
+            <div class="slider-row-label">格宽 <span id="val_cellW">20</span>px</div>
             <div class="slider-input-group">
-                <input type="range" id="slider_cellW" min="4" max="128" value="16">
-                <input type="number" id="cellW" value="16">
+                <input type="range" id="slider_cellW" min="4" max="128" value="20">
+                <input type="number" id="cellW" value="20">
             </div>
 
-            <!-- 格高 -->
-            <div class="slider-row-label">格高 <span id="val_cellH">16</span>px</div>
+            <div class="slider-row-label">格高 <span id="val_cellH">20</span>px</div>
             <div class="slider-input-group">
-                <input type="range" id="slider_cellH" min="4" max="128" value="16">
-                <input type="number" id="cellH" value="16">
+                <input type="range" id="slider_cellH" min="4" max="128" value="20">
+                <input type="number" id="cellH" value="20">
             </div>
             
-            <!-- 字号 -->
-            <div class="slider-row-label">字号 <span id="val_fontSize">12</span>px</div>
+            <div class="slider-row-label">字号 <span id="val_fontSize">18</span>px</div>
             <div class="slider-input-group">
-                <input type="range" id="slider_fontSize" min="8" max="128" value="12">
-                <input type="number" id="fontSize" value="12">
+                <input type="range" id="slider_fontSize" min="8" max="128" value="18">
+                <input type="number" id="fontSize" value="18">
             </div>
 
-            <!-- X偏移 -->
-            <div class="slider-row-label">X 偏移</div>
+            <div class="slider-row-label" style="color:#ff3366">文字 X 偏移</div>
             <div class="slider-input-group">
-                <input type="range" id="slider_offsetX" min="-50" max="50" value="0">
-                <input type="number" id="offsetX" value="0">
+                <input type="range" id="slider_textOffsetX" min="-50" max="50" value="0">
+                <input type="number" id="textOffsetX" value="0">
             </div>
 
-            <!-- Y偏移 -->
-            <div class="slider-row-label">Y 偏移</div>
+            <div class="slider-row-label" style="color:#ff3366">文字 Y 偏移</div>
             <div class="slider-input-group">
-                <input type="range" id="slider_offsetY" min="-50" max="50" value="0">
-                <input type="number" id="offsetY" value="0">
+                <input type="range" id="slider_textOffsetY" min="-50" max="50" value="0">
+                <input type="number" id="textOffsetY" value="0">
+            </div>
+
+            <div class="divider-line"></div>
+
+            <div class="slider-row-label" style="color:#ff3366">格子 X 偏移 (起始坐标)</div>
+            <div class="slider-input-group">
+                <input type="range" id="slider_gridOffsetX" min="-100" max="100" value="0">
+                <input type="number" id="gridOffsetX" value="0">
+            </div>
+
+            <div class="slider-row-label" style="color:#ff3366">格子 Y 偏移 (起始坐标)</div>
+            <div class="slider-input-group">
+                <input type="range" id="slider_gridOffsetY" min="-100" max="100" value="0">
+                <input type="number" id="gridOffsetY" value="0">
             </div>
         </div>
     </div>
@@ -97,11 +99,20 @@
     </div>
 </div>
 
-<!-- 右侧预览区 -->
 <div class="main-area">
     <div class="toolbar">
+        <div class="tool-group">
+            <div class="file-upload-wrapper" style="width: auto; margin:0;">
+                <input type="file" id="refImgInput" accept="image/png,image/jpeg">
+                <div class="file-upload-btn" style="padding: 4px 10px;">🖼️ 加载参考字库贴图</div>
+            </div>
+            <label class="tool-checkbox">
+                <input type="checkbox" id="showRefImg" checked disabled> 显示参考
+            </label>
+        </div>
+
+        <div class="divider"></div>
         
-        <!-- 样式组 -->
         <div class="tool-group">
             <div class="tool-item">
                 <span class="tool-label">字色</span>
@@ -119,13 +130,30 @@
                 </label>
             </div>
 
-            
             <div class="tool-item">
                 <label class="tool-checkbox">
                     <input type="checkbox" id="showGrid" checked> 网格
                 </label>
             </div>
         </div>
+
+        <div class="divider"></div>
+
+        <!-- 新增：样式控制组 -->
+        <div class="tool-group">
+            <label class="tool-checkbox">
+                <input type="checkbox" id="isItalic"> 斜体
+            </label>
+            
+            <div class="tool-item" style="gap: 2px;">
+                <label class="tool-checkbox" style="padding-right:4px;">
+                    <input type="checkbox" id="hasStroke"> 描边
+                </label>
+                <input type="color" id="strokeColor" value="#000000" title="描边颜色">
+                <input type="number" id="strokeWidth" value="2" min="0.5" step="0.5" title="描边宽度" style="width: 40px; margin-left: 4px;">
+            </div>
+        </div>
+
         <div class="divider"></div>
 
         <div class="tool-group">
@@ -142,13 +170,15 @@
 
         <div class="tool-group" style="flex:1; justify-content: flex-end;">
             <span class="tool-label">预览: <span id="zoomValue">150%</span></span>
-            <input type="range" id="zoomRange" min="0.1" max="4.0" step="0.1" value="1.5" title="可使用鼠标滚轮缩放">
+            <input type="range" id="zoomRange" min="0.1" max="8.0" step="0.1" value="1.5" title="可使用鼠标滚轮缩放">
         </div>
     </div>
 
     <div class="canvas-container" id="canvasContainer">
         <canvas id="previewCanvas"></canvas>
     </div>
+    
+    <div id="gridTooltip" class="grid-tooltip">序号: 01</div>
 </div>
 
 <script src="script.js"></script>
