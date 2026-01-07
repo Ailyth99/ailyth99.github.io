@@ -22,7 +22,7 @@ const I18N = {
         "status_render_fail": "Render Failed (Out of bounds, check offset)"
     },
     "zh": {
-        "version": "v2.4 / Wasm 核心",
+        "version": "v2.4 / aikika",
         "sec_file": "来源文件",
         "btn_load": "📂 加载文件 (BIN/RAW)",
         "no_file": "未加载文件",
