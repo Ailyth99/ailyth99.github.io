@@ -98,13 +98,14 @@ function bindEvents() {
             const maxRows = Math.floor((state.canvas.height - gridOffY) / cellH);
 
             if (col < maxCols && row < maxRows) {
-                const index = row * maxCols + col + 1;
-                const indexStr = index < 10 ? '0' + index : index;
+                const index = row * maxCols + col;
+                const decimalStr = index < 10 ? '0' + index : index;
+                const hexStr = '0x' + index.toString(16).toUpperCase().padStart(2, '0');
                 
                 tooltip.style.display = 'block';
                 tooltip.style.left = (e.clientX + 15) + 'px';
                 tooltip.style.top = (e.clientY + 15) + 'px';
-                tooltip.innerText = '序号: ' + indexStr;
+                tooltip.innerText = '序号: ' + decimalStr + '/' + hexStr;
                 return;
             }
         }
