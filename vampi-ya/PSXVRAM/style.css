@@ -5,11 +5,10 @@ body {
     display: flex; flex-direction: column; height: 100vh; box-sizing: border-box; overflow: hidden;
 }
 
-/* 顶部栏：移除 border-bottom */
 .toolbar {
     background: linear-gradient(to right, #2b1216, #1a0f12);
     padding: 12px 20px; border-radius: 4px; margin-bottom: 10px;
-    border: none; /* 移除暗红边框 */
+    border: none; 
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.2); 
     display: flex; align-items: center; justify-content: space-between;
 }
@@ -35,12 +34,12 @@ select.lang-btn option { background: #2b1216; color: #ff3366; }
 #vramCanvas, #gridCanvas { position: absolute; top: 0; left: 0; }
 #interactionCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 50; cursor: crosshair; }
 
-/* 底部状态栏：移除 border-top，设置固定高度使 Logo 顶满 */
+ 
 .footer {
-    height: 36px; /* 设定固定高度 */
+    height: 36px; 
     margin-top: 10px;
-    padding: 0 15px; /* 移除上下 padding */
-    border: none; /* 移除暗红边框 */
+    padding: 0 15px; 
+    border: none; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,7 +50,7 @@ select.lang-btn option { background: #2b1216; color: #ff3366; }
 .footer-left { height: 100%; display: flex; align-items: center; }
 
 .footer-logo {
-    height: 100%; /* Logo 高度顶满 */
+    height: 100%; 
     width: auto;
     display: block;
     filter: drop-shadow(0 0 3px rgba(255, 51, 102, 0.5));
