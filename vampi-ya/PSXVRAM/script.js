@@ -1,6 +1,4 @@
-/**
- * PS1 VRAM CLUT Extractor - Pro Ultimate (Scientific Correction)
- */
+
 const vramCanvas = document.getElementById('vramCanvas');
 const gridCanvas = document.getElementById('gridCanvas');
 const interCanvas = document.getElementById('interactionCanvas');
@@ -30,7 +28,7 @@ function syncInterCanvas() {
 }
 window.addEventListener('resize', syncInterCanvas);
 
-// 1. 初始化
+ 
 document.getElementById('fileInput').addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -53,7 +51,7 @@ function renderVRAM() {
     vctx.putImageData(imgData, 0, 0);
 }
 
-// 2. 变换
+ 
 function updateTransform() {
     container.style.transform = `translate(${viewX}px, ${viewY}px) scale(${scale})`;
     document.getElementById('zoomInfo').innerText = `${Math.round(scale * 100)}%`;
@@ -72,7 +70,7 @@ function resetView() {
 document.getElementById('recenterBtn').addEventListener('click', resetView);
 widthSelect.addEventListener('change', () => refreshOverlay());
 
-// 3. 映射
+ 
 function screenToPixel(clientX, clientY) {
     const vRect = viewport.getBoundingClientRect();
     const x = Math.floor((clientX - vRect.left - viewX) / scale);
@@ -83,7 +81,7 @@ function pixelToScreen(px, py) {
     return { x: px * scale + viewX, y: py * scale + viewY };
 }
 
-// 4. 绘图辅助
+ 
 function drawCLUTBoundary() {
     const w = parseInt(widthSelect.value);
     const s = pixelToScreen(0, 480);
@@ -130,11 +128,11 @@ function refreshOverlay(val = null, px = null, py = null) {
     if (val !== null && !isSelecting && !isPanning) drawLinkageLines(val, px, py);
 }
 
-// 5. 事件监听优化 (核心修复点)
+ 
 window.addEventListener('mousemove', (e) => {
     syncInterCanvas();
 
-    // 拖动画布的优先级最高，即使鼠标移出视口也要能继续拖动
+ 
     if (isPanning) {
         viewX += e.clientX - startMousePos.x; viewY += e.clientY - startMousePos.y;
         startMousePos = { x: e.clientX, y: e.clientY };
@@ -142,16 +140,16 @@ window.addEventListener('mousemove', (e) => {
         return;
     }
 
-    // 探测当前鼠标是否在视口范围内
+ 
     const rect = interCanvas.getBoundingClientRect();
     const isInViewport = (
         e.clientX >= rect.left && e.clientX <= rect.right &&
         e.clientY >= rect.top && e.clientY <= rect.bottom
     );
 
-    // 如果鼠标不在画布范围内，停止更新坐标和探测
+ 
     if (!isInViewport) {
-        // 如果正在选择则继续(框选到边缘)，否则清空联动线
+ 
         if (!isSelecting) {
             refreshOverlay();
         }
@@ -168,7 +166,7 @@ window.addEventListener('mousemove', (e) => {
         const r = (currentVal & 0x1F) << 3, g = ((currentVal >> 5) & 0x1F) << 3, b = ((currentVal >> 10) & 0x1F) << 3;
         const hex = `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
         
-        // 更新颜色显示和预览色块
+ 
         document.getElementById('hexInfo').innerText = hex;
         document.getElementById('colorSwatch').style.backgroundColor = hex;
     }
@@ -177,7 +175,7 @@ window.addEventListener('mousemove', (e) => {
     refreshOverlay(currentVal, c.x, c.y);
 });
 
-// 鼠标滚轮缩放限制在视口内触发
+ 
 viewport.addEventListener('wheel', (e) => {
     e.preventDefault();
     const vRect = viewport.getBoundingClientRect();
@@ -208,7 +206,7 @@ interCanvas.addEventListener('mousedown', (e) => {
 
 window.addEventListener('mouseup', () => { isPanning = false; isSelecting = false; if (selection.active) { document.getElementById('exportBtn').disabled = false; document.getElementById('exportActBtn').disabled = false; } });
 
-// 其余复制与导出保持不变
+ 
 interCanvas.addEventListener('contextmenu', async (e) => {
     e.preventDefault();
     const c = screenToPixel(e.clientX, e.clientY);
