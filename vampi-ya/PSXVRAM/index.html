@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PS1 VRAM CLUT 提取工具 - Pro Red Ultimate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wiki-nav toolbar">
+        <div class="group">
+            <label class="lang-btn">选择 VRAM.bin<input type="file" id="fileInput" accept=".bin,.vram,.raw"></label>
+            <button id="recenterBtn" class="lang-btn">重置视角</button>
+            <select id="gameWidthSelect" class="lang-btn">
+                <option value="256">宽度: 256</option>
+                <option value="320" selected>宽度: 320</option>
+                <option value="384">宽度: 384</option>
+                <option value="512">宽度: 512</option>
+                <option value="640">宽度: 640</option>
+            </select>
+        </div>
+        <div class="group status">
+            <div class="stat-item">缩放: <b id="zoomInfo">100%</b></div>
+            <div class="stat-item">坐标: <b id="posInfo">0, 0</b></div>
+            <div class="stat-item">偏移: <b id="offsetInfo">0x0</b></div>
+            <!-- 优化：颜色值在前，小方格在后 -->
+            <div class="stat-item">颜色: <b id="hexInfo">#000000</b> <span id="colorSwatch"></span></div>
+        </div>
+        <div class="group export-zone">
+            <div class="stat-item">选区: <b id="sizeInfo">0x0</b> (<b id="byteInfo">0</b> 字节)</div>
+            <button id="exportBtn" class="lang-btn" disabled>导出 RAW</button>
+            <button id="exportActBtn" class="lang-btn" disabled>导出 ACT</button>
+        </div>
+    </div>
+
+    <div class="main-viewport wiki-content" id="viewport">
+        <div class="canvas-container" id="container">
+            <canvas id="vramCanvas" width="1024" height="512"></canvas>
+            <canvas id="gridCanvas" width="1024" height="512"></canvas>
+        </div>
+        <canvas id="interactionCanvas"></canvas>
+        <div id="toast" class="toast">已复制 16 进制原始数据</div>
+    </div>
+
+    <div class="wiki-footer footer">
+        <div class="footer-left">
+            <img src="name.png" alt="Logo" class="footer-logo">
+        </div>
+        <div class="footer-right">
+            操作说明: [滚轮] 缩放 | [右键拖拽] 移动画布 | [左键框选] 像素 | [选区内右键] 复制 HEX
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
