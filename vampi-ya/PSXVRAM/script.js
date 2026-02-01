@@ -12,7 +12,6 @@ const vctx = vramCanvas.getContext('2d', { alpha: false });
 const gctx = gridCanvas.getContext('2d');
 const ictx = interCanvas.getContext('2d');
 
-
 let rawBuffer = null;
 let vramData = null;
 let scale = 1.0;
@@ -21,12 +20,12 @@ let isPanning = false, isSelecting = false;
 let startMousePos = { x: 0, y: 0 };
 let selection = { x1: 0, y1: 0, x2: 0, y2: 0, active: false };
 
-let editMode = 'NORMAL'; 
-let isFrozen = false; let lastHoverState = { val: null, px: 0, py: 0 }; 
+let editMode = 'NORMAL';
+let isFrozen = false;
+let lastHoverState = { val: null, px: 0, py: 0 };
 
 let clutArea = { x: 0, y: 480, w: 320, h: 32 };
 let frameArea = { x: 0, y: 0, w: 320, h: 480 };
-
 
 btnClut.onclick = () => { 
     editMode = (editMode === 'SET_CLUT') ? 'NORMAL' : 'SET_CLUT';
@@ -58,11 +57,9 @@ function resetDefaults() {
     const w = parseInt(widthSelect.value);
     frameArea = { x: 0, y: 0, w: w, h: 480 };
     clutArea = { x: 0, y: 480, w: w, h: 32 };
-    
     editMode = 'NORMAL';
     isFrozen = false;
     lastHoverState = { val: null, px: 0, py: 0 };
-    
     updateBtnStates();
     refreshOverlay();
 }
@@ -75,9 +72,9 @@ document.getElementById('fileInput').addEventListener('change', async (e) => {
         vramData = new Uint16Array(rawBuffer);
         renderVRAM();
         resetView();
-        resetDefaults(); 
-            } catch (err) {
-        alert("载入失败: " + err);
+        resetDefaults();
+    } catch (err) {
+        alert("Load Error: " + err);
     }
 });
 
@@ -136,14 +133,14 @@ function drawAreas() {
     ictx.strokeStyle = "rgba(255, 51, 102, 0.8)";
     ictx.strokeRect(cs.x, cs.y, clutArea.w * scale, clutArea.h * scale);
     ictx.fillStyle = "#ff3366"; ictx.font = "10px Consolas";
-    ictx.fillText(`CLUT AREA`, cs.x + 5, cs.y - 5);
+    ictx.fillText(`CLUT`, cs.x + 5, cs.y - 5);
 
     const fs = pixelToScreen(frameArea.x, frameArea.y);
     ictx.shadowColor = "#9933ff";
     ictx.strokeStyle = "rgba(153, 51, 255, 0.6)";
     ictx.strokeRect(fs.x, fs.y, frameArea.w * scale, frameArea.h * scale);
     ictx.fillStyle = "#9933ff";
-    ictx.fillText("FRAME BUFFER", fs.x + 5, fs.y - 5);
+    ictx.fillText("FRAME", fs.x + 5, fs.y - 5);
     
     ictx.restore();
 }
@@ -152,13 +149,12 @@ function drawLinkageLines() {
     const state = lastHoverState; 
 
     if (!state || state.val === null) return;
-    if ((state.val & 0x7FFF) === 0) return; //忽略纯黑
+    if ((state.val & 0x7FFF) === 0) return;
 
     if (state.px < frameArea.x || state.px >= frameArea.x + frameArea.w || 
         state.py < frameArea.y || state.py >= frameArea.y + frameArea.h) return;
 
     let matches = [];
-    //只在“CLUT区域”内搜索
     for (let y = clutArea.y; y < clutArea.y + clutArea.h; y++) {
         for (let x = clutArea.x; x < clutArea.x + clutArea.w; x++) {
             if (vramData[y * 1024 + x] === state.val) {
@@ -169,7 +165,6 @@ function drawLinkageLines() {
 
     if (matches.length > 0) {
         ictx.save();
-        // 冻结时变蓝，平时红
         const color = isFrozen ? "#00ffff" : "#ff3366";
         ictx.shadowBlur = 4; 
         ictx.shadowColor = color;
@@ -192,10 +187,9 @@ function drawLinkageLines() {
 function refreshOverlay() {
     ictx.clearRect(0, 0, interCanvas.width, interCanvas.height);
     
-    drawAreas(); 
+    drawAreas();
     
     if (selection.active) drawSelection();
-    
     
     if (isSelecting && editMode !== 'NORMAL') {
         const x1 = Math.min(selection.x1, selection.x2);
@@ -215,7 +209,7 @@ function refreshOverlay() {
 window.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() === 'f') {
         isFrozen = !isFrozen;
-        const msg = isFrozen ? "连线已锁定 (F 解锁)" : "连线解锁";
+        const msg = isFrozen ? "LOCKED" : "UNLOCKED";
         showToast(msg);
         refreshOverlay();
     }
@@ -346,7 +340,7 @@ interCanvas.addEventListener('contextmenu', async (e) => {
             } 
         }
         await navigator.clipboard.writeText(Array.from(raw).map(b => b.toString(16).padStart(2,'0').toUpperCase()).join(' '));
-        showToast("HEX 已复制");
+        showToast("HEX COPIED");
     }
 });
 
