@@ -12,7 +12,7 @@
 <div class="sidebar">
     <div class="sidebar-header">
         <h2>Font Image Generator</h2>
-        <span class="version">v1.6 / aikika</span>
+        <span class="version">v1.7 / aikika</span>
     </div>
 
     <div class="scroll-content">
@@ -65,6 +65,20 @@
                 <input type="range" id="slider_fontSize" min="8" max="128" value="18">
                 <input type="number" id="fontSize" value="18">
             </div>
+
+            <!-- 新增：字体缩放控制 -->
+            <div class="slider-row-label">水平缩放 %</div>
+            <div class="slider-input-group">
+                <input type="range" id="slider_fontScaleX" min="50" max="200" value="100">
+                <input type="number" id="fontScaleX" value="100">
+            </div>
+
+            <div class="slider-row-label">垂直缩放 %</div>
+            <div class="slider-input-group">
+                <input type="range" id="slider_fontScaleY" min="50" max="200" value="100">
+                <input type="number" id="fontScaleY" value="100">
+            </div>
+            <!-- 结束新增 -->
 
             <div class="slider-row-label" style="color:#ff3366">文字 X 偏移</div>
             <div class="slider-input-group">

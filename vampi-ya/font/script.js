@@ -42,6 +42,8 @@ function bindEvents() {
     bindSyncedInputs('cellW', 'slider_cellW', 'val_cellW');
     bindSyncedInputs('cellH', 'slider_cellH', 'val_cellH');
     bindSyncedInputs('fontSize', 'slider_fontSize', 'val_fontSize');
+    bindSyncedInputs('fontScaleX', 'slider_fontScaleX', null);
+    bindSyncedInputs('fontScaleY', 'slider_fontScaleY', null);
     
     bindSyncedInputs('textOffsetX', 'slider_textOffsetX', null);
     bindSyncedInputs('textOffsetY', 'slider_textOffsetY', null);
@@ -131,7 +133,8 @@ function bindEvents() {
         'textColor', 'bgColor', 'bgTransparent', 
         'showGrid', 'disableAA', 'mode4Color', 'showRefImg',
         'gridOffsetX', 'gridOffsetY', 'showText',
-        'isItalic', 'hasStroke', 'strokeColor', 'strokeWidth'
+        'isItalic', 'hasStroke', 'strokeColor', 'strokeWidth',
+        'fontScaleX', 'fontScaleY'
     ];
     inputs.forEach(id => {
         const el = document.getElementById(id);
@@ -234,6 +237,9 @@ function render(exportMode = false) {
     const gridOffX = parseInt(document.getElementById('gridOffsetX').value) || 0;
     const gridOffY = parseInt(document.getElementById('gridOffsetY').value) || 0;
 
+    const scaleX = (parseInt(document.getElementById('fontScaleX').value) || 100) / 100;
+    const scaleY = (parseInt(document.getElementById('fontScaleY').value) || 100) / 100;
+
     const textColor = document.getElementById('textColor').value;
     const bgColor = document.getElementById('bgColor').value;
     const isTransparent = document.getElementById('bgTransparent').checked;
@@ -294,13 +300,18 @@ function render(exportMode = false) {
                     const x = gridOffX + currentCol * cellW + (cellW / 2) + textOffX;
                     const y = gridOffY + currentRow * cellH + (cellH / 2) + textOffY;
                     
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.scale(scaleX, scaleY);
+
                     if (hasStroke) {
                         ctx.lineWidth = strokeWidth;
                         ctx.strokeStyle = strokeColor;
-                        ctx.strokeText(char, x, y);
+                        ctx.strokeText(char, 0, 0);
                     }
                     
-                    ctx.fillText(char, x, y);
+                    ctx.fillText(char, 0, 0);
+                    ctx.restore();
                 }
                 
                 currentCol++;
