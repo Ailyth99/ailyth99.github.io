@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>NDS_NFTR Patcher</title>
+    <link rel="stylesheet" href="nftr.css">    <link rel="icon" type="image/png" href="icon.png">
+
+    <script src="nftr.js" defer></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <h1>NFTR Patcher</h1>
+
+        <div class="card">
+            <div class="card-title">1. 源字库 (NFTR)</div>
+            <input type="file" id="nftrFile" accept=".nftr,.bin">
+            <div id="nftrInfo" class="info-box hidden"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">2. 汉化映射表 (CSV)</div>
+            <div class="tip-text">
+                格式：<code>新字符,十六进制,原字符</code><br>例如：<code>的,889F,亜</code>
+            </div>
+            <input type="file" id="csvFile" accept=".csv,.txt">
+        </div>
+
+        <div class="card log-card">
+            <div class="card-title">执行日志</div>
+            <div id="logOutput" class="log-output">系统已就绪...</div>
+        </div>
+
+        <div class="card borderless" style="margin-top: auto;">
+            <button id="btnProcess" class="btn-primary" disabled>⚡ 执行批量生成替换</button>
+            <button id="btnSave" class="btn-success" disabled>💾 保存修改版 NFTR</button>
+        </div>
+    </aside>
+
+    <main class="main-workspace">
+        <header class="toolbar">
+            <div class="toolbar-group">
+                <label>字体族:</label>
+                <select id="fontFamily" style="width: 130px;">
+                    <option value="SimSun">SimSun (宋体)</option>
+                    <option value="SimSun-ExtB">SimSun-ExtB (宋体扩)</option>
+                    <option value="Zull-GB">Zull-GB</option>
+                </select>
+                <button id="btnLoadSysFonts" class="btn-small">获取系统字体</button>
+            </div>
+            
+            <div class="toolbar-group">
+                <label>字号:</label>
+                <input type="number" id="fontSize" value="15" class="num-input">
+            </div>
+
+            <div class="toolbar-group">
+                <label>偏移(X/Y):</label>
+                <input type="number" id="offsetX" value="0" class="num-input">
+                <input type="number" id="offsetY" value="0" class="num-input">
+            </div>
+
+            <div class="toolbar-group">
+                <label title="笔画粘连时调大此值(默认160)">二值化阈值:</label>
+                <input type="number" id="alphaThreshold" value="160" min="1" max="255" class="num-input">
+            </div>
+
+            <div class="toolbar-group">
+                <label class="checkbox-label" title="清除灰阶，强制转化为纯点阵边缘"><input type="checkbox" id="purePixel" checked>纯点阵</label>
+            </div>
+            <div class="toolbar-group">
+                <label class="checkbox-label"><input type="checkbox" id="fontWeight">加粗</label>
+            </div>
+            <div class="toolbar-group">
+                <label class="checkbox-label"><input type="checkbox" id="fixedWidth" checked>等宽</label>
+            </div>
+
+            <div class="toolbar-group" style="margin-left: auto;">
+                <button id="btnClearFont" class="btn-danger btn-small" disabled title="抹除所有像素，保留空白结构">🗑️ 清空字库</button>
+            </div>
+        </header>
+
+        <div class="canvas-container" id="canvasContainer">
+            <div id="emptyState" class="empty-state">
+                <p>请在左侧加载NFTR字库文件</p>
+            </div>
+            <canvas id="previewCanvas"></canvas>
+        </div>
+        
+        <footer class="statusbar">
+            <span id="statusText">就绪</span>
+            <span id="statsText">字模总数: 0 | 已替换: 0</span>
+        </footer>
+    </main>
+</body>
+</html>
