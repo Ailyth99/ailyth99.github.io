@@ -12,7 +12,7 @@
 <div class="sidebar">
     <div class="sidebar-header">
         <h2>Font Image Generator</h2>
-        <span class="version">v1.7 / aikika</span>
+        <span class="version">v1.8 / aikika</span>
     </div>
 
     <div class="scroll-content">
@@ -66,7 +66,6 @@
                 <input type="number" id="fontSize" value="18">
             </div>
 
-            <!-- 新增：字体缩放控制 -->
             <div class="slider-row-label">水平缩放 %</div>
             <div class="slider-input-group">
                 <input type="range" id="slider_fontScaleX" min="50" max="200" value="100">
@@ -78,7 +77,6 @@
                 <input type="range" id="slider_fontScaleY" min="50" max="200" value="100">
                 <input type="number" id="fontScaleY" value="100">
             </div>
-            <!-- 结束新增 -->
 
             <div class="slider-row-label" style="color:#ff3366">文字 X 偏移</div>
             <div class="slider-input-group">
@@ -171,11 +169,14 @@
 
         <div class="tool-group">
              <label class="tool-checkbox" title="像素字体建议开启此项">
-                <input type="checkbox" id="disableAA"> 关闭抗锯齿 (1bit)
+                <input type="checkbox" id="disableAA"> 关闭抗锯齿
             </label>
-    
+            <div class="tool-item">
+                <span class="tool-label">阈值</span>
+                <input type="number" id="aaThreshold" min="1" max="254" value="160" style="width:45px; height:24px; padding:2px;">
+            </div>
              <label class="tool-checkbox" title="将颜色限制为4阶 (黑/深灰/浅灰/白)">
-                <input type="checkbox" id="mode4Color"> 4色模式 (2bit)
+                <input type="checkbox" id="mode4Color"> 4色模式
             </label>
         </div>
 
