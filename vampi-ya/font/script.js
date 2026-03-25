@@ -134,7 +134,7 @@ function bindEvents() {
         'showGrid', 'disableAA', 'mode4Color', 'showRefImg',
         'gridOffsetX', 'gridOffsetY', 'showText',
         'isItalic', 'hasStroke', 'strokeColor', 'strokeWidth',
-        'fontScaleX', 'fontScaleY'
+        'fontScaleX', 'fontScaleY', 'aaThreshold'
     ];
     inputs.forEach(id => {
         const el = document.getElementById(id);
@@ -223,23 +223,18 @@ function updateFontStatus(name, type) {
 function render(exportMode = false) {
     const { canvas, ctx } = state;
     if (!canvas || !ctx) return;
-    
     const rawText = document.getElementById('charList').value;
-    
     const cW = parseInt(document.getElementById('canvasW').value) || 512;
     const cH = parseInt(document.getElementById('canvasH').value) || 512;
     const cellW = parseInt(document.getElementById('cellW').value) || 20;
     const cellH = parseInt(document.getElementById('cellH').value) || 20;
     const fSize = parseInt(document.getElementById('fontSize').value) || 18;
-    
     const textOffX = parseInt(document.getElementById('textOffsetX').value) || 0;
     const textOffY = parseInt(document.getElementById('textOffsetY').value) || 0;
     const gridOffX = parseInt(document.getElementById('gridOffsetX').value) || 0;
     const gridOffY = parseInt(document.getElementById('gridOffsetY').value) || 0;
-
     const scaleX = (parseInt(document.getElementById('fontScaleX').value) || 100) / 100;
     const scaleY = (parseInt(document.getElementById('fontScaleY').value) || 100) / 100;
-
     const textColor = document.getElementById('textColor').value;
     const bgColor = document.getElementById('bgColor').value;
     const isTransparent = document.getElementById('bgTransparent').checked;
@@ -248,72 +243,49 @@ function render(exportMode = false) {
     const mode4Color = document.getElementById('mode4Color').checked;
     const showRefImg = document.getElementById('showRefImg').checked;
     const showText = document.getElementById('showText').checked;
-
     const isItalic = document.getElementById('isItalic').checked;
     const hasStroke = document.getElementById('hasStroke').checked;
     const strokeColor = document.getElementById('strokeColor').value;
     const strokeWidth = parseFloat(document.getElementById('strokeWidth').value) || 1;
+    const aaThreshold = parseInt(document.getElementById('aaThreshold').value);
 
     canvas.width = cW;
     canvas.height = cH;
     updateZoom();
-
     const availableW = cW - gridOffX;
     const maxCols = Math.floor(availableW / cellW);
     const availableH = cH - gridOffY;
     const maxRows = Math.floor(availableH / cellH);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    if (!isTransparent) {
-        ctx.fillStyle = bgColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-
-    if (!exportMode && state.refImage && showRefImg) {
-        ctx.drawImage(state.refImage, 0, 0, cW, cH);
-    }
+    if (!isTransparent) { ctx.fillStyle = bgColor; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+    if (!exportMode && state.refImage && showRefImg) { ctx.drawImage(state.refImage, 0, 0, cW, cH); }
 
     ctx.font = `${isItalic ? 'italic ' : ''}${fSize}px "${state.fontFamily}"`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = textColor;
 
-    const lines = rawText.split('\n');
-    let currentRow = 0;
-
     if (showText) {
+        const lines = rawText.split('\n');
+        let currentRow = 0;
         for (let l = 0; l < lines.length; l++) {
             const lineText = lines[l];
             let currentCol = 0;
-
             for (let c = 0; c < lineText.length; c++) {
                 const char = lineText[c];
-                
-                if (currentCol >= maxCols) {
-                    currentCol = 0;
-                    currentRow++;
-                }
+                if (currentCol >= maxCols) { currentCol = 0; currentRow++; }
                 if (currentRow >= maxRows) break;
-
                 if (char !== ' ' && char !== '\t') {
                     const x = gridOffX + currentCol * cellW + (cellW / 2) + textOffX;
                     const y = gridOffY + currentRow * cellH + (cellH / 2) + textOffY;
-                    
                     ctx.save();
                     ctx.translate(x, y);
                     ctx.scale(scaleX, scaleY);
-
-                    if (hasStroke) {
-                        ctx.lineWidth = strokeWidth;
-                        ctx.strokeStyle = strokeColor;
-                        ctx.strokeText(char, 0, 0);
-                    }
-                    
+                    if (hasStroke) { ctx.lineWidth = strokeWidth; ctx.strokeStyle = strokeColor; ctx.strokeText(char, 0, 0); }
                     ctx.fillText(char, 0, 0);
                     ctx.restore();
                 }
-                
                 currentCol++;
             }
             currentRow++;
@@ -324,60 +296,44 @@ function render(exportMode = false) {
     if (showText && (disableAA || mode4Color)) {
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
-        const quantize4 = (val) => Math.round(val / 255 * 3) / 3 * 255;
-        const threshold = 128;
-
+        const q4 = (val) => Math.round(val / 255 * 3) / 3 * 255;
         for (let i = 0; i < data.length; i += 4) {
             if (disableAA) {
-                if (isTransparent) {
-                    data[i + 3] = data[i + 3] >= threshold ? 255 : 0;
-                } else {
-                    const brightness = (data[i] + data[i+1] + data[i+2]) / 3;
-                    const val = brightness >= threshold ? 255 : 0;
-                    data[i] = data[i+1] = data[i+2] = val;
-                }
-            } 
-            else if (mode4Color) {
-                if (isTransparent) {
-                    data[i + 3] = quantize4(data[i + 3]);
-                } else {
-                    data[i] = quantize4(data[i]);
-                    data[i+1] = quantize4(data[i+1]);
-                    data[i+2] = quantize4(data[i+2]);
-                }
+                if (isTransparent) { data[i + 3] = data[i + 3] >= aaThreshold ? 255 : 0; } 
+                else { const b = (data[i] + data[i+1] + data[i+2]) / 3; const v = b >= aaThreshold ? 255 : 0; data[i] = data[i+1] = data[i+2] = v; }
+            } else if (mode4Color) {
+                if (isTransparent) { data[i + 3] = q4(data[i + 3]); } 
+                else { data[i] = q4(data[i]); data[i+1] = q4(data[i+1]); data[i+2] = q4(data[i+2]); }
             }
         }
         ctx.putImageData(imageData, 0, 0);
     }
 
     if (!exportMode && showGrid) {
-        ctx.strokeStyle = '#ff557fe6'; 
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        const drawCols = Math.floor((canvas.width - gridOffX) / cellW);
-        const drawRows = Math.floor((canvas.height - gridOffY) / cellH);
-
-        for (let r = 0; r < drawRows; r++) {
-            for (let c = 0; c < drawCols; c++) {
-                ctx.rect(gridOffX + c * cellW, gridOffY + r * cellH, cellW, cellH);
-            }
-        }
+        ctx.strokeStyle = '#ff557fe6'; ctx.lineWidth = 1; ctx.beginPath();
+        const dCols = Math.floor((canvas.width - gridOffX) / cellW);
+        const dRows = Math.floor((canvas.height - gridOffY) / cellH);
+        for (let r = 0; r < dRows; r++) { for (let c = 0; c < dCols; c++) { ctx.rect(gridOffX + c * cellW, gridOffY + r * cellH, cellW, cellH); } }
         ctx.stroke();
     }
 }
 
 function updateZoom() {
-    const { canvas, zoom } = state;
-    if (!canvas) return;
-    canvas.style.width = (canvas.width * zoom) + 'px';
-    canvas.style.height = (canvas.height * zoom) + 'px';
+    if (!state.canvas) return;
+    state.canvas.style.width = (state.canvas.width * state.zoom) + 'px';
+    state.canvas.style.height = (state.canvas.height * state.zoom) + 'px';
 }
 
-function downloadPNG() {
+async function downloadPNG() {
     render(true);
-    const link = document.createElement('a');
-    link.download = 'pixel_font.png';
-    link.href = state.canvas.toDataURL('image/png');
-    link.click();
+    const blob = await new Promise(resolve => state.canvas.toBlob(resolve, 'image/png'));
+    if ('showSaveFilePicker' in window) {
+        try {
+            const h = await window.showSaveFilePicker({ suggestedName: 'font.png', types: [{ description: 'PNG Image', accept: { 'image/png': ['.png'] } }] });
+            const w = await h.createWritable(); await w.write(blob); await w.close();
+        } catch (e) {}
+    } else {
+        const link = document.createElement('a'); link.download = 'font.png'; link.href = URL.createObjectURL(blob); link.click();
+    }
     render(false);
 }
