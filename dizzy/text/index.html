@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,12 +60,10 @@
             
         </div>
 
-        <!-- SHIFT-JIS Conversion -->
-      <!-- Encoding Conversion (原 SHIFT-JIS 改名) -->
+        <!-- Encoding Conversion (包含原编码转换和新增的汉字转换) -->
         <div class="tab-content" id="sjis-content">
             <h2>字符编码转换 (SJIS / Unicode)</h2>
             
-            <!-- 新增：编码选择 -->
             <div class="format-selector">
                 <label>目标编码：</label>
                 <div class="radio-group">
@@ -90,8 +86,27 @@
                 <div><p>转换结果：</p><textarea class="output"></textarea></div>
             </div>
             <div class="button-group"><button onclick="encodingConverter.convert()">转换</button><button onclick="encodingConverter.copyOutput()">复制结果</button></div>
-            <!-- debug-container 仅在 SJIS 模式下有用，但在 UTF-16 下我们可以隐藏它或留空 -->
             <div class="debug-container" id="sjis-debug-area"><p>未找到映射的字符 (仅SJIS)：</p><textarea class="debug-output" readonly></textarea></div>
+
+            <!-- 新增功能：日文汉字转中文简体 -->
+            <div class="kanji-conversion-section" style="margin-top: 40px; border-top: 2px solid #4a1018; padding-top: 20px;">
+                <h3 style="color: #ff3366; margin-bottom: 15px;">日文汉字转中文简体</h3>
+                <p style="font-size: 0.85em; color: #aaa; margin-bottom: 10px;">基于 j2c.js 映射表。逐字对照转换，未匹配字符保持原样。</p>
+                <div class="container">
+                    <div>
+                        <p>输入日文文本：</p>
+                        <textarea class="input kanji-input" placeholder="请输入含有日文汉字的文本..."></textarea>
+                    </div>
+                    <div>
+                        <p>转换结果：</p>
+                        <textarea class="output kanji-output" readonly></textarea>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button onclick="kanjiConverter.convert()">转换汉字</button>
+                    <button onclick="kanjiConverter.copyOutput()">复制结果</button>
+                </div>
+            </div>
         </div>
 
         <!-- Font Tester -->
@@ -159,7 +174,6 @@
                 <p style="font-size:0.9em; color:#aaa;">32位RGBA HEX值转换为PS2 16bit ABGR1555（小端序）。</p>
                 <div class="container" style="flex-direction: row; gap: 20px; align-items: flex-start;">
                     <div style="flex: 1;">
-                        <!-- MODIFIED: Added color preview span -->
                         <p>输入 32位 RGBA (Hex, 例: CA4A47FF): <span class="color-preview" id="rgba-input-preview"></span></p>
                         <input type="text" class="input rgba-input" placeholder="8位Hex..." maxlength="8">
                     </div>
@@ -188,7 +202,6 @@
                         <input type="text" class="input abgr-input" placeholder="4位Hex..." maxlength="4">
                     </div>
                     <div style="flex: 1;">
-                         <!-- MODIFIED: Added color preview span -->
                         <p>输出 32位 RGBA (Hex): <span class="color-preview" id="rgba-output-preview"></span></p>
                         <input type="text" class="output rgba-output" readonly>
                         <p style="font-size: 0.8em; color: #aaa; margin-top: 5px;">
@@ -210,7 +223,10 @@
         TextPixie © 2023 魑魅魍魎
     </footer>
 
-    <script src="sjismap.js"></script> <script src="frequency_data.js"></script>
+    <!-- 脚本引入顺序：先引入数据文件，后引入逻辑文件 -->
+    <script src="j2c.js"></script>
+    <script src="sjismap.js"></script> 
+    <script src="frequency_data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

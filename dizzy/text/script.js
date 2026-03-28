@@ -1047,3 +1047,43 @@ window.addEventListener('DOMContentLoaded', () => {
          console.warn("No active tab found and default tab content is missing.");
      }
 });
+
+
+//Kanji Converter (Japanese to Chinese Simplified) ---
+const kanjiConverter = {
+    convert() {
+        const inputEl = document.querySelector('.kanji-input');
+        const outputEl = document.querySelector('.kanji-output');
+        
+        if (!inputEl || !outputEl) return;
+
+        if (typeof kanjiMap === 'undefined') {
+            alert("错误：日中汉字映射表 (j2c.js) 未加载！请检查文件是否存在并已正确引入。");
+            return;
+        }
+
+        const inputText = inputEl.value;
+        let result = "";
+
+        for (const char of inputText) {
+            if (kanjiMap.hasOwnProperty(char)) {
+                result += kanjiMap[char];
+            } else {
+                result += char;
+            }
+        }
+
+        outputEl.value = result;
+    },
+
+    copyOutput() {
+        const outputEl = document.querySelector('.kanji-output');
+        if (!outputEl || !outputEl.value) {
+            showNoCopyAlert();
+            return;
+        }
+        outputEl.select();
+        document.execCommand('copy');
+        showCopyAlert('汉字转换结果');
+    }
+};
