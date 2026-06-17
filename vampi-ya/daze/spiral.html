@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>螺旋多行扭曲文字生成器</title>
+<script src="gif.js"></script> 
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    /* 棋盘格背景，方便观察真实透明效果 */
+    background-image: 
+      linear-gradient(45deg, #ccc 25%, transparent 25%), 
+      linear-gradient(-45deg, #ccc 25%, transparent 25%), 
+      linear-gradient(45deg, transparent 75%, #ccc 75%), 
+      linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  #canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #controls {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+    background: rgba(30, 30, 30, 0.95);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    color: white;
+    font-family: sans-serif;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .control-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .control-row label {
+    margin-top: 5px;
+    white-space: nowrap;
+  }
+
+  textarea {
+    width: 150px;
+    height: 60px;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #777;
+    background: #222;
+    color: white;
+    resize: vertical;
+    font-family: inherit;
+  }
+
+  select { width: 158px; padding: 4px; border-radius: 4px; background: #222; color: white; }
+  input[type="color"] { width: 40px; height: 25px; padding: 0; cursor: pointer; }
+  input[type="range"] { width: 150px; margin-top: 5px; }
+
+  button {
+    padding: 6px 12px; background: #4CAF50; color: white;
+    border: none; border-radius: 4px; cursor: pointer; font-weight: bold;
+  }
+  button:hover { background: #45a049; }
+  
+  #exportGif { background: #2196F3; margin-top: 5px; }
+  #exportGif:hover { background: #1976D2; }
+  #exportGif:disabled { background: #777; cursor: not-allowed; }
+  
+  #exportStatus {
+    font-size: 14px; font-weight: bold; color: #00d2ff;
+    text-align: center; margin-top: 5px; display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="controls">
+  <div class="control-row">
+    <label>文字:</label>
+    <textarea id="textInput">多行螺旋&#13;&#10;扭曲生成器</textarea>
+  </div>
+  <div class="control-row">
+    <label>字号:</label>
+    <input type="range" id="sizeInput" min="20" max="200" step="1" value="80">
+  </div>
+  <div class="control-row">
+    <label>颜色:</label>
+    <input type="color" id="colorInput" value="#000000">
+  </div>
+  <div class="control-row">
+    <label>字体:</label>
+    <button id="fontBtn">📂 读取系统字体</button>
+    <select id="fontSelect" style="display: none;"></select>
+  </div>
+  <div class="control-row">
+    <label>扭曲速度:</label>
+    <!-- 【核心修改】降低最小值，减小步长，颗粒度更细腻 -->
+    <input type="range" id="speedInput" min="0.002" max="0.1" step="0.002" value="0.04">
+  </div>
+  <div class="control-row">
+    <label>扭曲力度:</label>
+    <input type="range" id="amountInput" min="1" max="10" step="0.5" value="4">
+  </div>
+
+  <button id="exportGif">🎞️ 导出 透明GIF (智能FPS)</button>
+  <div id="exportStatus">初始化...</div>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+const INTERNAL_W = 600; 
+const INTERNAL_H = 450;
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = INTERNAL_W;
+canvas.height = INTERNAL_H;
+
+const offCanvas = document.createElement('canvas');
+const offCtx = offCanvas.getContext('2d');
+offCanvas.width = INTERNAL_W;
+offCanvas.height = INTERNAL_H;
+
+let text = document.getElementById('textInput').value;
+let fontSize = parseInt(document.getElementById('sizeInput').value);
+let textColor = document.getElementById('colorInput').value;
+let fontFamily = '"Microsoft YaHei", sans-serif';
+let speed = parseFloat(document.getElementById('speedInput').value);
+let maxTwist = parseFloat(document.getElementById('amountInput').value);
+
+let time = 0;
+let isExporting = false;
+
+const btnExport = document.getElementById('exportGif');
+const statusDiv = document.getElementById('exportStatus');
+
+document.getElementById('textInput').addEventListener('input', e => text = e.target.value);
+document.getElementById('sizeInput').addEventListener('input', e => fontSize = parseInt(e.target.value));
+document.getElementById('colorInput').addEventListener('input', e => textColor = e.target.value);
+document.getElementById('speedInput').addEventListener('input', e => speed = parseFloat(e.target.value));
+document.getElementById('amountInput').addEventListener('input', e => maxTwist = parseFloat(e.target.value));
+document.getElementById('fontSelect').addEventListener('change', e => fontFamily = `"${e.target.value}", sans-serif`);
+
+document.getElementById('fontBtn').addEventListener('click', async () => {
+  if (!window.queryLocalFonts) return alert("浏览器不支持读取系统字体！");
+  try {
+    const fonts = await window.queryLocalFonts();
+    const select = document.getElementById('fontSelect');
+    select.innerHTML = '';
+    const families = [...new Set(fonts.map(f => f.family))];
+    families.forEach(f => {
+      const opt = document.createElement('option');
+      opt.value = f; opt.innerText = f;
+      select.appendChild(opt);
+    });
+    select.style.display = 'block';
+    document.getElementById('fontBtn').style.display = 'none';
+    fontFamily = `"${families[0]}", sans-serif`;
+  } catch (err) {}
+});
+
+function drawBaseText() {
+  offCtx.clearRect(0, 0, INTERNAL_W, INTERNAL_H); 
+  offCtx.font = `bold ${fontSize}px ${fontFamily}`;
+  offCtx.textAlign = 'center';
+  offCtx.textBaseline = 'middle';
+  
+  let renderColor = textColor;
+  if (renderColor === '#000000') renderColor = '#010101';
+  offCtx.fillStyle = renderColor;
+
+  const lines = text.split('\n');
+  const lineHeight = fontSize * 1.2; 
+  const totalHeight = lines.length * lineHeight; 
+  const startY = (INTERNAL_H - totalHeight) / 2 + lineHeight / 2;
+
+  lines.forEach((line, index) => {
+    offCtx.fillText(line, INTERNAL_W / 2, startY + index * lineHeight);
+  });
+}
+
+function drawSwirlText() {
+  drawBaseText();
+  
+  const srcData = offCtx.getImageData(0, 0, INTERNAL_W, INTERNAL_H);
+  const src = srcData.data;
+  const destData = ctx.createImageData(INTERNAL_W, INTERNAL_H);
+  const dest = destData.data;
+
+  const cx = INTERNAL_W / 2;
+  const cy = INTERNAL_H / 2;
+  const radius = Math.min(cx, cy) * 1.2; 
+  const currentTwist = Math.sin(time) * maxTwist; 
+
+  for (let y = 0; y < INTERNAL_H; y++) {
+    for (let x = 0; x < INTERNAL_W; x++) {
+      const dx = x - cx;
+      const dy = y - cy;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      let sx = x;
+      let sy = y;
+
+      if (distance < radius) {
+        const twistAngle = currentTwist * Math.pow((1 - distance / radius), 2);
+        const angle = Math.atan2(dy, dx);
+        const newAngle = angle - twistAngle;
+        sx = Math.round(cx + distance * Math.cos(newAngle));
+        sy = Math.round(cy + distance * Math.sin(newAngle));
+      }
+
+      if (sx >= 0 && sx < INTERNAL_W && sy >= 0 && sy < INTERNAL_H) {
+        const srcIdx = (sy * INTERNAL_W + sx) * 4;
+        const destIdx = (y * INTERNAL_W + x) * 4;
+        dest[destIdx] = src[srcIdx];         
+        dest[destIdx + 1] = src[srcIdx + 1]; 
+        dest[destIdx + 2] = src[srcIdx + 2]; 
+        dest[destIdx + 3] = src[srcIdx + 3]; 
+      }
+    }
+  }
+  ctx.putImageData(destData, 0, 0);
+}
+
+function animate() {
+  if (!isExporting) {
+    time += speed;
+    drawSwirlText();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ==========================================
+// 导出 智能动态帧率 GIF
+// ==========================================
+btnExport.addEventListener('click', async () => {
+  if (typeof GIF === 'undefined') return alert("未检测到 gif.js！");
+
+  isExporting = true;
+  btnExport.disabled = true;
+  statusDiv.style.display = 'block';
+  statusDiv.textContent = "初始化...";
+
+  let finalWorkerScript = 'gif.worker.js';
+  if (window.location.protocol === 'file:') {
+      try {
+          const res = await fetch('gif.worker.js');
+          const blob = await res.blob();
+          finalWorkerScript = URL.createObjectURL(blob);
+      } catch (e) {
+          alert("本地运行需要联网获取引擎核心。若无网络，请使用 Live Server。");
+          isExporting = false; btnExport.disabled = false; statusDiv.style.display = 'none';
+          return;
+      }
+  }
+
+  try {
+    const gif = new GIF({
+      workers: 2,
+      quality: 10,
+      width: INTERNAL_W,
+      height: INTERNAL_H,
+      workerScript: finalWorkerScript,
+      transparent: 0x000000 
+    });
+
+    // 【智能帧率降级引擎】
+    // 默认目标输出为 30 FPS 丝滑画质
+    let targetFPS = 30; 
+    let frameCount = Math.round(Math.PI / speed); 
+
+    // 为了防止速度调得极慢时，生成几百上千帧导致内存崩溃
+    // 当物理时间变长时，系统会自动平滑降帧，保证能正常导出完整循环
+    if (frameCount > 90) { targetFPS = 20; }
+    if (frameCount > 150) { targetFPS = 15; }
+    if (frameCount > 200) { targetFPS = 10; }
+
+    // 重新计算降帧后的总帧数
+    frameCount = Math.round((Math.PI * 2) / (speed * (60 / targetFPS)));
+
+    // 终极兜底：最多允许生成 200 帧 (防死机)
+    if (frameCount > 200) frameCount = 200;
+
+    const angleStep = (Math.PI * 2) / frameCount;
+    const delay = Math.round(1000 / targetFPS);
+
+    for (let i = 0; i < frameCount; i++) {
+        statusDiv.textContent = `生成 ${targetFPS}FPS 画面: 第 ${i + 1} / ${frameCount} 帧`;
+
+        await new Promise((resolve) => {
+            requestAnimationFrame(() => {
+                time = i * angleStep;
+                drawSwirlText();
+
+                const frameCanvas = document.createElement('canvas');
+                frameCanvas.width = INTERNAL_W;
+                frameCanvas.height = INTERNAL_H;
+                const frameCtx = frameCanvas.getContext('2d');
+
+                frameCtx.fillStyle = '#000000';
+                frameCtx.fillRect(0, 0, INTERNAL_W, INTERNAL_H);
+                frameCtx.drawImage(canvas, 0, 0);
+
+                gif.addFrame(frameCtx, { delay: delay });
+                resolve();
+            });
+        });
+    }
+
+    statusDiv.textContent = "合并编码中(时间较长，请稍候)...";
+
+    gif.on('finished', function(blob) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = `smooth_spiral_${Date.now()}.gif`;
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        isExporting = false;
+        btnExport.disabled = false;
+        statusDiv.style.display = 'none';
+    });
+
+    gif.render();
+
+  } catch (e) {
+      alert("生成失败: " + e.message);
+      isExporting = false; btnExport.disabled = false; statusDiv.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
