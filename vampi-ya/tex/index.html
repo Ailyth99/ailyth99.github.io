@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS2 ReTX</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
+    <script src="wasm_exec.js"></script>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="sidebar-header">
+        <a href="help.html" target="_blank" class="help-link" title="Open Manual">
+            <img src="logo.png" alt="PS2 ReTX" class="app-logo">
+        </a>
+        <span class="version" data-i18n="version">v2.4 / Wasm Core</span>
+    </div>
+
+    <div class="scroll-content">
+        <div class="control-group">
+            <label data-i18n="sec_file">Source File</label>
+            <div class="file-upload-wrapper">
+                <input type="file" id="fileInput">
+                <div class="file-upload-btn" id="fileBtnText" data-i18n="btn_load">📂 Load File</div>
+            </div>
+            <div class="status" id="fileStatus" data-i18n="no_file">No file loaded</div>
+        </div>
+
+        <div class="control-group">
+            <label data-i18n="sec_dim_off">Dimensions & Offsets</label>
+            <div class="row">
+                <div class="input-wrap">
+                    <span data-i18n="lbl_w">W</span>
+                    <input type="number" id="width" value="256">
+                </div>
+                <div class="input-wrap">
+                    <span data-i18n="lbl_h">H</span>
+                    <input type="number" id="height" value="256">
+                </div>
+            </div>
+            <div class="input-wrap mt-2">
+                <span data-i18n="lbl_pixel">Pixel Offset</span>
+                <input type="text" id="pixelOff" value="0" placeholder="0">
+            </div>
+            <div class="input-wrap mt-2">
+                <span data-i18n="lbl_clut">CLUT Offset</span>
+                <input type="text" id="clutOff" value="0" placeholder="0">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label data-i18n="sec_swizzle">Format & Swizzle</label>
+            
+            <div class="row-label">BPP (Bits Per Pixel)</div>
+            <select id="bpp" class="mb-2">
+                <option value="4">4bpp (16 colors)</option>
+                <option value="8">8bpp (256 colors)</option>
+                <option value="16">16bpp</option>
+                <option value="32">32bpp</option>
+            </select>
+
+            <div class="row-label" data-i18n="lbl_swp">Pixel Swizzle</div>
+<select id="swp" class="mb-2">
+    <option value="linear">Linear</option>
+    <option value="4packed" selected>4bpp Packed</option>
+    <option value="4native">4bpp Native</option>
+    <option value="4as8">4bpp as 8bpp</option>
+    <option value="std">Standard</option>
+    <option value="zorder">Z-order (Morton)</option>
+    <option value="psp">PSP Swizzle</option> 
+    
+</select>            <div class="row-label" data-i18n="lbl_swc">CLUT Swizzle</div>
+            <select id="swc">
+                <option value="csm1">CSM1 (Standard)</option>
+                <option value="linear">Linear</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label data-i18n="sec_color">CLUT Format & Alpha</label>
+            <div class="row">
+                <div class="input-wrap">
+                   <select id="cf">
+    <option value="rgba8888">RGBA8888</option>
+    <option value="bgra8888">BGRA8888</option>
+    <option value="abgr1555">ABGR1555</option>
+</select>                </div>
+                <div class="input-wrap">
+                    <select id="alpha">
+                        <option value="ps2">Alpha: PS2 (x2)</option>
+                        <option value="ps2x2">Alpha: Low (x4)</option>
+                        <option value="raw">Alpha: Raw</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <label class="tool-checkbox" style="width:100%">
+                    <input type="checkbox" id="doSwap"> <span data-i18n="lbl_swap">Nibble Swap</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="control-group" style="border:none;">
+            <label>Log</label>
+            <textarea id="logArea" readonly></textarea>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <button id="btnDownload" class="btn-primary" data-i18n="btn_save">💾 Save PNG</button>
+    </div>
+</div>
+
+<div class="main-area">
+    <div class="toolbar">
+        <div class="tool-group">
+            <button class="btn-mini-toggle" id="btnInjectReuse" title="注入修改后的PNG (复用原调色板)" data-i18n="btn_inject_reuse">💉 注入(复用CLUT)</button>
+            <button class="btn-mini-toggle" id="btnInjectNew" title="量化PNG并注入全新调色板" data-i18n="btn_inject_new">✨ 注入(生成新CLUT)</button>
+            <input type="file" id="injectFileInput" accept="image/png" style="display:none">
+            
+            <div class="divider"></div>
+            
+            <button class="btn-mini-toggle" id="btnToggleBg" data-i18n="bg_dark">背景: 深色</button>
+            <input type="color" id="bgColorPicker" value="#333333" title="自定义背景颜色">
+            
+            <div class="divider"></div>
+            
+            <!-- 绝对暴力的中文默认值 -->
+            <button class="btn-mini-toggle" id="btnFlipV" title="垂直翻转图像" data-i18n="btn_flip_v">上下翻转</button>
+            <button class="btn-mini-toggle" id="btnFlipH" title="水平翻转图像" data-i18n="btn_flip_h">左右翻转</button>
+            
+            <div class="tool-label" id="imgInfo" data-i18n="no_img" style="color: var(--color-success); margin-left: 10px;">无预览</div>
+        </div>
+        
+        <div class="tool-group" style="flex:1; justify-content: flex-end;">
+            <span class="tool-label"><span data-i18n="lbl_zoom">缩放</span>: <span id="zoomValue">100%</span></span>
+            <input type="range" id="zoomRange" min="0.1" max="5.0" step="0.1" value="1.0">
+            <button class="btn-mini-toggle" id="btnFit" style="width: auto;" data-i18n="btn_fit">适应</button>
+        </div>
+    </div>
+    <div class="canvas-container dark-grid" id="canvasContainer" style="cursor: grab;">
+        <img id="previewImage" src="" style="display: none;" draggable="false">
+    </div>
+</div>
+
+<div id="loadingMask" class="loading-mask">
+    <div class="loading-content">
+        <img src="logo.png" alt="PS2 ReTX" class="loading-logo">
+        <div class="loading-text">Initializing Core...</div>
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div id="progressText" class="progress-info">0%</div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+ 
+<div id="resultModal" class="modal-mask hidden">
+ 
+    <div class="modal-content">
+        <div class="modal-header">✨ Mission Accomplished!</div>
+        <div class="modal-body">
+            <p id="modalMsg">Data injection completed successfully.</p>
+            <div class="file-info-box">
+                <span class="file-icon">📄</span>
+                <span id="modalFileName">injected_file.bin</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="btnModalCancel" class="btn-secondary">Close</button>
+            <button id="btnModalSave" class="btn-primary" style="width: auto; padding: 10px 30px;">💾 Save Now</button>
+        </div>
+    </div>
+</div>
+
+ 
+<div id="forceModal" class="modal-mask hidden">
+    <div class="modal-content" style="border-color: #ff9900; box-shadow: 0 0 30px rgba(255, 153, 0, 0.4);">
+        <div class="modal-header" style="background: #ff9900; color: #111;">⚠️ Dimension Mismatch</div>
+        <div class="modal-body">
+            <p id="forceModalMsg" style="font-size: 14px; line-height: 1.5;"></p>
+        </div>
+        <div class="modal-footer">
+            <button id="btnForceCancel" class="btn-secondary">Cancel</button>
+            <button id="btnForceConfirm" class="btn-primary" style="background: #ff9900; border-color: #ff9900; width: auto; padding: 10px 30px;">Force Inject</button>
+        </div>
+    </div>
+</div></body>
+</html>
