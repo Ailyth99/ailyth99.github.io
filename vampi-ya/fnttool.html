@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字库工具箱 | Font Toolbox</title>
+    <!-- 引入 opentype.js 用于解析字体 -->
+    <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #FFFDF7;
+            --primary: #FF5E5B; /* 珊瑚红 */
+            --secondary: #FFED66; /* 复古黄 */
+            --accent: #00CECB; /* 薄荷绿 */
+            --text-dark: #111111;
+            --border-width: 3px;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            background-image: radial-gradient(#d5d5d5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            display: grid;
+            gap: 20px;
+        }
+
+        /* 新粗野主义卡片风格 */
+        .brutal-card {
+            background: #fff;
+            border: var(--border-width) solid var(--text-dark);
+            box-shadow: 6px 6px 0px var(--text-dark);
+            padding: 25px;
+            border-radius: 0;
+        }
+
+        .header {
+            background: var(--secondary);
+            text-align: center;
+            padding: 15px;
+        }
+
+        h1 { margin: 0; font-size: 2rem; text-transform: uppercase; }
+
+        /* 标签页切换 */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: -3px; /* 与下方卡片连接 */
+            z-index: 1;
+        }
+
+        .tab-btn {
+            padding: 10px 25px;
+            font-weight: bold;
+            border: var(--border-width) solid var(--text-dark);
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 4px 4px 0px var(--text-dark);
+        }
+
+        /* 界面内容区域 */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .upload-area {
+            background: var(--accent);
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            padding: 20px;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
+        }
+
+        .font-info {
+            margin-top: 10px;
+            font-weight: bold;
+            background: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid var(--text-dark);
+        }
+
+        /* 预览区控制栏 */
+        .preview-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            background: #f0f0f0;
+            padding: 15px;
+            border: 2px solid var(--text-dark);
+        }
+
+        .control-group { display: flex; flex-direction: column; gap: 5px; }
+        .control-group label { font-size: 0.9rem; font-weight: bold; }
+
+        input[type="range"], input[type="color"] {
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* 预览显示区 */
+        #preview-display {
+            min-height: 300px;
+            border: var(--border-width) solid var(--text-dark);
+            padding: 20px;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            background: #fff;
+            box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1);
+            font-size: 48px; /* 默认大小 */
+        }
+
+        /* 缺字检测/全部字符区 多行文本框样式 */
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: var(--border-width) solid var(--text-dark);
+            box-shadow: 4px 4px 0px var(--text-dark);
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            border: var(--border-width) solid var(--text-dark);
+            box-shadow: 4px 4px 0px var(--text-dark);
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--text-dark); }
+
+        .stat-box { display: flex; gap: 10px; margin: 15px 0; }
+        .stat { flex: 1; padding: 10px; border: 2px solid var(--text-dark); text-align: center; font-weight: bold; }
+        .missing-chars-box {
+            border: 2px solid var(--text-dark);
+            padding: 15px;
+            background: #f9f9f9;
+            min-height: 80px;
+            font-size: 1.2rem;
+        }
+
+        .loader-text { display: none; color: var(--primary); font-weight: bold; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 头部 -->
+        <div class="brutal-card header">
+            <h1>🎨 字库工具箱</h1>
+        </div>
+
+        <!-- 统一上传区 -->
+        <div class="brutal-card upload-area" id="drop-zone">
+            <h2>📁 点击上传 TTF/OTF 字体文件</h2>
+            <input type="file" id="font-upload" accept=".ttf, .otf, .woff">
+            <div class="font-info" id="font-name">当前未加载字体</div>
+        </div>
+
+        <!-- 标签导航 (新增了全部字符标签) -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('check')">🔍 缺字检测</button>
+            <button class="tab-btn" onclick="switchTab('preview')">👁️ 字符预览</button>
+            <button class="tab-btn" onclick="switchTab('all')">📚 全部字符</button>
+        </div>
+
+        <!-- 功能卡片区 -->
+        <div class="brutal-card">
+            
+            <!-- 1. 缺字检测区 -->
+            <div id="check-section" class="tab-content active">
+                <textarea id="text-input" placeholder="粘贴需要测试的文本（自动去重）..."></textarea>
+                <button class="btn" id="check-btn">开始检测</button>
+                <div id="loader" class="loader-text">正在分析中...</div>
+                
+                <div id="result-area" style="display:none; margin-top: 20px;">
+                    <div class="stat-box">
+                        <div class="stat" style="background: var(--accent);">总测试字符: <span id="total-count">0</span></div>
+                        <div class="stat" style="background: var(--primary); color:white;">缺失: <span id="missing-count">0</span></div>
+                    </div>
+                    <div class="missing-chars-box" id="missing-chars"></div>
+                </div>
+            </div>
+
+            <!-- 2. 字符预览区 -->
+            <div id="preview-section" class="tab-content">
+                <div class="preview-controls">
+                    <div class="control-group">
+                        <label>字体大小: <span id="size-val">48</span>px</label>
+                        <input type="range" id="size-slider" min="12" max="200" value="48">
+                    </div>
+                    <div class="control-group">
+                        <label>文字颜色</label>
+                        <input type="color" id="text-color" value="#111111">
+                    </div>
+                    <div class="control-group">
+                        <label>背景颜色</label>
+                        <input type="color" id="bg-color" value="#ffffff">
+                    </div>
+                </div>
+                <textarea id="preview-input" style="height: 80px;" placeholder="在此输入需要预览的文字..."></textarea>
+                <div id="preview-display">预览效果将显示在这里...</div>
+            </div>
+
+            <!-- 3. 全部字符区 (新增) -->
+            <div id="all-chars-section" class="tab-content">
+                <button class="btn" id="extract-btn">提取字库所有包含字符</button>
+                <div id="extract-loader" class="loader-text">正在提取中，大字库（如中文字体）可能需要几秒钟，请稍候...</div>
+                
+                <div id="extract-result-area" style="display:none; margin-top: 20px;">
+                    <div class="stat-box">
+                        <div class="stat" style="background: var(--secondary);">当前字体总包含字符数: <span id="extracted-count">0</span></div>
+                    </div>
+                    <!-- 设为 readonly 防止误编辑导致大文本卡顿 -->
+                    <textarea id="all-chars-display" style="height: 350px; font-size: 1.2rem; line-height: 1.6;" placeholder="提取出的字符将显示在这里..." readonly></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let currentFont = null;
+        let fontStyleElement = null;
+
+        // 切换标签页
+        function switchTab(type) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            if(type === 'check') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('check-section').classList.add('active');
+            } else if(type === 'preview') {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('preview-section').classList.add('active');
+            } else if(type === 'all') {
+                // 处理新增的全部字符标签页
+                document.querySelectorAll('.tab-btn')[2].classList.add('active');
+                document.getElementById('all-chars-section').classList.add('active');
+            }
+        }
+
+        // 1. 处理字体上传与解析
+        document.getElementById('font-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const buffer = e.target.result;
+                try {
+                    // 解析字体供 opentype.js 检测使用
+                    currentFont = opentype.parse(buffer);
+                    const name = currentFont.names.fontFamily.zh || currentFont.names.fontFamily.en || file.name;
+                    document.getElementById('font-name').innerHTML = `✅ 已加载: ${name}`;
+
+                    // 清空之前的提取结果
+                    document.getElementById('extract-result-area').style.display = 'none';
+                    document.getElementById('all-chars-display').value = '';
+
+                    // 动态注入 CSS @font-face 供预览使用
+                    const fontBlob = new Blob([buffer], { type: 'font/opentype' });
+                    const fontUrl = URL.createObjectURL(fontBlob);
+                    
+                    if (fontStyleElement) fontStyleElement.remove();
+                    fontStyleElement = document.createElement('style');
+                    fontStyleElement.textContent = `
+                        @font-face {
+                            font-family: 'CustomUploadedFont';
+                            src: url('${fontUrl}');
+                        }
+                        #preview-display, #all-chars-display { font-family: 'CustomUploadedFont', sans-serif !important; }
+                    `;
+                    document.head.appendChild(fontStyleElement);
+
+                } catch (err) {
+                    alert('字体解析失败！');
+                    console.error(err);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        // 2. 缺字检测逻辑
+        document.getElementById('check-btn').addEventListener('click', function() {
+            if (!currentFont) return alert('请先上传字体');
+            const rawText = document.getElementById('text-input').value;
+            if (!rawText.trim()) return;
+
+            document.getElementById('loader').style.display = 'block';
+            setTimeout(() => {
+                const uniqueChars = [...new Set([...rawText])].filter(c => c.trim() !== '');
+                let missingChars = [];
+                for (const char of uniqueChars) {
+                    const glyph = currentFont.charToGlyph(char);
+                    // opentype.js 中 index === 0 通常代表 .notdef（即缺字形状）
+                    if (glyph.index === 0) missingChars.push(char);
+                }
+                document.getElementById('total-count').innerText = uniqueChars.length;
+                document.getElementById('missing-count').innerText = missingChars.length;
+                document.getElementById('missing-chars').innerText = missingChars.length > 0 ? missingChars.join('') : "无缺失字符";
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('result-area').style.display = 'block';
+            }, 100);
+        });
+
+        // 3. 预览控制逻辑
+        const previewInput = document.getElementById('preview-input');
+        const previewDisplay = document.getElementById('preview-display');
+        const sizeSlider = document.getElementById('size-slider');
+        const textColor = document.getElementById('text-color');
+        const bgColor = document.getElementById('bg-color');
+
+        function updatePreview() {
+            previewDisplay.innerText = previewInput.value || "请输入文字进行预览...";
+            previewDisplay.style.fontSize = sizeSlider.value + 'px';
+            previewDisplay.style.color = textColor.value;
+            previewDisplay.style.backgroundColor = bgColor.value;
+            document.getElementById('size-val').innerText = sizeSlider.value;
+        }
+
+        [previewInput, sizeSlider, textColor, bgColor].forEach(el => {
+            el.addEventListener('input', updatePreview);
+        });
+
+        // 4. 全部字符提取逻辑 (新增)
+        document.getElementById('extract-btn').addEventListener('click', function() {
+            if (!currentFont) return alert('请先上传字体');
+            
+            document.getElementById('extract-loader').style.display = 'block';
+            document.getElementById('extract-result-area').style.display = 'none';
+
+            // 使用 setTimeout 防止提取大字体（几万字）时阻塞 UI 导致 Loader 无法显示
+            setTimeout(() => {
+                let charSet = new Set();
+
+                // 遍历字体中的所有字形
+                for (let i = 0; i < currentFont.glyphs.length; i++) {
+                    const glyph = currentFont.glyphs.get(i);
+                    
+                    // 单一 unicode 映射
+                    if (glyph.unicode) {
+                        charSet.add(String.fromCodePoint(glyph.unicode));
+                    }
+                    // 多个 unicode 映射到同一个字形的情况
+                    if (glyph.unicodes && glyph.unicodes.length > 0) {
+                        glyph.unicodes.forEach(u => {
+                            charSet.add(String.fromCodePoint(u));
+                        });
+                    }
+                }
+
+                // 将 Set 转换为数组并合并成字符串
+                const charsArray = Array.from(charSet);
+                const charsString = charsArray.join('');
+
+                // 更新 UI
+                document.getElementById('extracted-count').innerText = charsArray.length;
+                document.getElementById('all-chars-display').value = charsString;
+                
+                document.getElementById('extract-loader').style.display = 'none';
+                document.getElementById('extract-result-area').style.display = 'block';
+            }, 100); // 100ms 延迟确保 DOM 渲染出 loading 状态
+        });
+    </script>
+</body>
+</html>
