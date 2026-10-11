@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>汉化补丁应用工具</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@chinese-fonts/stdgt@2.0.0/dist/%E4%B8%8A%E5%9B%BE%E4%B8%9C%E8%A7%82%E4%BD%93-%E5%B8%B8%E8%A7%84/result.min.css">
+<style>
+    :root{
+    --ink:#eef2fb;        /* 标题：亮 */
+    --ink2:#c6cfe0;       /* 正文 */
+    --ink3:#8d9ab2;       /* 次要 */
+    --line:rgba(255,255,255,.17);
+    --card:rgba(9,17,35,.66);
+    --drop:rgba(5,11,24,.55);
+    --accent:#d9bf8c;     /* 金色 */
+    --accent-d:#c4a877;
+    --ok:#5ecb96;
+    --warn:#e0b25c;
+    --err:#f0727c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%}
+  body{
+    font:14px/1.7 "Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink2);
+    background:#080e1e url("../bg1.jpg") center top / cover no-repeat fixed;
+    display:flex;flex-direction:column;min-height:100vh;
+  }
+  .wrap{width:100%;max-width:760px;margin:0 auto;padding:44px 18px 34px;flex:1 0 auto}
+
+  /* ---------- 标题 ---------- */
+  header{text-align:center;margin-bottom:26px}
+  h1{
+    font-family:"STDongGuanTi","Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+    font-size:34px;font-weight:400;color:var(--ink);margin:0 0 8px;
+    letter-spacing:4px;
+    text-shadow:0 2px 18px rgba(0,0,0,.92),0 0 3px rgba(0,0,0,.85);
+  }
+  .sub{
+    font-size:17px;color:#fff;letter-spacing:3px;margin-top:2px;
+    text-shadow:
+      0 0 4px  rgba(255,255,255,1),
+      0 0 10px rgba(255,255,255,.95),
+      0 0 22px rgba(214,233,255,.85),
+      0 0 40px rgba(160,198,255,.6),
+      0 1px 14px rgba(0,0,0,.9);
+  }
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    background:var(--card);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:16px;padding:24px;
+    box-shadow:0 18px 50px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.07);
+  }
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+
+  .drop{
+    background:var(--drop);
+    border:1.5px dashed rgba(255,255,255,.2);border-radius:12px;
+    padding:18px 14px;min-height:124px;
+    display:flex;flex-direction:column;justify-content:center;
+    cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;
+  }
+  .drop:hover{border-color:rgba(217,191,140,.75);background:rgba(12,22,44,.72)}
+  .drop.over{border-color:var(--accent);background:rgba(16,28,54,.85);
+    box-shadow:inset 0 0 0 3px rgba(217,191,140,.12)}
+  .drop.filled{border-style:solid;border-color:rgba(217,191,140,.42);background:rgba(13,23,45,.8)}
+  .drop .t{font-size:13px;font-weight:600;color:var(--ink);letter-spacing:.6px}
+  .drop .t i{font-style:normal;color:var(--accent);margin-left:5px}
+  .drop .h{font-size:12px;color:var(--ink3);margin-top:3px}
+  .drop .n{margin-top:9px;font-size:12.5px;color:var(--ink2);word-break:break-all;line-height:1.5}
+  .drop .m{font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+
+  .bar{display:flex;align-items:center;gap:10px;margin-top:20px;flex-wrap:wrap}
+  button{
+    font:inherit;font-weight:600;border:0;border-radius:10px;padding:10px 22px;
+    cursor:pointer;transition:background .15s,color .15s,border-color .15s,opacity .15s;
+    background:var(--accent);color:#141d33;letter-spacing:1px;
+  }
+  button:hover:not(:disabled){background:var(--accent-d)}
+  button:disabled{opacity:.35;cursor:not-allowed}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink2);font-weight:500}
+  button.ghost:hover:not(:disabled){border-color:var(--accent);color:var(--accent);background:transparent}
+  .chk{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink3);
+    cursor:pointer;user-select:none;margin-left:auto}
+  input[type=checkbox]{accent-color:var(--accent);width:14px;height:14px;margin:0}
+
+  .prog{height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden;
+    margin-top:16px;display:none}
+  .prog.on{display:block}
+  .prog i{display:block;height:100%;width:34%;background:var(--accent);
+    animation:sl 1.15s ease-in-out infinite}
+  @keyframes sl{0%{margin-left:-34%}100%{margin-left:100%}}
+
+  .st{margin-top:14px;font-size:12.5px;color:var(--ink3);text-align:center;min-height:20px}
+  .st.ok{color:var(--ok)}
+  .st.err{color:var(--err)}
+  .st .perk{color:rgba(94,203,150,.95)}
+
+  /* ---------- 结果 ---------- */
+  .res{display:none;margin-top:18px;padding:16px 18px;border-radius:12px;
+    background:rgba(94,203,150,.1);border:1px solid rgba(94,203,150,.32);text-align:center}
+  .res.on{display:block}
+  .res .f{font-size:14px;color:var(--ink);font-weight:600;word-break:break-all}
+  .res .d{font-size:12px;color:var(--ink3);margin-top:3px;font-variant-numeric:tabular-nums}
+  .res button{margin-top:12px}
+
+  /* ---------- 日志按钮 + 面板 ---------- */
+  #logBtn{
+    position:fixed;top:14px;right:14px;z-index:30;
+    padding:6px 13px;font-size:12px;font-weight:500;letter-spacing:1px;border-radius:20px;
+    background:rgba(9,17,35,.8);color:var(--ink2);
+    border:1px solid rgba(255,255,255,.16);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    box-shadow:0 4px 16px rgba(0,0,0,.45);
+  }
+  #logBtn:hover{background:rgba(16,28,54,.95);color:var(--accent);border-color:rgba(217,191,140,.5)}
+  #logBtn .dot{display:inline-block;width:5px;height:5px;border-radius:50%;
+    background:rgba(255,255,255,.28);margin-right:6px;vertical-align:1px}
+  #logBtn.err .dot{background:var(--err)}
+
+  #logPanel{
+    position:fixed;top:52px;right:14px;z-index:29;
+    width:min(460px,calc(100vw - 28px));max-height:min(62vh,520px);
+    display:none;flex-direction:column;
+    background:rgba(6,12,26,.97);
+    border:1px solid rgba(255,255,255,.15);border-radius:14px;
+    box-shadow:0 20px 54px rgba(0,0,0,.6);overflow:hidden;
+  }
+  #logPanel.on{display:flex}
+  #logPanel .hd{padding:8px 14px;font-size:12px;color:var(--ink3);
+    border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center}
+  #logPanel .hd b{color:var(--ink);font-weight:600}
+  #logPanel .hd span{margin-left:auto;cursor:pointer;color:var(--ink3)}
+  #logPanel .hd span:hover{color:var(--accent)}
+  #log{
+    margin:0;padding:12px 14px;overflow:auto;flex:1;
+    font:11.5px/1.75 ui-monospace,SFMono-Regular,Consolas,"Courier New",monospace;
+    color:#b9c4d8;white-space:pre-wrap;word-break:break-all;
+  }
+  #log .t{color:#6d7b93}
+  #log .ok{color:var(--ok)}
+  #log .warn{color:var(--warn)}
+  #log .err{color:var(--err)}
+
+  /* ---------- 页脚 ---------- */
+  footer{flex:0 0 auto;margin-top:auto;padding-top:44px;position:relative}
+  footer img{display:block;width:100%;height:auto}
+  /* 版权行浮动在底部图的底部（花丛是实心白的，所以用深色字） */
+  .credit{
+    position:absolute;left:0;right:0;bottom:0;
+    text-align:center;padding:10px 18px 11px;
+    font-size:11.5px;color:#1f2836;letter-spacing:.3px;
+    text-shadow:0 1px 0 rgba(255,255,255,.7);
+  }
+  .credit a{color:#74495a;text-decoration:none;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+  .credit a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<button id="logBtn"><span class="dot"></span>日志</button>
+
+<div id="logPanel">
+  <div class="hd"><b>运行日志</b><span id="logClr">清空</span></div>
+  <div id="log"></div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <h1>不思议游戏 在线补丁工具</h1>
+    <div class="sub">汉化制作：不思议汉化组</div>
+  </header>
+
+  <div class="card">
+    <div class="grid">
+      <div class="drop" id="dRom">
+        <div class="t">原版 ISO/ROM <i>必需</i></div>
+        <div class="h">点击选择，或把文件拖进来</div>
+        <div class="n" id="nRom"></div>
+        <div class="m" id="mRom"></div>
+        <input type="file" id="fRom" hidden>
+      </div>
+      <div class="drop" id="dPat">
+        <div class="t">补丁文件 <i>必需</i></div>
+        <div class="h">点击选择，或把文件拖进来</div>
+        <div class="n" id="nPat"></div>
+        <div class="m" id="mPat"></div>
+        <input type="file" id="fPat" hidden>
+      </div>
+    </div>
+
+    <div class="bar">
+      <button id="bRun" disabled>应用补丁</button>
+      <button id="bRst" class="ghost">重置</button>
+      <label class="chk"><input type="checkbox" id="optV" checked>校验文件校验和</label>
+    </div>
+
+    <div class="prog" id="prog"><i></i></div>
+    <div class="st" id="st">选择原版 ISO/ROM 和补丁文件后开始&nbsp;&nbsp;·&nbsp;&nbsp;<span class="perk">文件不会上传服务器，全部在本地完成</span></div>
+
+    <div class="res" id="res">
+      <div class="f" id="rName"></div>
+      <div class="d" id="rMeta"></div>
+      <button id="bSave">下载打好的 ROM</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+    <img src="../footer_bg.png" alt="">
+    <div class="credit">
+      Powered by <a href="https://github.com/marcrobledo/RomPatcher.js" target="_blank" rel="noopener">RomPatcher.js</a>
+      &nbsp;by Marc Robledo&nbsp;·&nbsp;MIT License
+    </div>
+  </footer>
+
+<!-- RomPatcher.js core + modules (classic scripts, no bundler needed) -->
+<script src="lib/rom-patcher-js/modules/HashCalculator.js"></script>
+<script src="lib/rom-patcher-js/modules/BinFile.js"></script>
+<script src="lib/rom-patcher-js/RomPatcher.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.ips.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.aps_n64.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.aps_gba.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.ups.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.bps.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.rup.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.ppf.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.bdf.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.pmsr.js"></script>
+<script src="lib/rom-patcher-js/modules/RomPatcher.format.vcdiff.js"></script>
+
+<!-- release fix-up table (generated by ../mknorm.py), defines global NORM -->
+<script src="norm.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  var logEl = document.getElementById('log');
+  var panel = document.getElementById('logPanel');
+  var logBtn = document.getElementById('logBtn');
+  var stEl = document.getElementById('st');
+  var prog = document.getElementById('prog');
+  var resEl = document.getElementById('res');
+
+  var S = { rom: null, pat: null, out: null, name: '' };
+
+  /* ---------------- helpers ---------------- */
+  function esc(s) {
+    return String(s).replace(/[&<>]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c];
+    });
+  }
+  function size(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    if (n < 1073741824) return (n / 1048576).toFixed(2) + ' MB';
+    return (n / 1073741824).toFixed(3) + ' GB';
+  }
+  function crc32(u8) {
+    try { return '0x' + HashCalculator.crc32(u8.buffer).toString(16).toUpperCase().padStart(8, '0'); }
+    catch (e) { return 'n/a'; }
+  }
+  function log(msg, cls) {
+    var t = new Date().toTimeString().slice(0, 8);
+    logEl.insertAdjacentHTML('beforeend',
+      '<div><span class="t">[' + t + ']</span> <span class="' + (cls || '') + '">' + esc(msg) + '</span></div>');
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+  function status(msg, cls) {
+    stEl.textContent = msg;
+    stEl.className = 'st' + (cls ? ' ' + cls : '');
+  }
+  function showLog(on) {
+    panel.classList.toggle('on', on);
+    logBtn.textContent = '';
+    logBtn.insertAdjacentHTML('beforeend', '<span class="dot"></span>' + (on ? '收起日志' : '日志'));
+    if (on) logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  logBtn.addEventListener('click', function () { showLog(!panel.classList.contains('on')); });
+  document.getElementById('logClr').addEventListener('click', function () { logEl.innerHTML = ''; });
+
+  /* ---------------- file input ---------------- */
+  function bind(dropId, inputId, key, nameId, metaId) {
+    var drop = document.getElementById(dropId);
+    var input = document.getElementById(inputId);
+    drop.addEventListener('click', function () { input.click(); });
+    input.addEventListener('change', function () { if (input.files[0]) take(input.files[0]); });
+    ['dragenter', 'dragover'].forEach(function (e) {
+      drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add('over'); });
+    });
+    ['dragleave', 'drop'].forEach(function (e) {
+      drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.remove('over'); });
+    });
+    drop.addEventListener('drop', function (ev) {
+      if (ev.dataTransfer.files[0]) take(ev.dataTransfer.files[0]);
+    });
+
+    function take(f) {
+      var fr = new FileReader();
+      fr.onload = function () {
+        var u8 = new Uint8Array(fr.result);
+        var info = identify(u8);
+        S[key] = { name: f.name, bytes: u8, fmt: info.name };
+        S.out = null;
+        document.getElementById(nameId).innerHTML = esc(f.name);
+        document.getElementById(metaId).textContent = size(u8.length) +
+          (key === 'pat' ? '  ·  ' + (info.name || '未知格式') : '') +
+          '  ·  CRC32 ' + crc32(u8);
+        drop.classList.add('filled');
+        log((key === 'rom' ? 'ROM' : 'PATCH') + ': ' + f.name + ' (' + size(u8.length) + ')');
+        if (key === 'pat') report(info, u8);
+        if (key === 'rom') chkRom(u8);
+        reset();
+        refresh();
+      };
+      fr.readAsArrayBuffer(f);
+    }
+  }
+
+  /* ---------- 文件头识别：只看 magic，绝不看扩展名 ---------- */
+  var MAGICS = [
+    { m: 'PATCH', n: 'IPS' },
+    { m: 'UPS1', n: 'UPS' },
+    { m: 'APS10', n: 'APS (N64)' },
+    { m: 'APS1', n: 'APS (GBA)' },
+    { m: 'BPS1', n: 'BPS' },
+    { m: 'NINJA2', n: 'RUP' },
+    { m: 'PPF', n: 'PPF' },
+    { m: 'BSDIFF40', n: 'BDF (bsdiff)' },
+    { m: 'PMSR', n: 'PMSR' },
+    { m: 'Yay0', n: 'PMSR / Yay0' }
+  ];
+
+  function head(b, n) {
+    var s = '';
+    for (var i = 0; i < n && i < b.length; i++) {
+      if (b[i] < 0x20 || b[i] > 0x7e) return null;
+      s += String.fromCharCode(b[i]);
+    }
+    return s;
+  }
+  function hex2(v) { return ('0' + v.toString(16)).slice(-2).toUpperCase(); }
+  function hexs(b, n) {
+    var a = [];
+    for (var i = 0; i < n && i < b.length; i++) a.push(hex2(b[i]));
+    return a.join(' ') || '(empty)';
+  }
+
+  /* 返回值完全由文件头决定，文件名/扩展名不参与 */
+  function identify(b) {
+    if (b.length >= 3 && b[0] === 0xd6 && b[1] === 0xc3 && b[2] === 0xc4) {
+      return { name: 'VCDIFF (xdelta)', flags: b.length > 3 ? b[3] : 0,
+               second: b.length > 4 ? b[4] : -1 };
+    }
+    for (var i = 0; i < MAGICS.length; i++) {
+      if (head(b, MAGICS[i].m.length) === MAGICS[i].m) {
+        return { name: MAGICS[i].n, flags: 0, second: 0 };
+      }
+    }
+    return { name: null, flags: 0, second: 0 };
+  }
+
+  function report(info, b) {
+    if (info.name) log('magic  : ' + info.name + '   [' + hexs(b, 4) + ']');
+    else log('magic  : unrecognized header [' + hexs(b, 8) + ']', 'warn');
+    if (info.name === 'VCDIFF (xdelta)') {
+      log('VCDIFF 头标志 = 0x' + hex2(info.flags));
+      if (info.flags & 0x01) {
+        log('检测到二次压缩 id=' + info.second + ' —— RomPatcher.js 不支持，应用会失败', 'warn');
+      } else {
+        log('无二次压缩，可正常应用', 'ok');
+      }
+    }
+  }
+
+  /* ---------- 版次适配：把限定版 ISO 归一化成通常版布局 ----------
+     两版的游戏数据完全相同，差别只在 ISO9660 元数据（启动文件名、
+     目录记录时间戳）和 PS2-logo 区的填充字节。补丁里存的是「从源文件
+     第 N 字节抄 N 字节」，源变了就会抄错，所以必须在打补丁前先把
+     这几个字节改回来。表格由 ../mknorm.py 生成（norm.js）。          */
+  function u32(b, o) {
+    return (b[o] | (b[o + 1] << 8) | (b[o + 2] << 16) | (b[o + 3] << 24)) >>> 0;
+  }
+
+  /* 标准 ISO9660：PVD(扇区16) -> 根目录 -> 启动文件名，与扩展名无关 */
+  function elfName(b) {
+    var p = 16 * 2048;
+    if (b.length < p + 176) return null;
+    if (b[p + 1] !== 0x43 || b[p + 2] !== 0x44 || b[p + 3] !== 0x30 ||
+        b[p + 4] !== 0x30 || b[p + 5] !== 0x31) return null;      /* "CD001" */
+    var o = u32(b, p + 158) * 2048;
+    var end = Math.min(o + u32(b, p + 166), b.length);
+    while (o + 33 < end) {
+      var len = b[o];
+      if (!len) { o = (Math.floor(o / 2048) + 1) * 2048; continue; }
+      var s = '';
+      for (var i = 0; i < b[o + 32]; i++) s += String.fromCharCode(b[o + 33 + i]);
+      var m = /^([A-Z]{4}_\d{3}\.\d{2});\d$/.exec(s);
+      if (m) return m[1];
+      o += len;
+    }
+    return null;
+  }
+
+  function headCrc(b) {
+    return HashCalculator.crc32(b.slice(0, NORM.limit).buffer) >>> 0;
+  }
+
+  /* 'ref' = 补丁基准版, 'alt' = 需适配的另一版, 'unknown' = 不认识 */
+  function edition(b) {
+    if (typeof NORM === 'undefined' || b.length < NORM.limit) return 'unknown';
+    var c = headCrc(b);
+    return c === NORM.headCrc ? 'ref' : (c === NORM.tgtHeadCrc ? 'alt' : 'unknown');
+  }
+
+  function normalize(b) {
+    var r = NORM.rules, i, k, x, v, h;
+    for (i = 0; i < r.length; i++) {
+      x = r[i];
+      if (x.b !== undefined) {
+        v = parseInt(x.b, 16);
+        for (k = 0; k < x.n; k++) b[x.o + k] = v;
+      } else if (x.x !== undefined) {
+        v = parseInt(x.x, 16);
+        for (k = 0; k < x.n; k++) b[x.o + k] ^= v;
+      } else {
+        h = x.h;
+        for (k = 0; k < h.length; k += 2) b[x.o + (k >> 1)] = parseInt(h.substr(k, 2), 16);
+      }
+    }
+  }
+
+  function chkRom(b) {
+    if (typeof NORM === 'undefined') { log('未载入版次表 norm.js，跳过版次识别', 'warn'); return; }
+    var e = edition(b);
+    log('启动文件: ' + (elfName(b) || '未识别') + '   版次: ' + e);
+    if (e === 'ref') log('版本比对通过 —— 这就是补丁的基准版，直接应用', 'ok');
+    else if (e === 'alt') log('这是另一版碟（限定版）—— 应用补丁时会自动适配，无需手动改', 'warn');
+    else log('与本工具已知的两个版次都不符 —— 仍可应用，但若补丁报校验错就是版本不对', 'warn');
+  }
+
+  /* 打补丁前调用：必要时就地改写源字节 */
+  function adapt(b) {
+    if (typeof NORM === 'undefined' || edition(b) !== 'alt') return;
+    if (b.length !== NORM.targetSize) {
+      throw new Error('release size ' + b.length + ' != expected ' + NORM.targetSize);
+    }
+    log('检测到限定版，正在适配为通常版布局...');
+    normalize(b);
+    log('适配完成：启动文件已变为 ' + (elfName(b) || '?') + '，按通常版应用补丁', 'ok');
+  }
+
+  bind('dRom', 'fRom', 'rom', 'nRom', 'mRom');
+  bind('dPat', 'fPat', 'pat', 'nPat', 'mPat');
+
+  function refresh() {
+    document.getElementById('bRun').disabled = !(S.rom && S.pat);
+  }
+  function reset() {
+    resEl.classList.remove('on');
+    prog.classList.remove('on');
+    logBtn.classList.remove('err');
+  }
+
+  /* ---------------- apply ---------------- */
+  document.getElementById('bRun').addEventListener('click', function () {
+    this.disabled = true;
+    prog.classList.add('on');
+    logBtn.classList.remove('err');
+    reset();
+    status('正在处理，' + size(S.rom.bytes.length) + ' 的文件需要几十秒，请勿关闭页面…');
+
+    setTimeout(function () {
+      try {
+        adapt(S.rom.bytes);
+
+        var romFile = new BinFile(S.rom.bytes);
+        romFile.fileName = S.rom.name;
+        var patFile = new BinFile(S.pat.bytes);
+        patFile.fileName = S.pat.name;
+
+        log('parsing patch...');
+        var patch = RomPatcher.parsePatchFile(patFile);
+        if (!patch) throw new Error('Invalid patch file');
+        log('format: ' + patch.toString());
+
+        log('applying...');
+        var t0 = performance.now();
+        var out = RomPatcher.applyPatch(romFile, patch, {
+          requireValidation: document.getElementById('optV').checked
+        });
+        var dt = (performance.now() - t0) / 1000;
+
+        S.out = out._u8array;
+        var m = S.rom.name.match(/(\.[^.]+)$/);
+        S.name = S.rom.name.replace(/(\.[^.]+)$/, '') + '_汉化' + (m ? m[1] : '.bin');
+
+        log('done in ' + dt.toFixed(2) + 's', 'ok');
+        log('output: ' + S.name + ' (' + size(S.out.length) + ') CRC32 ' + crc32(S.out), 'ok');
+
+        document.getElementById('rName').textContent = S.name;
+        document.getElementById('rMeta').textContent =
+          size(S.out.length) + '  ·  CRC32 ' + crc32(S.out) + '  ·  用时 ' + dt.toFixed(1) + ' 秒';
+        resEl.classList.add('on');
+        status('补丁应用成功', 'ok');
+      } catch (e) {
+        var msg = String(e && e.message || e);
+        log('FAILED: ' + msg, 'err');
+        if (/secondary decompressor|deltaIndicator|not implemented/i.test(msg)) {
+          log('原因：该补丁使用了 LZMA 等二次压缩，RomPatcher.js 无法解码。', 'warn');
+          log('请让补丁作者改用 -S none 重新生成。', 'warn');
+          status('补丁格式不受支持（二次压缩），详情见日志', 'err');
+        } else {
+          status('应用失败，详情见日志', 'err');
+        }
+        logBtn.classList.add('err');
+        showLog(true);
+      } finally {
+        prog.classList.remove('on');
+        refresh();
+      }
+    }, 30);
+  });
+
+  document.getElementById('bSave').addEventListener('click', function () {
+    if (!S.out) return;
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([S.out]));
+    a.download = S.name;
+    a.click();
+  });
+
+  document.getElementById('bRst').addEventListener('click', function () {
+    S = { rom: null, pat: null, out: null, name: '' };
+    ['nRom', 'mRom', 'nPat', 'mPat'].forEach(function (id) { document.getElementById(id).textContent = ''; });
+    document.getElementById('fRom').value = '';
+    document.getElementById('fPat').value = '';
+    document.getElementById('dRom').classList.remove('filled');
+    document.getElementById('dPat').classList.remove('filled');
+    logEl.innerHTML = '';
+    reset();
+    status('选择原版 ISO/ROM 和补丁文件后开始  ·  文件不会上传服务器，全部在本地完成');
+    refresh();
+    log('reset');
+  });
+
+  log('ready');
+  log('RomPatcher: ' + (typeof RomPatcher !== 'undefined' ? 'loaded' : 'FAILED'),
+    typeof RomPatcher !== 'undefined' ? 'ok' : 'err');
+})();
+</script>
+</body>
+</html>
