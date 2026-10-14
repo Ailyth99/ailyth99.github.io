@@ -440,15 +440,35 @@
   /* 支持镜像表里列出的三个整盘 CRC32，命中即判为「验证通过」 */
   var KNOWN_CRC = ['FA881391', '6FD8DFF6', '0D68AF2E'];
 
-  /* ---------- 自动模式：补丁分片地址（jsDelivr CDN） ----------
-     按平台分组：镜像整盘 CRC32 命中哪一组的 crc，就用哪一组的补丁分片。
-     分片按字节切开，这里按顺序列出，拼回来就是完整补丁（见 split_file / mkpatch_gui.py）。 */
+  /* ========== 补丁源开关 ==========
+     平时只改下面这一行就能切换补丁来源：
+
+       SRC = 'ms'   -> ModelScope 数据集整包（单文件，当前使用）
+       SRC = 'jsd'  -> jsDelivr 分片（4 片，备用；配置保留，别删）
+
+     ModelScope 直链要点（2026-10-14 实测）：
+       · 公开数据集无需权限，直接下，不带 token
+       · 两跳都带 Access-Control-Allow-Origin: *，浏览器 fetch 可直接用
+       · 大文件会 302 跳到 cdn-lfs-cn-1.modelscope.cn，URL 上挂短时效 auth_key 签名
+         => 必须始终用下面的 resolve 原始地址，绝不能缓存重定向后的 URL（几十秒就失效）
+       · 支持 HEAD 与 Range，所以进度条能按真实字节走
+
+     jsDelivr 分片：按字节切开、顺序列出，拼回来即完整补丁（见 mkpatch_gui.py 的 split_file）。 */
+  var SRC = 'ms';
+
+  var MS  = 'https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/';
   var CDN = 'https://cdn.jsdelivr.net/gh/';
+
   var PATCHES = {
     ps2: {
       label: 'PS2',
       crc: ['FA881391', '6FD8DFF6'],
-      pieces: [
+      /* ModelScope：整包单文件，不切片 */
+      ms: [
+        MS + 'Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko%20(Japan)_patch.xdelta?view=false'
+      ],
+      /* jsDelivr：4 片，备用 */
+      jsd: [
         CDN + 'EiliaLan/lzsd@HEAD/Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko%20(Japan)_patch.001.bin',
         CDN + 'EiliaLan/lzsd@HEAD/Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko%20(Japan)_patch.002.bin',
         CDN + 'EiliaLan/rELPKckr@HEAD/Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko%20(Japan)_patch.003.bin',
@@ -458,7 +478,12 @@
     psp: {
       label: 'PSP',
       crc: ['0D68AF2E'],
-      pieces: [
+      /* ModelScope：整包单文件，不切片 */
+      ms: [
+        MS + 'PSP_Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko_patch.xdelta?view=false'
+      ],
+      /* jsDelivr：4 片，备用 */
+      jsd: [
         CDN + 'EiliaLan/RTB-QuickBMS-Scripts@HEAD/Textures/PSP_Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko_patch.001.bin',
         CDN + 'EiliaLan/RTB-QuickBMS-Scripts@HEAD/Textures/PSP_Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko_patch.002.bin',
         CDN + 'EiliaLan/PS2_RidgeRacerV_ArchiveTool@HEAD/RidgeRacerVArchiveTool/PSP_Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko_patch.003.bin',
@@ -767,8 +792,9 @@
       log('自动模式：该镜像不在支持列表，跳过自动获取补丁', 'warn');
       return;
     }
-    var PIECES = group.pieces;
-    log('镜像匹配 ' + group.label + ' 版 —— 使用对应补丁', 'ok');
+    var PIECES = group[SRC];
+    log('镜像匹配 ' + group.label + ' 版 —— 走 ' + (SRC === 'ms' ? 'ModelScope 整包' : 'jsDelivr 分片') +
+      '，共 ' + PIECES.length + ' 个文件', 'ok');
 
     AUTO.busy = true;
     AUTO.done = false;
@@ -799,7 +825,7 @@
 
     /* 先探一次各片大小，好让进度按真实总字节走 */
     Promise.all(PIECES.map(function (u) {
-      return fetch(u, { method: 'HEAD' }).then(function (r) {
+      return fetch(u, { method: 'HEAD', cache: 'no-store' }).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         total += parseInt(r.headers.get('content-length') || '0', 10) || 0;
       }).catch(function () { /* HEAD 失败不致命，退回按片数计 */ });
@@ -808,7 +834,7 @@
       bump();
 
       return Promise.all(PIECES.map(function (u, i) {
-        return fetch(u).then(function (r) {
+        return fetch(u, { cache: 'no-store' }).then(function (r) {
           if (!r.ok) throw new Error('HTTP ' + r.status);
           var rd = r.body && r.body.getReader ? r.body.getReader() : null;
           if (!rd) {
@@ -856,7 +882,7 @@
       slotT.textContent = '补丁已就绪';
       slotS.textContent = size(all.length) + '  ·  ' + (info.name || '未知格式') +
         '  ·  CRC32 ' + crc32(all);
-      log('AUTO patch: ' + PIECES.length + ' pieces -> ' + size(all.length) +
+      log('AUTO patch: ' + PIECES.length + ' file(s) -> ' + size(all.length) +
         ' (' + (info.name || '?') + ')', 'ok');
       report(info, all);
 
@@ -1040,15 +1066,9 @@
     }
     /* 无论 <a> 是否生效，都开一个新标签页兜底：
        新页是独立文档，不受 iframe 的下载限制，用户可自行另存。 */
-    var w = window.open(url, '_blank');
-    if (!w) {
-      log('新标签页也被拦截 —— 请允许本站弹出窗口，或直接在浏览器里打开本页面', 'warn');
-      status('保存被浏览器拦截，请在新标签页打开本页面后再试', 'err');
-      if (hint) hint.textContent = '当前环境禁止自动保存 —— 请在新标签页打开本页面';
-    } else {
-      status('已导出到浏览器下载 / 新标签页，请自行另存', 'ok');
-      if (hint) hint.textContent = '文件已在新标签页打开，或已进入浏览器下载列表';
-    }
+    window.open(url, '_blank');
+    status('已在新页面开始下载，请留意浏览器下载列表', 'ok');
+    if (hint) hint.textContent = '文件已在新页面开始下载，请留意浏览器下载列表';
     /* 兜底：60 秒后释放，给下载留足时间 */
     setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
   }
