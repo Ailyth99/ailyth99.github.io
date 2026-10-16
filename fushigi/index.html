@@ -271,9 +271,45 @@
   }
   .credit a{color:#74495a;text-decoration:none;text-shadow:0 1px 0 rgba(255,255,255,.7)}
   .credit a:hover{text-decoration:underline}
+
+  /* ---------- 攻略入口（显眼位置） ---------- */
+  .guide{
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    margin:0 0 18px;padding:13px 20px;border-radius:12px;
+    text-decoration:none;
+    background:linear-gradient(135deg,rgba(9,17,35,.9),rgba(9,17,35,.78));
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid rgba(217,191,140,.68);
+    color:var(--accent);font-size:14.5px;font-weight:700;letter-spacing:1.5px;
+    text-shadow:0 1px 8px rgba(0,0,0,.85),0 0 14px rgba(217,191,140,.35);
+    box-shadow:0 8px 24px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);
+    transition:border-color .15s,background .15s,transform .15s,box-shadow .15s,color .15s;
+  }
+  .guide:hover{
+    border-color:var(--accent);color:#fff8e6;
+    background:linear-gradient(135deg,rgba(20,32,58,.96),rgba(12,22,44,.9));
+    transform:translateY(-1px);
+    box-shadow:0 10px 28px rgba(0,0,0,.6),0 0 22px rgba(217,191,140,.3);
+  }
+  .guide svg{flex:0 0 auto}
+  .guide .arw{font-size:13px;opacity:.85;transition:transform .15s}
+  .guide:hover .arw{transform:translateX(3px)}
+
+  /* ---------- 左上角访问统计 ---------- */
+  #visitor{
+    position:fixed;top:15px;left:14px;z-index:30;display:block;line-height:0;
+    border-radius:20px;overflow:hidden;opacity:.92;
+    box-shadow:0 4px 16px rgba(0,0,0,.45);
+    transition:opacity .15s;
+  }
+  #visitor:hover{opacity:1}
+  #visitor img{display:block;height:20px;width:auto}
+  @media(max-width:620px){#visitor{top:13px;left:10px}#visitor img{height:17px}}
 </style>
 </head>
 <body>
+
+<img id="visitor" src="https://visitor-badge.laobi.icu/badge?page_id=fushigi.visitor-badge&amp;left_text=dear%20friends&amp;left_color=%23ea8a8a&amp;right_color=%23b1d6ec" alt="访问统计">
 
 <button id="logBtn"><span class="dot"></span>日志</button>
 
@@ -288,6 +324,12 @@
     <h1>不思议游戏<br>在线补丁工具</h1>
     <div class="sub">汉化制作：不思议汉化组</div>
   </header>
+
+  <a class="guide" href="https://www.bilibili.com/toy/fushigi_genbu_guide" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="15.5 8.5 10.5 10.5 8.5 15.5 13.5 13.5"/></svg>
+    游戏攻略 · 玩法指南
+    <span class="arw">→</span>
+  </a>
 
   <div class="card">
     <div class="modes">
