@@ -305,6 +305,31 @@
   #visitor:hover{opacity:1}
   #visitor img{display:block;height:20px;width:auto}
   @media(max-width:620px){#visitor{top:13px;left:10px}#visitor img{height:17px}}
+
+  /* ---------- 手动模式：补丁下载入口 ---------- */
+  .dl{
+    margin-top:16px;padding:14px 16px;border-radius:12px;
+    background:rgba(9,17,35,.68);border:1px solid rgba(255,255,255,.13);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .dl .dl-h{font-size:12.5px;color:var(--ink2);text-align:center;letter-spacing:.5px}
+  .dl .dl-h span{display:block;font-size:11px;color:var(--ink3);margin-top:3px;letter-spacing:0}
+  .dl .dl-b{display:flex;gap:10px;margin-top:11px}
+  .dl .dl-b a{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:10px 12px;border-radius:10px;text-decoration:none;
+    background:rgba(217,191,140,.10);border:1px solid rgba(217,191,140,.45);
+    color:var(--accent);letter-spacing:1px;
+    transition:background .15s,border-color .15s,color .15s,box-shadow .15s;
+  }
+  .dl .dl-b a:hover{
+    background:rgba(217,191,140,.22);border-color:var(--accent);color:#fff8e6;
+    box-shadow:0 0 16px rgba(217,191,140,.22);
+  }
+  .dl .dl-b a b{font-size:13.5px;font-weight:700}
+  .dl .dl-b a span{font-size:11.5px;font-weight:500;opacity:.85}
+  @media(max-width:620px){.dl .dl-b{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -372,6 +397,20 @@
 
     <div class="prog" id="prog"><i></i></div>
     <div class="st" id="st">选择原版 ISO/ROM 和补丁文件后开始&nbsp;&nbsp;·&nbsp;&nbsp;<span class="perk">文件不会上传服务器，全部在本地完成</span></div>
+
+    <div class="dl hide" id="dl">
+      <div class="dl-h">按你的平台下载补丁文件（直接点击下载按钮，无需任何客户端，也无需登录）
+        <span>手动模式下需自行下载补丁，再在上方「补丁文件」处选择</span>
+      </div>
+      <div class="dl-b">
+        <a href="https://www.ilanzou.com/s/2ENBtD6l" target="_blank" rel="noopener">
+          <b>PS2</b><span>补丁下载</span>
+        </a>
+        <a href="https://www.ilanzou.com/s/aKABtqxq" target="_blank" rel="noopener">
+          <b>PSP</b><span>补丁下载</span>
+        </a>
+      </div>
+    </div>
 
     <div class="res" id="res">
       <div class="f" id="rName"></div>
@@ -794,6 +833,8 @@
     document.getElementById('mMan').classList.toggle('on', m === 'man');
     document.getElementById('dPat').classList.toggle('hide', m === 'auto');
     document.getElementById('grid').classList.toggle('solo', m === 'auto');
+    /* 手动模式才显示补丁下载入口 */
+    document.getElementById('dl').classList.toggle('hide', m === 'auto');
     slotEl.classList.remove('hide');
     slotEl.classList.toggle('on', m === 'auto');
     if (m === 'auto') {
