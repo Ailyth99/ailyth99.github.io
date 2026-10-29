@@ -411,6 +411,8 @@ footer{position:relative;overflow:hidden;margin-top:60px;padding:30px 20px 44px;
 footer img,footer p{position:relative;z-index:1}
 footer img{width:min(560px,80%);opacity:.7;display:block;margin:0 auto 18px}
 footer p{margin:6px 0}
+/* 访问统计徽章：页脚正下方居中 */
+#visitor{display:block;margin:-14px auto 30px;max-width:calc(100% - 40px);height:auto}
 
 @media (max-width:640px){
   .char-grid{grid-template-columns:1fr}
@@ -632,6 +634,7 @@ def build():
 <img src="{ASSET("border_top.png")}" alt="">
 {"".join(foot_ps)}
 </footer>
+<img id="visitor" src="https://visitor-badge.laobi.icu/badge?page_id=fushigisuzaku.visitor-badge&amp;left_text=dear%20friends&amp;left_color=%23ea8a8a&amp;right_color=%23b1d6ec" alt="访问统计">
 <script>{JS}</script>
 </body>
 </html>"""
