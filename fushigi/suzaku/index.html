@@ -210,7 +210,8 @@
   .res.on{display:block}
   .res .f{font-size:14px;color:#1f1a14;font-weight:600;word-break:break-all}
   .res .d{font-size:12px;color:var(--ink3);margin-top:3px;font-variant-numeric:tabular-nums}
-  .res button{margin-top:12px}
+  .res .acts{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .res .acts button{margin-top:0}
   .res .hint{font-size:11.5px;color:var(--ink3);margin-top:9px;opacity:.9}
 
   .savebar{display:none;margin-top:12px;align-items:center;gap:10px}
@@ -437,7 +438,8 @@
         <span>手动模式下需自行下载补丁，再在上方「补丁文件」处选择</span>
       </div>
       <div class="dl-b">
-        <a href="FushigiYuugiDS.patch" download>
+        <a href="https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/FushigiYuugiDS.patch?view=false"
+           target="_blank" rel="noopener">
           <b>NDS</b><span>补丁下载</span>
         </a>
       </div>
@@ -446,8 +448,11 @@
     <div class="res" id="res">
       <div class="f" id="rName"></div>
       <div class="d" id="rMeta"></div>
-      <button id="bSave">保存汉化版游戏</button>
-      <div class="hint" id="saveHint">保存前请确认目标磁盘有足够空余空间</div>
+      <div class="acts">
+        <button id="bDl">直接下载</button>
+        <button id="bSave" class="ghost">另存为…</button>
+      </div>
+      <div class="hint" id="saveHint">直接下载进浏览器默认目录；另存为可自选位置</div>
       <div class="savebar" id="sbWrap">
         <div class="prog" id="sbProg"><i></i></div>
         <div class="pct" id="sbPct">0%</div>
@@ -604,16 +609,15 @@
      ================================================================ */
   var SRC = 'ms';
 
-  var MS  = 'https://modelscope.cn/datasets/你的用户名/你的仓库/resolve/master/';
+  var MS  = 'https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/';
 
   var PATCHES = {
     nds: {
       label: 'NDS',
       crc: ['991E4757'],
-      /* 补丁与网页同目录发布，相对路径直取；整个目录上传即可自包含。
-         file:// 打开时浏览器会拦本地 fetch，这时走手动模式自选补丁。 */
-      local: ['FushigiYuugiDS.patch'],
-      ms:  [],
+      /* ModelScope 整包单文件（与玄武页同一个数据集）。
+         只用远端地址，不再从本站目录取本地补丁。 */
+      ms: [ MS + 'FushigiYuugiDS.patch?view=false' ],
       jsd: []
     },
     ps2: {
@@ -1145,7 +1149,7 @@
 
   document.getElementById('bRun').addEventListener('click', applyPatch);
 
-  /* 打完补丁：收起气泡，只留「保存汉化版游戏」 */
+  /* 打完补丁：收起气泡，只留结果卡上的两个保存按钮 */
   function afterApply() {
     dropBubble(document.getElementById('dRom'));
     if (S.out) {
@@ -1181,73 +1185,94 @@
     }
   }
 
-  /* ---------- 保存：三级降级 ----------
-     ① showSaveFilePicker —— 弹系统对话框，可选位置 + 进度条。
-        但**跨域 iframe 里被浏览器禁止**（B站这类网页部署工具就是 iframe）。
-     ② <a download> —— 落进浏览器默认下载目录。
-     ③ 新开标签页 —— iframe 里 <a download> 也常被拦，新页不受限。 */
-  function downloadFallback(blob) {
-    var url = URL.createObjectURL(blob);
+  /* ---------- 保存方式一：直接下载 ----------
+     落进浏览器默认下载目录，不弹任何对话框。
+     跨域 iframe（B站这类网页部署工具）里 <a download> 会被 sandbox 拦掉，
+     这时改用新开页面下载。 */
+  function downloadDirect() {
+    if (!S.out) return;
+    var blob = new Blob([S.out]);
     var hint = document.getElementById('saveHint');
-    try {
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = S.name;
-      a.rel = 'noopener';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } catch (e) {
-      log('直接下载被拦：' + (e && e.message || e), 'warn');
+    var url = URL.createObjectURL(blob);
+    var framed = false;
+    try { framed = window.top !== window.self; } catch (e) { framed = true; }
+
+    if (!framed) {
+      try {
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = S.name;
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        log('已交给浏览器下载: ' + S.name, 'ok');
+        status('已开始下载，请留意浏览器下载列表', 'ok');
+        if (hint) hint.textContent = '文件将保存到浏览器默认下载目录';
+      } catch (e) {
+        log('直接下载被拦：' + (e && e.message || e) + '，改用新页面下载', 'warn');
+        window.open(url, '_blank');
+        status('已在新页面开始下载，请留意浏览器下载列表', 'ok');
+      }
+    } else {
+      window.open(url, '_blank');
+      log('当前页面被嵌入，已改为在新页面下载', 'warn');
+      status('已在新页面开始下载，请留意浏览器下载列表', 'ok');
+      if (hint) hint.textContent = '文件已在新页面开始下载，请留意浏览器下载列表';
     }
-    window.open(url, '_blank');
-    status('已在新页面开始下载，请留意浏览器下载列表', 'ok');
-    if (hint) hint.textContent = '文件已在新页面开始下载，请留意浏览器下载列表';
     setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
   }
 
-  document.getElementById('bSave').addEventListener('click', function () {
+  /* ---------- 保存方式二：另存为（系统对话框，自选目录） ----------
+     showSaveFilePicker 在跨域 iframe 里被浏览器禁止；
+     不可用时退回「直接下载」，并在日志里说明原因。 */
+  function saveAs() {
     if (!S.out) return;
-    var blob = new Blob([S.out]);
+    var hint = document.getElementById('saveHint');
 
     var canPicker = false;
     try {
       canPicker = !!(window.showSaveFilePicker && window.top === window.self);
     } catch (e) { canPicker = false; }
 
-    if (canPicker) {
-      /* 按输出文件后缀给系统对话框配类型 */
-      var exM = S.name.match(/\.[^.]+$/);
-      var ex = exM ? exM[0].toLowerCase() : '.bin';
-      window.showSaveFilePicker({
-        suggestedName: S.name,
-        types: [{ description: '汉化版游戏', accept: { 'application/octet-stream': [ex] } }]
-      }).then(function (h) {
-        log('保存到: ' + h.name);
-        return h.createWritable();
-      }).then(function (w) {
-        status('正在写入文件，请勿关闭页面…');
-        saveBar(true, 0);
-        return writeAll(w, S.out, function (p) { saveBar(true, p); })
-          .then(function () { return w.close(); });
-      }).then(function () {
-        saveBar(false);
-        log('文件已保存', 'ok');
-        status('汉化版游戏已保存', 'ok');
-      }).catch(function (e) {
-        saveBar(false);
-        if (e && e.name === 'AbortError') { log('已取消保存'); status('已取消保存'); return; }
-        log('「另存为」不可用（' + (e && e.message || e) + '），改用浏览器下载', 'warn');
-        status('正在导出文件，请留意浏览器下载…');
-        downloadFallback(blob);
-      });
+    if (!canPicker) {
+      log('当前环境不支持「另存为」（被嵌入或被浏览器限制），改用直接下载', 'warn');
+      status('正在导出文件，请留意浏览器下载…');
+      if (hint) hint.textContent = '当前环境不支持另存为，已改为浏览器下载';
+      downloadDirect();
       return;
     }
 
-    log('当前环境不支持「另存为」，改用浏览器下载', 'warn');
-    status('正在导出文件，请留意浏览器下载…');
-    downloadFallback(blob);
-  });
+    /* 按输出文件后缀给系统对话框配类型 */
+    var exM = S.name.match(/\.[^.]+$/);
+    var ex = exM ? exM[0].toLowerCase() : '.bin';
+    window.showSaveFilePicker({
+      suggestedName: S.name,
+      types: [{ description: '汉化版游戏', accept: { 'application/octet-stream': [ex] } }]
+    }).then(function (h) {
+      log('保存到: ' + h.name);
+      return h.createWritable();
+    }).then(function (w) {
+      status('正在写入文件，请勿关闭页面…');
+      saveBar(true, 0);
+      return writeAll(w, S.out, function (p) { saveBar(true, p); })
+        .then(function () { return w.close(); });
+    }).then(function () {
+      saveBar(false);
+      log('文件已保存', 'ok');
+      status('汉化版游戏已保存', 'ok');
+      if (hint) hint.textContent = '文件已保存到指定位置';
+    }).catch(function (e) {
+      saveBar(false);
+      if (e && e.name === 'AbortError') { log('已取消保存'); status('已取消保存'); return; }
+      log('「另存为」不可用（' + (e && e.message || e) + '），改用直接下载', 'warn');
+      status('正在导出文件，请留意浏览器下载…');
+      downloadDirect();
+    });
+  }
+
+  document.getElementById('bDl').addEventListener('click', downloadDirect);
+  document.getElementById('bSave').addEventListener('click', saveAs);
 
   document.getElementById('bRst').addEventListener('click', function () {
     S = { rom: null, pat: null, out: null, name: '' };
