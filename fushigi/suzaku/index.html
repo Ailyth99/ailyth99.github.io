@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>不思议游戏 朱雀异闻 · 汉化补丁工具</title>
+<title>不思议游戏DS/朱雀异闻 · 汉化补丁工具</title>
 <link rel="icon" href="lib/ico.ico">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@chinese-fonts/stdgt@2.0.0/dist/%E4%B8%8A%E5%9B%BE%E4%B8%9C%E8%A7%82%E4%BD%93-%E5%B8%B8%E8%A7%84/result.min.css">
@@ -372,7 +372,7 @@
 <div class="wrap">
 
   <header>
-    <h1>不思议游戏 朱雀异闻 · 玄武开传<br>在线补丁工具</h1>
+    <h1>不思议游戏DS/朱雀异闻<br>在线补丁工具</h1>
     <div class="sub">汉化制作：不思议汉化组</div>
   </header>
 
@@ -548,6 +548,49 @@
   var KNOWN_CRC = ['991E4757'];
 
   /* ================================================================
+     可自动还原的「同源变体」ROM
+     网上流传的 dump 不一定和标准原版逐字节相同，常见的是被某些工具
+     清过几段数据（本例 8004110 那个 release 把 3 个区段清零了，共 188 字节）。
+     补丁是按标准原版做的，这种 ROM 直接打会失败。
+     这里在**内存里**把差异字节补回去，还原成标准原版再照常打补丁，
+     用户磁盘上的文件不动，也不用为每个变种单独做补丁。
+
+     表结构：{ 变体整盘 CRC32: { label, to: 还原后的 CRC32, writes: [[偏移, 标准原版的 hex]] } }
+     ================================================================ */
+  var FIXES = {
+    '13D8B937': {
+      label: '8004110 发行版',
+      to: '991E4757',
+      writes: [
+        [0x33C, 'C6823BE5C3986F0B597546574B7056F6F2D09E45'],
+        [0x378, '1787623EE8DD012815F73B46BE5C52378DC986109FCB1FB81DC3615CE6C410FA9DE2C76B494504A8'],
+        [0xF80, '3D917C31D940557F7C1EC6A10EA841BB5B41083AE83EB0CC64754658F26E2E79397324F2330502663426A43B0D8CB0B1F49865B671F9625FC2C6A9547A1B22CB836684F88AF7FD5B45BB38FEC42CB9AC114792A25C23A3C60FE44B78FEA82B4CC81CF5B8345BB11E38D84B691C0EA996A2254778F0AA5ECAFB8B2686D719E490']
+      ]
+    }
+  };
+
+  /* 命中变体表就在内存里还原成标准原版。
+     还原后用整盘 CRC32 复核：对不上说明不是这个变种（或表写错了），
+     立刻回滚，绝不能拿改了一半的数据去往下走。 */
+  function tryFix(u8, hx) {
+    var f = FIXES[hx];
+    if (!f) return null;
+    var undo = [], bytes = 0;
+    for (var k = 0; k < f.writes.length; k++) {
+      var off = f.writes[k][0], hex = f.writes[k][1], n = hex.length >> 1;
+      if (off + n > u8.length) return null;
+      undo.push([off, u8.slice(off, off + n)]);
+      for (var i = 0; i < n; i++) u8[off + i] = parseInt(hex.substr(i * 2, 2), 16);
+      bytes += n;
+    }
+    if (crcHex(u8) !== f.to) {
+      for (var j = 0; j < undo.length; j++) u8.set(undo[j][1], undo[j][0]);
+      return null;
+    }
+    return { crc: f.to, label: f.label, bytes: bytes };
+  }
+
+  /* ================================================================
      【待填】补丁源
        SRC = 'ms'  -> ModelScope 数据集整包（单文件）
        SRC = 'jsd' -> jsDelivr 分片（多片，拼回来才是完整补丁）
@@ -587,6 +630,18 @@
       if (PATCHES[k].crc.indexOf(hx) >= 0) return PATCHES[k];
     }
     return null;
+  }
+
+  /* 成品统一命名（按平台）。没配的平台才沿用上传文件名 + _汉化。 */
+  var OUT_NAME = {
+    nds: 'Fushigi Yuugi DS (CHINESE).nds'
+  };
+  function outName(hx) {
+    var g = hx ? pickPatch(hx) : null;
+    var k = g ? String(g.label).toLowerCase() : '';
+    if (OUT_NAME[k]) return OUT_NAME[k];
+    var m = S.rom.name.match(/(\.[^.]+)$/);
+    return S.rom.name.replace(/(\.[^.]+)$/, '') + '_汉化' + (m ? m[1] : '.bin');
   }
 
   var AUTO = { busy: false, done: false, size: 0 };
@@ -661,6 +716,20 @@
         var u8 = new Uint8Array(fr.result);
         var info = identify(u8);
         var hx = crcHex(u8);          /* 整盘 CRC32，最慢的一步，气泡就挂在这一步上 */
+        var orig = hx;
+        var fix = null;
+
+        /* 先看是不是已知的同源变体（与标准原版只差几百字节的 dump）。
+           是的话在内存里补回差异字节，还原成标准原版，后面流程完全照常。 */
+        if (key === 'rom' && hx && KNOWN_CRC.indexOf(hx) < 0) {
+          fix = tryFix(u8, hx);
+          if (fix) {
+            hx = fix.crc;
+            log('检测到「' + fix.label + '」（CRC32 0x' + orig + '），' +
+              '与标准原版差 ' + fix.bytes + ' 字节，已在内存中自动还原', 'ok');
+            log('还原后 CRC32 0x' + hx + ' —— 与标准原版一致，继续正常打补丁', 'ok');
+          }
+        }
 
         dropBubble(drop);
 
@@ -677,11 +746,16 @@
         var matched = hx !== null && KNOWN_CRC.indexOf(hx) >= 0;
         if (key === 'rom') {
           if (matched) {
-            metaEl.insertAdjacentHTML('beforeend', '  ·  <span class="pass">版本验证通过</span>');
+            metaEl.insertAdjacentHTML('beforeend', fix
+              ? '  ·  <span class="pass">已从 ' + esc(fix.label) + ' 还原</span>'
+              : '  ·  <span class="pass">版本验证通过</span>');
           } else {
             metaEl.insertAdjacentHTML('beforeend', '  ·  <span class="fail">版本不支持</span>');
             log('ROM/镜像 CRC32 0x' + (hx === null ? 'n/a' : hx) + ' 不在支持列表（' +
               KNOWN_CRC.join(' / ') + '），已拒绝处理', 'err');
+            var vari = [];
+            for (var fk in FIXES) vari.push(FIXES[fk].label + '（0x' + fk + '）');
+            if (vari.length) log('可自动还原的同源变体：' + vari.join('、'), 'warn');
             status('ROM/镜像版本不支持：本补丁仅适用于 CRC32 ' + KNOWN_CRC.join(' / ') + ' 的原版', 'err');
             logBtn.classList.add('err');
             /* 版本错了就别把上一轮的补丁留在槽里，免得误点 */
@@ -1031,8 +1105,10 @@
         var dt = (performance.now() - t0) / 1000;
 
         S.out = out._u8array;
-        var m = S.rom.name.match(/(\.[^.]+)$/);
-        S.name = S.rom.name.replace(/(\.[^.]+)$/, '') + '_汉化' + (m ? m[1] : '.bin');
+        /* 成品统一命名：不沿用上传文件名。
+           变体 dump 的名字（8004110.nds 之类）不该带进成品，
+           否则同一份汉化版会因为来源不同出现好几个名字。 */
+        S.name = outName(S.rom.crc);
 
         log('done in ' + dt.toFixed(2) + 's', 'ok');
         log('output: ' + S.name + ' (' + size(S.out.length) + ') CRC32 ' + crc32(S.out), 'ok');
