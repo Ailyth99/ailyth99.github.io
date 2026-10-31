@@ -1185,15 +1185,38 @@
     }
   }
 
-  /* ---------- 保存方式一：直接下载 ----------
-     落进浏览器默认下载目录，不弹任何对话框。
-     跨域 iframe（B站这类网页部署工具）里 <a download> 会被 sandbox 拦掉，
-     这时改用新开页面下载。 */
-  function downloadDirect() {
-    if (!S.out) return;
-    var blob = new Blob([S.out]);
+  /* ---------- 保存：按运行环境分路 ----------
+     桌面：<a download> 落进默认下载目录；另存为走 showSaveFilePicker。
+     手机：blob 链接点开只会被当成网页打开，**不会触发保存**，
+           必须走系统分享面板（iOS「存储到『文件』」/ Android「下载」），
+           这条是移动端唯一可靠的落盘路径。
+     App 内置浏览器（微信/QQ/B站等）里下载常被彻底封掉，只能提示换浏览器。 */
+  var MOBILE = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints > 1 && /Macintosh|Mac OS X/.test(navigator.userAgent));
+  var INAPP = /MicroMessenger|QQ\/|Weibo|BiliApp|baiduboxapp|AlipayClient|DingTalk/i.test(navigator.userAgent);
+
+  /* 系统分享面板存文件：成功返回 'ok'，用户取消 'cancel'，不支持 'no' */
+  function shareFile() {
+    return new Promise(function (resolve) {
+      var f;
+      try { f = new File([S.out], S.name, { type: 'application/octet-stream' }); }
+      catch (e) { resolve('no'); return; }
+      if (!navigator.share || !navigator.canShare || !navigator.canShare({ files: [f] })) {
+        resolve('no'); return;
+      }
+      navigator.share({ files: [f], title: S.name }).then(function () {
+        resolve('ok');
+      }).catch(function (e) {
+        resolve(e && e.name === 'AbortError' ? 'cancel' : 'no');
+      });
+    });
+  }
+
+  /* 常规 <a download> 下载；被 iframe 拦掉时改开新页。
+     okMsg 可覆盖成功后的提示语（手机端说法与桌面不同）。 */
+  function anchorDownload(okMsg) {
     var hint = document.getElementById('saveHint');
-    var url = URL.createObjectURL(blob);
+    var url = URL.createObjectURL(new Blob([S.out]));
     var framed = false;
     try { framed = window.top !== window.self; } catch (e) { framed = true; }
 
@@ -1208,7 +1231,7 @@
         document.body.removeChild(a);
         log('已交给浏览器下载: ' + S.name, 'ok');
         status('已开始下载，请留意浏览器下载列表', 'ok');
-        if (hint) hint.textContent = '文件将保存到浏览器默认下载目录';
+        if (hint) hint.textContent = okMsg || '文件将保存到浏览器默认下载目录';
       } catch (e) {
         log('直接下载被拦：' + (e && e.message || e) + '，改用新页面下载', 'warn');
         window.open(url, '_blank');
@@ -1223,9 +1246,39 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
   }
 
-  /* ---------- 保存方式二：另存为（系统对话框，自选目录） ----------
-     showSaveFilePicker 在跨域 iframe 里被浏览器禁止；
-     不可用时退回「直接下载」，并在日志里说明原因。 */
+  function downloadDirect() {
+    if (!S.out) return;
+    var hint = document.getElementById('saveHint');
+
+    /* 手机：优先系统分享面板，这是唯一能真正写进手机的路径 */
+    if (MOBILE) {
+      if (INAPP) {
+        log('当前是 App 内置浏览器，下载通常被禁止', 'warn');
+        log('请点右上角「…」→「在浏览器打开」，再回来下载', 'warn');
+        status('请改用系统浏览器打开本页后再下载', 'err');
+        if (hint) hint.textContent = '请点右上角「…」→「在浏览器打开」后重试';
+        return;
+      }
+      status('正在准备文件，稍后会弹出系统面板…');
+      shareFile().then(function (r) {
+        if (r === 'ok') {
+          log('已交给系统保存面板', 'ok');
+          status('已通过系统面板保存', 'ok');
+          if (hint) hint.textContent = '文件已交给系统保存';
+          return;
+        }
+        if (r === 'cancel') { log('已取消保存'); status('已取消保存'); return; }
+        /* 分享不可用（老系统/部分定制浏览器）：退回 <a download>，并在提示里给手动办法 */
+        log('系统分享不可用，改用浏览器下载', 'warn');
+        anchorDownload('已开始下载，请到「文件」App 或浏览器下载列表里查看');
+      });
+      return;
+    }
+
+    anchorDownload();
+  }
+
+  /* 另存为：桌面走系统对话框；手机端浏览器没有这个能力，退回分享/下载 */
   function saveAs() {
     if (!S.out) return;
     var hint = document.getElementById('saveHint');
@@ -1236,9 +1289,7 @@
     } catch (e) { canPicker = false; }
 
     if (!canPicker) {
-      log('当前环境不支持「另存为」（被嵌入或被浏览器限制），改用直接下载', 'warn');
-      status('正在导出文件，请留意浏览器下载…');
-      if (hint) hint.textContent = '当前环境不支持另存为，已改为浏览器下载';
+      log('当前环境不支持「另存为」（被嵌入、手机浏览器或权限受限），改用其他方式', 'warn');
       downloadDirect();
       return;
     }
@@ -1266,10 +1317,22 @@
       saveBar(false);
       if (e && e.name === 'AbortError') { log('已取消保存'); status('已取消保存'); return; }
       log('「另存为」不可用（' + (e && e.message || e) + '），改用直接下载', 'warn');
-      status('正在导出文件，请留意浏览器下载…');
       downloadDirect();
     });
   }
+
+  /* 按环境给提示语，手机端不显示「另存为」（浏览器没这能力，留着只会误导） */
+  (function envHint() {
+    var hint = document.getElementById('saveHint');
+    if (MOBILE) {
+      var b2 = document.getElementById('bSave');
+      if (b2) b2.style.display = 'none';
+    }
+    if (!hint) return;
+    if (INAPP) hint.textContent = '当前在 App 内置浏览器中，点右上角「…」→「在浏览器打开」后再下载';
+    else if (MOBILE) hint.textContent = '手机会弹出系统面板，选「存储到文件 / 下载」保存';
+    else hint.textContent = '直接下载进浏览器默认目录；另存为可自选位置';
+  })();
 
   document.getElementById('bDl').addEventListener('click', downloadDirect);
   document.getElementById('bSave').addEventListener('click', saveAs);
