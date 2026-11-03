@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>不思议游戏汉化补丁应用工具</title>
+<title>汉化补丁应用工具</title>
 <link rel="icon" href="lib/ico.ico">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@chinese-fonts/stdgt@2.0.0/dist/%E4%B8%8A%E5%9B%BE%E4%B8%9C%E8%A7%82%E4%BD%93-%E5%B8%B8%E8%A7%84/result.min.css">
@@ -182,7 +182,8 @@
   .res.on{display:block}
   .res .f{font-size:14px;color:var(--ink);font-weight:600;word-break:break-all}
   .res .d{font-size:12px;color:var(--ink3);margin-top:3px;font-variant-numeric:tabular-nums}
-  .res button{margin-top:12px}
+  .res .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .res .acts button{margin-top:0}
   .res .hint{font-size:11.5px;color:var(--ink3);margin-top:9px;opacity:.85}
 
   /* 保存到磁盘时的进度条，放在结果框内 */
@@ -258,6 +259,33 @@
     word-break:break-all}
   table.iso .crc{font:11.5px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;
     color:var(--ink2);white-space:nowrap}
+
+  /* ---------- 另一部作品的补丁页入口：独立一块，放在支持列表下面 ---------- */
+  .cross{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-top:14px;padding:16px 20px;border-radius:16px;
+    text-decoration:none;
+    background:var(--card);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid rgba(217,191,140,.42);
+    box-shadow:0 18px 50px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.07);
+    transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;
+  }
+  .cross:hover{
+    border-color:var(--accent);
+    background:rgba(14,24,46,.78);
+    transform:translateY(-1px);
+    box-shadow:0 20px 54px rgba(0,0,0,.55),0 0 22px rgba(217,191,140,.18),
+               inset 0 1px 0 rgba(255,255,255,.09);
+  }
+  .cross .ct{min-width:0}
+  .cross .ct b{display:block;font-size:13px;color:var(--ink);font-weight:600;
+    letter-spacing:.8px}
+  .cross .ct span{display:block;font-size:11px;color:var(--ink3);margin-top:4px;
+    line-height:1.4}
+  .cross .ca{flex:0 0 auto;font-size:12.5px;font-weight:600;color:var(--accent);
+    letter-spacing:1.5px;white-space:nowrap}
+  .cross:hover .ca{color:#fff8e6}
 
   /* ---------- 页脚 ---------- */
   footer{flex:0 0 auto;margin-top:auto;padding-top:44px;position:relative}
@@ -415,7 +443,10 @@
     <div class="res" id="res">
       <div class="f" id="rName"></div>
       <div class="d" id="rMeta"></div>
-      <button id="bSave">保存汉化版镜像</button>
+      <div class="acts">
+        <button id="bDl">直接下载</button>
+        <button id="bSave" class="ghost">另存为…</button>
+      </div>
       <div class="hint" id="saveHint">保存前请确认目标磁盘至少有 3GB 空余空间</div>
       <div class="savebar" id="sbWrap">
         <div class="prog" id="sbProg"><i></i></div>
@@ -451,6 +482,14 @@
       </tbody>
     </table>
   </div>
+
+  <a class="cross" href="https://ailyth99.github.io/fushigi/suzaku" target="_blank" rel="noopener">
+    <span class="ct">
+      <b>不思议游戏 朱雀异闻 / 不思议游戏DS</b>
+      <span>另一部作品的汉化补丁网页（NDS 版）</span>
+    </span>
+    <span class="ca">前往 →</span>
+  </a>
 
 </div>
 
@@ -1128,37 +1167,106 @@
     }
   }
 
-  /* ---------- 保存：三级降级 ----------
-     ① showSaveFilePicker —— 能弹系统对话框让用户选位置。
-        但**跨域 iframe 里被浏览器禁止**（B站这类网页部署工具就是 iframe），会抛错。
-     ② <a download> —— 落进浏览器默认下载目录。
-     ③ 新开标签页 —— iframe 里 <a download> 也常被拦，新页是同源的，不受限制。 */
-  function downloadFallback(blob) {
-    var url = URL.createObjectURL(blob);
+  /* ---------- 保存：按运行环境分路 ----------
+     桌面：<a download> 落进默认下载目录；另存为走 showSaveFilePicker。
+     手机：blob 链接点开只会被当成网页打开，**不会触发保存**，
+           必须走系统分享面板（iOS「存储到『文件』」/ Android「下载」），
+           这条是移动端唯一可靠的落盘路径。
+     App 内置浏览器（微信/QQ/B站等）里下载常被彻底封掉，只能提示换浏览器。 */
+  var MOBILE = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints > 1 && /Macintosh|Mac OS X/.test(navigator.userAgent));
+  var INAPP = /MicroMessenger|QQ\/|Weibo|BiliApp|baiduboxapp|AlipayClient|DingTalk/i.test(navigator.userAgent);
+
+  /* 系统分享面板存文件：成功返回 'ok'，用户取消 'cancel'，不支持 'no' */
+  function shareFile() {
+    return new Promise(function (resolve) {
+      var f;
+      try { f = new File([S.out], S.name, { type: 'application/octet-stream' }); }
+      catch (e) { resolve('no'); return; }
+      if (!navigator.share || !navigator.canShare || !navigator.canShare({ files: [f] })) {
+        resolve('no'); return;
+      }
+      navigator.share({ files: [f], title: S.name }).then(function () {
+        resolve('ok');
+      }).catch(function (e) {
+        resolve(e && e.name === 'AbortError' ? 'cancel' : 'no');
+      });
+    });
+  }
+
+  /* 常规 <a download> 下载；被 iframe 拦掉时改开新页。
+     okMsg 可覆盖成功后的提示语（手机端说法与桌面不同）。 */
+  function anchorDownload(okMsg) {
     var hint = document.getElementById('saveHint');
-    try {
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = S.name;
-      a.rel = 'noopener';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } catch (e) {
-      log('直接下载被拦：' + (e && e.message || e), 'warn');
+    var url = URL.createObjectURL(new Blob([S.out]));
+    var framed = false;
+    try { framed = window.top !== window.self; } catch (e) { framed = true; }
+
+    if (!framed) {
+      try {
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = S.name;
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        log('已交给浏览器下载: ' + S.name, 'ok');
+        status('已开始下载，请留意浏览器下载列表', 'ok');
+        if (hint) hint.textContent = okMsg || '文件将保存到浏览器默认下载目录';
+      } catch (e) {
+        log('直接下载被拦：' + (e && e.message || e) + '，改用新页面下载', 'warn');
+        window.open(url, '_blank');
+        status('已在新页面开始下载，请留意浏览器下载列表', 'ok');
+      }
+    } else {
+      /* 被嵌入（B站等 iframe 部署页）：<a download> 常被拦，新页是同源文档，不受限 */
+      window.open(url, '_blank');
+      log('当前页面被嵌入，已改为在新页面下载', 'warn');
+      status('已在新页面开始下载，请留意浏览器下载列表', 'ok');
+      if (hint) hint.textContent = '文件已在新页面开始下载，请留意浏览器下载列表';
     }
-    /* 无论 <a> 是否生效，都开一个新标签页兜底：
-       新页是独立文档，不受 iframe 的下载限制，用户可自行另存。 */
-    window.open(url, '_blank');
-    status('已在新页面开始下载，请留意浏览器下载列表', 'ok');
-    if (hint) hint.textContent = '文件已在新页面开始下载，请留意浏览器下载列表';
     /* 兜底：60 秒后释放，给下载留足时间 */
     setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
   }
 
-  document.getElementById('bSave').addEventListener('click', function () {
+  /* 直接下载：进浏览器默认下载目录；手机上改走系统保存面板 */
+  function downloadDirect() {
     if (!S.out) return;
-    var blob = new Blob([S.out]);
+    var hint = document.getElementById('saveHint');
+
+    /* 手机：优先系统分享面板，这是唯一能真正写进手机的路径 */
+    if (MOBILE) {
+      if (INAPP) {
+        log('当前是 App 内置浏览器，下载通常被禁止', 'warn');
+        log('请点右上角「…」→「在浏览器打开」，再回来下载', 'warn');
+        status('请改用系统浏览器打开本页后再下载', 'err');
+        if (hint) hint.textContent = '请点右上角「…」→「在浏览器打开」后重试';
+        return;
+      }
+      status('正在准备文件，稍后会弹出系统面板…');
+      shareFile().then(function (r) {
+        if (r === 'ok') {
+          log('已交给系统保存面板', 'ok');
+          status('已通过系统面板保存', 'ok');
+          if (hint) hint.textContent = '文件已交给系统保存';
+          return;
+        }
+        if (r === 'cancel') { log('已取消保存'); status('已取消保存'); return; }
+        /* 分享不可用（老系统/部分定制浏览器）：退回 <a download>，并在提示里给手动办法 */
+        log('系统分享不可用，改用浏览器下载', 'warn');
+        anchorDownload('已开始下载，请到「文件」App 或浏览器下载列表里查看');
+      });
+      return;
+    }
+
+    anchorDownload();
+  }
+
+  /* 另存为：桌面走系统对话框；手机端浏览器没有这个能力，退回分享/下载 */
+  function saveAs() {
+    if (!S.out) return;
+    var hint = document.getElementById('saveHint');
 
     /* 跨域 iframe 里 showSaveFilePicker 必然抛错，先判断能不能用 */
     var canPicker = false;
@@ -1166,39 +1274,53 @@
       canPicker = !!(window.showSaveFilePicker && window.top === window.self);
     } catch (e) { canPicker = false; }   /* 读 window.top 本身可能就抛跨域错 */
 
-    if (canPicker) {
-      window.showSaveFilePicker({
-        suggestedName: S.name,
-        types: [{ description: 'PlayStation 2 镜像', accept: { 'application/octet-stream': ['.iso', '.bin'] } }]
-      }).then(function (h) {
-        log('保存到: ' + h.name);
-        return h.createWritable();
-      }).then(function (w) {
-        status('正在写入文件，请勿关闭页面…');
-        saveBar(true, 0);
-        return writeAll(w, S.out, function (p) { saveBar(true, p); })
-          .then(function () { return w.close(); });
-      }).then(function () {
-        saveBar(false);
-        log('文件已保存', 'ok');
-        status('汉化版镜像已保存', 'ok');
-      }).catch(function (e) {
-        saveBar(false);
-        /* 用户点了取消不算错误 */
-        if (e && e.name === 'AbortError') { log('已取消保存'); status('已取消保存'); return; }
-        /* 其余情况（含跨域受限）改用下载兜底 */
-        log('「另存为」不可用（' + (e && e.message || e) + '），改用浏览器下载', 'warn');
-        status('正在导出文件，请留意浏览器下载…');
-        downloadFallback(blob);
-      });
+    if (!canPicker) {
+      log('当前环境不支持「另存为」（被嵌入、手机浏览器或权限受限），改用其他方式', 'warn');
+      downloadDirect();
       return;
     }
 
-    /* 不在顶层窗口 / 不支持另存为：直接走下载兜底 */
-    log('当前环境不支持「另存为」，改用浏览器下载', 'warn');
-    status('正在导出文件，请留意浏览器下载…');
-    downloadFallback(blob);
-  });
+    window.showSaveFilePicker({
+      suggestedName: S.name,
+      types: [{ description: 'PlayStation 2 镜像', accept: { 'application/octet-stream': ['.iso', '.bin'] } }]
+    }).then(function (h) {
+      log('保存到: ' + h.name);
+      return h.createWritable();
+    }).then(function (w) {
+      status('正在写入文件，请勿关闭页面…');
+      saveBar(true, 0);
+      return writeAll(w, S.out, function (p) { saveBar(true, p); })
+        .then(function () { return w.close(); });
+    }).then(function () {
+      saveBar(false);
+      log('文件已保存', 'ok');
+      status('汉化版镜像已保存', 'ok');
+      if (hint) hint.textContent = '文件已保存到指定位置';
+    }).catch(function (e) {
+      saveBar(false);
+      /* 用户点了取消不算错误 */
+      if (e && e.name === 'AbortError') { log('已取消保存'); status('已取消保存'); return; }
+      /* 其余情况（含跨域受限）改用下载 */
+      log('「另存为」不可用（' + (e && e.message || e) + '），改用直接下载', 'warn');
+      downloadDirect();
+    });
+  }
+
+  /* 按环境给提示语，手机端不显示「另存为」（浏览器没这能力，留着只会误导） */
+  (function envHint() {
+    var hint = document.getElementById('saveHint');
+    if (MOBILE) {
+      var b2 = document.getElementById('bSave');
+      if (b2) b2.style.display = 'none';
+    }
+    if (!hint) return;
+    if (INAPP) hint.textContent = '当前在 App 内置浏览器中，点右上角「…」→「在浏览器打开」后再下载';
+    else if (MOBILE) hint.textContent = '手机会弹出系统面板，选「存储到文件 / 下载」保存';
+    else hint.textContent = '直接下载进浏览器默认目录；另存为可自选位置（目标磁盘需留足 3GB）';
+  })();
+
+  document.getElementById('bDl').addEventListener('click', downloadDirect);
+  document.getElementById('bSave').addEventListener('click', saveAs);
 
   document.getElementById('bRst').addEventListener('click', function () {
     S = { rom: null, pat: null, out: null, name: '' };

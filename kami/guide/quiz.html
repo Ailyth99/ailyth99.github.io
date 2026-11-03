@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>题库使用说明 · 神々の悪戯 攻略</title>
+<link rel="icon" type="image/png" href="assets/snow.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="topnav"><div class="nav-inner">
+<a class="brand" href="index.html"><img src="assets/logo.png" alt="神々の悪戯"><span>攻略</span></a>
+<div class="nav-links"><a href="index.html">基本信息</a><a href="limits.html">攻略限制与推荐顺序</a><a href="routes.html">角色路线</a><a href="hakoniwa.html">箱庭模式</a><a href="quiz.html" class="quiz-link active">题库使用说明</a></div>
+</div></nav>
+<header class="page-head"><div class="kicker">KAMIGAMI NO ASOBI</div><h1>题库使用说明</h1><p class="subtitle">400 题神话问答 · 搜索与自测</p></header>
+<main>
+<section class="page-body"><div class="wrap"><div class="note"><p>本页题库由游戏内 QUIZ 数据导出，共 <b>400 题</b>（四选一 200 题 + ○× 判断 200 题），</p><p>按四大神话体系分组：<b>希腊 / 北欧 / 日本 / 埃及</b>。</p><p>每题均为「正确选项固定排在第一位」的原始数据，站内已自动标出正确答案。</p><p>支持中／日文关键词搜索、按体系 / 题型 / 难度筛选。</p></div>
+<div class="quiz-bar">
+  <div class="q-search">
+    <span class="icon">🔍</span>
+    <input id="qSearch" type="search" placeholder="搜索题目 / 选项关键词（支持中文·日文，空格分隔多个词）" autocomplete="off">
+    <label class="q-self"><input type="checkbox" id="qSelf"> 自测模式</label>
+  </div>
+  <div class="q-filters">
+    <span class="fg"><span class="lbl">神话</span>
+      <button class="fchip on" data-k="cat" data-v="all">全部</button>
+      <button class="fchip c-greek" data-k="cat" data-v="greek">希腊 100</button>
+      <button class="fchip c-norse" data-k="cat" data-v="norse">北欧 100</button>
+      <button class="fchip c-japan" data-k="cat" data-v="japan">日本 100</button>
+      <button class="fchip c-egypt" data-k="cat" data-v="egypt">埃及 100</button>
+    </span>
+    <span class="fg"><span class="lbl">题型</span>
+      <button class="fchip on" data-k="type" data-v="all">全部</button>
+      <button class="fchip" data-k="type" data-v="choice">四选一</button>
+      <button class="fchip" data-k="type" data-v="tf">○× 判断</button>
+    </span>
+    <span class="fg"><span class="lbl">难度</span>
+      <button class="fchip on" data-k="tier" data-v="all">全部</button>
+      <button class="fchip" data-k="tier" data-v="0">★</button>
+      <button class="fchip" data-k="tier" data-v="1">★★</button>
+      <button class="fchip" data-k="tier" data-v="2">★★★</button>
+    </span>
+  </div>
+</div>
+<div class="q-stat" id="qStat">共 <b>400</b> 题</div>
+<div class="q-list" id="qList"></div>
+</div></section>
+
+<div class="pager"><a href="hakoniwa.html">← 箱庭模式</a><a class="disabled">·</a></div>
+</main>
+<footer>
+<p>数据来源：<a href="https://www.soregashi.work/entry/kamiaso-matome" target="_blank" rel="noopener">某の乙女ゲーム遊戯録</a> ／ <a href="https://choro-game.com/e/kamiaso-guide" target="_blank" rel="noopener">choro 攻略</a></p>
+<p>题库：游戏内 QUIZ.dat 导出，共 400 题</p>
+<img class="visitor" src="https://visitor-badge.laobi.icu/badge?page_id=kamigamiguideraw.visitor-badge&left_text=%E7%A5%9E%20%20%20%E3%81%AE%20%E5%AD%90&left_color=%23f4aa0b&right_color=%23ababab&logo=vercel&height=25" alt="访问统计" height="25" loading="lazy" referrerpolicy="no-referrer">
+</footer>
+<script src="quiz-data.js"></script><script src="quiz.js"></script><script src="app.js"></script>
+</body>
+</html>
