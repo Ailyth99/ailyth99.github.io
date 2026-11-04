@@ -270,6 +270,8 @@ code{background:#00000055;border:1px solid var(--line);border-radius:4px;
   font-size:.92em;white-space:nowrap}
 .nav-links a:hover{color:var(--text)}
 .nav-links a.active{background:var(--ver);color:#fff}
+.genbu{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:5px 15px;border-radius:20px;background:var(--ver);color:#fff;font-size:.9em;letter-spacing:1px;text-decoration:none;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.14);transition:filter .15s}
+.genbu:hover{filter:brightness(1.1)}
 
 /* ---- Hero ---- */
 .hero{position:relative;overflow:hidden;text-align:center;padding:34px 20px 40px}
@@ -619,6 +621,7 @@ def build():
 <nav id="topnav"><div class="nav-inner">
 <a class="brand" href="#top">朱雀異聞·攻略</a>
 <div class="nav-links">{nav}</div>
+<a class="genbu" href="https://www.bilibili.com/toy/fushigi_genbu_guide/index.html" target="_blank" rel="noopener">玄武開傳·攻略 →</a>
 </div></nav>
 <header class="hero" id="top">
 <img class="hero-phoenix" src="{ASSET("suzaku.png")}" alt="">

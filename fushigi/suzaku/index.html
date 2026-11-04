@@ -199,6 +199,16 @@
   .slot.wait b{color:var(--accent-d)}
   .slot.wait small{color:#a4571f}
 
+  /* 补丁就绪后的提醒：打补丁那几十秒浏览器会假死，不说清楚会被当成页面挂了 */
+  .warnbig{
+    display:none;margin-top:14px;padding:13px 16px 13px 18px;border-radius:0;
+    border:1px solid rgba(198,54,20,.5);border-left:5px solid #c63614;
+    background:rgba(198,54,20,.09);
+    color:#7d2410;font-size:13px;font-weight:600;line-height:1.8;letter-spacing:.3px;
+  }
+  .warnbig.on{display:block;animation:warnin .22s ease-out}
+  @keyframes warnin{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+
   .st{margin-top:14px;font-size:12.5px;color:var(--ink3);text-align:center;min-height:20px}
   .st.ok{color:var(--ok)}
   .st.err{color:var(--err)}
@@ -286,6 +296,34 @@
     word-break:break-all}
   table.iso .crc{font:11.5px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;
     color:#4a3a2c;white-space:nowrap}
+
+  /* ---------- 另一部作品的补丁页入口：独立一块，放在支持列表下面 ---------- */
+  .cross{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-top:14px;padding:16px 20px;border-radius:0;
+    text-decoration:none;
+    background:var(--card);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border:1px solid rgba(222,107,61,.30);
+    box-shadow:0 22px 54px rgba(0,0,0,.5),0 0 34px rgba(222,107,61,.10),
+               inset 0 1px 0 rgba(255,255,255,.85);
+    transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;
+  }
+  .cross:hover{
+    border-color:rgba(222,107,61,.75);
+    background:rgba(255,250,245,.98);
+    transform:translateY(-1px);
+    box-shadow:0 24px 58px rgba(0,0,0,.55),0 0 40px rgba(222,107,61,.18),
+               inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  .cross .ct{min-width:0}
+  .cross .ct b{display:block;font-size:13px;color:#1f1a14;font-weight:600;
+    letter-spacing:.8px}
+  .cross .ct span{display:block;font-size:11px;color:var(--ink3);margin-top:4px;
+    line-height:1.4}
+  .cross .ca{flex:0 0 auto;font-size:12.5px;font-weight:600;color:var(--accent-d);
+    letter-spacing:1.5px;white-space:nowrap}
+  .cross:hover .ca{color:var(--accent)}
 
   /* ---------- 页脚 ---------- */
   footer{flex:0 0 auto;margin-top:auto;padding:30px 18px 26px;text-align:center;
@@ -424,10 +462,12 @@
       <div class="rt" id="slotR">重新获取</div>
     </div>
 
+    <div class="warnbig" id="warnBig">由于文件较大，打补丁过程可能卡死，请耐心等待。如果太久没反应，请刷新网页重试。</div>
+
     <div class="bar" id="bar">
       <button id="bRun" disabled>应用补丁</button>
       <button id="bRst" class="ghost">重置</button>
-      <div class="crcnote">CRC32 必须为 <b>991E4757</b></div>
+      <div class="crcnote">支持 CRC32 <b id="crcNote">991E4757</b></div>
     </div>
 
     <div class="prog" id="prog"><i></i></div>
@@ -469,19 +509,33 @@
       <tbody>
         <tr>
           <td class="plat">NDS</td>
-          <td><span class="no">日版<i>256MB</i></span>
+          <td><span class="no">日版<i>NTR-BF4J · ふしぎ遊戯DS</i></span>
             <div class="fn">Fushigi Yuugi DS (Japan).nds</div></td>
           <td class="crc r">991E4757</td>
         </tr>
         <tr>
           <td class="plat">PS2</td>
-          <td><span class="no">暂未支持<i>日版</i></span>
+          <td><span class="no">日版 通常版<i>SLPM-669.99 · ふしぎ遊戯 朱雀異聞</i></span>
             <div class="fn">Fushigi Yuugi - Suzaku Ibun (Japan).iso</div></td>
-          <td class="crc r">--------</td>
+          <td class="crc r">D1CE410B</td>
+        </tr>
+        <tr>
+          <td class="plat">PS2</td>
+          <td><span class="no">日版 限定版<i>SLPM-669.98 · ふしぎ遊戯 朱雀異聞</i></span>
+            <div class="fn">Fushigi Yuugi - Suzaku Ibun (Japan) (Genteiban).iso</div></td>
+          <td class="crc r">DC1A0D1E</td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <a class="cross" href="https://ailyth99.github.io/fushigi" target="_blank" rel="noopener">
+    <span class="ct">
+      <b>不思议游戏 玄武开传外传</b>
+      <span>另一部作品的汉化补丁网页（PS2 / PSP 版）</span>
+    </span>
+    <span class="ca">前往 →</span>
+  </a>
 
 </div>
 
@@ -507,6 +561,8 @@
 <script src="lib/rom-patcher-js/modules/RomPatcher.format.bdf.js"></script>
 <script src="lib/rom-patcher-js/modules/RomPatcher.format.pmsr.js"></script>
 <script src="lib/rom-patcher-js/modules/RomPatcher.format.vcdiff.js"></script>
+<!-- PS2 版次差异表（限定版 -> 通常版），只被本页脚本读取 -->
+<script src="lib/suzaku-ps2-norm.js"></script>
 
 <script>
 (function () {
@@ -547,10 +603,12 @@
   }
 
   /* ================================================================
-     【待填】支持的 ROM/镜像 整盘 CRC32
-     NDS 日版（ROM）已填 991E4757；以后上 PS2 版时把镜像的整盘 CRC32 也加进来。
+     支持的 ROM/镜像 整盘 CRC32
+       991E4757  NDS  日版                      (Fushigi Yuugi DS (Japan).nds)
+       D1CE410B  PS2  通常版 SLPM_669.99        <- 补丁基准版
+       DC1A0D1E  PS2  限定版 SLPM_669.98        <- 载入时自动改写成通常版
      ================================================================ */
-  var KNOWN_CRC = ['991E4757'];
+  var KNOWN_CRC = ['991E4757', 'D1CE410B', 'DC1A0D1E'];
 
   /* ================================================================
      可自动还原的「同源变体」ROM
@@ -596,6 +654,47 @@
   }
 
   /* ================================================================
+     PS2 版次归一化：限定版 SLPM_669.98  ->  通常版 SLPM_669.99
+     补丁是按通常版做的；限定版跟它体积一样、只差 23 处共 25017 字节，
+     且全部落在前 686107 字节内（启动文件 + 光盘目录区）。
+     检测到限定版就地改写这几段，之后完全按通常版走，用户不用自己换碟。
+
+     规则表在 lib/suzaku-ps2-norm.js（NORM），由二进制对比生成。
+     ================================================================ */
+  function ps2Head(u8) {
+    if (typeof NORM === 'undefined') return null;
+    try {
+      return HashCalculator.crc32(u8.slice(0, NORM.limit).buffer)
+        .toString(16).toUpperCase().padStart(8, '0');
+    } catch (e) { return null; }
+  }
+
+  /* 改写 is 就地进行，返回撤销快照（只覆盖被改的 25KB，很轻） */
+  function ps2Norm(u8) {
+    var r = NORM.rules, undo = [], i, k, x, o, n, v, hex;
+    for (i = 0; i < r.length; i++) {
+      x = r[i]; o = x.o;
+      n = x.h ? (x.h.length >> 1) : x.n;
+      undo.push([o, u8.slice(o, o + n)]);
+      if (x.x !== undefined) {
+        v = parseInt(x.x, 16);
+        for (k = 0; k < n; k++) u8[o + k] ^= v;
+      } else if (x.b !== undefined) {
+        v = parseInt(x.b, 16);
+        for (k = 0; k < n; k++) u8[o + k] = v;
+      } else {
+        hex = x.h;
+        for (k = 0; k < n; k++) u8[o + k] = parseInt(hex.substr(k * 2, 2), 16);
+      }
+    }
+    return undo;
+  }
+
+  function ps2Undo(u8, undo) {
+    for (var i = 0; i < undo.length; i++) u8.set(undo[i][1], undo[i][0]);
+  }
+
+  /* ================================================================
      【待填】补丁源
        SRC = 'ms'  -> ModelScope 数据集整包（单文件）
        SRC = 'jsd' -> jsDelivr 分片（多片，拼回来才是完整补丁）
@@ -622,9 +721,11 @@
     },
     ps2: {
       label: 'PS2',
-      crc: [],          /* 例：['FA881391'] */
-      ms:  [],          /* 例：[ MS + 'Suzaku%20Ibun_patch.xdelta?view=false' ] */
-      jsd: []           /* 例：[ CDN + 'user/repo@HEAD/xxx_patch.001.bin' ] */
+      /* 只认通常版 SLPM_669.99 的 CRC；限定版在载入时已改写成同一份数据。
+         限定版原 CRC DC1A0D1E 走归一化，最终也落到这里。 */
+      crc: ['D1CE410B'],
+      ms: [ MS + 'SUZAKU_PS2.PATCH?view=false' ],
+      jsd: []
     }
   };
 
@@ -638,7 +739,8 @@
 
   /* 成品统一命名（按平台）。没配的平台才沿用上传文件名 + _汉化。 */
   var OUT_NAME = {
-    nds: 'Fushigi Yuugi DS (CHINESE).nds'
+    nds: 'Fushigi Yuugi DS (CHINESE).nds',
+    ps2: 'Fushigi Yuugi Suzaku Ibun (CHINESE).iso'
   };
   function outName(hx) {
     var g = hx ? pickPatch(hx) : null;
@@ -701,8 +803,31 @@
       if (ev.dataTransfer.files[0]) take(ev.dataTransfer.files[0]);
     });
 
+    /* 分块读盘：FileReader 一次性读 >2GiB 的 Blob 会直接报错（Chromium 的限制），
+       PS2 镜像 2.1GB 正好踩线，所以按 96MB 一片自己拼起来。 */
+    var CHUNK = 96 * 1024 * 1024;
+    function readBig(f, tick, done, fail) {
+      var u8;
+      try { u8 = new Uint8Array(f.size); }
+      catch (e) { fail('内存不足，装不下 ' + size(f.size) + ' 的文件'); return; }
+      var off = 0;
+      (function next() {
+        if (off >= f.size) { done(u8); return; }
+        var end = Math.min(off + CHUNK, f.size);
+        var rd = new FileReader();
+        rd.onerror = function () { fail('读取时出错（文件可能被占用）'); };
+        rd.onload = function () {
+          try { u8.set(new Uint8Array(rd.result), off); }
+          catch (e) { fail('内存不足（' + (e && e.message) + '）'); return; }
+          off = end;
+          if (tick) tick(off, f.size);
+          next();
+        };
+        rd.readAsArrayBuffer(f.slice(off, end));
+      })();
+    }
+
     function take(f) {
-      var fr = new FileReader();
       var metaEl = document.getElementById(metaId);
 
       metaEl.textContent = '';
@@ -716,8 +841,9 @@
         bubble(drop, '正在验证 ROM/镜像，请稍等片刻…');
       }
 
-      fr.onload = function () {
-        var u8 = new Uint8Array(fr.result);
+      readBig(f, function (got, total) {
+        bubble(drop, '正在读取文件 ' + Math.round(got / total * 100) + '%…');
+      }, function (u8) {
         var info = identify(u8);
         var hx = crcHex(u8);          /* 整盘 CRC32，最慢的一步，气泡就挂在这一步上 */
         var orig = hx;
@@ -730,8 +856,28 @@
           if (fix) {
             hx = fix.crc;
             log('检测到「' + fix.label + '」（CRC32 0x' + orig + '），' +
-              '与标准原版差 ' + fix.bytes + ' 字节，已在内存中自动还原', 'ok');
-            log('还原后 CRC32 0x' + hx + ' —— 与标准原版一致，继续正常打补丁', 'ok');
+              '与标准原版差 ' + fix.bytes + ' 字节，已在内存中补回', 'ok');
+            log('补回后 CRC32 0x' + hx + ' —— 与标准原版一致，继续正常打补丁', 'ok');
+          }
+        }
+
+        /* PS2 限定版：就地改写成通常版，之后一律按通常版处理 */
+        if (key === 'rom' && typeof NORM !== 'undefined' && hx === NORM.altCrc) {
+          if (u8.length !== NORM.refSize) {
+            log('限定版处理中止：镜像大小 ' + size(u8.length) + ' 与预期的 ' +
+              size(NORM.refSize) + ' 不符', 'err');
+          } else {
+            var undo = ps2Norm(u8);
+            if (ps2Head(u8) !== NORM.headCrc) {
+              ps2Undo(u8, undo);
+              log('限定版校验失败（头部 CRC32 对不上），已回滚，数据未改动', 'err');
+            } else {
+              hx = NORM.refCrc;
+              fix = { label: 'PS2 限定版 SLPM-669.98', to: NORM.refCrc, bytes: NORM.diffBytes };
+              log('检测到 PS2 限定版（SLPM-669.98，CRC32 0x' + orig + '）—— ' +
+                '与通常版差 ' + NORM.diffBytes + ' 字节，已在内存中补正', 'ok');
+              log('补正后头部 CRC32 0x' + NORM.headCrc + ' 与通常版一致，按通常版继续', 'ok');
+            }
           }
         }
 
@@ -759,7 +905,7 @@
               KNOWN_CRC.join(' / ') + '），已拒绝处理', 'err');
             var vari = [];
             for (var fk in FIXES) vari.push(FIXES[fk].label + '（0x' + fk + '）');
-            if (vari.length) log('可自动还原的同源变体：' + vari.join('、'), 'warn');
+            if (vari.length) log('可直接修复的同源变体：' + vari.join('、'), 'warn');
             status('ROM/镜像版本不支持：本补丁仅适用于 CRC32 ' + KNOWN_CRC.join(' / ') + ' 的原版', 'err');
             logBtn.classList.add('err');
             /* 版本错了就别把上一轮的补丁留在槽里，免得误点 */
@@ -778,13 +924,12 @@
         if (key === 'rom' && matched && mode === 'auto') autopatch();
         reset();
         refresh();
-      };
-      fr.onerror = function () {
+      }, function (msg) {
         dropBubble(drop);
         metaEl.textContent = '';
-        log('读取文件失败: ' + f.name, 'err');
-      };
-      fr.readAsArrayBuffer(f);
+        log('读取文件失败: ' + f.name + ' —— ' + msg, 'err');
+        status('文件读取失败：' + msg, 'err');
+      });
     }
   }
 
@@ -1056,6 +1201,7 @@
 
   bind('dRom', 'fRom', 'rom', 'nRom', 'mRom');
   bind('dPat', 'fPat', 'pat', 'nPat', 'mPat');
+  document.getElementById('crcNote').textContent = KNOWN_CRC.join(' / ');
   slotReset();
 
   /* ROM/镜像版本是否在支持列表内 —— 打补丁的前置硬条件 */
@@ -1065,6 +1211,7 @@
   function refresh() {
     var ok = romOk() && S.pat && !AUTO.busy;
     document.getElementById('bRun').disabled = !ok;
+    document.getElementById('warnBig').classList.toggle('on', !!(S.pat && !AUTO.busy && !S.out));
   }
   function reset() {
     resEl.classList.remove('on');
