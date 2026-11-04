@@ -323,6 +323,20 @@
   .guide .arw{font-size:13px;opacity:.85;transition:transform .15s}
   .guide:hover .arw{transform:translateX(3px)}
 
+  /* ---------- 网页打补丁失败时的本地工具入口 ---------- */
+  .localtip{
+    margin:0 0 18px;padding:11px 16px;border-radius:12px;
+    background:var(--drop);
+    border:1px solid var(--line);border-left:3px solid var(--accent);
+    color:#f2f6ff;font-size:13px;line-height:1.75;
+    word-break:break-word;
+  }
+  .localtip a{
+    color:var(--accent);font-weight:700;text-decoration:none;
+    border-bottom:1px solid rgba(217,191,140,.45);
+  }
+  .localtip a:hover{color:#fff8e6;border-bottom-color:var(--accent)}
+
   /* ---------- 左上角访问统计 ---------- */
   #visitor{
     position:fixed;top:15px;left:14px;z-index:30;display:block;line-height:0;
@@ -383,6 +397,12 @@
     游戏攻略 · 玩法指南
     <span class="arw">→</span>
   </a>
+
+  <!-- 网页打补丁失败时的兜底方案：本地补丁工具 -->
+  <div class="localtip">
+    如果在本网页打补丁失败，请下载并使用本地补丁工具（适用于 WINDOWS 电脑）：
+    <a href="https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/fushigi_patcher.zip" target="_blank" rel="noopener">fushigi_patcher.zip</a>
+  </div>
 
   <div class="card">
     <div class="modes">

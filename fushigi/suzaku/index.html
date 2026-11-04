@@ -358,6 +358,20 @@
   .guide .arw{font-size:13px;opacity:.85;transition:transform .15s}
   .guide:hover .arw{transform:translateX(3px)}
 
+  /* ---------- 网页打补丁失败时的本地工具入口 ---------- */
+  .localtip{
+    margin:0 0 18px;padding:10px 14px;
+    border:1px solid rgba(222,107,61,.6);border-left:3px solid var(--accent);
+    background:linear-gradient(135deg,rgba(37,37,29,.97),rgba(24,21,18,.97));
+    font-size:13px;line-height:1.75;color:#fff;
+    word-break:break-word;
+  }
+  .localtip a{
+    color:#ffbb8c;font-weight:700;text-decoration:none;
+    border-bottom:1px solid rgba(255,187,140,.55);
+  }
+  .localtip a:hover{color:#fff;border-bottom-color:#fff}
+
   /* ---------- 左上角访问统计 ---------- */
   #visitor{
     position:fixed;top:15px;left:14px;z-index:30;display:block;line-height:0;
@@ -427,6 +441,12 @@
       玄武开传 · 攻略
       <span class="arw">→</span>
     </a>
+  </div>
+
+  <!-- 网页打补丁失败时的兜底方案：本地补丁工具 -->
+  <div class="localtip">
+    如果在本网页打补丁失败，请下载并使用本地补丁工具（适用于 WINDOWS 电脑）：
+    <a href="https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/fushigi_patcher.zip" target="_blank" rel="noopener">fushigi_patcher.zip</a>
   </div>
 
   <div class="card">
