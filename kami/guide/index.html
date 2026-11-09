@@ -14,14 +14,15 @@
   --ink:#43425e; --muted:#7d7c93;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
+html{height:100%}
+body{margin:0;min-height:100%;display:flex;flex-direction:column}
 body{
   font-family:"Noto Serif SC","Yu Mincho","Hiragino Mincho ProN","Noto Serif CJK SC","Songti SC",serif;
   background:#f2f5f5 url("assets/bg-snow.jpg") center / cover no-repeat fixed;
-  color:var(--ink);overflow:hidden;
+  color:var(--ink);overflow-x:hidden;-webkit-overflow-scrolling:touch;
 }
 
-.shell{position:relative;z-index:2;height:100%;display:flex;
+.shell{position:relative;z-index:2;flex:1 0 auto;width:100%;display:flex;
   flex-direction:column;align-items:center;justify-content:center;
   padding:24px;gap:6px;text-align:center}
 
@@ -59,8 +60,9 @@ body{
 .entry.coming{opacity:.94;cursor:not-allowed;filter:saturate(.6)}
 .entry.coming .btn{color:var(--muted);border-color:#d8d2c0;background:transparent}
 
-.hint{position:fixed;bottom:18px;left:0;right:0;z-index:3;text-align:center;
-  font-size:.74em;color:var(--muted);letter-spacing:2px}
+.hint{position:relative;z-index:3;flex:none;text-align:center;
+  font-size:.74em;color:var(--muted);letter-spacing:2px;
+  padding:4px 16px 22px}
 
 /* 音乐开关 */
 .music{position:fixed;top:18px;right:18px;z-index:5;width:42px;height:42px;padding:0;
@@ -86,8 +88,10 @@ body{
 
 @media(max-width:700px){
   .entries{flex-direction:column;gap:18px}
-  .entry{width:min(300px,88vw);height:330px}
+  .entry{width:min(300px,88vw);height:320px}
   .logo{height:110px}
+  .shell{padding:16px 14px 6px}
+  .hint{font-size:.68em;padding:2px 16px 46px}
 }
 .visitor-badge{position:fixed;right:16px;bottom:14px;z-index:4;line-height:0;opacity:.85;transition:opacity .2s}
 .visitor-badge:hover{opacity:1}
@@ -105,7 +109,7 @@ body{
 
   <div class="entries">
     <!-- 左：本编（跳第一部站） -->
-    <a class="entry" href="../kamiaso-kouryaku/index.html">
+    <a class="entry" href="kamiaso-kouryaku/index.html">
       <div class="glow"></div>
       <span class="tag">UNITE EDITION</span>
       <div class="logobox"><img class="logoimg" src="assets/honpen.png" alt="神々の悪戯"></div>
@@ -113,7 +117,7 @@ body{
     </a>
 
     <!-- 右：InFinite -->
-    <a class="entry" href="../kamiaso-infinite-kouryaku/index.html">
+    <a class="entry" href="kamiaso-infinite-kouryaku/index.html">
       <div class="glow"></div>
       <span class="tag">LUDERE DEORUM</span>
       <div class="logobox"><img class="logoimg" src="assets/fd.png" alt="神々の悪戯 InFinite"></div>
@@ -204,7 +208,7 @@ body{
   });
 })();
 
-// InFinite 入口已改为 <a> 链接，指向 ../kamiaso-infinite-kouryaku/index.html
+// InFinite 入口已改为 <a> 链接，指向 kamiaso-infinite-kouryaku/index.html
 </script>
 <a class="visitor-badge" href="https://visitor-badge.laobi.icu" target="_blank" rel="noopener"><img src="https://visitor-badge.laobi.icu/badge?page_id=kamigamiguide&amp;left_text=%E7%A5%9E%20%E3%81%AE%20visitors&amp;left_color=%23dfa4a4&amp;right_color=%23a3f0ef" alt="访客统计" loading="lazy"></a>
 </body>
