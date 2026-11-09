@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>题库 · 神々の悪戯 InFinite</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="topnav"><div class="nav-inner">
+<a class="home" href="../guide/index.html" title="返回主页">⌂ 主页</a>
+<a class="brand" href="index.html"><span class="brand-txt">神々の悪戯</span><span>InFinite 攻略</span></a>
+<div class="nav-links"><a href="index.html" class="">基本信息</a><a href="guide.html" class="">攻略</a><a href="quiz.html" class="quiz-link active">题库</a></div>
+<div class="lang-switch" title="切换界面语言 / Switch language"><button class="lang-btn on" data-lang="cn">中</button><button class="lang-btn" data-lang="jp">日</button></div>
+</div></nav>
+<header class="page-head"><div class="kicker">KAMIGAMI NO ASOBI INFINITE</div><h1>题库</h1><p class="subtitle">400 题神话问答 · 搜索与自测</p></header>
+<main>
+<section class="page-body"><div class="wrap">
+<div class="quiz-bar">
+  <div class="q-search">
+    <span class="icon">🔍</span>
+    <input id="qSearch" type="search" placeholder="搜索题目 / 选项关键词（支持中文·日文，空格分隔多个词）" autocomplete="off">
+    <label class="q-self"><input type="checkbox" id="qSelf"> 自测模式</label>
+  </div>
+  <div class="q-filters">
+    <span class="fg"><span class="lbl">神话</span>
+      <button class="fchip on" data-k="cat" data-v="all">全部</button>
+      <button class="fchip c-greek" data-k="cat" data-v="greek">希腊 100</button><button class="fchip c-norse" data-k="cat" data-v="norse">北欧 100</button><button class="fchip c-japan" data-k="cat" data-v="japan">日本 100</button><button class="fchip c-egypt" data-k="cat" data-v="egypt">埃及 100</button>
+    </span>
+    <span class="fg"><span class="lbl">题型</span>
+      <button class="fchip on" data-k="type" data-v="all">全部</button>
+      <button class="fchip" data-k="type" data-v="choice">四选一</button>
+      <button class="fchip" data-k="type" data-v="tf">○× 判断</button>
+    </span>
+    <span class="fg"><span class="lbl">难度</span>
+      <button class="fchip on" data-k="tier" data-v="all">全部</button>
+      <button class="fchip" data-k="tier" data-v="0">★</button>
+      <button class="fchip" data-k="tier" data-v="1">★★</button>
+      <button class="fchip" data-k="tier" data-v="2">★★★</button>
+    </span>
+  </div>
+</div>
+<div class="q-stat" id="qStat">共 <b>400</b> 题</div>
+<div class="q-list" id="qList"></div>
+</div></section>
+</main>
+<footer>
+<p>数据来源：游戏剧本与题库导出（infinite_project/SCRIPT）</p>
+<p>角色中文译名与立绘见 <code>角色译名.md</code>；选项译文见 <code>选项译文.md</code>；站点文案见 <code>站点内容.md</code>。</p>
+</footer>
+<script src="app.js"></script>
+<script src="quiz-data.js"></script><script src="quiz.js"></script>
+</body>
+</html>
