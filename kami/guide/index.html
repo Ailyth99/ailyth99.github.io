@@ -16,7 +16,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
 body{
-  font-family:"Yu Mincho","Hiragino Mincho ProN","Noto Serif CJK SC","Songti SC",serif;
+  font-family:"Noto Serif SC","Yu Mincho","Hiragino Mincho ProN","Noto Serif CJK SC","Songti SC",serif;
   background:#f2f5f5 url("assets/bg-snow.jpg") center / cover no-repeat fixed;
   color:var(--ink);overflow:hidden;
 }
@@ -145,38 +145,62 @@ body{
   }
 })();
 
-// ---------- BGM ----------
+// ---------- BGM（默认自动播放） ----------
 (function(){
   var audio = new Audio('assets/bgm.mp3');
   audio.loop = true;
   audio.volume = 0.8;
   audio.preload = 'auto';
   var btn = document.getElementById('musicBtn');
+  var hint = document.querySelector('.hint');
+  var hintText = hint ? hint.textContent : '';
+  var wantSound = true;
 
-  // 图标状态完全跟随 audio 真实状态，避免播放/暂停不同步
+  // 图标状态完全跟随 audio 真实状态
   function sync(){
     var on = !audio.paused && !audio.ended;
     btn.classList.toggle('off', !on);
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    btn.title = on ? '关闭音乐' : '播放音乐';
+    btn.title = !on ? '播放音乐' : (audio.muted ? '点击开启声音' : '关闭音乐');
+    if(hint) hint.textContent = (on && audio.muted)
+      ? '音乐已静音起播 · 点击页面任意处开启声音' : hintText;
   }
   audio.addEventListener('play', sync);
   audio.addEventListener('pause', sync);
+  audio.addEventListener('volumechange', sync);
   sync();
 
-  function tryPlay(){
+  // 优先有声自动播放；被浏览器拦截则先静音自动播放，等首次交互再解开静音
+  function startSound(){
+    if(!wantSound) return;
+    audio.muted = false;
     var p = audio.play();
-    if(p && p.catch) p.catch(function(){ sync(); });   // 被浏览器拦截则保持 off
+    if(p && p.catch) p.catch(function(){
+      audio.muted = true;
+      var q = audio.play();
+      if(q && q.catch) q.catch(function(){ sync(); });
+    });
   }
+  startSound();
 
-  // 加载即尝试播放；若被自动播放策略拦截，首次点击页面任意处补播
-  tryPlay();
-  document.addEventListener('click', function once(){ tryPlay(); }, {once:true});
+  // 首次交互（点击/触摸/按键）立刻解除静音，让声音正常出来
+  function unmute(){
+    if(audio.muted && !audio.paused){
+      audio.muted = false;
+      var p = audio.play();
+      if(p && p.catch) p.catch(function(){});
+    }
+    sync();
+  }
+  ['pointerdown', 'touchstart', 'keydown'].forEach(function(t){
+    document.addEventListener(t, unmute, {once:true, passive:true});
+  });
 
   btn.addEventListener('click', function(e){
     e.stopPropagation();
-    if(audio.paused) tryPlay();
-    else audio.pause();
+    if(audio.paused){ wantSound = true; startSound(); }
+    else if(audio.muted){ audio.muted = false; var p = audio.play(); if(p && p.catch) p.catch(function(){}); sync(); }
+    else { audio.pause(); }
   });
 })();
 
