@@ -175,6 +175,61 @@
         }
 
         .loader-text { display: none; color: var(--primary); font-weight: bold; margin: 10px 0; }
+
+        /* 字体信息表 */
+        .info-empty {
+            border: 2px dashed #bbb;
+            padding: 30px;
+            text-align: center;
+            color: #888;
+            font-weight: bold;
+            background: #fafafa;
+        }
+
+        .info-table {
+            border: var(--border-width) solid var(--text-dark);
+            box-shadow: 4px 4px 0px var(--text-dark);
+            background: #fff;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            border-bottom: 2px solid var(--text-dark);
+        }
+        .info-row:last-child { border-bottom: none; }
+
+        .info-key {
+            background: var(--secondary);
+            font-weight: bold;
+            padding: 10px 12px;
+            border-right: 2px solid var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .info-val {
+            padding: 10px 12px;
+            word-break: break-all;
+            white-space: pre-wrap;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .info-sub {
+            display: block;
+            margin-top: 4px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 0.82rem;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .info-row { grid-template-columns: 112px 1fr; }
+            .info-key { padding: 8px; font-size: 0.85rem; }
+            .info-val { padding: 8px; font-size: 0.85rem; }
+        }
     </style>
 </head>
 <body>
@@ -192,18 +247,19 @@
             <div class="font-info" id="font-name">当前未加载字体</div>
         </div>
 
-        <!-- 标签导航 (新增了全部字符标签) -->
+        <!-- 标签导航 -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('check')">🔍 缺字检测</button>
-            <button class="tab-btn" onclick="switchTab('preview')">👁️ 字符预览</button>
-            <button class="tab-btn" onclick="switchTab('all')">📚 全部字符</button>
+            <button class="tab-btn active" data-tab="check" onclick="switchTab('check')">🔍 缺字检测</button>
+            <button class="tab-btn" data-tab="preview" onclick="switchTab('preview')">👁️ 字符预览</button>
+            <button class="tab-btn" data-tab="all" onclick="switchTab('all')">📚 全部字符</button>
+            <button class="tab-btn" data-tab="info" onclick="switchTab('info')">ℹ️ 字体信息</button>
         </div>
 
         <!-- 功能卡片区 -->
         <div class="brutal-card">
             
             <!-- 1. 缺字检测区 -->
-            <div id="check-section" class="tab-content active">
+            <div id="check-section" class="tab-content active" data-tab="check">
                 <textarea id="text-input" placeholder="粘贴需要测试的文本（自动去重）..."></textarea>
                 <button class="btn" id="check-btn">开始检测</button>
                 <div id="loader" class="loader-text">正在分析中...</div>
@@ -218,7 +274,7 @@
             </div>
 
             <!-- 2. 字符预览区 -->
-            <div id="preview-section" class="tab-content">
+            <div id="preview-section" class="tab-content" data-tab="preview">
                 <div class="preview-controls">
                     <div class="control-group">
                         <label>字体大小: <span id="size-val">48</span>px</label>
@@ -237,8 +293,8 @@
                 <div id="preview-display">预览效果将显示在这里...</div>
             </div>
 
-            <!-- 3. 全部字符区 (新增) -->
-            <div id="all-chars-section" class="tab-content">
+            <!-- 3. 全部字符区 -->
+            <div id="all-chars-section" class="tab-content" data-tab="all">
                 <button class="btn" id="extract-btn">提取字库所有包含字符</button>
                 <div id="extract-loader" class="loader-text">正在提取中，大字库（如中文字体）可能需要几秒钟，请稍候...</div>
                 
@@ -251,6 +307,19 @@
                 </div>
             </div>
 
+            <!-- 4. 字体信息区 -->
+            <div id="info-section" class="tab-content" data-tab="info">
+                <div class="info-empty" id="info-empty">上传字体后，这里会自动显示字体的元数据信息</div>
+
+                <div id="info-panel" style="display:none;">
+                    <div class="info-table" id="info-table"></div>
+                    <div style="margin-top: 18px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <button class="btn" id="copy-info-btn">📋 复制全部信息</button>
+                        <span id="copy-tip" style="display:none; font-weight: bold; color: var(--accent);">已复制 ✓</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -260,21 +329,154 @@
 
         // 切换标签页
         function switchTab(type) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
-            if(type === 'check') {
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
-                document.getElementById('check-section').classList.add('active');
-            } else if(type === 'preview') {
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
-                document.getElementById('preview-section').classList.add('active');
-            } else if(type === 'all') {
-                // 处理新增的全部字符标签页
-                document.querySelectorAll('.tab-btn')[2].classList.add('active');
-                document.getElementById('all-chars-section').classList.add('active');
-            }
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.tab === type);
+            });
+            document.querySelectorAll('.tab-content').forEach(c => {
+                c.classList.toggle('active', c.dataset.tab === type);
+            });
         }
+
+        /* ---------------- 字体信息面板 ---------------- */
+
+        // 需要展示的字段（顺序即显示顺序）
+        const INFO_FIELDS = [
+            { key: 'fullName',        label: '字体名称',        alt: true  },
+            { key: 'fontFamily',      label: '字体族',          alt: true  },
+            { key: 'fontSubfamily',   label: '字体子族',        alt: true  },
+            { key: 'numGlyphs',       label: '字形数量',        alt: false },
+            { key: 'postScriptName',  label: 'Postscript 名称', alt: false },
+            { key: 'designer',        label: '设计师名称',      alt: false },
+            { key: 'designerURL',     label: '设计师网址',      alt: false },
+            { key: 'license',         label: '许可证描述',      alt: false },
+            { key: 'licenseURL',      label: '许可证信息网址',  alt: false },
+            { key: 'copyright',       label: '版权',            alt: false },
+            { key: 'manufacturer',    label: '制造商',          alt: false },
+            { key: 'manufacturerURL', label: '供应商网址',      alt: false },
+            { key: 'version',         label: '版本',            alt: false }
+        ];
+
+        let lastInfoText = '';
+
+        // 取 name 表的原始记录（兼容不同版本的字段命名）
+        function nameRecord(font, key) {
+            if (!font.names) return null;
+            let rec = font.names[key];
+            if (rec === undefined && key === 'fullName') rec = font.names.fontName;
+            if (rec === undefined && key === 'version') rec = font.names.nameTableVersion;
+            return rec === undefined ? null : rec;
+        }
+
+        // 把 name 记录统一成 [[语言, 文本], ...]
+        function langEntries(rec) {
+            if (rec == null) return [];
+            if (typeof rec === 'string') return [['', rec]];
+            if (Array.isArray(rec)) return rec.filter(v => typeof v === 'string').map(v => ['', v]);
+            if (typeof rec === 'object') {
+                return Object.entries(rec).filter(([, v]) => typeof v === 'string' && v.trim() !== '');
+            }
+            return [];
+        }
+
+        // 优先英文，其次中文，最后任意语言
+        function pickName(font, key) {
+            const ent = langEntries(nameRecord(font, key));
+            if (!ent.length) return '';
+            const order = ['en', 'zh', 'zh-Hans', 'zh-Hant', 'ja'];
+            for (const lang of order) {
+                const hit = ent.find(([l]) => l === lang);
+                if (hit) return hit[1].trim();
+            }
+            return ent[0][1].trim();
+        }
+
+        // 其他语种的同类名称（用于名称类字段的补充显示）
+        function pickAltName(font, key, primary) {
+            const ent = langEntries(nameRecord(font, key));
+            const others = ent.filter(([, v]) => v.trim() !== primary);
+            if (!others.length) return '';
+            const zh = others.find(([l]) => l.startsWith('zh')) || others[0];
+            return zh[1].trim();
+        }
+
+        function getInfoValue(font, key) {
+            if (key === 'numGlyphs') {
+                return String(font.numGlyphs || (font.glyphs ? font.glyphs.length : 0) || '-');
+            }
+            let val = pickName(font, key);
+            if (!val && key === 'version' && font.tables && font.tables.head &&
+                font.tables.head.fontRevision != null) {
+                val = 'Version ' + Number(font.tables.head.fontRevision).toFixed(3);
+            }
+            return val;
+        }
+
+        function renderFontInfo(font) {
+            const table = document.getElementById('info-table');
+            table.innerHTML = '';
+            const lines = [];
+
+            INFO_FIELDS.forEach(field => {
+                let val = getInfoValue(font, field.key);
+                if (!val) val = '-';
+
+                const row = document.createElement('div');
+                row.className = 'info-row';
+
+                const keyCell = document.createElement('div');
+                keyCell.className = 'info-key';
+                keyCell.textContent = field.label;
+
+                const valCell = document.createElement('div');
+                valCell.className = 'info-val';
+                valCell.textContent = val;
+
+                if (field.alt && val !== '-') {
+                    const alt = pickAltName(font, field.key, val);
+                    if (alt && alt !== val) {
+                        const sub = document.createElement('span');
+                        sub.className = 'info-sub';
+                        sub.textContent = '多语言名称：' + alt;
+                        valCell.appendChild(sub);
+                    }
+                }
+
+                row.appendChild(keyCell);
+                row.appendChild(valCell);
+                table.appendChild(row);
+
+                lines.push(field.label + '：' + val);
+            });
+
+            lastInfoText = lines.join('\n');
+            document.getElementById('info-empty').style.display = 'none';
+            document.getElementById('info-panel').style.display = 'block';
+        }
+
+        // 复制全部信息
+        document.getElementById('copy-info-btn').addEventListener('click', function() {
+            if (!lastInfoText) return;
+            const tip = document.getElementById('copy-tip');
+            const done = () => {
+                tip.style.display = 'inline';
+                setTimeout(() => { tip.style.display = 'none'; }, 1500);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(lastInfoText).then(done).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+            function fallbackCopy() {
+                const ta = document.createElement('textarea');
+                ta.value = lastInfoText;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); done(); } catch (e) { alert('复制失败，请手动选择文本'); }
+                document.body.removeChild(ta);
+            }
+        });
 
         // 1. 处理字体上传与解析
         document.getElementById('font-upload').addEventListener('change', function(e) {
@@ -308,6 +510,10 @@
                         #preview-display, #all-chars-display { font-family: 'CustomUploadedFont', sans-serif !important; }
                     `;
                     document.head.appendChild(fontStyleElement);
+
+                    // 渲染字体信息
+                    renderFontInfo(currentFont);
+                    switchTab('info');
 
                 } catch (err) {
                     alert('字体解析失败！');
