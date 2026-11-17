@@ -197,6 +197,23 @@
             background: #cbc7bf;
         }
 
+        .pick.drag {
+            background: #fff;
+            outline: 2px dotted var(--navy);
+            outline-offset: -7px;
+        }
+
+        .pick.drag .pick-label::before {
+            content: "\25BC";
+            color: var(--hot);
+        }
+
+        .pick.drag .pick-hint {
+            background: var(--navy);
+            color: var(--cyan);
+            border-color: var(--dk) var(--hi) var(--hi) var(--dk);
+        }
+
         .pick:focus-within {
             outline: 1px dotted #000;
             outline-offset: 2px;
@@ -743,7 +760,7 @@
         </header>
 
         <label class="pick" for="font-upload">
-            <span class="pick-label">选择字体文件</span>
+            <span class="pick-label">选择字体文件，或直接把文件拖进窗口</span>
             <span class="pick-hint">*.TTF *.OTF *.WOFF</span>
             <input type="file" id="font-upload" accept=".ttf,.otf,.woff">
         </label>
@@ -1002,9 +1019,8 @@
             }
         });
 
-        // 1. 处理字体上传与解析
-        document.getElementById('font-upload').addEventListener('change', function (e) {
-            const file = e.target.files[0];
+        // 1. 处理字体上传与解析（点选 / 拖入窗口）
+        function loadFont(file) {
             if (!file) return;
 
             const reader = new FileReader();
@@ -1047,6 +1063,50 @@
                 }
             };
             reader.readAsArrayBuffer(file);
+        }
+
+        document.getElementById('font-upload').addEventListener('change', function (e) {
+            loadFont(e.target.files[0]);
+        });
+
+        // 拖入窗口即可加载
+        const pickBox = document.querySelector('.pick');
+        const pickText = pickBox.querySelector('.pick-label');
+        const pickOrig = pickText.textContent;
+
+        function hasFiles(e) {
+            const t = e.dataTransfer && e.dataTransfer.types;
+            return !!t && Array.prototype.indexOf.call(t, 'Files') !== -1;
+        }
+
+        ['dragenter', 'dragover'].forEach(type => {
+            window.addEventListener(type, function (e) {
+                if (!hasFiles(e)) return;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'copy';
+                pickBox.classList.add('drag');
+                pickText.textContent = '松开鼠标即可加载';
+            });
+        });
+
+        window.addEventListener('dragleave', function (e) {
+            if (e.relatedTarget !== null && e.clientX > 0 && e.clientY > 0) return;
+            pickBox.classList.remove('drag');
+            pickText.textContent = pickOrig;
+        });
+
+        window.addEventListener('drop', function (e) {
+            if (!hasFiles(e)) return;
+            e.preventDefault();
+            pickBox.classList.remove('drag');
+            pickText.textContent = pickOrig;
+            const file = e.dataTransfer.files[0];
+            if (!file) return;
+            if (!/\.(ttf|otf|woff|woff2)$/i.test(file.name)) {
+                alert('只支持 TTF / OTF / WOFF 字体文件');
+                return;
+            }
+            loadFont(file);
         });
 
         // 2. 缺字检测逻辑
