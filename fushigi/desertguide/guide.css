@@ -34,7 +34,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 .route-tabs button[aria-selected=true]::after{right:8px}
 .tab-scroll-hint{display:none}
 .brand-banner{position:relative;width:calc(100% - 80px);max-width:1000px;height:155px;margin:0 auto;background:url("imgs/top.png") center/cover no-repeat}
-.brand-title{position:absolute;top:22px;left:34px;text-decoration:none;color:#ffffff;font-family:"Microsoft YaHei Light","Microsoft YaHei","PingFang SC","SimHei",sans-serif;font-weight:300;text-shadow:0 1px 2px rgba(187,187,187,.8)}
+.brand-title{position:absolute;top:22px;left:34px;text-decoration:none;color:#ffffff;font-family:"Microsoft YaHei Light","Microsoft YaHei","PingFang SC","SimHei",sans-serif;font-weight:300;text-shadow:0 1px 2px rgba(56,34,10,.88)}
 .brand-title strong{display:block;font:300 40px/1.25 "Microsoft YaHei Light","Microsoft YaHei","PingFang SC","SimHei",sans-serif;letter-spacing:3px}
 .brand-title span{display:block;margin-top:5px;letter-spacing:2px}
 .brand-title .brand-english{font-size:20px;line-height:1.3;letter-spacing:1px}
@@ -107,6 +107,8 @@ input[type=checkbox]:checked::after{visibility:visible}
 .day-step.is-complete h4{color:var(--green)}
 .site-footer{width:calc(100% - 80px);max-width:1200px;margin:0 auto;padding:20px 26px 28px;border-top:2px solid var(--ink);background:rgba(255,253,242,.75);font-size:12px;line-height:1.9;color:var(--muted)}
 .site-footer p+p{margin-top:4px}
+.site-footer .footer-visit{margin-top:14px;line-height:0}
+.site-footer .footer-visit img{display:block;height:20px;width:auto;max-width:100%}
 .skip-link{position:fixed;top:7px;left:7px;z-index:20;padding:8px 10px;background:#fff6de;transform:translateY(-160%)}
 .skip-link:focus{transform:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
