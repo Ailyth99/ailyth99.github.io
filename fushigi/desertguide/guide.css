@@ -60,6 +60,7 @@ main{position:relative;width:calc(100% - 80px);max-width:1200px;margin:0 auto;pa
 .character-portrait.emblem{object-fit:contain;padding:8px}
 .route-sidebar h2{font:400 30px/1.4 var(--serif);letter-spacing:2px}
 .character-english{font-size:15px;line-height:1.5;letter-spacing:1.5px;color:var(--accent);margin-top:3px}
+.character-cv{font-size:13px;line-height:1.5;letter-spacing:1px;color:var(--muted);margin-top:3px}
 .route-caption{font-size:12px;letter-spacing:2px;color:var(--muted);margin-top:3px}
 .route-sidebar h3{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
 .route-condition{margin-top:19px;padding-top:13px;border-top:1px solid var(--line)}
