@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Are you Alice? 完全攻略</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+@import url("https://fontsapi.zeoseven.com/906/main/result.css");
+:root{
+  --bg:#120d09;
+  --bg2:#1c140d;
+  --panel:#e7d3ab;
+  --panel-dark:#e0c99c;
+  --ink:#2b2015;
+  --ink-soft:#6b5638;
+  --red:#8e1f1f;
+  --red-bright:#b02a2a;
+  --gold:#c9a468;
+  --gold-soft:#a9885a;
+  --cream:#f3e6c8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(1200px 700px at 50% -100px, rgba(142,31,31,.22), transparent 60%),
+    radial-gradient(900px 600px at 85% 110%, rgba(201,164,104,.08), transparent 55%),
+    linear-gradient(180deg, var(--bg2), var(--bg) 40%, #0c0805);
+  color:var(--cream);
+  font-family:"Swei Spring CJK SC",Georgia,"Times New Roman","STZhongsong","NSimSun",serif;
+  font-weight:normal;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+/* faint card-suit texture */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><text x='10' y='30' font-size='26' fill='%23c9a468'>%E2%99%A0</text><text x='70' y='80' font-size='26' fill='%238e1f1f'>%E2%99%A5</text><text x='30' y='105' font-size='22' fill='%23c9a468'>%E2%99%A6</text><text x='90' y='25' font-size='22' fill='%23c9a468'>%E2%99%A3</text></svg>");
+}
+.wrap{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 18px;}
+
+/* ============ hero ============ */
+.hero{position:relative;height:480px;overflow:hidden;}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:sepia(.15) saturate(.95);}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,13,9,.35) 0%,rgba(18,13,9,0) 35%,rgba(18,13,9,.92) 92%,var(--bg) 100%);}
+.hero .t{position:absolute;left:0;right:0;bottom:52px;text-align:center;}
+.hero h1{font-size:56px;letter-spacing:.06em;color:var(--gold);text-shadow:0 2px 18px rgba(0,0,0,.85),0 0 40px rgba(142,31,31,.5);}
+.hero .sub{margin-top:8px;font-size:16px;letter-spacing:.5em;text-indent:.5em;color:var(--cream);opacity:.85;}
+.hero .ruler{width:200px;height:1px;margin:16px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+/* ============ nav ============ */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(14,10,7,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(201,164,104,.35);
+}
+nav .in{max-width:1020px;margin:0 auto;padding:0 18px;display:flex;flex-wrap:wrap;gap:2px 26px;justify-content:center;}
+nav a{display:block;padding:13px 4px;color:var(--gold);text-decoration:none;font-size:14.5px;letter-spacing:.12em;border-bottom:2px solid transparent;transition:.25s;}
+nav a:hover{color:var(--cream);border-bottom-color:var(--red-bright);}
+
+/* ============ sections ============ */
+section{margin:88px 0;}
+.sec-head{text-align:center;margin-bottom:34px;}
+.sec-head .num{font-size:13px;letter-spacing:.45em;text-indent:.45em;color:var(--gold-soft);}
+.sec-head h2{font-size:34px;color:var(--gold);margin-top:6px;letter-spacing:.08em;text-shadow:0 2px 14px rgba(0,0,0,.8);}
+.sec-head .line{width:70px;height:1px;margin:14px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+.panel{
+  background:linear-gradient(180deg, rgba(231,211,171,.06), rgba(231,211,171,.02));
+  border:1px solid rgba(201,164,104,.35);
+  border-radius:4px;
+  padding:30px 34px;
+  box-shadow:0 10px 40px rgba(0,0,0,.5), inset 0 0 60px rgba(201,164,104,.04);
+}
+
+/* parchment flow panel */
+.parch{
+  position:relative;padding:26px 30px 30px;
+  background-size:100% 100%;
+  color:var(--ink);
+  box-shadow:0 14px 46px rgba(0,0,0,.65);
+}
+.parch .note-top{
+  font-size:15.5px;color:var(--cream);text-align:center;
+  background:linear-gradient(90deg,transparent,rgba(142,31,31,.85) 18%,rgba(142,31,31,.85) 82%,transparent);
+  padding:9px 12px;margin:0 0 18px;
+  letter-spacing:.22em;font-weight:bold;
+}
+
+/* banner art between */
+.banner{position:relative;margin:0 0 22px;border-radius:3px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.55);}
+.banner img{display:block;width:100%;height:auto;filter:sepia(.1);}
+.banner .cap{
+  position:absolute;left:0;bottom:0;right:0;padding:26px 20px 10px;
+  background:linear-gradient(180deg,transparent,rgba(24,16,9,.88));
+  color:var(--cream);font-size:22px;letter-spacing:.15em;
+}
+
+/* progress */
+.prog{display:flex;align-items:center;gap:14px;margin:18px 0 14px;}
+.prog .bar{flex:1;height:10px;background:rgba(43,32,21,.25);border:1px solid rgba(43,32,21,.35);border-radius:6px;overflow:hidden;}
+.prog .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--red),var(--red-bright));transition:width .35s;}
+.prog .cnt{font-size:13px;color:var(--ink-soft);min-width:64px;text-align:right;font-weight:bold;}
+.btn{
+  display:inline-block;border:1px solid var(--red);color:var(--red);
+  background:transparent;font-size:12.5px;padding:4px 14px;border-radius:3px;
+  cursor:pointer;font-family:inherit;letter-spacing:.15em;transition:.25s;
+}
+.btn:hover{background:var(--red);color:var(--cream);}
+
+/* steps */
+.steps{list-style:none;}
+.steps li{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 12px;border-bottom:1px dashed rgba(43,32,21,.28);
+  cursor:pointer;transition:background .2s, opacity .3s;
+  border-radius:3px;
+}
+.steps li:hover{background:rgba(142,31,31,.08);}
+.steps li .no{
+  width:30px;height:30px;flex:0 0 30px;border-radius:50%;
+  border:1.6px solid var(--red);color:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:bold;background:rgba(255,255,255,.25);
+}
+.steps li .nm{font-size:19px;font-weight:bold;letter-spacing:.06em;}
+.steps li .jp{margin-left:auto;font-size:12.5px;color:var(--ink-soft);letter-spacing:.05em;white-space:nowrap;}
+.steps li.done{opacity:.42;}
+.steps li.done .nm{text-decoration:line-through;text-decoration-color:var(--red);}
+.steps li.done .no{background:var(--red);color:var(--cream);}
+.steps li.unknown .no{border-style:dashed;color:var(--ink-soft);font-size:15px;}
+.steps li.unknown .nm{color:#5a4a30;}
+.steps li.unknown.done .no{background:var(--ink-soft);color:var(--cream);border-style:solid;}
+.parch .foot-note{margin-top:18px;font-size:13.5px;color:var(--ink-soft);text-align:center;}
+.parch .foot-note b{color:var(--red);}
+
+/* ============ info ============ */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+.kv{display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid rgba(201,164,104,.25);padding:9px 2px;font-size:15px;}
+.kv dt{color:var(--gold);letter-spacing:.2em;}
+.kv dd{color:var(--cream);}
+.quote{
+  border:1px solid rgba(201,164,104,.35);
+  padding:16px 22px;margin:22px 0 6px;
+  background:rgba(201,164,104,.06);color:var(--cream);font-size:15.5px;border-radius:0 4px 4px 0;
+  line-height:2;
+}
+.quote em{color:var(--gold);font-style:normal;}
+.syslist{list-style:none;margin-top:14px;}
+.syslist li{padding:7px 2px 7px 26px;position:relative;font-size:15px;border-bottom:1px solid rgba(201,164,104,.14);}
+.syslist li::before{content:"♥";position:absolute;left:2px;color:var(--red-bright);font-size:12px;top:11px;}
+
+/* ============ characters ============ */
+.charimg{border:1px solid rgba(201,164,104,.4);border-radius:4px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.6);}
+.charimg img{display:block;width:100%;height:auto;}
+.chars{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin-top:24px;}
+.cc{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:10px 16px;border:1px solid rgba(201,164,104,.3);border-radius:3px;
+  background:linear-gradient(180deg,rgba(231,211,171,.07),rgba(231,211,171,.02));
+  transition:.25s;
+}
+.cc:hover{border-color:var(--red-bright);transform:translateY(-2px);}
+.cc .n{font-size:17px;color:var(--cream);letter-spacing:.08em;}
+.cc .cv{font-size:12.5px;color:var(--gold-soft);}
+.cc.main .n{color:var(--gold);}
+
+/* still table */
+table.still{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px;}
+table.still th{color:var(--gold);font-weight:normal;letter-spacing:.15em;border-bottom:1px solid rgba(201,164,104,.4);padding:8px;}
+table.still td{text-align:center;padding:7px;border-bottom:1px solid rgba(201,164,104,.14);color:var(--cream);}
+
+/* ============ footer ============ */
+footer{margin:110px 0 0;padding:44px 0 60px;text-align:center;border-top:1px solid rgba(201,164,104,.25);}
+footer p{font-size:13px;color:var(--gold-soft);letter-spacing:.1em;}
+footer a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold);}
+footer .src{margin-top:10px;font-size:12px;opacity:.75;}
+
+#totop{
+  position:fixed;right:26px;bottom:26px;z-index:60;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--gold);background:rgba(14,10,7,.85);color:var(--gold);
+  font-size:18px;cursor:pointer;display:none;transition:.25s;font-family:serif;
+}
+#totop:hover{background:var(--red);border-color:var(--red);color:var(--cream);}
+
+@media (max-width:720px){
+  .hero{height:340px;}
+  .hero h1{font-size:38px;}
+  .two{grid-template-columns:1fr;}
+  .parch{padding:18px 14px 22px;}
+  .steps li .jp{display:none;}
+  section{margin:60px 0;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="https://pic1.imgdb.cn/i/03520adSlRFpFjbR7LWVfX.png" alt="">
+  <div class="shade"></div>
+  <div class="t">
+    <h1>Are you Alice?</h1>
+    <div class="sub">完 全 攻 略 · 白 兔 杀 戮 之 国</div>
+    <div class="ruler"></div>
+  </div>
+</div>
+
+<nav><div class="in">
+  <a href="#info">作品情报</a>
+  <a href="#chars">人物</a>
+  <a href="#walk1">一周目流程</a>
+  <a href="#walk2">二周目流程</a>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ================= 作品情报 ================= -->
+<section id="info">
+  <div class="sec-head">
+    <div class="num">CHAPTER Ⅰ</div>
+    <h2>作品情报</h2>
+    <div class="line"></div>
+  </div>
+  <div class="panel">
+    <dl>
+      <div class="kv"><dt>机种</dt><dd>PlayStation Portable</dd></div>
+      <div class="kv"><dt>发售日</dt><dd>2011 年 4 月 7 日</dd></div>
+      <div class="kv"><dt>分级</dt><dd>CERO「C」（15 岁以上对象）</dd></div>
+      <div class="kv"><dt>原作</dt><dd>二宫爱（原画：Meiji）</dd></div>
+      <div class="kv"><dt>人设</dt><dd>田仓透</dd></div>
+    </dl>
+    <div class="quote">
+      「<em>我的名字——是什么。</em>」<br>
+      没有居所，没有目的……什么都不知道，连该做什么也不知道。<br>
+      被称作「爱丽丝」的少年，加入了「<em>杀死白兔的游戏</em>」。<br>
+      ——白兔，只有爱丽丝能杀。<br>
+      那就是规则。这个国存在着无数扭曲而蛮不讲理的「规则」，居民们仍被规则束缚着活下去。<br>
+      爱丽丝抵达的，这个故事的结局是——
+    </div>
+  </div>
+</section>
+
+<!-- ================= 人物 ================= -->
+<section id="chars">
+  <div class="sec-head">
+    <div class="num">CHAPTER Ⅱ</div>
+    <h2>人 物</h2>
+    <div class="line"></div>
+  </div>
+  <div class="panel">
+    <div class="charimg"><img src="https://pic1.imgdb.cn/i/03520ac46jKXrCCTzOvJvK.png" alt="主要人物一览"></div>
+    <div class="chars">
+      <div class="cc main"><span class="n">爱丽丝</span><span class="cv">CV 樱井孝宏</span></div>
+      <div class="cc"><span class="n">疯帽匠</span><span class="cv">CV 平田广明</span></div>
+      <div class="cc"><span class="n">柴郡猫</span><span class="cv">CV 井上和彦</span></div>
+      <div class="cc"><span class="n">白兔</span><span class="cv">CV 森久保祥太郎</span></div>
+      <div class="cc"><span class="n">红心女王</span><span class="cv">CV 大川透</span></div>
+      <div class="cc"><span class="n">玛丽安</span><span class="cv">CV 中原麻衣</span></div>
+      <div class="cc"><span class="n">睡鼠</span><span class="cv">CV 藤原启治</span></div>
+      <div class="cc"><span class="n">公爵夫人</span><span class="cv">CV 川田妙子</span></div>
+      <div class="cc"><span class="n">留恋</span><span class="cv">CV 田村由香里</span></div>
+      <div class="cc"><span class="n">白骑士</span><span class="cv">CV 森川智之</span></div>
+      <div class="cc"><span class="n">特威德尔·迪</span><span class="cv">CV 石田彰</span></div>
+      <div class="cc"><span class="n">特威德尔·达姆</span><span class="cv">CV 保志总一朗</span></div>
+      <div class="cc"><span class="n">罗泽</span><span class="cv">CV 立花慎之介</span></div>
+    </div>
+    <table class="still">
+      <tr><th>章节</th><th>Ch.1</th><th>Ch.2</th><th>Ch.3</th><th>Ch.4</th><th>Ch.5</th><th>Ch.6</th><th>Ch.7</th><th>Ch.8</th><th>其他</th></tr>
+      <tr><td style="color:var(--gold)">剧情图（含差分）</td><td>13</td><td>18</td><td>11</td><td>—</td><td>8</td><td>9</td><td>11</td><td>9</td><td>12</td></tr>
+    </table>
+    <p style="margin-top:10px;font-size:12.5px;color:var(--gold-soft);text-align:right;">※ 括号外为基础枚数；表中为含差分枚数。</p>
+  </div>
+</section>
+
+<!-- ================= 一周目 ================= -->
+<section id="walk1">
+  <div class="sec-head">
+    <div class="num">CHAPTER Ⅲ</div>
+    <h2>攻略 · 一周目</h2>
+    <div class="line"></div>
+  </div>
+  <div class="parch" style="background-image:url('https://pic1.imgdb.cn/i/03520adIp230NW24ZGmu8c.png');">
+    <div class="note-top">— 按顺序前往以下地点推进剧情 · 点击条目可勾选进度 —</div>
+    <div class="prog">
+      <div class="bar"><div class="fill" id="fill1"></div></div>
+      <div class="cnt" id="cnt1">0 / 16</div>
+      <button class="btn" onclick="resetSec('g1',1)">重置</button>
+    </div>
+    <div class="banner"><img src="https://pic1.imgdb.cn/i/03520aiFglLbdgmGK2kXGF.png" alt="疯帽匠"><div class="cap">一周目 · 从帽匠的家开始</div></div>
+    <ul class="steps" id="list1"></ul>
+    <div class="foot-note">※ 同一地点连续出现为剧情需要，请按顺序逐一推进。</div>
+  </div>
+</section>
+
+<!-- ================= 二周目 ================= -->
+<section id="walk2">
+  <div class="sec-head">
+    <div class="num">CHAPTER Ⅳ</div>
+    <h2>攻略 · 二周目</h2>
+    <div class="line"></div>
+  </div>
+  <div class="parch" style="background-image:url('https://pic1.imgdb.cn/i/03520adIp230NW24ZGmu8c.png');">
+    <div class="note-top">— 「？」为不显示地名的事件地点 · 同样点击勾选 —</div>
+    <div class="prog">
+      <div class="bar"><div class="fill" id="fill2"></div></div>
+      <div class="cnt" id="cnt2">0 / 29</div>
+      <button class="btn" onclick="resetSec('g2',2)">重置</button>
+    </div>
+    <div class="banner"><img src="https://pic1.imgdb.cn/i/03520aeHSQjc0YbvTOkxtk.png" alt="白兔"><div class="cap">二周目 · 追赶白兔的另一面</div></div>
+    <ul class="steps" id="list2"></ul>
+    <div class="foot-note">※ <b>未能回收的剧情图（Still），查看「BOOK」即可补完。</b></div>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <p>— 白兔只有爱丽丝能杀 ——</p>
+  <p class="src" style="margin-top:14px;">流程资料参考：<a href="https://choro-game.com/e/are-you-alice-guide" target="_blank" rel="noopener">choro-game 攻略页</a>　·　译名依据：本作汉化版贴图文字对照定案</p>
+  <p class="src">进度保存在本地浏览器中</p>
+</footer>
+
+<button id="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">♠</button>
+
+<script>
+var P1=[
+ ["帽匠的家","帽子屋の家"],
+ ["帽匠的家","帽子屋の家"],
+ ["红心女王的城堡","ハートの女王の城"],
+ ["帽匠的家","帽子屋の家"],
+ ["帽匠的家","帽子屋の家"],
+ ["广场","広場"],
+ ["广场","広場"],
+ ["毛毛虫小巷","イモ蟲横丁"],
+ ["红心女王的城堡","ハートの女王の城"],
+ ["公爵夫人的宅邸","公爵夫人の屋敷"],
+ ["泪水池","泪の池"],
+ ["红心女王的城堡","ハートの女王の城"],
+ ["路标","標識"],
+ ["双子的家","双子の家"],
+ ["镜之国女王的城堡","鏡の国の女王の城"],
+ ["帽匠的家","帽子屋の家"]
+];
+var P2=[
+ ["帽匠的家","帽子屋の家"],
+ ["帽匠的家","帽子屋の家"],
+ ["红心女王的城堡","ハートの女王の城"],
+ ["？？？","（右下方）"],
+ ["帽匠的家","帽子屋の家"],
+ ["？？？","（广场）"],
+ ["帽匠的家","帽子屋の家"],
+ ["广场","広場"],
+ ["？？？",""],
+ ["帽匠的家","帽子屋の家"],
+ ["广场","広場"],
+ ["？？？",""],
+ ["公爵夫人的宅邸","公爵夫人の屋敷"],
+ ["？？？",""],
+ ["红心女王的城堡","ハートの女王の城"],
+ ["？？？",""],
+ ["小巷","路地裏"],
+ ["？？？",""],
+ ["酒馆","酒場"],
+ ["？？？",""],
+ ["泪水池","泪の池"],
+ ["？？？","（帽匠的家旁）"],
+ ["？？？",""],
+ ["路标","標識"],
+ ["？？？",""],
+ ["双子的家","双子の家"],
+ ["镜之国女王的城堡","鏡の国の女王の城"],
+ ["？？？",""],
+ ["帽匠的家","帽子屋の家"]
+];
+var PLACES=null;
+function render(list, data, store, startNo){
+  var el=document.getElementById(list);
+  var saved=JSON.parse(localStorage.getItem(store)||"[]");
+  el.innerHTML="";
+  data.forEach(function(d,i){
+    var li=document.createElement("li");
+    var unk=d[0]==="？？？";
+    if(unk) li.className="unknown";
+    var jp=d[1]?("<ruby>"+d[0]+"<rt style=\"font-size:11px;color:var(--gold-soft);letter-spacing:0;\">"+d[1]+"</rt></ruby>"):d[0];
+    li.innerHTML="<span class='no'>"+(unk?"?":(startNo+i))+"</span><span class='nm'>"+jp+"</span>"+(d[1]&&!unk?"<span class='jp'>"+d[1]+"</span>":"");
+    if(saved.indexOf(i)>=0) li.classList.add("done");
+    li.addEventListener("click",function(){
+      li.classList.toggle("done");
+      var now=JSON.parse(localStorage.getItem(store)||"[]");
+      var k=now.indexOf(i);
+      if(k>=0) now.splice(k,1); else now.push(i);
+      localStorage.setItem(store,JSON.stringify(now));
+      updateProg(store,data,i+1);
+    });
+    el.appendChild(li);
+  });
+  updateProg(store,data,data.length);
+}
+function updateProg(store,data,total){
+  var saved=JSON.parse(localStorage.getItem(store)||"[]");
+  var n=0;
+  data.forEach(function(d,i){ if(saved.indexOf(i)>=0) n++; });
+  var id=store==="g1"?"1":"2";
+  document.getElementById("fill"+id).style.width=(total? n/total*100:0)+"%";
+  document.getElementById("cnt"+id).textContent=n+" / "+total;
+}
+function resetSec(store,sec){
+  localStorage.removeItem(store);
+  render("list"+sec, sec===1?P1:P2, store, 1);
+}
+render("list1",P1,"g1",1);
+render("list2",P2,"g2",1);
+
+var tt=document.getElementById("totop");
+window.addEventListener("scroll",function(){ tt.style.display=window.scrollY>500?"block":"none"; });
+</script>
+</body>
+</html>
