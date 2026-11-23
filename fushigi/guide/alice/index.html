@@ -167,7 +167,8 @@ section{margin:88px 0;}
 .cc.main .n{color:var(--gold);}
 
 /* still table */
-table.still{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table.still{width:100%;min-width:560px;border-collapse:collapse;margin-top:18px;font-size:14px;}
 table.still th{color:var(--gold);font-weight:normal;letter-spacing:.15em;border-bottom:1px solid rgba(201,164,104,.4);padding:8px;}
 table.still td{text-align:center;padding:7px;border-bottom:1px solid rgba(201,164,104,.14);color:var(--cream);}
 
@@ -265,10 +266,12 @@ footer .src{margin-top:10px;font-size:12px;opacity:.75;}
       <div class="cc"><span class="n">特威德尔·达姆</span><span class="cv">CV 保志总一朗</span></div>
       <div class="cc"><span class="n">罗泽</span><span class="cv">CV 立花慎之介</span></div>
     </div>
+    <div class="tscroll">
     <table class="still">
       <tr><th>章节</th><th>Ch.1</th><th>Ch.2</th><th>Ch.3</th><th>Ch.4</th><th>Ch.5</th><th>Ch.6</th><th>Ch.7</th><th>Ch.8</th><th>其他</th></tr>
       <tr><td style="color:var(--gold)">剧情图（含差分）</td><td>13</td><td>18</td><td>11</td><td>—</td><td>8</td><td>9</td><td>11</td><td>9</td><td>12</td></tr>
     </table>
+    </div>
     <p style="margin-top:10px;font-size:12.5px;color:var(--gold-soft);text-align:right;">※ 括号外为基础枚数；表中为含差分枚数。</p>
   </div>
 </section>
