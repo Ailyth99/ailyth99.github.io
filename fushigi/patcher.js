@@ -33,14 +33,11 @@
     '0D68AF2E': { key: 'psp', label: 'PSP', out: 'Fushigi Yuugi Kagami no Miko PSP (CHINESE).iso',
                   src: [MS + 'PSP_Fushigi%20Yuugi%20-%20Genbu%20Kaiden%20Gaiden%20-%20Kagami%20no%20Miko_patch.xdelta?view=false'],
                   back: [GH + 'PSP_Fushigi.Yuugi.-.Genbu.Kaiden.Gaiden.-.Kagami.no.Miko_patch.xdelta'],
-                  game: '不可思议游戏 玄武开传外传 镜之巫女' },
-    /* PSP 沙漠王国 携带版 */
-    '2BA86CE4': { key: 'psp', label: 'PSP', out: 'Desert Kingdom Portable (CHINESE).iso',
-                  src: [MS + 'Desert_Kingdom_Portable.CHS.Patch?view=false'],
-                  back: [GH + 'Desert_Kingdom_Portable.CHS.Patch'],
-                  game: '沙漠王国 携带版' }
+                  game: '不可思议游戏 玄武开传外传 镜之巫女' }
   };
-  var KNOWN_CRC = Object.keys(TARGETS);
+  function targetFor(crc) {
+    return TARGETS[crc] || (window.FushigiContent && window.FushigiContent.targets[crc]);
+  }
 
   /* 同源变体：网上流传的 dump 有时被清过几段数据，与标准原版差几十到几百字节。
      补丁按标准原版做，这类 ROM 直接打会失败。命中就在内存里补回差异字节，
@@ -115,6 +112,41 @@
     var b = elProg.querySelector('.pct');
     if (!b) { b = document.createElement('div'); b.className = 'pct'; elProg.appendChild(b); }
     b.textContent = Math.round(p) + '%';
+  }
+
+  function unmatchedRom() {
+    S.pat = null;
+    AUTO.done = false;
+    var state = window.FushigiContent && window.FushigiContent.state;
+    $('dRom').classList.toggle('bad', state !== 'loading');
+    if (state === 'loading') {
+      setSlot('wait on', '正在加载游戏信息…', '加载完成后自动匹配补丁', false);
+      status('游戏信息正在加载，请稍等…');
+    } else if (state === 'error') {
+      setSlot('fail', '游戏信息未加载', '请在游戏列表下方重新加载，或使用手动模式', false);
+      status('更多游戏信息加载失败，请点游戏列表下方的「重新加载」，或改用手动模式', 'err');
+    } else {
+      setSlot('fail', '未匹配到补丁', '换一个原版镜像试试', false);
+      log('没有匹配到补丁，可切到「手动模式」自行选择', 'err');
+      status('这个镜像没有匹配到补丁，请切换到手动模式自行选择补丁文件', 'err');
+    }
+  }
+
+  function catalogChanged() {
+    if (mode !== 'auto' || !S.rom || S.out || AUTO.busy || AUTO.done) return;
+    var matched = !!targetFor(S.rom.crc);
+    $('mRom').textContent = size(S.rom.bytes.length);
+    if (matched) {
+      $('mRom').insertAdjacentHTML('beforeend', '  ·  <span class="pass">版本验证通过</span>');
+      $('dRom').classList.remove('bad');
+      autopatch();
+    } else {
+      if (!window.FushigiContent || window.FushigiContent.state !== 'loading') {
+        $('mRom').insertAdjacentHTML('beforeend', '  ·  <span class="fail">未匹配到补丁</span>');
+      }
+      unmatchedRom();
+      refresh();
+    }
   }
 
   /* ---------------- 文件读取（分块，避开 >2GiB 的 Blob 限制） ---------------- */
@@ -265,14 +297,14 @@
         var orig = hx;
         var fix = null;
 
-        if (key === 'rom' && hx && !TARGETS[hx]) {
+        if (key === 'rom' && hx && !targetFor(hx)) {
           fix = tryFix(u8, hx);
           if (fix) {
             hx = fix.crc;
           }
         }
 
-        if (key === 'rom' && hx && !TARGETS[hx]) {
+        if (key === 'rom' && hx && !targetFor(hx)) {
           var ne = normOf(hx);
           if (ne) {
             if (u8.length !== ne.size) {
@@ -296,7 +328,7 @@
         metaEl.textContent = size(u8.length) +
           (key === 'pat' ? '  ·  ' + (info.name || '未知格式') : '');
 
-        var matched = !!(hx && TARGETS[hx]);
+        var matched = !!(hx && targetFor(hx));
 
         if (key === 'rom') {
           if (matched) {
@@ -304,13 +336,10 @@
             drop.classList.remove('bad');
           } else if (mode === 'auto') {
             /* 自动模式必须认出是哪个补丁，认不出就不能往下走 */
-            metaEl.insertAdjacentHTML('beforeend', '  ·  <span class="fail">未匹配到补丁</span>');
-            log('没有匹配到补丁，可切到「手动模式」自行选择', 'err');
-            status('这个镜像没有匹配到补丁，请切换到手动模式自行选择补丁文件', 'err');
-            S.pat = null;
-            AUTO.done = false;
-            setSlot('fail', '未匹配到补丁', '换一个原版镜像试试', false);
-            drop.classList.add('bad');
+            if (!window.FushigiContent || window.FushigiContent.state !== 'loading') {
+              metaEl.insertAdjacentHTML('beforeend', '  ·  <span class="fail">未匹配到补丁</span>');
+            }
+            unmatchedRom();
           } else {
             metaEl.insertAdjacentHTML('beforeend', '  ·  <span class="pass">手动模式</span>');
             drop.classList.remove('bad');
@@ -337,9 +366,9 @@
   /* ---------------- 自动获取补丁 ---------------- */
   function autopatch() {
     if (AUTO.busy) return;
-    var t = S.rom && S.rom.crc ? TARGETS[S.rom.crc] : null;
+    var t = S.rom && S.rom.crc ? targetFor(S.rom.crc) : null;
     if (!t) {
-      setSlot('fail', '未匹配到补丁', '换一个原版镜像试试', false);
+      unmatchedRom();
       return;
     }
     var PIECES = (t.src || []).slice();
@@ -493,7 +522,7 @@
 
   /* ---------------- 应用 ---------------- */
   function romOk() {
-    return !!(S.rom && S.rom.crc && TARGETS[S.rom.crc]);
+    return !!(S.rom && S.rom.crc && targetFor(S.rom.crc));
   }
   function canRun() {
     if (!S.rom || !S.pat || AUTO.busy) return false;
@@ -556,7 +585,7 @@
   }
 
   function outName() {
-    var t = S.rom && S.rom.crc ? TARGETS[S.rom.crc] : null;
+    var t = S.rom && S.rom.crc ? targetFor(S.rom.crc) : null;
     if (t && t.out) return t.out;
     var n = S.rom ? S.rom.name : 'rom.bin';
     var m = n.match(/(\.[^.]+)$/);
@@ -731,6 +760,9 @@
   }
 
   /* ---------------- 事件绑定 ---------------- */
+  document.addEventListener('fushigi:content-loading', catalogChanged);
+  document.addEventListener('fushigi:content-ready', catalogChanged);
+  document.addEventListener('fushigi:content-error', catalogChanged);
   $('pMAuto').addEventListener('click', function () { setMode('auto'); });
   $('pMMan').addEventListener('click', function () { setMode('man'); });
   elSlotR.addEventListener('click', function () { if (mode === 'auto' && S.rom) autopatch(); });

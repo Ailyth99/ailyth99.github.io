@@ -39,7 +39,7 @@
   </a>
   <div class="top-right">
     <a class="top-btn" href="#games"><span class="tb-l">支持的游戏列表</span><span class="tb-s">游戏列表</span></a>
-    <div class="top-news" id="news"><span class="tn-in"><b>2026.11.19</b> 增加PSP《沙漠王国 携带版》汉化支持。</span></div>
+    <div class="top-news" id="news"><span class="tn-in">正在读取最新公告…</span></div>
   </div>
 </header>
 
@@ -217,17 +217,12 @@
           </div>
         </article>
 
-        <article class="g-item">
-          <span class="g-no" aria-hidden="true">05</span>
-          <div class="g-body">
-            <div class="g-top"><span class="g-plat">PSP</span><b>沙漠王国 携带版</b></div>
-            <div class="g-ed">
-              <span class="g-e"><i>ULJM-06249</i><em>2BA86CE4</em></span>
-            </div>
-            <div class="g-rom"><span>Desert Kingdom Portable (Japan).iso</span></div>
-          </div>
-        </article>
       </div>
+      <div class="g-foot content-status" role="status" aria-live="polite">
+        <span id="contentStatus">正在加载更多游戏和攻略…</span>
+        <button id="contentRetry" class="content-retry" type="button" hidden>重新加载</button>
+      </div>
+      <noscript><p class="g-foot">请启用 JavaScript，以加载更多游戏、攻略并使用在线补丁工具。</p></noscript>
     </div>
   </div>
 </section>
@@ -268,17 +263,6 @@
         </div>
       </a>
 
-      <a class="gd-item" href="https://ailyth99.github.io/fushigi/desertguide/" target="_blank" rel="noopener">
-        <div class="gd-pic">
-          <img src="assets/desertkingdom.jpg" alt="沙漠王国 携带版" loading="lazy" />
-          <span class="gd-tag">PSP</span>
-        </div>
-        <div class="gd-txt">
-          <h3 class="gd-title">沙漠王国 <b>携带版</b></h3>
-          <p class="gd-desc">魔神公主阿丝帕西娅（可改名）某天突然失去魔力，并从父王口中得知自己是魔神与人类的混血儿。跌落成凡人的她前往人间，历经两个月流浪抵达沙漠王国。为了在限定时间内重新变回魔神、重返故乡 EVUU，她必须通过实现当地形形色色人类的愿望来收集魔力，否则就将彻底沦为人类！</p>
-          <span class="gd-go">查看攻略<i>→</i></span>
-        </div>
-      </a>
     </div>
   </div>
 </section>
@@ -293,6 +277,7 @@
   </div>
 </footer>
 
+<script src="content.js"></script>
 <script src="app.js"></script>
 
 <!-- 补丁内核：rom-patcher-js -->

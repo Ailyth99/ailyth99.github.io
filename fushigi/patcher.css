@@ -566,6 +566,20 @@
   color:rgba(255,247,251,.42);
 }
 
+.content-status[hidden]{display:none}
+.content-retry{
+  margin-left:10px;padding:3px 9px;
+  border:1px solid currentColor;border-radius:4px;
+  background:transparent;color:inherit;font:inherit;cursor:pointer;
+}
+.content-retry[hidden]{display:none}
+.g-patch-info{
+  margin-top:7px;
+  font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  font-size:11.5px;line-height:1.8;color:rgba(255,247,251,.62);
+  white-space:pre-line;overflow-wrap:anywhere;
+}
+
 /* ---------- 窄屏 ---------- */
 @media(max-width:760px){
   .patch{padding-top:clamp(40px,7vh,64px)}

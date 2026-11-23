@@ -213,6 +213,7 @@
   function fitNews() {
     if (!news) return;
     const inner = news.firstElementChild;
+    if (!inner) return;
     news.classList.remove('scroll');
     inner.style.removeProperty('--sx');
     const over = inner.getBoundingClientRect().width - news.clientWidth;
@@ -257,7 +258,7 @@
 
     /* 首屏两个入口框的大标题：跟着框一起入场 */
     document.querySelectorAll('.lnk-h').forEach((t, k) => {
-      if (!t.textContent.trim()) return;
+      if (!t.textContent.trim() || t.classList.contains('pop')) return;
       splitChars(t);
       t.style.setProperty('--d', (0.34 + k * 0.14).toFixed(2) + 's');
       heroPop.push(t);
@@ -265,7 +266,7 @@
 
     /* 补丁区 / 支持游戏列表 / 攻略区的标题：滚到视口才播 */
     document.querySelectorAll('.p-title, .g-title, .gd-h, .gd-title').forEach(t => {
-      if (!t.textContent.trim()) return;
+      if (!t.textContent.trim() || t.classList.contains('pop')) return;
       splitChars(t);
       t.setAttribute('aria-label', t.textContent);
       popWait.push(t);
@@ -343,6 +344,11 @@
   /* ---------------------------------------------------------
      4. 起動
      --------------------------------------------------------- */
+  document.addEventListener('fushigi:content-ready', () => {
+    fitNews();
+    charPop();
+    if (booted) popStart();
+  });
   fitNews();
   charPop();
   footReveal();

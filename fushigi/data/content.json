@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "news": [
+    {
+      "date": "2026-11-19",
+      "text": "增加PSP《沙漠王国 携带版》汉化支持。"
+    }
+  ],
+  "games": [
+    {
+      "id": "desert-kingdom-psp",
+      "title": "沙漠王国 携带版",
+      "platform": "PSP",
+      "cover": "assets/desertkingdom.jpg",
+      "description": "魔神公主阿丝帕西娅（可改名）某天突然失去魔力，并从父王口中得知自己是魔神与人类的混血儿。跌落成凡人的她前往人间，历经两个月流浪抵达沙漠王国。为了在限定时间内重新变回魔神、重返故乡 EVUU，她必须通过实现当地形形色色人类的愿望来收集魔力，否则就将彻底沦为人类！",
+      "enabled": true,
+      "order": 5,
+      "versions": [
+        {
+          "label": "",
+          "serial": "ULJM-06249",
+          "romName": "Desert Kingdom Portable (Japan).iso",
+          "crc32": "2BA86CE4",
+          "patchId": "desert-kingdom-zh"
+        }
+      ]
+    }
+  ],
+  "patches": [
+    {
+      "id": "desert-kingdom-zh",
+      "version": null,
+      "releasedAt": null,
+      "notes": "",
+      "outputName": "Desert Kingdom Portable (CHINESE).iso",
+      "files": [
+        {
+          "url": "https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/Desert_Kingdom_Portable.CHS.Patch?view=false",
+          "fallbackUrl": "https://github.com/EiliaLan/fushigi_patcher/releases/download/1.0/Desert_Kingdom_Portable.CHS.Patch"
+        }
+      ]
+    }
+  ],
+  "guides": [
+    {
+      "id": "desert-kingdom-guide",
+      "gameIds": ["desert-kingdom-psp"],
+      "url": "desertguide/",
+      "highlight": "携带版",
+      "enabled": true,
+      "order": 3
+    }
+  ]
+}
