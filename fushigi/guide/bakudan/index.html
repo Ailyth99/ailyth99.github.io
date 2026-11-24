@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バクダン★ハンダン 攻略 - 爆弹★判断</title>
+<style>
+@import url("https://fontsapi.zeoseven.com/2328/main/result.css");
+
+:root{
+  --bg:#0d0d12;
+  --bg2:#14141c;
+  --panel:#1a1a24;
+  --panel2:#20202c;
+  --pink:#ff4d9d;
+  --pink2:#ff7ab8;
+  --gold:#f5c542;
+  --text:#e8e8f0;
+  --muted:#9a9ab0;
+  --line:#2c2c3a;
+  --accent:#ffb84d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background-color:#0d0d12;
+  color:var(--text);
+  font-family:"Cheese Foam Oolong Song","Songti SC","Noto Serif CJK SC","Source Han Serif SC",SimSun,serif;
+  font-weight:normal;
+  line-height:1.7;
+  min-height:100vh;
+}
+/* 背景：稍微倾斜 + 慢速横向滚动 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-12%;
+  z-index:-1;
+  pointer-events:none;
+  background-image:url("assets/img/bg_texture.jpg");
+  background-repeat:repeat;
+  background-size:144px 2000px;
+  transform:rotate(-4deg);
+  animation:bgScrollX 20s linear infinite;
+}
+@keyframes bgScrollX{
+  from{background-position:0 0}
+  to{background-position:144px 0}
+}
+a{color:var(--pink2);text-decoration:none}
+a:hover{color:var(--gold)}
+
+/* 顶部品牌条 */
+.brandbar{
+  background:#000;
+  border-bottom:2px solid var(--pink);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 24px;
+}
+.brandbar .logo{font-weight:900;letter-spacing:2px;color:#fff;font-size:15px}
+.brandbar .logo span{color:var(--pink)}
+.brandbar .platform{
+  font-size:12px;color:var(--muted);
+  border:1px solid var(--line);padding:3px 10px;border-radius:20px;
+}
+
+/* 主视觉 Hero */
+.hero{
+  position:relative;
+  text-align:center;
+  padding:56px 20px 48px;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at center, rgba(13,13,18,.55), rgba(13,13,18,.85) 80%);
+}
+.hero .logoimg{
+  max-width:min(620px,88vw);
+  height:auto;
+  display:block;
+  margin:0 auto 10px;
+  filter:drop-shadow(0 6px 20px rgba(255,77,157,.35));
+}
+.hero .sub{
+  color:var(--muted);margin-top:8px;font-size:14px;letter-spacing:2px;
+}
+.hero .tags{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero .tags .tag{
+  border:1px solid var(--pink);color:var(--pink2);
+  padding:4px 14px;border-radius:20px;font-size:12px;
+}
+.hero h1{font-size:clamp(24px,5vw,40px);letter-spacing:3px;color:#fff;text-shadow:0 0 20px rgba(255,77,157,.5)}
+
+/* 导航（标签切换） */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(13,13,18,.94);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--pink);
+}
+nav ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
+nav a{
+  display:block;padding:14px 34px;color:var(--text);
+  font-size:15px;letter-spacing:2px;transition:.2s;border-bottom:2px solid transparent;
+  cursor:pointer;
+}
+nav a:hover{color:var(--pink2);border-bottom-color:var(--pink)}
+nav a.active{color:var(--pink);border-bottom-color:var(--pink)}
+
+/* 布局 */
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{
+  padding:48px 28px;margin:28px auto;
+  background:rgba(13,13,18,.82);border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+.sec-title{
+  text-align:center;margin-bottom:8px;
+  font-size:26px;letter-spacing:3px;color:#fff;
+}
+.sec-title .en{color:var(--pink);font-size:14px;letter-spacing:6px;display:block;margin-bottom:6px}
+.sec-desc{text-align:center;color:var(--muted);font-size:14px;margin-bottom:36px}
+
+/* 首页角色横排 */
+/* 人物介绍 - 官网经典布局：左侧头像列表 + 右侧大立绘 */
+.chara-layout{
+  display:flex;gap:22px;align-items:flex-start;
+}
+.chara-nav{
+  flex:0 0 176px;
+  display:flex;flex-direction:column;gap:8px;
+  max-height:640px;overflow-y:auto;
+  padding-right:6px;
+}
+.chara-nav::-webkit-scrollbar{width:6px}
+.chara-nav::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.chara-tab{
+  display:flex;align-items:center;gap:11px;
+  background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+  padding:7px 10px;cursor:pointer;transition:.2s;color:var(--text);text-align:left;
+  font-family:inherit;width:100%;
+}
+.chara-tab img{width:46px;height:46px;border-radius:7px;background:#000;object-fit:cover;flex:0 0 auto}
+.chara-tab .nm{font-size:13px;line-height:1.35}
+.chara-tab:hover{border-color:var(--pink2)}
+.chara-tab.active{
+  border-color:var(--pink);background:rgba(255,77,157,.14);
+  box-shadow:0 0 14px rgba(255,77,157,.35);
+}
+.chara-tab.active .nm{color:var(--pink2)}
+.chara-main{flex:1;min-width:0}
+.chara-portrait{
+  min-height:360px;display:flex;align-items:flex-end;justify-content:center;
+  background:radial-gradient(ellipse at 50% 100%, rgba(255,77,157,.14), transparent 72%);
+  border-radius:14px;padding:14px;position:relative;
+}
+.chara-portrait img{
+  max-height:460px;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 12px 28px rgba(0,0,0,.55));
+}
+.chara-info{
+  margin-top:16px;padding:20px 22px;
+  background:var(--panel2);border:1px solid var(--line);border-radius:12px;text-align:left;
+}
+.chara-info .switch{
+  display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px;
+}
+.chara-info .switch button{
+  background:transparent;border:none;color:var(--muted);padding:6px 16px;cursor:pointer;
+  font-size:12px;font-family:inherit;letter-spacing:1px;
+}
+.chara-info .switch button.active{background:var(--pink);color:#fff}
+.chara-info .cname{font-size:24px;color:var(--pink);letter-spacing:2px;font-weight:900}
+.chara-info .cname .jp{font-size:14px;color:var(--muted);font-weight:400;letter-spacing:1px;margin-left:8px}
+.chara-info .cv{font-size:13px;color:var(--muted);margin:6px 0 12px}
+.chara-info .cv b{color:var(--pink2)}
+.chara-info .desc{font-size:14px;color:var(--text);line-height:1.9}
+
+/* 攻略列表 */
+.guide-list{display:grid;gap:14px}
+.guide-item{
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:18px 22px;transition:.2s;
+}
+.guide-item:hover{border-color:var(--pink)}
+.guide-item .t{font-size:16px;color:#fff;font-weight:700}
+.guide-item .d{color:var(--muted);font-size:13px;margin-top:4px}
+
+/* 语言切换 */
+.langbar{
+  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  padding:10px 20px;background:rgba(13,13,18,.8);border-bottom:1px solid var(--line);
+}
+.langbar .lb-label{font-size:12px;color:var(--muted);letter-spacing:1px;margin-right:2px}
+.langbar button{
+  padding:6px 16px;font-family:inherit;font-size:12px;cursor:pointer;border-radius:20px;
+  background:var(--panel2);border:1px solid var(--line);color:var(--muted);transition:.2s;letter-spacing:1px;
+}
+.langbar button:hover{border-color:var(--pink2);color:var(--pink2)}
+.langbar button.active{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:700}
+
+/* 双语文本 */
+.opt .j,.rt-step-text .j{display:block;color:var(--text)}
+.opt .c,.rt-step-text .c{display:block;color:var(--pink2);font-size:12px;margin-top:1px;line-height:1.5}
+body.lang-ja .opt .c,body.lang-ja .rt-step-text .c{display:none}
+body.lang-zh .opt .j,body.lang-zh .rt-step-text .j{display:none}
+
+/* 进度条 */
+.progress-area{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px;
+}
+.progress-card{
+  background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+}
+.progress-card h4{font-size:15px;color:#fff;margin-bottom:14px;letter-spacing:1px}
+.progress-card h4 .tag{font-size:11px;color:var(--pink2);margin-left:6px;font-weight:400}
+.progress-track{
+  height:18px;background:var(--bg);border:1px solid var(--line);border-radius:9px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;width:0;border-radius:9px;transition:width .45s ease;
+  background:linear-gradient(90deg,var(--pink),var(--gold));
+}
+.progress-num{font-size:13px;color:var(--muted);margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+.progress-num b{color:var(--pink2);font-size:18px}
+.progress-input{
+  display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap;
+}
+.progress-input input{
+  background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--text);
+  padding:8px 12px;font-size:14px;width:80px;font-family:inherit;
+}
+.progress-input input:focus{outline:none;border-color:var(--pink)}
+.progress-input label{font-size:13px;color:var(--muted)}
+
+/* 攻略区块 */
+.guide-block{margin-bottom:26px}
+.guide-block > h3{
+  font-size:18px;color:var(--pink);letter-spacing:1px;margin-bottom:14px;
+  padding-bottom:8px;border-bottom:1px solid var(--line);
+}
+.guide-block > h3 .jp{font-size:12px;color:var(--muted);margin-left:8px;font-weight:400}
+.chap{
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px;
+}
+.chap .cht{font-size:14px;color:var(--gold);font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.chap .opt{
+  font-size:13px;color:var(--text);padding:3px 0 3px 16px;position:relative;line-height:1.65;
+}
+.chap .opt::before{content:"▸";position:absolute;left:0;color:var(--pink2)}
+.chap .opt .up{color:var(--gold);font-size:12px;margin-left:4px}
+.chap .opt .note{color:var(--muted);font-size:12px;margin-left:4px}
+
+/* ===== 角色路线：顶部 tab 切换 ===== */
+.rt-tabs{
+  display:flex;gap:6px;flex-wrap:wrap;justify-content:center;
+  padding:10px 8px;margin-bottom:-1px;
+  background:linear-gradient(180deg,rgba(245,197,66,.10),transparent);
+  border:1px solid var(--line);border-bottom:none;border-radius:12px 12px 0 0;
+}
+.rt-tab{
+  cursor:pointer;padding:9px 16px;font-family:inherit;font-size:13px;
+  color:var(--muted);background:linear-gradient(180deg,#2a2a36,#1a1a24);
+  border:1px solid var(--line);border-bottom:none;border-radius:8px 8px 0 0;
+  transition:.2s;letter-spacing:1px;position:relative;
+}
+.rt-tab:hover{color:var(--pink2);border-color:var(--pink2)}
+.rt-tab.active{
+  color:#fff;font-weight:700;
+  background:linear-gradient(180deg,rgba(255,77,157,.28),var(--panel2));
+  border-color:var(--pink);
+}
+.rt-tab.active::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--panel2);
+}
+.rt-tab .hi{font-size:10px;color:var(--gold);margin-left:4px}
+
+/* ===== 角色路线：左右两栏 ===== */
+.rt-layout{
+  display:grid;grid-template-columns:250px 1fr;gap:0;
+  border:1px solid var(--pink);border-radius:0 0 12px 12px;overflow:hidden;
+  background:var(--panel);
+}
+/* 左栏：立绘 + 角色信息 */
+.rt-side{
+  background:linear-gradient(180deg,rgba(255,77,157,.08),transparent 60%),var(--panel2);
+  border-right:1px solid var(--line);padding:20px 18px;text-align:center;
+}
+.rt-portrait{
+  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;
+  border:1px solid var(--pink);border-radius:10px;background:#000;display:block;
+  box-shadow:0 0 22px rgba(255,77,157,.22);
+}
+.rt-name{font-size:24px;color:#fff;font-weight:800;letter-spacing:2px;margin-top:16px}
+.rt-romaji{font-size:12px;color:var(--pink2);letter-spacing:2px;margin-top:2px}
+.rt-cv{font-size:12px;color:var(--muted);margin-top:6px}
+.rt-cv b{color:var(--gold);font-weight:500}
+.rt-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px;text-align:left}
+.rt-side-divider{height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);margin:16px 0}
+.rt-menu{list-style:none;text-align:left}
+.rt-menu li{margin:2px 0}
+.rt-menu a{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 10px;font-size:13px;color:var(--muted);border-radius:6px;transition:.2s;
+}
+.rt-menu a:hover{background:rgba(255,77,157,.12);color:var(--pink2)}
+.rt-menu a .pct{font-size:11px;color:var(--gold)}
+.rt-side-btns{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.rt-side-btns button{
+  padding:8px;font-family:inherit;font-size:12px;cursor:pointer;border-radius:8px;transition:.2s;
+  background:var(--panel);border:1px solid var(--line);color:var(--muted);
+}
+.rt-side-btns button:hover{border-color:var(--pink2);color:var(--pink2)}
+.rt-done-btn{border-color:var(--pink)!important;color:var(--pink2)!important}
+.rt-done-btn.done{background:var(--pink)!important;color:#fff!important}
+
+/* 右栏：流程列表 */
+.rt-main{padding:22px 26px;min-height:520px}
+.rt-main-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:14px;
+  border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:6px;
+}
+.rt-main-head h3{font-size:20px;color:#fff;letter-spacing:2px}
+.rt-main-head h3 span{font-size:12px;color:var(--muted);font-weight:400;margin-left:8px;letter-spacing:1px}
+.rt-chap-progress{font-size:12px;color:var(--muted);white-space:nowrap}
+.rt-chap-progress b{color:var(--pink2);font-size:16px}
+.rt-tip{font-size:12px;color:var(--muted);margin-bottom:20px}
+.rt-chap{margin-bottom:22px;scroll-margin-top:80px}
+.rt-chap-head{
+  display:flex;align-items:center;gap:10px;
+  font-size:15px;color:var(--gold);font-weight:700;letter-spacing:1px;
+  padding:8px 12px;background:linear-gradient(90deg,rgba(245,197,66,.12),transparent);
+  border-left:3px solid var(--gold);border-radius:0 6px 6px 0;margin-bottom:6px;
+}
+.rt-chap-head .cn{font-size:12px;color:var(--muted);font-weight:400}
+.rt-step{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;transition:.18s;
+}
+.rt-step:hover{background:rgba(255,77,157,.06)}
+.rt-step input{
+  appearance:none;flex:none;width:18px;height:18px;margin-top:2px;
+  border:1px solid var(--pink2);border-radius:4px;background:transparent;cursor:pointer;position:relative;
+}
+.rt-step input:checked{background:var(--pink);border-color:var(--pink)}
+.rt-step input:checked::after{
+  content:"✓";position:absolute;inset:0;color:#fff;font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;line-height:1;
+}
+.rt-step-body{flex:1}
+.rt-step-text{font-size:13.5px;color:var(--text);line-height:1.6}
+.rt-step-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.rt-step.checked .rt-step-text{color:#6a6a7c;text-decoration:line-through}
+.rt-step-pct{font-size:12px;color:var(--gold);white-space:nowrap;margin-top:2px}
+.rt-step.checked .rt-step-pct{color:#5a5a6a;text-decoration:line-through}
+.rt-badend{
+  font-size:12px;color:var(--muted);margin-top:18px;padding:12px 14px;
+  background:rgba(0,0,0,.25);border:1px dashed var(--line);border-radius:8px;
+}
+.rt-badend b{color:var(--gold)}
+
+/* 神秘人物：解锁提示 / 剪影 / 条件 */
+.rt-mystery{
+  text-align:center;font-size:13px;color:var(--muted);letter-spacing:1px;line-height:1.9;
+  padding:11px 16px;margin-bottom:12px;
+  background:linear-gradient(90deg,transparent,rgba(245,197,66,.10),transparent);
+  border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);border-radius:6px;
+}
+.rt-mystery .q{color:var(--pink2);font-weight:800;font-size:15px}
+.rt-portrait.mystery{
+  filter:brightness(0) drop-shadow(0 0 14px rgba(245,197,66,.45));
+  border-color:var(--gold);
+}
+.rt-unlock-cond{
+  font-size:12.5px;color:var(--muted);line-height:1.9;
+  background:rgba(245,197,66,.08);border:1px dashed var(--gold);
+  border-radius:8px;padding:12px 16px;margin-bottom:18px;
+}
+.rt-unlock-cond b{color:var(--gold)}
+.common-tip{
+  font-size:12.5px;color:var(--muted);line-height:1.8;margin-bottom:14px;
+  padding:10px 14px;background:rgba(245,197,66,.07);
+  border:1px solid rgba(245,197,66,.3);border-radius:8px;
+}
+.common-tip b{color:var(--gold)}
+
+/* 页脚 */
+footer{
+  background:rgba(13,13,18,.9);
+  border-top:1px solid var(--line);margin-top:40px;
+  padding:28px 20px;text-align:center;color:var(--muted);font-size:12px;
+}
+footer .copy{letter-spacing:1px}
+
+/* 响应式 */
+@media(max-width:760px){
+  .rt-layout{grid-template-columns:1fr}
+  .rt-side{border-right:none;border-bottom:1px solid var(--line);display:grid;grid-template-columns:140px 1fr;gap:0 18px;text-align:left}
+  .rt-portrait{grid-row:1/6;aspect-ratio:3/4}
+  .rt-name,.rt-romaji,.rt-cv,.rt-desc{margin-top:0}
+  .rt-side-divider,.rt-menu,.rt-side-btns{grid-column:1/-1}
+  .rt-main{padding:18px 16px}
+  .rt-tab{padding:8px 10px;font-size:12px}
+}
+@media(max-width:640px){
+  .chara-layout{flex-direction:column}
+  .chara-nav{flex:1 1 auto;flex-direction:row;max-height:none;overflow-x:auto;width:100%}
+  .chara-nav::-webkit-scrollbar{height:6px}
+  .chara-tab{flex:0 0 auto;width:auto;flex-direction:column;text-align:center;padding:8px}
+  .chara-tab .nm{font-size:11px}
+  .chara-portrait img{max-height:300px}
+  .progress-area{grid-template-columns:1fr}
+  nav a{padding:12px 18px;font-size:14px}
+}
+
+/* ===== 体验优化 ===== */
+html{scroll-behavior:smooth}
+section,.rt-chap,.rt-tabs,.rt-main-head,.rt-badend,.rt-mystery{scroll-margin-top:calc(var(--navh,60px) + 12px)}
+a:focus-visible,button:focus-visible,.rt-step input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.rt-step.checked .rt-step-text .j,.rt-step.checked .rt-step-text .c{color:#7c7c90}
+.chap .cht{display:flex;justify-content:space-between;align-items:baseline}
+.chap .cht .cnt{font-size:12px;color:var(--muted);font-weight:400}
+.chap .rt-step{padding:8px 4px}
+.chap .rt-step:last-child{border-bottom:none}
+.guide-block > h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 8px}
+.guide-block > h3 .jp{margin-left:0}
+.mini-btn{
+  margin-left:auto;padding:5px 12px;font-family:inherit;font-size:12px;cursor:pointer;border-radius:8px;
+  background:var(--panel);border:1px solid var(--line);color:var(--muted);transition:.2s;
+}
+.mini-btn:hover{border-color:var(--pink2);color:var(--pink2)}
+.to-top{
+  position:fixed;right:18px;bottom:18px;z-index:60;width:44px;height:44px;border-radius:50%;
+  background:var(--panel2);border:1px solid var(--pink);color:var(--pink2);
+  font-size:18px;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.5);
+}
+.to-top[hidden]{display:none}
+
+/* 攻略页二级导航（章节跳转 + 语言切换），随顶部导航一起吸顶 */
+.subnav{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0 4px;
+}
+nav[hidden]{display:none}
+/* 游戏介绍入口 */
+.brandbar a.platform{color:var(--pink2);border-color:var(--pink);white-space:nowrap}
+.brandbar a.platform:hover{background:var(--pink);color:#fff}
+.intro-entry{
+  display:inline-block;margin-top:16px;padding:7px 20px;font-size:13px;letter-spacing:1px;
+  border:1px solid var(--pink);border-radius:20px;color:var(--pink2);transition:.2s;
+}
+.intro-entry:hover{background:var(--pink);color:#fff}
+.subnav > a{padding:8px 16px;font-size:13px;letter-spacing:1px}
+.subnav .langbar{padding:6px 12px;background:none;border-bottom:none;gap:6px}
+.subnav .langbar button{padding:4px 12px}
+
+/* 切换角色/立绘时不再跳动 */
+.chara-portrait{min-height:488px}
+@media(max-width:640px){
+  .chara-portrait{min-height:328px}
+  .subnav .lb-label{display:none}
+  .brandbar{padding:8px 14px;gap:10px}
+  .brandbar .logo{font-size:13px;letter-spacing:1px}
+}
+/* ===== 选项字号放大 ===== */
+.rt-step{padding:12px}
+.chap .rt-step{padding:10px 4px}
+.rt-step input{width:20px;height:20px;margin-top:4px}
+.rt-step-text{font-size:17px;line-height:1.7}
+.opt .c,.rt-step-text .c{font-size:15px}
+body.lang-zh .rt-step-text .c{font-size:17px;color:var(--text);margin-top:0}
+.rt-step-pct{font-size:13px;margin-top:5px}
+.rt-chap-head,.chap .cht{font-size:17px}
+.rt-tab{font-size:14px}
+.rt-menu a{font-size:14px}
+.rt-tip,.rt-desc,.common-tip,.rt-unlock-cond,.rt-badend{font-size:14px}
+.intro-entry.solid{background:var(--pink);color:#fff;font-size:15px;padding:10px 30px;margin-top:22px}
+.intro-entry.solid:hover{background:var(--pink2)}
+/* ===== 角色路线：名字与周边文字放大 ===== */
+.rt-tab{font-size:18px;padding:11px 20px}
+.rt-tab .hi{font-size:12px}
+.rt-name{font-size:32px}
+.rt-romaji{font-size:13px}
+.rt-cv{font-size:15px}
+.rt-desc{font-size:15px}
+.rt-main-head h3{font-size:28px}
+.rt-main-head h3 span{font-size:15px}
+.rt-chap-progress{font-size:14px}
+.rt-chap-progress b{font-size:22px}
+.rt-menu a{font-size:15px;padding:9px 10px}
+.rt-menu a .pct{font-size:13px}
+.rt-side-btns button{font-size:14px;padding:10px}
+.rt-mystery{font-size:15px}
+.rt-mystery .q{font-size:17px}
+.rt-chap-head .cn{font-size:13px}
+.guide-block > h3{font-size:20px}
+.guide-block > h3 .jp{font-size:13px}
+.mini-btn{font-size:13px}
+.sec-desc{font-size:15px}
+.progress-card h4{font-size:17px}
+.progress-card h4 .tag{font-size:13px}
+.progress-num,.progress-input label{font-size:14px}
+.langbar button{font-size:13px}
+.subnav > a{font-size:15px}
+/* 介绍页人物 */
+.chara-tab .nm{font-size:15px}
+.chara-info .cname{font-size:28px}
+.chara-info .cv{font-size:15px}
+.chara-info .desc{font-size:16px}
+.chara-info .switch button{font-size:13px}
+.guide-item .t{font-size:18px}
+.guide-item .d{font-size:15px}
+@media(max-width:760px){
+  .rt-tab{font-size:16px;padding:9px 13px}
+  .rt-name{font-size:26px}
+  .rt-main-head h3{font-size:23px}
+}
+@media(max-width:640px){
+  .chara-tab .nm{font-size:13px}
+}
+/* ===== 角色路线头像：PNG 差分图只取上方 368x288 的立绘，下方表情零件裁掉 ===== */
+.rt-pbox{
+  width:100%;aspect-ratio:368/288;overflow:hidden;display:block;
+  border:1px solid var(--pink);border-radius:10px;
+  background:radial-gradient(ellipse at 50% 100%,rgba(255,77,157,.22),transparent 75%),#14141c;
+  box-shadow:0 0 22px rgba(255,77,157,.22);
+}
+.rt-pbox img{display:block;width:100%;height:auto}
+.rt-pbox.mystery{border-color:var(--gold);background:#14141c}
+.rt-pbox.mystery img{filter:brightness(0) drop-shadow(0 0 10px rgba(245,197,66,.6))}
+@media(max-width:760px){
+  .rt-pbox{grid-row:1/6;align-self:start}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body{animation:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="brandbar">
+  <div class="logo">不思议<span>汉化组</span> <span style="font-weight:400;color:var(--muted)">│</span> バクダン★ハンダン</div>
+  <a class="platform" id="tabSwitch" href="#intro">游戏介绍 →</a>
+</div>
+
+<!-- 攻略页吸顶导航：章节跳转 + 语言切换（介绍页不显示） -->
+<nav id="guideNav">
+  <div class="subnav">
+    <a href="#progress" data-nav="progress">进度</a>
+    <a href="#common" data-nav="common">共通路线</a>
+    <a href="#routes" data-nav="routes">角色路线</a>
+    <div class="langbar">
+      <span class="lb-label">显示语言</span>
+      <button type="button" data-lang="zh" class="active" onclick="setLang('zh')">中文</button>
+      <button type="button" data-lang="both" onclick="setLang('both')">中日对照</button>
+      <button type="button" data-lang="ja" onclick="setLang('ja')">日文</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ 游戏介绍（从攻略页入口进入，地址 #intro） ============ -->
+<div id="tab-intro" hidden>
+
+  <div class="hero">
+    <img class="logoimg" src="assets/img/logo_clean.png" alt="バクダン★ハンダン">
+    <div class="sub">爆弹★判断 · 中文介绍</div>
+    <div class="tags">
+      <span class="tag">乙女游戏</span>
+      <span class="tag">PSP</span>
+      <span class="tag">不思议汉化组</span>
+      <span class="tag">恋爱冒险</span>
+    </div>
+    <a class="intro-entry solid" href="#guide">查看攻略 →</a>
+  </div>
+
+  <main class="wrap">
+
+    <!-- 作品简介 -->
+    <section id="home">
+      <div class="sec-title"><span class="en">INTRODUCTION</span>作品简介</div>
+      <p class="sec-desc" style="max-width:680px;margin:0 auto 36px">
+        以「炸弹」为主题的全新恋爱冒险。卷入爆炸事件的主人公，将在危机与心动的交织中，
+        寻找真正的答案。这是一场关于「判断」与「选择」的恋物语。
+      </p>
+      <div class="guide-list">
+        <div class="guide-item"><div class="t">📖 攻略说明</div><div class="d">本站为《バクダン★ハンダン》中文玩家提供角色、路线与结局攻略。资料整理中，雏形阶段先展示框架与人物素材。</div></div>
+      </div>
+    </section>
+
+    <!-- 剧情 -->
+    <section id="story">
+      <div class="sec-title"><span class="en">STORY</span>剧情概要</div>
+      <div class="guide-list">
+        <div class="guide-item"><div class="t">序幕</div><div class="d">故事背景与世界观介绍——待补充。</div></div>
+        <div class="guide-item"><div class="t">章节构成</div><div class="d">各章节流程与分歧点——待补充。</div></div>
+      </div>
+    </section>
+
+    <!-- 人物介绍 -->
+    <section id="chara">
+      <div class="sec-title"><span class="en">CHARACTER</span>人物介绍</div>
+      <p class="sec-desc">点击左侧头像查看角色详情</p>
+      <div class="chara-layout">
+        <div class="chara-nav" id="charaNav"></div>
+        <div class="chara-main">
+          <div class="chara-portrait" id="charaPortrait"></div>
+          <div class="chara-info" id="charaInfo"></div>
+        </div>
+      </div>
+    </section>
+
+    <p style="text-align:center;margin:8px 0 12px"><a class="intro-entry solid" href="#guide">进入攻略 →</a></p>
+
+  </main>
+</div>
+
+<!-- ============ 标签二：游戏攻略 ============ -->
+<div id="tab-guide">
+
+  <div class="hero" style="padding:36px 20px 28px">
+    <h1>バクダン★ハンダン 攻略</h1>
+    <div class="sub">爆弹★判断 · 全路线攻略</div>
+    <a class="intro-entry" href="#intro">游戏介绍 · 人物一览 →</a>
+  </div>
+
+  <main class="wrap">
+
+    <!-- 进度 -->
+    <section id="progress">
+      <div class="sec-title"><span class="en">PROGRESS</span>攻略进度</div>
+      <div class="progress-area">
+        <div class="progress-card">
+          <h4>攻略完成度<span class="tag">勾选已通关路线</span></h4>
+          <div class="progress-track"><div class="progress-fill" id="routeFill"></div></div>
+          <div class="progress-num"><span id="routeText">0 / 7 路线</span><b id="routePct">0%</b></div>
+        </div>
+        <div class="progress-card">
+          <h4>游戏时长<span class="tag">记录你的游玩时间</span></h4>
+          <div class="progress-track"><div class="progress-fill" id="timeFill"></div></div>
+          <div class="progress-num"><span id="timeText">0h / 50h</span><b id="timePct">0%</b></div>
+          <div class="progress-input">
+            <label>已玩</label><input type="number" id="timePlayed" min="0" step="0.5" placeholder="0"><label>小时</label>
+            <label style="margin-left:6px">目标</label><input type="number" id="timeGoal" min="1" step="1" value="50"><label>小时</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 共通路线 -->
+    <section id="common">
+      <div class="sec-title"><span class="en">COMMON ROUTE</span>共通路线</div>
+      <div class="common-tip">
+        <b>隐藏人物解锁提示：</b>序幕内容需<b>第 2 周目以后</b>才会发生；在 1~3 章把某位神秘人物的好感度刷到<b>全场最高</b>，才会在 3 章末自动进入其路线。（完成任意一条角色路线后，攻略页才会显示这位隐藏人物的入口。）
+      </div>
+      <div class="guide-block">
+        <h3>序幕 〜 3章<span class="jp">选项后标注的角色好感度上升</span><button type="button" class="mini-btn" onclick="resetCommon()">清空勾选（新周目）</button></h3>
+        <div id="commonGuide"></div>
+      </div>
+    </section>
+
+    <!-- 角色路线 -->
+    <section id="routes">
+      <div class="sec-title"><span class="en">CHARACTER ROUTE</span>角色路线</div>
+
+      <!-- 角色 tab -->
+      <div class="rt-mystery" id="rtMystery">✦ 除上述攻略对象外，本作还有 <span class="q">一位隐藏攻略人物</span>。<br>当你在下方<b>标记完成任意一条角色路线</b>后，这位神秘人物的攻略入口才会显现。ta 是谁，先留个悬念…… ✦</div>
+      <div class="rt-tabs" id="rtTabs"></div>
+
+      <!-- 左右两栏 -->
+      <div class="rt-layout">
+        <aside class="rt-side" id="rtSide"></aside>
+        <div class="rt-main" id="rtMain"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<button type="button" class="to-top" id="toTop" aria-label="回到顶部" title="回到顶部" hidden>↑</button>
+
+<footer>
+  <div class="copy">バクダン★ハンダン · 非官方中文攻略资料站</div>
+  <div>角色立绘素材来自游戏官网存档 · 攻略资料整理自 otomenotomo.tyonmage.com · 仅供学习交流</div>
+</footer>
+
+<script>
+/* ================= 标签切换 ================= */
+function showTab(name){
+  document.getElementById('tab-intro').hidden = (name !== 'intro');
+  document.getElementById('tab-guide').hidden = (name !== 'guide');
+  document.getElementById('guideNav').hidden = (name !== 'guide');
+  // 顶栏右侧入口：攻略页 → 游戏介绍；介绍页 → 返回攻略
+  const sw = document.getElementById('tabSwitch');
+  sw.textContent = (name === 'guide') ? '游戏介绍 →' : '← 返回攻略';
+  sw.href = (name === 'guide') ? '#intro' : '#guide';
+}
+
+/* ================= 人物介绍 ================= */
+// 角色数据（角色名与立绘对应关系待最终核对）
+const charas = [
+  {thumb:"img_016_id48.jpg", bust:"img_001_id4.jpg", body:"img_025_id130.jpg", name:"士道昴流", jp:"", cv:"鈴村健一", desc:"负责开园活动的警察，理性且严守规则。"},
+  {thumb:"img_015_id47.jpg", bust:"img_002_id7.jpg", body:"img_026_id152.jpg", name:"若狭永遠", jp:"", cv:"梶裕貴", desc:"人气男子偶像组合成员，实际却胆小爱哭。"},
+  {thumb:"img_019_id51.jpg", bust:"img_003_id10.jpg", body:"img_027_id171.jpg", name:"芽御師航大", jp:"", cv:"森田成一", desc:"不善社交的宅男，网名「阿瑞斯」，游戏达人。"},
+  {thumb:"img_013_id45.jpg", bust:"img_004_id13.jpg", body:"img_028_id188.jpg", name:"調辺歩", jp:"", cv:"成田剣", desc:"自由记者，总叼着零食，追寻真相。"},
+  {thumb:"img_012_id44.jpg", bust:"img_005_id16.jpg", body:"img_029_id207.jpg", name:"卜部君麻呂", jp:"", cv:"諏訪部順一", desc:"温柔的占卜师，外表奇特但性格沉稳。"},
+  {thumb:"img_018_id50.jpg", bust:"img_006_id19.jpg", body:"img_030_id226.jpg", name:"御手洗流星", jp:"", cv:"日野聡", desc:"银座头牌牛郎（艺名尤利西斯），容易冲动。"},
+  {thumb:"img_023_id55.jpg", bust:"img_007_id22.jpg", body:"img_031_id243.jpg", name:"魅神真", jp:"", cv:"鈴木千尋", desc:"开朗有趣的大学生，身上透着神秘气息（隐藏路线）。"},
+  {thumb:"img_017_id49.jpg", bust:"img_008_id25.jpg", body:"img_032_id261.jpg", name:"其他角色", jp:"", cv:"", desc:"待补充"},
+  {thumb:"img_021_id53.jpg", bust:"img_009_id28.jpg", body:"img_033_id275.jpg", name:"其他角色", jp:"", cv:"", desc:"待补充"},
+  {thumb:"img_020_id52.jpg", bust:"img_010_id31.jpg", body:"img_034_id290.jpg", name:"其他角色", jp:"", cv:"", desc:"待补充"},
+  {thumb:"img_022_id54.jpg", bust:"img_011_id34.jpg", body:"img_035_id303.jpg", name:"其他角色", jp:"", cv:"", desc:"待补充"},
+];
+
+const nav = document.getElementById('charaNav');
+const portrait = document.getElementById('charaPortrait');
+const info = document.getElementById('charaInfo');
+let curIdx = 0;
+let curView = 'bust'; // 'bust' | 'body'
+
+charas.forEach((c,i)=>{
+  const tab = document.createElement('button');
+  tab.className = 'chara-tab' + (i===0?' active':'');
+  tab.innerHTML = `<img src="assets/img/${c.thumb}" alt="${c.name}"><span class="nm">${c.name}</span>`;
+  tab.onclick = ()=>selectChara(i);
+  nav.appendChild(tab);
+});
+
+function selectChara(i){
+  curIdx = i; curView = 'bust';
+  document.querySelectorAll('.chara-tab').forEach((t,ti)=>t.classList.toggle('active', ti===i));
+  renderCharaMain();
+}
+
+function renderCharaMain(){
+  const c = charas[curIdx];
+  const img = curView==='bust' ? c.bust : c.body;
+  portrait.innerHTML = `<img src="assets/img/${img}" alt="${c.name}">`;
+  info.innerHTML = `
+    <div class="switch">
+      <button class="${curView==='bust'?'active':''}" onclick="setView('bust')">半身立绘</button>
+      <button class="${curView==='body'?'active':''}" onclick="setView('body')">全身立绘</button>
+    </div>
+    <div class="cname">${c.name}${c.jp?`<span class="jp">${c.jp}</span>`:''}</div>
+    ${c.cv?`<div class="cv">CV：<b>${c.cv}</b></div>`:''}
+    <div class="desc">${c.desc}</div>
+  `;
+}
+
+function setView(v){
+  curView = v;
+  renderCharaMain();
+}
+
+selectChara(0);
+
+/* ================= 中文翻译字典（日文原文 → 中文）=================
+   预留中日双语结构：新增选项只需在此补一条映射即可自动显示中文。
+   角色名保留日文汉字（中文玩家易辨识），好感度标注 ↑ 保留。
+==================================================================== */
+const CN_MAP = {
+  // —— 共通路线：序幕 ——
+  "「知ってるの？」（-）":"「你知道吗？」（—）",
+  "「もらい物です」（？？？↑）":"「是别人送的」（？？？↑）",
+  // —— 共通路线：1章 ——
+  "分支：昴流・永遠・航大とパネルを調べる ／ 歩・流星・君麻呂と彫像を調べる":"分支：与昴流·永远·航大调查面板 ／ 与步·流星·君麻吕调查雕像",
+  "「尻尾だと思う」（調辺歩↑）":"「我觉得是尾巴」（调边步↑）",
+  "「己が宿命に目覚め」（-）":"「觉醒于自己的宿命」（—）",
+  "「何かが分かるかも」（若狭永遠↑）":"「也许能明白些什么」（若狭永远↑）",
+  "「芽御師さんに賭ける」（芽御師航大↑）":"「赌在芽御师身上」（芽御师航大↑）",
+  "「手を取る」（卜部君麻呂↑）":"「牵起手」（卜部君麻吕↑）",
+  "分支：昴流・君麻呂と一緒に彫像を調べる ／ 歩・航大と一緒に床を調べる ／ 流星・永遠と一緒にふすまを調べる":"分支：与昴流·君麻吕调查雕像 ／ 与步·航大调查地板 ／ 与流星·永远调查纸门",
+  "「なんでこんな無茶を！？」（御手洗流星↑）":"「为什么这么乱来！？」（御手洗流星↑）",
+  "「材質が違う」（-）":"「材质不一样」（—）",
+  "「喝を入れる」（士道昴流↑）":"「训斥一顿」（士道昴流↑）",
+  "「喝を入れる」（-）":"「训斥一顿」（—）",
+  "※ブレイクタイム：选择任一角色 → 好感度UP":"※休息时段：任选一位角色 → 好感度上升",
+  // —— 共通路线：2章 ——
+  "分支：グー ／ チョキ ／ パー":"分支：石头 ／ 剪刀 ／ 布",
+  "私もそう思う（士道昴流↑）":"我也这么想（士道昴流↑）",
+  "分かりました！（芽御師航大↑）":"明白了！（芽御师航大↑）",
+  "気をつかってくれた？（調辺歩↑）":"是照顾我吗？（调边步↑）",
+  "「卜部さん、大丈夫ですか？」（卜部君麻呂↑）":"「卜部先生，你没事吧？」（卜部君麻吕↑）",
+  "どちらでも可（-）":"都可以（—）",
+  "「頑張ってと言う」（若狭永遠↑）":"「说句加油吧」（若狭永远↑）",
+  "「ハートのQ」（-）":"「红桃Q」（—）",
+  "「何してたんですか？」（-）":"「你在做什么？」（—）",
+  "※隐藏人物好感度最高时：「逃げない」（？？？↑）":"※隐藏人物好感度最高时：「不逃走」（？？？↑）",
+  "「怪我は大丈夫ですか？」（御手洗流星↑）":"「伤势不要紧吗？」（御手洗流星↑）",
+  "※ブレイクタイム：选择角色 → 好感度UP":"※休息时段：选择角色 → 好感度上升",
+  // —— 共通路线：3章 ——
+  "分支：昴流・航大ペア ／ 歩・永遠ペア ／ 流星・君麻呂ペア":"分支：昴流·航大组队 ／ 步·永远组队 ／ 流星·君麻吕组队",
+  "※隐藏人物好感度最高时：「ちょっと待って」（？？？↑）":"※隐藏人物好感度最高时：「等一下」（？？？↑）",
+  "ゲームオーバーになるよ？（芽御師航大↑）":"会游戏结束哦？（芽御师航大↑）",
+  "若狭くん、こっちに！（若狭永遠↑）":"若狭，到这边来！（若狭永远↑）",
+  "卜部さん、行きましょう！（御手洗流星↑）":"卜部先生，我们走吧！（御手洗流星↑）",
+  "「喝を入れる」（調辺歩↑）":"「训斥一顿」（调边步↑）",
+  "「何か言いたいのかな？」（-）":"「有什么想说的吗？」（—）",
+  "「七つの大罪」（-）":"「七宗罪」（—）",
+  "「分かりました！」（士道昴流↑）":"「明白了！」（士道昴流↑）",
+  "「全ての罪」（-）":"「所有的罪」（—）",
+  "※ブレイクタイム：好感度最高角色的剧情自动发生 → 进入其路线":"※休息时段：好感度最高角色的剧情自动发生 → 进入其路线",
+  // —— 角色路线：士道昴流 ——
+  "士道さんの誘いを受ける":"接受士道的邀请",
+  "【PW】が気になる":"在意【PW】",
+  "卜部さんはそんな人じゃない":"卜部先生不是那种人",
+  "MOON":"MOON",
+  "同時に攻撃":"同时攻击",
+  "……信じる！":"……我相信你！",
+  "喝を入れる":"训斥一顿",
+  "案外好きですよ":"意外地喜欢呢",
+  "一度に全部載せるとか？":"一次性全放上去？",
+  "1匹200円くらいかな？":"一只大概200日元？",
+  "売買テクニック":"买卖技巧",
+  "ぬいぐるみ":"玩偶",
+  "話しても大丈夫？":"可以说话吗？",
+  "とりあえず様子を見る":"先看看情况",
+  "クリアのためです":"为了通关",
+  "御手洗さんがいれば！":"有御手洗先生在就好了！",
+  "命にかえてもだなんて":"说什么不惜付出生命",
+  "仲間を信頼して！":"相信同伴！",
+  "昴流さんと一緒なら":"和昴流在一起的话",
+  "忍者スキップ":"忍者跳过",
+  // —— 角色路线：若狭永遠 ——
+  "歌上手いんだね":"歌唱得真好呢",
+  "頼りにさせてね":"让我依靠你吧",
+  "一緒に決めようよ":"一起决定吧",
+  "レストラン":"餐厅",
+  "何があったの？":"发生什么事了？",
+  "大人だね":"真成熟呢",
+  "恥ずかしいな":"好难为情",
+  "もう一つ":"再来一个",
+  "ちょっと待って":"等一下",
+  "楽しもうよ！":"好好享受吧！",
+  "ふたりなら怖くない":"两个人的话就不怕",
+  "素敵だよ":"很棒哦",
+  // —— 角色路线：芽御師航大 ——
+  "ごめんね、若狭くん":"对不起，若狭",
+  "本当にありがとう":"真的谢谢你",
+  "そうさせてもらうね":"那我就这么做啦",
+  "なぜ引きこもったの？":"为什么闭门不出？",
+  "ありがとう":"谢谢",
+  "目の前の壁":"眼前的墙",
+  "ちょっと怖いな":"有点可怕呢",
+  "気を付けてね":"小心点哦",
+  "あなたで良かった":"是你就好了",
+  "今のは一体？":"刚才那到底是怎么回事？",
+  "血文字":"血字",
+  "うん、そうだね！":"嗯，是啊！",
+  // —— 角色路线：調辺歩 ——
+  "一緒に行きます":"一起去",
+  "良く知らないの？":"不太清楚吗？",
+  "親子なら大丈夫":"是亲子就没问题",
+  "回り込む":"绕到后面",
+  "恥ずかしいです":"很不好意思",
+  "同士討ち":"自相残杀",
+  "色々知れて良かった":"知道了很多真好",
+  "抱き締めてあげて":"抱紧他吧",
+  "『すまん』は禁止":"禁止说『抱歉』",
+  "別の意味":"别的意思",
+  "私も行きます！":"我也去！",
+  "関係……ないよ":"关系……没有啦",
+  "届くけど…・・・":"虽然传得到……",
+  "ワルドブーに会おう":"去见瓦尔多维吧",
+  // —— 角色路线：卜部君麻呂 ——
+  "なんで憎んでるの？":"为什么憎恨呢？",
+  "薄汚くなんてない":"才没有那么肮脏",
+  "それがワルドブー？":"那就是瓦尔多维？",
+  "私も一緒に行く":"我也一起去",
+  "恋愛運":"恋爱运",
+  "うれしいな":"好开心",
+  "ここにいれば安全":"待在这里就安全",
+  "うれしいけど……":"虽然开心……",
+  "足をかける":"绊住脚",
+  "一回転":"转一圈",
+  // —— 角色路线：御手洗流星 ——
+  "手当てに残る":"留下来照料",
+  "おかあさん、って":"叫一声『妈妈』",
+  "そんなことより心配":"比起那个更担心",
+  "本当に大丈夫？":"真的没问题吗？",
+  "絶対にダメです":"绝对不行",
+  "参加者を助ける":"帮助参加者",
+  "短期にならないで！":"别这么短命啊！",
+  "昨日クリアした":"昨天通关了",
+  "ムリしないで！":"别勉强！",
+  "【E】が気になる":"在意【E】",
+  "他の【E】を目指そう":"以其他【E】为目标吧",
+  "通り抜け際":"穿过的瞬间",
+  "私もドキドキする":"我也心动不已",
+  "気持ちを抑える":"压抑住心情",
+  "ガマンしないで！":"别忍耐了！",
+  "人質を解放した":"解放了人质",
+  // —— 角色路线：魅神真（隐藏）——
+  "みんななら大丈夫":"有大家在就没问题",
+  "選べない":"无法选择",
+  "それはできないよ":"那做不到啊",
+  "気になる":"很在意",
+  "やっぱり間違ってる":"果然是错的",
+  "その場に残る":"留在原地",
+  "やめたい":"想要停下",
+};
+
+// 双语渲染：日文原文 + 中文译文（无译文时只显示原文）
+function bi(ja){
+  const zh = CN_MAP[ja];
+  return zh
+    ? `<span class="j">${ja}</span><span class="c">${zh}</span>`
+    : ja;   // 暂无译文：直接显示原文（任何语言模式下都可见）
+}
+
+// 语言切换
+let curLang = localStorage.getItem('bh_lang_v2') || 'zh';
+function setLang(l, remember = true){
+  curLang = l;
+  document.body.classList.remove('lang-ja','lang-zh');
+  if(l==='ja') document.body.classList.add('lang-ja');
+  if(l==='zh') document.body.classList.add('lang-zh');
+  if(remember) localStorage.setItem('bh_lang_v2', l);
+  document.querySelectorAll('.langbar button').forEach(b=>b.classList.toggle('active', b.dataset.lang===l));
+}
+setLang(curLang, false);
+
+/* ================= 攻略数据 ================= */
+const commonGuide = [
+  {ch:"序幕（2周目以后）", opts:[
+    "「知ってるの？」（-）",
+    "「もらい物です」（？？？↑）",
+  ]},
+  {ch:"1章", opts:[
+    "分支：昴流・永遠・航大とパネルを調べる ／ 歩・流星・君麻呂と彫像を調べる",
+    "「尻尾だと思う」（調辺歩↑）",
+    "「己が宿命に目覚め」（-）",
+    "「何かが分かるかも」（若狭永遠↑）",
+    "「芽御師さんに賭ける」（芽御師航大↑）",
+    "「手を取る」（卜部君麻呂↑）",
+    "分支：昴流・君麻呂と一緒に彫像を調べる ／ 歩・航大と一緒に床を調べる ／ 流星・永遠と一緒にふすまを調べる",
+    "「なんでこんな無茶を！？」（御手洗流星↑）",
+    "「材質が違う」（-）",
+    "「喝を入れる」（士道昴流↑）",
+    "「喝を入れる」（-）",
+    "※ブレイクタイム：选择任一角色 → 好感度UP",
+  ]},
+  {ch:"2章", opts:[
+    "分支：グー ／ チョキ ／ パー",
+    "私もそう思う（士道昴流↑）",
+    "分かりました！（芽御師航大↑）",
+    "気をつかってくれた？（調辺歩↑）",
+    "「卜部さん、大丈夫ですか？」（卜部君麻呂↑）",
+    "どちらでも可（-）",
+    "「頑張ってと言う」（若狭永遠↑）",
+    "「ハートのQ」（-）",
+    "「喝を入れる」（-）",
+    "「何してたんですか？」（-）",
+    "※隐藏人物好感度最高时：「逃げない」（？？？↑）",
+    "「怪我は大丈夫ですか？」（御手洗流星↑）",
+    "※ブレイクタイム：选择角色 → 好感度UP",
+  ]},
+  {ch:"3章", opts:[
+    "分支：昴流・航大ペア ／ 歩・永遠ペア ／ 流星・君麻呂ペア",
+    "※隐藏人物好感度最高时：「ちょっと待って」（？？？↑）",
+    "ゲームオーバーになるよ？（芽御師航大↑）",
+    "若狭くん、こっちに！（若狭永遠↑）",
+    "卜部さん、行きましょう！（御手洗流星↑）",
+    "「喝を入れる」（調辺歩↑）",
+    "「何か言いたいのかな？」（-）",
+    "「七つの大罪」（-）",
+    "「分かりました！」（士道昴流↑）",
+    "「全ての罪」（-）",
+    "「喝を入れる」（-）",
+    "※ブレイクタイム：好感度最高角色的剧情自动发生 → 进入其路线",
+  ]},
+];
+
+const routes = [
+  {name:"士道昴流", romaji:"SHIDOU SUBARU", cv:"鈴村健一", hidden:false,
+   bust:"img_001_id4.png", body:"img_025_id130.jpg", desc:"负责开园活动的警察，理性且严守规则。", chs:[
+    {ch:4, opts:["士道さんの誘いを受ける","【PW】が気になる","卜部さんはそんな人じゃない","MOON","同時に攻撃","……信じる！","喝を入れる"]},
+    {ch:5, opts:["喝を入れる","案外好きですよ","一度に全部載せるとか？","1匹200円くらいかな？","売買テクニック","ぬいぐるみ","話しても大丈夫？","喝を入れる"]},
+    {ch:6, opts:["とりあえず様子を見る","クリアのためです","御手洗さんがいれば！","喝を入れる","命にかえてもだなんて"]},
+    {ch:7, opts:["仲間を信頼して！","昴流さんと一緒なら","忍者スキップ","喝を入れる"]},
+  ]},
+  {name:"若狭永遠", romaji:"WAKASA TOWA", cv:"梶裕貴", hidden:false,
+   bust:"img_002_id7.png", body:"img_026_id152.jpg", desc:"人气男子偶像组合成员，实际却胆小爱哭。", chs:[
+    {ch:4, opts:["歌上手いんだね","頼りにさせてね","一緒に決めようよ"]},
+    {ch:5, opts:["レストラン","喝を入れる","何があったの？","大人だね"]},
+    {ch:6, opts:["恥ずかしいな","もう一つ","ちょっと待って","喝を入れる","楽しもうよ！"]},
+    {ch:7, opts:["ふたりなら怖くない","素敵だよ","喝を入れる"]},
+  ]},
+  {name:"芽御師航大", romaji:"MEOSHI KOUTA", cv:"森田成一", hidden:false,
+   bust:"img_003_id10.png", body:"img_027_id171.jpg", desc:"不善社交的宅男，网名「阿瑞斯」，游戏达人。", chs:[
+    {ch:4, opts:["ごめんね、若狭くん","本当にありがとう","そうさせてもらうね"]},
+    {ch:5, opts:["なぜ引きこもったの？","ありがとう","目の前の壁","ちょっと怖いな"]},
+    {ch:6, opts:["喝を入れる","気を付けてね"]},
+    {ch:7, opts:["喝を入れる","あなたで良かった","今のは一体？","血文字","うん、そうだね！","喝を入れる"]},
+  ]},
+  {name:"調辺歩", romaji:"SHIRABE AYUMU", cv:"成田剣", hidden:false,
+   bust:"img_004_id13.png", body:"img_028_id188.jpg", desc:"自由记者，总叼着零食，追寻真相。", chs:[
+    {ch:4, opts:["一緒に行きます","良く知らないの？","親子なら大丈夫","喝を入れる","回り込む"]},
+    {ch:5, opts:["恥ずかしいです","同士討ち","色々知れて良かった","抱き締めてあげて"]},
+    {ch:6, opts:["『すまん』は禁止","別の意味","私も行きます！","喝を入れる","関係……ないよ"]},
+    {ch:7, opts:["届くけど…・・・","ワルドブーに会おう","喝を入れる"]},
+  ]},
+  {name:"卜部君麻呂", romaji:"URABE KIMIMARO", cv:"諏訪部順一", hidden:false,
+   bust:"img_005_id16.png", body:"img_029_id207.jpg", desc:"温柔的占卜师，外表奇特但性格沉稳。", chs:[
+    {ch:4, opts:["なんで憎んでるの？","薄汚くなんてない","それがワルドブー？","ありがとう","私も一緒に行く","喝を入れる"]},
+    {ch:5, opts:["恋愛運","うれしいな","ここにいれば安全","うれしいけど……"]},
+    {ch:6, opts:["足をかける"]},
+    {ch:7, opts:["喝を入れる","喝を入れる","喝を入れる","一回転"]},
+  ]},
+  {name:"御手洗流星", romaji:"MITARASHI RYUUSEI", cv:"日野聡", hidden:false,
+   bust:"img_006_id19.png", body:"img_030_id226.jpg", desc:"银座头牌牛郎（艺名尤利西斯），容易冲动。", chs:[
+    {ch:4, opts:["手当てに残る","おかあさん、って","そんなことより心配"]},
+    {ch:5, opts:["本当に大丈夫？","喝を入れる","絶対にダメです","参加者を助ける","短期にならないで！","昨日クリアした","ちょっと怖いな"]},
+    {ch:6, opts:["ムリしないで！","【E】が気になる","他の【E】を目指そう","通り抜け際","私もドキドキする","気持ちを抑える"]},
+    {ch:7, opts:["ガマンしないで！","人質を解放した","喝を入れる"]},
+  ]},
+  {name:"魅神真", romaji:"MIKAMI MAKOTO", cv:"鈴木千尋", hidden:true,
+   bust:"img_007_id22.png", body:"img_031_id243.jpg", desc:"开朗有趣的大学生，身上透着神秘气息（隐藏路线）。", chs:[
+    {ch:4, opts:["みんななら大丈夫","選べない"]},
+    {ch:5, opts:["喝を入れる","それはできないよ"]},
+    {ch:6, opts:["気になる","やっぱり間違ってる","喝を入れる","その場に残る"]},
+    {ch:7, opts:["やめたい","喝を入れる"]},
+  ]},
+];
+
+/* ================= 渲染共通路线 ================= */
+// 可勾选，勾选状态保存到本机；每周目重新走共通线时用「清空勾选」
+let commonState = [];
+try { commonState = JSON.parse(localStorage.getItem('bh_common_state') || '[]'); } catch(e){ commonState = []; }
+function commonCount(ci){ return commonState.filter(k=>k.startsWith(ci+'-')).length; }
+function renderCommon(){
+  document.getElementById('commonGuide').innerHTML = commonGuide.map((sec,ci)=>{
+    const steps = sec.opts.map((o,oi)=>{
+      const key = ci+'-'+oi, checked = commonState.includes(key);
+      return `<label class="rt-step ${checked?'checked':''}">
+        <input type="checkbox" ${checked?'checked':''} onchange="toggleCommon('${key}',this)">
+        <span class="rt-step-body"><span class="rt-step-text">${bi(o)}</span></span>
+      </label>`;
+    }).join('');
+    return `<div class="chap"><div class="cht">${sec.ch}<span class="cnt" id="commonCnt${ci}">${commonCount(ci)}/${sec.opts.length}</span></div>${steps}</div>`;
+  }).join('');
+}
+function toggleCommon(key, box){
+  const pos = commonState.indexOf(key);
+  if(box.checked && pos<0) commonState.push(key);
+  if(!box.checked && pos>=0) commonState.splice(pos,1);
+  localStorage.setItem('bh_common_state', JSON.stringify(commonState));
+  box.closest('.rt-step').classList.toggle('checked', box.checked);
+  const ci = +key.split('-')[0];
+  document.getElementById('commonCnt'+ci).textContent = commonCount(ci) + '/' + commonGuide[ci].opts.length;
+}
+function resetCommon(){
+  if(!commonState.length) return;
+  if(!confirm('清空共通路线的全部勾选？')) return;
+  commonState = [];
+  localStorage.setItem('bh_common_state', '[]');
+  renderCommon();
+}
+renderCommon();
+
+/* ================= 角色路线：tab + 立绘栏 + 勾选流程 ================= */
+let doneArr = [];
+try { doneArr = JSON.parse(localStorage.getItem('bh_route_done') || '[]'); } catch(e){ doneArr = []; }
+const doneSet = new Set(doneArr);       // 已通关角色
+// 各角色已勾选的选项索引：{ "士道昴流": [0,3,7], ... }
+let stepState = {};
+try { stepState = JSON.parse(localStorage.getItem('bh_step_state') || '{}'); } catch(e){ stepState = {}; }
+let activeRoute = parseInt(localStorage.getItem('bh_active_route'), 10) || 0;   // 记住上次查看的角色
+
+const tabsEl    = document.getElementById('rtTabs');
+const sideEl    = document.getElementById('rtSide');
+const mainEl    = document.getElementById('rtMain');
+const mysteryEl = document.getElementById('rtMystery');
+
+// 隐藏人物是否已解锁：标记完成任意一条（普通）角色路线
+function isHiddenUnlocked(){ return doneSet.size > 0; }
+
+// 计算某角色选项总数
+function totalSteps(r){ return r.chs.reduce((s,c)=>s+c.opts.length, 0); }
+// 某角色已完成数
+function doneSteps(r, name){
+  const arr = stepState[name] || [];
+  return arr.filter(i=>i>=0 && i<totalSteps(r)).length;
+}
+
+// 渲染 tab（隐藏人物未解锁时不出现在 tab 栏）
+function renderTabs(){
+  const unlocked = isHiddenUnlocked();
+  tabsEl.innerHTML = routes.map((r,i)=>{
+    if(r.hidden && !unlocked) return '';                 // 未解锁：完全不出现
+    const done = doneSet.has(r.name);
+    const label = r.hidden ? '？？？' : r.name;
+    return `<button type="button" class="rt-tab ${i===activeRoute?'active':''}" aria-pressed="${i===activeRoute}" onclick="selectRoute(${i})">
+      ${label}${r.hidden?'<span class="hi">隐藏</span>':''}${done?'<span class="hi">✓</span>':''}
+    </button>`;
+  }).join('');
+  // 已解锁后，神秘提示改为"已揭晓"语气（仍不点名）
+  if(mysteryEl){
+    mysteryEl.innerHTML = unlocked
+      ? `✦ 你已完成一条角色路线 —— <span class="q">那位隐藏攻略人物</span>的入口已解锁。<br>ta 的姓名与身份仍以「？？？」示人，留待你自己揭晓。 ✦`
+      : `✦ 除上述攻略对象外，本作还有 <span class="q">一位隐藏攻略人物</span>。<br>当你<b>标记完成任意一条角色路线</b>后，这位神秘人物的攻略入口才会显现。ta 是谁，先留个悬念…… ✦`;
+  }
+}
+
+// 渲染左侧立绘信息栏
+function renderSide(r){
+  const name = r.name;
+  const done = doneSet.has(name);
+  const total = totalSteps(r), doneN = doneSteps(r, name);
+  const pct = total ? Math.round(doneN/total*100) : 0;
+  const menu = r.chs.map((sec,ci)=>{
+    // 该章完成数
+    let start=0;
+    for(let k=0;k<ci;k++) start+=r.chs[k].opts.length;
+    let cDone=0;
+    (stepState[name]||[]).forEach(i=>{ if(i>=start && i<start+sec.opts.length) cDone++; });
+    const cp = Math.round(cDone/sec.opts.length*100);
+    return `<li><a href="#chap-${activeRoute}-${ci}" onclick="jumpChap(event,${activeRoute},${ci})">
+      <span>${sec.ch}章 · ${['','','','','攻略','收集','结局','终章'][sec.ch]||('第'+sec.ch+'章')}</span>
+      <span class="pct">${cp}%</span>
+    </a></li>`;
+  }).join('');
+  const anonym = r.hidden;
+  sideEl.innerHTML = `
+    <div class="rt-pbox${anonym?' mystery':''}"><img src="assets/img/${r.bust}" alt="${anonym?'？？？':r.name}"></div>
+    <div class="rt-name">${anonym?'？？？':r.name}</div>
+    <div class="rt-romaji">${anonym?'? ? ? ? ? ? ?':r.romaji}</div>
+    <div class="rt-cv">CV <b>${anonym?'？？？':r.cv}</b></div>
+    <div class="rt-desc">${anonym?'身份不明的神秘人物。完成任意一条角色路线后解锁其攻略入口；名字与身份留待你自己揭晓。':r.desc}</div>
+    ${anonym?`<div class="rt-unlock-cond" style="margin-top:12px;margin-bottom:0">
+      <b>解锁条件（原站记载）：</b><br>
+      · 序幕需<b>第 2 周目以后</b>才会发生（序幕「もらい物です」提升其好感）。<br>
+      · 共通 1~3 章将其<b>好感度刷到全场最高</b>，才会触发专属事件。<br>
+      · 3 章末 Break Time 自动进入好感最高者的路线。
+    </div>`:''}
+    <div class="rt-side-divider"></div>
+    <ul class="rt-menu">
+      <li><a href="#chap-top" onclick="jumpTop(event)"><span>路线流程</span><span class="pct">${pct}%</span></a></li>
+      ${menu}
+      <li><a href="#chap-badend" onclick="jumpBadEnd(event)"><span>BAD END</span></a></li>
+    </ul>
+    <div class="rt-side-btns">
+      <button class="rt-done-btn ${done?'done':''}" onclick="toggleRoute('${name}')">
+        ${done?'✓ 已通关（点击取消）':(total && doneN===total ? '选项已全部勾选 · 标记通关' : '标记通关')}
+      </button>
+      <button type="button" onclick="resetRoute('${name}')">清空本路线勾选</button>
+    </div>`;
+}
+
+// 渲染右侧流程列表
+function renderRouteMain(r){
+  const name = r.name;
+  const total = totalSteps(r), doneN = doneSteps(r, name);
+  const pct = total ? Math.round(doneN/total*100) : 0;
+  let idx = 0; // 全局选项序号
+  const chaps = r.chs.map((sec,ci)=>{
+    let start=idx;
+    const steps = sec.opts.map((o,oi)=>{
+      const gi = idx++;
+      const checked = (stepState[name]||[]).includes(gi);
+      const pctEach = Math.round(100/total);
+      return `<label class="rt-step ${checked?'checked':''}" id="step-${activeRoute}-${gi}">
+        <input type="checkbox" ${checked?'checked':''} onchange="toggleStep('${name}',${gi},this.checked)">
+        <span class="rt-step-body">
+          <span class="rt-step-text">${bi(o)}</span>
+        </span>
+        <span class="rt-step-pct">+${pctEach}%</span>
+      </label>`;
+    }).join('');
+    let cDone=0;
+    (stepState[name]||[]).forEach(i=>{ if(i>=start && i<idx) cDone++; });
+    const cp = Math.round(cDone/sec.opts.length*100);
+    return `<div class="rt-chap" id="chap-${activeRoute}-${ci}">
+      <div class="rt-chap-head">${sec.ch}章<span class="cn">· 攻略选项</span><span style="margin-left:auto;font-size:12px;color:var(--muted)">${cDone}/${sec.opts.length}</span></div>
+      ${steps}
+    </div>`;
+  }).join('');
+  const anonym = r.hidden;
+  mainEl.innerHTML = `
+    <div class="rt-main-head" id="chap-top">
+      <h3>${anonym?'？？？':r.name}<span>个人线攻略</span></h3>
+      <div class="rt-chap-progress"><b>${pct}%</b> · ${doneN}/${total} 项</div>
+    </div>
+    <div class="rt-tip">按流程勾选已完成的选项，进度会自动保存到本机。好感度提升标注见共通路线。</div>
+    ${anonym?`<div class="rt-unlock-cond">
+      <b>✦ 隐藏人物 · 解锁条件</b><br>
+      ① 序幕内容需<b>第 2 周目以后</b>才发生，序幕「もらい物です」可提升其好感度；<br>
+      ② 共通 1~3 章把这位神秘人物的<b>好感度保持全场最高</b>（1章「流星と事務所」自动事件、2章「逃げない」、3章「ちょっと待って」）；<br>
+      ③ 3 章末 Break Time 后会自动进入好感最高者的路线。
+    </div>`:''}
+    ${chaps}
+    <div class="rt-badend" id="chap-badend"><b>BAD END：</b>「日記」から「${anonym?'？？？':r.name}7章／好感度：0」スタート</div>`;
+}
+
+function renderRoute(){
+  // 隐藏角色若因取消通关而重新上锁，自动切回第一个角色
+  if(routes[activeRoute].hidden && !isHiddenUnlocked()) activeRoute = 0;
+  renderTabs();
+  const r=routes[activeRoute]; renderSide(r); renderRouteMain(r);
+}
+// 切换角色时不再把页面强行滚回区块顶部，只保证 tab 栏仍在视野内
+function selectRoute(i){ activeRoute=i; localStorage.setItem('bh_active_route', i); renderRoute(); tabsEl.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+function jumpChap(e,ri,ci){ e.preventDefault(); const el=document.getElementById(`chap-${ri}-${ci}`); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+function jumpTop(e){ e.preventDefault(); document.getElementById('chap-top').scrollIntoView({behavior:'smooth',block:'start'}); }
+function jumpBadEnd(e){ e.preventDefault(); document.getElementById('chap-badend').scrollIntoView({behavior:'smooth',block:'start'}); }
+
+// 勾选选项
+function toggleStep(name, gi, checked){
+  if(!stepState[name]) stepState[name]=[];
+  const arr = stepState[name];
+  const pos = arr.indexOf(gi);
+  if(checked && pos<0) arr.push(gi);
+  if(!checked && pos>=0) arr.splice(pos,1);
+  localStorage.setItem('bh_step_state', JSON.stringify(stepState));
+  // 局部刷新左栏进度 + 右栏头部，不重绘整个列表（保持勾选焦点）
+  const r = routes.find(x=>x.name===name);
+  const total = totalSteps(r), doneN = doneSteps(r,name), pct = total?Math.round(doneN/total*100):0;
+  const row = document.getElementById(`step-${activeRoute}-${gi}`);
+  if(row) row.classList.toggle('checked', checked);
+  const hp = mainEl.querySelector('.rt-chap-progress');
+  if(hp) hp.innerHTML = `<b>${pct}%</b> · ${doneN}/${total} 项`;
+  // 更新对应章的计数 + 左栏目录百分比
+  renderSide(r);
+  const ci = chapIndexOf(r, gi);
+  const head = document.getElementById(`chap-${activeRoute}-${ci}`);
+  if(head){
+    const c = r.chs[ci], start = chapStart(r,ci);
+    let cDone=0; (stepState[name]||[]).forEach(i=>{ if(i>=start && i<start+c.opts.length) cDone++; });
+    const cnt = head.querySelector('.rt-chap-head span:last-child');
+    if(cnt) cnt.textContent = `${cDone}/${c.opts.length}`;
+  }
+}
+function chapStart(r,ci){ let s=0; for(let k=0;k<ci;k++) s+=r.chs[k].opts.length; return s; }
+function chapIndexOf(r,gi){ let s=0; for(let k=0;k<r.chs.length;k++){ const e=s+r.chs[k].opts.length; if(gi<e) return k; s=e; } return 0; }
+
+// 标记通关（保留与顶部进度条联动）
+function toggleRoute(name){
+  const wasUnlocked = isHiddenUnlocked();
+  if(doneSet.has(name)) doneSet.delete(name); else doneSet.add(name);
+  localStorage.setItem('bh_route_done', JSON.stringify([...doneSet]));
+  updateRouteProgress();
+  // 若隐藏人物因此重新上锁，且当前正停留在其页面，则重绘并切回普通角色
+  if(routes[activeRoute].hidden && !isHiddenUnlocked()) renderRoute();
+  else { renderTabs(); renderSide(routes[activeRoute]); }
+  // 首次解锁隐藏人物：把提示滚到视野内，让玩家看到新出现的入口
+  if(!wasUnlocked && isHiddenUnlocked() && mysteryEl) mysteryEl.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// 清空某条路线的勾选（重玩该路线时用）
+function resetRoute(name){
+  if(!(stepState[name]||[]).length) return;
+  if(!confirm('清空这条路线的全部勾选？')) return;
+  stepState[name] = [];
+  localStorage.setItem('bh_step_state', JSON.stringify(stepState));
+  renderRoute();
+}
+
+function updateRouteProgress(){
+  const total = routes.length;
+  const done = doneSet.size;
+  const pct = Math.round(done/total*100);
+  document.getElementById('routeFill').style.width = pct + '%';
+  document.getElementById('routeText').textContent = `${done} / ${total} 路线`;
+  document.getElementById('routePct').textContent = pct + '%';
+}
+updateRouteProgress();
+renderRoute();
+
+/* ================= 游戏时长进度条 ================= */
+const timePlayedEl = document.getElementById('timePlayed');
+const timeGoalEl = document.getElementById('timeGoal');
+timePlayedEl.value = localStorage.getItem('bh_time_played') || '';
+timeGoalEl.value = localStorage.getItem('bh_time_goal') || 50;
+
+function updateTimeProgress(){
+  const played = parseFloat(timePlayedEl.value) || 0;
+  const goal = parseFloat(timeGoalEl.value) || 50;
+  const pct = Math.min(100, Math.round(played/goal*100));
+  document.getElementById('timeFill').style.width = pct + '%';
+  document.getElementById('timeText').textContent = `${played}h / ${goal}h`;
+  document.getElementById('timePct').textContent = pct + '%';
+  localStorage.setItem('bh_time_played', timePlayedEl.value);
+  localStorage.setItem('bh_time_goal', timeGoalEl.value);
+}
+timePlayedEl.addEventListener('input', updateTimeProgress);
+timeGoalEl.addEventListener('input', updateTimeProgress);
+updateTimeProgress();
+
+/* ================= 导航：吸顶高度 / 地址栏 hash 同步 / 章节高亮 / 回到顶部 ================= */
+const navEl = document.querySelector('nav');
+function syncNavH(){ document.documentElement.style.setProperty('--navh', navEl.offsetHeight + 'px'); }
+window.addEventListener('resize', syncNavH);
+
+// 默认进入攻略；#intro（及介绍页内的锚点）才显示游戏介绍。刷新、分享链接、浏览器后退都能回到原位
+const INTRO_HASHES = ['intro','home','story','chara'];
+function applyHash(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  const tab = INTRO_HASHES.includes(h) ? 'intro' : 'guide';
+  const changed = document.getElementById('tab-' + tab).hidden;
+  showTab(tab);
+  syncNavH();
+  if(!changed) return;                       // 同一标签内的锚点跳转交给浏览器
+  const target = (h && h !== 'guide' && h !== 'intro') ? document.getElementById(h) : null;
+  if(target) target.scrollIntoView({behavior:'instant'});
+  else window.scrollTo({top:0, behavior:'instant'});
+}
+window.addEventListener('hashchange', applyHash);
+applyHash();
+
+const spyLinks = document.querySelectorAll('nav a[data-nav]');
+const toTop = document.getElementById('toTop');
+function onScroll(){
+  toTop.hidden = window.scrollY < 600;
+  if(document.getElementById('tab-guide').hidden) return;
+  let cur = 'progress';
+  ['progress','common','routes'].forEach(id=>{
+    if(document.getElementById(id).getBoundingClientRect().top <= navEl.offsetHeight + 60) cur = id;
+  });
+  spyLinks.forEach(a=>a.classList.toggle('active', a.dataset.nav===cur));
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+toTop.addEventListener('click', ()=>window.scrollTo({top:0}));
+</script>
+</body>
+</html>
