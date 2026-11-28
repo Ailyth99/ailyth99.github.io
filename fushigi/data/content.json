@@ -82,7 +82,7 @@
       "gameIds": [
         "g1"
       ],
-      "url": "/guide/desert",
+      "url": "guide/desert/",
       "title": "",
       "highlight": "携带版",
       "platform": "",
@@ -96,7 +96,7 @@
       "gameIds": [
         "g2"
       ],
-      "url": "/guide/alice",
+      "url": "guide/alice/",
       "title": "汝名爱丽丝？Are You Alice？",
       "highlight": "Are You Alice？",
       "platform": "PSP",
