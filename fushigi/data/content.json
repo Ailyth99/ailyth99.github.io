@@ -4,51 +4,106 @@
     {
       "date": "2026-11-19",
       "text": "增加PSP《沙漠王国 携带版》汉化支持。"
+    },
+    {
+      "date": "2026-11-28",
+      "text": "增加PSP《Are You Alice?》汉化支持。"
     }
   ],
   "games": [
     {
-      "id": "desert-kingdom-psp",
+      "id": "g1",
       "title": "沙漠王国 携带版",
       "platform": "PSP",
       "cover": "assets/desertkingdom.jpg",
       "description": "魔神公主阿丝帕西娅（可改名）某天突然失去魔力，并从父王口中得知自己是魔神与人类的混血儿。跌落成凡人的她前往人间，历经两个月流浪抵达沙漠王国。为了在限定时间内重新变回魔神、重返故乡 EVUU，她必须通过实现当地形形色色人类的愿望来收集魔力，否则就将彻底沦为人类！",
       "enabled": true,
-      "order": 5,
+      "order": 1,
       "versions": [
         {
           "label": "",
           "serial": "ULJM-06249",
           "romName": "Desert Kingdom Portable (Japan).iso",
           "crc32": "2BA86CE4",
-          "patchId": "desert-kingdom-zh"
+          "patchId": "p1"
+        }
+      ]
+    },
+    {
+      "id": "g2",
+      "title": "汝名爱丽丝？Are You Alice？",
+      "platform": "PSP",
+      "cover": "https://pic1.imgdb.cn/i/0354sxJUXKMupe2eRx16kQ.png",
+      "description": "「我的名字——是什么。」\n没有居所，没有目的……什么都不知道，连该做什么也不知道。\n被称作「爱丽丝」的少年，加入了「杀死白兔的游戏」。\n——白兔，只有爱丽丝能杀。\n那就是规则。这个国存在着无数扭曲而蛮不讲理的「规则」，居民们仍被规则束缚着活下去。\n爱丽丝抵达的，这个故事的结局是——",
+      "enabled": true,
+      "order": 2,
+      "versions": [
+        {
+          "label": "",
+          "serial": "ULJM-05848",
+          "romName": "Are You Alice (Japan).iso",
+          "crc32": "A66DFB36",
+          "patchId": "p2"
         }
       ]
     }
   ],
   "patches": [
     {
-      "id": "desert-kingdom-zh",
-      "version": null,
+      "id": "p1",
+      "version": "1.01",
       "releasedAt": null,
       "notes": "",
       "outputName": "Desert Kingdom Portable (CHINESE).iso",
       "files": [
         {
-          "url": "https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/Desert_Kingdom_Portable.CHS.Patch?view=false",
+          "url": "https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/Desert_Kingdom_Portable.CHS.Patch",
           "fallbackUrl": "https://github.com/EiliaLan/fushigi_patcher/releases/download/1.0/Desert_Kingdom_Portable.CHS.Patch"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "version": "1.00",
+      "releasedAt": "2026-11-28",
+      "notes": "",
+      "outputName": "Are You Alice (CHINESE).iso",
+      "files": [
+        {
+          "url": "https://modelscope.cn/datasets/flyheadko/TRANSLATE/resolve/master/Are_you_alice.CHS.Patch",
+          "fallbackUrl": "https://github.com/EiliaLan/fushigi_patcher/releases/download/1.0/Are_you_alice.CHS.Patch"
         }
       ]
     }
   ],
   "guides": [
     {
-      "id": "desert-kingdom-guide",
-      "gameIds": ["desert-kingdom-psp"],
-      "url": "desertguide/",
+      "id": "gd1",
+      "gameIds": [
+        "g1"
+      ],
+      "url": "/guide/desert",
+      "title": "",
       "highlight": "携带版",
+      "platform": "",
+      "description": "魔神王国EVUU的公主阿丝帕西娅（可改名）原本是个有些早熟又爱任性的少女，却在某天突然失去了魔力，并从魔神国王父亲口中得知了一个惊人的真相——已故的母亲其实是人类，而自己则是魔神与人类的混血。无奈从神明沦为凡人的她只得踏上前往人间界的旅程，在经历了约两个月的流浪后，终于抵达了沙漠王国。原本期待着置身帅哥天堂的她，迎来的却是怀揣着各种大小愿望的普通人类；为了能变回魔神、重返原本所属的故乡，公主必须赶在有限的期限内，通过帮这些人实现愿望来换取“魔力”作为回报，否则她将彻底失去神格，永远成为一名人类。",
+      "cover": "https://pic1.imgdb.cn/i/0355BYuyVzVBz24Yhswww6.jpg",
       "enabled": true,
-      "order": 3
+      "order": 1
+    },
+    {
+      "id": "gd2",
+      "gameIds": [
+        "g2"
+      ],
+      "url": "/guide/alice",
+      "title": "汝名爱丽丝？Are You Alice？",
+      "highlight": "Are You Alice？",
+      "platform": "PSP",
+      "description": "爱丽丝在柴郡猫的指引下来到奇境国度，遵从红心女王的命令，受到疯帽匠的保护，卷入名为“杀死白兔”的游戏。之前的88名爱丽丝都以失败告终，游戏进入了死循环。这第89位爱丽丝是否能够胜出？只要成功杀死了白兔，爱丽丝这个名字就会变成自己的。倘若杀不死白兔，就表示自己不是真正的爱丽丝。\n疯帽匠和柴郡猫的真实身份是什么？这到底是一场为了什么而举行的游戏？亦或是仪式？爱丽丝又是否是自己真正的名字？",
+      "cover": "https://pic1.imgdb.cn/i/0354sxJUXKMupe2eRx16kQ.png",
+      "enabled": true,
+      "order": 2
     }
   ]
 }

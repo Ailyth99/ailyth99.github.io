@@ -468,7 +468,7 @@
       AUTO.done = true;
 
       elProg.classList.remove('on');
-      setSlot('done', '补丁已就绪', '准备完成', false);
+      setSlot('done', '补丁已就绪，正在应用补丁', '准备完成', false);
       log('补丁已获取', 'ok');
 
       if (mode === 'auto') {
@@ -568,7 +568,7 @@
         elRes.classList.add('on');
         elBar.classList.add('hide');
         elSlot.classList.add('hide');
-        status('补丁应用成功，可以下载了', 'ok');
+        status('补丁应用成功，可以保存了', 'ok');
       } catch (e) {
         var msg = String((e && e.message) || e);
         log('补丁应用失败', 'err');
